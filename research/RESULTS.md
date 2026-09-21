@@ -110,4 +110,4 @@ Regex: years `\b(1[5-9]\d\d|20\d\d)\b`, decades `\b(1[5-9]\d0s|20\d0s)\b`, Engli
 
 ## Failure-case labels (proposed, unconfirmed)
 
-See `research/week1/proposed_case_labels.md`. Track 2 (20 cases, drones + biology): continuation 9, self-contained 6, coreference 5; lexical mismatch 9, history drowns the turn 4, implicit reasoning link 2, gold debatable 1, success/history helps 4. Track 1: 3 iota cases.
+See `research/cases/pilot_proposed_labels.md`. Track 2 (20 cases, drones + biology): continuation 9, self-contained 6, coreference 5; lexical mismatch 9, history drowns the turn 4, implicit reasoning link 2, gold debatable 1, success/history helps 4. Track 1: 3 iota cases.
