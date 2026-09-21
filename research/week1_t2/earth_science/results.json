@@ -1,0 +1,111 @@
+[
+  {
+    "track": 2,
+    "domain": "earth_science",
+    "split": "dev",
+    "run": "DIAG_gold_recycling",
+    "n": 104,
+    "ndcg10": 0.88,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {},
+    "any_reuse": 97,
+    "full_reuse": 87
+  },
+  {
+    "track": 2,
+    "domain": "earth_science",
+    "split": "dev",
+    "run": "2a_ORACLE_prev_turn_gold",
+    "n": 133,
+    "ndcg10": 0.6468,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {}
+  },
+  {
+    "track": 2,
+    "domain": "earth_science",
+    "split": "dev",
+    "run": "2a_current",
+    "n": 133,
+    "ndcg10": 0.1986,
+    "official_ref": 0.2195,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.2727,
+      "T2": 0.1665,
+      "T3": 0.2529,
+      "T4": 0.1193,
+      "T5+": 0.1522
+    }
+  },
+  {
+    "track": 2,
+    "domain": "earth_science",
+    "split": "dev",
+    "run": "2a_history",
+    "n": 133,
+    "ndcg10": 0.5987,
+    "official_ref": 0.6264,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.2727,
+      "T2": 0.627,
+      "T3": 0.754,
+      "T4": 0.6665,
+      "T5+": 0.7054
+    }
+  },
+  {
+    "track": 2,
+    "domain": "earth_science",
+    "split": "dev",
+    "run": "2a_hist_questions_only",
+    "n": 133,
+    "ndcg10": 0.4466,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.2727,
+      "T2": 0.4514,
+      "T3": 0.556,
+      "T4": 0.4193,
+      "T5+": 0.5341
+    }
+  },
+  {
+    "track": 2,
+    "domain": "earth_science",
+    "split": "dev",
+    "run": "2a_hist_answers_only",
+    "n": 133,
+    "ndcg10": 0.6333,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.2727,
+      "T2": 0.6644,
+      "T3": 0.8056,
+      "T4": 0.6862,
+      "T5+": 0.7678
+    }
+  },
+  {
+    "track": 2,
+    "domain": "earth_science",
+    "split": "dev",
+    "run": "2a_ORACLE_hist+reasoning",
+    "n": 133,
+    "ndcg10": 0.6491,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.4584,
+      "T2": 0.6523,
+      "T3": 0.7369,
+      "T4": 0.6745,
+      "T5+": 0.7408
+    }
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "track": 1,
+    "domain": "law",
+    "split": "dev",
+    "run": "1a",
+    "n": 11,
+    "ndcg10": 0.0293,
+    "official_ref": 0.0574
+  },
+  {
+    "track": 1,
+    "domain": "law",
+    "split": "dev",
+    "run": "1b_query+step",
+    "n": 23,
+    "ndcg10": 0.0476,
+    "official_ref": 0.0549
+  },
+  {
+    "track": 1,
+    "domain": "law",
+    "split": "dev",
+    "run": "1b_step_only",
+    "n": 23,
+    "ndcg10": 0.0767,
+    "official_ref": null
+  },
+  {
+    "track": 1,
+    "domain": "law",
+    "split": "dev",
+    "run": "1b_query+all",
+    "n": 23,
+    "ndcg10": 0.0623,
+    "official_ref": null
+  }
+]

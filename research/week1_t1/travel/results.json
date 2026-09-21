@@ -1,0 +1,38 @@
+[
+  {
+    "track": 1,
+    "domain": "travel",
+    "split": "dev",
+    "run": "1a",
+    "n": 30,
+    "ndcg10": 0.0225,
+    "official_ref": 0.0275
+  },
+  {
+    "track": 1,
+    "domain": "travel",
+    "split": "dev",
+    "run": "1b_query+step",
+    "n": 52,
+    "ndcg10": 0.0264,
+    "official_ref": 0.0492
+  },
+  {
+    "track": 1,
+    "domain": "travel",
+    "split": "dev",
+    "run": "1b_step_only",
+    "n": 52,
+    "ndcg10": 0.0522,
+    "official_ref": null
+  },
+  {
+    "track": 1,
+    "domain": "travel",
+    "split": "dev",
+    "run": "1b_query+all",
+    "n": 52,
+    "ndcg10": 0.0274,
+    "official_ref": null
+  }
+]

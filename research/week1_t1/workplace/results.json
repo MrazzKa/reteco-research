@@ -1,0 +1,38 @@
+[
+  {
+    "track": 1,
+    "domain": "workplace",
+    "split": "dev",
+    "run": "1a",
+    "n": 11,
+    "ndcg10": 0.0184,
+    "official_ref": 0.023
+  },
+  {
+    "track": 1,
+    "domain": "workplace",
+    "split": "dev",
+    "run": "1b_query+step",
+    "n": 20,
+    "ndcg10": 0.0235,
+    "official_ref": 0.0302
+  },
+  {
+    "track": 1,
+    "domain": "workplace",
+    "split": "dev",
+    "run": "1b_step_only",
+    "n": 20,
+    "ndcg10": 0.1861,
+    "official_ref": null
+  },
+  {
+    "track": 1,
+    "domain": "workplace",
+    "split": "dev",
+    "run": "1b_query+all",
+    "n": 20,
+    "ndcg10": 0.0735,
+    "official_ref": null
+  }
+]

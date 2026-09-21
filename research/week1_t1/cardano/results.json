@@ -1,0 +1,38 @@
+[
+  {
+    "track": 1,
+    "domain": "cardano",
+    "split": "dev",
+    "run": "1a",
+    "n": 15,
+    "ndcg10": 0.1108,
+    "official_ref": 0.0851
+  },
+  {
+    "track": 1,
+    "domain": "cardano",
+    "split": "dev",
+    "run": "1b_query+step",
+    "n": 33,
+    "ndcg10": 0.076,
+    "official_ref": 0.0554
+  },
+  {
+    "track": 1,
+    "domain": "cardano",
+    "split": "dev",
+    "run": "1b_step_only",
+    "n": 33,
+    "ndcg10": 0.0984,
+    "official_ref": null
+  },
+  {
+    "track": 1,
+    "domain": "cardano",
+    "split": "dev",
+    "run": "1b_query+all",
+    "n": 33,
+    "ndcg10": 0.0699,
+    "official_ref": null
+  }
+]

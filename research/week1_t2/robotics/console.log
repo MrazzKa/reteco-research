@@ -1,0 +1,13 @@
+
+[track2 / robotics]
+      indexed 50,000 docs ...
+    index: 61,961 docs, 86,746 terms, 2s
+    gold recycling: 48/55 later turns reuse earlier gold; 37/55 reuse ALL of it; mean share 0.79
+    2a_ORACLE_prev_turn_gold  nDCG@10 0.5354 (earlier turns' gold only)
+    2a_current                75 topics     3.7s
+    2a_history                75 topics    17.4s
+    2a_hist_questions_only    75 topics     8.1s
+    2a_hist_answers_only      75 topics    34.8s
+    2a_ORACLE_hist+reasoning    75 topics    61.9s
+
+done in 128s -> D:\dev\semeval-reteco\reteco-research\research\week1_t2\robotics

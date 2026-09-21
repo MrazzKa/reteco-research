@@ -1,0 +1,13 @@
+
+[track2 / psychology]
+      indexed 50,000 docs ...
+    index: 52,835 docs, 96,970 terms, 3s
+    gold recycling: 68/74 later turns reuse earlier gold; 62/74 reuse ALL of it; mean share 0.87
+    2a_ORACLE_prev_turn_gold  nDCG@10 0.6293 (earlier turns' gold only)
+    2a_current                99 topics     5.0s
+    2a_history                99 topics    30.4s
+    2a_hist_questions_only    99 topics    11.4s
+    2a_hist_answers_only      99 topics    79.1s
+    2a_ORACLE_hist+reasoning    99 topics    55.2s
+
+done in 185s -> D:\dev\semeval-reteco\reteco-research\research\week1_t2\psychology

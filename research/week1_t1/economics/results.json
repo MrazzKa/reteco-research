@@ -1,0 +1,38 @@
+[
+  {
+    "track": 1,
+    "domain": "economics",
+    "split": "dev",
+    "run": "1a",
+    "n": 25,
+    "ndcg10": 0.0385,
+    "official_ref": 0.048
+  },
+  {
+    "track": 1,
+    "domain": "economics",
+    "split": "dev",
+    "run": "1b_query+step",
+    "n": 51,
+    "ndcg10": 0.0312,
+    "official_ref": 0.0517
+  },
+  {
+    "track": 1,
+    "domain": "economics",
+    "split": "dev",
+    "run": "1b_step_only",
+    "n": 51,
+    "ndcg10": 0.06,
+    "official_ref": null
+  },
+  {
+    "track": 1,
+    "domain": "economics",
+    "split": "dev",
+    "run": "1b_query+all",
+    "n": 51,
+    "ndcg10": 0.0345,
+    "official_ref": null
+  }
+]

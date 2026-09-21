@@ -1,0 +1,256 @@
+[
+  {
+    "track": 1,
+    "domain": "iota",
+    "split": "dev",
+    "run": "1a",
+    "n": 3,
+    "ndcg10": 0.2346,
+    "official_ref": 0.2083
+  },
+  {
+    "track": 1,
+    "domain": "iota",
+    "split": "dev",
+    "run": "1b_query+step",
+    "n": 8,
+    "ndcg10": 0.25,
+    "official_ref": 0.3289
+  },
+  {
+    "track": 1,
+    "domain": "iota",
+    "split": "dev",
+    "run": "1b_step_only",
+    "n": 8,
+    "ndcg10": 0.3436,
+    "official_ref": null
+  },
+  {
+    "track": 1,
+    "domain": "iota",
+    "split": "dev",
+    "run": "1b_query+all",
+    "n": 8,
+    "ndcg10": 0.3125,
+    "official_ref": null
+  },
+  {
+    "track": 2,
+    "domain": "drones",
+    "split": "dev",
+    "run": "DIAG_gold_recycling",
+    "n": 27,
+    "ndcg10": 0.7777,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {},
+    "any_reuse": 25,
+    "full_reuse": 16
+  },
+  {
+    "track": 2,
+    "domain": "drones",
+    "split": "dev",
+    "run": "2a_ORACLE_prev_turn_gold",
+    "n": 38,
+    "ndcg10": 0.4939,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {}
+  },
+  {
+    "track": 2,
+    "domain": "drones",
+    "split": "dev",
+    "run": "2a_current",
+    "n": 38,
+    "ndcg10": 0.0668,
+    "official_ref": 0.1695,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.0869,
+      "T2": 0.1204,
+      "T3": 0.0236,
+      "T4": 0.0,
+      "T5+": 0.0
+    }
+  },
+  {
+    "track": 2,
+    "domain": "drones",
+    "split": "dev",
+    "run": "2a_history",
+    "n": 38,
+    "ndcg10": 0.1898,
+    "official_ref": 0.2954,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.0869,
+      "T2": 0.21,
+      "T3": 0.2328,
+      "T4": 0.3467,
+      "T5+": 0.0
+    }
+  },
+  {
+    "track": 2,
+    "domain": "drones",
+    "split": "dev",
+    "run": "2a_hist_questions_only",
+    "n": 38,
+    "ndcg10": 0.1362,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.0869,
+      "T2": 0.1359,
+      "T3": 0.1743,
+      "T4": 0.202,
+      "T5+": 0.0
+    }
+  },
+  {
+    "track": 2,
+    "domain": "drones",
+    "split": "dev",
+    "run": "2a_hist_answers_only",
+    "n": 38,
+    "ndcg10": 0.2033,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.0869,
+      "T2": 0.2399,
+      "T3": 0.2493,
+      "T4": 0.3467,
+      "T5+": 0.0
+    }
+  },
+  {
+    "track": 2,
+    "domain": "drones",
+    "split": "dev",
+    "run": "2a_ORACLE_hist+reasoning",
+    "n": 38,
+    "ndcg10": 0.2358,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.1777,
+      "T2": 0.2481,
+      "T3": 0.2461,
+      "T4": 0.3929,
+      "T5+": 0.0
+    }
+  },
+  {
+    "track": 2,
+    "domain": "biology",
+    "split": "dev",
+    "run": "DIAG_gold_recycling",
+    "n": 89,
+    "ndcg10": 0.8681,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {},
+    "any_reuse": 82,
+    "full_reuse": 71
+  },
+  {
+    "track": 2,
+    "domain": "biology",
+    "split": "dev",
+    "run": "2a_ORACLE_prev_turn_gold",
+    "n": 115,
+    "ndcg10": 0.6228,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {}
+  },
+  {
+    "track": 2,
+    "domain": "biology",
+    "split": "dev",
+    "run": "2a_current",
+    "n": 115,
+    "ndcg10": 0.188,
+    "official_ref": 0.2034,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.3089,
+      "T2": 0.1691,
+      "T3": 0.1424,
+      "T4": 0.1265,
+      "T5+": 0.1651
+    }
+  },
+  {
+    "track": 2,
+    "domain": "biology",
+    "split": "dev",
+    "run": "2a_history",
+    "n": 115,
+    "ndcg10": 0.5426,
+    "official_ref": 0.6065,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.3089,
+      "T2": 0.5178,
+      "T3": 0.5334,
+      "T4": 0.6903,
+      "T5+": 0.7613
+    }
+  },
+  {
+    "track": 2,
+    "domain": "biology",
+    "split": "dev",
+    "run": "2a_hist_questions_only",
+    "n": 115,
+    "ndcg10": 0.336,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.3089,
+      "T2": 0.2753,
+      "T3": 0.3074,
+      "T4": 0.3562,
+      "T5+": 0.4648
+    }
+  },
+  {
+    "track": 2,
+    "domain": "biology",
+    "split": "dev",
+    "run": "2a_hist_answers_only",
+    "n": 115,
+    "ndcg10": 0.5781,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.3089,
+      "T2": 0.6073,
+      "T3": 0.5901,
+      "T4": 0.6946,
+      "T5+": 0.7714
+    }
+  },
+  {
+    "track": 2,
+    "domain": "biology",
+    "split": "dev",
+    "run": "2a_ORACLE_hist+reasoning",
+    "n": 115,
+    "ndcg10": 0.6306,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.523,
+      "T2": 0.5829,
+      "T3": 0.6034,
+      "T4": 0.7014,
+      "T5+": 0.8028
+    }
+  }
+]

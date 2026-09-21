@@ -1,0 +1,12 @@
+
+[track2 / medicalsciences]
+    index: 23,297 docs, 93,071 terms, 3s
+    gold recycling: 25/31 later turns reuse earlier gold; 17/31 reuse ALL of it; mean share 0.70
+    2a_ORACLE_prev_turn_gold  nDCG@10 0.4622 (earlier turns' gold only)
+    2a_current                44 topics     2.6s
+    2a_history                44 topics    13.1s
+    2a_hist_questions_only    44 topics     4.9s
+    2a_hist_answers_only      44 topics    10.8s
+    2a_ORACLE_hist+reasoning    44 topics    14.5s
+
+done in 50s -> D:\dev\semeval-reteco\reteco-research\research\week1_t2\medicalsciences

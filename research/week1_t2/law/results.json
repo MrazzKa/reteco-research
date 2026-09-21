@@ -1,0 +1,111 @@
+[
+  {
+    "track": 2,
+    "domain": "law",
+    "split": "dev",
+    "run": "DIAG_gold_recycling",
+    "n": 51,
+    "ndcg10": 0.7196,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {},
+    "any_reuse": 42,
+    "full_reuse": 30
+  },
+  {
+    "track": 2,
+    "domain": "law",
+    "split": "dev",
+    "run": "2a_ORACLE_prev_turn_gold",
+    "n": 66,
+    "ndcg10": 0.4998,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {}
+  },
+  {
+    "track": 2,
+    "domain": "law",
+    "split": "dev",
+    "run": "2a_current",
+    "n": 66,
+    "ndcg10": 0.1149,
+    "official_ref": 0.1147,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.2435,
+      "T2": 0.094,
+      "T3": 0.0921,
+      "T4": 0.0518,
+      "T5+": 0.0567
+    }
+  },
+  {
+    "track": 2,
+    "domain": "law",
+    "split": "dev",
+    "run": "2a_history",
+    "n": 66,
+    "ndcg10": 0.3187,
+    "official_ref": 0.3437,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.2435,
+      "T2": 0.3895,
+      "T3": 0.4265,
+      "T4": 0.2804,
+      "T5+": 0.2123
+    }
+  },
+  {
+    "track": 2,
+    "domain": "law",
+    "split": "dev",
+    "run": "2a_hist_questions_only",
+    "n": 66,
+    "ndcg10": 0.2043,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.2435,
+      "T2": 0.2011,
+      "T3": 0.2771,
+      "T4": 0.1688,
+      "T5+": 0.088
+    }
+  },
+  {
+    "track": 2,
+    "domain": "law",
+    "split": "dev",
+    "run": "2a_hist_answers_only",
+    "n": 66,
+    "ndcg10": 0.3279,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.2435,
+      "T2": 0.4185,
+      "T3": 0.3909,
+      "T4": 0.3098,
+      "T5+": 0.2502
+    }
+  },
+  {
+    "track": 2,
+    "domain": "law",
+    "split": "dev",
+    "run": "2a_ORACLE_hist+reasoning",
+    "n": 66,
+    "ndcg10": 0.3508,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.3015,
+      "T2": 0.3711,
+      "T3": 0.4497,
+      "T4": 0.322,
+      "T5+": 0.2817
+    }
+  }
+]

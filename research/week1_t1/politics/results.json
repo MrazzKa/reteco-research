@@ -1,0 +1,38 @@
+[
+  {
+    "track": 1,
+    "domain": "politics",
+    "split": "dev",
+    "run": "1a",
+    "n": 45,
+    "ndcg10": 0.2095,
+    "official_ref": 0.255
+  },
+  {
+    "track": 1,
+    "domain": "politics",
+    "split": "dev",
+    "run": "1b_query+step",
+    "n": 119,
+    "ndcg10": 0.2047,
+    "official_ref": 0.2306
+  },
+  {
+    "track": 1,
+    "domain": "politics",
+    "split": "dev",
+    "run": "1b_step_only",
+    "n": 119,
+    "ndcg10": 0.1396,
+    "official_ref": null
+  },
+  {
+    "track": 1,
+    "domain": "politics",
+    "split": "dev",
+    "run": "1b_query+all",
+    "n": 119,
+    "ndcg10": 0.2233,
+    "official_ref": null
+  }
+]

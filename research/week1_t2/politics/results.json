@@ -1,0 +1,111 @@
+[
+  {
+    "track": 2,
+    "domain": "politics",
+    "split": "dev",
+    "run": "DIAG_gold_recycling",
+    "n": 41,
+    "ndcg10": 0.7636,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {},
+    "any_reuse": 38,
+    "full_reuse": 24
+  },
+  {
+    "track": 2,
+    "domain": "politics",
+    "split": "dev",
+    "run": "2a_ORACLE_prev_turn_gold",
+    "n": 54,
+    "ndcg10": 0.5249,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {}
+  },
+  {
+    "track": 2,
+    "domain": "politics",
+    "split": "dev",
+    "run": "2a_current",
+    "n": 54,
+    "ndcg10": 0.0936,
+    "official_ref": 0.1514,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.2072,
+      "T2": 0.1163,
+      "T3": 0.0087,
+      "T4": 0.0521,
+      "T5+": 0.0443
+    }
+  },
+  {
+    "track": 2,
+    "domain": "politics",
+    "split": "dev",
+    "run": "2a_history",
+    "n": 54,
+    "ndcg10": 0.2667,
+    "official_ref": 0.3219,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.2072,
+      "T2": 0.4054,
+      "T3": 0.2642,
+      "T4": 0.2354,
+      "T5+": 0.147
+    }
+  },
+  {
+    "track": 2,
+    "domain": "politics",
+    "split": "dev",
+    "run": "2a_hist_questions_only",
+    "n": 54,
+    "ndcg10": 0.1533,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.2072,
+      "T2": 0.2272,
+      "T3": 0.0934,
+      "T4": 0.116,
+      "T5+": 0.0625
+    }
+  },
+  {
+    "track": 2,
+    "domain": "politics",
+    "split": "dev",
+    "run": "2a_hist_answers_only",
+    "n": 54,
+    "ndcg10": 0.2768,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.2072,
+      "T2": 0.4126,
+      "T3": 0.2771,
+      "T4": 0.237,
+      "T5+": 0.1925
+    }
+  },
+  {
+    "track": 2,
+    "domain": "politics",
+    "split": "dev",
+    "run": "2a_ORACLE_hist+reasoning",
+    "n": 54,
+    "ndcg10": 0.2804,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.2375,
+      "T2": 0.4065,
+      "T3": 0.2843,
+      "T4": 0.2331,
+      "T5+": 0.1622
+    }
+  }
+]

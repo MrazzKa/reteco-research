@@ -1,0 +1,38 @@
+[
+  {
+    "track": 1,
+    "domain": "monero",
+    "split": "dev",
+    "run": "1a",
+    "n": 19,
+    "ndcg10": 0.0152,
+    "official_ref": 0.0252
+  },
+  {
+    "track": 1,
+    "domain": "monero",
+    "split": "dev",
+    "run": "1b_query+step",
+    "n": 28,
+    "ndcg10": 0.0103,
+    "official_ref": 0.0103
+  },
+  {
+    "track": 1,
+    "domain": "monero",
+    "split": "dev",
+    "run": "1b_step_only",
+    "n": 28,
+    "ndcg10": 0.0065,
+    "official_ref": null
+  },
+  {
+    "track": 1,
+    "domain": "monero",
+    "split": "dev",
+    "run": "1b_query+all",
+    "n": 28,
+    "ndcg10": 0.0103,
+    "official_ref": null
+  }
+]

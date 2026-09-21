@@ -1,0 +1,111 @@
+[
+  {
+    "track": 2,
+    "domain": "psychology",
+    "split": "dev",
+    "run": "DIAG_gold_recycling",
+    "n": 74,
+    "ndcg10": 0.8686,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {},
+    "any_reuse": 68,
+    "full_reuse": 62
+  },
+  {
+    "track": 2,
+    "domain": "psychology",
+    "split": "dev",
+    "run": "2a_ORACLE_prev_turn_gold",
+    "n": 99,
+    "ndcg10": 0.6293,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {}
+  },
+  {
+    "track": 2,
+    "domain": "psychology",
+    "split": "dev",
+    "run": "2a_current",
+    "n": 99,
+    "ndcg10": 0.2066,
+    "official_ref": 0.2596,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.2149,
+      "T2": 0.2289,
+      "T3": 0.1569,
+      "T4": 0.2389,
+      "T5+": 0.2086
+    }
+  },
+  {
+    "track": 2,
+    "domain": "psychology",
+    "split": "dev",
+    "run": "2a_history",
+    "n": 99,
+    "ndcg10": 0.4983,
+    "official_ref": 0.5726,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.2149,
+      "T2": 0.5632,
+      "T3": 0.5405,
+      "T4": 0.6387,
+      "T5+": 0.7426
+    }
+  },
+  {
+    "track": 2,
+    "domain": "psychology",
+    "split": "dev",
+    "run": "2a_hist_questions_only",
+    "n": 99,
+    "ndcg10": 0.2854,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.2149,
+      "T2": 0.2999,
+      "T3": 0.267,
+      "T4": 0.2945,
+      "T5+": 0.4585
+    }
+  },
+  {
+    "track": 2,
+    "domain": "psychology",
+    "split": "dev",
+    "run": "2a_hist_answers_only",
+    "n": 99,
+    "ndcg10": 0.5259,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.2149,
+      "T2": 0.5822,
+      "T3": 0.5927,
+      "T4": 0.6799,
+      "T5+": 0.7796
+    }
+  },
+  {
+    "track": 2,
+    "domain": "psychology",
+    "split": "dev",
+    "run": "2a_ORACLE_hist+reasoning",
+    "n": 99,
+    "ndcg10": 0.5857,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.4425,
+      "T2": 0.579,
+      "T3": 0.6097,
+      "T4": 0.6817,
+      "T5+": 0.7662
+    }
+  }
+]

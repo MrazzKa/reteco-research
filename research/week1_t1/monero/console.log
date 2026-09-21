@@ -1,0 +1,30 @@
+
+[track1 / monero]
+      indexed 50,000 docs ...
+    index: 85,093 docs, 627,106 terms, 43s
+    1a                        19 topics    37.8s
+    1b_query+step             28 topics    48.1s
+    1b_step_only              28 topics    10.6s
+    1b_query+all              28 topics    43.4s
+
+done in 185s -> D:\dev\semeval-reteco\reteco-research\research\week1_t1\monero
+# Week-1 results
+
+split: `dev` · BM25 k1=0.9 b=0.4 · pure-Python (FastBM25 ≡ starter_kit/bm25.py) · nDCG@10 via starter_kit/ir_metrics.py
+
+`official_ref` is the pyserini baseline from BASELINE_RESULTS.md. Tokenisation differs, so a small gap is expected; a large one is a finding to investigate, not to patch.
+
+| track | domain | run | n | nDCG@10 | official ref | Δ |
+| --- | --- | --- | ---: | ---: | ---: | ---: |
+| 1 | monero | 1a | 19 | 0.0152 | 0.0252 | -0.0100 |
+| 1 | monero | 1b_query+step | 28 | 0.0103 | 0.0103 | +0.0000 |
+| 1 | monero | 1b_step_only | 28 | 0.0065 |  |  |
+| 1 | monero | 1b_query+all | 28 | 0.0103 |  |  |
+
+Notes:
+- `2a_ORACLE_hist+reasoning` appends GOLD reasoning to the query. It is a diagnostic, not a deployable system or guaranteed ceiling.
+- `2a_ORACLE_prev_turn_gold` ranks ONLY the gold passages of earlier turns (needs hidden qrels, never a system). It measures how much of +history's gain could come from re-finding what was already relevant.
+- `DIAG_gold_recycling`: the value column is the mean share of a later turn's gold that was already gold in an earlier turn — not an nDCG.
+- `2a_hist_questions_only` / `2a_hist_answers_only` split the history into prior questions vs prior REFERENCE answers (written from gold passages).
+- `1b_step_only` and `1b_query+all` are the two strategies the task proposal permits but the baseline does not report.
+- Small domains give unstable numbers (see iota: official 1a train 0.0199 vs dev 0.2083). Report n next to every score.

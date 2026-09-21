@@ -1,0 +1,12 @@
+
+[track2 / politics]
+    index: 16,712 docs, 67,549 terms, 3s
+    gold recycling: 38/41 later turns reuse earlier gold; 24/41 reuse ALL of it; mean share 0.76
+    2a_ORACLE_prev_turn_gold  nDCG@10 0.5249 (earlier turns' gold only)
+    2a_current                54 topics     2.4s
+    2a_history                54 topics    16.4s
+    2a_hist_questions_only    54 topics     4.6s
+    2a_hist_answers_only      54 topics    12.5s
+    2a_ORACLE_hist+reasoning    54 topics    18.0s
+
+done in 57s -> D:\dev\semeval-reteco\reteco-research\research\week1_t2\politics

@@ -1,0 +1,12 @@
+
+[track2 / hardware]
+    index: 26,308 docs, 59,650 terms, 2s
+    gold recycling: 37/44 later turns reuse earlier gold; 28/44 reuse ALL of it; mean share 0.75
+    2a_ORACLE_prev_turn_gold  nDCG@10 0.5110 (earlier turns' gold only)
+    2a_current                58 topics     3.4s
+    2a_history                58 topics    20.9s
+    2a_hist_questions_only    58 topics     7.6s
+    2a_hist_answers_only      58 topics    16.9s
+    2a_ORACLE_hist+reasoning    58 topics    24.9s
+
+done in 76s -> D:\dev\semeval-reteco\reteco-research\research\week1_t2\hardware

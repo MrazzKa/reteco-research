@@ -1,0 +1,111 @@
+[
+  {
+    "track": 2,
+    "domain": "medicalsciences",
+    "split": "dev",
+    "run": "DIAG_gold_recycling",
+    "n": 31,
+    "ndcg10": 0.6978,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {},
+    "any_reuse": 25,
+    "full_reuse": 17
+  },
+  {
+    "track": 2,
+    "domain": "medicalsciences",
+    "split": "dev",
+    "run": "2a_ORACLE_prev_turn_gold",
+    "n": 44,
+    "ndcg10": 0.4622,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {}
+  },
+  {
+    "track": 2,
+    "domain": "medicalsciences",
+    "split": "dev",
+    "run": "2a_current",
+    "n": 44,
+    "ndcg10": 0.0736,
+    "official_ref": 0.1168,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.1341,
+      "T2": 0.077,
+      "T3": 0.0379,
+      "T4": 0.0,
+      "T5+": 0.0
+    }
+  },
+  {
+    "track": 2,
+    "domain": "medicalsciences",
+    "split": "dev",
+    "run": "2a_history",
+    "n": 44,
+    "ndcg10": 0.1162,
+    "official_ref": 0.173,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.1341,
+      "T2": 0.1196,
+      "T3": 0.0864,
+      "T4": 0.1795,
+      "T5+": 0.0755
+    }
+  },
+  {
+    "track": 2,
+    "domain": "medicalsciences",
+    "split": "dev",
+    "run": "2a_hist_questions_only",
+    "n": 44,
+    "ndcg10": 0.1033,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.1341,
+      "T2": 0.0664,
+      "T3": 0.1227,
+      "T4": 0.0651,
+      "T5+": 0.0755
+    }
+  },
+  {
+    "track": 2,
+    "domain": "medicalsciences",
+    "split": "dev",
+    "run": "2a_hist_answers_only",
+    "n": 44,
+    "ndcg10": 0.1295,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.1341,
+      "T2": 0.1124,
+      "T3": 0.1364,
+      "T4": 0.19,
+      "T5+": 0.0755
+    }
+  },
+  {
+    "track": 2,
+    "domain": "medicalsciences",
+    "split": "dev",
+    "run": "2a_ORACLE_hist+reasoning",
+    "n": 44,
+    "ndcg10": 0.107,
+    "official_ref": null,
+    "source": "StackExchange",
+    "by_turn": {
+      "T1": 0.1125,
+      "T2": 0.1109,
+      "T3": 0.0851,
+      "T4": 0.1813,
+      "T5+": 0.0755
+    }
+  }
+]

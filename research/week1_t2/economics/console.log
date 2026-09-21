@@ -1,0 +1,13 @@
+
+[track2 / economics]
+      indexed 50,000 docs ...
+    index: 50,220 docs, 75,834 terms, 2s
+    gold recycling: 62/70 later turns reuse earlier gold; 52/70 reuse ALL of it; mean share 0.82
+    2a_ORACLE_prev_turn_gold  nDCG@10 0.5646 (earlier turns' gold only)
+    2a_current                92 topics     4.4s
+    2a_history                92 topics    26.6s
+    2a_hist_questions_only    92 topics     8.9s
+    2a_hist_answers_only      92 topics    22.1s
+    2a_ORACLE_hist+reasoning    92 topics    30.3s
+
+done in 95s -> D:\dev\semeval-reteco\reteco-research\research\week1_t2\economics

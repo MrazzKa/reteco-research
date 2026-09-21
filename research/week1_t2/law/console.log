@@ -1,0 +1,12 @@
+
+[track2 / law]
+    index: 20,027 docs, 51,522 terms, 2s
+    gold recycling: 42/51 later turns reuse earlier gold; 30/51 reuse ALL of it; mean share 0.72
+    2a_ORACLE_prev_turn_gold  nDCG@10 0.4998 (earlier turns' gold only)
+    2a_current                66 topics     2.9s
+    2a_history                66 topics    22.0s
+    2a_hist_questions_only    66 topics     7.6s
+    2a_hist_answers_only      66 topics    20.4s
+    2a_ORACLE_hist+reasoning    66 topics    28.0s
+
+done in 83s -> D:\dev\semeval-reteco\reteco-research\research\week1_t2\law

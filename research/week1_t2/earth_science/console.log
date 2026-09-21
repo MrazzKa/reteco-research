@@ -1,0 +1,19 @@
+
+[track2 / earth_science]
+      indexed 50,000 docs ...
+      indexed 100,000 docs ...
+    index: 121,249 docs, 222,547 terms, 5s
+    gold recycling: 97/104 later turns reuse earlier gold; 87/104 reuse ALL of it; mean share 0.88
+    2a_ORACLE_prev_turn_gold  nDCG@10 0.6468 (earlier turns' gold only)
+      2a_current: 100/133
+    2a_current               133 topics     9.8s
+      2a_history: 100/133
+    2a_history               133 topics    71.6s
+      2a_hist_questions_only: 100/133
+    2a_hist_questions_only   133 topics    19.5s
+      2a_hist_answers_only: 100/133
+    2a_hist_answers_only     133 topics    53.7s
+      2a_ORACLE_hist+reasoning: 100/133
+    2a_ORACLE_hist+reasoning   133 topics    80.8s
+
+done in 241s -> D:\dev\semeval-reteco\reteco-research\research\week1_t2\earth_science

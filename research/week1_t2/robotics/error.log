@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "D:\dev\semeval-reteco\reteco-research\scripts\week1_run.py", line 567, in <module>
+    main()
+  File "D:\dev\semeval-reteco\reteco-research\scripts\week1_run.py", line 563, in main
+    print(open(os.path.join(a.out, "results.md"), encoding="utf-8").read())
+  File "C:\Users\Timur\AppData\Local\Programs\Python\Python312\Lib\encodings\cp1251.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2261' in position 77: character maps to <undefined>

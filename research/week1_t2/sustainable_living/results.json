@@ -1,0 +1,111 @@
+[
+  {
+    "track": 2,
+    "domain": "sustainable_living",
+    "split": "dev",
+    "run": "DIAG_gold_recycling",
+    "n": 61,
+    "ndcg10": 0.6119,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {},
+    "any_reuse": 44,
+    "full_reuse": 30
+  },
+  {
+    "track": 2,
+    "domain": "sustainable_living",
+    "split": "dev",
+    "run": "2a_ORACLE_prev_turn_gold",
+    "n": 84,
+    "ndcg10": 0.404,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {}
+  },
+  {
+    "track": 2,
+    "domain": "sustainable_living",
+    "split": "dev",
+    "run": "2a_current",
+    "n": 84,
+    "ndcg10": 0.2499,
+    "official_ref": 0.2938,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.3701,
+      "T2": 0.1973,
+      "T3": 0.1772,
+      "T4": 0.3363,
+      "T5+": 0.1
+    }
+  },
+  {
+    "track": 2,
+    "domain": "sustainable_living",
+    "split": "dev",
+    "run": "2a_history",
+    "n": 84,
+    "ndcg10": 0.4836,
+    "official_ref": 0.5531,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.3701,
+      "T2": 0.4974,
+      "T3": 0.5783,
+      "T4": 0.5284,
+      "T5+": 0.4164
+    }
+  },
+  {
+    "track": 2,
+    "domain": "sustainable_living",
+    "split": "dev",
+    "run": "2a_hist_questions_only",
+    "n": 84,
+    "ndcg10": 0.3737,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.3701,
+      "T2": 0.4136,
+      "T3": 0.342,
+      "T4": 0.4205,
+      "T5+": 0.2578
+    }
+  },
+  {
+    "track": 2,
+    "domain": "sustainable_living",
+    "split": "dev",
+    "run": "2a_hist_answers_only",
+    "n": 84,
+    "ndcg10": 0.4909,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.3701,
+      "T2": 0.509,
+      "T3": 0.5884,
+      "T4": 0.529,
+      "T5+": 0.439
+    }
+  },
+  {
+    "track": 2,
+    "domain": "sustainable_living",
+    "split": "dev",
+    "run": "2a_ORACLE_hist+reasoning",
+    "n": 84,
+    "ndcg10": 0.5775,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.5556,
+      "T2": 0.5658,
+      "T3": 0.6597,
+      "T4": 0.5419,
+      "T5+": 0.4245
+    }
+  }
+]

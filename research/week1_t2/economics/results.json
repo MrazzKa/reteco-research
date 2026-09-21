@@ -1,0 +1,111 @@
+[
+  {
+    "track": 2,
+    "domain": "economics",
+    "split": "dev",
+    "run": "DIAG_gold_recycling",
+    "n": 70,
+    "ndcg10": 0.8226,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {},
+    "any_reuse": 62,
+    "full_reuse": 52
+  },
+  {
+    "track": 2,
+    "domain": "economics",
+    "split": "dev",
+    "run": "2a_ORACLE_prev_turn_gold",
+    "n": 92,
+    "ndcg10": 0.5646,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {}
+  },
+  {
+    "track": 2,
+    "domain": "economics",
+    "split": "dev",
+    "run": "2a_current",
+    "n": 92,
+    "ndcg10": 0.1387,
+    "official_ref": 0.1629,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.2164,
+      "T2": 0.1163,
+      "T3": 0.0735,
+      "T4": 0.1928,
+      "T5+": 0.0847
+    }
+  },
+  {
+    "track": 2,
+    "domain": "economics",
+    "split": "dev",
+    "run": "2a_history",
+    "n": 92,
+    "ndcg10": 0.3705,
+    "official_ref": 0.4739,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.2164,
+      "T2": 0.4311,
+      "T3": 0.4092,
+      "T4": 0.4302,
+      "T5+": 0.3983
+    }
+  },
+  {
+    "track": 2,
+    "domain": "economics",
+    "split": "dev",
+    "run": "2a_hist_questions_only",
+    "n": 92,
+    "ndcg10": 0.2205,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.2164,
+      "T2": 0.232,
+      "T3": 0.2104,
+      "T4": 0.2064,
+      "T5+": 0.2454
+    }
+  },
+  {
+    "track": 2,
+    "domain": "economics",
+    "split": "dev",
+    "run": "2a_hist_answers_only",
+    "n": 92,
+    "ndcg10": 0.3853,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.2164,
+      "T2": 0.4579,
+      "T3": 0.4243,
+      "T4": 0.437,
+      "T5+": 0.4297
+    }
+  },
+  {
+    "track": 2,
+    "domain": "economics",
+    "split": "dev",
+    "run": "2a_ORACLE_hist+reasoning",
+    "n": 92,
+    "ndcg10": 0.4171,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.3437,
+      "T2": 0.4826,
+      "T3": 0.4263,
+      "T4": 0.4117,
+      "T5+": 0.4215
+    }
+  }
+]

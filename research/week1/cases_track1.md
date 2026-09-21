@@ -1,0 +1,83 @@
+# Track 1 failure cases (1a)
+
+_seed 20260921; cases were sampled at random from nDCG@10 = 0 before reading them. Label each one; do not re-sample._
+
+### iota · `2714_798` · 1a nDCG@10 = 0.000
+
+**Query:** Are there future plans for the legacy network? <p>From <a href="https://blog.iota.org/the-chrysalis-token-migration-starts-now/" rel="nofollow noreferrer">The Chrysalis Token Migration Starts Now! publication</a> we can read the following:</p> <blockquote> <p>That means that after April 28th, users still holding tokens in the legacy network will only be able to send tokens to the migration address using Firefly but will no longer be able to send tokens to any other addresses in the legacy network (e.g. for payments, addresses maintained by exchanges, etc).</p> </blockquote> <p>So, what will be the utility of the network in the coming months? Is the network shutdown or some similar situation planned? Are IOTA channels still work on this network?</p> <p>Sorry if this information was published by IOTA, but I haven't found anything related to the above in their posts.</p> <p>Thank you very m …
+
+**Steps:**
+- Search for official IOTA publications or blog posts discussing the legacy network's future after April 28th.  _(nDCG@10: query+step 0.50, step_only 0.36, query+all 0.50)_
+- Review technical documentation or migration guides for details on the network's ongoing functionality.  _(nDCG@10: query+step 0.00, step_only 0.00, query+all 0.50)_
+
+**Gold passages:**
+- `iota/2688d1c2_0003.txt` — IOTA’s upcoming Rebased upgrade could be its most ambitious yet, replacing centralization with decentralization and unlocking smart contracts for a future-ready blockchain. On May 5, IOTA will activate Rebased, a protocol upgrade that marks the project’s most  …
+- `iota/7a96ac1f_0002.txt` — 1. How does the MoveVM improve security and developer experience? MoveVM offers: Resource-Oriented Programming: Secure and flexible asset management. Strong Data Abstraction: Simplifies resource management tasks. Static Verification: Detects errors before code …
+- `iota/c5cc10bf_0004.txt` — TL;DR: The IOTA Legacy Migration Tool is a standalone app that helps users migrate their tokens from the legacy IOTA network to the Stardust version. As with previous migrations within the Firefly wallet, this new tool allows users to migrate from an 81-charac …
+- `iota/e9f2d8f5_0001.txt` — PANews reported on May 5 that according to the IOTA official blog announcement, the IOTA Rebased mainnet upgrade was officially launched today (May 5, 2025) at 9 am Central European Summer Time (4 pm Beijing/Tokyo time). This upgrade marks the migration of the …
+
+**BM25 top 5:**
+1. `iota/1765eb64_0729.txt`  — 153 results back to index Mastering Blockchain: Unlocking the Power of Cryptocurrencies and Smart Contracts by Lorne Lantz, Daniel Cawrey air gap, altcoin, Amazon Web Services, barriers to entry, bitcoin, blockchain, business logic, business process, call cent …
+2. `iota/efbd57be_0837.txt`  — THE BOOK OF CRYPTO The Complete Guide to Understanding Bitcoin, Cryptocurrencies and Digital Assets HENRI ARSLANIAN The Book of Crypto Henri Arslanian The Book of Crypto The Complete Guide to Understanding Bitcoin, Cryptocurrencies and Digital Assets Henri Ars …
+3. `iota/9be25471_0728.txt`  — This is an updated glossary based on our years as largest worldwide human risk management platform, security awareness training, and simulated phishing space. A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z …
+4. `iota/bb5fb3c3_0725.txt`  — This is an updated glossary based on our years as largest worldwide human risk management platform, security awareness training, and simulated phishing space. A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z …
+5. `iota/1eee391f_0726.txt`  — This is an updated glossary based on our years as largest worldwide human risk management platform, security awareness training, and simulated phishing space. A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z …
+
+- [ ] TEMPO class: event analysis/localization · time-period contextualization · other TEMPO class (write it in) · not temporal at all
+- [ ] Failure mode: right topic, wrong period · period partly covered · lexical mismatch · gold looks wrong/debatable · other
+- Note: 
+
+---
+
+### iota · `314_806` · 1a nDCG@10 = 0.000
+
+**Query:** When do nodes sync their subtangle with the neighbours? <p>Does this happen after every transaction? In discrete steps? </p> <p>Is it always synced with neighbours only, or is there some super tangle that it syncs with? Is that the case as long as the coordinator is up?</p>
+
+**Steps:**
+- Locate technical documentation or whitepapers describing node synchronization processes and timing.  _(nDCG@10: query+step 0.00, step_only 0.00, query+all 0.00)_
+- Cross-reference findings with authoritative sources to confirm timing and conditions.  _(nDCG@10: query+step 0.00, step_only 0.00, query+all 0.00)_
+
+**Gold passages:**
+- `iota/0b09095f_0840.txt` — I’ve long thought of how to structure these tech series. It’s hard to choose a technical level of proficiency that everyone can follow, because everyone comes from a different background. If you’re new, take a look at the first article of the series to get a g …
+- `iota/bd8c4b46_0841.txt` — A transaction on the tangle consists of an encoded 2673 tryte string which decodes an object containing address, signature, value and tag attributes. Transactions are usually grouped in arrays called bundles which wrap together value transactions containing ou …
+
+**BM25 top 5:**
+1. `iota/fdb74119_0198.txt`  — Patterns of Distributed Systems Pearson Addison-Wesley Signature Series Visit informit.com/awss for a complete list of available publications. T he Pearson Addison-Wesley Signature Series provides readers with practical and authoritative information on the lat …
+2. `iota/9817a96c_0176.txt`  — How do we determine if an event happens before another event? In our everyday life, we use time to order different events. For example, if event A happened at 8AM and event B happened at 8:30AM, then we say event A happened before event B. Using physical time  …
+3. `iota/311_abc2351bc1bcba3d_501.txt`  — TCP and HTTP logs provide a stream termination indicator in the "termination\_state" field, just before the number of active connections. It is 2-characters long in TCP mode, and is extended to 4 characters in HTTP mode, each of which has a special meaning : - …
+4. `iota/9762f33e_0378.txt`  — Learning and Analytics in Intelligent Systems 3 Suresh Chandra Satapathy · K. Srujan Raju · K. Shyamala · D. Rama Krishna · Margarita N. Favorskaya Editors Advances in Decision Sciences, Image Processing, Security and Computer Vision International Conference o …
+5. `iota/625b66bd_0782.txt`  — There are a number of competing digital complementary currency systems, most of them providing networked currency platforms on something resembling Greco’s principles: among them Community Exchange Systems, Community Forge and Ripple. Community Exchange System …
+
+- [ ] TEMPO class: event analysis/localization · time-period contextualization · other TEMPO class (write it in) · not temporal at all
+- [ ] Failure mode: right topic, wrong period · period partly covered · lexical mismatch · gold looks wrong/debatable · other
+- Note: 
+
+---
+
+### iota · `2194_800` · 1a nDCG@10 = 0.704  (success, for contrast)
+
+**Query:** physical clock or logical clock for timestamping <p>Timestamps in Tangle are already mandatory and must have a value in a certain range, which seems to be between the last snapshot time (epoch 1517180400, which is GMT: Sunday, January 28, 2018 11:00:00 PM) and 2 hours in the future relative to the node's clock. Is this node's clock a physical clock or logical clock? If physical clock, does tangle really needs to use physical clocks for their timestamping mechanism? The fact that timestamping by nodes can be lied or mistaken by wrong physical clock, will logical clock helps?</p>
+
+**Steps:**
+- Identify technical documentation or whitepapers on Tangle's timestamping mechanism.  _(nDCG@10: query+step 0.00, step_only 0.50, query+all 0.00)_
+- Locate discussions or analyses comparing physical and logical clocks in distributed systems.  _(nDCG@10: query+step 0.50, step_only 0.63, query+all 0.50)_
+- Verify the epoch time and its role in Tangle's timestamping range.  _(nDCG@10: query+step 0.00, step_only 0.63, query+all 0.00)_
+- Cross-check reliability issues related to physical clocks in distributed systems.  _(nDCG@10: query+step 1.00, step_only 0.63, query+all 1.00)_
+
+**Gold passages:**
+- `iota/1822d984_0174.txt` — In this post, we highlight the interesting relationship between snapshotting and timestamps. To summarize below, the act of snapshotting is a temporal declaration, and thus in order to have consensus about which transactions can be snapshotted, we have to have …
+- `iota/3395fae7_0175.txt` — What are Logical Clocks? Logical clocks are a concept used in distributed systems to order events without relying on physical time synchronization. They provide a way to establish a partial ordering of events based on causality rather than real-time clock valu …
+- `iota/9817a96c_0176.txt` — How do we determine if an event happens before another event? In our everyday life, we use time to order different events. For example, if event A happened at 8AM and event B happened at 8:30AM, then we say event A happened before event B. Using physical time  …
+
+**BM25 top 5:**
+1. `iota/9817a96c_0176.txt` ✅ GOLD — How do we determine if an event happens before another event? In our everyday life, we use time to order different events. For example, if event A happened at 8AM and event B happened at 8:30AM, then we say event A happened before event B. Using physical time  …
+2. `iota/fdb74119_0198.txt`  — Patterns of Distributed Systems Pearson Addison-Wesley Signature Series Visit informit.com/awss for a complete list of available publications. T he Pearson Addison-Wesley Signature Series provides readers with practical and authoritative information on the lat …
+3. `iota/3395fae7_0175.txt` ✅ GOLD — What are Logical Clocks? Logical clocks are a concept used in distributed systems to order events without relying on physical time synchronization. They provide a way to establish a partial ordering of events based on causality rather than real-time clock valu …
+4. `iota/72d61454_9652.txt`  — - Scalability Issues - Vector Clock Size : In systems using vector clocks, the size of the vector grows with the number of nodes, leading to increased storage and communication overhead. - Management Complexity : Managing and maintaining logical clocks across  …
+5. `iota/2194_51fca9c1ace76471_87.txt`  — 1. Although it’s most intuitive to think of individual operations as commuting (or not), commutativity is actually a property of the system as a whole and can be accomplished in many ways. For example, a data structure might be entirely composed of operations  …
+
+- [ ] TEMPO class: event analysis/localization · time-period contextualization · other TEMPO class (write it in) · not temporal at all
+- [ ] Failure mode: right topic, wrong period · period partly covered · lexical mismatch · gold looks wrong/debatable · other
+- Note: 
+
+---

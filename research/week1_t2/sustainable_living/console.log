@@ -1,0 +1,13 @@
+
+[track2 / sustainable_living]
+      indexed 50,000 docs ...
+    index: 60,792 docs, 85,678 terms, 2s
+    gold recycling: 44/61 later turns reuse earlier gold; 30/61 reuse ALL of it; mean share 0.61
+    2a_ORACLE_prev_turn_gold  nDCG@10 0.4040 (earlier turns' gold only)
+    2a_current                84 topics     3.1s
+    2a_history                84 topics    33.9s
+    2a_hist_questions_only    84 topics    13.9s
+    2a_hist_answers_only      84 topics    18.5s
+    2a_ORACLE_hist+reasoning    84 topics    24.2s
+
+done in 96s -> D:\dev\semeval-reteco\reteco-research\research\week1_t2\sustainable_living

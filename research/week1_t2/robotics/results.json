@@ -1,0 +1,111 @@
+[
+  {
+    "track": 2,
+    "domain": "robotics",
+    "split": "dev",
+    "run": "DIAG_gold_recycling",
+    "n": 55,
+    "ndcg10": 0.7875,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {},
+    "any_reuse": 48,
+    "full_reuse": 37
+  },
+  {
+    "track": 2,
+    "domain": "robotics",
+    "split": "dev",
+    "run": "2a_ORACLE_prev_turn_gold",
+    "n": 75,
+    "ndcg10": 0.5354,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {}
+  },
+  {
+    "track": 2,
+    "domain": "robotics",
+    "split": "dev",
+    "run": "2a_current",
+    "n": 75,
+    "ndcg10": 0.1182,
+    "official_ref": 0.1574,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.2443,
+      "T2": 0.0841,
+      "T3": 0.0606,
+      "T4": 0.048,
+      "T5+": 0.1693
+    }
+  },
+  {
+    "track": 2,
+    "domain": "robotics",
+    "split": "dev",
+    "run": "2a_history",
+    "n": 75,
+    "ndcg10": 0.4161,
+    "official_ref": 0.5123,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.2443,
+      "T2": 0.5415,
+      "T3": 0.4495,
+      "T4": 0.4418,
+      "T5+": 0.401
+    }
+  },
+  {
+    "track": 2,
+    "domain": "robotics",
+    "split": "dev",
+    "run": "2a_hist_questions_only",
+    "n": 75,
+    "ndcg10": 0.2432,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.2443,
+      "T2": 0.2725,
+      "T3": 0.2103,
+      "T4": 0.2338,
+      "T5+": 0.297
+    }
+  },
+  {
+    "track": 2,
+    "domain": "robotics",
+    "split": "dev",
+    "run": "2a_hist_answers_only",
+    "n": 75,
+    "ndcg10": 0.4309,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.2443,
+      "T2": 0.524,
+      "T3": 0.481,
+      "T4": 0.5231,
+      "T5+": 0.3527
+    }
+  },
+  {
+    "track": 2,
+    "domain": "robotics",
+    "split": "dev",
+    "run": "2a_ORACLE_hist+reasoning",
+    "n": 75,
+    "ndcg10": 0.471,
+    "official_ref": null,
+    "source": "BRIGHT",
+    "by_turn": {
+      "T1": 0.4221,
+      "T2": 0.5058,
+      "T3": 0.4924,
+      "T4": 0.5008,
+      "T5+": 0.3031
+    }
+  }
+]
