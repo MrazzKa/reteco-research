@@ -319,3 +319,13 @@ result: 1a=0.0225 (n=30); 1b_query+step=0.0264 (n=52); 1b_step_only=0.0522 (n=52
 runtime: 443s    peak RAM: not measured
 notes: console and errors in `reteco-research/research/week1_t1/travel`; exit code 0.
 conclusion: Completed fixed dev conditions.
+
+## 2026-09-21 — repository restructure (no new runs)
+notes: Folders renamed; paths in earlier entries refer to the old names:
+`research/week1` -> `research/runs/pilot`, `research/week1_t1` -> `research/runs/track1`,
+`research/week1_t2` -> `research/runs/track2`. Case sheets moved to `research/cases/`
+(per-domain sheets merged into `wide_track{1,2}.md`, unchanged content). Per-domain
+`results.md` removed (same numbers in `results.json`). Notes, handoff and meeting brief moved
+out of the repo. Codex's `date_feasibility.py` process on Windows was stopped before finishing
+(no output); `date_quick.py` results stand. Verified after the move: `--selftest` OK; both
+aggregations re-run from the new paths reproduce every table row in `research/RESULTS.md`.

@@ -2,3 +2,6 @@ __pycache__/
 .venv/
 smoke_out/
 *.zip
+# regenerated summaries (paste into research/RESULTS.md)
+research/*_summary.md
+research/date_feasibility_train.md
