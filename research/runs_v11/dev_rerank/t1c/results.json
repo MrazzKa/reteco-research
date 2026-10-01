@@ -1,0 +1,234 @@
+[
+ {
+  "track": 1,
+  "domain": "law",
+  "split": "dev",
+  "run": "1a_rerank",
+  "n": 11,
+  "ndcg10": 0.228,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "law",
+  "split": "dev",
+  "run": "1a_rrf",
+  "n": 11,
+  "ndcg10": 0.1009,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "law",
+  "split": "dev",
+  "run": "1a_recall_cap",
+  "n": 11,
+  "ndcg10": 0.323,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "law",
+  "split": "dev",
+  "run": "1b_query+step_rerank",
+  "n": 23,
+  "ndcg10": 0.2612,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "law",
+  "split": "dev",
+  "run": "1b_query+step_rrf",
+  "n": 23,
+  "ndcg10": 0.1846,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "law",
+  "split": "dev",
+  "run": "1b_query+step_recall_cap",
+  "n": 23,
+  "ndcg10": 0.3913,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "workplace",
+  "split": "dev",
+  "run": "1a_rerank",
+  "n": 11,
+  "ndcg10": 0.2257,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "workplace",
+  "split": "dev",
+  "run": "1a_rrf",
+  "n": 11,
+  "ndcg10": 0.1096,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "workplace",
+  "split": "dev",
+  "run": "1a_recall_cap",
+  "n": 11,
+  "ndcg10": 0.367,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "workplace",
+  "split": "dev",
+  "run": "1b_query+step_rerank",
+  "n": 20,
+  "ndcg10": 0.3535,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "workplace",
+  "split": "dev",
+  "run": "1b_query+step_rrf",
+  "n": 20,
+  "ndcg10": 0.1472,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "workplace",
+  "split": "dev",
+  "run": "1b_query+step_recall_cap",
+  "n": 20,
+  "ndcg10": 0.5113,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "quant",
+  "split": "dev",
+  "run": "1a_rerank",
+  "n": 10,
+  "ndcg10": 0.0832,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "quant",
+  "split": "dev",
+  "run": "1a_rrf",
+  "n": 10,
+  "ndcg10": 0.0482,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "quant",
+  "split": "dev",
+  "run": "1a_recall_cap",
+  "n": 10,
+  "ndcg10": 0.1226,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "quant",
+  "split": "dev",
+  "run": "1b_query+step_rerank",
+  "n": 15,
+  "ndcg10": 0.1313,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "quant",
+  "split": "dev",
+  "run": "1b_query+step_rrf",
+  "n": 15,
+  "ndcg10": 0.0729,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "quant",
+  "split": "dev",
+  "run": "1b_query+step_recall_cap",
+  "n": 15,
+  "ndcg10": 0.1742,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "dev",
+  "run": "1a_rerank",
+  "n": 3,
+  "ndcg10": 0.6951,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "dev",
+  "run": "1a_rrf",
+  "n": 3,
+  "ndcg10": 0.4413,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "dev",
+  "run": "1a_recall_cap",
+  "n": 3,
+  "ndcg10": 0.944,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "dev",
+  "run": "1b_query+step_rerank",
+  "n": 8,
+  "ndcg10": 0.5822,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "dev",
+  "run": "1b_query+step_rrf",
+  "n": 8,
+  "ndcg10": 0.4539,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "dev",
+  "run": "1b_query+step_recall_cap",
+  "n": 8,
+  "ndcg10": 1.0,
+  "system": "oracle-cap-top100"
+ }
+]

@@ -39,17 +39,21 @@ from math import log
 # ---------------------------------------------------------------- reference --
 # From starter_kit/BASELINE_RESULTS.md (official pyserini baseline). Pure-Python
 # BM25 tokenises differently, so expect small gaps, not equality.
+# Official pyserini BM25 references (train, dev), from starter_kit/BASELINE_RESULTS.md.
+# Track 1 numbers are data **v1.1** (deduplicated corpora, 25 Sep 2026); Track 2 is unchanged.
+# v1.0 Track-1 macro was 1a 0.0879/0.0967 and 1b 0.0852/0.1063 (train/dev); v1.1 is 1a
+# 0.1075/0.1147 and 1b 0.1024/0.1177. Our own v1.0 runs are kept in research/RESULTS_v10.md.
 REF = {
-    "1a": {"bitcoin": (.0695, .0263), "cardano": (.1349, .0851), "economics": (.0382, .0480),
-           "genealogy": (.1003, .1677), "history": (.0691, .0877), "hsm": (.1627, .2239),
-           "iota": (.0199, .2083), "law": (.0943, .0574), "monero": (.0278, .0252),
-           "politics": (.2792, .2550), "quant": (.0255, .0218), "travel": (.0429, .0275),
-           "workplace": (.0777, .0230)},
-    "1b": {"bitcoin": (.0774, .0205), "cardano": (.1174, .0554), "economics": (.0278, .0517),
-           "genealogy": (.0982, .2060), "history": (.0651, .0989), "hsm": (.1591, .2084),
-           "iota": (.0000, .3289), "law": (.0846, .0549), "monero": (.0517, .0103),
-           "politics": (.2425, .2306), "quant": (.0085, .0374), "travel": (.0378, .0492),
-           "workplace": (.1369, .0302)},
+    "1a": {"bitcoin": (.0856, .0370), "cardano": (.1848, .1027), "economics": (.0382, .0467),
+           "genealogy": (.1242, .1949), "history": (.0654, .0873), "hsm": (.1736, .2489),
+           "iota": (.1563, .3309), "law": (.0946, .0574), "monero": (.0382, .0320),
+           "politics": (.2810, .2625), "quant": (.0255, .0237), "travel": (.0506, .0442),
+           "workplace": (.0798, .0230)},
+    "1b": {"bitcoin": (.0888, .0299), "cardano": (.1655, .0627), "economics": (.0300, .0463),
+           "genealogy": (.1181, .2183), "history": (.0614, .1015), "hsm": (.1729, .2140),
+           "iota": (.1403, .4195), "law": (.0854, .0549), "monero": (.0622, .0113),
+           "politics": (.2403, .2371), "quant": (.0085, .0403), "travel": (.0423, .0645),
+           "workplace": (.1162, .0297)},
     "2a_current": {"biology": (.2250, .2034), "drones": (.1400, .1695), "earth_science": (.2757, .2195),
                    "economics": (.1573, .1629), "hardware": (.1472, .1605), "law": (.1047, .1147),
                    "medicalsciences": (.1188, .1168), "politics": (.1609, .1514),

@@ -1,0 +1,40 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights:  46%|████▌     | 91/199 [00:00<00:00, 909.22it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 1379.69it/s]
+
+[t2 / earth_science / rerank-bge-small]
+    7,137 candidate docs read in 4s
+    encoded earth_science candidates: 7,137 texts, 788s (9/s)
+    encoded 2a_current queries: 133 texts, 3s (47/s)
+      -> 2a_current rerank: 0.2094
+      -> 2a_current rrf: 0.2416
+      -> 2a_current recall cap (oracle over BM25 top-100): 0.6263
+    encoded 2a_history queries: 133 texts, 19s (7/s)
+      -> 2a_history rerank: 0.3721
+      -> 2a_history rrf: 0.4678
+      -> 2a_history recall cap (oracle over BM25 top-100): 0.9085
+
+[t2 / biology / rerank-bge-small]
+    6,994 candidate docs read in 2s
+    encoded biology candidates: 6,994 texts, 554s (13/s)
+    encoded 2a_current queries: 115 texts, 3s (42/s)
+      -> 2a_current rerank: 0.2101
+      -> 2a_current rrf: 0.2000
+      -> 2a_current recall cap (oracle over BM25 top-100): 0.5185
+    encoded 2a_history queries: 115 texts, 16s (7/s)
+      -> 2a_history rerank: 0.4192
+      -> 2a_history rrf: 0.4870
+      -> 2a_history recall cap (oracle over BM25 top-100): 0.8717
+
+[t2 / robotics / rerank-bge-small]
+    4,191 candidate docs read in 2s
+    encoded robotics candidates: 4,191 texts, 431s (10/s)
+    encoded 2a_current queries: 75 texts, 2s (39/s)
+      -> 2a_current rerank: 0.1267
+      -> 2a_current rrf: 0.1881
+      -> 2a_current recall cap (oracle over BM25 top-100): 0.5255
+    encoded 2a_history queries: 75 texts, 10s (8/s)
+      -> 2a_history rerank: 0.3592
+      -> 2a_history rrf: 0.4559
+      -> 2a_history recall cap (oracle over BM25 top-100): 0.8521
+
+wrote ../research/runs_v11/dev_rerank/t2a/results.json

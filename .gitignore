@@ -5,3 +5,9 @@ smoke_out/
 # regenerated summaries (paste into research/RESULTS.md)
 research/*_summary.md
 research/date_feasibility_train.md
+# large regenerable artifacts: TREC run files, embedding caches, ANN indexes
+# (every number lives in the results.json next to them; see README to regenerate)
+*.tsv
+*.npy
+research/runs_v11/ann/emb/
+research/runs_v11/ann/index/

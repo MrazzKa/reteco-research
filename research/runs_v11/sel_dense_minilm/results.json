@@ -1,0 +1,176 @@
+[
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "train",
+  "run": "1a_rerank",
+  "n": 7,
+  "ndcg10": 0.2043,
+  "system": "rerank-minilm+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "train",
+  "run": "1a_rrf",
+  "n": 7,
+  "ndcg10": 0.1934,
+  "system": "rrf-minilm+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "train",
+  "run": "1a_recall_cap",
+  "n": 7,
+  "ndcg10": 0.4134,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "train",
+  "run": "1b_query+step_rerank",
+  "n": 16,
+  "ndcg10": 0.17,
+  "system": "rerank-minilm+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "train",
+  "run": "1b_query+step_rrf",
+  "n": 16,
+  "ndcg10": 0.2213,
+  "system": "rrf-minilm+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "train",
+  "run": "1b_query+step_recall_cap",
+  "n": 16,
+  "ndcg10": 0.49,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "quant",
+  "split": "train",
+  "run": "1a_rerank",
+  "n": 24,
+  "ndcg10": 0.1212,
+  "system": "rerank-minilm+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "quant",
+  "split": "train",
+  "run": "1a_rrf",
+  "n": 24,
+  "ndcg10": 0.087,
+  "system": "rrf-minilm+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "quant",
+  "split": "train",
+  "run": "1a_recall_cap",
+  "n": 24,
+  "ndcg10": 0.1683,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "quant",
+  "split": "train",
+  "run": "1b_query+step_rerank",
+  "n": 37,
+  "ndcg10": 0.1654,
+  "system": "rerank-minilm+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "quant",
+  "split": "train",
+  "run": "1b_query+step_rrf",
+  "n": 37,
+  "ndcg10": 0.0813,
+  "system": "rrf-minilm+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "quant",
+  "split": "train",
+  "run": "1b_query+step_recall_cap",
+  "n": 37,
+  "ndcg10": 0.2535,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "law",
+  "split": "train",
+  "run": "1a_rerank",
+  "n": 24,
+  "ndcg10": 0.1759,
+  "system": "rerank-minilm+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "law",
+  "split": "train",
+  "run": "1a_rrf",
+  "n": 24,
+  "ndcg10": 0.1403,
+  "system": "rrf-minilm+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "law",
+  "split": "train",
+  "run": "1a_recall_cap",
+  "n": 24,
+  "ndcg10": 0.4202,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "law",
+  "split": "train",
+  "run": "1b_query+step_rerank",
+  "n": 53,
+  "ndcg10": 0.2082,
+  "system": "rerank-minilm+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "law",
+  "split": "train",
+  "run": "1b_query+step_rrf",
+  "n": 53,
+  "ndcg10": 0.1588,
+  "system": "rrf-minilm+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "law",
+  "split": "train",
+  "run": "1b_query+step_recall_cap",
+  "n": 53,
+  "ndcg10": 0.4964,
+  "system": "oracle-cap-top100"
+ }
+]

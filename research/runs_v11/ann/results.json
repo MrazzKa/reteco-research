@@ -1,0 +1,56 @@
+[
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "dev",
+  "run": "1a_dense_exact",
+  "n": 3,
+  "ndcg10": 0.5581,
+  "system": "dense_exact-bge-small",
+  "docs": 9680,
+  "query_latency_s": 0.019,
+  "encode_s": 1034.5
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "dev",
+  "run": "1a_dense_ann",
+  "n": 3,
+  "ndcg10": 0.5581,
+  "system": "dense_ann-bge-small",
+  "docs": 9680,
+  "query_latency_s": 0.0034,
+  "encode_s": 1034.5,
+  "recall10_vs_exact": 1.0,
+  "index_build_s": 3.5,
+  "epsilon": 0.1
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "dev",
+  "run": "1b_query+step_dense_exact",
+  "n": 8,
+  "ndcg10": 0.4984,
+  "system": "dense_exact-bge-small",
+  "docs": 9680,
+  "query_latency_s": 0.0091,
+  "encode_s": 1034.5
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "dev",
+  "run": "1b_query+step_dense_ann",
+  "n": 8,
+  "ndcg10": 0.4984,
+  "system": "dense_ann-bge-small",
+  "docs": 9680,
+  "query_latency_s": 0.0025,
+  "encode_s": 1034.5,
+  "recall10_vs_exact": 1.0,
+  "index_build_s": 2.6,
+  "epsilon": 0.1
+ }
+]

@@ -1,0 +1,346 @@
+[
+ {
+  "track": 2,
+  "domain": "law",
+  "split": "dev",
+  "run": "2a_current_rerank",
+  "n": 66,
+  "ndcg10": 0.207,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.4206,
+   "T2": 0.09,
+   "T3": 0.1485,
+   "T4": 0.2288,
+   "T5+": 0.1354
+  }
+ },
+ {
+  "track": 2,
+  "domain": "law",
+  "split": "dev",
+  "run": "2a_current_rrf",
+  "n": 66,
+  "ndcg10": 0.1992,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.3713,
+   "T2": 0.1129,
+   "T3": 0.1731,
+   "T4": 0.2119,
+   "T5+": 0.106
+  }
+ },
+ {
+  "track": 2,
+  "domain": "law",
+  "split": "dev",
+  "run": "2a_current_recall_cap",
+  "n": 66,
+  "ndcg10": 0.6404,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "law",
+  "split": "dev",
+  "run": "2a_history_rerank",
+  "n": 66,
+  "ndcg10": 0.3261,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.4206,
+   "T2": 0.2935,
+   "T3": 0.2987,
+   "T4": 0.335,
+   "T5+": 0.271
+  }
+ },
+ {
+  "track": 2,
+  "domain": "law",
+  "split": "dev",
+  "run": "2a_history_rrf",
+  "n": 66,
+  "ndcg10": 0.3443,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.3713,
+   "T2": 0.3371,
+   "T3": 0.3576,
+   "T4": 0.3132,
+   "T5+": 0.3275
+  }
+ },
+ {
+  "track": 2,
+  "domain": "law",
+  "split": "dev",
+  "run": "2a_history_recall_cap",
+  "n": 66,
+  "ndcg10": 0.8593,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "medicalsciences",
+  "split": "dev",
+  "run": "2a_current_rerank",
+  "n": 44,
+  "ndcg10": 0.148,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.2558,
+   "T2": 0.079,
+   "T3": 0.1299,
+   "T4": 0.1564,
+   "T5+": 0.0
+  }
+ },
+ {
+  "track": 2,
+  "domain": "medicalsciences",
+  "split": "dev",
+  "run": "2a_current_rrf",
+  "n": 44,
+  "ndcg10": 0.1249,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.1614,
+   "T2": 0.1489,
+   "T3": 0.0898,
+   "T4": 0.0987,
+   "T5+": 0.0
+  }
+ },
+ {
+  "track": 2,
+  "domain": "medicalsciences",
+  "split": "dev",
+  "run": "2a_current_recall_cap",
+  "n": 44,
+  "ndcg10": 0.5101,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "medicalsciences",
+  "split": "dev",
+  "run": "2a_history_rerank",
+  "n": 44,
+  "ndcg10": 0.2653,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.2558,
+   "T2": 0.1079,
+   "T3": 0.3828,
+   "T4": 0.4276,
+   "T5+": 0.3425
+  }
+ },
+ {
+  "track": 2,
+  "domain": "medicalsciences",
+  "split": "dev",
+  "run": "2a_history_rrf",
+  "n": 44,
+  "ndcg10": 0.1784,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.1614,
+   "T2": 0.1092,
+   "T3": 0.2255,
+   "T4": 0.3451,
+   "T5+": 0.1819
+  }
+ },
+ {
+  "track": 2,
+  "domain": "medicalsciences",
+  "split": "dev",
+  "run": "2a_history_recall_cap",
+  "n": 44,
+  "ndcg10": 0.7067,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "politics",
+  "split": "dev",
+  "run": "2a_current_rerank",
+  "n": 54,
+  "ndcg10": 0.3177,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.4776,
+   "T2": 0.3286,
+   "T3": 0.1693,
+   "T4": 0.2294,
+   "T5+": 0.4013
+  }
+ },
+ {
+  "track": 2,
+  "domain": "politics",
+  "split": "dev",
+  "run": "2a_current_rrf",
+  "n": 54,
+  "ndcg10": 0.2554,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.4299,
+   "T2": 0.3129,
+   "T3": 0.1481,
+   "T4": 0.105,
+   "T5+": 0.2103
+  }
+ },
+ {
+  "track": 2,
+  "domain": "politics",
+  "split": "dev",
+  "run": "2a_current_recall_cap",
+  "n": 54,
+  "ndcg10": 0.6608,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "politics",
+  "split": "dev",
+  "run": "2a_history_rerank",
+  "n": 54,
+  "ndcg10": 0.4668,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.4776,
+   "T2": 0.5428,
+   "T3": 0.4278,
+   "T4": 0.5485,
+   "T5+": 0.2411
+  }
+ },
+ {
+  "track": 2,
+  "domain": "politics",
+  "split": "dev",
+  "run": "2a_history_rrf",
+  "n": 54,
+  "ndcg10": 0.4035,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.4299,
+   "T2": 0.5177,
+   "T3": 0.3559,
+   "T4": 0.3637,
+   "T5+": 0.2616
+  }
+ },
+ {
+  "track": 2,
+  "domain": "politics",
+  "split": "dev",
+  "run": "2a_history_recall_cap",
+  "n": 54,
+  "ndcg10": 0.8743,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "dev",
+  "run": "2a_current_rerank",
+  "n": 38,
+  "ndcg10": 0.1874,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.2615,
+   "T2": 0.0711,
+   "T3": 0.2237,
+   "T4": 0.25,
+   "T5+": 0.0
+  }
+ },
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "dev",
+  "run": "2a_current_rrf",
+  "n": 38,
+  "ndcg10": 0.161,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.2647,
+   "T2": 0.1637,
+   "T3": 0.1276,
+   "T4": 0.0,
+   "T5+": 0.0
+  }
+ },
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "dev",
+  "run": "2a_current_recall_cap",
+  "n": 38,
+  "ndcg10": 0.4783,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "dev",
+  "run": "2a_history_rerank",
+  "n": 38,
+  "ndcg10": 0.3019,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.2615,
+   "T2": 0.2716,
+   "T3": 0.3208,
+   "T4": 0.4127,
+   "T5+": 0.4307
+  }
+ },
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "dev",
+  "run": "2a_history_rrf",
+  "n": 38,
+  "ndcg10": 0.3275,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.2647,
+   "T2": 0.318,
+   "T3": 0.3661,
+   "T4": 0.3441,
+   "T5+": 0.6309
+  }
+ },
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "dev",
+  "run": "2a_history_recall_cap",
+  "n": 38,
+  "ndcg10": 0.7546,
+  "system": "oracle-cap-top100"
+ }
+]

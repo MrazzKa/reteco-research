@@ -10,7 +10,8 @@ Code, experiment log and generated results only. Notes and meeting briefs are ke
 ```
 semeval-reteco/                  (not a repo)
   RETECO/                        official task repo, pinned 23093c30, read-only
-  reteco_data/                   official release, all 24 domains, read-only
+  reteco_data/                   release v1.0: Track 2 (current) + Track 1 (superseded)
+  reteco_data_v11/               release v1.1: Track 1, deduplicated (use this for Track 1)
   .venv/                         Windows venv, CPU only
   reteco-research/               <- this repo
     scripts/                     all code
@@ -23,23 +24,45 @@ semeval-reteco/                  (not a repo)
         pilot_track{1,2}.md        must-label (iota; drones + biology)
         pilot_proposed_labels.md   assistant-proposed labels, unconfirmed
         wide_track{1,2}.md         optional (other domains)
-      runs/
-        pilot/                   first pass: iota, drones, biology
-        track1/<domain>/         Track-1 dev runs (9 of 13 domains)
-        track2/<domain>/         Track-2 dev runs (all 11 domains)
-                                 each: results.json + runs/*.tsv (TREC run files)
+      runs/                    week 1 (pure-Python BM25, data v1.0)
+        pilot/ track1/ track2/
+      runs_v11/                  week 2 (bm25s and dense), data v1.1 for Track 1
+        track1_lucene/ track1_plain/ track2_lucene/ track2_plain/   BM25, dev
+        track1_train_lucene/ sel_track1_train/                      BM25, train
+        sel_dense_<model>/       encoder selection on TRAIN
+        dev_rerank/t1*/ t2*/     dense reranking on dev
+        dense_full/              dense over the whole corpus (small domains)
+        e2_dates_train.json      E2 date-reranking result (negative)
 ```
 
 ## Scripts
 
 | script | purpose |
 | --- | --- |
-| `week1_run.py` | Main runner. FastBM25 (rank-identical to starter-kit `bm25.py`, proven by `--selftest`); all 1a/1b/2a conditions; case sheets. |
+| `bm25s_run.py` | **Current BM25 runner**: bm25s, Lucene BM25 formula, `--analyzer lucene` (Snowball stemmer + stopwords) or `plain`. Reproduces the official macro to ~0.002 on Track 1. |
+| `dense_rerank.py` | Reranks a BM25 run's top-100 with a sentence-transformers encoder (CPU); also RRF and the top-100 recall ceiling. |
+| `dense_run.py` | Dense retrieval over a whole corpus (expensive; small domains only). |
+| `date_rerank.py` | E2: explicit-date reranking, four fixed variants. |
+| `compare_systems.py` · `make_results.py` | Comparison tables; regenerate `research/RESULTS.md`. |
+| `query_view.py` | Readable side-by-side examples: query, gold, two systems' top-5. |
+| `week1_run.py` | Week-1 runner (pure-Python FastBM25, `--selftest`), kept for the ablation conditions and case sheets. |
 | `aggregate_week1.py` | Per-domain + macro tables and paired bootstrap CIs, re-scored from run files and checked against `results.json`. |
 | `run_remaining.py` | Runs `week1_run.py` per domain in subprocesses and appends LOG entries. |
 | `date_quick.py` | Explicit-date feasibility on Track-1 **train** (regex; gold vs random corpus sample). ~2 min. |
 | `date_feasibility.py` | Same with BM25 non-gold top-10 as contrast. Hours on `history`; not completed. |
 | `get_data.py` · `check_open_questions.py` · `inspect_release.py` · `smoke_sample.py` | Download, schema checks, data report, pipeline smoke test. |
+
+## Run (WSL / Linux, from `reteco-research/scripts`)
+
+```bash
+pip install --user bm25s PyStemmer            # plus torch + sentence-transformers for dense
+python3 bm25s_run.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit \
+    --split dev --track 1 --domains iota --analyzer lucene --out ../research/runs_v11/demo
+python3 dense_rerank.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit \
+    --split dev --track 1 --domains iota --model bge-small \
+    --runs ../research/runs_v11/demo/runs --out ../research/runs_v11/demo_rerank
+python3 make_results.py --root .. --out ../research/RESULTS.md
+```
 
 ## Run (Windows PowerShell, from `D:\dev\semeval-reteco`)
 
@@ -71,6 +94,7 @@ The same commands work from WSL with `python3` and forward slashes (no packages 
 4. Case sheets are sampled with a fixed seed (20260921) before anyone reads them. Never resample.
    Proposed labels must be confirmed by a human before they are counted.
 5. Negative and surprising results are reported as results.
+6. Model/variant selection happens on **train** (see the encoder selection in the LOG); dev is measured once with the already-fixed choice.
 
 ## Gotchas
 

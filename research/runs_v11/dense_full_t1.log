@@ -1,0 +1,15 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights:  31%|███       | 61/199 [00:00<00:00, 575.10it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 1417.50it/s]
+
+[track1 / iota / bge-small]
+    encoded iota corpus: 9,680 texts, 2381s (4/s)
+    encoded 1a queries: 3 texts, 1s (4/s)
+    search 1a: 3 unique queries, 0s
+      -> 1a dense 0.5581
+      -> 1a hybrid 0.5204
+    encoded 1b_query+step queries: 8 texts, 2s (4/s)
+    search 1b_query+step: 8 unique queries, 0s
+      -> 1b_query+step dense 0.4984
+      -> 1b_query+step hybrid 0.5164
+
+[track1 / quant / bge-small]

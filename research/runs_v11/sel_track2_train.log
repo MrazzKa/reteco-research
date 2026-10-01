@@ -1,0 +1,24 @@
+
+[track2 / drones]
+    index: 16,381 docs, 3s (lucene)
+    2a_current                 104 topics (104 unique)    0.2s
+      -> 2a_current nDCG@10 0.1319   official 0.14
+    2a_history                 104 topics (104 unique)    1.0s
+      -> 2a_history nDCG@10 0.2546   official 0.3162
+    2a_hist_questions_only     104 topics (104 unique)    0.3s
+      -> 2a_hist_questions_only nDCG@10 0.1378
+    2a_hist_answers_only       104 topics (104 unique)    0.8s
+      -> 2a_hist_answers_only nDCG@10 0.2761
+
+[track2 / biology]
+    index: 57,359 docs, 6s (lucene)
+    2a_current                 247 topics (247 unique)    0.4s
+      -> 2a_current nDCG@10 0.2015   official 0.225
+    2a_history                 247 topics (247 unique)    2.4s
+      -> 2a_history nDCG@10 0.5908   official 0.6369
+    2a_hist_questions_only     247 topics (247 unique)    0.7s
+      -> 2a_hist_questions_only nDCG@10 0.3497
+    2a_hist_answers_only       247 topics (247 unique)    1.9s
+      -> 2a_hist_answers_only nDCG@10 0.6140
+
+done in 18s -> ../research/runs_v11/sel_track2_train/results.json

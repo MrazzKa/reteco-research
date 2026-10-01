@@ -1,0 +1,13 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights:  44%|████▍     | 88/199 [00:00<00:00, 873.64it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 1052.66it/s]
+
+[t1 / iota / dense-bge-small]
+    encoded iota corpus: 9,680 texts, 1034s (9/s)
+    encoded 1a queries: 3 texts, 1s (5/s)
+      -> 1a dense_exact: nDCG@10 0.5581  19.0 ms/query
+      -> 1a dense_ann: nDCG@10 0.5581  3.4 ms/query  recall@10 vs exact 1.000  build 3s
+    encoded 1b_query+step queries: 8 texts, 1s (9/s)
+      -> 1b_query+step dense_exact: nDCG@10 0.4984  9.1 ms/query
+      -> 1b_query+step dense_ann: nDCG@10 0.4984  2.5 ms/query  recall@10 vs exact 1.000  build 3s
+
+wrote ../research/runs_v11/ann/results.json

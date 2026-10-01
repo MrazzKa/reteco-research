@@ -1,0 +1,66 @@
+[
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "dev",
+  "run": "2a_current",
+  "n": 38,
+  "ndcg10": 0.1525,
+  "system": "dense-bge-small",
+  "by_turn": {
+   "T1": 0.1976,
+   "T2": 0.0609,
+   "T3": 0.1809,
+   "T4": 0.2404,
+   "T5+": 0.0
+  }
+ },
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "dev",
+  "run": "2a_current_hybrid",
+  "n": 38,
+  "ndcg10": 0.2067,
+  "system": "hybrid-rrf-bge-small+bm25s",
+  "by_turn": {
+   "T1": 0.3082,
+   "T2": 0.157,
+   "T3": 0.2097,
+   "T4": 0.1077,
+   "T5+": 0.0
+  }
+ },
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "dev",
+  "run": "2a_history",
+  "n": 38,
+  "ndcg10": 0.2353,
+  "system": "dense-bge-small",
+  "by_turn": {
+   "T1": 0.1976,
+   "T2": 0.236,
+   "T3": 0.256,
+   "T4": 0.25,
+   "T5+": 0.3562
+  }
+ },
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "dev",
+  "run": "2a_history_hybrid",
+  "n": 38,
+  "ndcg10": 0.3391,
+  "system": "hybrid-rrf-bge-small+bm25s",
+  "by_turn": {
+   "T1": 0.3082,
+   "T2": 0.3147,
+   "T3": 0.3404,
+   "T4": 0.4149,
+   "T5+": 0.6309
+  }
+ }
+]

@@ -1,0 +1,28 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 2111.63it/s]
+
+[t2 / drones / rerank-bge-small]
+    4,232 candidate docs read in 1s
+    encoded drones candidates: 4,232 texts, 1505s (3/s)
+    encoded 2a_current queries: 104 texts, 8s (14/s)
+      -> 2a_current rerank: 0.2592
+      -> 2a_current rrf: 0.1923
+      -> 2a_current recall cap (oracle over BM25 top-100): 0.5837
+    encoded 2a_history queries: 104 texts, 37s (3/s)
+      -> 2a_history rerank: 0.3603
+      -> 2a_history rrf: 0.3428
+      -> 2a_history recall cap (oracle over BM25 top-100): 0.7928
+
+[t2 / biology / rerank-bge-small]
+    11,489 candidate docs read in 3s
+    encoded biology candidates: 11,489 texts, 1151s (10/s)
+    encoded 2a_current queries: 247 texts, 6s (44/s)
+      -> 2a_current rerank: 0.2582
+      -> 2a_current rrf: 0.2706
+      -> 2a_current recall cap (oracle over BM25 top-100): 0.5543
+    encoded 2a_history queries: 247 texts, 43s (6/s)
+      -> 2a_history rerank: 0.4742
+      -> 2a_history rrf: 0.5376
+      -> 2a_history recall cap (oracle over BM25 top-100): 0.9073
+
+wrote ../research/runs_v11/sel_len512/results.json

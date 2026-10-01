@@ -1,0 +1,38 @@
+[
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "dev",
+  "run": "1a",
+  "n": 3,
+  "ndcg10": 0.5581,
+  "system": "dense-bge-small"
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "dev",
+  "run": "1a_hybrid",
+  "n": 3,
+  "ndcg10": 0.5204,
+  "system": "hybrid-rrf-bge-small+bm25s"
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "dev",
+  "run": "1b_query+step",
+  "n": 8,
+  "ndcg10": 0.4984,
+  "system": "dense-bge-small"
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "dev",
+  "run": "1b_query+step_hybrid",
+  "n": 8,
+  "ndcg10": 0.5164,
+  "system": "hybrid-rrf-bge-small+bm25s"
+ }
+]

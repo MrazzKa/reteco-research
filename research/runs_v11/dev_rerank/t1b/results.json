@@ -1,0 +1,292 @@
+[
+ {
+  "track": 1,
+  "domain": "bitcoin",
+  "split": "dev",
+  "run": "1a_rerank",
+  "n": 30,
+  "ndcg10": 0.195,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "bitcoin",
+  "split": "dev",
+  "run": "1a_rrf",
+  "n": 30,
+  "ndcg10": 0.1022,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "bitcoin",
+  "split": "dev",
+  "run": "1a_recall_cap",
+  "n": 30,
+  "ndcg10": 0.3951,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "bitcoin",
+  "split": "dev",
+  "run": "1b_query+step_rerank",
+  "n": 56,
+  "ndcg10": 0.1919,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "bitcoin",
+  "split": "dev",
+  "run": "1b_query+step_rrf",
+  "n": 56,
+  "ndcg10": 0.1384,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "bitcoin",
+  "split": "dev",
+  "run": "1b_query+step_recall_cap",
+  "n": 56,
+  "ndcg10": 0.4228,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "travel",
+  "split": "dev",
+  "run": "1a_rerank",
+  "n": 30,
+  "ndcg10": 0.1524,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "travel",
+  "split": "dev",
+  "run": "1a_rrf",
+  "n": 30,
+  "ndcg10": 0.0996,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "travel",
+  "split": "dev",
+  "run": "1a_recall_cap",
+  "n": 30,
+  "ndcg10": 0.3362,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "travel",
+  "split": "dev",
+  "run": "1b_query+step_rerank",
+  "n": 52,
+  "ndcg10": 0.1949,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "travel",
+  "split": "dev",
+  "run": "1b_query+step_rrf",
+  "n": 52,
+  "ndcg10": 0.11,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "travel",
+  "split": "dev",
+  "run": "1b_query+step_recall_cap",
+  "n": 52,
+  "ndcg10": 0.5131,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "monero",
+  "split": "dev",
+  "run": "1a_rerank",
+  "n": 19,
+  "ndcg10": 0.0843,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "monero",
+  "split": "dev",
+  "run": "1a_rrf",
+  "n": 19,
+  "ndcg10": 0.0682,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "monero",
+  "split": "dev",
+  "run": "1a_recall_cap",
+  "n": 19,
+  "ndcg10": 0.2069,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "monero",
+  "split": "dev",
+  "run": "1b_query+step_rerank",
+  "n": 28,
+  "ndcg10": 0.1171,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "monero",
+  "split": "dev",
+  "run": "1b_query+step_rrf",
+  "n": 28,
+  "ndcg10": 0.0475,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "monero",
+  "split": "dev",
+  "run": "1b_query+step_recall_cap",
+  "n": 28,
+  "ndcg10": 0.214,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "cardano",
+  "split": "dev",
+  "run": "1a_rerank",
+  "n": 15,
+  "ndcg10": 0.2077,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "cardano",
+  "split": "dev",
+  "run": "1a_rrf",
+  "n": 15,
+  "ndcg10": 0.2389,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "cardano",
+  "split": "dev",
+  "run": "1a_recall_cap",
+  "n": 15,
+  "ndcg10": 0.656,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "cardano",
+  "split": "dev",
+  "run": "1b_query+step_rerank",
+  "n": 33,
+  "ndcg10": 0.174,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "cardano",
+  "split": "dev",
+  "run": "1b_query+step_rrf",
+  "n": 33,
+  "ndcg10": 0.1897,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "cardano",
+  "split": "dev",
+  "run": "1b_query+step_recall_cap",
+  "n": 33,
+  "ndcg10": 0.6501,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "economics",
+  "split": "dev",
+  "run": "1a_rerank",
+  "n": 25,
+  "ndcg10": 0.1685,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "economics",
+  "split": "dev",
+  "run": "1a_rrf",
+  "n": 25,
+  "ndcg10": 0.1062,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "economics",
+  "split": "dev",
+  "run": "1a_recall_cap",
+  "n": 25,
+  "ndcg10": 0.4111,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "economics",
+  "split": "dev",
+  "run": "1b_query+step_rerank",
+  "n": 51,
+  "ndcg10": 0.1655,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "economics",
+  "split": "dev",
+  "run": "1b_query+step_rrf",
+  "n": 51,
+  "ndcg10": 0.1078,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "economics",
+  "split": "dev",
+  "run": "1b_query+step_recall_cap",
+  "n": 51,
+  "ndcg10": 0.457,
+  "system": "oracle-cap-top100"
+ }
+]

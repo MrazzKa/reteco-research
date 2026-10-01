@@ -1,0 +1,16 @@
+bitcoin      n=  70 dated=  15 base 0.0526  hard +0.0000  top20 +0.0000  top10 +0.0000  rrf +0.0000
+cardano      n=  36 dated=   2 base 0.2100  hard -0.0278  top20 -0.0194  top10 -0.0171  rrf -0.0198
+economics    n=  58 dated=  31 base 0.0508  hard -0.0058  top20 +0.0006  top10 +0.0034  rrf +0.0043
+genealogy    n=  80 dated=  75 base 0.0881  hard -0.0068  top20 +0.0039  top10 +0.0022  rrf +0.0025
+history      n= 561 dated= 271 base 0.0436  hard -0.0024  top20 -0.0013  top10 +0.0004  rrf -0.0017
+hsm          n= 105 dated=  39 base 0.2067  hard -0.0214  top20 -0.0104  top10 -0.0036  rrf -0.0080
+iota         n=   7 dated=   0 base 0.1444  hard +0.0000  top20 +0.0000  top10 +0.0000  rrf +0.0000
+law          n=  24 dated=   9 base 0.0439  hard +0.0015  top20 +0.0015  top10 +0.0008  rrf +0.0015
+monero       n=  46 dated=  18 base 0.0329  hard -0.0144  top20 -0.0100  top10 -0.0084  rrf -0.0100
+politics     n= 105 dated=  73 base 0.2855  hard -0.0366  top20 -0.0337  top10 -0.0136  rrf -0.0337
+quant        n=  24 dated=   8 base 0.0255  hard +0.0000  top20 +0.0000  top10 +0.0000  rrf +0.0000
+travel       n=  70 dated=  21 base 0.0445  hard -0.0113  top20 -0.0096  top10 -0.0084  rrf -0.0113
+workplace    n=  25 dated=   3 base 0.0778  hard +0.0000  top20 +0.0000  top10 +0.0000  rrf +0.0000
+
+macro base 0.1005; hard 0.0909 (-0.0096); top20 0.0945 (-0.0060); top10 0.0971 (-0.0034); rrf 0.0946 (-0.0059)
+wrote ../research/runs_v11/e2_dates_train.json

@@ -1,0 +1,5 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights:  16%|█▌        | 32/199 [00:00<00:00, 311.52it/s]Loading weights:  41%|████      | 82/199 [00:00<00:00, 417.51it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 746.60it/s]
+
+[t1 / hsm / rerank-bge-small]
+    2,862 candidate docs read in 40s

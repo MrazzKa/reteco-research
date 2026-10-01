@@ -1,0 +1,123 @@
+
+[track2 / biology]
+    index: 57,359 docs, 3s (lucene)
+    2a_current                 115 topics (115 unique)    0.1s
+      -> 2a_current nDCG@10 0.1962   official 0.2034
+    2a_history                 115 topics (115 unique)    0.6s
+      -> 2a_history nDCG@10 0.5509   official 0.6065
+    2a_hist_questions_only     115 topics (115 unique)    0.2s
+      -> 2a_hist_questions_only nDCG@10 0.3198
+    2a_hist_answers_only       115 topics (115 unique)    0.5s
+      -> 2a_hist_answers_only nDCG@10 0.5710
+
+[track2 / drones]
+    index: 16,381 docs, 2s (lucene)
+    2a_current                  38 topics (38 unique)    0.0s
+      -> 2a_current nDCG@10 0.1235   official 0.1695
+    2a_history                  38 topics (38 unique)    0.1s
+      -> 2a_history nDCG@10 0.2590   official 0.2954
+    2a_hist_questions_only      38 topics (38 unique)    0.1s
+      -> 2a_hist_questions_only nDCG@10 0.2280
+    2a_hist_answers_only        38 topics (38 unique)    0.1s
+      -> 2a_hist_answers_only nDCG@10 0.2767
+
+[track2 / earth_science]
+    index: 121,249 docs, 8s (lucene)
+    2a_current                 133 topics (133 unique)    0.2s
+      -> 2a_current nDCG@10 0.2070   official 0.2195
+    2a_history                 133 topics (133 unique)    0.7s
+      -> 2a_history nDCG@10 0.6061   official 0.6264
+    2a_hist_questions_only     133 topics (133 unique)    0.3s
+      -> 2a_hist_questions_only nDCG@10 0.4302
+    2a_hist_answers_only       133 topics (133 unique)    0.6s
+      -> 2a_hist_answers_only nDCG@10 0.6123
+
+[track2 / economics]
+    index: 50,220 docs, 3s (lucene)
+    2a_current                  92 topics (92 unique)    0.1s
+      -> 2a_current nDCG@10 0.1783   official 0.1629
+    2a_history                  92 topics (92 unique)    0.4s
+      -> 2a_history nDCG@10 0.4322   official 0.4739
+    2a_hist_questions_only      92 topics (92 unique)    0.2s
+      -> 2a_hist_questions_only nDCG@10 0.2781
+    2a_hist_answers_only        92 topics (92 unique)    0.4s
+      -> 2a_hist_answers_only nDCG@10 0.4573
+
+[track2 / hardware]
+    index: 26,308 docs, 3s (lucene)
+    2a_current                  58 topics (58 unique)    0.1s
+      -> 2a_current nDCG@10 0.1559   official 0.1605
+    2a_history                  58 topics (58 unique)    0.3s
+      -> 2a_history nDCG@10 0.2899   official 0.3378
+    2a_hist_questions_only      58 topics (58 unique)    0.1s
+      -> 2a_hist_questions_only nDCG@10 0.2110
+    2a_hist_answers_only        58 topics (58 unique)    0.3s
+      -> 2a_hist_answers_only nDCG@10 0.3136
+
+[track2 / law]
+    index: 20,027 docs, 3s (lucene)
+    2a_current                  66 topics (66 unique)    0.1s
+      -> 2a_current nDCG@10 0.1356   official 0.1147
+    2a_history                  66 topics (66 unique)    0.3s
+      -> 2a_history nDCG@10 0.3508   official 0.3437
+    2a_hist_questions_only      66 topics (66 unique)    0.1s
+      -> 2a_hist_questions_only nDCG@10 0.2712
+    2a_hist_answers_only        66 topics (66 unique)    0.3s
+      -> 2a_hist_answers_only nDCG@10 0.3687
+
+[track2 / medicalsciences]
+    index: 23,297 docs, 3s (lucene)
+    2a_current                  44 topics (44 unique)    0.0s
+      -> 2a_current nDCG@10 0.0973   official 0.1168
+    2a_history                  44 topics (44 unique)    0.2s
+      -> 2a_history nDCG@10 0.1282   official 0.173
+    2a_hist_questions_only      44 topics (44 unique)    0.1s
+      -> 2a_hist_questions_only nDCG@10 0.0965
+    2a_hist_answers_only        44 topics (44 unique)    0.2s
+      -> 2a_hist_answers_only nDCG@10 0.1446
+
+[track2 / politics]
+    index: 16,712 docs, 3s (lucene)
+    2a_current                  54 topics (54 unique)    0.0s
+      -> 2a_current nDCG@10 0.1458   official 0.1514
+    2a_history                  54 topics (54 unique)    0.3s
+      -> 2a_history nDCG@10 0.3016   official 0.3219
+    2a_hist_questions_only      54 topics (54 unique)    0.1s
+      -> 2a_hist_questions_only nDCG@10 0.2015
+    2a_hist_answers_only        54 topics (54 unique)    0.2s
+      -> 2a_hist_answers_only nDCG@10 0.3147
+
+[track2 / psychology]
+    index: 52,835 docs, 4s (lucene)
+    2a_current                  99 topics (99 unique)    0.1s
+      -> 2a_current nDCG@10 0.2369   official 0.2596
+    2a_history                  99 topics (99 unique)    0.5s
+      -> 2a_history nDCG@10 0.5226   official 0.5726
+    2a_hist_questions_only      99 topics (99 unique)    0.2s
+      -> 2a_hist_questions_only nDCG@10 0.3490
+    2a_hist_answers_only        99 topics (99 unique)    0.4s
+      -> 2a_hist_answers_only nDCG@10 0.5419
+
+[track2 / robotics]
+    index: 61,961 docs, 3s (lucene)
+    2a_current                  75 topics (75 unique)    0.1s
+      -> 2a_current nDCG@10 0.1628   official 0.1574
+    2a_history                  75 topics (75 unique)    0.3s
+      -> 2a_history nDCG@10 0.4709   official 0.5123
+    2a_hist_questions_only      75 topics (75 unique)    0.1s
+      -> 2a_hist_questions_only nDCG@10 0.3078
+    2a_hist_answers_only        75 topics (75 unique)    0.3s
+      -> 2a_hist_answers_only nDCG@10 0.4941
+
+[track2 / sustainable_living]
+    index: 60,792 docs, 4s (lucene)
+    2a_current                  84 topics (84 unique)    0.1s
+      -> 2a_current nDCG@10 0.2959   official 0.2938
+    2a_history                  84 topics (84 unique)    0.4s
+      -> 2a_history nDCG@10 0.5257   official 0.5531
+    2a_hist_questions_only      84 topics (84 unique)    0.1s
+      -> 2a_hist_questions_only nDCG@10 0.3861
+    2a_hist_answers_only        84 topics (84 unique)    0.3s
+      -> 2a_hist_answers_only nDCG@10 0.5334
+
+done in 50s -> ../research/runs_v11/track2_lucene/results.json

@@ -1,0 +1,64 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3322.11it/s]
+
+[t1 / bitcoin / rerank-bge-small]
+    1,441 candidate docs read in 8s
+    encoded bitcoin candidates: 1,441 texts, 334s (4/s)
+    encoded 1a queries: 30 texts, 8s (4/s)
+      -> 1a rerank: 0.1950
+      -> 1a rrf: 0.1022
+      -> 1a recall cap (oracle over BM25 top-100): 0.3951
+    encoded 1b_query+step queries: 56 texts, 14s (4/s)
+      -> 1b_query+step rerank: 0.1919
+      -> 1b_query+step rrf: 0.1384
+      -> 1b_query+step recall cap (oracle over BM25 top-100): 0.4228
+
+[t1 / travel / rerank-bge-small]
+    1,964 candidate docs read in 37s
+    encoded travel candidates: 1,964 texts, 454s (4/s)
+    encoded 1a queries: 30 texts, 6s (5/s)
+      -> 1a rerank: 0.1524
+      -> 1a rrf: 0.0996
+      -> 1a recall cap (oracle over BM25 top-100): 0.3362
+    encoded 1b_query+step queries: 52 texts, 10s (5/s)
+      -> 1b_query+step rerank: 0.1949
+      -> 1b_query+step rrf: 0.1100
+      -> 1b_query+step recall cap (oracle over BM25 top-100): 0.5131
+
+[t1 / monero / rerank-bge-small]
+    1,217 candidate docs read in 14s
+    encoded monero candidates: 1,217 texts, 222s (5/s)
+    encoded 1a queries: 19 texts, 4s (5/s)
+      -> 1a rerank: 0.0843
+      -> 1a rrf: 0.0682
+      -> 1a recall cap (oracle over BM25 top-100): 0.2069
+    encoded 1b_query+step queries: 28 texts, 6s (5/s)
+      -> 1b_query+step rerank: 0.1171
+      -> 1b_query+step rrf: 0.0475
+      -> 1b_query+step recall cap (oracle over BM25 top-100): 0.2140
+
+[t1 / cardano / rerank-bge-small]
+    944 candidate docs read in 10s
+    encoded cardano candidates: 944 texts, 153s (6/s)
+    encoded 1a queries: 15 texts, 3s (6/s)
+      -> 1a rerank: 0.2077
+      -> 1a rrf: 0.2389
+      -> 1a recall cap (oracle over BM25 top-100): 0.6560
+    encoded 1b_query+step queries: 33 texts, 6s (6/s)
+      -> 1b_query+step rerank: 0.1740
+      -> 1b_query+step rrf: 0.1897
+      -> 1b_query+step recall cap (oracle over BM25 top-100): 0.6501
+
+[t1 / economics / rerank-bge-small]
+    1,584 candidate docs read in 17s
+    encoded economics candidates: 1,584 texts, 203s (8/s)
+    encoded 1a queries: 25 texts, 2s (10/s)
+      -> 1a rerank: 0.1685
+      -> 1a rrf: 0.1062
+      -> 1a recall cap (oracle over BM25 top-100): 0.4111
+    encoded 1b_query+step queries: 51 texts, 5s (10/s)
+      -> 1b_query+step rerank: 0.1655
+      -> 1b_query+step rrf: 0.1078
+      -> 1b_query+step recall cap (oracle over BM25 top-100): 0.4570
+
+wrote ../research/runs_v11/dev_rerank/t1b/results.json

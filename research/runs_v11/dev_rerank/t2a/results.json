@@ -1,0 +1,260 @@
+[
+ {
+  "track": 2,
+  "domain": "earth_science",
+  "split": "dev",
+  "run": "2a_current_rerank",
+  "n": 133,
+  "ndcg10": 0.2094,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.3092,
+   "T2": 0.2013,
+   "T3": 0.22,
+   "T4": 0.1631,
+   "T5+": 0.1309
+  }
+ },
+ {
+  "track": 2,
+  "domain": "earth_science",
+  "split": "dev",
+  "run": "2a_current_rrf",
+  "n": 133,
+  "ndcg10": 0.2416,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.2859,
+   "T2": 0.2323,
+   "T3": 0.3068,
+   "T4": 0.2071,
+   "T5+": 0.1565
+  }
+ },
+ {
+  "track": 2,
+  "domain": "earth_science",
+  "split": "dev",
+  "run": "2a_current_recall_cap",
+  "n": 133,
+  "ndcg10": 0.6263,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "earth_science",
+  "split": "dev",
+  "run": "2a_history_rerank",
+  "n": 133,
+  "ndcg10": 0.3721,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.3092,
+   "T2": 0.4107,
+   "T3": 0.4447,
+   "T4": 0.386,
+   "T5+": 0.3075
+  }
+ },
+ {
+  "track": 2,
+  "domain": "earth_science",
+  "split": "dev",
+  "run": "2a_history_rrf",
+  "n": 133,
+  "ndcg10": 0.4678,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.2859,
+   "T2": 0.4939,
+   "T3": 0.5808,
+   "T4": 0.5521,
+   "T5+": 0.4508
+  }
+ },
+ {
+  "track": 2,
+  "domain": "earth_science",
+  "split": "dev",
+  "run": "2a_history_recall_cap",
+  "n": 133,
+  "ndcg10": 0.9085,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "biology",
+  "split": "dev",
+  "run": "2a_current_rerank",
+  "n": 115,
+  "ndcg10": 0.2101,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.3339,
+   "T2": 0.1786,
+   "T3": 0.1408,
+   "T4": 0.2447,
+   "T5+": 0.1553
+  }
+ },
+ {
+  "track": 2,
+  "domain": "biology",
+  "split": "dev",
+  "run": "2a_current_rrf",
+  "n": 115,
+  "ndcg10": 0.2,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.2633,
+   "T2": 0.1807,
+   "T3": 0.191,
+   "T4": 0.2102,
+   "T5+": 0.1491
+  }
+ },
+ {
+  "track": 2,
+  "domain": "biology",
+  "split": "dev",
+  "run": "2a_current_recall_cap",
+  "n": 115,
+  "ndcg10": 0.5185,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "biology",
+  "split": "dev",
+  "run": "2a_history_rerank",
+  "n": 115,
+  "ndcg10": 0.4192,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.3339,
+   "T2": 0.4325,
+   "T3": 0.3278,
+   "T4": 0.4289,
+   "T5+": 0.6141
+  }
+ },
+ {
+  "track": 2,
+  "domain": "biology",
+  "split": "dev",
+  "run": "2a_history_rrf",
+  "n": 115,
+  "ndcg10": 0.487,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.2633,
+   "T2": 0.5276,
+   "T3": 0.4495,
+   "T4": 0.5503,
+   "T5+": 0.7117
+  }
+ },
+ {
+  "track": 2,
+  "domain": "biology",
+  "split": "dev",
+  "run": "2a_history_recall_cap",
+  "n": 115,
+  "ndcg10": 0.8717,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "robotics",
+  "split": "dev",
+  "run": "2a_current_rerank",
+  "n": 75,
+  "ndcg10": 0.1267,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.2557,
+   "T2": 0.068,
+   "T3": 0.062,
+   "T4": 0.0739,
+   "T5+": 0.3011
+  }
+ },
+ {
+  "track": 2,
+  "domain": "robotics",
+  "split": "dev",
+  "run": "2a_current_rrf",
+  "n": 75,
+  "ndcg10": 0.1881,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.3056,
+   "T2": 0.1819,
+   "T3": 0.1008,
+   "T4": 0.1204,
+   "T5+": 0.2996
+  }
+ },
+ {
+  "track": 2,
+  "domain": "robotics",
+  "split": "dev",
+  "run": "2a_current_recall_cap",
+  "n": 75,
+  "ndcg10": 0.5255,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "robotics",
+  "split": "dev",
+  "run": "2a_history_rerank",
+  "n": 75,
+  "ndcg10": 0.3592,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.2557,
+   "T2": 0.385,
+   "T3": 0.3553,
+   "T4": 0.5163,
+   "T5+": 0.2761
+  }
+ },
+ {
+  "track": 2,
+  "domain": "robotics",
+  "split": "dev",
+  "run": "2a_history_rrf",
+  "n": 75,
+  "ndcg10": 0.4559,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.3056,
+   "T2": 0.4994,
+   "T3": 0.4965,
+   "T4": 0.5649,
+   "T5+": 0.4599
+  }
+ },
+ {
+  "track": 2,
+  "domain": "robotics",
+  "split": "dev",
+  "run": "2a_history_recall_cap",
+  "n": 75,
+  "ndcg10": 0.8521,
+  "system": "oracle-cap-top100"
+ }
+]

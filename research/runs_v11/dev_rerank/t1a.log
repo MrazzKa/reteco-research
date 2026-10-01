@@ -1,0 +1,41 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3025.63it/s]
+
+[t1 / history / rerank-bge-small]
+    7,674 candidate docs read in 58s
+    encoded history candidates: 7,674 texts, 1497s (5/s)
+    encoded 1a queries: 240 texts, 21s (11/s)
+      -> 1a rerank: 0.1410
+      -> 1a rrf: 0.1005
+      -> 1a recall cap (oracle over BM25 top-100): 0.2084
+    encoded 1b_query+step queries: 636 texts, 56s (11/s)
+      -> 1b_query+step rerank: 0.1482
+      -> 1b_query+step rrf: 0.1296
+      -> 1b_query+step recall cap (oracle over BM25 top-100): 0.2391
+
+[t1 / politics / rerank-bge-small]
+    2,495 candidate docs read in 22s
+    encoded politics candidates: 2,495 texts, 224s (11/s)
+    encoded 1a queries: 45 texts, 4s (11/s)
+      -> 1a rerank: 0.3774
+      -> 1a rrf: 0.3777
+      -> 1a recall cap (oracle over BM25 top-100): 0.6069
+    encoded 1b_query+step queries: 119 texts, 11s (11/s)
+      -> 1b_query+step rerank: 0.3606
+      -> 1b_query+step rrf: 0.3512
+      -> 1b_query+step recall cap (oracle over BM25 top-100): 0.6426
+
+[t1 / genealogy / rerank-bge-small]
+    1,816 candidate docs read in 27s
+    encoded genealogy candidates: 1,816 texts, 338s (5/s)
+    encoded 1a queries: 35 texts, 9s (4/s)
+      -> 1a rerank: 0.2607
+      -> 1a rrf: 0.2388
+      -> 1a recall cap (oracle over BM25 top-100): 0.5138
+    encoded 1b_query+step queries: 68 texts, 15s (5/s)
+      -> 1b_query+step rerank: 0.2963
+      -> 1b_query+step rrf: 0.2901
+      -> 1b_query+step recall cap (oracle over BM25 top-100): 0.5847
+
+[t1 / hsm / rerank-bge-small]
+    2,862 candidate docs read in 54s

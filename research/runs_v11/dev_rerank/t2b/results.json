@@ -1,0 +1,346 @@
+[
+ {
+  "track": 2,
+  "domain": "sustainable_living",
+  "split": "dev",
+  "run": "2a_current_rerank",
+  "n": 84,
+  "ndcg10": 0.2638,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.3513,
+   "T2": 0.2925,
+   "T3": 0.1783,
+   "T4": 0.2843,
+   "T5+": 0.0811
+  }
+ },
+ {
+  "track": 2,
+  "domain": "sustainable_living",
+  "split": "dev",
+  "run": "2a_current_rrf",
+  "n": 84,
+  "ndcg10": 0.3088,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.3787,
+   "T2": 0.3253,
+   "T3": 0.2332,
+   "T4": 0.3729,
+   "T5+": 0.1319
+  }
+ },
+ {
+  "track": 2,
+  "domain": "sustainable_living",
+  "split": "dev",
+  "run": "2a_current_recall_cap",
+  "n": 84,
+  "ndcg10": 0.5874,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "sustainable_living",
+  "split": "dev",
+  "run": "2a_history_rerank",
+  "n": 84,
+  "ndcg10": 0.4268,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.3513,
+   "T2": 0.4527,
+   "T3": 0.4951,
+   "T4": 0.3815,
+   "T5+": 0.4312
+  }
+ },
+ {
+  "track": 2,
+  "domain": "sustainable_living",
+  "split": "dev",
+  "run": "2a_history_rrf",
+  "n": 84,
+  "ndcg10": 0.4907,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.3787,
+   "T2": 0.5118,
+   "T3": 0.595,
+   "T4": 0.4653,
+   "T5+": 0.48
+  }
+ },
+ {
+  "track": 2,
+  "domain": "sustainable_living",
+  "split": "dev",
+  "run": "2a_history_recall_cap",
+  "n": 84,
+  "ndcg10": 0.8504,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "psychology",
+  "split": "dev",
+  "run": "2a_current_rerank",
+  "n": 99,
+  "ndcg10": 0.2524,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.18,
+   "T2": 0.2504,
+   "T3": 0.2542,
+   "T4": 0.2819,
+   "T5+": 0.3924
+  }
+ },
+ {
+  "track": 2,
+  "domain": "psychology",
+  "split": "dev",
+  "run": "2a_current_rrf",
+  "n": 99,
+  "ndcg10": 0.2981,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.2044,
+   "T2": 0.3274,
+   "T3": 0.3333,
+   "T4": 0.2888,
+   "T5+": 0.3844
+  }
+ },
+ {
+  "track": 2,
+  "domain": "psychology",
+  "split": "dev",
+  "run": "2a_current_recall_cap",
+  "n": 99,
+  "ndcg10": 0.5722,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "psychology",
+  "split": "dev",
+  "run": "2a_history_rerank",
+  "n": 99,
+  "ndcg10": 0.3914,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.18,
+   "T2": 0.3816,
+   "T3": 0.512,
+   "T4": 0.477,
+   "T5+": 0.5228
+  }
+ },
+ {
+  "track": 2,
+  "domain": "psychology",
+  "split": "dev",
+  "run": "2a_history_rrf",
+  "n": 99,
+  "ndcg10": 0.4639,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.2044,
+   "T2": 0.4824,
+   "T3": 0.5297,
+   "T4": 0.5922,
+   "T5+": 0.7223
+  }
+ },
+ {
+  "track": 2,
+  "domain": "psychology",
+  "split": "dev",
+  "run": "2a_history_recall_cap",
+  "n": 99,
+  "ndcg10": 0.8006,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "economics",
+  "split": "dev",
+  "run": "2a_current_rerank",
+  "n": 92,
+  "ndcg10": 0.2003,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.2487,
+   "T2": 0.1635,
+   "T3": 0.2231,
+   "T4": 0.1592,
+   "T5+": 0.1874
+  }
+ },
+ {
+  "track": 2,
+  "domain": "economics",
+  "split": "dev",
+  "run": "2a_current_rrf",
+  "n": 92,
+  "ndcg10": 0.2194,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.288,
+   "T2": 0.1852,
+   "T3": 0.2718,
+   "T4": 0.1293,
+   "T5+": 0.1687
+  }
+ },
+ {
+  "track": 2,
+  "domain": "economics",
+  "split": "dev",
+  "run": "2a_current_recall_cap",
+  "n": 92,
+  "ndcg10": 0.5176,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "economics",
+  "split": "dev",
+  "run": "2a_history_rerank",
+  "n": 92,
+  "ndcg10": 0.3857,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.2487,
+   "T2": 0.402,
+   "T3": 0.4362,
+   "T4": 0.4371,
+   "T5+": 0.4557
+  }
+ },
+ {
+  "track": 2,
+  "domain": "economics",
+  "split": "dev",
+  "run": "2a_history_rrf",
+  "n": 92,
+  "ndcg10": 0.4514,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.288,
+   "T2": 0.4923,
+   "T3": 0.483,
+   "T4": 0.5415,
+   "T5+": 0.5103
+  }
+ },
+ {
+  "track": 2,
+  "domain": "economics",
+  "split": "dev",
+  "run": "2a_history_recall_cap",
+  "n": 92,
+  "ndcg10": 0.8487,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "hardware",
+  "split": "dev",
+  "run": "2a_current_rerank",
+  "n": 58,
+  "ndcg10": 0.2062,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.3671,
+   "T2": 0.2136,
+   "T3": 0.1107,
+   "T4": 0.2389,
+   "T5+": 0.0463
+  }
+ },
+ {
+  "track": 2,
+  "domain": "hardware",
+  "split": "dev",
+  "run": "2a_current_rrf",
+  "n": 58,
+  "ndcg10": 0.1925,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.3556,
+   "T2": 0.2078,
+   "T3": 0.1228,
+   "T4": 0.1578,
+   "T5+": 0.037
+  }
+ },
+ {
+  "track": 2,
+  "domain": "hardware",
+  "split": "dev",
+  "run": "2a_current_recall_cap",
+  "n": 58,
+  "ndcg10": 0.4634,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 2,
+  "domain": "hardware",
+  "split": "dev",
+  "run": "2a_history_rerank",
+  "n": 58,
+  "ndcg10": 0.3164,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.3671,
+   "T2": 0.4212,
+   "T3": 0.3024,
+   "T4": 0.2804,
+   "T5+": 0.105
+  }
+ },
+ {
+  "track": 2,
+  "domain": "hardware",
+  "split": "dev",
+  "run": "2a_history_rrf",
+  "n": 58,
+  "ndcg10": 0.3087,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100,
+  "by_turn": {
+   "T1": 0.3556,
+   "T2": 0.3921,
+   "T3": 0.2977,
+   "T4": 0.2883,
+   "T5+": 0.1204
+  }
+ },
+ {
+  "track": 2,
+  "domain": "hardware",
+  "split": "dev",
+  "run": "2a_history_recall_cap",
+  "n": 58,
+  "ndcg10": 0.7494,
+  "system": "oracle-cap-top100"
+ }
+]

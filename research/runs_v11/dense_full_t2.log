@@ -1,0 +1,15 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 6125.14it/s]
+
+[track2 / drones / bge-small]
+    encoded drones corpus: 16,381 texts, 2768s (6/s)
+    encoded 2a_current queries: 38 texts, 1s (47/s)
+    search 2a_current: 38 unique queries, 0s
+      -> 2a_current dense 0.1525
+      -> 2a_current hybrid 0.2067
+    encoded 2a_history queries: 38 texts, 5s (7/s)
+    search 2a_history: 38 unique queries, 0s
+      -> 2a_history dense 0.2353
+      -> 2a_history hybrid 0.3391
+
+[track2 / politics / bge-small]

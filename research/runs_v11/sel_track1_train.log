@@ -1,0 +1,35 @@
+
+[track1 / iota]
+    index: 9,680 docs, 5s (lucene)
+    1a                           7 topics (7 unique)    0.0s
+      -> 1a nDCG@10 0.1444   official 0.1563
+    1b_query+step               16 topics (16 unique)    0.0s
+      -> 1b_query+step nDCG@10 0.1458   official 0.1403
+    1b_step_only                16 topics (16 unique)    0.0s
+      -> 1b_step_only nDCG@10 0.1168
+    1b_query+all                16 topics (7 unique)    0.0s
+      -> 1b_query+all nDCG@10 0.1492
+
+[track1 / quant]
+    index: 25,040 docs, 8s (lucene)
+    1a                          24 topics (24 unique)    0.2s
+      -> 1a nDCG@10 0.0255   official 0.0255
+    1b_query+step               37 topics (37 unique)    0.4s
+      -> 1b_query+step nDCG@10 0.0090   official 0.0085
+    1b_step_only                37 topics (37 unique)    0.1s
+      -> 1b_step_only nDCG@10 0.0286
+    1b_query+all                37 topics (21 unique)    0.3s
+      -> 1b_query+all nDCG@10 0.0085
+
+[track1 / law]
+    index: 36,110 docs, 13s (lucene)
+    1a                          24 topics (24 unique)    0.1s
+      -> 1a nDCG@10 0.0439   official 0.0946
+    1b_query+step               53 topics (53 unique)    0.3s
+      -> 1b_query+step nDCG@10 0.0540   official 0.0854
+    1b_step_only                53 topics (53 unique)    0.1s
+      -> 1b_step_only nDCG@10 0.0680
+    1b_query+all                53 topics (23 unique)    0.2s
+      -> 1b_query+all nDCG@10 0.0529
+
+done in 28s -> ../research/runs_v11/sel_track1_train/results.json

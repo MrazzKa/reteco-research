@@ -1,0 +1,122 @@
+[
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "train",
+  "run": "1a",
+  "n": 7,
+  "ndcg10": 0.1444,
+  "official_ref": 0.1563,
+  "system": "bm25s-lucene"
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "train",
+  "run": "1b_query+step",
+  "n": 16,
+  "ndcg10": 0.1458,
+  "official_ref": 0.1403,
+  "system": "bm25s-lucene"
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "train",
+  "run": "1b_step_only",
+  "n": 16,
+  "ndcg10": 0.1168,
+  "official_ref": null,
+  "system": "bm25s-lucene"
+ },
+ {
+  "track": 1,
+  "domain": "iota",
+  "split": "train",
+  "run": "1b_query+all",
+  "n": 16,
+  "ndcg10": 0.1492,
+  "official_ref": null,
+  "system": "bm25s-lucene"
+ },
+ {
+  "track": 1,
+  "domain": "quant",
+  "split": "train",
+  "run": "1a",
+  "n": 24,
+  "ndcg10": 0.0255,
+  "official_ref": 0.0255,
+  "system": "bm25s-lucene"
+ },
+ {
+  "track": 1,
+  "domain": "quant",
+  "split": "train",
+  "run": "1b_query+step",
+  "n": 37,
+  "ndcg10": 0.009,
+  "official_ref": 0.0085,
+  "system": "bm25s-lucene"
+ },
+ {
+  "track": 1,
+  "domain": "quant",
+  "split": "train",
+  "run": "1b_step_only",
+  "n": 37,
+  "ndcg10": 0.0286,
+  "official_ref": null,
+  "system": "bm25s-lucene"
+ },
+ {
+  "track": 1,
+  "domain": "quant",
+  "split": "train",
+  "run": "1b_query+all",
+  "n": 37,
+  "ndcg10": 0.0085,
+  "official_ref": null,
+  "system": "bm25s-lucene"
+ },
+ {
+  "track": 1,
+  "domain": "law",
+  "split": "train",
+  "run": "1a",
+  "n": 24,
+  "ndcg10": 0.0439,
+  "official_ref": 0.0946,
+  "system": "bm25s-lucene"
+ },
+ {
+  "track": 1,
+  "domain": "law",
+  "split": "train",
+  "run": "1b_query+step",
+  "n": 53,
+  "ndcg10": 0.054,
+  "official_ref": 0.0854,
+  "system": "bm25s-lucene"
+ },
+ {
+  "track": 1,
+  "domain": "law",
+  "split": "train",
+  "run": "1b_step_only",
+  "n": 53,
+  "ndcg10": 0.068,
+  "official_ref": null,
+  "system": "bm25s-lucene"
+ },
+ {
+  "track": 1,
+  "domain": "law",
+  "split": "train",
+  "run": "1b_query+all",
+  "n": 53,
+  "ndcg10": 0.0529,
+  "official_ref": null,
+  "system": "bm25s-lucene"
+ }
+]

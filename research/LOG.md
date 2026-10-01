@@ -329,3 +329,80 @@ notes: Folders renamed; paths in earlier entries refer to the old names:
 out of the repo. Codex's `date_feasibility.py` process on Windows was stopped before finishing
 (no output); `date_quick.py` results stand. Verified after the move: `--selftest` OK; both
 aggregations re-run from the new paths reproduce every table row in `research/RESULTS.md`.
+
+## 2026-09-28 — data v1.1 downloaded and verified
+split: n/a    domains: all 13 Track-1
+command: `python3 scripts/get_data.py --out reteco_data_v11 --track1 <all 13>` (WSL)
+result: 1,167,159 Track-1 documents, matching the organisers' announcement exactly (v1.0 had 1,654,055). Per-domain reduction 7% (iota) to 50% (bitcoin). `duplicate_map.json` present in every domain. Track 2 unchanged, still read from `reteco_data/`.
+notes: v1.0 kept at `reteco_data/` for comparison. Official v1.1 references (1a dev 0.1147, 1b dev 0.1177) were copied into `scripts/week1_run.py` REF from the updated starter-kit BASELINE_RESULTS.md; our REF macro reproduces both exactly.
+conclusion: All Track-1 numbers from here on are v1.1; week-1 Track-1 numbers are v1.0 and are not comparable.
+
+## 2026-09-28 — BM25 reproduction with a Lucene-style analyzer (bm25s)
+split: dev    domains: all 13 Track-1 (v1.1), all 11 Track-2
+command: `python3 scripts/bm25s_run.py --data <root> --kit RETECO/starter_kit --split dev --track {1,2} --domains <all> --analyzer {lucene,plain} --out research/runs_v11/...`
+system: bm25s, method="lucene", k1=0.9, b=0.4, top-100; `lucene` = Snowball English stemmer + English stopwords, `plain` = no stemming/stopwords
+result: Track 1 macro 1a 0.1127 (official 0.1147), 1b_query+step 0.1181 (official 0.1177). Track 2 macro current 0.1759 (official 0.1827), +history 0.4034 (official 0.4379).
+runtime: Track 1 dev 1087s (lucene) / 477s (plain); Track 2 dev 50s / 57s
+notes: Track 2 attribution of the week-1 gap: kit pure-Python 0.1445 -> bm25s-plain 0.1490 (BM25 variant) -> bm25s-lucene 0.1759 (stemming + stopwords) -> official 0.1827. Stemming accounts for most of it; ~0.007 (current) and ~0.035 (history) remain unexplained.
+conclusion: The macro-level reproduction gap is essentially closed on Track 1 and mostly closed on Track 2; per-domain differences of up to 0.04 remain, so per-domain claims still need the official pipeline.
+
+## 2026-09-28 — E1 revisited on all 13 Track-1 domains (v1.1, lucene analyzer)
+split: dev    domains: all 13
+result: macro 1a 0.1127; 1b Query+Step 0.1181, Step-Only 0.1177, Query+All 0.1221. Step-weighted (1,214 steps): 0.1124 / 0.0902 / 0.1168. Paired bootstrap: Step-Only - Query+Step -0.0004 [-0.0275, +0.0244]; Query+All - Query+Step +0.0039 [-0.0020, +0.0099].
+notes: This overturns the week-1 reading (Step-Only +0.047 on 9 domains, pure-Python BM25, v1.0). That advantage came from small domains and a weaker analyzer.
+conclusion: Negative result for E1: with a proper analyzer and all 13 domains, the three permitted 1b query strategies are indistinguishable.
+
+## 2026-09-28 — dense encoder selection (TRAIN only)
+split: train    domains: iota, quant, law (Track 1); conditions 1a and 1b_query+step
+command: `python3 scripts/dense_rerank.py --split train --track 1 --domains iota quant law --model {bge-small,e5-small,minilm,arctic-s} --runs research/runs_v11/sel_track1_train/runs --max-len 256 --depth 100`
+system: sentence-transformers on CPU, reranking the BM25 top-100; RRF variant fuses the dense order with the BM25 order
+result: macro over the 6 (domain, condition) cells — BM25 0.0704; rerank: bge-small 0.2139, arctic-s 0.1940, minilm 0.1742, e5-small 0.1686; rrf is worse than rerank for every model (best 0.1724). Recall ceiling of the BM25 top-100: 0.3736.
+notes: Selection was done on train precisely so that dev stays untouched; the dev numbers below use the selected model (bge-small, plain rerank) without further choices.
+conclusion: bge-small chosen. Dense reranking roughly triples BM25 on train; RRF with BM25 hurts.
+
+## 2026-09-28 — dense reranking on dev, Track 1 (11 of 13 domains at time of writing)
+split: dev    domains: 11 Track-1 domains (genealogy, hsm still running)
+result: macro 1a — BM25 0.0972 -> rerank 0.2326 (RRF 0.1630), recall cap 0.4161. macro 1b_query+step — BM25 0.1012 -> rerank 0.2437 (RRF 0.1757), cap 0.4741.
+notes: Same 11 domains in every column. The official v1.1 BM25 baseline is 0.1147 (1a) / 0.1177 (1b) over all 13. Dense reranking is limited by BM25 recall: it reaches roughly 56% of the top-100 ceiling on 1a.
+conclusion: A 33M-parameter off-the-shelf encoder reranking BM25's top-100 more than doubles nDCG@10 on CPU, with no training.
+
+## 2026-09-28 — E2 explicit-date reranking: negative result (train)
+split: train    domains: all 13 Track-1
+command: `python3 scripts/date_rerank.py --split train --runs research/runs_v11/track1_train_lucene/runs --out research/runs_v11/e2_dates_train.json`
+system: four fixed variants over the BM25 top-100 — promote date-matching documents over the whole list (`hard`), inside the top 20 / top 10, or fuse the two orders with RRF
+result: macro base 0.1005; hard 0.0909 (-0.0096), top20 0.0945 (-0.0060), top10 0.0971 (-0.0034), rrf 0.0946 (-0.0059). No domain improved by more than +0.002; several lose 0.02-0.04.
+notes: Last week's feasibility analysis compared gold with RANDOM corpus documents (41% vs 11% year overlap). Among BM25's top-100 — topically similar documents — the year signal no longer separates gold from non-gold, which is why every variant loses.
+conclusion: E2 as specified is dead in this form. Reported as a negative result; a date-aware system would need the date signal inside the ranking function (or a recall stage), not as a post-hoc reorder of BM25's top-100.
+
+## 2026-09-28 — dense reranking on dev, Track 2 (all 11 domains)
+split: dev    domains: all 11
+result: 2a_current — BM25 0.1759 -> rerank 0.2117, RRF 0.2172 (RRF beats BM25 in 11/11 domains), recall cap 0.5546. 2a_history — BM25 0.4034 -> rerank 0.3664, RRF 0.3981 (RRF beats BM25 in only 5/11), cap 0.8251.
+notes: The loss is concentrated in the BRIGHT domains, where `conversation_history` carries the previous turns' reference answers (week-1 Finding 2): biology 0.5509 -> 0.4192, earth_science 0.6061 -> 0.3721. In the StackExchange domains reranking still helps (drones 0.2590 -> 0.3019, politics 0.3016 -> 0.4668).
+conclusion: Dense reranking helps the current-turn condition everywhere and hurts the +history condition exactly where near-verbatim gold text sits in the query.
+
+## 2026-09-28 — is the Track-2 history loss caused by the encoder's 256-token window? (train)
+split: train    domains: drones, biology
+command: `dense_rerank.py --split train --track 2 --domains drones biology --model bge-small --max-len {256,512}`
+result: drones 2a_history — BM25 0.2546, @256 0.3701, @512 0.3603. biology 2a_history — BM25 0.5908, @256 0.4224, @512 0.4742. Current-turn: drones 0.1319 / 0.2662 / 0.2592; biology 0.2015 / 0.2213 / 0.2582.
+conclusion: Truncation explains part of it (biology +0.05 from the longer window) but not the effect: at 512 tokens the reranker is still 0.12 below BM25 on biology history. The leakage explanation stands — where the query paraphrases the gold, lexical matching is close to optimal.
+
+## 2026-09-28 — hsm dense reranking killed, rerun
+notes: The hsm Track-1 reranking died without a traceback while five encoder jobs ran concurrently (7 GB RAM in WSL) — an out-of-memory kill. `results.json` for that batch therefore holds only genealogy, history and politics. Rerun alone as `dev_rerank/t1d`.
+conclusion: Run at most 3 encoder processes at a time on this machine.
+
+## 2026-10-01 — dense retrieval with an ANN index (Steve's week-2 direction)
+plan: Steve asked to move the encoders from reranking to retrieval, with an ANN index over the
+embedding vectors (ann-benchmarks: NGT-QG / Descartes). `scripts/ann_index.py` embeds a domain's
+corpus once (vectors cached under `research/runs_v11/ann/emb/`), then runs (a) exact brute-force
+cosine as the quality reference and (b) NGT (ANNG graph, cosine) over the same vectors, reporting
+nDCG@10 for both, recall@10 of ANN against exact, index build time and per-query latency.
+system: bge-small-en-v1.5, 256-token window, CPU; NGT via `ngtpy` (Linux wheels available).
+notes: `hnswlib` has no wheels for this Python; faiss-cpu does, kept as a cross-check. NGT-QG
+(the quantized variant, "qsgngt" in ann-benchmarks) is the next refinement after the plain graph.
+
+## 2026-10-01 — measured embedding throughput (the binding constraint)
+command: bge-small, 256-token window, 18 threads, 2,000 documents from the `history` corpus
+result: **8 documents/second**, i.e. about 38 h for the 1,167,159 Track-1 documents and 17 h for
+Track 2 on this machine. Vector storage is small: 1.7 GB float32 / 0.8 GB float16 for Track 1.
+conclusion: For a full dense index the cost is embedding the corpus, not the ANN index or the
+search. Scaling plan is therefore smallest-domains-first, plus an int8/ONNX export test.

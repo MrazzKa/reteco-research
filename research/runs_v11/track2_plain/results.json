@@ -1,0 +1,750 @@
+[
+ {
+  "track": 2,
+  "domain": "biology",
+  "split": "dev",
+  "run": "2a_current",
+  "n": 115,
+  "ndcg10": 0.1853,
+  "official_ref": 0.2034,
+  "by_turn": {
+   "T1": 0.299,
+   "T2": 0.1664,
+   "T3": 0.1441,
+   "T4": 0.1258,
+   "T5+": 0.1645
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "biology",
+  "split": "dev",
+  "run": "2a_history",
+  "n": 115,
+  "ndcg10": 0.5433,
+  "official_ref": 0.6065,
+  "by_turn": {
+   "T1": 0.299,
+   "T2": 0.5388,
+   "T3": 0.5461,
+   "T4": 0.6793,
+   "T5+": 0.7441
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "biology",
+  "split": "dev",
+  "run": "2a_hist_questions_only",
+  "n": 115,
+  "ndcg10": 0.3447,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.299,
+   "T2": 0.2848,
+   "T3": 0.3275,
+   "T4": 0.3858,
+   "T5+": 0.4655
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "biology",
+  "split": "dev",
+  "run": "2a_hist_answers_only",
+  "n": 115,
+  "ndcg10": 0.5809,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.299,
+   "T2": 0.6146,
+   "T3": 0.6026,
+   "T4": 0.6762,
+   "T5+": 0.789
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "dev",
+  "run": "2a_current",
+  "n": 38,
+  "ndcg10": 0.0689,
+  "official_ref": 0.1695,
+  "by_turn": {
+   "T1": 0.0869,
+   "T2": 0.1261,
+   "T3": 0.0252,
+   "T4": 0.0,
+   "T5+": 0.0
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "dev",
+  "run": "2a_history",
+  "n": 38,
+  "ndcg10": 0.193,
+  "official_ref": 0.2954,
+  "by_turn": {
+   "T1": 0.0869,
+   "T2": 0.2091,
+   "T3": 0.2447,
+   "T4": 0.3467,
+   "T5+": 0.0
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "dev",
+  "run": "2a_hist_questions_only",
+  "n": 38,
+  "ndcg10": 0.138,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.0869,
+   "T2": 0.1374,
+   "T3": 0.1775,
+   "T4": 0.2061,
+   "T5+": 0.0
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "dev",
+  "run": "2a_hist_answers_only",
+  "n": 38,
+  "ndcg10": 0.2166,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.0869,
+   "T2": 0.247,
+   "T3": 0.2884,
+   "T4": 0.3467,
+   "T5+": 0.0
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "earth_science",
+  "split": "dev",
+  "run": "2a_current",
+  "n": 133,
+  "ndcg10": 0.1858,
+  "official_ref": 0.2195,
+  "by_turn": {
+   "T1": 0.2576,
+   "T2": 0.1305,
+   "T3": 0.2328,
+   "T4": 0.1325,
+   "T5+": 0.1562
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "earth_science",
+  "split": "dev",
+  "run": "2a_history",
+  "n": 133,
+  "ndcg10": 0.5918,
+  "official_ref": 0.6264,
+  "by_turn": {
+   "T1": 0.2576,
+   "T2": 0.6143,
+   "T3": 0.7202,
+   "T4": 0.6589,
+   "T5+": 0.7446
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "earth_science",
+  "split": "dev",
+  "run": "2a_hist_questions_only",
+  "n": 133,
+  "ndcg10": 0.4447,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.2576,
+   "T2": 0.4339,
+   "T3": 0.5437,
+   "T4": 0.4608,
+   "T5+": 0.5427
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "earth_science",
+  "split": "dev",
+  "run": "2a_hist_answers_only",
+  "n": 133,
+  "ndcg10": 0.6126,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.2576,
+   "T2": 0.6631,
+   "T3": 0.7428,
+   "T4": 0.6538,
+   "T5+": 0.7753
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "economics",
+  "split": "dev",
+  "run": "2a_current",
+  "n": 92,
+  "ndcg10": 0.1352,
+  "official_ref": 0.1629,
+  "by_turn": {
+   "T1": 0.1918,
+   "T2": 0.114,
+   "T3": 0.071,
+   "T4": 0.2084,
+   "T5+": 0.0925
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "economics",
+  "split": "dev",
+  "run": "2a_history",
+  "n": 92,
+  "ndcg10": 0.3854,
+  "official_ref": 0.4739,
+  "by_turn": {
+   "T1": 0.1918,
+   "T2": 0.4603,
+   "T3": 0.4214,
+   "T4": 0.4481,
+   "T5+": 0.4652
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "economics",
+  "split": "dev",
+  "run": "2a_hist_questions_only",
+  "n": 92,
+  "ndcg10": 0.2189,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.1918,
+   "T2": 0.2232,
+   "T3": 0.2067,
+   "T4": 0.2264,
+   "T5+": 0.2784
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "economics",
+  "split": "dev",
+  "run": "2a_hist_answers_only",
+  "n": 92,
+  "ndcg10": 0.4012,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.1918,
+   "T2": 0.4754,
+   "T3": 0.4805,
+   "T4": 0.4382,
+   "T5+": 0.4624
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "hardware",
+  "split": "dev",
+  "run": "2a_current",
+  "n": 58,
+  "ndcg10": 0.1469,
+  "official_ref": 0.1605,
+  "by_turn": {
+   "T1": 0.2359,
+   "T2": 0.1435,
+   "T3": 0.1235,
+   "T4": 0.148,
+   "T5+": 0.037
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "hardware",
+  "split": "dev",
+  "run": "2a_history",
+  "n": 58,
+  "ndcg10": 0.2481,
+  "official_ref": 0.3378,
+  "by_turn": {
+   "T1": 0.2359,
+   "T2": 0.3185,
+   "T3": 0.2775,
+   "T4": 0.2749,
+   "T5+": 0.0678
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "hardware",
+  "split": "dev",
+  "run": "2a_hist_questions_only",
+  "n": 58,
+  "ndcg10": 0.1894,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.2359,
+   "T2": 0.2155,
+   "T3": 0.1985,
+   "T4": 0.2167,
+   "T5+": 0.0189
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "hardware",
+  "split": "dev",
+  "run": "2a_hist_answers_only",
+  "n": 58,
+  "ndcg10": 0.2744,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.2359,
+   "T2": 0.3691,
+   "T3": 0.2996,
+   "T4": 0.2911,
+   "T5+": 0.115
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "law",
+  "split": "dev",
+  "run": "2a_current",
+  "n": 66,
+  "ndcg10": 0.1266,
+  "official_ref": 0.1147,
+  "by_turn": {
+   "T1": 0.2496,
+   "T2": 0.098,
+   "T3": 0.0929,
+   "T4": 0.0834,
+   "T5+": 0.083
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "law",
+  "split": "dev",
+  "run": "2a_history",
+  "n": 66,
+  "ndcg10": 0.3258,
+  "official_ref": 0.3437,
+  "by_turn": {
+   "T1": 0.2496,
+   "T2": 0.393,
+   "T3": 0.4295,
+   "T4": 0.2654,
+   "T5+": 0.2514
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "law",
+  "split": "dev",
+  "run": "2a_hist_questions_only",
+  "n": 66,
+  "ndcg10": 0.2111,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.2496,
+   "T2": 0.2233,
+   "T3": 0.2795,
+   "T4": 0.1664,
+   "T5+": 0.0891
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "law",
+  "split": "dev",
+  "run": "2a_hist_answers_only",
+  "n": 66,
+  "ndcg10": 0.3372,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.2496,
+   "T2": 0.4264,
+   "T3": 0.4132,
+   "T4": 0.2948,
+   "T5+": 0.2698
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "medicalsciences",
+  "split": "dev",
+  "run": "2a_current",
+  "n": 44,
+  "ndcg10": 0.0761,
+  "official_ref": 0.1168,
+  "by_turn": {
+   "T1": 0.1341,
+   "T2": 0.077,
+   "T3": 0.0466,
+   "T4": 0.0,
+   "T5+": 0.0
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "medicalsciences",
+  "split": "dev",
+  "run": "2a_history",
+  "n": 44,
+  "ndcg10": 0.1229,
+  "official_ref": 0.173,
+  "by_turn": {
+   "T1": 0.1341,
+   "T2": 0.1218,
+   "T3": 0.107,
+   "T4": 0.1795,
+   "T5+": 0.0755
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "medicalsciences",
+  "split": "dev",
+  "run": "2a_hist_questions_only",
+  "n": 44,
+  "ndcg10": 0.1042,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.1341,
+   "T2": 0.0675,
+   "T3": 0.123,
+   "T4": 0.0651,
+   "T5+": 0.0841
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "medicalsciences",
+  "split": "dev",
+  "run": "2a_hist_answers_only",
+  "n": 44,
+  "ndcg10": 0.1377,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.1341,
+   "T2": 0.1186,
+   "T3": 0.1481,
+   "T4": 0.1948,
+   "T5+": 0.1319
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "politics",
+  "split": "dev",
+  "run": "2a_current",
+  "n": 54,
+  "ndcg10": 0.0987,
+  "official_ref": 0.1514,
+  "by_turn": {
+   "T1": 0.2104,
+   "T2": 0.1086,
+   "T3": 0.0343,
+   "T4": 0.0521,
+   "T5+": 0.0443
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "politics",
+  "split": "dev",
+  "run": "2a_history",
+  "n": 54,
+  "ndcg10": 0.2737,
+  "official_ref": 0.3219,
+  "by_turn": {
+   "T1": 0.2104,
+   "T2": 0.4195,
+   "T3": 0.2779,
+   "T4": 0.234,
+   "T5+": 0.1452
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "politics",
+  "split": "dev",
+  "run": "2a_hist_questions_only",
+  "n": 54,
+  "ndcg10": 0.1509,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.2104,
+   "T2": 0.2055,
+   "T3": 0.0963,
+   "T4": 0.1189,
+   "T5+": 0.0701
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "politics",
+  "split": "dev",
+  "run": "2a_hist_answers_only",
+  "n": 54,
+  "ndcg10": 0.2834,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.2104,
+   "T2": 0.4129,
+   "T3": 0.2992,
+   "T4": 0.2392,
+   "T5+": 0.1925
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "psychology",
+  "split": "dev",
+  "run": "2a_current",
+  "n": 99,
+  "ndcg10": 0.2033,
+  "official_ref": 0.2596,
+  "by_turn": {
+   "T1": 0.2188,
+   "T2": 0.2527,
+   "T3": 0.1214,
+   "T4": 0.237,
+   "T5+": 0.1988
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "psychology",
+  "split": "dev",
+  "run": "2a_history",
+  "n": 99,
+  "ndcg10": 0.5109,
+  "official_ref": 0.5726,
+  "by_turn": {
+   "T1": 0.2188,
+   "T2": 0.5818,
+   "T3": 0.5579,
+   "T4": 0.6479,
+   "T5+": 0.7551
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "psychology",
+  "split": "dev",
+  "run": "2a_hist_questions_only",
+  "n": 99,
+  "ndcg10": 0.298,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.2188,
+   "T2": 0.3162,
+   "T3": 0.296,
+   "T4": 0.2956,
+   "T5+": 0.4592
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "psychology",
+  "split": "dev",
+  "run": "2a_hist_answers_only",
+  "n": 99,
+  "ndcg10": 0.5316,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.2188,
+   "T2": 0.5954,
+   "T3": 0.5932,
+   "T4": 0.6721,
+   "T5+": 0.8039
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "robotics",
+  "split": "dev",
+  "run": "2a_current",
+  "n": 75,
+  "ndcg10": 0.1367,
+  "official_ref": 0.1574,
+  "by_turn": {
+   "T1": 0.3072,
+   "T2": 0.0807,
+   "T3": 0.0696,
+   "T4": 0.048,
+   "T5+": 0.1765
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "robotics",
+  "split": "dev",
+  "run": "2a_history",
+  "n": 75,
+  "ndcg10": 0.4299,
+  "official_ref": 0.5123,
+  "by_turn": {
+   "T1": 0.3072,
+   "T2": 0.4743,
+   "T3": 0.4727,
+   "T4": 0.5139,
+   "T5+": 0.3298
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "robotics",
+  "split": "dev",
+  "run": "2a_hist_questions_only",
+  "n": 75,
+  "ndcg10": 0.2689,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.3072,
+   "T2": 0.2759,
+   "T3": 0.2469,
+   "T4": 0.2177,
+   "T5+": 0.3183
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "robotics",
+  "split": "dev",
+  "run": "2a_hist_answers_only",
+  "n": 75,
+  "ndcg10": 0.4465,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.3072,
+   "T2": 0.5102,
+   "T3": 0.4901,
+   "T4": 0.4967,
+   "T5+": 0.4585
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "sustainable_living",
+  "split": "dev",
+  "run": "2a_current",
+  "n": 84,
+  "ndcg10": 0.2753,
+  "official_ref": 0.2938,
+  "by_turn": {
+   "T1": 0.3887,
+   "T2": 0.2079,
+   "T3": 0.2424,
+   "T4": 0.3332,
+   "T5+": 0.1
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "sustainable_living",
+  "split": "dev",
+  "run": "2a_history",
+  "n": 84,
+  "ndcg10": 0.4984,
+  "official_ref": 0.5531,
+  "by_turn": {
+   "T1": 0.3887,
+   "T2": 0.5114,
+   "T3": 0.6029,
+   "T4": 0.5269,
+   "T5+": 0.405
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "sustainable_living",
+  "split": "dev",
+  "run": "2a_hist_questions_only",
+  "n": 84,
+  "ndcg10": 0.3811,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.3887,
+   "T2": 0.4107,
+   "T3": 0.3706,
+   "T4": 0.3785,
+   "T5+": 0.2631
+  },
+  "system": "bm25s-plain"
+ },
+ {
+  "track": 2,
+  "domain": "sustainable_living",
+  "split": "dev",
+  "run": "2a_hist_answers_only",
+  "n": 84,
+  "ndcg10": 0.5013,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.3887,
+   "T2": 0.5244,
+   "T3": 0.5903,
+   "T4": 0.5317,
+   "T5+": 0.4439
+  },
+  "system": "bm25s-plain"
+ }
+]

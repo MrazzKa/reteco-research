@@ -1,0 +1,52 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 11556.80it/s]
+
+[t2 / law / rerank-bge-small]
+    3,562 candidate docs read in 3s
+    encoded law candidates: 3,562 texts, 662s (5/s)
+    encoded 2a_current queries: 66 texts, 2s (32/s)
+      -> 2a_current rerank: 0.2070
+      -> 2a_current rrf: 0.1992
+      -> 2a_current recall cap (oracle over BM25 top-100): 0.6404
+    encoded 2a_history queries: 66 texts, 11s (6/s)
+      -> 2a_history rerank: 0.3261
+      -> 2a_history rrf: 0.3443
+      -> 2a_history recall cap (oracle over BM25 top-100): 0.8593
+
+[t2 / medicalsciences / rerank-bge-small]
+    2,761 candidate docs read in 2s
+    encoded medicalsciences candidates: 2,761 texts, 425s (6/s)
+    encoded 2a_current queries: 44 texts, 2s (29/s)
+      -> 2a_current rerank: 0.1480
+      -> 2a_current rrf: 0.1249
+      -> 2a_current recall cap (oracle over BM25 top-100): 0.5101
+    encoded 2a_history queries: 44 texts, 8s (5/s)
+      -> 2a_history rerank: 0.2653
+      -> 2a_history rrf: 0.1784
+      -> 2a_history recall cap (oracle over BM25 top-100): 0.7067
+
+[t2 / politics / rerank-bge-small]
+    3,078 candidate docs read in 2s
+    encoded politics candidates: 3,078 texts, 523s (6/s)
+    encoded 2a_current queries: 54 texts, 2s (33/s)
+      -> 2a_current rerank: 0.3177
+      -> 2a_current rrf: 0.2554
+      -> 2a_current recall cap (oracle over BM25 top-100): 0.6608
+    encoded 2a_history queries: 54 texts, 10s (5/s)
+      -> 2a_history rerank: 0.4668
+      -> 2a_history rrf: 0.4035
+      -> 2a_history recall cap (oracle over BM25 top-100): 0.8743
+
+[t2 / drones / rerank-bge-small]
+    2,297 candidate docs read in 1s
+    encoded drones candidates: 2,297 texts, 323s (7/s)
+    encoded 2a_current queries: 38 texts, 1s (52/s)
+      -> 2a_current rerank: 0.1874
+      -> 2a_current rrf: 0.1610
+      -> 2a_current recall cap (oracle over BM25 top-100): 0.4783
+    encoded 2a_history queries: 38 texts, 5s (8/s)
+      -> 2a_history rerank: 0.3019
+      -> 2a_history rrf: 0.3275
+      -> 2a_history recall cap (oracle over BM25 top-100): 0.7546
+
+wrote ../research/runs_v11/dev_rerank/t2c/results.json

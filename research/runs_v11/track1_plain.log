@@ -1,0 +1,145 @@
+
+[track1 / bitcoin]
+    index: 76,706 docs, 24s (plain)
+    1a                          30 topics (30 unique)    0.3s
+      -> 1a nDCG@10 0.0357   official 0.037
+    1b_query+step               56 topics (56 unique)    0.5s
+      -> 1b_query+step nDCG@10 0.0328   official 0.0299
+    1b_step_only                56 topics (56 unique)    0.1s
+      -> 1b_step_only nDCG@10 0.0556
+    1b_query+all                56 topics (27 unique)    0.3s
+      -> 1b_query+all nDCG@10 0.0296
+
+[track1 / cardano]
+    index: 47,509 docs, 14s (plain)
+    1a                          15 topics (15 unique)    0.1s
+      -> 1a nDCG@10 0.1686   official 0.1027
+    1b_query+step               33 topics (33 unique)    0.2s
+      -> 1b_query+step nDCG@10 0.1228   official 0.0627
+    1b_step_only                33 topics (33 unique)    0.0s
+      -> 1b_step_only nDCG@10 0.1162
+    1b_query+all                33 topics (15 unique)    0.1s
+      -> 1b_query+all nDCG@10 0.1296
+
+[track1 / economics]
+    index: 74,692 docs, 25s (plain)
+    1a                          25 topics (25 unique)    0.2s
+      -> 1a nDCG@10 0.0425   official 0.0467
+    1b_query+step               51 topics (51 unique)    0.5s
+      -> 1b_query+step nDCG@10 0.0555   official 0.0463
+    1b_step_only                51 topics (51 unique)    0.1s
+      -> 1b_step_only nDCG@10 0.0644
+    1b_query+all                51 topics (22 unique)    0.2s
+      -> 1b_query+all nDCG@10 0.0438
+
+[track1 / genealogy]
+    index: 136,101 docs, 50s (plain)
+    1a                          35 topics (35 unique)    0.7s
+      -> 1a nDCG@10 0.1362   official 0.1949
+    1b_query+step               68 topics (68 unique)    1.1s
+      -> 1b_query+step nDCG@10 0.1614   official 0.2183
+    1b_step_only                68 topics (68 unique)    0.1s
+      -> 1b_step_only nDCG@10 0.1045
+    1b_query+all                68 topics (32 unique)    0.7s
+      -> 1b_query+all nDCG@10 0.1556
+
+[track1 / history]
+    index: 200,252 docs, 110s (plain)
+    1a                         240 topics (240 unique)    7.1s
+      -> 1a nDCG@10 0.0622   official 0.0873
+    1b_query+step              636 topics (636 unique)   21.7s
+      -> 1b_query+step nDCG@10 0.0865   official 0.1015
+    1b_step_only               636 topics (636 unique)    1.8s
+      -> 1b_step_only nDCG@10 0.0626
+    1b_query+all               636 topics (232 unique)    8.0s
+      -> 1b_query+all nDCG@10 0.0893
+
+[track1 / hsm]
+    index: 169,552 docs, 61s (plain)
+    1a                          45 topics (45 unique)    0.6s
+      -> 1a nDCG@10 0.3171   official 0.2489
+    1b_query+step              105 topics (105 unique)    1.5s
+      -> 1b_query+step nDCG@10 0.2869   official 0.214
+    1b_step_only               105 topics (105 unique)    0.3s
+      -> 1b_step_only nDCG@10 0.1611
+    1b_query+all               105 topics (40 unique)    0.7s
+      -> 1b_query+all nDCG@10 0.3088
+
+[track1 / iota]
+    index: 9,680 docs, 4s (plain)
+    1a                           3 topics (3 unique)    0.0s
+      -> 1a nDCG@10 0.4316   official 0.3309
+    1b_query+step                8 topics (8 unique)    0.0s
+      -> 1b_query+step nDCG@10 0.4539   official 0.4195
+    1b_step_only                 8 topics (8 unique)    0.0s
+      -> 1b_step_only nDCG@10 0.4077
+    1b_query+all                 8 topics (3 unique)    0.0s
+      -> 1b_query+all nDCG@10 0.4539
+
+[track1 / law]
+    index: 36,110 docs, 12s (plain)
+    1a                          11 topics (11 unique)    0.1s
+      -> 1a nDCG@10 0.0275   official 0.0574
+    1b_query+step               23 topics (23 unique)    0.2s
+      -> 1b_query+step nDCG@10 0.0479   official 0.0549
+    1b_step_only                23 topics (23 unique)    0.0s
+      -> 1b_step_only nDCG@10 0.0767
+    1b_query+all                23 topics (11 unique)    0.1s
+      -> 1b_query+all nDCG@10 0.0630
+
+[track1 / monero]
+    index: 53,955 docs, 17s (plain)
+    1a                          19 topics (19 unique)    0.1s
+      -> 1a nDCG@10 0.0414   official 0.032
+    1b_query+step               28 topics (28 unique)    0.2s
+      -> 1b_query+step nDCG@10 0.0191   official 0.0113
+    1b_step_only                28 topics (28 unique)    0.0s
+      -> 1b_step_only nDCG@10 0.0191
+    1b_query+all                28 topics (15 unique)    0.1s
+      -> 1b_query+all nDCG@10 0.0191
+
+[track1 / politics]
+    index: 135,207 docs, 44s (plain)
+    1a                          45 topics (45 unique)    0.8s
+      -> 1a nDCG@10 0.2749   official 0.2625
+    1b_query+step              119 topics (119 unique)    2.2s
+      -> 1b_query+step nDCG@10 0.2627   official 0.2371
+    1b_step_only               119 topics (119 unique)    0.2s
+      -> 1b_step_only nDCG@10 0.1402
+    1b_query+all               119 topics (44 unique)    0.9s
+      -> 1b_query+all nDCG@10 0.2784
+
+[track1 / quant]
+    index: 25,040 docs, 6s (plain)
+    1a                          10 topics (10 unique)    0.1s
+      -> 1a nDCG@10 0.0000   official 0.0237
+    1b_query+step               15 topics (15 unique)    0.1s
+      -> 1b_query+step nDCG@10 0.0000   official 0.0403
+    1b_step_only                15 topics (15 unique)    0.0s
+      -> 1b_step_only nDCG@10 0.1298
+    1b_query+all                15 topics (7 unique)    0.1s
+      -> 1b_query+all nDCG@10 0.0000
+
+[track1 / travel]
+    index: 158,771 docs, 41s (plain)
+    1a                          30 topics (30 unique)    0.4s
+      -> 1a nDCG@10 0.0357   official 0.0442
+    1b_query+step               52 topics (52 unique)    0.8s
+      -> 1b_query+step nDCG@10 0.0332   official 0.0645
+    1b_step_only                52 topics (52 unique)    0.1s
+      -> 1b_step_only nDCG@10 0.0528
+    1b_query+all                52 topics (27 unique)    0.4s
+      -> 1b_query+all nDCG@10 0.0427
+
+[track1 / workplace]
+    index: 43,584 docs, 10s (plain)
+    1a                          11 topics (11 unique)    0.1s
+      -> 1a nDCG@10 0.0184   official 0.023
+    1b_query+step               20 topics (20 unique)    0.2s
+      -> 1b_query+step nDCG@10 0.0600   official 0.0297
+    1b_step_only                20 topics (20 unique)    0.0s
+      -> 1b_step_only nDCG@10 0.2194
+    1b_query+all                20 topics (9 unique)    0.1s
+      -> 1b_query+all nDCG@10 0.0805
+
+done in 477s -> ../research/runs_v11/track1_plain/results.json

@@ -1,0 +1,138 @@
+[
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "train",
+  "run": "2a_current",
+  "n": 104,
+  "ndcg10": 0.1319,
+  "official_ref": 0.14,
+  "by_turn": {
+   "T1": 0.2093,
+   "T2": 0.0905,
+   "T3": 0.1222,
+   "T4": 0.0358,
+   "T5+": 0.1868
+  },
+  "system": "bm25s-lucene"
+ },
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "train",
+  "run": "2a_history",
+  "n": 104,
+  "ndcg10": 0.2546,
+  "official_ref": 0.3162,
+  "by_turn": {
+   "T1": 0.2093,
+   "T2": 0.1985,
+   "T3": 0.3924,
+   "T4": 0.2116,
+   "T5+": 0.2264
+  },
+  "system": "bm25s-lucene"
+ },
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "train",
+  "run": "2a_hist_questions_only",
+  "n": 104,
+  "ndcg10": 0.1378,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.2093,
+   "T2": 0.0861,
+   "T3": 0.1493,
+   "T4": 0.1007,
+   "T5+": 0.1135
+  },
+  "system": "bm25s-lucene"
+ },
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "train",
+  "run": "2a_hist_answers_only",
+  "n": 104,
+  "ndcg10": 0.2761,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.2093,
+   "T2": 0.2087,
+   "T3": 0.4401,
+   "T4": 0.2014,
+   "T5+": 0.2988
+  },
+  "system": "bm25s-lucene"
+ },
+ {
+  "track": 2,
+  "domain": "biology",
+  "split": "train",
+  "run": "2a_current",
+  "n": 247,
+  "ndcg10": 0.2015,
+  "official_ref": 0.225,
+  "by_turn": {
+   "T1": 0.2424,
+   "T2": 0.1546,
+   "T3": 0.2029,
+   "T4": 0.2705,
+   "T5+": 0.1476
+  },
+  "system": "bm25s-lucene"
+ },
+ {
+  "track": 2,
+  "domain": "biology",
+  "split": "train",
+  "run": "2a_history",
+  "n": 247,
+  "ndcg10": 0.5908,
+  "official_ref": 0.6369,
+  "by_turn": {
+   "T1": 0.2424,
+   "T2": 0.6634,
+   "T3": 0.7089,
+   "T4": 0.7302,
+   "T5+": 0.7184
+  },
+  "system": "bm25s-lucene"
+ },
+ {
+  "track": 2,
+  "domain": "biology",
+  "split": "train",
+  "run": "2a_hist_questions_only",
+  "n": 247,
+  "ndcg10": 0.3497,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.2424,
+   "T2": 0.3447,
+   "T3": 0.3506,
+   "T4": 0.4896,
+   "T5+": 0.4026
+  },
+  "system": "bm25s-lucene"
+ },
+ {
+  "track": 2,
+  "domain": "biology",
+  "split": "train",
+  "run": "2a_hist_answers_only",
+  "n": 247,
+  "ndcg10": 0.614,
+  "official_ref": null,
+  "by_turn": {
+   "T1": 0.2424,
+   "T2": 0.6953,
+   "T3": 0.7337,
+   "T4": 0.7684,
+   "T5+": 0.7482
+  },
+  "system": "bm25s-lucene"
+ }
+]

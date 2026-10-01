@@ -1,0 +1,52 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights:  68%|██████▊   | 136/199 [00:00<00:00, 1349.32it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 1746.83it/s]
+
+[t1 / law / rerank-bge-small]
+    893 candidate docs read in 7s
+    encoded law candidates: 893 texts, 239s (4/s)
+    encoded 1a queries: 11 texts, 4s (3/s)
+      -> 1a rerank: 0.2280
+      -> 1a rrf: 0.1009
+      -> 1a recall cap (oracle over BM25 top-100): 0.3230
+    encoded 1b_query+step queries: 23 texts, 7s (3/s)
+      -> 1b_query+step rerank: 0.2612
+      -> 1b_query+step rrf: 0.1846
+      -> 1b_query+step recall cap (oracle over BM25 top-100): 0.3913
+
+[t1 / workplace / rerank-bge-small]
+    689 candidate docs read in 13s
+    encoded workplace candidates: 689 texts, 197s (3/s)
+    encoded 1a queries: 11 texts, 3s (3/s)
+      -> 1a rerank: 0.2257
+      -> 1a rrf: 0.1096
+      -> 1a recall cap (oracle over BM25 top-100): 0.3670
+    encoded 1b_query+step queries: 20 texts, 6s (3/s)
+      -> 1b_query+step rerank: 0.3535
+      -> 1b_query+step rrf: 0.1472
+      -> 1b_query+step recall cap (oracle over BM25 top-100): 0.5113
+
+[t1 / quant / rerank-bge-small]
+    620 candidate docs read in 7s
+    encoded quant candidates: 620 texts, 192s (3/s)
+    encoded 1a queries: 10 texts, 3s (3/s)
+      -> 1a rerank: 0.0832
+      -> 1a rrf: 0.0482
+      -> 1a recall cap (oracle over BM25 top-100): 0.1226
+    encoded 1b_query+step queries: 15 texts, 5s (3/s)
+      -> 1b_query+step rerank: 0.1313
+      -> 1b_query+step rrf: 0.0729
+      -> 1b_query+step recall cap (oracle over BM25 top-100): 0.1742
+
+[t1 / iota / rerank-bge-small]
+    283 candidate docs read in 4s
+    encoded iota candidates: 283 texts, 92s (3/s)
+    encoded 1a queries: 3 texts, 1s (2/s)
+      -> 1a rerank: 0.6951
+      -> 1a rrf: 0.4413
+      -> 1a recall cap (oracle over BM25 top-100): 0.9440
+    encoded 1b_query+step queries: 8 texts, 2s (3/s)
+      -> 1b_query+step rerank: 0.5822
+      -> 1b_query+step rrf: 0.4539
+      -> 1b_query+step recall cap (oracle over BM25 top-100): 1.0000
+
+wrote ../research/runs_v11/dev_rerank/t1c/results.json

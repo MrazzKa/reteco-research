@@ -1,0 +1,40 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 1680.04it/s]
+
+[t1 / iota / rerank-minilm]
+    389 candidate docs read in 1s
+    encoded iota candidates: 389 texts, 20s (20/s)
+    encoded 1a queries: 7 texts, 0s (17/s)
+      -> 1a rerank: 0.2043
+      -> 1a rrf: 0.1934
+      -> 1a recall cap (oracle over BM25 top-100): 0.4134
+    encoded 1b_query+step queries: 16 texts, 1s (21/s)
+      -> 1b_query+step rerank: 0.1700
+      -> 1b_query+step rrf: 0.2213
+      -> 1b_query+step recall cap (oracle over BM25 top-100): 0.4900
+
+[t1 / quant / rerank-minilm]
+    1,231 candidate docs read in 2s
+    encoded quant candidates: 1,231 texts, 60s (21/s)
+    encoded 1a queries: 24 texts, 1s (18/s)
+      -> 1a rerank: 0.1212
+      -> 1a rrf: 0.0870
+      -> 1a recall cap (oracle over BM25 top-100): 0.1683
+    encoded 1b_query+step queries: 37 texts, 2s (18/s)
+      -> 1b_query+step rerank: 0.1654
+      -> 1b_query+step rrf: 0.0813
+      -> 1b_query+step recall cap (oracle over BM25 top-100): 0.2535
+
+[t1 / law / rerank-minilm]
+    1,625 candidate docs read in 2s
+    encoded law candidates: 1,625 texts, 76s (21/s)
+    encoded 1a queries: 24 texts, 1s (20/s)
+      -> 1a rerank: 0.1759
+      -> 1a rrf: 0.1403
+      -> 1a recall cap (oracle over BM25 top-100): 0.4202
+    encoded 1b_query+step queries: 53 texts, 3s (21/s)
+      -> 1b_query+step rerank: 0.2082
+      -> 1b_query+step rrf: 0.1588
+      -> 1b_query+step recall cap (oracle over BM25 top-100): 0.4964
+
+wrote ../research/runs_v11/sel_dense_minilm/results.json
