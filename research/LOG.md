@@ -406,3 +406,16 @@ result: **8 documents/second**, i.e. about 38 h for the 1,167,159 Track-1 docume
 Track 2 on this machine. Vector storage is small: 1.7 GB float32 / 0.8 GB float16 for Track 1.
 conclusion: For a full dense index the cost is embedding the corpus, not the ANN index or the
 search. Scaling plan is therefore smallest-domains-first, plus an int8/ONNX export test.
+
+## 2026-10-01 — dense retrieval + ANN on iota (first full-corpus dense index)
+split: dev    domain: iota (9,680 docs, Track 1 v1.1)
+command: `python3 scripts/ann_index.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --split dev --track 1 --domains iota --model bge-small --conditions 1a 1b_query+step --out ../research/runs_v11/ann`
+system: bge-small-en-v1.5, 256-token window, CPU; exact brute-force cosine vs NGT (ANNG graph, cosine, epsilon 0.1)
+result: 1a — exact 0.5581 (19.0 ms/query), ANN 0.5581 (3.4 ms/query), recall@10 vs exact 1.000, index build 3s.
+        1b_query+step — exact 0.4984 (9.1 ms/query), ANN 0.4984 (2.5 ms/query), recall@10 1.000, build 3s.
+        For comparison on the same domain: BM25 1a 0.4316; BM25 + bge rerank 0.6951; oracle over BM25 top-100 0.9440.
+runtime: corpus embedding 1,034s for 9,680 docs (9 docs/s, CPU, shared machine); index build 3s
+notes: At this corpus size the ANN approximation is free — identical rankings, 5x lower latency. Dense
+retrieval alone beats BM25 (+0.127) but stays below BM25 + dense reranking (-0.137), so the pipeline
+still wins over dense-only here. One small domain, 3 dev queries for 1a: not generalisable yet.
+conclusion: The retrieval path works end to end. The open cost is embedding, not indexing or search.
