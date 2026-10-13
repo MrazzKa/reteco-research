@@ -56,7 +56,10 @@ def load_model(name, max_len, device=None):
 
 def encode(model, texts, prefix, batch, label):
     t0 = time.time()
-    emb = model.encode([prefix + t for t in texts], batch_size=batch,
+    # cap very long texts before tokenisation (first max_seq_length tokens unchanged); without it
+    # the tokenizer materialises >1M-word documents and the process is OOM-killed (hsm, week 4)
+    cap = 200 * model.max_seq_length
+    emb = model.encode([prefix + t[:cap] for t in texts], batch_size=batch,
                        normalize_embeddings=True, convert_to_numpy=True,
                        show_progress_bar=False).astype(np.float32)
     rate = len(texts) / max(time.time() - t0, 1e-9)

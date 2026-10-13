@@ -419,3 +419,215 @@ notes: At this corpus size the ANN approximation is free — identical rankings,
 retrieval alone beats BM25 (+0.127) but stays below BM25 + dense reranking (-0.137), so the pipeline
 still wins over dense-only here. One small domain, 3 dev queries for 1a: not generalisable yet.
 conclusion: The retrieval path works end to end. The open cost is embedding, not indexing or search.
+
+---
+
+# Week 4 — GPU machine (2026-10-13, autonomous overnight session)
+
+All runs below on the new laptop: RTX 4060 Laptop 8 GB, WSL2 Ubuntu, ~12 GB RAM visible,
+i7-13650HX (20 threads), Python 3.14.4, torch 2.14.1+cu130, sentence-transformers 6.1.0,
+transformers 5.19.0, bm25s 0.3.13, faiss-cpu 1.15.1, ngt 2.8.0.post1, numpy 2.5.4.
+Data: `reteco_data_v11/` for **both** tracks. The local official repo `RETECO/` is now at
+`eebd377` ("Open registration"), two commits after the earlier pin `23093c3`; the new
+commits touch the website/news only (v1.1 announcement, registration link).
+Run outputs: `research/runs_v12/` (embeddings, TREC runs and ANN indexes are git-ignored).
+Seed for every sample and bootstrap: 20260921.
+
+## 2026-10-13 15:27 — environment check and Track-2 data version
+command: `nvidia-smi`; `python -c "import torch; ..."`; `free -g`; counts of `documents.jsonl`
+result: CUDA available, 8,188 MiB VRAM, 11.7 GB RAM, 940 GB free disk. `reteco_data/` (v1.0)
+  is not on this machine. Track 2 in v1.1: per-domain document, conversation, turn and qrels
+  counts in `split_manifest.json` match `research/data_report.md` (made from v1.0) for every
+  domain, and the task website states Track 2 is unchanged in v1.1. BM25 on Track-2 dev
+  reproduces the week-2 numbers (below).
+conclusion: Track 2 v1.1 = v1.0 for our purposes; README now points both tracks to `reteco_data_v11/`.
+
+## 2026-10-13 15:30 — GPU encoding benchmark (bge-small)
+command: `python3 gpu_bench.py --corpus ../../reteco_data_v11/track1_tempo/history/documents.jsonl --model bge-small --n 4000 --max-len {256,512} --batches ...`
+system: `BAAI/bge-small-en-v1.5` rev 5c38ec7c, sentence-transformers (length-sorted batches), first 4,000 `history` documents
+result: 256 tokens — fp16: 1,141 / 1,257 / 1,243 / 1,189 / 1,092 docs/s at batch 32/64/128/256/512
+  (peak VRAM 0.15–1.24 GB); fp32: 507 / 485 / 404 / 360 / 350 docs/s. 512 tokens, fp16: 822 / 753 / 648
+  docs/s at batch 64/128/256 (0.37–1.27 GB).
+notes: batch 64 fp16 is best; larger batches are slower (padding inside a length-sorted batch grows).
+  Previous CPU machine: 8 docs/s → ~150× faster.
+outputs: `research/runs_v12/bench/bge-small_{256,512}.json`
+conclusion: The whole release (1.67M docs) is ~30–40 min of encoding with bge-small; the 38-hour bottleneck is gone.
+
+## 2026-10-13 15:35 — BM25 depth-1000, train+dev, both tracks; tie-breaking bug found
+command: `python3 bm25s_run.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --splits train dev --track {1,2} --domains <all> --analyzer lucene --k 1000 --conditions <1a 1b_query+step | 2a_current 2a_history> --threads 8 --out ../research/runs_v12/bm25/t{1,2}`
+system: bm25s-lucene (k1=0.9, b=0.4, Snowball + stopwords) as week 2; new options: `--k` depth, `--splits` (one index for both splits), `--conditions`.
+result (first attempt, before the fix): Track-2 dev 2a_history macro 0.4032 instead of 0.4034; per domain
+  biology 0.5509 → 0.5478 and robotics 0.4709 → 0.4711, everything else identical.
+diagnosis: biology dev 2a_history with k=100 gives 0.5509, with k=1000 gives 0.5478; the thread count does
+  not matter. 29/115 topics have a different top 10, always among documents with **exactly equal scores**
+  (e.g. `dealing-with-fear-of-the-dark_6_6 / _7_6 / _8_6`, identical passages). bm25s returns tied
+  documents in an order that depends on k.
+fix: `search()` now sorts each list by (−score, doc id) — the starter kit's rule; `--no-tiebreak` keeps the old
+  behaviour. With the fix, k=100 and k=1000 both give 0.5529 on biology. The aborted run's log is kept
+  (`logs/bm25_deep_untiebroken_aborted.log`).
+result (final): Track 1 dev macro 1a **0.1127**, 1b_query+step **0.1181** — identical to week 2 in all 13
+  domains. Track 1 train 1a 0.1005, 1b 0.1101 (monero +0.0006 vs week 2, a tie effect). Track 2 dev
+  2a_current **0.1758** (week 2 0.1759), 2a_history **0.4034**; train 0.1667 / 0.4082.
+runtime: Track 2 50 s (peak RSS 0.4 GB); Track 1 7 min 18 s (peak RSS 3.2 GB), both splits, both conditions.
+conclusion: Baseline reproduced; scores are now independent of run depth. Ties matter only where corpora hold duplicate passages (see the order study).
+
+## 2026-10-13 15:37–17:10 — full dense index, bge-small, 512 tokens, all 24 domains
+command: `python3 dense_index.py --data ../../reteco_data_v11 --track {2,1} --domains all --model bge-small --max-len 512 --batch 64 --out ../research/runs_v12/emb`
+system: float16 vectors in shards of 20,000 docs (`shard_*.npy` + `shard_*.ids.json`), written atomically,
+  skipped on restart; `manifest.json` last. Validation per domain: shard ids concatenated == corpus order,
+  no non-finite rows, norms in [0.98, 1.02], 32 random documents (seed 20260921) re-encoded and compared
+  with the cache (cosine > 0.99).
+result: 24/24 domains validated (minimum re-encode cosine 0.99915). Track 2: 507,141 docs, 363 s of
+  encoding (1,398 docs/s). Track 1: 1,167,159 docs; 11 domains in 1,293 s (617 docs/s), then hsm + history
+  after the crash below (410 s). Cache 1.2 GB on disk (git-ignored). Peak VRAM 0.38 GB.
+failure: the Track-1 job was killed without a traceback in `hsm` shard 4 (4 shards done). RAM was free
+  afterwards; the job's peak RSS had reached 5.4 GB and an NGT/FAISS build (`ann_eval.py`, earth_science)
+  ran at the same time → most likely the OOM killer. Cause of the 5.4 GB: the tokenizer materialises
+  very long documents in full (Track-1 corpora contain documents of >1M words) before truncating.
+fix: `Encoder.encode_docs` cuts each text at 200 × max_len characters before tokenisation (512 tokens
+  never span 102k characters of real text, so the first 512 tokens are unchanged). Resumed alone:
+  hsm reused shards 0–3, history built from scratch; peak RSS 3.3 GB, 7 min 8 s.
+conclusion: Full dense index for the whole release in ~35 min of GPU time. Large jobs now run alone.
+
+## 2026-10-13 15:45 — precision problem in the first dense runs (fixed)
+notes: `ann_eval.py` showed GPU "exact" search (fp16 matmul) and FAISS IndexFlatIP (float32) disagreeing
+  on drones: nDCG@10 0.1665 vs 0.1689, recall@10 between the two exact lists 0.982. fp16 accumulation
+  flips near-ties. `dense_search.py` and `order_study.py` now keep vectors in fp16 on disk but score in
+  float32 (TF32 off). After the fix GPU exact == FAISS flat (drones R@10 1.000; biology 0.999, a tie between
+  duplicates). All dense results below were re-run with float32 scoring; the fp16-scored Track-2 order
+  study is kept as `order/t2_fp16scoring_superseded.json`. Hybrid conclusions did not change (Track 2
+  current 0.2435 → 0.2441, history 0.4238 → 0.4242).
+
+## 2026-10-13 16:18 — dense retrieval (whole corpus), train + dev, both tracks
+command: `python3 dense_search.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track {1,2} --model bge-small --max-len 512 --emb ../research/runs_v12/emb --out ../research/runs_v12/dense/bge-small_L512/t{1,2}`
+system: exact cosine (float32 on GPU) over the full corpus, top 1000, ties by doc id; query instruction from the model card
+result (dev, macro nDCG@10): 1a **0.2806**, 1b_query+step **0.2787**, 2a_current **0.2081**,
+  2a_history 0.3726 (history then question) / **0.3816** (question then history).
+  Recall@100 dev: 1a 0.633, 1b 0.719, 2a_current 0.612, 2a_history 0.843.
+query-string choice (train, decided before looking at dev): `2a_history_qfirst` 0.4142 vs 0.4029 (R@100 0.8388 vs 0.8261) → question first.
+runtime: 0.4–13 ms per query for search (GPU); whole dense_search for both splits of Track 1 ~40 s.
+reproduction: bge-small, **256 tokens**, iota dev: 1a **0.5581**, 1b 0.4984 — exactly the 2026-10-01 CPU numbers
+  (metric: binary nDCG@10, starter-kit `ir_metrics.ndcg_at_k`, mean over iota's 3 dev queries; 256-token
+  window; exact cosine). At 512 tokens iota dev 1a is 0.7157 (3 queries — not interpretable alone).
+conclusion: On Track 1, dense retrieval alone is 2.5× BM25 and already above week 2's BM25 + rerank pipeline; on Track 2 it beats BM25 on the current turn, not with history.
+
+## 2026-10-13 16:19 — hybrid BM25 + dense: tuned on train, frozen, measured on dev
+command: `python3 hybrid.py --track {1,2} --conditions <...> [--dense-cond 2a_current 2a_history_qfirst] --bm25 ../research/runs_v12/bm25/t{1,2}/runs --dense ../research/runs_v12/dense/bge-small_L512/t{1,2}/runs --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out ../research/runs_v12/hybrid/bge-small_L512_t{1,2}.json`
+system: pool = BM25 top-kb ∪ dense top-kd; RRF (kb, kd ∈ {50,100,200,500}, c ∈ {10,30,60,100}) and linear
+  fusion alpha·norm(dense) + (1−alpha)·norm(BM25), norm ∈ {min-max, z-score}, alpha ∈ {0,…,1} in 0.1 steps,
+  (kb, kd) ∈ {(100,100),(200,200),(500,500),(100,500),(500,100)}; 175 configurations. Missing score =
+  that system's 1000th score (upper bound); missing RRF rank contributes 0. One configuration per
+  sub-track chosen by train macro nDCG@10; dev scored once. Paired bootstrap (10,000, topics within domain).
+result (dev macro nDCG@10; hybrid = linear, configuration from train):
+  | sub-track | BM25 | dense | BM25 top-100 + dense rerank | RRF* | hybrid* |
+  | 1a | 0.1127 | 0.2806 | 0.2562 | 0.2588 | 0.2956 |
+  | 1b_query+step | 0.1181 | 0.2787 | 0.2685 | 0.2814 | 0.2966 |
+  | 2a_current | 0.1758 | 0.2081 | 0.2224 | 0.2390 | 0.2441 |
+  | 2a_history | 0.4034 | 0.3816 | 0.3864 | 0.4221 | 0.4242 |
+  hybrid − BM25: +0.1829 [0.1445, 0.2257], +0.1784 [0.1472, 0.2118], +0.0683 [0.0515, 0.0851], +0.0208 [0.0027, 0.0387].
+  hybrid − rerank: +0.0395 [0.0204, 0.0594], +0.0281 [0.0093, 0.0483], +0.0217 [0.0102, 0.0334], +0.0377 [0.0256, 0.0497].
+  hybrid − dense: +0.0151 [−0.0021, 0.0316], +0.0179 [0.0045, 0.0312], +0.0360 [0.0241, 0.0477], +0.0426 [0.0305, 0.0548].
+  chosen: linear (100+100) z-score alpha 0.6 (1a), min-max 0.7 (1b), z-score 0.7 (both Track-2 conditions).
+  hybrid > BM25 in 13/13, 13/13, 10/11 and 6/11 domains.
+runtime: Track 1 3 min 20 s, Track 2 4 min (pure Python, CPU).
+notes: dev was used once per sub-track with the frozen configuration. Week 2's CPU rerank used a 256-token window and 12 domains; the `rerank` column here is re-run at 512 tokens on all 13 domains.
+conclusion: Fusing BM25 and dense scores beats every single system on all four sub-tracks; over dense alone the gain is small on Track 1 (about +0.015) and larger on Track 2.
+
+## 2026-10-13 16:22 — retrieval depth and unique contributions (dev)
+source: `depth` and `allocation` blocks of the hybrid reports (same command as above).
+result: recall@100 (macro) BM25 / dense / union of the two top-100 lists (mean 179–186 docs):
+  1a 0.402 / 0.633 / 0.683; 1b 0.482 / 0.719 / 0.767; 2a_current 0.531 / 0.612 / 0.710; 2a_history 0.807 / 0.843 / 0.917.
+  At equal budget (k unique docs alternating between lists) the union beats both single systems on
+  Track 2 at every k, and is between them on Track 1 below k=200 (dense alone is better there).
+  Unique gold at k=100 (pairs): Track 1 1a — dense adds 606 to BM25's 454 (+133%), BM25 adds 57 to dense's
+  1,003 (+6%). Track 2 current — dense adds 302 to 824 (+37%), BM25 adds 178 to 948 (+19%).
+  Best BM25 share of a 100-doc budget (train): 0 on Track 1, 0.25 on Track 2 (same on dev).
+conclusion: On Track 1, recall comes from the dense side; BM25 contributes a few percent. On Track 2 both contribute and a 25/75 BM25/dense split is the most efficient allocation.
+
+## 2026-10-13 16:22 — BM25-only / dense-only / both / neither (dev) — meeting deliverable
+command: `python3 gold_categories.py --data ../../reteco_data_v11 --bm25 ../research/runs_v12/bm25 --dense ../research/runs_v12/dense/bge-small_L512 --out ../research/runs_v12/categories`; `python3 case_study.py ... --readings ../research/cases/readings_dev.json --intro ../research/cases/src/categories_intro.md --outro ../research/cases/src/categories_outro.md --out ../research/cases/retrieval_categories_dev.md`; `python3 label_sample.py ... --category {neither,bm25_only,dense_only}`
+system: every (topic, gold) pair of dev, conditions 1a, 1b_query+step, 2a_current, 2a_history; k=10 and 100.
+result (k=100; BM25-only / dense-only / both / neither): 1a 3.2 / 34.0 / 22.3 / 40.5%; 1b 4.1 / 38.8 / 31.2 / 25.9%;
+  2a_current 10.7 / 18.1 / 38.8 / 32.4%; 2a_history 8.0 / 10.8 / 71.8 / 9.4%. At k=10 "neither" is 70% (1a)
+  and 64% (2a_current).
+  Features (all pairs, Track 1 1a): BM25-only golds average 1,279 words, 68% longer than the window,
+  44% match the query only beyond the window (dense-only: 234 words, 8%, 2%); lexical overlap dense-only
+  0.18 vs 0.36–0.40 for BM25-found pairs.
+  Example rule fixed in code before reading (seed 20260921, k=100, 1a/2a_current, 2 per track per category);
+  16 examples rendered with hand readings; 52 more pairs labelled with the same rule (preliminary labels):
+  neither — 6/20 instance needing world knowledge, 6/20 abstract inferential link, 3/20 weak/debatable
+  judgement, 2 context-dependent turns, 2 near-copy crowding, 1 fragment; BM25-only — 11/16 exact rare
+  term/name/identifier, 5/16 match beyond the window; dense-only — 10/16 paraphrase, 5/16 verbose query
+  dilutes BM25, 1 inferential.
+notes: diagnosis only; nothing fed back into any configuration. Labels are the assistant's, not human-validated.
+conclusion: BM25's unique contribution is exact terms and text the encoder never sees (truncation); the dense side's is paraphrase; what neither finds mostly needs an inference step.
+
+## 2026-10-13 16:20 — data note: Track-2 document ids reveal gold documents
+command: `python3 id_artifact.py --data ../../reteco_data_v11 --out ../research/runs_v12/id_artifact.json`
+result: in drones, hardware, law, medicalsciences and politics, 100% of train+dev gold documents are named
+  `<question>_doc_<n>`; only 1.1–1.5% of the corpus has that form and 64–76% of those are gold; most
+  negatives are `<question>_google_neg_<n>`. BRIGHT domains use `<question-folder>/<page>` ids.
+notes: no system here reads ids. To be reported to Steve (and possibly the organisers) — if the hidden test
+  set is built the same way, an id-reading system would gain an illegitimate advantage.
+
+## 2026-10-13 15:58 — Track 2: history gain vs recycled gold (dev and train)
+command: `python3 history_leak.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --bm25 ../research/runs_v12/bm25/t2/runs --dense ../research/runs_v12/dense/bge-small_L512/t2/runs --out ../research/runs_v12/history_leak.json`
+result (dev): 89% (BRIGHT) / 86% (StackExchange) of later turns reuse ≥1 gold document of an earlier turn.
+  Recycled-gold turns (568): BM25 0.163 → 0.556 with history; hybrid 0.222 → 0.534. New-gold turns (79):
+  BM25 0.178 → 0.197; hybrid 0.245 → 0.208 (history hurts). First turns (211) are unaffected by construction.
+  Train shows the same pattern (recycled 1,455 turns: BM25 0.151 → 0.539; new 162: 0.172 → 0.180).
+conclusion: Most of the "+history" gain is re-finding documents whose content is already in the history (prior reference answers); it says little about finding new evidence. Track-2 current-turn results are the cleaner measure of retrieval.
+
+## 2026-10-13 15:59–16:26 — does indexing order matter? (Steve's question)
+command: `python3 order_study.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 2 --domains <all 11> --perms 5 --ann-domains drones biology earth_science --emb ../research/runs_v12/emb --out ../research/runs_v12/order/t2.json`; same for Track 1 with iota quant law workplace cardano, ANN on law and cardano.
+system: corpus in file order + 5 random permutations (seeds 0–4); BM25 index rebuilt per order; dense = rows
+  of the cached matrix permuted; NGT graph built with 3 insertion orders.
+result: Track 2 — BRIGHT domains have 4.9–41.7% of documents in exact-duplicate groups (robotics 41.7%);
+  StackExchange domains 0%. Gold documents with a non-gold exact twin: biology 3, earth_science 2, else 0.
+  nDCG@10 range over the 6 orders: BM25 with bm25s's native tie order ≤ 0.0031 (biology history);
+  dense ≤ 0.0114 (biology history), > 0 only in biology and earth_science; with doc-id tie-break 0.0000
+  everywhere. NGT: nDCG@10 varies ≤ 0.0036 across insertion orders (biology), recall@10 vs exact 0.987–0.995.
+  Track 1 (v1.1 deduplicated, 5 small domains): no duplicates, every range 0.0000; NGT range 0.
+conclusion: Document order changes results only through exact ties between duplicate documents, by at most ~1 point on one domain (≈0.1 on the macro). The ~10-point week-1 differences came from the analyzer (stemming: Track 2 current 0.1490 → 0.1759) and from v1.0 → v1.1 deduplication, not from order.
+
+## 2026-10-13 16:03–16:30 — ANN (NGT, FAISS HNSW) vs exact search, all 24 domains
+command: `python3 ann_eval.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track {1,2} --emb ../research/runs_v12/emb --out ../research/runs_v12/ann/bge-small_L512_t{1,2}.json`
+system: dev 1a / 2a_current; exact = GPU float32; FAISS IndexFlatIP (CPU, independent exact); FAISS HNSW (M 32, efC 200, efS 128); NGT ANNG (cosine, epsilon 0.1).
+result: see RESULTS.md section H (per domain: nDCG@10, recall@10 vs exact, build time, latency).
+  Over 24 domains: NGT recall@10 vs exact 0.960–1.000 (recall@100 ≥ 0.959), mean |ΔnDCG@10| 0.0021,
+  build ≤ 19 s, ≤ 2.8 ms/query; HNSW recall@10 0.960–1.000 (recall@100 ≥ 0.931), mean |ΔnDCG@10| 0.0027,
+  build ≤ 34 s, ≤ 0.7 ms/query. history (200,252 docs): exact 0.2603, NGT 0.2612 (R@10 0.987), HNSW 0.2603
+  (R@10 0.993). FAISS flat R@10 ≥ 0.975 — below 1 only through duplicate ties.
+  Largest per-domain changes: NGT −0.0178 (Track-2 economics) and −0.0159 (sustainable_living), both
+  BRIGHT domains with ~25% exact duplicates (presumably the ANN returning a non-gold twin of a gold
+  passage — not checked per query). HNSW: worst −0.0613 on Track-1 quant (10 dev queries, R@10 0.960).
+conclusion: At RETECO's scale (≤ 200k docs per domain) ANN costs ~0.002 nDCG on average (worst domain −0.018 for NGT, −0.061 for HNSW on a 10-query domain) and a few seconds of build; exact GPU search (≤ 13 ms/query) is also affordable, so ANN is a convenience here, not a necessity.
+
+## 2026-10-13 16:35 — pre-registered decision rules (written before the runs they govern)
+1. **Window (256 vs 512 tokens, bge-small).** On the 4+6-domain selection subset, train nDCG@10 favoured
+   256 on Track 1 and 512 on Track 2, recall@100 favoured 512 on both (see section G of RESULTS). The
+   subset has ~80 Track-1 train queries, too few to decide. Rule: build L256 for all 24 domains, run
+   dense retrieval on **train only**, and per track choose the window with the higher mean train macro
+   nDCG@10 over that track's two conditions. If a track switches to 256, its hybrid is re-tuned on train
+   with the L256 runs and dev is scored once; the L512 numbers stay in the record.
+2. **Encoder.** Choose the model with the highest mean train nDCG@10 over the four sub-track cells of the
+   selection subset (section G). If it is not bge-small and a full index costs ≤ 3 h of GPU time, build it
+   for all domains and run the same pipeline (dense, hybrid tuned on train, dev once).
+3. **Cross-encoder depth.** bge-reranker-v2-m3 scores the frozen hybrid top 100; N ∈ {10, 20, 50, 100}
+   chosen on a train subsample (≤ 40 topics per domain and condition, seed 20260921); dev once.
+   Amendment (16:37, before any full cross-encoder run): measured 32 pairs/s while the GPU is shared;
+   to fit the night the cross-encoder scores the hybrid **top 50**, N ∈ {10, 20, 50}, train subsample ≤ 30
+   topics per domain and condition. Smoke test on drones only (not reported as a result).
+
+## 2026-10-13 16:55 — week-2 hsm rerank completed (13/13 domains), and a second OOM kill
+command: `python3 dense_rerank.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --split dev --track 1 --domains hsm --model bge-small --runs ../research/runs_v12/bm25/t1/runs --depth 100 --max-len 256 --conditions 1a 1b_query+step --out ../research/runs_v11/dev_rerank/t1d_hsm_gpu`
+system: the week-2 configuration (BM25 top-100 reranked by bge-small, 256 tokens, fp32), now on the GPU. The
+  BM25 input is the week-4 depth-1000 run, whose top 100 equals week 2's on Track 1 dev (identical scores in
+  all 13 domains).
+failure: first attempt killed by signal 9 after 10 min, peak RSS 11.0 GB — the week-2 encoder path had no
+  length cap and tokenised hsm's very long documents in full (same cause as the indexer crash). The model-
+  selection job running at the same time survived. Fix: `dense_run.encode` now cuts texts at 200 × window
+  characters before tokenisation.
+result: hsm dev 1a — rerank **0.3932**, RRF 0.3728, recall cap 0.6977; 1b_query+step — rerank **0.3234**,
+  RRF 0.3452, cap 0.6189. 35 s, peak RSS 2.1 GB.
+conclusion: The week-2 table (RESULTS, "Weeks 1–3", section 2) now covers all 13 Track-1 domains.

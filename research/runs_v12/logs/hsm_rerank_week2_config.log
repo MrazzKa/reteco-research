@@ -1,0 +1,40 @@
+    model BAAI/bge-small-en-v1.5 on cuda
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3084.86it/s]
+
+[t1 / hsm / rerank-bge-small]
+    2,862 candidate docs read in 1s
+    encoded hsm candidates: 2,862 texts, 24s (118/s)
+    encoded 1a queries: 45 texts, 0s (126/s)
+      -> 1a rerank: 0.3932
+      -> 1a rrf: 0.3728
+      -> 1a recall cap (oracle over BM25 top-100): 0.6977
+    encoded 1b_query+step queries: 105 texts, 1s (136/s)
+      -> 1b_query+step rerank: 0.3234
+      -> 1b_query+step rrf: 0.3452
+      -> 1b_query+step recall cap (oracle over BM25 top-100): 0.6189
+
+wrote ../research/runs_v11/dev_rerank/t1d_hsm_gpu/results.json
+	Command being timed: "python dense_rerank.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --split dev --track 1 --domains hsm --model bge-small --runs ../research/runs_v12/bm25/t1/runs --depth 100 --max-len 256 --conditions 1a 1b_query+step --out ../research/runs_v11/dev_rerank/t1d_hsm_gpu"
+	User time (seconds): 57.85
+	System time (seconds): 3.23
+	Percent of CPU this job got: 172%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:35.32
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 2128280
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 2036
+	Minor (reclaiming a frame) page faults: 485430
+	Voluntary context switches: 51630
+	Involuntary context switches: 17992
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

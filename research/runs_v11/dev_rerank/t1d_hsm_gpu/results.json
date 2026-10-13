@@ -1,0 +1,60 @@
+[
+ {
+  "track": 1,
+  "domain": "hsm",
+  "split": "dev",
+  "run": "1a_rerank",
+  "n": 45,
+  "ndcg10": 0.3932,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "hsm",
+  "split": "dev",
+  "run": "1a_rrf",
+  "n": 45,
+  "ndcg10": 0.3728,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "hsm",
+  "split": "dev",
+  "run": "1a_recall_cap",
+  "n": 45,
+  "ndcg10": 0.6977,
+  "system": "oracle-cap-top100"
+ },
+ {
+  "track": 1,
+  "domain": "hsm",
+  "split": "dev",
+  "run": "1b_query+step_rerank",
+  "n": 105,
+  "ndcg10": 0.3234,
+  "system": "rerank-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "hsm",
+  "split": "dev",
+  "run": "1b_query+step_rrf",
+  "n": 105,
+  "ndcg10": 0.3452,
+  "system": "rrf-bge-small+bm25s",
+  "depth": 100
+ },
+ {
+  "track": 1,
+  "domain": "hsm",
+  "split": "dev",
+  "run": "1b_query+step_recall_cap",
+  "n": 105,
+  "ndcg10": 0.6189,
+  "system": "oracle-cap-top100"
+ }
+]

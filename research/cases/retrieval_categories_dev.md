@@ -581,6 +581,10 @@ treat the counts as a first impression, n = 52.**
 
 ## 7. Caveats
 
+- Pooled counts are dominated by large domains: on Track 1 `1a`, `history` contributes
+  1,010 of the 1,783 gold pairs (240 queries with ~4 gold documents each). The per-domain
+  tables show the other domains separately; the direction (dense-only ≫ BM25-only) holds
+  in every Track-1 domain at k=100 except where both are tiny.
 - One dense model (bge-small, 512 tokens). A larger or longer-context encoder would move
   pairs out of "BM25-only" (the truncation cases) — model comparison is in RESULTS.md.
 - k=100 categories describe candidate generation; k=10 categories describe what the

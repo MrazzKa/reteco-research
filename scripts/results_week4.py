@@ -64,6 +64,15 @@ def week4(root):
               "normalisation and alpha; see section C). CIs: paired bootstrap over topics within "
               "each domain, 10,000 resamples, macro over domains. Track-2 `2a_history` for the "
               "dense side uses the current question first (chosen on train, section B).", ""]
+        L += ["Averaging: the task's baseline table averages over domains; the evaluation page describes "
+              "averaging over topics (and, for 1b, over a query's steps first — not computed here). The same "
+              "dev runs averaged over all topics:", "",
+              "| sub-track | topics | BM25 | dense | rerank | hybrid* |", "| --- | ---: | ---: | ---: | ---: | ---: |"]
+        for t, cond in CONDS:
+            pt = hyb[t]["conditions"][cond]["dev_per_topic"]
+            vals = [[x for d in pt[s].values() for x in d] for s in ("bm25", "dense", "rerank", "linear*")]
+            L.append(f"| {t} `{cond}` | {len(vals[0])} | " + " | ".join(f4(mean(v)) for v in vals) + " |")
+        L += ["", "The ranking of the systems is the same under both averages.", ""]
         L += ["Chosen configurations (train):", ""]
         for t, cond in CONDS:
             c = hyb[t]["conditions"][cond]["systems"]
@@ -87,6 +96,17 @@ def week4(root):
                            > hyb[t]["conditions"][c]["systems"]["bm25"]["dev"][d]["ndcg10"]) for c in conds}
             L += ["", "Hybrid above BM25 in " + ", ".join(f"{w}/{len(doms)} domains ({c})" for c, w in wins.items())
                   + ".", ""]
+            if t == 2:
+                bright = {"biology", "earth_science", "economics", "psychology", "robotics", "sustainable_living"}
+                L += ["By source (dev macro nDCG@10):", "",
+                      "| condition | source | BM25 | dense | rerank | hybrid |", "| --- | --- | ---: | ---: | ---: | ---: |"]
+                for c in conds:
+                    s = hyb[t]["conditions"][c]["systems"]
+                    for name, grp in (("BRIGHT (6)", [d for d in doms if d in bright]),
+                                      ("StackExchange (5)", [d for d in doms if d not in bright])):
+                        L.append(f"| {c} | {name} | " + " | ".join(
+                            f4(mean([s[k]["dev"][d]["ndcg10"] for d in grp])) for k in ("bm25", "dense", "rerank", "linear*")) + " |")
+                L.append("")
 
     # ------------------------------------------------------------- B. query string for dense history
     dres = jload(os.path.join(R, "dense/bge-small_L512/t2/results.json"))
@@ -137,6 +157,19 @@ def week4(root):
                 vals = [mean([v[f"{m}@{k}"] for v in dep.values()]) for m in
                         ("bm25", "dense", "union_budget", "union_each", "union_size")]
                 L.append(f"| {k} | " + " | ".join(f4(x) for x in vals[:4]) + f" | {vals[4]:.0f} |")
+            L.append("")
+        # per-domain recall@100
+        L += ["### Recall@100 per domain (dev): BM25 / dense / union at equal budget", ""]
+        for t, doms in ((1, T1), (2, T2)):
+            conds = [c for tt, c in CONDS if tt == t]
+            L += ["| domain | " + " | ".join(f"{c}: BM25 | dense | union" for c in conds) + " |",
+                  "| --- |" + " ---: |" * (3 * len(conds))]
+            for d in doms:
+                row = []
+                for c in conds:
+                    v = hyb[t]["conditions"][c]["depth"]["dev"].get(d, {})
+                    row += [v.get("bm25@100"), v.get("dense@100"), v.get("union_budget@100")]
+                L.append(f"| {d} | " + " | ".join(f3(x) for x in row) + " |")
             L.append("")
         # depth needed for coverage levels
         L += ["### Depth needed for a given recall (dev, macro; smallest k in {10..1000} reaching it)", "",
@@ -273,7 +306,10 @@ def week4(root):
         if allr:
             L += ["", f"Over {len(allr)} domains: NGT recall@10 against exact search {min(v['ngt']['recall10_vs_exact'] for v in allr):.3f}–"
                   f"{max(v['ngt']['recall10_vs_exact'] for v in allr):.3f}, mean |ΔnDCG@10| "
-                  f"{mean([abs(v['ngt']['ndcg10'] - v['exact_gpu']['ndcg10']) for v in allr]):.4f}. "
+                  f"{mean([abs(v['ngt']['ndcg10'] - v['exact_gpu']['ndcg10']) for v in allr]):.4f} (worst "
+                  f"{min(v['ngt']['ndcg10'] - v['exact_gpu']['ndcg10'] for v in allr):+.4f}); HNSW mean |ΔnDCG@10| "
+                  f"{mean([abs(v['faiss_hnsw']['ndcg10'] - v['exact_gpu']['ndcg10']) for v in allr]):.4f} (worst "
+                  f"{min(v['faiss_hnsw']['ndcg10'] - v['exact_gpu']['ndcg10'] for v in allr):+.4f}). "
                   "FAISS flat (CPU, float32) is an independent exact search; its R@10 below 1 comes only from "
                   "ties between duplicate documents. NGT: ANNG, cosine, epsilon 0.1; HNSW: M=32, "
                   "efConstruction 200, efSearch 128; latency single-threaded.", ""]

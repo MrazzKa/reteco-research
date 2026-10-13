@@ -19,6 +19,17 @@ Machine: RTX 4060 Laptop (8 GB), WSL2, Python 3.14, torch 2.14.1+cu130, sentence
 
 `*` = configuration chosen on train (grid over pool depths, RRF constant, normalisation and alpha; see section C). CIs: paired bootstrap over topics within each domain, 10,000 resamples, macro over domains. Track-2 `2a_history` for the dense side uses the current question first (chosen on train, section B).
 
+Averaging: the task's baseline table averages over domains; the evaluation page describes averaging over topics (and, for 1b, over a query's steps first — not computed here). The same dev runs averaged over all topics:
+
+| sub-track | topics | BM25 | dense | rerank | hybrid* |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 1 `1a` | 519 | 0.0982 | 0.2624 | 0.2105 | 0.2773 |
+| 1 `1b_query+step` | 1214 | 0.1124 | 0.2686 | 0.2187 | 0.2872 |
+| 2 `2a_current` | 858 | 0.1885 | 0.2110 | 0.2304 | 0.2548 |
+| 2 `2a_history` | 858 | 0.4506 | 0.4036 | 0.4093 | 0.4581 |
+
+The ranking of the systems is the same under both averages.
+
 Chosen configurations (train):
 
 - 1 `1a`: hybrid = `{'kind': 'linear', 'kb': 100, 'kd': 100, 'norm': 'zscore', 'alpha': 0.6}` (train 0.2445); RRF = `{'kind': 'rrf', 'kb': 50, 'kd': 100, 'c': 60}` (train 0.2255)
@@ -63,6 +74,15 @@ Hybrid above BM25 in 13/13 domains (1a), 13/13 domains (1b_query+step).
 | sustainable_living | 0.2959 | 0.2510 | 0.2638 | 0.3288 | 0.5257 | 0.4451 | 0.4525 | 0.5225 |
 
 Hybrid above BM25 in 10/11 domains (2a_current), 6/11 domains (2a_history).
+
+By source (dev macro nDCG@10):
+
+| condition | source | BM25 | dense | rerank | hybrid |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 2a_current | BRIGHT (6) | 0.2127 | 0.1997 | 0.2315 | 0.2583 |
+| 2a_current | StackExchange (5) | 0.1316 | 0.2182 | 0.2115 | 0.2270 |
+| 2a_history | BRIGHT (6) | 0.5180 | 0.4299 | 0.4383 | 0.5039 |
+| 2a_history | StackExchange (5) | 0.2659 | 0.3236 | 0.3242 | 0.3286 |
 
 ## B. Dense query for Track-2 history (train decides)
 
@@ -135,6 +155,38 @@ Pool = BM25 top-kb ∪ dense top-kd. A document missing from one system's top-10
 | 200 | 0.8613 | 0.8954 | 0.9279 | 0.9526 | 332 |
 | 500 | 0.9181 | 0.9438 | 0.9698 | 0.9799 | 837 |
 | 1000 | 0.9456 | 0.9586 | 0.9813 | 0.9860 | 1673 |
+
+### Recall@100 per domain (dev): BM25 / dense / union at equal budget
+
+| domain | 1a: BM25 | dense | union | 1b_query+step: BM25 | dense | union |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| bitcoin | 0.338 | 0.552 | 0.456 | 0.411 | 0.625 | 0.598 |
+| cardano | 0.611 | 0.671 | 0.723 | 0.636 | 0.753 | 0.758 |
+| economics | 0.346 | 0.492 | 0.531 | 0.425 | 0.516 | 0.556 |
+| genealogy | 0.457 | 0.573 | 0.595 | 0.571 | 0.706 | 0.721 |
+| history | 0.175 | 0.658 | 0.569 | 0.229 | 0.747 | 0.678 |
+| hsm | 0.657 | 0.705 | 0.753 | 0.605 | 0.754 | 0.770 |
+| iota | 0.917 | 0.917 | 1.000 | 1.000 | 1.000 | 1.000 |
+| law | 0.309 | 0.905 | 0.814 | 0.391 | 0.935 | 0.826 |
+| monero | 0.175 | 0.513 | 0.496 | 0.202 | 0.589 | 0.554 |
+| politics | 0.553 | 0.613 | 0.631 | 0.623 | 0.640 | 0.657 |
+| quant | 0.100 | 0.350 | 0.175 | 0.167 | 0.567 | 0.300 |
+| travel | 0.297 | 0.675 | 0.589 | 0.500 | 0.817 | 0.750 |
+| workplace | 0.285 | 0.603 | 0.667 | 0.500 | 0.700 | 0.700 |
+
+| domain | 2a_current: BM25 | dense | union | 2a_history: BM25 | dense | union |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| biology | 0.501 | 0.593 | 0.625 | 0.862 | 0.834 | 0.901 |
+| drones | 0.446 | 0.614 | 0.539 | 0.707 | 0.889 | 0.845 |
+| earth_science | 0.619 | 0.585 | 0.671 | 0.908 | 0.875 | 0.955 |
+| economics | 0.502 | 0.514 | 0.560 | 0.842 | 0.903 | 0.871 |
+| hardware | 0.438 | 0.655 | 0.578 | 0.728 | 0.782 | 0.787 |
+| law | 0.614 | 0.758 | 0.747 | 0.842 | 0.922 | 0.883 |
+| medicalsciences | 0.482 | 0.721 | 0.718 | 0.673 | 0.904 | 0.898 |
+| politics | 0.607 | 0.776 | 0.764 | 0.847 | 0.928 | 0.901 |
+| psychology | 0.562 | 0.590 | 0.627 | 0.789 | 0.712 | 0.824 |
+| robotics | 0.500 | 0.351 | 0.515 | 0.838 | 0.770 | 0.909 |
+| sustainable_living | 0.575 | 0.579 | 0.650 | 0.839 | 0.757 | 0.860 |
 
 ### Depth needed for a given recall (dev, macro; smallest k in {10..1000} reaching it)
 
@@ -226,6 +278,7 @@ Track 1: iota, quant, law, workplace. Track 2: drones, law, medicalsciences (Sta
 
 | model | window | dims | 1a | 1b | 2a current | 2a history (q first) | **mean nDCG@10** | mean R@100 | docs/s (Track 1 / Track 2) | peak VRAM GB | revision |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | ---: | --- |
+| bge-base | 512 | 768 | 0.2185 | 0.2333 | 0.2688 | 0.4445 | **0.2913** | 0.7207 | 288 / 429 | 0.82 | a5beb1e3 |
 | bge-small | 256 | 384 | 0.2598 | 0.2573 | 0.2332 | 0.3943 | **0.2861** | 0.6960 | 1092 / 2186 | 0.23 | 5c38ec7c |
 | bge-small | 512 | 384 | 0.2267 | 0.2355 | 0.2427 | 0.4128 | **0.2794** | 0.7306 | 654 / 1439 | 0.38 | 5c38ec7c |
 
@@ -247,6 +300,7 @@ Not evaluated: `snowflake-arctic-embed-m-v2.0` (its remote code fails under tran
 | 1 | genealogy | 136,101 | 0.3218 | 0.3218 | 0.991 | 14.1 | 2.76 | 0.991 | 20.9 | 0.59 | 1.000 |
 | 1 | travel | 158,771 | 0.2495 | 0.2479 | 0.997 | 19.1 | 1.55 | 0.997 | 24.7 | 0.4 | 0.997 |
 | 1 | hsm | 169,552 | 0.3140 | 0.3138 | 0.996 | 14.9 | 2.82 | 0.998 | 22.9 | 0.42 | 1.000 |
+| 1 | history | 200,252 | 0.2603 | 0.2612 | 0.987 | 17.7 | 2.23 | 0.993 | 34.1 | 0.57 | 0.997 |
 | 2 | drones | 16,381 | 0.1689 | 0.1689 | 0.995 | 1.0 | 0.95 | 0.995 | 0.7 | 0.25 | 1.000 |
 | 2 | politics | 16,712 | 0.3035 | 0.3035 | 0.996 | 1.1 | 0.88 | 1.000 | 1.0 | 0.27 | 1.000 |
 | 2 | law | 20,027 | 0.2265 | 0.2252 | 0.994 | 1.4 | 1.67 | 0.992 | 1.4 | 0.27 | 1.000 |
@@ -259,7 +313,7 @@ Not evaluated: `snowflake-arctic-embed-m-v2.0` (its remote code fails under tran
 | 2 | robotics | 61,961 | 0.0952 | 0.0956 | 0.992 | 3.2 | 1.56 | 0.969 | 4.2 | 0.24 | 0.975 |
 | 2 | earth_science | 121,249 | 0.2504 | 0.2504 | 0.987 | 7.9 | 2.44 | 0.965 | 11.3 | 0.37 | 0.999 |
 
-Over 23 domains: NGT recall@10 against exact search 0.960–1.000, mean |ΔnDCG@10| 0.0022. FAISS flat (CPU, float32) is an independent exact search; its R@10 below 1 comes only from ties between duplicate documents. NGT: ANNG, cosine, epsilon 0.1; HNSW: M=32, efConstruction 200, efSearch 128; latency single-threaded.
+Over 24 domains: NGT recall@10 against exact search 0.960–1.000, mean |ΔnDCG@10| 0.0021 (worst -0.0178); HNSW mean |ΔnDCG@10| 0.0027 (worst -0.0613). FAISS flat (CPU, float32) is an independent exact search; its R@10 below 1 comes only from ties between duplicate documents. NGT: ANNG, cosine, epsilon 0.1; HNSW: M=32, efConstruction 200, efSearch 128; latency single-threaded.
 
 ## I. Does document order matter? (dev; file order + 5 random permutations)
 
@@ -330,7 +384,7 @@ Per-domain agreement is weaker than the macro agreement (differences up to 0.04,
 | economics | 0.0328 | 0.1685 | 0.4111 | 0.0467 | 0.0426 | 0.1655 | 0.4570 | 0.0463 |
 | genealogy | 0.1491 | 0.2607 | 0.5138 | 0.1949 | 0.1771 | 0.2963 | 0.5847 | 0.2183 |
 | history | 0.0615 | 0.1410 | 0.2084 | 0.0873 | 0.0813 | 0.1482 | 0.2391 | 0.1015 |
-| hsm | 0.2467 |  |  | 0.2489 | 0.2459 |  |  | 0.2140 |
+| hsm | 0.2467 | 0.3932 | 0.6977 | 0.2489 | 0.2459 | 0.3234 | 0.6189 | 0.2140 |
 | iota | 0.4316 | 0.6951 | 0.9440 | 0.3309 | 0.4539 | 0.5822 | 1.0000 | 0.4195 |
 | law | 0.0304 | 0.2280 | 0.3230 | 0.0574 | 0.0505 | 0.2612 | 0.3913 | 0.0549 |
 | monero | 0.0349 | 0.0843 | 0.2069 | 0.0320 | 0.0209 | 0.1171 | 0.2140 | 0.0113 |
@@ -338,7 +392,7 @@ Per-domain agreement is weaker than the macro agreement (differences up to 0.04,
 | quant | 0.0000 | 0.0832 | 0.1226 | 0.0237 | 0.0000 | 0.1313 | 0.1742 | 0.0403 |
 | travel | 0.0396 | 0.1524 | 0.3362 | 0.0442 | 0.0387 | 0.1949 | 0.5131 | 0.0645 |
 | workplace | 0.0000 | 0.2257 | 0.3670 | 0.0230 | 0.0309 | 0.3535 | 0.5113 | 0.0297 |
-| **macro (12 reranked domains)** | 0.1015 | 0.2349 | 0.4243 | 0.1035 | 0.1075 | 0.2481 | 0.4834 | 0.1097 |
+| **macro (13 reranked domains)** | 0.1127 | 0.2471 | 0.4453 | 0.1147 | 0.1181 | 0.2539 | 0.4938 | 0.1177 |
 
 Reranking a 33M-parameter encoder over BM25's top-100 more than doubles nDCG@10 on both sub-tracks, with no training and no GPU. It reaches 55% of the top-100 ceiling on 1a, so the next lever is recall, not the reranker.
 

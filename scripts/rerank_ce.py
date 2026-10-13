@@ -2,8 +2,8 @@
 """Cross-encoder reranking of the frozen hybrid (BM25 + dense) list.
 
 The hybrid configuration per (track, condition) is read from hybrid.py's report (chosen
-on train). The cross-encoder scores the hybrid top-100 once; the reranking depth N in
-{10, 20, 50, 100} is then chosen on TRAIN (the top-N is reordered by the cross-encoder,
+on train). The cross-encoder scores the hybrid top-50 once; the reranking depth N in
+{10, 20, 50} is then chosen on TRAIN (the top-N is reordered by the cross-encoder,
 everything below N keeps the hybrid order) and frozen for DEV.
 
 Train is subsampled for cost: at most --train-per-domain topics per domain and condition
@@ -31,7 +31,8 @@ from dense_search import plan  # noqa: E402
 from gold_categories import fetch  # noqa: E402
 from hybrid import Query, bootstrap, read_run, system  # noqa: E402
 
-DEPTHS = (10, 20, 50, 100)
+DEPTHS = (10, 20, 50)
+POOL = 50  # documents scored per topic
 CKPT = "BAAI/bge-reranker-v2-m3"
 
 
@@ -44,8 +45,9 @@ def main():
     ap.add_argument("--dense", required=True)
     ap.add_argument("--data", required=True)
     ap.add_argument("--kit", required=True)
-    ap.add_argument("--train-per-domain", type=int, default=40)
-    ap.add_argument("--batch", type=int, default=32)
+    ap.add_argument("--train-per-domain", type=int, default=30)
+    ap.add_argument("--batch", type=int, default=64)
+    ap.add_argument("--domains", nargs="+", default=["all"])
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     import torch
@@ -56,7 +58,7 @@ def main():
     ce.model.half()
     rev = revision(CKPT)
     hyb = json.load(open(a.hybrid))
-    doms = T1 if a.track == 1 else T2
+    doms = (T1 if a.track == 1 else T2) if a.domains == ["all"] else a.domains
     sub = "track1_tempo" if a.track == 1 else "track2_recor"
     os.makedirs(a.out, exist_ok=True)
     rpath = os.path.join(a.out, f"t{a.track}.json")
@@ -80,15 +82,21 @@ def main():
                 qids = sorted(q for q in gold if q in qtext)
                 if split == "train" and len(qids) > a.train_per_domain:
                     qids = sorted(random.Random(20260921).sample(qids, a.train_per_domain))
-                hyb_lists = {q: system(Query(bm.get(q, []), de.get(q, [])), cfg)[:100] for q in qids}
+                hyb_lists = {q: system(Query(bm.get(q, []), de.get(q, [])), cfg)[:POOL] for q in qids}
                 scores = json.load(open(cache)) if os.path.exists(cache) else {}
                 todo = [q for q in qids if q not in scores]
                 if todo:
                     texts = fetch(a.data, a.track, dom, {d for q in todo for d in hyb_lists[q]})
                     t0 = time.time()
-                    pairs = [(qtext[q], texts.get(d, "")) for q in todo for d in hyb_lists[q]]
+                    # documents cut at 4,000 characters (beyond what 512 tokens can hold) and
+                    # pairs scored in length order to limit padding; scores mapped back.
+                    pairs = [(qtext[q], texts.get(d, "")[:4000]) for q in todo for d in hyb_lists[q]]
+                    order = sorted(range(len(pairs)), key=lambda i: len(pairs[i][0]) + len(pairs[i][1]))
                     with torch.inference_mode():
-                        s = ce.predict(pairs, batch_size=a.batch, show_progress_bar=False)
+                        ss = ce.predict([pairs[i] for i in order], batch_size=a.batch, show_progress_bar=False)
+                    s = [0.0] * len(pairs)
+                    for j, i in enumerate(order):
+                        s[i] = ss[j]
                     i = 0
                     for q in todo:
                         scores[q] = {d: float(s[i + j]) for j, d in enumerate(hyb_lists[q])}

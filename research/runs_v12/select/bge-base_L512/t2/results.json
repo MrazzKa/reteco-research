@@ -1,0 +1,542 @@
+[
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "train",
+  "run": "2a_current",
+  "n": 104,
+  "ndcg10": 0.31,
+  "recall": {
+   "10": 0.437,
+   "20": 0.5535,
+   "50": 0.6888,
+   "100": 0.7971,
+   "200": 0.8478,
+   "500": 0.9159,
+   "1000": 0.9663
+  },
+  "system": "dense-bge-base-L512",
+  "docs": 16381,
+  "query_encode_s": 0.28,
+  "search_s": 0.11,
+  "ms_per_query_search": 1.03,
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "by_turn": {
+   "T1": 0.3592,
+   "T2": 0.3313,
+   "T3": 0.2918,
+   "T4": 0.1978,
+   "T5+": 0.3279
+  }
+ },
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "train",
+  "run": "2a_history",
+  "n": 104,
+  "ndcg10": 0.3993,
+  "recall": {
+   "10": 0.5609,
+   "20": 0.6569,
+   "50": 0.7748,
+   "100": 0.859,
+   "200": 0.9199,
+   "500": 0.9423,
+   "1000": 0.9744
+  },
+  "system": "dense-bge-base-L512",
+  "docs": 16381,
+  "query_encode_s": 0.43,
+  "search_s": 0.04,
+  "ms_per_query_search": 0.37,
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "by_turn": {
+   "T1": 0.3592,
+   "T2": 0.3492,
+   "T3": 0.525,
+   "T4": 0.3568,
+   "T5+": 0.3724
+  }
+ },
+ {
+  "track": 2,
+  "domain": "drones",
+  "split": "train",
+  "run": "2a_history_qfirst",
+  "n": 104,
+  "ndcg10": 0.4293,
+  "recall": {
+   "10": 0.5917,
+   "20": 0.7053,
+   "50": 0.8165,
+   "100": 0.8838,
+   "200": 0.9423,
+   "500": 0.9423,
+   "1000": 0.9904
+  },
+  "system": "dense-bge-base-L512",
+  "docs": 16381,
+  "query_encode_s": 0.41,
+  "search_s": 0.04,
+  "ms_per_query_search": 0.37,
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "by_turn": {
+   "T1": 0.3592,
+   "T2": 0.3665,
+   "T3": 0.5543,
+   "T4": 0.434,
+   "T5+": 0.441
+  }
+ },
+ {
+  "track": 2,
+  "domain": "law",
+  "split": "train",
+  "run": "2a_current",
+  "n": 164,
+  "ndcg10": 0.2474,
+  "recall": {
+   "10": 0.3391,
+   "20": 0.4526,
+   "50": 0.6067,
+   "100": 0.699,
+   "200": 0.7772,
+   "500": 0.8749,
+   "1000": 0.8966
+  },
+  "system": "dense-bge-base-L512",
+  "docs": 20027,
+  "query_encode_s": 0.06,
+  "search_s": 0.06,
+  "ms_per_query_search": 0.38,
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "by_turn": {
+   "T1": 0.2747,
+   "T2": 0.2386,
+   "T3": 0.2875,
+   "T4": 0.2013,
+   "T5+": 0.2221
+  }
+ },
+ {
+  "track": 2,
+  "domain": "law",
+  "split": "train",
+  "run": "2a_history",
+  "n": 164,
+  "ndcg10": 0.4021,
+  "recall": {
+   "10": 0.5108,
+   "20": 0.6728,
+   "50": 0.811,
+   "100": 0.8844,
+   "200": 0.9391,
+   "500": 0.9759,
+   "1000": 0.9866
+  },
+  "system": "dense-bge-base-L512",
+  "docs": 20027,
+  "query_encode_s": 0.64,
+  "search_s": 0.07,
+  "ms_per_query_search": 0.4,
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "by_turn": {
+   "T1": 0.2747,
+   "T2": 0.3839,
+   "T3": 0.4438,
+   "T4": 0.5004,
+   "T5+": 0.433
+  }
+ },
+ {
+  "track": 2,
+  "domain": "law",
+  "split": "train",
+  "run": "2a_history_qfirst",
+  "n": 164,
+  "ndcg10": 0.4119,
+  "recall": {
+   "10": 0.5499,
+   "20": 0.7004,
+   "50": 0.828,
+   "100": 0.8889,
+   "200": 0.9415,
+   "500": 0.9805,
+   "1000": 0.9866
+  },
+  "system": "dense-bge-base-L512",
+  "docs": 20027,
+  "query_encode_s": 0.64,
+  "search_s": 0.06,
+  "ms_per_query_search": 0.36,
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "by_turn": {
+   "T1": 0.2747,
+   "T2": 0.3994,
+   "T3": 0.4555,
+   "T4": 0.4828,
+   "T5+": 0.4679
+  }
+ },
+ {
+  "track": 2,
+  "domain": "medicalsciences",
+  "split": "train",
+  "run": "2a_current",
+  "n": 139,
+  "ndcg10": 0.3575,
+  "recall": {
+   "10": 0.5084,
+   "20": 0.6579,
+   "50": 0.7801,
+   "100": 0.8427,
+   "200": 0.9035,
+   "500": 0.9353,
+   "1000": 0.9616
+  },
+  "system": "dense-bge-base-L512",
+  "docs": 23297,
+  "query_encode_s": 0.06,
+  "search_s": 0.05,
+  "ms_per_query_search": 0.37,
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "by_turn": {
+   "T1": 0.497,
+   "T2": 0.2968,
+   "T3": 0.3232,
+   "T4": 0.3451,
+   "T5+": 0.3162
+  }
+ },
+ {
+  "track": 2,
+  "domain": "medicalsciences",
+  "split": "train",
+  "run": "2a_history",
+  "n": 139,
+  "ndcg10": 0.4531,
+  "recall": {
+   "10": 0.6053,
+   "20": 0.783,
+   "50": 0.8878,
+   "100": 0.9518,
+   "200": 0.9928,
+   "500": 0.9964,
+   "1000": 0.9964
+  },
+  "system": "dense-bge-base-L512",
+  "docs": 23297,
+  "query_encode_s": 0.57,
+  "search_s": 0.05,
+  "ms_per_query_search": 0.37,
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "by_turn": {
+   "T1": 0.497,
+   "T2": 0.443,
+   "T3": 0.4251,
+   "T4": 0.4151,
+   "T5+": 0.4711
+  }
+ },
+ {
+  "track": 2,
+  "domain": "medicalsciences",
+  "split": "train",
+  "run": "2a_history_qfirst",
+  "n": 139,
+  "ndcg10": 0.471,
+  "recall": {
+   "10": 0.6143,
+   "20": 0.8006,
+   "50": 0.8982,
+   "100": 0.968,
+   "200": 0.9904,
+   "500": 0.9964,
+   "1000": 0.9964
+  },
+  "system": "dense-bge-base-L512",
+  "docs": 23297,
+  "query_encode_s": 0.55,
+  "search_s": 0.05,
+  "ms_per_query_search": 0.36,
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "by_turn": {
+   "T1": 0.497,
+   "T2": 0.4724,
+   "T3": 0.4418,
+   "T4": 0.4612,
+   "T5+": 0.4795
+  }
+ },
+ {
+  "track": 2,
+  "domain": "biology",
+  "split": "train",
+  "run": "2a_current",
+  "n": 247,
+  "ndcg10": 0.222,
+  "recall": {
+   "10": 0.3603,
+   "20": 0.4663,
+   "50": 0.5847,
+   "100": 0.6899,
+   "200": 0.7645,
+   "500": 0.8495,
+   "1000": 0.9079
+  },
+  "system": "dense-bge-base-L512",
+  "docs": 57359,
+  "query_encode_s": 0.09,
+  "search_s": 0.1,
+  "ms_per_query_search": 0.41,
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "by_turn": {
+   "T1": 0.25,
+   "T2": 0.2188,
+   "T3": 0.2039,
+   "T4": 0.2495,
+   "T5+": 0.1867
+  }
+ },
+ {
+  "track": 2,
+  "domain": "biology",
+  "split": "train",
+  "run": "2a_history",
+  "n": 247,
+  "ndcg10": 0.4237,
+  "recall": {
+   "10": 0.6326,
+   "20": 0.7102,
+   "50": 0.7999,
+   "100": 0.8613,
+   "200": 0.9143,
+   "500": 0.9399,
+   "1000": 0.9838
+  },
+  "system": "dense-bge-base-L512",
+  "docs": 57359,
+  "query_encode_s": 0.79,
+  "search_s": 0.1,
+  "ms_per_query_search": 0.41,
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "by_turn": {
+   "T1": 0.25,
+   "T2": 0.4275,
+   "T3": 0.4897,
+   "T4": 0.5189,
+   "T5+": 0.5043
+  }
+ },
+ {
+  "track": 2,
+  "domain": "biology",
+  "split": "train",
+  "run": "2a_history_qfirst",
+  "n": 247,
+  "ndcg10": 0.4272,
+  "recall": {
+   "10": 0.6302,
+   "20": 0.7183,
+   "50": 0.7986,
+   "100": 0.864,
+   "200": 0.913,
+   "500": 0.9514,
+   "1000": 0.9852
+  },
+  "system": "dense-bge-base-L512",
+  "docs": 57359,
+  "query_encode_s": 0.79,
+  "search_s": 0.1,
+  "ms_per_query_search": 0.42,
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "by_turn": {
+   "T1": 0.25,
+   "T2": 0.3914,
+   "T3": 0.507,
+   "T4": 0.5388,
+   "T5+": 0.5399
+  }
+ },
+ {
+  "track": 2,
+  "domain": "psychology",
+  "split": "train",
+  "run": "2a_current",
+  "n": 234,
+  "ndcg10": 0.2627,
+  "recall": {
+   "10": 0.3592,
+   "20": 0.4173,
+   "50": 0.5039,
+   "100": 0.573,
+   "200": 0.6316,
+   "500": 0.7041,
+   "1000": 0.7783
+  },
+  "system": "dense-bge-base-L512",
+  "docs": 52835,
+  "query_encode_s": 0.09,
+  "search_s": 0.1,
+  "ms_per_query_search": 0.41,
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "by_turn": {
+   "T1": 0.386,
+   "T2": 0.1833,
+   "T3": 0.201,
+   "T4": 0.2337,
+   "T5+": 0.3183
+  }
+ },
+ {
+  "track": 2,
+  "domain": "psychology",
+  "split": "train",
+  "run": "2a_history",
+  "n": 234,
+  "ndcg10": 0.5192,
+  "recall": {
+   "10": 0.6527,
+   "20": 0.7009,
+   "50": 0.7815,
+   "100": 0.8326,
+   "200": 0.8652,
+   "500": 0.8949,
+   "1000": 0.9435
+  },
+  "system": "dense-bge-base-L512",
+  "docs": 52835,
+  "query_encode_s": 0.69,
+  "search_s": 0.09,
+  "ms_per_query_search": 0.37,
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "by_turn": {
+   "T1": 0.386,
+   "T2": 0.5235,
+   "T3": 0.577,
+   "T4": 0.5677,
+   "T5+": 0.6125
+  }
+ },
+ {
+  "track": 2,
+  "domain": "psychology",
+  "split": "train",
+  "run": "2a_history_qfirst",
+  "n": 234,
+  "ndcg10": 0.5182,
+  "recall": {
+   "10": 0.6416,
+   "20": 0.7047,
+   "50": 0.7878,
+   "100": 0.8337,
+   "200": 0.8582,
+   "500": 0.8974,
+   "1000": 0.93
+  },
+  "system": "dense-bge-base-L512",
+  "docs": 52835,
+  "query_encode_s": 0.69,
+  "search_s": 0.09,
+  "ms_per_query_search": 0.37,
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "by_turn": {
+   "T1": 0.386,
+   "T2": 0.5186,
+   "T3": 0.592,
+   "T4": 0.544,
+   "T5+": 0.6047
+  }
+ },
+ {
+  "track": 2,
+  "domain": "economics",
+  "split": "train",
+  "run": "2a_current",
+  "n": 196,
+  "ndcg10": 0.2135,
+  "recall": {
+   "10": 0.3061,
+   "20": 0.4164,
+   "50": 0.5085,
+   "100": 0.5819,
+   "200": 0.6788,
+   "500": 0.7466,
+   "1000": 0.8032
+  },
+  "system": "dense-bge-base-L512",
+  "docs": 50220,
+  "query_encode_s": 0.08,
+  "search_s": 0.07,
+  "ms_per_query_search": 0.38,
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "by_turn": {
+   "T1": 0.2849,
+   "T2": 0.2351,
+   "T3": 0.1443,
+   "T4": 0.1413,
+   "T5+": 0.2449
+  }
+ },
+ {
+  "track": 2,
+  "domain": "economics",
+  "split": "train",
+  "run": "2a_history",
+  "n": 196,
+  "ndcg10": 0.4127,
+  "recall": {
+   "10": 0.5333,
+   "20": 0.662,
+   "50": 0.7702,
+   "100": 0.8355,
+   "200": 0.8844,
+   "500": 0.9242,
+   "1000": 0.9478
+  },
+  "system": "dense-bge-base-L512",
+  "docs": 50220,
+  "query_encode_s": 0.67,
+  "search_s": 0.07,
+  "ms_per_query_search": 0.37,
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "by_turn": {
+   "T1": 0.2849,
+   "T2": 0.4225,
+   "T3": 0.4457,
+   "T4": 0.439,
+   "T5+": 0.65
+  }
+ },
+ {
+  "track": 2,
+  "domain": "economics",
+  "split": "train",
+  "run": "2a_history_qfirst",
+  "n": 196,
+  "ndcg10": 0.4096,
+  "recall": {
+   "10": 0.5352,
+   "20": 0.6529,
+   "50": 0.7674,
+   "100": 0.8296,
+   "200": 0.8824,
+   "500": 0.9207,
+   "1000": 0.9468
+  },
+  "system": "dense-bge-base-L512",
+  "docs": 50220,
+  "query_encode_s": 0.66,
+  "search_s": 0.07,
+  "ms_per_query_search": 0.38,
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "by_turn": {
+   "T1": 0.2849,
+   "T2": 0.4073,
+   "T3": 0.4556,
+   "T4": 0.4359,
+   "T5+": 0.6338
+  }
+ }
+]
