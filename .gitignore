@@ -11,3 +11,7 @@ research/date_feasibility_train.md
 *.npy
 research/runs_v11/ann/emb/
 research/runs_v11/ann/index/
+# week 4 (GPU): embedding caches, ANN indexes, per-pair dumps
+research/runs_v12/emb/
+research/runs_v12/index/
+*.ids.json

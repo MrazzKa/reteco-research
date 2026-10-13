@@ -51,7 +51,7 @@ def build(corpus_path, key, analyzer):
     return retriever, ids
 
 
-def search(retriever, ids, queries, analyzer, label, k=100, threads=-1):
+def search(retriever, ids, queries, analyzer, label, k=100, threads=-1, tiebreak=True):
     """queries: list of (qid, text). Identical texts are searched once."""
     t0 = time.time()
     uniq = sorted({q for _, q in queries})
@@ -60,7 +60,11 @@ def search(retriever, ids, queries, analyzer, label, k=100, threads=-1):
                                      n_threads=threads, show_progress=False)
     by_text = {}
     for i, text in enumerate(uniq):
-        by_text[text] = [(ids[int(idx[i, j])], float(scores[i, j])) for j in range(idx.shape[1])]
+        # Exact score ties are common (duplicate passages, esp. in the non-deduplicated
+        # Track-2 corpora) and bm25s orders them arbitrarily, depending on k. Break ties
+        # by doc id, as the starter kit does, so a run no longer depends on its depth.
+        ranked = [(ids[int(idx[i, j])], float(scores[i, j])) for j in range(idx.shape[1])]
+        by_text[text] = sorted(ranked, key=lambda x: (-x[1], x[0])) if tiebreak else ranked
     print(f"    {label:<24} {len(queries):>5} topics ({len(uniq)} unique) "
           f"{time.time() - t0:6.1f}s", flush=True)
     return {qid: by_text[q] for qid, q in queries}
@@ -92,14 +96,14 @@ def by_turn(per):
     return {k: round(sum(v) / len(v), 4) for k, v in sorted(buckets.items())}
 
 
-def track1(a, dom, ndcg, runs_dir, results):
+def track1(a, dom, ndcg, runs_dir, results, index=None):
     d = os.path.join(a.data, "track1_tempo", dom)
-    print(f"\n[track1 / {dom}]", flush=True)
+    print(f"\n[track1 / {dom} / {a.split}]", flush=True)
     recs = read_jsonl(os.path.join(d, f"examples_{a.split}.jsonl"))
     step_recs = read_jsonl(os.path.join(d, f"steps_{a.split}.jsonl"))
     g1a = load_qrels(os.path.join(d, f"qrels_{a.split}.txt"))
     g1b = load_qrels(os.path.join(d, f"qrels_steps_{a.split}.txt"))
-    retriever, ids = build(os.path.join(d, "documents.jsonl"), "id", a.analyzer)
+    retriever, ids = index or build(os.path.join(d, "documents.jsonl"), "id", a.analyzer)
 
     plan = [("1a", [(r["id"], r["query"]) for r in recs], g1a)]
     strategies = {
@@ -112,9 +116,10 @@ def track1(a, dom, ndcg, runs_dir, results):
         plan.append((name, [(s["step_id"], fn(r, s)) for r in step_recs
                             for s in r.get("steps", [])], g1b))
     for name, queries, gold in plan:
-        if not queries:
+        if not queries or (a.conditions and name not in a.conditions):
             continue
-        run = search(retriever, ids, queries, a.analyzer, name, threads=a.threads)
+        run = search(retriever, ids, queries, a.analyzer, name, k=a.k, threads=a.threads,
+                     tiebreak=not a.no_tiebreak)
         write_run(os.path.join(runs_dir, f"t1_{dom}_{a.split}_{name}.tsv"), run, name)
         m, _ = score(run, gold, ndcg)
         ref_key = "1a" if name == "1a" else ("1b" if name == "1b_query+step" else None)
@@ -128,13 +133,13 @@ def track1(a, dom, ndcg, runs_dir, results):
               flush=True)
 
 
-def track2(a, dom, ndcg, runs_dir, results):
+def track2(a, dom, ndcg, runs_dir, results, index=None):
     d = os.path.join(a.data, "track2_recor", dom)
-    print(f"\n[track2 / {dom}]", flush=True)
+    print(f"\n[track2 / {dom} / {a.split}]", flush=True)
     bench = json.load(open(os.path.join(d, f"benchmark_{a.split}.json"), encoding="utf-8"))
     bench = [bench] if isinstance(bench, dict) else bench
     gold = load_qrels(os.path.join(d, f"qrels_{a.split}.txt"))
-    retriever, ids = build(os.path.join(d, "documents.jsonl"), "doc_id", a.analyzer)
+    retriever, ids = index or build(os.path.join(d, "documents.jsonl"), "doc_id", a.analyzer)
     turns = [(f"{c['id']}_turn_{t['turn_id']}", t) for c in bench for t in c["turns"]]
 
     def hist(t):
@@ -162,7 +167,10 @@ def track2(a, dom, ndcg, runs_dir, results):
                                  for q, t in turns],
     }
     for name, queries in plan.items():
-        run = search(retriever, ids, queries, a.analyzer, name, threads=a.threads)
+        if a.conditions and name not in a.conditions:
+            continue
+        run = search(retriever, ids, queries, a.analyzer, name, k=a.k, threads=a.threads,
+                     tiebreak=not a.no_tiebreak)
         write_run(os.path.join(runs_dir, f"t2_{dom}_{a.split}_{name}.tsv"), run, name)
         m, per = score(run, gold, ndcg)
         ref = REF.get(name, {}).get(dom)
@@ -180,6 +188,12 @@ def main():
     ap.add_argument("--data", required=True)
     ap.add_argument("--kit", required=True)
     ap.add_argument("--split", default="dev", choices=("train", "dev"))
+    ap.add_argument("--splits", nargs="+", choices=("train", "dev"),
+                    help="several splits from one index build (overrides --split)")
+    ap.add_argument("--k", type=int, default=100, help="run depth")
+    ap.add_argument("--no-tiebreak", action="store_true",
+                    help="keep bm25s's arbitrary order among tied scores (old behaviour)")
+    ap.add_argument("--conditions", nargs="*", help="only these condition names")
     ap.add_argument("--track", type=int, required=True, choices=(1, 2))
     ap.add_argument("--domains", nargs="+", required=True)
     ap.add_argument("--analyzer", default="lucene", choices=("lucene", "plain"))
@@ -193,7 +207,14 @@ def main():
     results = []
     started = time.time()
     for dom in a.domains:
-        (track1 if a.track == 1 else track2)(a, dom, ndcg, runs_dir, results)
+        index = None
+        if a.splits:
+            sub, key = ("track1_tempo", "id") if a.track == 1 else ("track2_recor", "doc_id")
+            index = build(os.path.join(a.data, sub, dom, "documents.jsonl"), key, a.analyzer)
+        for split in (a.splits or [a.split]):
+            a.split = split
+            (track1 if a.track == 1 else track2)(a, dom, ndcg, runs_dir, results, index)
+        del index
         with open(os.path.join(a.out, "results.json"), "w", encoding="utf-8") as f:
             json.dump(results, f, indent=1)
     print(f"\ndone in {time.time() - started:.0f}s -> {a.out}/results.json", flush=True)
