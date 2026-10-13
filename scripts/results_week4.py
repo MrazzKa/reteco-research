@@ -343,6 +343,7 @@ def week4(root):
 
     # ------------------------------------------------------------- J. cross-encoder
     ces = {t: jload(os.path.join(R, f"ce/t{t}.json")) for t in (1, 2)}
+    ce_base = jload(os.path.join(R, "ce_bge-base/t2.json"))
     if any(ces.values()):
         L += ["## J. Cross-encoder (bge-reranker-v2-m3) on the hybrid list", "",
               "| sub-track | N chosen on train | train: hybrid → CE | dev: hybrid | dev: hybrid + CE | dev CE − hybrid [95% CI] |",
@@ -353,6 +354,10 @@ def week4(root):
                 bd = v["by_depth"]
                 L.append(f"| {t} `{cond}` | {n} | {f4(bd['0']['train_macro'])} → {f4(bd[n]['train_macro'])} | "
                          f"{f4(bd['0']['dev_macro'])} | {f4(bd[n]['dev_macro'])} | {ci(v['dev_bootstrap_ce_minus_hybrid'])} |")
+        for cond, v in (ce_base or {}).items():
+            n, bd = str(v["chosen_depth_on_train"]), v["by_depth"]
+            L.append(f"| 2 `{cond}`, bge-base hybrid (rule 5) | {n} | {f4(bd['0']['train_macro'])} → {f4(bd[n]['train_macro'])} | "
+                     f"{f4(bd['0']['dev_macro'])} | {f4(bd[n]['dev_macro'])} | {ci(v['dev_bootstrap_ce_minus_hybrid'])} |")
         L += ["", "Train/dev macro by reranking depth N (0 = plain hybrid):", "",
               "| sub-track | " + " | ".join(f"N={n}" for n in ("0", "10", "20", "50")) + " |", "| --- |" + " --- |" * 4]
         for t in (1, 2):
@@ -415,4 +420,20 @@ def week4(root):
         L += ["", "Track 1 bge-small L512 is listed for the record but is not a rule-4 candidate (rule 1 moved "
               "Track 1 to 256 tokens on train; L512 was then seen to be better on dev, so re-admitting it would "
               "be selection on dev).", ""]
+        fin = {n: h for t, n, h in cands if t == 1}.get("bge-small_L256"), {n: h for t, n, h in cands if t == 2}.get("bge-base_L512")
+        if all(fin):
+            cur = (ce_base or {}).get("2a_current")
+            rows = [("1a", fin[0]["conditions"]["1a"], "BM25 ∪ bge-small (256 tokens), linear fusion"),
+                    ("1b Query+Step", fin[0]["conditions"]["1b_query+step"], "BM25 ∪ bge-small (256 tokens), linear fusion"),
+                    ("2a current turn", fin[1]["conditions"]["2a_current"], "BM25 ∪ bge-base, linear fusion"
+                     + (", top 50 reordered by bge-reranker-v2-m3 (rule 5)" if cur else "")),
+                    ("2a with history", fin[1]["conditions"]["2a_history"], "BM25 ∪ bge-base (question first), linear fusion")]
+            L += ["### Final frozen systems (every choice on train; dev scored once)", "",
+                  "| sub-track | system | BM25 | final | final − BM25 |", "| --- | --- | ---: | ---: | ---: |"]
+            for name, c, desc in rows:
+                b, f = c["systems"]["bm25"]["dev_macro"], c["systems"]["linear*"]["dev_macro"]
+                if name.startswith("2a current") and cur:
+                    f = cur["by_depth"][str(cur["chosen_depth_on_train"])]["dev_macro"]
+                L.append(f"| {name} | {desc} | {f4(b)} | **{f4(f)}** | {f - b:+.4f} |")
+            L.append("")
     return L

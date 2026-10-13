@@ -6,10 +6,12 @@ Directed Research (INFO 492, University of Arizona) on **SemEval-2027 Task 1 —
 Code, experiment log and generated results only. Notes and meeting briefs are kept outside the repo.
 
 **Where things stand (week 4, 2026-10-13):** BM25, dense retrieval over every corpus
-(bge-small, GPU) and a BM25 + dense hybrid tuned on train. Dev nDCG@10, frozen configurations:
-Track 1a 0.1127 → 0.2956, 1b 0.1181 → 0.2966, Track 2 current 0.1758 → 0.2441, +history
-0.4034 → 0.4242. Tables: `research/RESULTS.md`. Error analysis with examples:
-`research/cases/retrieval_categories_dev.md`.
+(GPU), a BM25 + dense hybrid tuned on train, a cross-encoder, and an encoder comparison.
+Dev nDCG@10 of the frozen systems chosen on train (LOG rules 1–5; the cross-encoder hurts on Track 1 and with history): Track 1a 0.1127 → 0.2834,
+1b 0.1181 → 0.2865 (bge-small, 256 tokens), Track 2 current 0.1758 → 0.3001 (bge-base hybrid
++ bge-reranker-v2-m3 on the top 50), +history 0.4034 → 0.4342 (bge-base hybrid). The analysis system (bge-small, 512 tokens; RESULTS section A and the
+case study) scores 0.2956 / 0.2966 / 0.2441 / 0.4242. Tables: `research/RESULTS.md` (section L =
+which system is final and why). Error analysis with examples: `research/cases/retrieval_categories_dev.md`.
 
 ## Layout
 
@@ -37,9 +39,9 @@ semeval-reteco/                  (not a repo)
         hybrid/                  fusion grid on train, frozen dev results, depth analysis
         categories/              per-pair categories + labelling sheets
         select/                  encoder selection on train (subset)
-        ann/ order/ ce/          ANN vs exact; indexing-order study; cross-encoder
+        ann/ order/ ce/ ce_bge-base/  ANN vs exact; indexing-order study; cross-encoder (score caches git-ignored)
         logs/                    process logs and the shell queues that produced them
-        emb/                     embedding caches (git-ignored, ~1.2 GB for bge-small)
+        emb/                     embedding caches (git-ignored; bge-small 1.2 GB per window, bge-base 2.5 GB)
 ```
 
 Git-ignored and regenerable: `*.tsv` run files, `*.npy` / `*.ids.json` embedding shards,

@@ -17,3 +17,4 @@ research/runs_v12/index/
 *.ids.json
 research/runs_v12/categories/pairs.jsonl
 research/runs_v12/ce/scores_*.json
+research/runs_v12/ce_*/scores_*.json

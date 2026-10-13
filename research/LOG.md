@@ -708,3 +708,41 @@ conclusion: A general-purpose cross-encoder helps where the query is a short, se
   inferential relevance) and Track-2 history queries (which fill most of the 512-token pair budget). Hypotheses, not
   tested: (a) truncation of query+passage at 512 tokens; (b) on BRIGHT history, BM25 re-finds gold through the prior
   answers (LOG 2026-10-13 15:58 entry) while the cross-encoder judges answer-relevance to the current question only.
+
+## 2026-10-13 21:40–23:03 — rule 2: bge-base full pipeline; rule 4: final system per track
+command: `research/runs_v12/logs/queue3.sh` (`dense_index.py --model bge-base --max-len 512` all 24 domains,
+  `dense_search.py` train+dev, `hybrid.py` as for bge-small → `research/runs_v12/hybrid/bge-base_L512_t{1,2}.json`).
+cost: Track 1 1,167,159 docs 73.5 min (233–291 docs/s), Track 2 507,141 docs 16.9 min; peak VRAM 0.82 GB; cache 2.5 GB;
+  re-encode validation ok in all 24 domains (cos min ≥ 0.9991). (The four Track-1 and six Track-2 subset domains were
+  encoded during selection and reused.)
+result (macro nDCG@10, train / dev):
+  1a  BM25 0.1005/0.1127 · dense 0.2103/0.2488 · rerank 0.1856/0.2415 · RRF* 0.2140/0.2470 · hybrid* 0.2345/**0.2734**
+  1b  BM25 0.1101/0.1181 · dense 0.2304/0.2579 · rerank 0.2139/0.2623 · RRF* 0.2426/0.2571 · hybrid* 0.2632/**0.2824**
+  2a current  BM25 0.1667/0.1758 · dense 0.2573/0.2350 · rerank 0.2524/0.2398 · RRF* 0.2632/0.2448 · hybrid* 0.2803/**0.2540**
+  2a history  BM25 0.4082/0.4034 · dense 0.4387/0.3838 · rerank 0.4445/0.3866 · RRF* 0.4692/0.4265 · hybrid* 0.4806/**0.4342**
+  dev hybrid* − BM25: 1a +0.1607 [0.1285, 0.1929]; 1b +0.1643 [0.1337, 0.1974]; 2a current +0.0782 [0.0609, 0.0960];
+  2a history +0.0307 [0.0155, 0.0458]. Hybrid* − dense: +0.0245, +0.0245, +0.0190, +0.0503 (all CIs > 0).
+  Hybrid configs (train): linear 100+100, min-max α 0.7 (1a, 1b, 2a current), z-score α 0.6 (2a history).
+rule 4 (train hybrid mean over the two conditions): Track 1 bge-small L256 0.2586 vs bge-base 0.2488 → **bge-small L256**;
+  Track 2 bge-small L512 0.3613 vs bge-base 0.3805 → **bge-base L512**.
+final frozen systems (dev): Track 1 1a **0.2834**, 1b **0.2865** (bge-small L256 hybrid); Track 2 current **0.2540**,
+  +history **0.4342** (bge-base hybrid). The cross-encoder result on Track-2 current (0.2900) was obtained over the
+  bge-small L512 hybrid and has not been run over the bge-base hybrid.
+conclusion: The subset selection (4 Track-1 domains, ~80 train queries) did not carry over to Track 1 as a whole:
+  over all 13 domains bge-base is below bge-small on train (−0.010) and dev (1a 0.2734 vs 0.2956 at L512). On Track 2
+  the larger model is better on train and dev (+0.010 / +0.010). Encoder differences in the 0.01 range are about as
+  large as the selection noise we can measure with this much train data; the hybrid's gain over BM25 is not.
+
+## 2026-10-13 23:06 — rule 5 (before running): cross-encoder over the bge-base Track-2 current-turn hybrid
+`rerank_ce.py` as in rule 3 (top 50, N ∈ {10, 20, 50}, train subsample ≤ 30 topics/domain, seed 20260921), input the
+bge-base L512 hybrid, condition 2a_current only (the only condition where rule 3 helped on train). Fix of the rule-3
+flaw: the cross-encoder is adopted only if its train macro at the chosen N exceeds the plain hybrid's (N = 0); dev once.
+
+## 2026-10-13 23:06–23:14 — rule 5 result: cross-encoder over the bge-base Track-2 current-turn hybrid
+command: `python3 rerank_ce.py --track 2 --conditions 2a_current --hybrid ../research/runs_v12/hybrid/bge-base_L512_t2.json
+  --bm25 ../research/runs_v12/bm25/t2/runs --dense ../research/runs_v12/dense/bge-base_L512/t2/runs --data ../../reteco_data_v11
+  --kit ../../RETECO/starter_kit --out ../research/runs_v12/ce_bge-base` (log `runs_v12/logs/ce_bge-base_t2.log`, ~8 min).
+result: train N=0 0.2830, N=10 0.3039, N=20 0.3252, N=50 0.3435 → N=50, and 0.3435 > 0.2830 → adopted.
+  dev 0.2540 → **0.3001**, CE − hybrid +0.0462 [+0.0311, +0.0614]; better in 10/11 domains.
+conclusion: Final Track-2 current-turn system = BM25 ∪ bge-base hybrid, top 50 reordered by bge-reranker-v2-m3:
+  dev 0.1758 (BM25) → 0.3001. Final systems overall (dev): 1a 0.2834, 1b 0.2865, 2a current 0.3001, 2a history 0.4342.

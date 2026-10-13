@@ -350,6 +350,7 @@ Ranges are max − min nDCG@10 over the six document orders, for the two conditi
 | 1 `1b_query+step` | 10 | 0.2861 → 0.2498 | 0.2966 | 0.2519 | -0.0446 [-0.0659, -0.0237] |
 | 2 `2a_current` | 50 | 0.2839 → 0.3375 | 0.2441 | 0.2900 | +0.0459 [+0.0311, +0.0610] |
 | 2 `2a_history` | 10 | 0.4645 → 0.4327 | 0.4242 | 0.3777 | -0.0465 [-0.0630, -0.0300] |
+| 2 `2a_current`, bge-base hybrid (rule 5) | 50 | 0.2830 → 0.3435 | 0.2540 | 0.3001 | +0.0462 [+0.0311, +0.0614] |
 
 Train/dev macro by reranking depth N (0 = plain hybrid):
 
@@ -381,13 +382,26 @@ Each row is the whole pipeline (dense over all domains, hybrid grid tuned on tra
 | 1 | bge-small_L512 | `1b_query+step` | 0.2387 | 0.2735 | 0.2787 | 0.2966 | `{'kind': 'linear', 'kb': 100, 'kd': 100, 'norm': 'minmax', 'alpha': 0.7}` |
 | 1 | bge-small_L256 | `1a` | 0.2271 | 0.2479 | 0.2429 | 0.2834 | `{'kind': 'linear', 'kb': 100, 'kd': 100, 'norm': 'zscore', 'alpha': 0.6}` |
 | 1 | bge-small_L256 | `1b_query+step` | 0.2407 | 0.2694 | 0.2417 | 0.2865 | `{'kind': 'linear', 'kb': 100, 'kd': 100, 'norm': 'zscore', 'alpha': 0.6}` |
+| 1 | bge-base_L512 | `1a` | 0.2103 | 0.2345 | 0.2488 | 0.2734 | `{'kind': 'linear', 'kb': 100, 'kd': 100, 'norm': 'minmax', 'alpha': 0.7}` |
+| 1 | bge-base_L512 | `1b_query+step` | 0.2304 | 0.2632 | 0.2579 | 0.2824 | `{'kind': 'linear', 'kb': 100, 'kd': 100, 'norm': 'minmax', 'alpha': 0.7}` |
 | 2 | bge-small_L512 | `2a_current` | 0.2333 | 0.2639 | 0.2081 | 0.2441 | `{'kind': 'linear', 'kb': 100, 'kd': 100, 'norm': 'zscore', 'alpha': 0.7}` |
 | 2 | bge-small_L512 | `2a_history` | 0.4142 | 0.4586 | 0.3816 | 0.4242 | `{'kind': 'linear', 'kb': 100, 'kd': 100, 'norm': 'zscore', 'alpha': 0.7}` |
+| 2 | bge-base_L512 | `2a_current` | 0.2573 | 0.2803 | 0.2350 | 0.2540 | `{'kind': 'linear', 'kb': 100, 'kd': 100, 'norm': 'minmax', 'alpha': 0.7}` |
+| 2 | bge-base_L512 | `2a_history` | 0.4387 | 0.4806 | 0.3838 | 0.4342 | `{'kind': 'linear', 'kb': 100, 'kd': 100, 'norm': 'zscore', 'alpha': 0.6}` |
 
-- Track 1 selection scores (train): bge-small_L512 0.2590, bge-small_L256 0.2586.
-- Track 2 selection scores (train): bge-small_L512 0.3613.
+- Track 1 selection scores (train): bge-small_L512 0.2590, bge-small_L256 0.2586, bge-base_L512 0.2488. Rule 4 choice: **bge-small_L256**.
+- Track 2 selection scores (train): bge-small_L512 0.3613, bge-base_L512 0.3805. Rule 4 choice: **bge-base_L512**.
 
 Track 1 bge-small L512 is listed for the record but is not a rule-4 candidate (rule 1 moved Track 1 to 256 tokens on train; L512 was then seen to be better on dev, so re-admitting it would be selection on dev).
+
+### Final frozen systems (every choice on train; dev scored once)
+
+| sub-track | system | BM25 | final | final − BM25 |
+| --- | --- | ---: | ---: | ---: |
+| 1a | BM25 ∪ bge-small (256 tokens), linear fusion | 0.1127 | **0.2834** | +0.1707 |
+| 1b Query+Step | BM25 ∪ bge-small (256 tokens), linear fusion | 0.1181 | **0.2865** | +0.1684 |
+| 2a current turn | BM25 ∪ bge-base, linear fusion, top 50 reordered by bge-reranker-v2-m3 (rule 5) | 0.1758 | **0.3001** | +0.1243 |
+| 2a with history | BM25 ∪ bge-base (question first), linear fusion | 0.4034 | **0.4342** | +0.0308 |
 
 # Weeks 1–3 (CPU)
 

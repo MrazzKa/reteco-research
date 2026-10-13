@@ -1,0 +1,25 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  12%|█▏        | 49/393 [00:00<00:00, 481.95it/s]Loading weights:  28%|██▊       | 111/393 [00:00<00:00, 559.46it/s]Loading weights:  42%|████▏     | 167/393 [00:00<00:00, 540.48it/s]Loading weights:  56%|█████▋    | 222/393 [00:00<00:00, 510.90it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 899.91it/s]
+  [2a_current/train/drones] 1500 pairs, 15s (102/s)
+  [2a_current/train/politics] 1500 pairs, 17s (90/s)
+  [2a_current/train/law] 1500 pairs, 16s (93/s)
+  [2a_current/train/medicalsciences] 1500 pairs, 18s (84/s)
+  [2a_current/train/hardware] 1500 pairs, 17s (90/s)
+  [2a_current/train/economics] 1500 pairs, 14s (104/s)
+  [2a_current/train/psychology] 1500 pairs, 14s (104/s)
+  [2a_current/train/biology] 1500 pairs, 9s (160/s)
+  [2a_current/train/sustainable_living] 1500 pairs, 14s (106/s)
+  [2a_current/train/robotics] 1500 pairs, 11s (136/s)
+  [2a_current/train/earth_science] 1500 pairs, 12s (124/s)
+  [2a_current/dev/drones] 1900 pairs, 23s (81/s)
+  [2a_current/dev/politics] 2700 pairs, 40s (67/s)
+  [2a_current/dev/law] 3300 pairs, 46s (72/s)
+  [2a_current/dev/medicalsciences] 2200 pairs, 30s (74/s)
+  [2a_current/dev/hardware] 2900 pairs, 37s (78/s)
+  [2a_current/dev/economics] 4600 pairs, 53s (87/s)
+  [2a_current/dev/psychology] 4950 pairs, 49s (101/s)
+  [2a_current/dev/biology] 5750 pairs, 34s (167/s)
+  [2a_current/dev/sustainable_living] 4200 pairs, 34s (125/s)
+  [2a_current/dev/robotics] 3750 pairs, 28s (134/s)
+  [2a_current/dev/earth_science] 6650 pairs, 51s (131/s)
+== t2 2a_current: N=0: train 0.2830 dev 0.2540  N=10: train 0.3039 dev 0.2808  N=20: train 0.3252 dev 0.2933  N=50: train 0.3435 dev 0.3001  -> chosen N=50 on train; dev CE-hybrid {'diff': 0.0462, 'ci95': [0.0311, 0.0614], 'p_le_0': 0.0}
