@@ -1,0 +1,302 @@
+=== 20:21:28 python dense_index.py --data ../../reteco_data_v11 --track 2 --domains all --model bge-small --max-len 256 --batch 64 --out ../research/runs_v12/emb
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 256 fp16=True (7s)
+  [t2/drones] complete, skipping
+  [t2/politics] DONE 16,712 docs, encode 9s (1770.6/s), peak VRAM 0.23 GB, validation ok (cos min 0.9996)
+  [t2/law] complete, skipping
+  [t2/medicalsciences] complete, skipping
+  [t2/hardware] shard 0  20,000 docs, 10s
+  [t2/hardware] DONE 26,308 docs, encode 13s (1997.7/s), peak VRAM 0.22 GB, validation ok (cos min 0.9995)
+  [t2/economics] complete, skipping
+  [t2/psychology] complete, skipping
+  [t2/biology] complete, skipping
+  [t2/sustainable_living] shard 0  20,000 docs, 10s
+  [t2/sustainable_living] shard 1  40,000 docs, 17s
+  [t2/sustainable_living] shard 2  60,000 docs, 24s
+  [t2/sustainable_living] DONE 60,792 docs, encode 24s (2548.6/s), peak VRAM 0.22 GB, validation ok (cos min 0.9995)
+  [t2/robotics] shard 0  20,000 docs, 7s
+  [t2/robotics] shard 1  40,000 docs, 14s
+  [t2/robotics] shard 2  60,000 docs, 21s
+  [t2/robotics] DONE 61,961 docs, encode 21s (2935.3/s), peak VRAM 0.22 GB, validation ok (cos min 0.9995)
+  [t2/earth_science] shard 0  20,000 docs, 14s
+  [t2/earth_science] shard 1  40,000 docs, 26s
+  [t2/earth_science] shard 2  60,000 docs, 40s
+  [t2/earth_science] shard 3  80,000 docs, 55s
+  [t2/earth_science] shard 4  100,000 docs, 67s
+  [t2/earth_science] shard 5  120,000 docs, 80s
+  [t2/earth_science] DONE 121,249 docs, encode 80s (1516.6/s), peak VRAM 0.22 GB, validation ok (cos min 0.9996)
+all done in 151s
+=== 20:24:07 python dense_index.py --data ../../reteco_data_v11 --track 1 --domains all --model bge-small --max-len 256 --batch 64 --out ../research/runs_v12/emb
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 256 fp16=True (5s)
+  [t1/iota] complete, skipping
+  [t1/quant] complete, skipping
+  [t1/law] complete, skipping
+  [t1/workplace] complete, skipping
+  [t1/cardano] shard 0  20,000 docs, 18s
+  [t1/cardano] shard 1  40,000 docs, 35s
+  [t1/cardano] DONE 47,509 docs, encode 41s (1149.7/s), peak VRAM 0.23 GB, validation ok (cos min 0.9996)
+  [t1/monero] shard 0  20,000 docs, 17s
+  [t1/monero] shard 1  40,000 docs, 35s
+  [t1/monero] DONE 53,955 docs, encode 46s (1160.8/s), peak VRAM 0.23 GB, validation ok (cos min 0.9996)
+  [t1/economics] shard 0  20,000 docs, 17s
+  [t1/economics] shard 1  40,000 docs, 34s
+  [t1/economics] shard 2  60,000 docs, 52s
+  [t1/economics] DONE 74,692 docs, encode 64s (1174.2/s), peak VRAM 0.23 GB, validation ok (cos min 0.9997)
+  [t1/bitcoin] shard 0  20,000 docs, 17s
+  [t1/bitcoin] shard 1  40,000 docs, 35s
+  [t1/bitcoin] shard 2  60,000 docs, 52s
+  [t1/bitcoin] DONE 76,706 docs, encode 66s (1159.5/s), peak VRAM 0.23 GB, validation ok (cos min 0.9996)
+  [t1/politics] shard 0  20,000 docs, 17s
+  [t1/politics] shard 1  40,000 docs, 34s
+  [t1/politics] shard 2  60,000 docs, 52s
+  [t1/politics] shard 3  80,000 docs, 69s
+  [t1/politics] shard 4  100,000 docs, 86s
+  [t1/politics] shard 5  120,000 docs, 104s
+  [t1/politics] DONE 135,207 docs, encode 116s (1167.2/s), peak VRAM 0.23 GB, validation ok (cos min 0.9992)
+  [t1/genealogy] shard 0  20,000 docs, 18s
+  [t1/genealogy] shard 1  40,000 docs, 36s
+  [t1/genealogy] shard 2  60,000 docs, 54s
+  [t1/genealogy] shard 3  80,000 docs, 71s
+  [t1/genealogy] shard 4  100,000 docs, 89s
+  [t1/genealogy] shard 5  120,000 docs, 107s
+  [t1/genealogy] DONE 136,101 docs, encode 120s (1132.7/s), peak VRAM 0.23 GB, validation ok (cos min 0.9996)
+  [t1/travel] shard 0  20,000 docs, 17s
+  [t1/travel] shard 1  40,000 docs, 34s
+  [t1/travel] shard 2  60,000 docs, 51s
+  [t1/travel] shard 3  80,000 docs, 68s
+  [t1/travel] shard 4  100,000 docs, 86s
+  [t1/travel] shard 5  120,000 docs, 103s
+  [t1/travel] shard 6  140,000 docs, 120s
+  [t1/travel] DONE 158,771 docs, encode 134s (1180.8/s), peak VRAM 0.23 GB, validation ok (cos min 0.9997)
+  [t1/hsm] shard 0  20,000 docs, 18s
+  [t1/hsm] shard 1  40,000 docs, 36s
+  [t1/hsm] shard 2  60,000 docs, 54s
+  [t1/hsm] shard 3  80,000 docs, 72s
+  [t1/hsm] shard 4  100,000 docs, 91s
+  [t1/hsm] shard 5  120,000 docs, 109s
+  [t1/hsm] shard 6  140,000 docs, 127s
+  [t1/hsm] shard 7  160,000 docs, 145s
+  [t1/hsm] DONE 169,552 docs, encode 152s (1116.5/s), peak VRAM 0.23 GB, validation ok (cos min 0.9995)
+  [t1/history] shard 0  20,000 docs, 16s
+  [t1/history] shard 1  40,000 docs, 32s
+  [t1/history] shard 2  60,000 docs, 49s
+  [t1/history] shard 3  80,000 docs, 66s
+  [t1/history] shard 4  100,000 docs, 82s
+  [t1/history] shard 5  120,000 docs, 99s
+  [t1/history] shard 6  140,000 docs, 115s
+  [t1/history] shard 7  160,000 docs, 132s
+  [t1/history] shard 8  180,000 docs, 148s
+  [t1/history] shard 9  200,000 docs, 164s
+  [t1/history] DONE 200,252 docs, encode 161s (1240.1/s), peak VRAM 0.23 GB, validation ok (cos min 0.9995)
+all done in 927s
+=== 20:39:40 python dense_search.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 2 --splits train --model bge-small --max-len 256 --emb ../research/runs_v12/emb --out ../research/runs_v12/dense/bge-small_L256/t2
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 256 fp16=True (6s)
+
+[t2/drones] 16,381 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2818  R@100 0.7399  R@1000 0.9516  (104 q, 1.81 ms/q)
+    train 2a_history           nDCG@10 0.3616  R@100 0.8104  R@1000 0.9239  (104 q, 0.41 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.3804  R@100 0.8633  R@1000 0.9471  (104 q, 0.37 ms/q)
+
+[t2/politics] 16,712 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2415  R@100 0.6999  R@1000 0.9189  (159 q, 0.4 ms/q)
+    train 2a_history           nDCG@10 0.3974  R@100 0.9057  R@1000 0.9887  (159 q, 0.36 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.4046  R@100 0.9119  R@1000 0.9833  (159 q, 0.36 ms/q)
+
+[t2/law] 20,027 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.1955  R@100 0.6881  R@1000 0.8707  (164 q, 0.38 ms/q)
+    train 2a_history           nDCG@10 0.3084  R@100 0.8484  R@1000 0.9713  (164 q, 0.38 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.3244  R@100 0.8620  R@1000 0.9754  (164 q, 0.37 ms/q)
+
+[t2/medicalsciences] 23,297 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.3154  R@100 0.8197  R@1000 0.9430  (139 q, 0.37 ms/q)
+    train 2a_history           nDCG@10 0.3556  R@100 0.9653  R@1000 0.9964  (139 q, 0.34 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.3771  R@100 0.9653  R@1000 0.9964  (139 q, 0.37 ms/q)
+
+[t2/hardware] 26,308 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.1660  R@100 0.5323  R@1000 0.7837  (130 q, 0.36 ms/q)
+    train 2a_history           nDCG@10 0.2751  R@100 0.6923  R@1000 0.8818  (130 q, 0.36 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.2895  R@100 0.7192  R@1000 0.9151  (130 q, 0.37 ms/q)
+
+[t2/economics] 50,220 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.1740  R@100 0.5030  R@1000 0.7532  (196 q, 0.47 ms/q)
+    train 2a_history           nDCG@10 0.3601  R@100 0.7413  R@1000 0.9119  (196 q, 0.48 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.3698  R@100 0.7469  R@1000 0.9105  (196 q, 0.45 ms/q)
+
+[t2/psychology] 52,835 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2310  R@100 0.4932  R@1000 0.7357  (234 q, 0.43 ms/q)
+    train 2a_history           nDCG@10 0.4646  R@100 0.7995  R@1000 0.9202  (234 q, 0.39 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.4935  R@100 0.8061  R@1000 0.9266  (234 q, 0.4 ms/q)
+
+[t2/biology] 57,359 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2014  R@100 0.5469  R@1000 0.8131  (247 q, 0.4 ms/q)
+    train 2a_history           nDCG@10 0.4083  R@100 0.7976  R@1000 0.9460  (247 q, 0.37 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.4205  R@100 0.8013  R@1000 0.9406  (247 q, 0.44 ms/q)
+
+[t2/sustainable_living] 60,792 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2772  R@100 0.6603  R@1000 0.8841  (235 q, 0.49 ms/q)
+    train 2a_history           nDCG@10 0.4889  R@100 0.8787  R@1000 0.9689  (235 q, 0.42 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.4893  R@100 0.8822  R@1000 0.9799  (235 q, 0.49 ms/q)
+
+[t2/robotics] 61,961 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.1297  R@100 0.3621  R@1000 0.5804  (184 q, 0.38 ms/q)
+    train 2a_history           nDCG@10 0.3176  R@100 0.6396  R@1000 0.8187  (184 q, 0.38 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.3407  R@100 0.6756  R@1000 0.8255  (184 q, 0.37 ms/q)
+
+[t2/earth_science] 121,249 docs on GPU (1s)
+    train 2a_current           nDCG@10 0.2027  R@100 0.5182  R@1000 0.7285  (321 q, 0.49 ms/q)
+    train 2a_history           nDCG@10 0.4008  R@100 0.7320  R@1000 0.8470  (321 q, 0.41 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.4011  R@100 0.7429  R@1000 0.8478  (321 q, 0.49 ms/q)
+wrote ../research/runs_v12/dense/bge-small_L256/t2/results.json
+=== 20:40:01 python dense_search.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 1 --splits train --model bge-small --max-len 256 --emb ../research/runs_v12/emb --out ../research/runs_v12/dense/bge-small_L256/t1
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 256 fp16=True (4s)
+
+[t1/quant] 25,040 docs on GPU (0s)
+    train 1a                   nDCG@10 0.1691  R@100 0.5403  R@1000 0.8021  (24 q, 4.35 ms/q)
+    train 1b_query+step        nDCG@10 0.2236  R@100 0.6081  R@1000 0.8919  (37 q, 0.43 ms/q)
+
+[t1/law] 36,110 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2323  R@100 0.7486  R@1000 0.9861  (24 q, 0.44 ms/q)
+    train 1b_query+step        nDCG@10 0.2302  R@100 0.8491  R@1000 0.9811  (53 q, 0.39 ms/q)
+
+[t1/workplace] 43,584 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2838  R@100 0.7093  R@1000 0.9382  (25 q, 0.43 ms/q)
+    train 1b_query+step        nDCG@10 0.2493  R@100 0.7903  R@1000 1.0000  (31 q, 0.46 ms/q)
+
+[t1/cardano] 47,509 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2525  R@100 0.7103  R@1000 0.8967  (36 q, 0.42 ms/q)
+    train 1b_query+step        nDCG@10 0.2941  R@100 0.8596  R@1000 0.9649  (57 q, 0.42 ms/q)
+
+[t1/monero] 53,955 docs on GPU (0s)
+    train 1a                   nDCG@10 0.1916  R@100 0.5134  R@1000 0.8373  (46 q, 0.67 ms/q)
+    train 1b_query+step        nDCG@10 0.2829  R@100 0.6153  R@1000 0.8836  (73 q, 0.41 ms/q)
+
+[t1/economics] 74,692 docs on GPU (0s)
+    train 1a                   nDCG@10 0.1091  R@100 0.4602  R@1000 0.7286  (58 q, 0.46 ms/q)
+    train 1b_query+step        nDCG@10 0.1169  R@100 0.5231  R@1000 0.7949  (130 q, 0.4 ms/q)
+
+[t1/bitcoin] 76,706 docs on GPU (0s)
+    train 1a                   nDCG@10 0.1712  R@100 0.5115  R@1000 0.8106  (70 q, 0.44 ms/q)
+    train 1b_query+step        nDCG@10 0.1700  R@100 0.5581  R@1000 0.8630  (132 q, 0.41 ms/q)
+
+[t1/politics] 135,207 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2878  R@100 0.6735  R@1000 0.8317  (105 q, 0.49 ms/q)
+    train 1b_query+step        nDCG@10 0.2845  R@100 0.7253  R@1000 0.8716  (266 q, 0.45 ms/q)
+
+[t1/genealogy] 136,101 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2337  R@100 0.5259  R@1000 0.6936  (80 q, 0.5 ms/q)
+    train 1b_query+step        nDCG@10 0.2807  R@100 0.7055  R@1000 0.8050  (159 q, 0.42 ms/q)
+
+[t1/travel] 158,771 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2238  R@100 0.5895  R@1000 0.8269  (70 q, 0.47 ms/q)
+    train 1b_query+step        nDCG@10 0.2188  R@100 0.6629  R@1000 0.8872  (133 q, 0.46 ms/q)
+
+[t1/hsm] 169,552 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2169  R@100 0.5651  R@1000 0.8008  (105 q, 0.55 ms/q)
+    train 1b_query+step        nDCG@10 0.2315  R@100 0.6568  R@1000 0.8589  (254 q, 0.43 ms/q)
+
+[t1/history] 200,252 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2265  R@100 0.6316  R@1000 0.8474  (561 q, 0.58 ms/q)
+    train 1b_query+step        nDCG@10 0.2211  R@100 0.7111  R@1000 0.9050  (1421 q, 0.48 ms/q)
+wrote ../research/runs_v12/dense/bge-small_L256/t1/results.json
+=== 20:40:17 python rerank_ce.py --track 2 --conditions 2a_current 2a_history --hybrid ../research/runs_v12/hybrid/bge-small_L512_t2.json --bm25 ../research/runs_v12/bm25/t2/runs --dense ../research/runs_v12/dense/bge-small_L512/t2/runs --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out ../research/runs_v12/ce
+  [2a_current/train/drones] 1500 pairs, 16s (96/s)
+  [2a_current/train/politics] 1500 pairs, 21s (73/s)
+  [2a_current/train/law] 1500 pairs, 23s (66/s)
+  [2a_current/train/medicalsciences] 1500 pairs, 21s (70/s)
+  [2a_current/train/hardware] 1500 pairs, 19s (80/s)
+  [2a_current/train/economics] 1500 pairs, 15s (99/s)
+  [2a_current/train/psychology] 1500 pairs, 14s (110/s)
+  [2a_current/train/biology] 1500 pairs, 9s (164/s)
+  [2a_current/train/sustainable_living] 1500 pairs, 12s (120/s)
+  [2a_current/train/robotics] 1500 pairs, 10s (147/s)
+  [2a_current/train/earth_science] 1500 pairs, 12s (121/s)
+  [2a_current/dev/drones] 1900 pairs, 24s (80/s)
+  [2a_current/dev/politics] 2700 pairs, 40s (67/s)
+  [2a_current/dev/law] 3300 pairs, 46s (72/s)
+  [2a_current/dev/medicalsciences] 2200 pairs, 30s (73/s)
+  [2a_current/dev/hardware] 2900 pairs, 36s (80/s)
+  [2a_current/dev/economics] 4600 pairs, 49s (94/s)
+  [2a_current/dev/psychology] 4950 pairs, 47s (106/s)
+  [2a_current/dev/biology] 5750 pairs, 34s (171/s)
+  [2a_current/dev/sustainable_living] 4200 pairs, 32s (130/s)
+  [2a_current/dev/robotics] 3750 pairs, 26s (144/s)
+  [2a_current/dev/earth_science] 6650 pairs, 52s (129/s)
+== t2 2a_current: N=0: train 0.2839 dev 0.2441  N=10: train 0.2937 dev 0.2657  N=20: train 0.3148 dev 0.2863  N=50: train 0.3375 dev 0.2900  -> chosen N=50 on train; dev CE-hybrid {'diff': 0.0459, 'ci95': [0.0311, 0.061], 'p_le_0': 0.0}
+  [2a_history/train/drones] 1500 pairs, 24s (61/s)
+  [2a_history/train/politics] 1500 pairs, 25s (60/s)
+  [2a_history/train/law] 1500 pairs, 26s (59/s)
+  [2a_history/train/medicalsciences] 1500 pairs, 25s (61/s)
+  [2a_history/train/hardware] 1500 pairs, 25s (60/s)
+  [2a_history/train/economics] 1500 pairs, 24s (62/s)
+  [2a_history/train/psychology] 1500 pairs, 23s (65/s)
+  [2a_history/train/biology] 1500 pairs, 18s (82/s)
+  [2a_history/train/sustainable_living] 1500 pairs, 21s (71/s)
+  [2a_history/train/robotics] 1500 pairs, 20s (74/s)
+  [2a_history/train/earth_science] 1500 pairs, 20s (74/s)
+  [2a_history/dev/drones] 1900 pairs, 30s (64/s)
+  [2a_history/dev/politics] 2700 pairs, 45s (59/s)
+  [2a_history/dev/law] 3300 pairs, 55s (61/s)
+  [2a_history/dev/medicalsciences] 2200 pairs, 35s (63/s)
+  [2a_history/dev/hardware] 2900 pairs, 46s (63/s)
+  [2a_history/dev/economics] 4600 pairs, 73s (63/s)
+  [2a_history/dev/psychology] 4950 pairs, 73s (68/s)
+  [2a_history/dev/biology] 5750 pairs, 74s (77/s)
+  [2a_history/dev/sustainable_living] 4200 pairs, 56s (75/s)
+  [2a_history/dev/robotics] 3750 pairs, 51s (73/s)
+  [2a_history/dev/earth_science] 6650 pairs, 96s (69/s)
+== t2 2a_history: N=0: train 0.4645 dev 0.4242  N=10: train 0.4327 dev 0.3777  N=20: train 0.4015 dev 0.3570  N=50: train 0.3602 dev 0.3146  -> chosen N=10 on train; dev CE-hybrid {'diff': -0.0465, 'ci95': [-0.063, -0.03], 'p_le_0': 1.0}
+=== 21:05:17 python rerank_ce.py --track 1 --conditions 1a 1b_query+step --hybrid ../research/runs_v12/hybrid/bge-small_L512_t1.json --bm25 ../research/runs_v12/bm25/t1/runs --dense ../research/runs_v12/dense/bge-small_L512/t1/runs --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out ../research/runs_v12/ce
+  [1a/train/iota] 350 pairs, 5s (72/s)
+  [1a/train/quant] 1200 pairs, 17s (71/s)
+  [1a/train/law] 1200 pairs, 16s (73/s)
+  [1a/train/workplace] 1250 pairs, 18s (68/s)
+  [1a/train/cardano] 1500 pairs, 23s (65/s)
+  [1a/train/monero] 1500 pairs, 20s (74/s)
+  [1a/train/economics] 1500 pairs, 25s (60/s)
+  [1a/train/bitcoin] 1500 pairs, 24s (63/s)
+  [1a/train/politics] 1500 pairs, 26s (58/s)
+  [1a/train/genealogy] 1500 pairs, 26s (59/s)
+  [1a/train/travel] 1500 pairs, 24s (62/s)
+  [1a/train/hsm] 1500 pairs, 26s (58/s)
+  [1a/train/history] 1500 pairs, 26s (59/s)
+  [1a/dev/iota] 150 pairs, 3s (59/s)
+  [1a/dev/quant] 500 pairs, 9s (58/s)
+  [1a/dev/law] 550 pairs, 9s (63/s)
+  [1a/dev/workplace] 550 pairs, 9s (59/s)
+  [1a/dev/cardano] 750 pairs, 11s (66/s)
+  [1a/dev/monero] 950 pairs, 15s (65/s)
+  [1a/dev/economics] 1250 pairs, 21s (59/s)
+  [1a/dev/bitcoin] 1500 pairs, 24s (63/s)
+  [1a/dev/politics] 2250 pairs, 38s (58/s)
+  [1a/dev/genealogy] 1750 pairs, 30s (59/s)
+  [1a/dev/travel] 1500 pairs, 23s (66/s)
+  [1a/dev/hsm] 2250 pairs, 38s (60/s)
+  [1a/dev/history] 12000 pairs, 205s (59/s)
+== t1 1a: N=0: train 0.2383 dev 0.2956  N=10: train 0.2181 dev 0.2786  N=20: train 0.2040 dev 0.2565  N=50: train 0.1766 dev 0.2180  -> chosen N=10 on train; dev CE-hybrid {'diff': -0.017, 'ci95': [-0.0373, 0.0031], 'p_le_0': 0.9507}
+  [1b_query+step/train/iota] 800 pairs, 13s (61/s)
+  [1b_query+step/train/quant] 1500 pairs, 26s (58/s)
+  [1b_query+step/train/law] 1500 pairs, 25s (61/s)
+  [1b_query+step/train/workplace] 1500 pairs, 24s (64/s)
+  [1b_query+step/train/cardano] 1500 pairs, 23s (67/s)
+  [1b_query+step/train/monero] 1500 pairs, 21s (72/s)
+  [1b_query+step/train/economics] 1500 pairs, 25s (60/s)
+  [1b_query+step/train/bitcoin] 1500 pairs, 24s (61/s)
+  [1b_query+step/train/politics] 1500 pairs, 26s (58/s)
+  [1b_query+step/train/genealogy] 1500 pairs, 25s (59/s)
+  [1b_query+step/train/travel] 1500 pairs, 25s (61/s)
+  [1b_query+step/train/hsm] 1500 pairs, 26s (58/s)
+  [1b_query+step/train/history] 1500 pairs, 26s (58/s)
+  [1b_query+step/dev/iota] 400 pairs, 7s (61/s)
+  [1b_query+step/dev/quant] 750 pairs, 13s (60/s)
+  [1b_query+step/dev/law] 1150 pairs, 18s (63/s)
+  [1b_query+step/dev/workplace] 1000 pairs, 16s (61/s)
+  [1b_query+step/dev/cardano] 1650 pairs, 25s (65/s)
+  [1b_query+step/dev/monero] 1400 pairs, 20s (71/s)
+  [1b_query+step/dev/economics] 2550 pairs, 43s (59/s)
+  [1b_query+step/dev/bitcoin] 2800 pairs, 44s (64/s)
+  [1b_query+step/dev/politics] 5950 pairs, 101s (59/s)
+  [1b_query+step/dev/genealogy] 3400 pairs, 57s (59/s)
+  [1b_query+step/dev/travel] 2600 pairs, 39s (67/s)
+  [1b_query+step/dev/hsm] 5250 pairs, 89s (59/s)
+  [1b_query+step/dev/history] 31800 pairs, 545s (58/s)
+== t1 1b_query+step: N=0: train 0.2861 dev 0.2966  N=10: train 0.2498 dev 0.2519  N=20: train 0.2195 dev 0.2299  N=50: train 0.1774 dev 0.1779  -> chosen N=10 on train; dev CE-hybrid {'diff': -0.0446, 'ci95': [-0.0659, -0.0237], 'p_le_0': 0.9999}
+=== 21:40:04 ALLDONE

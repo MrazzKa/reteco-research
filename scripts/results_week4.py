@@ -353,7 +353,17 @@ def week4(root):
                 bd = v["by_depth"]
                 L.append(f"| {t} `{cond}` | {n} | {f4(bd['0']['train_macro'])} → {f4(bd[n]['train_macro'])} | "
                          f"{f4(bd['0']['dev_macro'])} | {f4(bd[n]['dev_macro'])} | {ci(v['dev_bootstrap_ce_minus_hybrid'])} |")
-        L.append("")
+        L += ["", "Train/dev macro by reranking depth N (0 = plain hybrid):", "",
+              "| sub-track | " + " | ".join(f"N={n}" for n in ("0", "10", "20", "50")) + " |", "| --- |" + " --- |" * 4]
+        for t in (1, 2):
+            for cond, v in (ces[t] or {}).items():
+                L.append(f"| {t} `{cond}` | " + " | ".join(
+                    f"{f4(v['by_depth'][n]['train_macro'])} / {f4(v['by_depth'][n]['dev_macro'])}" for n in ("0", "10", "20", "50")) + " |")
+        L += ["", "Input: the bge-small **L512** hybrid of section A, top 50; train subsample ≤ 30 topics per domain "
+              "and condition (seed 20260921). The pre-registered rule allowed N ∈ {10, 20, 50} only, so where the "
+              "cross-encoder lowers train scores at every depth (Track 1, Track-2 history) it was still applied at "
+              "N = 10; with N = 0 allowed, train would have kept the plain hybrid there. The cross-encoder helps "
+              "only on the Track-2 current turn (11/11 domains).", ""]
 
     # ------------------------------------------------------------- K. throughput
     man = [json.load(open(m)) for m in glob.glob(os.path.join(R, "emb/bge-small_L512/t*/*/manifest.json"))]
@@ -371,4 +381,38 @@ def week4(root):
         L += ["", "Encoding time is summed per domain; hsm was resumed from 4 completed shards after an "
               "OOM kill (see LOG), so its time covers only the remaining shards. Previous machine (CPU): "
               "8 docs/s, i.e. ~38 h for Track 1.", ""]
+
+    # ------------------------------------------------------------- L. full-pipeline candidates
+    cands = [(t, name, jload(os.path.join(R, f"hybrid/{name}_t{t}.json")))
+             for t, names in ((1, ("bge-small_L512", "bge-small_L256", "bge-base_L512")),
+                              (2, ("bge-small_L512", "bge-base_L512"))) for name in names]
+    cands = [c for c in cands if c[2]]
+    if len(cands) > 2:
+        # rule 4 (LOG 20:46): Track 1 compares bge-small L256 (rule 1) with bge-base; Track 2 bge-small L512 with bge-base
+        eligible = {1: ("bge-small_L256", "bge-base_L512"), 2: ("bge-small_L512", "bge-base_L512")}
+        L += ["## L. Window and encoder in the full pipeline (rules 1, 2 and 4 in LOG)", "",
+              "Each row is the whole pipeline (dense over all domains, hybrid grid tuned on train, dev scored once). "
+              "Selection score = mean train macro of the hybrid over the track's two conditions.", "",
+              "| track | dense side | condition | train dense | train hybrid* | dev dense | dev hybrid* | hybrid* config |",
+              "| --- | --- | --- | ---: | ---: | ---: | ---: | --- |"]
+        score = {}
+        for t, name, h in cands:
+            tr = []
+            for cond, c in h["conditions"].items():
+                s = c["systems"]
+                tr.append(s["linear*"]["train_macro"])
+                L.append(f"| {t} | {name} | `{cond}` | {f4(s['dense']['train_macro'])} | {f4(s['linear*']['train_macro'])} | "
+                         f"{f4(s['dense']['dev_macro'])} | {f4(s['linear*']['dev_macro'])} | `{s['linear*']['cfg']}` |")
+            score[(t, name)] = mean(tr)
+        L.append("")
+        for t in (1, 2):
+            el = [(score[(t, n)], n) for n in eligible[t] if (t, n) in score]
+            sc = ", ".join(f"{n} {v:.4f}" for (tt, n), v in score.items() if tt == t)
+            line = f"- Track {t} selection scores (train): {sc}."
+            if len(el) == 2:
+                line += f" Rule 4 choice: **{max(el)[1]}**."
+            L.append(line)
+        L += ["", "Track 1 bge-small L512 is listed for the record but is not a rule-4 candidate (rule 1 moved "
+              "Track 1 to 256 tokens on train; L512 was then seen to be better on dev, so re-admitting it would "
+              "be selection on dev).", ""]
     return L

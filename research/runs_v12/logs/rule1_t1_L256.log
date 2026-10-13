@@ -1,0 +1,85 @@
+=== 20:40:47 rule1 T1 L256
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 4478.40it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 256 fp16=True (7s)
+
+[t1/quant] 25,040 docs on GPU (0s)
+    dev   1a                   nDCG@10 0.0919  R@100 0.4750  R@1000 0.7833  (10 q, 33.93 ms/q)
+    dev   1b_query+step        nDCG@10 0.1286  R@100 0.5667  R@1000 0.7667  (15 q, 0.9 ms/q)
+
+[t1/law] 36,110 docs on GPU (0s)
+    dev   1a                   nDCG@10 0.3685  R@100 0.9045  R@1000 0.9409  (11 q, 0.65 ms/q)
+    dev   1b_query+step        nDCG@10 0.3593  R@100 0.9348  R@1000 0.9565  (23 q, 0.5 ms/q)
+
+[t1/workplace] 43,584 docs on GPU (0s)
+    dev   1a                   nDCG@10 0.2676  R@100 0.5848  R@1000 0.9000  (11 q, 0.62 ms/q)
+    dev   1b_query+step        nDCG@10 0.3136  R@100 0.7000  R@1000 0.9667  (20 q, 0.5 ms/q)
+
+[t1/cardano] 47,509 docs on GPU (0s)
+    dev   1a                   nDCG@10 0.1519  R@100 0.6652  R@1000 0.9385  (15 q, 0.58 ms/q)
+    dev   1b_query+step        nDCG@10 0.1189  R@100 0.7374  R@1000 0.9394  (33 q, 0.45 ms/q)
+
+[t1/monero] 53,955 docs on GPU (0s)
+    dev   1a                   nDCG@10 0.0850  R@100 0.5439  R@1000 0.7939  (19 q, 0.55 ms/q)
+    dev   1b_query+step        nDCG@10 0.1164  R@100 0.5893  R@1000 0.8036  (28 q, 0.49 ms/q)
+
+[t1/economics] 74,692 docs on GPU (0s)
+    dev   1a                   nDCG@10 0.1227  R@100 0.5058  R@1000 0.7812  (25 q, 0.59 ms/q)
+    dev   1b_query+step        nDCG@10 0.1206  R@100 0.5359  R@1000 0.7549  (51 q, 0.48 ms/q)
+
+[t1/bitcoin] 76,706 docs on GPU (0s)
+    dev   1a                   nDCG@10 0.2048  R@100 0.5524  R@1000 0.8300  (30 q, 0.57 ms/q)
+    dev   1b_query+step        nDCG@10 0.1830  R@100 0.6250  R@1000 0.8750  (56 q, 0.54 ms/q)
+
+[t1/politics] 135,207 docs on GPU (0s)
+    dev   1a                   nDCG@10 0.2970  R@100 0.5615  R@1000 0.7737  (45 q, 0.61 ms/q)
+    dev   1b_query+step        nDCG@10 0.2748  R@100 0.5896  R@1000 0.8151  (119 q, 0.49 ms/q)
+
+[t1/genealogy] 136,101 docs on GPU (0s)
+    dev   1a                   nDCG@10 0.2499  R@100 0.5243  R@1000 0.6890  (35 q, 0.64 ms/q)
+    dev   1b_query+step        nDCG@10 0.2844  R@100 0.6446  R@1000 0.8015  (68 q, 0.58 ms/q)
+
+[t1/travel] 158,771 docs on GPU (0s)
+    dev   1a                   nDCG@10 0.2491  R@100 0.6750  R@1000 0.8500  (30 q, 0.66 ms/q)
+    dev   1b_query+step        nDCG@10 0.2459  R@100 0.8365  R@1000 0.9423  (52 q, 0.56 ms/q)
+
+[t1/hsm] 169,552 docs on GPU (0s)
+    dev   1a                   nDCG@10 0.2648  R@100 0.6830  R@1000 0.8263  (45 q, 0.57 ms/q)
+    dev   1b_query+step        nDCG@10 0.2549  R@100 0.7206  R@1000 0.8778  (105 q, 0.57 ms/q)
+
+[t1/history] 200,252 docs on GPU (0s)
+    dev   1a                   nDCG@10 0.2465  R@100 0.6275  R@1000 0.8436  (240 q, 0.64 ms/q)
+    dev   1b_query+step        nDCG@10 0.2438  R@100 0.7070  R@1000 0.8996  (636 q, 0.62 ms/q)
+wrote ../research/runs_v12/dense/bge-small_L256/t1/results.json
+
+== track 1 1a (dense: 1a) — train 13 dom, dev 13 dom
+  bm25             train 0.1005  dev 0.1127   kind=bm25
+  dense            train 0.2271  dev 0.2429   kind=dense
+  rerank           train 0.1989  dev 0.2467   kind=rerank
+  linear*          train 0.2479  dev 0.2834   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.6
+  rrf*             train 0.2327  dev 0.2563   kind=rrf|kb=50|kd=50|c=30
+  pool_rerank*     train 0.2270  dev 0.2429   kind=pool_rerank|kb=100|kd=100
+  rrf_c60_100+100  train 0.2311  dev 0.2497   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.1707, 'ci95': [0.1367, 0.2075], 'p_le_0': 0.0}
+  dev rrf* - bm25: {'diff': 0.1436, 'ci95': [0.1179, 0.1701], 'p_le_0': 0.0}
+  dev linear* - rerank: {'diff': 0.0367, 'ci95': [0.0148, 0.0594], 'p_le_0': 0.0006}
+  dev dense - bm25: {'diff': 0.1302, 'ci95': [0.0986, 0.1625], 'p_le_0': 0.0}
+  dev rerank - bm25: {'diff': 0.1339, 'ci95': [0.0929, 0.179], 'p_le_0': 0.0}
+  dev linear* - dense: {'diff': 0.0404, 'ci95': [0.0223, 0.059], 'p_le_0': 0.0}
+
+== track 1 1b_query+step (dense: 1b_query+step) — train 13 dom, dev 13 dom
+  bm25             train 0.1101  dev 0.1181   kind=bm25
+  dense            train 0.2407  dev 0.2417   kind=dense
+  rerank           train 0.2308  dev 0.2531   kind=rerank
+  linear*          train 0.2694  dev 0.2865   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.6
+  rrf*             train 0.2586  dev 0.2670   kind=rrf|kb=50|kd=50|c=30
+  pool_rerank*     train 0.2407  dev 0.2417   kind=pool_rerank|kb=100|kd=100
+  rrf_c60_100+100  train 0.2579  dev 0.2670   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.1684, 'ci95': [0.1379, 0.2014], 'p_le_0': 0.0}
+  dev rrf* - bm25: {'diff': 0.1488, 'ci95': [0.123, 0.1763], 'p_le_0': 0.0}
+  dev linear* - rerank: {'diff': 0.0335, 'ci95': [0.0152, 0.0524], 'p_le_0': 0.0001}
+  dev dense - bm25: {'diff': 0.1236, 'ci95': [0.0937, 0.1544], 'p_le_0': 0.0}
+  dev rerank - bm25: {'diff': 0.1349, 'ci95': [0.1009, 0.1708], 'p_le_0': 0.0}
+  dev linear* - dense: {'diff': 0.0448, 'ci95': [0.0273, 0.0626], 'p_le_0': 0.0}
+wrote ../research/runs_v12/hybrid/bge-small_L256_t1.json
+=== exit 0 20:44:08

@@ -1,0 +1,142 @@
+{
+ "1a": {
+  "checkpoint": "BAAI/bge-reranker-v2-m3",
+  "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+  "hybrid_cfg": {
+   "kind": "linear",
+   "kb": 100,
+   "kd": 100,
+   "norm": "zscore",
+   "alpha": 0.6
+  },
+  "query_condition": "1a",
+  "train_topics_per_domain_max": 30,
+  "chosen_depth_on_train": 10,
+  "by_depth": {
+   "0": {
+    "train_macro": 0.2383,
+    "dev_macro": 0.2956
+   },
+   "10": {
+    "train_macro": 0.2181,
+    "dev_macro": 0.2786
+   },
+   "20": {
+    "train_macro": 0.204,
+    "dev_macro": 0.2565
+   },
+   "50": {
+    "train_macro": 0.1766,
+    "dev_macro": 0.218
+   }
+  },
+  "dev_per_domain_chosen": {
+   "iota": 0.6136,
+   "quant": 0.092,
+   "law": 0.3123,
+   "workplace": 0.2929,
+   "cardano": 0.1979,
+   "monero": 0.164,
+   "economics": 0.184,
+   "bitcoin": 0.2281,
+   "politics": 0.3454,
+   "genealogy": 0.2846,
+   "travel": 0.2571,
+   "hsm": 0.3912,
+   "history": 0.2587
+  },
+  "dev_per_domain_hybrid": {
+   "iota": 0.7362,
+   "quant": 0.0605,
+   "law": 0.3021,
+   "workplace": 0.294,
+   "cardano": 0.2068,
+   "monero": 0.1328,
+   "economics": 0.195,
+   "bitcoin": 0.2034,
+   "politics": 0.4566,
+   "genealogy": 0.3518,
+   "travel": 0.1994,
+   "hsm": 0.4614,
+   "history": 0.2431
+  },
+  "dev_bootstrap_ce_minus_hybrid": {
+   "diff": -0.017,
+   "ci95": [
+    -0.0373,
+    0.0031
+   ],
+   "p_le_0": 0.9507
+  }
+ },
+ "1b_query+step": {
+  "checkpoint": "BAAI/bge-reranker-v2-m3",
+  "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+  "hybrid_cfg": {
+   "kind": "linear",
+   "kb": 100,
+   "kd": 100,
+   "norm": "minmax",
+   "alpha": 0.7
+  },
+  "query_condition": "1b_query+step",
+  "train_topics_per_domain_max": 30,
+  "chosen_depth_on_train": 10,
+  "by_depth": {
+   "0": {
+    "train_macro": 0.2861,
+    "dev_macro": 0.2966
+   },
+   "10": {
+    "train_macro": 0.2498,
+    "dev_macro": 0.2519
+   },
+   "20": {
+    "train_macro": 0.2195,
+    "dev_macro": 0.2299
+   },
+   "50": {
+    "train_macro": 0.1774,
+    "dev_macro": 0.1779
+   }
+  },
+  "dev_per_domain_chosen": {
+   "iota": 0.3971,
+   "quant": 0.1204,
+   "law": 0.2404,
+   "workplace": 0.3302,
+   "cardano": 0.1554,
+   "monero": 0.2093,
+   "economics": 0.1864,
+   "bitcoin": 0.2434,
+   "politics": 0.2595,
+   "genealogy": 0.2833,
+   "travel": 0.2602,
+   "hsm": 0.3431,
+   "history": 0.2462
+  },
+  "dev_per_domain_hybrid": {
+   "iota": 0.6165,
+   "quant": 0.0916,
+   "law": 0.2737,
+   "workplace": 0.3884,
+   "cardano": 0.2316,
+   "monero": 0.1633,
+   "economics": 0.2093,
+   "bitcoin": 0.2136,
+   "politics": 0.3941,
+   "genealogy": 0.3846,
+   "travel": 0.2345,
+   "hsm": 0.3914,
+   "history": 0.2627
+  },
+  "dev_bootstrap_ce_minus_hybrid": {
+   "diff": -0.0446,
+   "ci95": [
+    -0.0659,
+    -0.0237
+   ],
+   "p_le_0": 0.9999
+  }
+ }
+}

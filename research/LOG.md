@@ -652,3 +652,59 @@ conclusion: Bigger is not better here: no 335M–600M model beats bge-base at 51
   between the top four (0.279–0.291) is small for ~80 Track-1 train queries. Rule 2: bge-base wins; full
   index estimated ≈1.5 h (1.17M docs at 288/s + 0.51M at 429/s) ≤ 3 h → full pipeline queued
   (`research/runs_v12/logs/queue3.sh`, after queue2).
+
+## 2026-10-13 20:24–20:44 — rule 1 (window 256 vs 512), full train
+command: `research/runs_v12/logs/queue2.sh` (bge-small L256 index for all 24 domains, `dense_search.py --splits train`);
+  then for Track 1 only (switch triggered): `dense_search.py --track 1 --splits dev --model bge-small --max-len 256`
+  and `hybrid.py --track 1 --conditions 1a 1b_query+step --dense ../research/runs_v12/dense/bge-small_L256/t1/runs
+  --out ../research/runs_v12/hybrid/bge-small_L256_t1.json` (log `runs_v12/logs/rule1_t1_L256.log`).
+data: index validation ok in all 24 domains (re-encode cos min ≥ 0.9992); L256 encoding 1,100–2,900 docs/s.
+  The L256 Track-1 results file also holds the 16:19 iota dev reproduction (0.5581/0.4984), not new dev scoring.
+result (train macro nDCG@10 over all domains, dense alone):
+  Track 1: L256 1a 0.2271, 1b 0.2407 (mean 0.2339) vs L512 0.2219, 0.2387 (0.2303) → switch to 256 (+0.0036).
+  Track 2: L256 current 0.2197, history-qfirst 0.3901 (0.3049) vs L512 0.2333, 0.4142 (0.3237) → stay at 512.
+  Track 1 with L256, hybrid re-tuned on train (chosen: linear 100+100, z-score, α 0.6 for both conditions):
+    1a  train hybrid 0.2479 · dev: BM25 0.1127, dense 0.2429, rerank 0.2467, hybrid **0.2834** (CI vs BM25 +0.1707 [0.1367, 0.2075])
+    1b  train hybrid 0.2694 · dev: BM25 0.1181, dense 0.2417, rerank 0.2531, hybrid **0.2865** (+0.1684 [0.1379, 0.2014])
+  For comparison, the L512 system scored dev 1a 0.2956 / 1b 0.2966 (dense 0.2806 / 0.2787).
+conclusion (negative): the rule picked 256 on a +0.0036 train difference, and on dev the 256 system is lower
+  (hybrid −0.012/−0.010, dense −0.038/−0.037). Train and dev disagree about the window by more than the train
+  margin, so the window choice is within noise on train and the decision rule was too sensitive (no minimum
+  margin). Per the rule, the Track-1 frozen system is the L256 one; the L512 numbers stay in the record and are
+  NOT re-selected on the basis of dev. Lesson for next time: require a margin (or a bootstrap over train topics)
+  before switching.
+
+## 2026-10-13 20:46 — rule 4 (written before any bge-base result exists): final system per track
+After queue3, the submitted-style system per track is the hybrid with the higher **train** macro nDCG@10
+(mean of the track's two conditions) of: bge-small at the rule-1 window (Track 1 L256, Track 2 L512) and
+bge-base L512. Dev numbers of both are reported; dev is not used to choose.
+Disclosure: this rule was written after the Track-1 L256 dev scores above had been seen. bge-small L512 is
+deliberately *not* a candidate on Track 1 (its train hybrid mean, 0.2590, ties L256's 0.2587; re-admitting it
+now would amount to choosing on dev).
+
+## 2026-10-13 20:40–21:40 — cross-encoder (bge-reranker-v2-m3) over the hybrid list (rule 3)
+command: `research/runs_v12/logs/queue2.sh`, last two steps: `rerank_ce.py --track {2,1} --conditions ... --hybrid
+  ../research/runs_v12/hybrid/bge-small_L512_t{2,1}.json ... --out ../research/runs_v12/ce` (report `ce/t{1,2}.json`).
+system: BAAI/bge-reranker-v2-m3 (rev 953dc6f6), fp16, max 512 tokens per (query, passage) pair, documents cut at
+  4,000 characters; scores the hybrid top 50; top N ∈ {10, 20, 50} reordered by the cross-encoder, the rest keep the
+  hybrid order; N chosen on a train subsample (≤ 30 topics per domain and condition, seed 20260921); dev once.
+  Track-2 history query = current question first. Input hybrid = bge-small **L512** (prepared before rule 1 moved
+  Track 1 to L256; the Track-1 L256 hybrid was not cross-encoded).
+cost: 241,750 pairs in ~60 min, 58–61 pairs/s with the GPU to itself.
+result (train → chosen N; dev hybrid → hybrid + CE; dev CE − hybrid, paired bootstrap):
+  2a current  train 0.2839 → 0.3375 (N=50) · dev 0.2441 → **0.2900**, +0.0459 [+0.0311, +0.0610]; better in 11/11 domains
+              (BRIGHT 0.258 → 0.308, StackExchange 0.227 → 0.268).
+  2a history  train 0.4645 → 0.4327 (N=10, the least harmful) · dev 0.4242 → 0.3777, −0.0465 [−0.0630, −0.0300];
+              worse in 6/6 BRIGHT domains (0.504 → 0.403), better in 4/5 StackExchange domains (0.329 → 0.348).
+  1a          train 0.2383 → 0.2181 (N=10) · dev 0.2956 → 0.2786, −0.0170 [−0.0373, +0.0031].
+  1b          train 0.2861 → 0.2498 (N=10) · dev 0.2966 → 0.2519, −0.0446 [−0.0659, −0.0237].
+  On Track 1 and Track-2 history every N lowers train and dev, monotonically in N (1a dev N=50: 0.2180).
+failure of the rule: N = 0 ("do not rerank") was not an allowed choice, so where the cross-encoder hurts on train the
+  rule still had to apply it. With N=0 allowed, train would have kept the plain hybrid on Track 1 and Track-2 history.
+  Reported as run; this is a design flaw in rule 3, not a reason to re-select on dev.
+conclusion: A general-purpose cross-encoder helps where the query is a short, self-contained question (Track-2
+  current turn, +4.6 points, the largest single gain on Track 2 this week) and hurts where the query is long or the
+  relevance is not a "does this passage answer this question" judgement: Track-1 queries/steps (temporal and
+  inferential relevance) and Track-2 history queries (which fill most of the 512-token pair budget). Hypotheses, not
+  tested: (a) truncation of query+passage at 512 tokens; (b) on BRIGHT history, BM25 re-finds gold through the prior
+  answers (LOG 2026-10-13 15:58 entry) while the cross-encoder judges answer-relevance to the current question only.

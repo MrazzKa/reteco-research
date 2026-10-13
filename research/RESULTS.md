@@ -342,6 +342,26 @@ Over 24 domains: NGT recall@10 against exact search 0.960–1.000, mean |ΔnDCG@
 
 Ranges are max − min nDCG@10 over the six document orders, for the two conditions of the track (1a / 1b, or current / history). Effects exist only through exact score ties between duplicate documents; with ties broken by doc id the result no longer depends on order. The largest effect is 0.011 on one domain — far from the ~10-point differences seen in week 1, which came from the analyzer (stemming) and the v1.0→v1.1 deduplication.
 
+## J. Cross-encoder (bge-reranker-v2-m3) on the hybrid list
+
+| sub-track | N chosen on train | train: hybrid → CE | dev: hybrid | dev: hybrid + CE | dev CE − hybrid [95% CI] |
+| --- | ---: | --- | ---: | ---: | --- |
+| 1 `1a` | 10 | 0.2383 → 0.2181 | 0.2956 | 0.2786 | -0.0170 [-0.0373, +0.0031] |
+| 1 `1b_query+step` | 10 | 0.2861 → 0.2498 | 0.2966 | 0.2519 | -0.0446 [-0.0659, -0.0237] |
+| 2 `2a_current` | 50 | 0.2839 → 0.3375 | 0.2441 | 0.2900 | +0.0459 [+0.0311, +0.0610] |
+| 2 `2a_history` | 10 | 0.4645 → 0.4327 | 0.4242 | 0.3777 | -0.0465 [-0.0630, -0.0300] |
+
+Train/dev macro by reranking depth N (0 = plain hybrid):
+
+| sub-track | N=0 | N=10 | N=20 | N=50 |
+| --- | --- | --- | --- | --- |
+| 1 `1a` | 0.2383 / 0.2956 | 0.2181 / 0.2786 | 0.2040 / 0.2565 | 0.1766 / 0.2180 |
+| 1 `1b_query+step` | 0.2861 / 0.2966 | 0.2498 / 0.2519 | 0.2195 / 0.2299 | 0.1774 / 0.1779 |
+| 2 `2a_current` | 0.2839 / 0.2441 | 0.2937 / 0.2657 | 0.3148 / 0.2863 | 0.3375 / 0.2900 |
+| 2 `2a_history` | 0.4645 / 0.4242 | 0.4327 / 0.3777 | 0.4015 / 0.3570 | 0.3602 / 0.3146 |
+
+Input: the bge-small **L512** hybrid of section A, top 50; train subsample ≤ 30 topics per domain and condition (seed 20260921). The pre-registered rule allowed N ∈ {10, 20, 50} only, so where the cross-encoder lowers train scores at every depth (Track 1, Track-2 history) it was still applied at N = 10; with N = 0 allowed, train would have kept the plain hybrid there. The cross-encoder helps only on the Track-2 current turn (11/11 domains).
+
 ## K. Cost of the full dense index (bge-small, 512 tokens, fp16)
 
 | track | domains | documents | encoding time | docs/s | cache size | peak VRAM |
@@ -350,6 +370,24 @@ Ranges are max − min nDCG@10 over the six document orders, for the two conditi
 | 2 | 11 | 507,141 | 6.0 min | 1398 | 0.36 GB | 0.38 GB |
 
 Encoding time is summed per domain; hsm was resumed from 4 completed shards after an OOM kill (see LOG), so its time covers only the remaining shards. Previous machine (CPU): 8 docs/s, i.e. ~38 h for Track 1.
+
+## L. Window and encoder in the full pipeline (rules 1, 2 and 4 in LOG)
+
+Each row is the whole pipeline (dense over all domains, hybrid grid tuned on train, dev scored once). Selection score = mean train macro of the hybrid over the track's two conditions.
+
+| track | dense side | condition | train dense | train hybrid* | dev dense | dev hybrid* | hybrid* config |
+| --- | --- | --- | ---: | ---: | ---: | ---: | --- |
+| 1 | bge-small_L512 | `1a` | 0.2219 | 0.2445 | 0.2806 | 0.2956 | `{'kind': 'linear', 'kb': 100, 'kd': 100, 'norm': 'zscore', 'alpha': 0.6}` |
+| 1 | bge-small_L512 | `1b_query+step` | 0.2387 | 0.2735 | 0.2787 | 0.2966 | `{'kind': 'linear', 'kb': 100, 'kd': 100, 'norm': 'minmax', 'alpha': 0.7}` |
+| 1 | bge-small_L256 | `1a` | 0.2271 | 0.2479 | 0.2429 | 0.2834 | `{'kind': 'linear', 'kb': 100, 'kd': 100, 'norm': 'zscore', 'alpha': 0.6}` |
+| 1 | bge-small_L256 | `1b_query+step` | 0.2407 | 0.2694 | 0.2417 | 0.2865 | `{'kind': 'linear', 'kb': 100, 'kd': 100, 'norm': 'zscore', 'alpha': 0.6}` |
+| 2 | bge-small_L512 | `2a_current` | 0.2333 | 0.2639 | 0.2081 | 0.2441 | `{'kind': 'linear', 'kb': 100, 'kd': 100, 'norm': 'zscore', 'alpha': 0.7}` |
+| 2 | bge-small_L512 | `2a_history` | 0.4142 | 0.4586 | 0.3816 | 0.4242 | `{'kind': 'linear', 'kb': 100, 'kd': 100, 'norm': 'zscore', 'alpha': 0.7}` |
+
+- Track 1 selection scores (train): bge-small_L512 0.2590, bge-small_L256 0.2586.
+- Track 2 selection scores (train): bge-small_L512 0.3613.
+
+Track 1 bge-small L512 is listed for the record but is not a rule-4 candidate (rule 1 moved Track 1 to 256 tokens on train; L512 was then seen to be better on dev, so re-admitting it would be selection on dev).
 
 # Weeks 1–3 (CPU)
 
