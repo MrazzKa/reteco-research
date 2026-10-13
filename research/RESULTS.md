@@ -95,14 +95,14 @@ Encoders cut text on the right; with the history first, long histories push the 
 
 ## C. Fusion on train: what the grid says
 
-| sub-track | best RRF (train) | best linear (train) | linear, alpha=0 (BM25 scores only) | linear alpha curve (z-score, 100+100): 0.0 / 0.3 / 0.5 / 0.7 / 0.9 / 1.0 |
-| --- | ---: | ---: | ---: | --- |
-| 1 `1a` | 0.2255 | 0.2445 | 0.1005 | 0.1005 / 0.1738 / 0.2316 / 0.2403 / 0.2298 / 0.2219 |
-| 1 `1b_query+step` | 0.2589 | 0.2735 | 0.1101 | 0.1101 / 0.1936 / 0.2556 / 0.2729 / 0.2503 / 0.2387 |
-| 2 `2a_current` | 0.2482 | 0.2639 | 0.1667 | 0.1667 / 0.2217 / 0.2530 / 0.2639 / 0.2482 / 0.2333 |
-| 2 `2a_history` | 0.4516 | 0.4586 | 0.4082 | 0.4082 / 0.4448 / 0.4570 / 0.4586 / 0.4333 / 0.4142 |
+| sub-track | best RRF (train) | best linear (train) | best min-max | best z-score | linear, alpha=0 (BM25 scores only) | linear alpha curve (z-score, 100+100): 0.0 / 0.3 / 0.5 / 0.7 / 0.9 / 1.0 |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| 1 `1a` | 0.2255 | 0.2445 | 0.2441 | 0.2445 | 0.1005 | 0.1005 / 0.1738 / 0.2316 / 0.2403 / 0.2298 / 0.2219 |
+| 1 `1b_query+step` | 0.2589 | 0.2735 | 0.2735 | 0.2729 | 0.1101 | 0.1101 / 0.1936 / 0.2556 / 0.2729 / 0.2503 / 0.2387 |
+| 2 `2a_current` | 0.2482 | 0.2639 | 0.2613 | 0.2639 | 0.1667 | 0.1667 / 0.2217 / 0.2530 / 0.2639 / 0.2482 / 0.2333 |
+| 2 `2a_history` | 0.4516 | 0.4586 | 0.4569 | 0.4586 | 0.4082 | 0.4082 / 0.4448 / 0.4570 / 0.4586 / 0.4333 / 0.4142 |
 
-Pool = BM25 top-kb ∪ dense top-kd. A document missing from one system's top-1000 gets that system's 1000th score (an upper bound) and no RRF contribution from it. Normalisation statistics come from each system's own top-1000 list. Linear fusion with z-scores and alpha 0.6–0.7 (dense-leaning) wins on train in 3 of 4 sub-tracks; min-max wins on 1b. Reranking the union pool with the same dense model is identical to dense retrieval (no new information) and is omitted.
+Pool = BM25 top-kb ∪ dense top-kd. A document missing from one system's top-1000 gets that system's 1000th score (an upper bound) and no RRF contribution from it. Normalisation statistics come from each system's own top-1000 list. The best min-max and z-score settings are within 0.003 of each other on every sub-track, so the choice of normalisation hardly matters; the weight does (alpha 0.6–0.7, dense-leaning, in every case), and linear fusion beats the best RRF by 0.007–0.019 on train. Reranking the union pool with the same dense model is identical to dense retrieval (no new information) and is omitted.
 
 ## D. Retrieval depth: recall@k (dev, macro over domains)
 
@@ -280,7 +280,11 @@ Track 1: iota, quant, law, workplace. Track 2: drones, law, medicalsciences (Sta
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | ---: | --- |
 | bge-base | 512 | 768 | 0.2185 | 0.2333 | 0.2688 | 0.4445 | **0.2913** | 0.7207 | 288 / 429 | 0.82 | a5beb1e3 |
 | bge-small | 256 | 384 | 0.2598 | 0.2573 | 0.2332 | 0.3943 | **0.2861** | 0.6960 | 1092 / 2186 | 0.23 | 5c38ec7c |
+| gte-modernbert | 512 | 768 | 0.2551 | 0.2534 | 0.2405 | 0.3735 | **0.2806** | 0.7245 | 78 / 255 | 1.09 | e7f32e3c |
 | bge-small | 512 | 384 | 0.2267 | 0.2355 | 0.2427 | 0.4128 | **0.2794** | 0.7306 | 654 / 1439 | 0.38 | 5c38ec7c |
+| qwen3-0.6b | 512 | 1024 | 0.1976 | 0.2298 | 0.2471 | 0.4230 | **0.2744** | 0.7575 | 39 / 77 | 2.23 | 97b0c614 |
+| bge-large | 512 | 1024 | 0.2061 | 0.2080 | 0.2597 | 0.4216 | **0.2739** | 0.7301 | 94 / 180 | 1.03 | d4aa6901 |
+| e5-large | 512 | 1024 | 0.1333 | 0.1516 | 0.2037 | 0.4235 | **0.2280** | 0.5882 | 94 / 179 | 1.03 | f169b11e |
 
 Not evaluated: `snowflake-arctic-embed-m-v2.0` (its remote code fails under transformers 5.19 with a CUDA index assertion) and `nomic-embed-text-v1.5` (remote code calls a method removed in transformers 5). Throughput includes tokenisation; the cards' longer contexts (8k–32k) were not used, every model is cut at 512 tokens.
 

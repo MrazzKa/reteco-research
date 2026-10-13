@@ -125,21 +125,24 @@ def week4(root):
     # ------------------------------------------------------------- C. fusion grid
     if all(hyb.values()):
         L += ["## C. Fusion on train: what the grid says", "",
-              "| sub-track | best RRF (train) | best linear (train) | linear, alpha=0 (BM25 scores only) "
+              "| sub-track | best RRF (train) | best linear (train) | best min-max | best z-score | linear, alpha=0 (BM25 scores only) "
               "| linear alpha curve (z-score, 100+100): 0.0 / 0.3 / 0.5 / 0.7 / 0.9 / 1.0 |",
-              "| --- | ---: | ---: | ---: | --- |"]
+              "| --- | ---: | ---: | ---: | ---: | ---: | --- |"]
         for t, cond in CONDS:
             c = hyb[t]["conditions"][cond]
             curve = c["linear_alpha_curve_train"]
             pts = [curve.get(f"zscore|100+100|a={a}") for a in (0.0, 0.3, 0.5, 0.7, 0.9, 1.0)]
+            best_mm = max(v for k, v in curve.items() if k.startswith("minmax"))
+            best_z = max(v for k, v in curve.items() if k.startswith("zscore"))
             L.append(f"| {t} `{cond}` | {f4(c['systems']['rrf*']['train_macro'])} | "
-                     f"{f4(c['systems']['linear*']['train_macro'])} | {f4(pts[0])} | "
+                     f"{f4(c['systems']['linear*']['train_macro'])} | {f4(best_mm)} | {f4(best_z)} | {f4(pts[0])} | "
                      + " / ".join(f4(p) for p in pts) + " |")
         L += ["", "Pool = BM25 top-kb ∪ dense top-kd. A document missing from one system's top-1000 "
               "gets that system's 1000th score (an upper bound) and no RRF contribution from it. "
-              "Normalisation statistics come from each system's own top-1000 list. Linear fusion with "
-              "z-scores and alpha 0.6–0.7 (dense-leaning) wins on train in 3 of 4 sub-tracks; min-max "
-              "wins on 1b. Reranking the union pool with the same dense model is identical to dense "
+              "Normalisation statistics come from each system's own top-1000 list. The best min-max and "
+              "z-score settings are within 0.003 of each other on every sub-track, so the choice of "
+              "normalisation hardly matters; the weight does (alpha 0.6–0.7, dense-leaning, in every "
+              "case), and linear fusion beats the best RRF by 0.007–0.019 on train. Reranking the union pool with the same dense model is identical to dense "
               "retrieval (no new information) and is omitted.", ""]
 
     # ------------------------------------------------------------- D. recall@k

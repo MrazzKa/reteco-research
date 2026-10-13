@@ -247,3 +247,338 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
   [t1/iota] DONE 9,680 docs, encode 78s (124.4/s), peak VRAM 1.08 GB, validation ok (cos min 0.9994)
   [t1/quant] shard 0  20,000 docs, 738s
   [t1/quant] DONE 25,040 docs, encode 798s (31.4/s), peak VRAM 1.09 GB, validation ok (cos min 0.9992)
+  [t1/law] shard 0  20,000 docs, 154s
+  [t1/law] DONE 36,110 docs, encode 275s (131.5/s), peak VRAM 1.08 GB, validation ok (cos min 0.9993)
+  [t1/workplace] shard 0  20,000 docs, 144s
+  [t1/workplace] shard 1  40,000 docs, 286s
+  [t1/workplace] DONE 43,584 docs, encode 311s (140.1/s), peak VRAM 1.08 GB, validation ok (cos min 0.9993)
+all done in 1466s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/134 [00:00<?, ?it/s]Loading weights: 100%|██████████| 134/134 [00:00<00:00, 1425.69it/s]
+    model Alibaba-NLP/gte-modernbert-base rev e7f32e3c00 dim 768 max_len 512 fp16=True (6s)
+  [t2/drones] DONE 16,381 docs, encode 95s (172.7/s), peak VRAM 1.08 GB, validation ok (cos min 0.9993)
+  [t2/law] shard 0  20,000 docs, 132s
+  [t2/law] DONE 20,027 docs, encode 132s (151.7/s), peak VRAM 1.09 GB, validation ok (cos min 0.9993)
+  [t2/medicalsciences] shard 0  20,000 docs, 141s
+  [t2/medicalsciences] DONE 23,297 docs, encode 162s (143.4/s), peak VRAM 1.09 GB, validation ok (cos min 0.9991)
+  [t2/biology] shard 0  20,000 docs, 46s
+  [t2/biology] shard 1  40,000 docs, 96s
+  [t2/biology] DONE 57,359 docs, encode 133s (431.0/s), peak VRAM 1.08 GB, validation ok (cos min 0.9992)
+  [t2/psychology] shard 0  20,000 docs, 61s
+  [t2/psychology] shard 1  40,000 docs, 121s
+  [t2/psychology] DONE 52,835 docs, encode 160s (331.2/s), peak VRAM 1.08 GB, validation ok (cos min 0.9993)
+  [t2/economics] shard 0  20,000 docs, 73s
+  [t2/economics] shard 1  40,000 docs, 149s
+  [t2/economics] DONE 50,220 docs, encode 182s (276.3/s), peak VRAM 1.08 GB, validation ok (cos min 0.9992)
+all done in 868s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/134 [00:00<?, ?it/s]Loading weights: 100%|██████████| 134/134 [00:00<00:00, 55107.04it/s]
+    model Alibaba-NLP/gte-modernbert-base rev e7f32e3c00 dim 768 max_len 512 fp16=True (5s)
+
+[t1/iota] 9,680 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2565  R@100 0.4167  R@1000 0.8762  (7 q, 11.41 ms/q)
+    train 1b_query+step        nDCG@10 0.1832  R@100 0.4375  R@1000 0.9375  (16 q, 0.45 ms/q)
+
+[t1/quant] 25,040 docs on GPU (0s)
+    train 1a                   nDCG@10 0.3085  R@100 0.6792  R@1000 0.8875  (24 q, 0.51 ms/q)
+    train 1b_query+step        nDCG@10 0.3134  R@100 0.7432  R@1000 0.9459  (37 q, 0.42 ms/q)
+
+[t1/law] 36,110 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2598  R@100 0.7674  R@1000 0.9896  (24 q, 0.49 ms/q)
+    train 1b_query+step        nDCG@10 0.2391  R@100 0.8679  R@1000 0.9811  (53 q, 0.42 ms/q)
+
+[t1/workplace] 43,584 docs on GPU (0s)
+    train 1a                   nDCG@10 0.1958  R@100 0.7147  R@1000 0.9440  (25 q, 0.49 ms/q)
+    train 1b_query+step        nDCG@10 0.2778  R@100 0.8226  R@1000 0.9677  (31 q, 0.45 ms/q)
+wrote ../research/runs_v12/select/gte-modernbert_L512/t1/results.json
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/134 [00:00<?, ?it/s]Loading weights: 100%|██████████| 134/134 [00:00<00:00, 82713.28it/s]
+    model Alibaba-NLP/gte-modernbert-base rev e7f32e3c00 dim 768 max_len 512 fp16=True (5s)
+
+[t2/drones] 16,381 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2932  R@100 0.7827  R@1000 0.9383  (104 q, 0.95 ms/q)
+    train 2a_history           nDCG@10 0.3138  R@100 0.8575  R@1000 0.9728  (104 q, 0.37 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.3564  R@100 0.8758  R@1000 0.9760  (104 q, 0.36 ms/q)
+
+[t2/law] 20,027 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2474  R@100 0.7722  R@1000 0.9273  (164 q, 0.38 ms/q)
+    train 2a_history           nDCG@10 0.2947  R@100 0.8955  R@1000 0.9840  (164 q, 0.36 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.3351  R@100 0.8996  R@1000 0.9883  (164 q, 0.37 ms/q)
+
+[t2/medicalsciences] 23,297 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.3484  R@100 0.8571  R@1000 0.9616  (139 q, 0.37 ms/q)
+    train 2a_history           nDCG@10 0.3645  R@100 0.9698  R@1000 0.9946  (139 q, 0.35 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.3918  R@100 0.9794  R@1000 1.0000  (139 q, 0.36 ms/q)
+
+[t2/biology] 57,359 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.1804  R@100 0.5864  R@1000 0.8495  (247 q, 0.39 ms/q)
+    train 2a_history           nDCG@10 0.3166  R@100 0.7810  R@1000 0.9558  (247 q, 0.38 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.3592  R@100 0.8209  R@1000 0.9599  (247 q, 0.39 ms/q)
+
+[t2/psychology] 52,835 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2091  R@100 0.5600  R@1000 0.7978  (234 q, 0.4 ms/q)
+    train 2a_history           nDCG@10 0.4318  R@100 0.7895  R@1000 0.9400  (234 q, 0.37 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.4491  R@100 0.8339  R@1000 0.9440  (234 q, 0.38 ms/q)
+
+[t2/economics] 50,220 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.1642  R@100 0.5037  R@1000 0.7785  (196 q, 0.38 ms/q)
+    train 2a_history           nDCG@10 0.3436  R@100 0.7300  R@1000 0.9179  (196 q, 0.39 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.3492  R@100 0.7435  R@1000 0.9183  (196 q, 0.38 ms/q)
+wrote ../research/runs_v12/select/gte-modernbert_L512/t2/results.json
+MODEL DONE gte-modernbert L512
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights:  18%|█▊        | 55/310 [00:00<00:00, 520.74it/s]Loading weights:  35%|███▍      | 108/310 [00:00<00:00, 459.66it/s]Loading weights:  55%|█████▌    | 171/310 [00:00<00:00, 525.71it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 837.47it/s]
+    model Qwen/Qwen3-Embedding-0.6B rev 97b0c614be dim 1024 max_len 512 fp16=True (8s)
+  [t1/iota] DONE 9,680 docs, encode 281s (34.5/s), peak VRAM 2.22 GB, validation ok (cos min 0.9995)
+  [t1/quant] shard 0  20,000 docs, 559s
+  [t1/quant] DONE 25,040 docs, encode 699s (35.8/s), peak VRAM 2.23 GB, validation ok (cos min 0.9995)
+  [t1/law] shard 0  20,000 docs, 510s
+  [t1/law] DONE 36,110 docs, encode 915s (39.5/s), peak VRAM 2.23 GB, validation ok (cos min 0.9996)
+  [t1/workplace] shard 0  20,000 docs, 478s
+  [t1/workplace] shard 1  40,000 docs, 952s
+  [t1/workplace] DONE 43,584 docs, encode 1037s (42.0/s), peak VRAM 2.23 GB, validation ok (cos min 0.9996)
+all done in 2939s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 11290.97it/s]
+    model Qwen/Qwen3-Embedding-0.6B rev 97b0c614be dim 1024 max_len 512 fp16=True (8s)
+  [t2/drones] DONE 16,381 docs, encode 293s (55.9/s), peak VRAM 2.22 GB, validation ok (cos min 0.9996)
+  [t2/law] shard 0  20,000 docs, 446s
+  [t2/law] DONE 20,027 docs, encode 447s (44.8/s), peak VRAM 2.23 GB, validation ok (cos min 0.9996)
+  [t2/medicalsciences] shard 0  20,000 docs, 485s
+  [t2/medicalsciences] DONE 23,297 docs, encode 556s (41.9/s), peak VRAM 2.23 GB, validation ok (cos min 0.9996)
+  [t2/biology] shard 0  20,000 docs, 159s
+  [t2/biology] shard 1  40,000 docs, 346s
+  [t2/biology] DONE 57,359 docs, encode 476s (120.4/s), peak VRAM 2.22 GB, validation ok (cos min 0.9996)
+  [t2/psychology] shard 0  20,000 docs, 199s
+  [t2/psychology] shard 1  40,000 docs, 405s
+  [t2/psychology] DONE 52,835 docs, encode 531s (99.5/s), peak VRAM 2.22 GB, validation ok (cos min 0.9997)
+  [t2/economics] shard 0  20,000 docs, 233s
+  [t2/economics] shard 1  40,000 docs, 447s
+  [t2/economics] DONE 50,220 docs, encode 551s (91.1/s), peak VRAM 2.22 GB, validation ok (cos min 0.9996)
+all done in 2865s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 3610.95it/s]
+    model Qwen/Qwen3-Embedding-0.6B rev 97b0c614be dim 1024 max_len 512 fp16=True (7s)
+
+[t1/iota] 9,680 docs on GPU (0s)
+    train 1a                   nDCG@10 0.1928  R@100 0.4262  R@1000 0.8048  (7 q, 15.2 ms/q)
+    train 1b_query+step        nDCG@10 0.1798  R@100 0.6250  R@1000 0.9062  (16 q, 0.49 ms/q)
+
+[t1/quant] 25,040 docs on GPU (0s)
+    train 1a                   nDCG@10 0.1445  R@100 0.6167  R@1000 0.9292  (24 q, 0.49 ms/q)
+    train 1b_query+step        nDCG@10 0.1954  R@100 0.8243  R@1000 0.9730  (37 q, 0.44 ms/q)
+
+[t1/law] 36,110 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2618  R@100 0.8271  R@1000 1.0000  (24 q, 0.49 ms/q)
+    train 1b_query+step        nDCG@10 0.2640  R@100 0.9371  R@1000 1.0000  (53 q, 0.41 ms/q)
+
+[t1/workplace] 43,584 docs on GPU (0s)
+    train 1a                   nDCG@10 0.1913  R@100 0.7309  R@1000 0.9240  (25 q, 0.49 ms/q)
+    train 1b_query+step        nDCG@10 0.2800  R@100 0.8871  R@1000 0.9355  (31 q, 0.46 ms/q)
+wrote ../research/runs_v12/select/qwen3-0.6b_L512/t1/results.json
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 21672.02it/s]
+    model Qwen/Qwen3-Embedding-0.6B rev 97b0c614be dim 1024 max_len 512 fp16=True (7s)
+
+[t2/drones] 16,381 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2591  R@100 0.7095  R@1000 0.9119  (104 q, 1.08 ms/q)
+    train 2a_history           nDCG@10 0.3512  R@100 0.8404  R@1000 0.9551  (104 q, 0.39 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.3555  R@100 0.8596  R@1000 0.9551  (104 q, 0.36 ms/q)
+
+[t2/law] 20,027 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2578  R@100 0.7300  R@1000 0.9045  (164 q, 0.39 ms/q)
+    train 2a_history           nDCG@10 0.3849  R@100 0.9457  R@1000 0.9929  (164 q, 0.38 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.3873  R@100 0.9454  R@1000 0.9929  (164 q, 0.37 ms/q)
+
+[t2/medicalsciences] 23,297 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.3530  R@100 0.8775  R@1000 0.9610  (139 q, 0.37 ms/q)
+    train 2a_history           nDCG@10 0.4092  R@100 0.9734  R@1000 0.9982  (139 q, 0.36 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.4008  R@100 0.9770  R@1000 0.9982  (139 q, 0.39 ms/q)
+
+[t2/biology] 57,359 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2073  R@100 0.6269  R@1000 0.8850  (247 q, 0.4 ms/q)
+    train 2a_history           nDCG@10 0.4427  R@100 0.8853  R@1000 0.9919  (247 q, 0.4 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.4403  R@100 0.8853  R@1000 0.9919  (247 q, 0.41 ms/q)
+
+[t2/psychology] 52,835 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2083  R@100 0.5501  R@1000 0.8024  (234 q, 0.41 ms/q)
+    train 2a_history           nDCG@10 0.5250  R@100 0.8748  R@1000 0.9791  (234 q, 0.4 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.5228  R@100 0.8782  R@1000 0.9777  (234 q, 0.41 ms/q)
+
+[t2/economics] 50,220 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.1972  R@100 0.5020  R@1000 0.7628  (196 q, 0.42 ms/q)
+    train 2a_history           nDCG@10 0.4361  R@100 0.8302  R@1000 0.9472  (196 q, 0.4 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.4315  R@100 0.8280  R@1000 0.9485  (196 q, 0.41 ms/q)
+wrote ../research/runs_v12/select/qwen3-0.6b_L512/t2/results.json
+MODEL DONE qwen3-0.6b L512
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights:  14%|█▍        | 55/391 [00:00<00:00, 533.60it/s]Loading weights:  28%|██▊       | 109/391 [00:00<00:00, 477.49it/s]Loading weights:  40%|████      | 158/391 [00:00<00:00, 441.87it/s]Loading weights:  52%|█████▏    | 203/391 [00:00<00:00, 437.37it/s]Loading weights:  71%|███████   | 277/391 [00:00<00:00, 538.20it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 601.06it/s]
+    model intfloat/e5-large-v2 rev f169b11e22 dim 1024 max_len 512 fp16=True (8s)
+  [t1/iota] DONE 9,680 docs, encode 113s (85.4/s), peak VRAM 1.02 GB, validation ok (cos min 0.9995)
+  [t1/quant] shard 0  20,000 docs, 233s
+  [t1/quant] DONE 25,040 docs, encode 291s (86.0/s), peak VRAM 1.03 GB, validation ok (cos min 0.9996)
+  [t1/law] shard 0  20,000 docs, 208s
+  [t1/law] DONE 36,110 docs, encode 375s (96.3/s), peak VRAM 1.02 GB, validation ok (cos min 0.9996)
+  [t1/workplace] shard 0  20,000 docs, 204s
+  [t1/workplace] shard 1  40,000 docs, 406s
+  [t1/workplace] DONE 43,584 docs, encode 442s (98.7/s), peak VRAM 1.02 GB, validation ok (cos min 0.9995)
+all done in 1225s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights:  68%|██████▊   | 264/391 [00:00<00:00, 2639.48it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 3653.46it/s]
+    model intfloat/e5-large-v2 rev f169b11e22 dim 1024 max_len 512 fp16=True (6s)
+  [t2/drones] DONE 16,381 docs, encode 134s (122.6/s), peak VRAM 1.02 GB, validation ok (cos min 0.9995)
+  [t2/law] shard 0  20,000 docs, 184s
+  [t2/law] DONE 20,027 docs, encode 184s (108.8/s), peak VRAM 1.03 GB, validation ok (cos min 0.9995)
+  [t2/medicalsciences] shard 0  20,000 docs, 201s
+  [t2/medicalsciences] DONE 23,297 docs, encode 232s (100.5/s), peak VRAM 1.03 GB, validation ok (cos min 0.9995)
+  [t2/biology] shard 0  20,000 docs, 70s
+  [t2/biology] shard 1  40,000 docs, 147s
+  [t2/biology] DONE 57,359 docs, encode 206s (279.1/s), peak VRAM 1.02 GB, validation ok (cos min 0.9996)
+  [t2/psychology] shard 0  20,000 docs, 91s
+  [t2/psychology] shard 1  40,000 docs, 182s
+  [t2/psychology] DONE 52,835 docs, encode 238s (222.1/s), peak VRAM 1.02 GB, validation ok (cos min 0.9996)
+  [t2/economics] shard 0  20,000 docs, 101s
+  [t2/economics] shard 1  40,000 docs, 192s
+  [t2/economics] DONE 50,220 docs, encode 238s (210.8/s), peak VRAM 1.02 GB, validation ok (cos min 0.9996)
+all done in 1237s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 73092.34it/s]
+    model intfloat/e5-large-v2 rev f169b11e22 dim 1024 max_len 512 fp16=True (5s)
+
+[t1/iota] 9,680 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2762  R@100 0.4357  R@1000 0.7976  (7 q, 14.54 ms/q)
+    train 1b_query+step        nDCG@10 0.2118  R@100 0.4375  R@1000 0.8438  (16 q, 0.45 ms/q)
+
+[t1/quant] 25,040 docs on GPU (0s)
+    train 1a                   nDCG@10 0.0605  R@100 0.3007  R@1000 0.6215  (24 q, 0.49 ms/q)
+    train 1b_query+step        nDCG@10 0.0420  R@100 0.4099  R@1000 0.7027  (37 q, 0.44 ms/q)
+
+[t1/law] 36,110 docs on GPU (0s)
+    train 1a                   nDCG@10 0.1072  R@100 0.5153  R@1000 0.8097  (24 q, 0.5 ms/q)
+    train 1b_query+step        nDCG@10 0.1218  R@100 0.5535  R@1000 0.8428  (53 q, 0.43 ms/q)
+
+[t1/workplace] 43,584 docs on GPU (0s)
+    train 1a                   nDCG@10 0.0893  R@100 0.4947  R@1000 0.8933  (25 q, 0.48 ms/q)
+    train 1b_query+step        nDCG@10 0.2308  R@100 0.7419  R@1000 0.9032  (31 q, 0.44 ms/q)
+wrote ../research/runs_v12/select/e5-large_L512/t1/results.json
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 73633.84it/s]
+    model intfloat/e5-large-v2 rev f169b11e22 dim 1024 max_len 512 fp16=True (5s)
+
+[t2/drones] 16,381 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2714  R@100 0.7415  R@1000 0.9639  (104 q, 1.17 ms/q)
+    train 2a_history           nDCG@10 0.4219  R@100 0.9064  R@1000 0.9920  (104 q, 0.39 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.4303  R@100 0.9160  R@1000 1.0000  (104 q, 0.38 ms/q)
+
+[t2/law] 20,027 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2395  R@100 0.6862  R@1000 0.8362  (164 q, 0.36 ms/q)
+    train 2a_history           nDCG@10 0.4132  R@100 0.8732  R@1000 0.9749  (164 q, 0.38 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.4127  R@100 0.8808  R@1000 0.9769  (164 q, 0.39 ms/q)
+
+[t2/medicalsciences] 23,297 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.3403  R@100 0.7314  R@1000 0.9335  (139 q, 0.37 ms/q)
+    train 2a_history           nDCG@10 0.4614  R@100 0.9305  R@1000 0.9982  (139 q, 0.35 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.4535  R@100 0.9269  R@1000 0.9982  (139 q, 0.36 ms/q)
+
+[t2/biology] 57,359 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.0834  R@100 0.3050  R@1000 0.5516  (247 q, 0.39 ms/q)
+    train 2a_history           nDCG@10 0.3880  R@100 0.7325  R@1000 0.8428  (247 q, 0.43 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.3933  R@100 0.7287  R@1000 0.8536  (247 q, 0.4 ms/q)
+
+[t2/psychology] 52,835 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.1461  R@100 0.4368  R@1000 0.6539  (234 q, 0.41 ms/q)
+    train 2a_history           nDCG@10 0.4718  R@100 0.8175  R@1000 0.9227  (234 q, 0.41 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.4555  R@100 0.8068  R@1000 0.9221  (234 q, 0.39 ms/q)
+
+[t2/economics] 50,220 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.1416  R@100 0.3654  R@1000 0.5751  (196 q, 0.39 ms/q)
+    train 2a_history           nDCG@10 0.4121  R@100 0.7433  R@1000 0.9013  (196 q, 0.4 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.3958  R@100 0.7582  R@1000 0.8992  (196 q, 0.39 ms/q)
+wrote ../research/runs_v12/select/e5-large_L512/t2/results.json
+MODEL DONE e5-large L512
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights:   8%|▊         | 33/391 [00:00<00:01, 297.97it/s]Loading weights:  17%|█▋        | 67/391 [00:00<00:01, 321.61it/s]Loading weights:  26%|██▌       | 100/391 [00:00<00:01, 285.05it/s]Loading weights:  47%|████▋     | 182/391 [00:00<00:00, 476.00it/s]Loading weights:  60%|██████    | 236/391 [00:00<00:00, 483.82it/s]Loading weights:  73%|███████▎  | 286/391 [00:00<00:00, 448.44it/s]Loading weights:  85%|████████▌ | 333/391 [00:00<00:00, 388.07it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 421.70it/s]
+    model BAAI/bge-large-en-v1.5 rev d4aa6901d3 dim 1024 max_len 512 fp16=True (8s)
+  [t1/iota] DONE 9,680 docs, encode 114s (85.1/s), peak VRAM 1.02 GB, validation ok (cos min 0.9996)
+  [t1/quant] shard 0  20,000 docs, 232s
+  [t1/quant] DONE 25,040 docs, encode 290s (86.4/s), peak VRAM 1.03 GB, validation ok (cos min 0.9995)
+  [t1/law] shard 0  20,000 docs, 207s
+  [t1/law] DONE 36,110 docs, encode 373s (96.8/s), peak VRAM 1.03 GB, validation ok (cos min 0.9996)
+  [t1/workplace] shard 0  20,000 docs, 203s
+  [t1/workplace] shard 1  40,000 docs, 404s
+  [t1/workplace] DONE 43,584 docs, encode 439s (99.2/s), peak VRAM 1.02 GB, validation ok (cos min 0.9995)
+all done in 1222s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 4123.53it/s]
+    model BAAI/bge-large-en-v1.5 rev d4aa6901d3 dim 1024 max_len 512 fp16=True (7s)
+  [t2/drones] DONE 16,381 docs, encode 133s (123.3/s), peak VRAM 1.02 GB, validation ok (cos min 0.9996)
+  [t2/law] shard 0  20,000 docs, 182s
+  [t2/law] DONE 20,027 docs, encode 183s (109.5/s), peak VRAM 1.03 GB, validation ok (cos min 0.9998)
+  [t2/medicalsciences] shard 0  20,000 docs, 201s
+  [t2/medicalsciences] DONE 23,297 docs, encode 231s (101.0/s), peak VRAM 1.03 GB, validation ok (cos min 0.9995)
+  [t2/biology] shard 0  20,000 docs, 69s
+  [t2/biology] shard 1  40,000 docs, 145s
+  [t2/biology] DONE 57,359 docs, encode 202s (283.5/s), peak VRAM 1.02 GB, validation ok (cos min 0.9996)
+  [t2/psychology] shard 0  20,000 docs, 91s
+  [t2/psychology] shard 1  40,000 docs, 180s
+  [t2/psychology] DONE 52,835 docs, encode 235s (224.4/s), peak VRAM 1.02 GB, validation ok (cos min 0.9996)
+  [t2/economics] shard 0  20,000 docs, 100s
+  [t2/economics] shard 1  40,000 docs, 190s
+  [t2/economics] DONE 50,220 docs, encode 236s (212.9/s), peak VRAM 1.02 GB, validation ok (cos min 0.9996)
+all done in 1227s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 72658.41it/s]
+    model BAAI/bge-large-en-v1.5 rev d4aa6901d3 dim 1024 max_len 512 fp16=True (7s)
+
+[t1/iota] 9,680 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2381  R@100 0.4905  R@1000 0.9238  (7 q, 17.96 ms/q)
+    train 1b_query+step        nDCG@10 0.2148  R@100 0.6250  R@1000 0.9062  (16 q, 0.5 ms/q)
+
+[t1/quant] 25,040 docs on GPU (0s)
+    train 1a                   nDCG@10 0.1153  R@100 0.4917  R@1000 0.8194  (24 q, 0.54 ms/q)
+    train 1b_query+step        nDCG@10 0.1393  R@100 0.6486  R@1000 0.8784  (37 q, 0.46 ms/q)
+
+[t1/law] 36,110 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2421  R@100 0.7604  R@1000 0.9861  (24 q, 0.49 ms/q)
+    train 1b_query+step        nDCG@10 0.2333  R@100 0.8333  R@1000 0.9811  (53 q, 0.4 ms/q)
+
+[t1/workplace] 43,584 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2288  R@100 0.7084  R@1000 0.9680  (25 q, 0.48 ms/q)
+    train 1b_query+step        nDCG@10 0.2447  R@100 0.8065  R@1000 1.0000  (31 q, 0.48 ms/q)
+wrote ../research/runs_v12/select/bge-large_L512/t1/results.json
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 7475.05it/s]
+    model BAAI/bge-large-en-v1.5 rev d4aa6901d3 dim 1024 max_len 512 fp16=True (7s)
+
+[t2/drones] 16,381 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2866  R@100 0.7744  R@1000 0.9575  (104 q, 1.39 ms/q)
+    train 2a_history           nDCG@10 0.4002  R@100 0.8907  R@1000 0.9728  (104 q, 0.4 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.4129  R@100 0.9091  R@1000 0.9696  (104 q, 0.38 ms/q)
+
+[t2/law] 20,027 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2205  R@100 0.7314  R@1000 0.9170  (164 q, 0.37 ms/q)
+    train 2a_history           nDCG@10 0.3796  R@100 0.8995  R@1000 0.9947  (164 q, 0.37 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.3775  R@100 0.8910  R@1000 0.9907  (164 q, 0.37 ms/q)
+
+[t2/medicalsciences] 23,297 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.3488  R@100 0.8784  R@1000 0.9622  (139 q, 0.37 ms/q)
+    train 2a_history           nDCG@10 0.4199  R@100 0.9618  R@1000 0.9964  (139 q, 0.37 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.4213  R@100 0.9665  R@1000 0.9964  (139 q, 0.38 ms/q)
+
+[t2/biology] 57,359 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2226  R@100 0.6562  R@1000 0.8694  (247 q, 0.4 ms/q)
+    train 2a_history           nDCG@10 0.4335  R@100 0.8472  R@1000 0.9723  (247 q, 0.42 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.4268  R@100 0.8364  R@1000 0.9602  (247 q, 0.41 ms/q)
+
+[t2/psychology] 52,835 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2584  R@100 0.5654  R@1000 0.8036  (234 q, 0.44 ms/q)
+    train 2a_history           nDCG@10 0.4826  R@100 0.8236  R@1000 0.9352  (234 q, 0.38 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.4781  R@100 0.8377  R@1000 0.9298  (234 q, 0.41 ms/q)
+
+[t2/economics] 50,220 docs on GPU (0s)
+    train 2a_current           nDCG@10 0.2214  R@100 0.5866  R@1000 0.8496  (196 q, 0.42 ms/q)
+    train 2a_history           nDCG@10 0.4210  R@100 0.8337  R@1000 0.9551  (196 q, 0.38 ms/q)
+    train 2a_history_qfirst    nDCG@10 0.4129  R@100 0.8422  R@1000 0.9586  (196 q, 0.4 ms/q)
+wrote ../research/runs_v12/select/bge-large_L512/t2/results.json
+MODEL DONE bge-large L512
+ALLDONE

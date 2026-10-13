@@ -631,3 +631,24 @@ failure: first attempt killed by signal 9 after 10 min, peak RSS 11.0 GB — the
 result: hsm dev 1a — rerank **0.3932**, RRF 0.3728, recall cap 0.6977; 1b_query+step — rerank **0.3234**,
   RRF 0.3452, cap 0.6189. 35 s, peak RSS 2.1 GB.
 conclusion: The week-2 table (RESULTS, "Weeks 1–3", section 2) now covers all 13 Track-1 domains.
+
+## 2026-10-13 15:10–20:21 — encoder selection on train (subset), rule 2 applied
+command: `research/runs_v12/logs/select_queue.sh` (per model: `dense_index.py` on the subset domains, then
+  `dense_search.py --splits train`; outputs `research/runs_v12/select/<model>_L<len>/t{1,2}/results.json`).
+data: Track 1 iota, quant, law, workplace; Track 2 drones, law, medicalsciences (StackExchange), biology,
+  psychology, economics (BRIGHT). Train queries only, retrieval over each full domain corpus. Dev not touched.
+system: fp16 encoding, exact float32 search; prefixes/instructions from each model card (bge: query
+  instruction; e5: "query: "/"passage: "; Qwen3: retrieval instruct prompt; gte-modernbert: none); every
+  model cut at 512 tokens. Revisions recorded in the results files and RESULTS section G.
+result (mean of 1a, 1b, 2a current, 2a history-qfirst train macro nDCG@10):
+  bge-base 0.2913 · bge-small L256 0.2861 · gte-modernbert 0.2806 · bge-small L512 0.2794 ·
+  Qwen3-Embedding-0.6B 0.2744 · bge-large 0.2739 · e5-large-v2 0.2280.
+  Throughput Track 1 / Track 2 docs/s: bge-small 654/1439 (L512), bge-base 288/429, bge-large 94/180,
+  e5-large 94/179, gte-modernbert 78/255, Qwen3-0.6B 39/77 (peak VRAM 2.2 GB, batch 16).
+  Qwen3 has the best recall@100 (0.758) but lower nDCG@10 on Track 1; e5-large is weak on Track 1
+  (1a 0.133) — prefixes were applied as in the card; not investigated further.
+failed: snowflake-arctic-embed-m-v2.0 and nomic-embed-text-v1.5 (remote code incompatible with transformers 5.19).
+conclusion: Bigger is not better here: no 335M–600M model beats bge-base at 512 tokens, and the spread
+  between the top four (0.279–0.291) is small for ~80 Track-1 train queries. Rule 2: bge-base wins; full
+  index estimated ≈1.5 h (1.17M docs at 288/s + 0.51M at 429/s) ≤ 3 h → full pipeline queued
+  (`research/runs_v12/logs/queue3.sh`, after queue2).
