@@ -101,6 +101,13 @@ class Encoder:
                 print(f"    CUDA OOM -> batch {batch}", flush=True)
 
     def encode_docs(self, texts, batch=128):
+        # Cap very long documents before tokenisation: only the first max_len tokens are
+        # used, but the tokenizer would still materialise the whole text (Track-1 corpora
+        # hold documents of >1M words; this drove the indexer's RSS past 5 GB and, next
+        # to an ANN build, into the OOM killer). 200 characters per token is far beyond
+        # any real text, so the first max_len tokens are unchanged.
+        cap = 200 * self.max_len
+        texts = [t[:cap] for t in texts]
         return self._enc(texts, self.dp, min(batch, getattr(self, "oom_batch", batch)))
 
     def encode_queries(self, texts, batch=64):

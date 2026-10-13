@@ -1,0 +1,89 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 5754.57it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (7s)
+  [t2/drones] DONE 16,381 docs, encode 13s (1266.4/s), peak VRAM 0.37 GB, validation ok (cos min 0.9996)
+  [t2/politics] DONE 16,712 docs, encode 17s (970.6/s), peak VRAM 0.38 GB, validation ok (cos min 0.9995)
+  [t2/law] shard 0  20,000 docs, 20s
+  [t2/law] DONE 20,027 docs, encode 20s (989.1/s), peak VRAM 0.38 GB, validation ok (cos min 0.9996)
+  [t2/medicalsciences] shard 0  20,000 docs, 26s
+  [t2/medicalsciences] DONE 23,297 docs, encode 29s (796.4/s), peak VRAM 0.38 GB, validation ok (cos min 0.9995)
+  [t2/hardware] shard 0  20,000 docs, 20s
+  [t2/hardware] DONE 26,308 docs, encode 25s (1031.7/s), peak VRAM 0.37 GB, validation ok (cos min 0.9995)
+  [t2/economics] shard 0  20,000 docs, 13s
+  [t2/economics] shard 1  40,000 docs, 26s
+  [t2/economics] DONE 50,220 docs, encode 32s (1558.6/s), peak VRAM 0.37 GB, validation ok (cos min 0.9996)
+  [t2/psychology] shard 0  20,000 docs, 13s
+  [t2/psychology] shard 1  40,000 docs, 25s
+  [t2/psychology] DONE 52,835 docs, encode 33s (1623.1/s), peak VRAM 0.37 GB, validation ok (cos min 0.9996)
+  [t2/biology] shard 0  20,000 docs, 9s
+  [t2/biology] shard 1  40,000 docs, 18s
+  [t2/biology] DONE 57,359 docs, encode 26s (2221.8/s), peak VRAM 0.37 GB, validation ok (cos min 0.9997)
+  [t2/sustainable_living] shard 0  20,000 docs, 19s
+  [t2/sustainable_living] shard 1  40,000 docs, 29s
+  [t2/sustainable_living] shard 2  60,000 docs, 39s
+  [t2/sustainable_living] DONE 60,792 docs, encode 39s (1544.1/s), peak VRAM 0.37 GB, validation ok (cos min 0.9996)
+  [t2/robotics] shard 0  20,000 docs, 13s
+  [t2/robotics] shard 1  40,000 docs, 24s
+  [t2/robotics] shard 2  60,000 docs, 33s
+  [t2/robotics] DONE 61,961 docs, encode 33s (1851.0/s), peak VRAM 0.37 GB, validation ok (cos min 0.9995)
+  [t2/earth_science] shard 0  20,000 docs, 21s
+  [t2/earth_science] shard 1  40,000 docs, 40s
+  [t2/earth_science] shard 2  60,000 docs, 53s
+  [t2/earth_science] shard 3  80,000 docs, 68s
+  [t2/earth_science] shard 4  100,000 docs, 81s
+  [t2/earth_science] shard 5  120,000 docs, 94s
+  [t2/earth_science] DONE 121,249 docs, encode 94s (1287.5/s), peak VRAM 0.37 GB, validation ok (cos min 0.9996)
+all done in 369s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3339.92it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (8s)
+  [t1/iota] DONE 9,680 docs, encode 23s (412.0/s), peak VRAM 0.37 GB, validation ok (cos min 0.9998)
+  [t1/quant] shard 0  20,000 docs, 48s
+  [t1/quant] DONE 25,040 docs, encode 43s (578.8/s), peak VRAM 0.38 GB, validation ok (cos min 0.9997)
+  [t1/law] shard 0  20,000 docs, 26s
+  [t1/law] DONE 36,110 docs, encode 49s (730.3/s), peak VRAM 0.38 GB, validation ok (cos min 0.9997)
+  [t1/workplace] shard 0  20,000 docs, 27s
+  [t1/workplace] shard 1  40,000 docs, 55s
+  [t1/workplace] DONE 43,584 docs, encode 59s (742.3/s), peak VRAM 0.37 GB, validation ok (cos min 0.9995)
+  [t1/cardano] shard 0  20,000 docs, 32s
+  [t1/cardano] shard 1  40,000 docs, 65s
+  [t1/cardano] DONE 47,509 docs, encode 80s (593.4/s), peak VRAM 0.38 GB, validation ok (cos min 0.9997)
+  [t1/monero] shard 0  20,000 docs, 36s
+  [t1/monero] shard 1  40,000 docs, 68s
+  [t1/monero] DONE 53,955 docs, encode 92s (589.5/s), peak VRAM 0.38 GB, validation ok (cos min 0.9995)
+  [t1/economics] shard 0  20,000 docs, 32s
+  [t1/economics] shard 1  40,000 docs, 64s
+  [t1/economics] shard 2  60,000 docs, 97s
+  [t1/economics] DONE 74,692 docs, encode 120s (622.2/s), peak VRAM 0.38 GB, validation ok (cos min 0.9995)
+  [t1/bitcoin] shard 0  20,000 docs, 37s
+  [t1/bitcoin] shard 1  40,000 docs, 82s
+  [t1/bitcoin] shard 2  60,000 docs, 118s
+  [t1/bitcoin] DONE 76,706 docs, encode 147s (521.7/s), peak VRAM 0.38 GB, validation ok (cos min 0.9996)
+  [t1/politics] shard 0  20,000 docs, 30s
+  [t1/politics] shard 1  40,000 docs, 62s
+  [t1/politics] shard 2  60,000 docs, 93s
+  [t1/politics] shard 3  80,000 docs, 122s
+  [t1/politics] shard 4  100,000 docs, 153s
+  [t1/politics] shard 5  120,000 docs, 186s
+  [t1/politics] DONE 135,207 docs, encode 209s (648.1/s), peak VRAM 0.38 GB, validation ok (cos min 0.9992)
+  [t1/genealogy] shard 0  20,000 docs, 33s
+  [t1/genealogy] shard 1  40,000 docs, 80s
+  [t1/genealogy] shard 2  60,000 docs, 115s
+  [t1/genealogy] shard 3  80,000 docs, 148s
+  [t1/genealogy] shard 4  100,000 docs, 180s
+  [t1/genealogy] shard 5  120,000 docs, 213s
+  [t1/genealogy] DONE 136,101 docs, encode 240s (568.0/s), peak VRAM 0.38 GB, validation ok (cos min 0.9996)
+  [t1/travel] shard 0  20,000 docs, 30s
+  [t1/travel] shard 1  40,000 docs, 59s
+  [t1/travel] shard 2  60,000 docs, 87s
+  [t1/travel] shard 3  80,000 docs, 118s
+  [t1/travel] shard 4  100,000 docs, 148s
+  [t1/travel] shard 5  120,000 docs, 176s
+  [t1/travel] shard 6  140,000 docs, 206s
+  [t1/travel] DONE 158,771 docs, encode 232s (685.6/s), peak VRAM 0.38 GB, validation ok (cos min 0.9995)
+  [t1/hsm] shard 0  20,000 docs, 35s
+  [t1/hsm] shard 1  40,000 docs, 70s
+  [t1/hsm] shard 2  60,000 docs, 105s
+  [t1/hsm] shard 3  80,000 docs, 141s
+/usr/lib/python3.14/multiprocessing/resource_tracker.py:396: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/loky-5205-cctahka3'}
+  warnings.warn(

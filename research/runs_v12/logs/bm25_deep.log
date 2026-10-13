@@ -1,0 +1,363 @@
+    index: 57,359 docs, 2s (lucene)
+
+[track2 / biology / train]
+    2a_current                 247 topics (247 unique)    0.3s
+      -> 2a_current nDCG@10 0.2019   official 0.225
+    2a_history                 247 topics (247 unique)    1.4s
+      -> 2a_history nDCG@10 0.5904   official 0.6369
+
+[track2 / biology / dev]
+    2a_current                 115 topics (115 unique)    0.2s
+      -> 2a_current nDCG@10 0.1962   official 0.2034
+    2a_history                 115 topics (115 unique)    0.7s
+      -> 2a_history nDCG@10 0.5529   official 0.6065
+    index: 16,381 docs, 1s (lucene)
+
+[track2 / drones / train]
+    2a_current                 104 topics (104 unique)    0.1s
+      -> 2a_current nDCG@10 0.1319   official 0.14
+    2a_history                 104 topics (104 unique)    0.5s
+      -> 2a_history nDCG@10 0.2546   official 0.3162
+
+[track2 / drones / dev]
+    2a_current                  38 topics (38 unique)    0.0s
+      -> 2a_current nDCG@10 0.1235   official 0.1695
+    2a_history                  38 topics (38 unique)    0.2s
+      -> 2a_history nDCG@10 0.2590   official 0.2954
+    index: 121,249 docs, 5s (lucene)
+
+[track2 / earth_science / train]
+    2a_current                 321 topics (321 unique)    0.5s
+      -> 2a_current nDCG@10 0.2447   official 0.2757
+    2a_history                 321 topics (321 unique)    1.9s
+      -> 2a_history nDCG@10 0.6081   official 0.6324
+
+[track2 / earth_science / dev]
+    2a_current                 133 topics (133 unique)    0.2s
+      -> 2a_current nDCG@10 0.2058   official 0.2195
+    2a_history                 133 topics (133 unique)    0.7s
+      -> 2a_history nDCG@10 0.6040   official 0.6264
+    index: 50,220 docs, 2s (lucene)
+
+[track2 / economics / train]
+    2a_current                 196 topics (196 unique)    0.2s
+      -> 2a_current nDCG@10 0.1450   official 0.1573
+    2a_history                 196 topics (196 unique)    1.2s
+      -> 2a_history nDCG@10 0.4334   official 0.4593
+
+[track2 / economics / dev]
+    2a_current                  92 topics (92 unique)    0.1s
+      -> 2a_current nDCG@10 0.1783   official 0.1629
+    2a_history                  92 topics (92 unique)    0.6s
+      -> 2a_history nDCG@10 0.4322   official 0.4739
+    index: 26,308 docs, 2s (lucene)
+
+[track2 / hardware / train]
+    2a_current                 130 topics (130 unique)    0.2s
+      -> 2a_current nDCG@10 0.1130   official 0.1472
+    2a_history                 130 topics (130 unique)    0.8s
+      -> 2a_history nDCG@10 0.2238   official 0.2935
+
+[track2 / hardware / dev]
+    2a_current                  58 topics (58 unique)    0.1s
+      -> 2a_current nDCG@10 0.1559   official 0.1605
+    2a_history                  58 topics (58 unique)    0.3s
+      -> 2a_history nDCG@10 0.2899   official 0.3378
+    index: 20,027 docs, 2s (lucene)
+
+[track2 / law / train]
+    2a_current                 164 topics (164 unique)    0.2s
+      -> 2a_current nDCG@10 0.1040   official 0.1047
+    2a_history                 164 topics (164 unique)    1.0s
+      -> 2a_history nDCG@10 0.2615   official 0.2721
+
+[track2 / law / dev]
+    2a_current                  66 topics (66 unique)    0.1s
+      -> 2a_current nDCG@10 0.1356   official 0.1147
+    2a_history                  66 topics (66 unique)    0.4s
+      -> 2a_history nDCG@10 0.3508   official 0.3437
+    index: 23,297 docs, 2s (lucene)
+
+[track2 / medicalsciences / train]
+    2a_current                 139 topics (139 unique)    0.2s
+      -> 2a_current nDCG@10 0.1101   official 0.1188
+    2a_history                 139 topics (139 unique)    0.8s
+      -> 2a_history nDCG@10 0.2015   official 0.2267
+
+[track2 / medicalsciences / dev]
+    2a_current                  44 topics (44 unique)    0.1s
+      -> 2a_current nDCG@10 0.0973   official 0.1168
+    2a_history                  44 topics (44 unique)    0.2s
+      -> 2a_history nDCG@10 0.1282   official 0.173
+    index: 16,712 docs, 2s (lucene)
+
+[track2 / politics / train]
+    2a_current                 159 topics (159 unique)    0.2s
+      -> 2a_current nDCG@10 0.1643   official 0.1609
+    2a_history                 159 topics (159 unique)    1.1s
+      -> 2a_history nDCG@10 0.4011   official 0.4423
+
+[track2 / politics / dev]
+    2a_current                  54 topics (54 unique)    0.1s
+      -> 2a_current nDCG@10 0.1458   official 0.1514
+    2a_history                  54 topics (54 unique)    0.3s
+      -> 2a_history nDCG@10 0.3016   official 0.3219
+    index: 52,835 docs, 2s (lucene)
+
+[track2 / psychology / train]
+    2a_current                 234 topics (234 unique)    0.3s
+      -> 2a_current nDCG@10 0.1936   official 0.2208
+    2a_history                 234 topics (234 unique)    1.6s
+      -> 2a_history nDCG@10 0.4626   official 0.5558
+
+[track2 / psychology / dev]
+    2a_current                  99 topics (99 unique)    0.1s
+      -> 2a_current nDCG@10 0.2369   official 0.2596
+    2a_history                  99 topics (99 unique)    0.6s
+      -> 2a_history nDCG@10 0.5226   official 0.5726
+    index: 61,961 docs, 2s (lucene)
+
+[track2 / robotics / train]
+    2a_current                 184 topics (184 unique)    0.2s
+      -> 2a_current nDCG@10 0.1596   official 0.1847
+    2a_history                 184 topics (184 unique)    0.9s
+      -> 2a_history nDCG@10 0.4925   official 0.5773
+
+[track2 / robotics / dev]
+    2a_current                  75 topics (75 unique)    0.1s
+      -> 2a_current nDCG@10 0.1628   official 0.1574
+    2a_history                  75 topics (75 unique)    0.4s
+      -> 2a_history nDCG@10 0.4709   official 0.5123
+    index: 60,792 docs, 3s (lucene)
+
+[track2 / sustainable_living / train]
+    2a_current                 235 topics (235 unique)    0.4s
+      -> 2a_current nDCG@10 0.2653   official 0.2851
+    2a_history                 235 topics (235 unique)    1.1s
+      -> 2a_history nDCG@10 0.5604   official 0.5801
+
+[track2 / sustainable_living / dev]
+    2a_current                  84 topics (84 unique)    0.1s
+      -> 2a_current nDCG@10 0.2959   official 0.2938
+    2a_history                  84 topics (84 unique)    0.4s
+      -> 2a_history nDCG@10 0.5257   official 0.5531
+
+done in 50s -> ../research/runs_v12/bm25/t2/results.json
+	Command being timed: "python bm25s_run.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --splits train dev --track 2 --domains biology drones earth_science economics hardware law medicalsciences politics psychology robotics sustainable_living --analyzer lucene --k 1000 --conditions 2a_current 2a_history --threads 8 --out ../research/runs_v12/bm25/t2"
+	User time (seconds): 45.04
+	System time (seconds): 16.62
+	Percent of CPU this job got: 123%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:50.07
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 371188
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 170989
+	Voluntary context switches: 1125728
+	Involuntary context switches: 1518
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+    index: 9,680 docs, 3s (lucene)
+
+[track1 / iota / train]
+    1a                           7 topics (7 unique)    0.0s
+      -> 1a nDCG@10 0.1444   official 0.1563
+    1b_query+step               16 topics (16 unique)    0.0s
+      -> 1b_query+step nDCG@10 0.1458   official 0.1403
+
+[track1 / iota / dev]
+    1a                           3 topics (3 unique)    0.0s
+      -> 1a nDCG@10 0.4316   official 0.3309
+    1b_query+step                8 topics (8 unique)    0.0s
+      -> 1b_query+step nDCG@10 0.4539   official 0.4195
+    index: 25,040 docs, 4s (lucene)
+
+[track1 / quant / train]
+    1a                          24 topics (24 unique)    0.1s
+      -> 1a nDCG@10 0.0255   official 0.0255
+    1b_query+step               37 topics (37 unique)    0.2s
+      -> 1b_query+step nDCG@10 0.0090   official 0.0085
+
+[track1 / quant / dev]
+    1a                          10 topics (10 unique)    0.1s
+      -> 1a nDCG@10 0.0000   official 0.0237
+    1b_query+step               15 topics (15 unique)    0.1s
+      -> 1b_query+step nDCG@10 0.0000   official 0.0403
+    index: 36,110 docs, 7s (lucene)
+
+[track1 / law / train]
+    1a                          24 topics (24 unique)    0.1s
+      -> 1a nDCG@10 0.0439   official 0.0946
+    1b_query+step               53 topics (53 unique)    0.3s
+      -> 1b_query+step nDCG@10 0.0540   official 0.0854
+
+[track1 / law / dev]
+    1a                          11 topics (11 unique)    0.1s
+      -> 1a nDCG@10 0.0304   official 0.0574
+    1b_query+step               23 topics (23 unique)    0.2s
+      -> 1b_query+step nDCG@10 0.0505   official 0.0549
+    index: 43,584 docs, 6s (lucene)
+
+[track1 / workplace / train]
+    1a                          25 topics (25 unique)    0.2s
+      -> 1a nDCG@10 0.0778   official 0.0798
+    1b_query+step               31 topics (31 unique)    0.3s
+      -> 1b_query+step nDCG@10 0.1341   official 0.1162
+
+[track1 / workplace / dev]
+    1a                          11 topics (11 unique)    0.1s
+      -> 1a nDCG@10 0.0000   official 0.023
+    1b_query+step               20 topics (20 unique)    0.1s
+      -> 1b_query+step nDCG@10 0.0309   official 0.0297
+    index: 47,509 docs, 9s (lucene)
+
+[track1 / cardano / train]
+    1a                          36 topics (36 unique)    0.1s
+      -> 1a nDCG@10 0.2100   official 0.1848
+    1b_query+step               57 topics (57 unique)    0.2s
+      -> 1b_query+step nDCG@10 0.2158   official 0.1655
+
+[track1 / cardano / dev]
+    1a                          15 topics (15 unique)    0.1s
+      -> 1a nDCG@10 0.1207   official 0.1027
+    1b_query+step               33 topics (33 unique)    0.2s
+      -> 1b_query+step nDCG@10 0.0912   official 0.0627
+    index: 53,955 docs, 11s (lucene)
+
+[track1 / monero / train]
+    1a                          46 topics (46 unique)    0.1s
+      -> 1a nDCG@10 0.0335   official 0.0382
+    1b_query+step               73 topics (73 unique)    0.3s
+      -> 1b_query+step nDCG@10 0.0835   official 0.0622
+
+[track1 / monero / dev]
+    1a                          19 topics (19 unique)    0.1s
+      -> 1a nDCG@10 0.0349   official 0.032
+    1b_query+step               28 topics (28 unique)    0.1s
+      -> 1b_query+step nDCG@10 0.0209   official 0.0113
+    index: 74,692 docs, 14s (lucene)
+
+[track1 / economics / train]
+    1a                          58 topics (58 unique)    0.4s
+      -> 1a nDCG@10 0.0508   official 0.0382
+    1b_query+step              130 topics (130 unique)    1.0s
+      -> 1b_query+step nDCG@10 0.0414   official 0.03
+
+[track1 / economics / dev]
+    1a                          25 topics (25 unique)    0.2s
+      -> 1a nDCG@10 0.0328   official 0.0467
+    1b_query+step               51 topics (51 unique)    0.4s
+      -> 1b_query+step nDCG@10 0.0426   official 0.0463
+    index: 76,706 docs, 16s (lucene)
+
+[track1 / bitcoin / train]
+    1a                          70 topics (70 unique)    0.4s
+      -> 1a nDCG@10 0.0526   official 0.0856
+    1b_query+step              132 topics (132 unique)    0.9s
+      -> 1b_query+step nDCG@10 0.0686   official 0.0888
+
+[track1 / bitcoin / dev]
+    1a                          30 topics (30 unique)    0.2s
+      -> 1a nDCG@10 0.0362   official 0.037
+    1b_query+step               56 topics (56 unique)    0.4s
+      -> 1b_query+step nDCG@10 0.0377   official 0.0299
+    index: 135,207 docs, 32s (lucene)
+
+[track1 / politics / train]
+    1a                         105 topics (105 unique)    1.2s
+      -> 1a nDCG@10 0.2855   official 0.281
+    1b_query+step              266 topics (266 unique)    3.5s
+      -> 1b_query+step nDCG@10 0.2757   official 0.2403
+
+[track1 / politics / dev]
+    1a                          45 topics (45 unique)    0.5s
+      -> 1a nDCG@10 0.2815   official 0.2625
+    1b_query+step              119 topics (119 unique)    1.7s
+      -> 1b_query+step nDCG@10 0.2652   official 0.2371
+    index: 136,101 docs, 41s (lucene)
+
+[track1 / genealogy / train]
+    1a                          80 topics (80 unique)    0.8s
+      -> 1a nDCG@10 0.0881   official 0.1242
+    1b_query+step              159 topics (159 unique)    1.5s
+      -> 1b_query+step nDCG@10 0.1146   official 0.1181
+
+[track1 / genealogy / dev]
+    1a                          35 topics (35 unique)    0.3s
+      -> 1a nDCG@10 0.1491   official 0.1949
+    1b_query+step               68 topics (68 unique)    0.7s
+      -> 1b_query+step nDCG@10 0.1771   official 0.2183
+    index: 158,771 docs, 67s (lucene)
+
+[track1 / travel / train]
+    1a                          70 topics (70 unique)    0.5s
+      -> 1a nDCG@10 0.0445   official 0.0506
+    1b_query+step              133 topics (133 unique)    1.1s
+      -> 1b_query+step nDCG@10 0.0365   official 0.0423
+
+[track1 / travel / dev]
+    1a                          30 topics (30 unique)    0.2s
+      -> 1a nDCG@10 0.0396   official 0.0442
+    1b_query+step               52 topics (52 unique)    0.4s
+      -> 1b_query+step nDCG@10 0.0387   official 0.0645
+    index: 169,552 docs, 50s (lucene)
+
+[track1 / hsm / train]
+    1a                         105 topics (105 unique)    1.7s
+      -> 1a nDCG@10 0.2067   official 0.1736
+    1b_query+step              254 topics (254 unique)    3.9s
+      -> 1b_query+step nDCG@10 0.2066   official 0.1729
+
+[track1 / hsm / dev]
+    1a                          45 topics (45 unique)    0.5s
+      -> 1a nDCG@10 0.2467   official 0.2489
+    1b_query+step              105 topics (105 unique)    1.9s
+      -> 1b_query+step nDCG@10 0.2459   official 0.214
+    index: 200,252 docs, 89s (lucene)
+
+[track1 / history / train]
+    1a                         561 topics (561 unique)   10.3s
+      -> 1a nDCG@10 0.0436   official 0.0654
+    1b_query+step             1421 topics (1421 unique)   29.1s
+      -> 1b_query+step nDCG@10 0.0461   official 0.0614
+
+[track1 / history / dev]
+    1a                         240 topics (240 unique)    3.5s
+      -> 1a nDCG@10 0.0615   official 0.0873
+    1b_query+step              636 topics (636 unique)   11.1s
+      -> 1b_query+step nDCG@10 0.0813   official 0.1015
+
+done in 437s -> ../research/runs_v12/bm25/t1/results.json
+	Command being timed: "python bm25s_run.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --splits train dev --track 1 --domains iota quant law workplace cardano monero economics bitcoin politics genealogy travel hsm history --analyzer lucene --k 1000 --conditions 1a 1b_query+step --threads 8 --out ../research/runs_v12/bm25/t1"
+	User time (seconds): 398.27
+	System time (seconds): 65.08
+	Percent of CPU this job got: 105%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 7:17.66
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3163928
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1530003
+	Voluntary context switches: 2297622
+	Involuntary context switches: 3836
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+ALLDONE

@@ -1,0 +1,47 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3918.64it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (6s)
+  [t1/hsm] shard 0 (cached) 20,000 docs, 0s
+  [t1/hsm] shard 1 (cached) 40,000 docs, 0s
+  [t1/hsm] shard 2 (cached) 60,000 docs, 0s
+  [t1/hsm] shard 3 (cached) 80,000 docs, 0s
+  [t1/hsm] shard 4  100,000 docs, 27s
+  [t1/hsm] shard 5  120,000 docs, 56s
+  [t1/hsm] shard 6  140,000 docs, 90s
+  [t1/hsm] shard 7  160,000 docs, 124s
+  [t1/hsm] DONE 169,552 docs, encode 139s (644.5/s), peak VRAM 0.38 GB, validation ok (cos min 0.9996)
+  [t1/history] shard 0  20,000 docs, 27s
+  [t1/history] shard 1  40,000 docs, 54s
+  [t1/history] shard 2  60,000 docs, 82s
+  [t1/history] shard 3  80,000 docs, 109s
+  [t1/history] shard 4  100,000 docs, 137s
+  [t1/history] shard 5  120,000 docs, 164s
+  [t1/history] shard 6  140,000 docs, 191s
+  [t1/history] shard 7  160,000 docs, 219s
+  [t1/history] shard 8  180,000 docs, 246s
+  [t1/history] shard 9  200,000 docs, 273s
+  [t1/history] DONE 200,252 docs, encode 271s (738.0/s), peak VRAM 0.38 GB, validation ok (cos min 0.9995)
+all done in 421s
+	Command being timed: "python dense_index.py --data ../../reteco_data_v11 --track 1 --domains hsm history --model bge-small --max-len 512 --batch 64 --out ../research/runs_v12/emb"
+	User time (seconds): 951.15
+	System time (seconds): 53.93
+	Percent of CPU this job got: 234%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 7:08.35
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3342800
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 1626
+	Minor (reclaiming a frame) page faults: 996743
+	Voluntary context switches: 2393790
+	Involuntary context switches: 71704
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

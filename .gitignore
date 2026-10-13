@@ -15,3 +15,4 @@ research/runs_v11/ann/index/
 research/runs_v12/emb/
 research/runs_v12/index/
 *.ids.json
+research/runs_v12/categories/pairs.jsonl

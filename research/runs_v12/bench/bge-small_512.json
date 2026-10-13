@@ -1,0 +1,36 @@
+{
+ "info": {
+  "python": "3.14.4",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "vram_total_gb": 8.0,
+  "corpus": "../../reteco_data_v11/track1_tempo/history/documents.jsonl",
+  "n": 4000,
+  "max_len": 512,
+  "model": "bge-small"
+ },
+ "rows": [
+  {
+   "precision": "fp16",
+   "batch": 64,
+   "seconds": 4.87,
+   "docs_per_s": 821.8,
+   "peak_vram_gb": 0.37
+  },
+  {
+   "precision": "fp16",
+   "batch": 128,
+   "seconds": 5.31,
+   "docs_per_s": 752.8,
+   "peak_vram_gb": 0.67
+  },
+  {
+   "precision": "fp16",
+   "batch": 256,
+   "seconds": 6.17,
+   "docs_per_s": 648.2,
+   "peak_vram_gb": 1.27
+  }
+ ]
+}

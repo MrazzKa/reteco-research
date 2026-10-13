@@ -23,6 +23,8 @@ import time
 import numpy as np
 import torch
 
+torch.backends.cuda.matmul.allow_tf32 = False  # exact float32 scores
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from week1_run import write_run  # noqa: E402
 from bm25s_run import by_turn, ndcg_fn  # noqa: E402
@@ -69,7 +71,9 @@ class GpuIndex:
 
     def __init__(self, ddir):
         self.ids, shards, self.man = load_cache(ddir)
-        self.mat = torch.cat([torch.from_numpy(np.array(s)) for s in shards]).cuda()
+        # stored as float16; scored in float32 (fp16 matmul accumulation flips near-ties:
+        # recall@10 0.982 against FAISS float32 exact search on drones)
+        self.mat = torch.cat([torch.from_numpy(np.array(s)) for s in shards]).cuda().float()
         # rank of each id in lexicographic order, for tie-breaking by doc id
         order = sorted(range(len(self.ids)), key=self.ids.__getitem__)
         self.lex = np.empty(len(self.ids), dtype=np.int64)
@@ -77,10 +81,10 @@ class GpuIndex:
 
     def search(self, qemb, k):
         k = min(k, len(self.ids))
-        q = torch.from_numpy(qemb).cuda()
+        q = torch.from_numpy(qemb).cuda().float()
         out = []
         for s in range(0, q.shape[0], 256):
-            sims = (q[s:s + 256] @ self.mat.T).float()
+            sims = q[s:s + 256] @ self.mat.T
             # take a margin beyond k so ties at the cut can be ordered by id
             kk = min(k + 32, sims.shape[1])
             val, idx = torch.topk(sims, kk, dim=1)

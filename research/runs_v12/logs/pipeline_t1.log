@@ -1,0 +1,200 @@
+=== 16:18:19 python dense_search.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 1 --model bge-small --max-len 512 --emb ../research/runs_v12/emb --out ../research/runs_v12/dense/bge-small_L512/t1
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (6s)
+
+[t1/iota] 9,680 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2762  R@100 0.4905  R@1000 0.8810  (7 q, 13.25 ms/q)
+    train 1b_query+step        nDCG@10 0.2598  R@100 0.6562  R@1000 0.8438  (16 q, 0.45 ms/q)
+    dev   1a                   nDCG@10 0.7157  R@100 0.9167  R@1000 1.0000  (3 q, 0.58 ms/q)
+    dev   1b_query+step        nDCG@10 0.5625  R@100 1.0000  R@1000 1.0000  (8 q, 0.43 ms/q)
+
+[t1/quant] 25,040 docs on GPU (0s)
+    train 1a                   nDCG@10 0.1584  R@100 0.5194  R@1000 0.8299  (24 q, 1.4 ms/q)
+    train 1b_query+step        nDCG@10 0.2099  R@100 0.6216  R@1000 0.9189  (37 q, 0.7 ms/q)
+    dev   1a                   nDCG@10 0.0924  R@100 0.3500  R@1000 0.7833  (10 q, 0.65 ms/q)
+    dev   1b_query+step        nDCG@10 0.1286  R@100 0.5667  R@1000 0.7667  (15 q, 0.52 ms/q)
+
+[t1/law] 36,110 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2320  R@100 0.8042  R@1000 0.9861  (24 q, 0.53 ms/q)
+    train 1b_query+step        nDCG@10 0.2393  R@100 0.8679  R@1000 0.9811  (53 q, 0.52 ms/q)
+    dev   1a                   nDCG@10 0.3622  R@100 0.9045  R@1000 0.9409  (11 q, 0.71 ms/q)
+    dev   1b_query+step        nDCG@10 0.3384  R@100 0.9348  R@1000 0.9565  (23 q, 0.49 ms/q)
+
+[t1/workplace] 43,584 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2403  R@100 0.7796  R@1000 0.9507  (25 q, 0.55 ms/q)
+    train 1b_query+step        nDCG@10 0.2332  R@100 0.8710  R@1000 1.0000  (31 q, 0.49 ms/q)
+    dev   1a                   nDCG@10 0.3575  R@100 0.6030  R@1000 0.9000  (11 q, 0.63 ms/q)
+    dev   1b_query+step        nDCG@10 0.4237  R@100 0.7000  R@1000 0.9667  (20 q, 0.61 ms/q)
+
+[t1/cardano] 47,509 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2554  R@100 0.7403  R@1000 0.9099  (36 q, 0.48 ms/q)
+    train 1b_query+step        nDCG@10 0.2539  R@100 0.8772  R@1000 0.9737  (57 q, 0.48 ms/q)
+    dev   1a                   nDCG@10 0.1892  R@100 0.6711  R@1000 0.9533  (15 q, 0.58 ms/q)
+    dev   1b_query+step        nDCG@10 0.1922  R@100 0.7525  R@1000 0.9091  (33 q, 0.46 ms/q)
+
+[t1/monero] 53,955 docs on GPU (0s)
+    train 1a                   nDCG@10 0.1984  R@100 0.5062  R@1000 0.8373  (46 q, 0.46 ms/q)
+    train 1b_query+step        nDCG@10 0.2803  R@100 0.6564  R@1000 0.8699  (73 q, 0.49 ms/q)
+    dev   1a                   nDCG@10 0.0937  R@100 0.5132  R@1000 0.7412  (19 q, 0.54 ms/q)
+    dev   1b_query+step        nDCG@10 0.1188  R@100 0.5893  R@1000 0.7500  (28 q, 0.51 ms/q)
+
+[t1/economics] 74,692 docs on GPU (0s)
+    train 1a                   nDCG@10 0.1258  R@100 0.4963  R@1000 0.8086  (58 q, 0.7 ms/q)
+    train 1b_query+step        nDCG@10 0.1375  R@100 0.6000  R@1000 0.8583  (130 q, 0.57 ms/q)
+    dev   1a                   nDCG@10 0.1530  R@100 0.4925  R@1000 0.7995  (25 q, 0.58 ms/q)
+    dev   1b_query+step        nDCG@10 0.1715  R@100 0.5163  R@1000 0.7974  (51 q, 0.46 ms/q)
+
+[t1/bitcoin] 76,706 docs on GPU (0s)
+    train 1a                   nDCG@10 0.1526  R@100 0.5235  R@1000 0.8042  (70 q, 0.47 ms/q)
+    train 1b_query+step        nDCG@10 0.1624  R@100 0.5960  R@1000 0.8782  (132 q, 0.49 ms/q)
+    dev   1a                   nDCG@10 0.1868  R@100 0.5524  R@1000 0.8252  (30 q, 0.61 ms/q)
+    dev   1b_query+step        nDCG@10 0.1855  R@100 0.6250  R@1000 0.8571  (56 q, 0.46 ms/q)
+
+[t1/politics] 135,207 docs on GPU (0s)
+    train 1a                   nDCG@10 0.3208  R@100 0.6703  R@1000 0.8556  (105 q, 0.62 ms/q)
+    train 1b_query+step        nDCG@10 0.3168  R@100 0.7472  R@1000 0.9029  (266 q, 0.58 ms/q)
+    dev   1a                   nDCG@10 0.3514  R@100 0.6133  R@1000 0.8200  (45 q, 0.58 ms/q)
+    dev   1b_query+step        nDCG@10 0.3182  R@100 0.6401  R@1000 0.8676  (119 q, 0.49 ms/q)
+
+[t1/genealogy] 136,101 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2442  R@100 0.5376  R@1000 0.7382  (80 q, 0.67 ms/q)
+    train 1b_query+step        nDCG@10 0.3132  R@100 0.7306  R@1000 0.8711  (159 q, 0.51 ms/q)
+    dev   1a                   nDCG@10 0.3218  R@100 0.5729  R@1000 0.7376  (35 q, 0.61 ms/q)
+    dev   1b_query+step        nDCG@10 0.3590  R@100 0.7059  R@1000 0.8456  (68 q, 0.58 ms/q)
+
+[t1/travel] 158,771 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2180  R@100 0.5931  R@1000 0.8483  (70 q, 0.57 ms/q)
+    train 1b_query+step        nDCG@10 0.2153  R@100 0.6704  R@1000 0.9023  (133 q, 0.57 ms/q)
+    dev   1a                   nDCG@10 0.2495  R@100 0.6750  R@1000 0.8333  (30 q, 0.9 ms/q)
+    dev   1b_query+step        nDCG@10 0.2671  R@100 0.8173  R@1000 0.9615  (52 q, 0.54 ms/q)
+
+[t1/hsm] 169,552 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2311  R@100 0.6214  R@1000 0.8310  (105 q, 0.65 ms/q)
+    train 1b_query+step        nDCG@10 0.2536  R@100 0.7021  R@1000 0.8950  (254 q, 0.56 ms/q)
+    dev   1a                   nDCG@10 0.3140  R@100 0.7052  R@1000 0.8300  (45 q, 0.61 ms/q)
+    dev   1b_query+step        nDCG@10 0.2945  R@100 0.7540  R@1000 0.8825  (105 q, 0.51 ms/q)
+
+[t1/history] 200,252 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2317  R@100 0.6514  R@1000 0.8592  (561 q, 0.68 ms/q)
+    train 1b_query+step        nDCG@10 0.2279  R@100 0.7351  R@1000 0.9180  (1421 q, 0.71 ms/q)
+    dev   1a                   nDCG@10 0.2603  R@100 0.6584  R@1000 0.8644  (240 q, 0.66 ms/q)
+    dev   1b_query+step        nDCG@10 0.2634  R@100 0.7467  R@1000 0.9190  (636 q, 0.6 ms/q)
+wrote ../research/runs_v12/dense/bge-small_L512/t1/results.json
+=== 16:18:59 python dense_search.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 1 --domains iota --model bge-small --max-len 256 --emb ../research/runs_v12/emb --out ../research/runs_v12/dense/bge-small_L256/t1
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 256 fp16=True (5s)
+
+[t1/iota] 9,680 docs on GPU (0s)
+    train 1a                   nDCG@10 0.3540  R@100 0.4381  R@1000 0.8810  (7 q, 15.18 ms/q)
+    train 1b_query+step        nDCG@10 0.3261  R@100 0.5625  R@1000 0.8438  (16 q, 0.46 ms/q)
+    dev   1a                   nDCG@10 0.5581  R@100 0.9167  R@1000 1.0000  (3 q, 0.84 ms/q)
+    dev   1b_query+step        nDCG@10 0.4984  R@100 1.0000  R@1000 1.0000  (8 q, 0.55 ms/q)
+wrote ../research/runs_v12/dense/bge-small_L256/t1/results.json
+=== 16:19:07 python hybrid.py --track 1 --conditions 1a 1b_query+step --bm25 ../research/runs_v12/bm25/t1/runs --dense ../research/runs_v12/dense/bge-small_L512/t1/runs --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out ../research/runs_v12/hybrid/bge-small_L512_t1.json
+
+== track 1 1a (dense: 1a) — train 13 dom, dev 13 dom
+  bm25             train 0.1005  dev 0.1127   kind=bm25
+  dense            train 0.2219  dev 0.2806   kind=dense
+  rerank           train 0.2002  dev 0.2562   kind=rerank
+  linear*          train 0.2445  dev 0.2956   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.6
+  rrf*             train 0.2255  dev 0.2588   kind=rrf|kb=50|kd=100|c=60
+  pool_rerank*     train 0.2219  dev 0.2806   kind=pool_rerank|kb=100|kd=100
+  rrf_c60_100+100  train 0.2255  dev 0.2588   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.1829, 'ci95': [0.1445, 0.2257], 'p_le_0': 0.0}
+  dev rrf* - bm25: {'diff': 0.1461, 'ci95': [0.1183, 0.1765], 'p_le_0': 0.0}
+  dev linear* - rerank: {'diff': 0.0395, 'ci95': [0.0204, 0.0594], 'p_le_0': 0.0}
+  dev dense - bm25: {'diff': 0.1679, 'ci95': [0.1274, 0.2132], 'p_le_0': 0.0}
+  dev rerank - bm25: {'diff': 0.1434, 'ci95': [0.1022, 0.19], 'p_le_0': 0.0}
+  dev linear* - dense: {'diff': 0.0151, 'ci95': [-0.0021, 0.0316], 'p_le_0': 0.0408}
+
+== track 1 1b_query+step (dense: 1b_query+step) — train 13 dom, dev 13 dom
+  bm25             train 0.1101  dev 0.1181   kind=bm25
+  dense            train 0.2387  dev 0.2787   kind=dense
+  rerank           train 0.2329  dev 0.2685   kind=rerank
+  linear*          train 0.2735  dev 0.2966   kind=linear|kb=100|kd=100|norm=minmax|alpha=0.7
+  rrf*             train 0.2589  dev 0.2814   kind=rrf|kb=50|kd=50|c=30
+  pool_rerank*     train 0.2387  dev 0.2787   kind=pool_rerank|kb=100|kd=100
+  rrf_c60_100+100  train 0.2548  dev 0.2739   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.1784, 'ci95': [0.1472, 0.2118], 'p_le_0': 0.0}
+  dev rrf* - bm25: {'diff': 0.1632, 'ci95': [0.1342, 0.1949], 'p_le_0': 0.0}
+  dev linear* - rerank: {'diff': 0.0281, 'ci95': [0.0093, 0.0483], 'p_le_0': 0.0022}
+  dev dense - bm25: {'diff': 0.1606, 'ci95': [0.1279, 0.1963], 'p_le_0': 0.0}
+  dev rerank - bm25: {'diff': 0.1503, 'ci95': [0.1165, 0.1859], 'p_le_0': 0.0}
+  dev linear* - dense: {'diff': 0.0179, 'ci95': [0.0045, 0.0312], 'p_le_0': 0.0047}
+wrote ../research/runs_v12/hybrid/bge-small_L512_t1.json
+=== 16:22:27 python gold_categories.py --data ../../reteco_data_v11 --bm25 ../research/runs_v12/bm25 --dense ../research/runs_v12/dense/bge-small_L512 --out ../research/runs_v12/categories
+  t1/iota: 17 pairs
+  t1/quant: 39 pairs
+  t1/law: 59 pairs
+  t1/workplace: 56 pairs
+  t1/cardano: 91 pairs
+  t1/monero: 83 pairs
+  t1/economics: 187 pairs
+  t1/bitcoin: 171 pairs
+  t1/politics: 298 pairs
+  t1/genealogy: 184 pairs
+  t1/travel: 145 pairs
+  t1/hsm: 271 pairs
+  t1/history: 2032 pairs
+  t2/drones: 214 pairs
+  t2/politics: 284 pairs
+  t2/law: 290 pairs
+  t2/medicalsciences: 202 pairs
+  t2/hardware: 228 pairs
+  t2/economics: 318 pairs
+  t2/psychology: 382 pairs
+  t2/biology: 392 pairs
+  t2/sustainable_living: 364 pairs
+  t2/robotics: 294 pairs
+  t2/earth_science: 362 pairs
+wrote ../research/runs_v12/categories/categories.json (6963 pairs)
+=== 16:22:41 python order_study.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 1 --domains iota quant law workplace cardano --emb ../research/runs_v12/emb --perms 5 --ann-domains law cardano --out ../research/runs_v12/order/t1.json
+  [iota] bm25 1a: raw 0.4316..0.4316  tiebreak 0.4316..0.4316
+  [iota] bm25 1b_query+step: raw 0.4539..0.4539  tiebreak 0.4539..0.4539
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (7s)
+  [iota] dense 1a: raw range 0.0000  tiebreak range 0.0000
+  [iota] dense 1b_query+step: raw range 0.0000  tiebreak range 0.0000
+  [quant] bm25 1a: raw 0.0000..0.0000  tiebreak 0.0000..0.0000
+  [quant] bm25 1b_query+step: raw 0.0000..0.0000  tiebreak 0.0000..0.0000
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (3s)
+  [quant] dense 1a: raw range 0.0000  tiebreak range 0.0000
+  [quant] dense 1b_query+step: raw range 0.0000  tiebreak range 0.0000
+  [law] bm25 1a: raw 0.0304..0.0304  tiebreak 0.0304..0.0304
+  [law] bm25 1b_query+step: raw 0.0505..0.0505  tiebreak 0.0505..0.0505
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (3s)
+  [law] dense 1a: raw range 0.0000  tiebreak range 0.0000
+  [law] dense 1b_query+step: raw range 0.0000  tiebreak range 0.0000
+  [law] ann 1a: [{'ndcg10': 0.3634, 'recall10_vs_exact': 0.9909}, {'ndcg10': 0.3634, 'recall10_vs_exact': 0.9909}, {'ndcg10': 0.3634, 'recall10_vs_exact': 0.9909}]
+  [workplace] bm25 1a: raw 0.0000..0.0000  tiebreak 0.0000..0.0000
+  [workplace] bm25 1b_query+step: raw 0.0309..0.0309  tiebreak 0.0309..0.0309
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (2s)
+  [workplace] dense 1a: raw range 0.0000  tiebreak range 0.0000
+  [workplace] dense 1b_query+step: raw range 0.0000  tiebreak range 0.0000
+  [cardano] bm25 1a: raw 0.1207..0.1207  tiebreak 0.1207..0.1207
+  [cardano] bm25 1b_query+step: raw 0.0912..0.0912  tiebreak 0.0912..0.0912
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (3s)
+  [cardano] dense 1a: raw range 0.0000  tiebreak range 0.0000
+  [cardano] dense 1b_query+step: raw range 0.0000  tiebreak range 0.0000
+  [cardano] ann 1a: [{'ndcg10': 0.1917, 'recall10_vs_exact': 1.0}, {'ndcg10': 0.1917, 'recall10_vs_exact': 0.9933}, {'ndcg10': 0.1917, 'recall10_vs_exact': 1.0}]
+wrote ../research/runs_v12/order/t1.json
+=== 16:26:03 python ann_eval.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 1 --emb ../research/runs_v12/emb --out ../research/runs_v12/ann/bge-small_L512_t1.json
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (5s)
+  [t1/iota] 9,680 docs  exact_gpu: nDCG 0.7157 R@10 1.000 build 0.0s 30.3ms  faiss_flat: nDCG 0.7157 R@10 1.000 build 0.0s 1.78ms  faiss_hnsw: nDCG 0.7157 R@10 1.000 build 0.3s 0.2ms  ngt: nDCG 0.7157 R@10 1.000 build 0.5s 0.75ms
+  [t1/quant] 25,040 docs  exact_gpu: nDCG 0.0924 R@10 1.000 build 0.0s 0.45ms  faiss_flat: nDCG 0.0924 R@10 1.000 build 0.0s 1.53ms  faiss_hnsw: nDCG 0.0311 R@10 0.960 build 1.5s 0.32ms  ngt: nDCG 0.0924 R@10 0.960 build 1.6s 1.49ms
+  [t1/law] 36,110 docs  exact_gpu: nDCG 0.3622 R@10 1.000 build 0.0s 0.27ms  faiss_flat: nDCG 0.3622 R@10 1.000 build 0.0s 2.36ms  faiss_hnsw: nDCG 0.3622 R@10 0.991 build 3.0s 0.36ms  ngt: nDCG 0.3634 R@10 0.991 build 2.3s 1.57ms
+  [t1/workplace] 43,584 docs  exact_gpu: nDCG 0.3575 R@10 1.000 build 0.0s 0.27ms  faiss_flat: nDCG 0.3575 R@10 1.000 build 0.0s 3.4ms  faiss_hnsw: nDCG 0.3575 R@10 1.000 build 4.3s 0.33ms  ngt: nDCG 0.3575 R@10 1.000 build 2.9s 1.27ms
+  [t1/cardano] 47,509 docs  exact_gpu: nDCG 0.1892 R@10 1.000 build 0.0s 0.22ms  faiss_flat: nDCG 0.1892 R@10 0.993 build 0.0s 3.07ms  faiss_hnsw: nDCG 0.1892 R@10 0.993 build 4.5s 0.29ms  ngt: nDCG 0.1917 R@10 1.000 build 4.0s 1.08ms
+  [t1/monero] 53,955 docs  exact_gpu: nDCG 0.0937 R@10 1.000 build 0.0s 0.21ms  faiss_flat: nDCG 0.0937 R@10 1.000 build 0.0s 4.31ms  faiss_hnsw: nDCG 0.0937 R@10 1.000 build 4.9s 0.29ms  ngt: nDCG 0.0937 R@10 0.995 build 3.7s 1.19ms
+  [t1/economics] 74,692 docs  exact_gpu: nDCG 0.1530 R@10 1.000 build 0.0s 0.19ms  faiss_flat: nDCG 0.1530 R@10 1.000 build 0.1s 4.89ms  faiss_hnsw: nDCG 0.1530 R@10 0.996 build 7.9s 0.68ms  ngt: nDCG 0.1526 R@10 0.996 build 5.6s 2.09ms
+  [t1/bitcoin] 76,706 docs  exact_gpu: nDCG 0.1868 R@10 1.000 build 0.0s 0.18ms  faiss_flat: nDCG 0.1868 R@10 1.000 build 0.1s 5.04ms  faiss_hnsw: nDCG 0.1868 R@10 1.000 build 8.1s 0.48ms  ngt: nDCG 0.1868 R@10 0.997 build 6.5s 1.24ms
+GraphAndTreeIndex::createIndexWithInsertionOrder: Processed 100000 objects. time= 7.80447 (s) vm size=40.02 G:40.02 G
+  [t1/politics] 135,207 docs  exact_gpu: nDCG 0.3514 R@10 1.000 build 0.0s 0.19ms  faiss_flat: nDCG 0.3514 R@10 1.000 build 0.2s 9.83ms  faiss_hnsw: nDCG 0.3515 R@10 0.993 build 19.3s 0.45ms  ngt: nDCG 0.3473 R@10 0.987 build 11.0s 2.14ms
+GraphAndTreeIndex::createIndexWithInsertionOrder: Processed 100000 objects. time= 9.89521 (s) vm size=40.08 G:40.08 G
+  [t1/genealogy] 136,101 docs  exact_gpu: nDCG 0.3218 R@10 1.000 build 0.0s 0.25ms  faiss_flat: nDCG 0.3218 R@10 1.000 build 0.1s 10.3ms  faiss_hnsw: nDCG 0.3218 R@10 0.991 build 20.9s 0.59ms  ngt: nDCG 0.3218 R@10 0.991 build 14.1s 2.76ms
+GraphAndTreeIndex::createIndexWithInsertionOrder: Processed 100000 objects. time= 10.9198 (s) vm size=40.1 G:40.14 G
+  [t1/travel] 158,771 docs  exact_gpu: nDCG 0.2495 R@10 1.000 build 0.0s 0.28ms  faiss_flat: nDCG 0.2495 R@10 0.997 build 0.1s 10.72ms  faiss_hnsw: nDCG 0.2495 R@10 0.997 build 24.7s 0.4ms  ngt: nDCG 0.2479 R@10 0.997 build 19.1s 1.55ms
+GraphAndTreeIndex::createIndexWithInsertionOrder: Processed 100000 objects. time= 8.23988 (s) vm size=40.15 G:40.21 G
+  [t1/hsm] 169,552 docs  exact_gpu: nDCG 0.3140 R@10 1.000 build 0.0s 0.24ms  faiss_flat: nDCG 0.3140 R@10 1.000 build 0.1s 12.04ms  faiss_hnsw: nDCG 0.3140 R@10 0.998 build 22.9s 0.42ms  ngt: nDCG 0.3138 R@10 0.996 build 14.9s 2.82ms
+GraphAndTreeIndex::createIndexWithInsertionOrder: Processed 100000 objects. time= 8.3949 (s) vm size=40.23 G:40.34 G
+GraphAndTreeIndex::createIndexWithInsertionOrder: Processed 200000 objects. time= 17.603 (s)*2 vm size=40.26 G:40.34 G
+  [t1/history] 200,252 docs  exact_gpu: nDCG 0.2603 R@10 1.000 build 0.0s 0.13ms  faiss_flat: nDCG 0.2603 R@10 0.997 build 0.2s 18.4ms  faiss_hnsw: nDCG 0.2603 R@10 0.993 build 34.1s 0.57ms  ngt: nDCG 0.2612 R@10 0.987 build 17.7s 2.23ms
+wrote ../research/runs_v12/ann/bge-small_L512_t1.json
+=== 16:30:45 ALLDONE

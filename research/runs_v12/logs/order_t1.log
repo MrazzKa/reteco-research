@@ -1,0 +1,15 @@
+  [iota] bm25 1a: raw 0.4316..0.4316  tiebreak 0.4316..0.4316
+  [iota] bm25 1b_query+step: raw 0.4539..0.4539  tiebreak 0.4539..0.4539
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 2771.01it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (6s)
+  [iota] dense 1a: raw range 0.0754  tiebreak range 0.0000
+  [iota] dense 1b_query+step: raw range 0.0087  tiebreak range 0.0000
+  [quant] bm25 1a: raw 0.0000..0.0000  tiebreak 0.0000..0.0000
+  [quant] bm25 1b_query+step: raw 0.0000..0.0000  tiebreak 0.0000..0.0000
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 2974.95it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (2s)
+  [quant] dense 1a: raw range 0.0000  tiebreak range 0.0000
+  [quant] dense 1b_query+step: raw range 0.0000  tiebreak range 0.0000
+/usr/lib/python3.14/multiprocessing/resource_tracker.py:396: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/mp-tkbfzbc5'}
+  warnings.warn(

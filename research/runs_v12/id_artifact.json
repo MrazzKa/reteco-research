@@ -1,0 +1,144 @@
+{
+ "drones": {
+  "corpus": {
+   "doc": 224,
+   "other": 941,
+   "google_neg": 15216
+  },
+  "gold": {
+   "doc": 146
+  },
+  "gold_total": 146,
+  "share_gold_with_doc_id": 1.0,
+  "share_corpus_with_doc_id": 0.0137,
+  "p_gold_given_doc_id": 0.6518
+ },
+ "politics": {
+  "corpus": {
+   "doc": 256,
+   "other": 2320,
+   "google_neg": 14136
+  },
+  "gold": {
+   "doc": 191
+  },
+  "gold_total": 191,
+  "share_gold_with_doc_id": 1.0,
+  "share_corpus_with_doc_id": 0.0153,
+  "p_gold_given_doc_id": 0.7461
+ },
+ "law": {
+  "corpus": {
+   "doc": 281,
+   "other": 2258,
+   "google_neg": 17488
+  },
+  "gold": {
+   "doc": 213
+  },
+  "gold_total": 213,
+  "share_gold_with_doc_id": 1.0,
+  "share_corpus_with_doc_id": 0.014,
+  "p_gold_given_doc_id": 0.758
+ },
+ "medicalsciences": {
+  "corpus": {
+   "doc": 250,
+   "other": 2408,
+   "google_neg": 20639
+  },
+  "gold": {
+   "doc": 170
+  },
+  "gold_total": 170,
+  "share_gold_with_doc_id": 1.0,
+  "share_corpus_with_doc_id": 0.0107,
+  "p_gold_given_doc_id": 0.68
+ },
+ "hardware": {
+  "corpus": {
+   "doc": 284,
+   "other": 1232,
+   "google_neg": 24792
+  },
+  "gold": {
+   "doc": 181
+  },
+  "gold_total": 181,
+  "share_gold_with_doc_id": 1.0,
+  "share_corpus_with_doc_id": 0.0108,
+  "p_gold_given_doc_id": 0.6373
+ },
+ "economics": {
+  "corpus": {
+   "other": 50220
+  },
+  "gold": {
+   "other": 320
+  },
+  "gold_total": 320,
+  "share_gold_with_doc_id": 0.0,
+  "share_corpus_with_doc_id": 0.0,
+  "p_gold_given_doc_id": null
+ },
+ "psychology": {
+  "corpus": {
+   "other": 52835
+  },
+  "gold": {
+   "other": 310
+  },
+  "gold_total": 310,
+  "share_gold_with_doc_id": 0.0,
+  "share_corpus_with_doc_id": 0.0,
+  "p_gold_given_doc_id": null
+ },
+ "biology": {
+  "corpus": {
+   "other": 57359
+  },
+  "gold": {
+   "other": 232
+  },
+  "gold_total": 232,
+  "share_gold_with_doc_id": 0.0,
+  "share_corpus_with_doc_id": 0.0,
+  "p_gold_given_doc_id": null
+ },
+ "sustainable_living": {
+  "corpus": {
+   "other": 60792
+  },
+  "gold": {
+   "other": 291
+  },
+  "gold_total": 291,
+  "share_gold_with_doc_id": 0.0,
+  "share_corpus_with_doc_id": 0.0,
+  "p_gold_given_doc_id": null
+ },
+ "robotics": {
+  "corpus": {
+   "other": 61961
+  },
+  "gold": {
+   "other": 199
+  },
+  "gold_total": 199,
+  "share_gold_with_doc_id": 0.0,
+  "share_corpus_with_doc_id": 0.0,
+  "p_gold_given_doc_id": null
+ },
+ "earth_science": {
+  "corpus": {
+   "other": 121249
+  },
+  "gold": {
+   "other": 253
+  },
+  "gold_total": 253,
+  "share_gold_with_doc_id": 0.0,
+  "share_corpus_with_doc_id": 0.0,
+  "p_gold_given_doc_id": null
+ }
+}

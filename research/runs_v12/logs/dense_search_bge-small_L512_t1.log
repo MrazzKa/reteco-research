@@ -1,0 +1,50 @@
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (7s)
+
+[t1/iota] 9,680 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2762  R@100 0.4905  R@1000 0.8810  (7 q, 29.73 ms/q)
+    train 1b_query+step        nDCG@10 0.2598  R@100 0.6562  R@1000 0.8438  (16 q, 0.66 ms/q)
+    dev   1a                   nDCG@10 0.7157  R@100 0.9167  R@1000 1.0000  (3 q, 1.22 ms/q)
+    dev   1b_query+step        nDCG@10 0.5538  R@100 1.0000  R@1000 1.0000  (8 q, 0.63 ms/q)
+
+[t1/quant] 25,040 docs on GPU (0s)
+    train 1a                   nDCG@10 0.1584  R@100 0.5194  R@1000 0.8299  (24 q, 0.95 ms/q)
+    train 1b_query+step        nDCG@10 0.2095  R@100 0.6216  R@1000 0.9189  (37 q, 0.69 ms/q)
+    dev   1a                   nDCG@10 0.0924  R@100 0.3500  R@1000 0.7833  (10 q, 0.73 ms/q)
+    dev   1b_query+step        nDCG@10 0.1286  R@100 0.5667  R@1000 0.7667  (15 q, 0.67 ms/q)
+
+[t1/law] 36,110 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2320  R@100 0.8042  R@1000 0.9861  (24 q, 0.63 ms/q)
+    train 1b_query+step        nDCG@10 0.2395  R@100 0.8679  R@1000 0.9811  (53 q, 0.91 ms/q)
+    dev   1a                   nDCG@10 0.3627  R@100 0.9045  R@1000 0.9409  (11 q, 0.69 ms/q)
+    dev   1b_query+step        nDCG@10 0.3384  R@100 0.9348  R@1000 0.9565  (23 q, 0.55 ms/q)
+
+[t1/workplace] 43,584 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2403  R@100 0.7796  R@1000 0.9507  (25 q, 1.83 ms/q)
+    train 1b_query+step        nDCG@10 0.2358  R@100 0.8710  R@1000 1.0000  (31 q, 2.41 ms/q)
+    dev   1a                   nDCG@10 0.3575  R@100 0.6212  R@1000 0.9000  (11 q, 1.3 ms/q)
+    dev   1b_query+step        nDCG@10 0.4237  R@100 0.7000  R@1000 0.9667  (20 q, 0.75 ms/q)
+
+[t1/cardano] 47,509 docs on GPU (0s)
+    train 1a                   nDCG@10 0.2559  R@100 0.7403  R@1000 0.9099  (36 q, 0.92 ms/q)
+    train 1b_query+step        nDCG@10 0.2548  R@100 0.8772  R@1000 0.9737  (57 q, 1.38 ms/q)
+    dev   1a                   nDCG@10 0.1902  R@100 0.6711  R@1000 0.9533  (15 q, 1.06 ms/q)
+    dev   1b_query+step        nDCG@10 0.1922  R@100 0.7525  R@1000 0.9091  (33 q, 0.76 ms/q)
+
+[t1/monero] 53,955 docs on GPU (0s)
+    train 1a                   nDCG@10 0.1966  R@100 0.5062  R@1000 0.8373  (46 q, 0.71 ms/q)
+    train 1b_query+step        nDCG@10 0.2797  R@100 0.6564  R@1000 0.8699  (73 q, 0.78 ms/q)
+    dev   1a                   nDCG@10 0.0937  R@100 0.5132  R@1000 0.7412  (19 q, 0.67 ms/q)
+    dev   1b_query+step        nDCG@10 0.1188  R@100 0.5893  R@1000 0.7143  (28 q, 0.66 ms/q)
+
+[t1/economics] 74,692 docs on GPU (1s)
+    train 1a                   nDCG@10 0.1260  R@100 0.4963  R@1000 0.8086  (58 q, 0.66 ms/q)
+    train 1b_query+step        nDCG@10 0.1372  R@100 0.6000  R@1000 0.8583  (130 q, 0.8 ms/q)
+    dev   1a                   nDCG@10 0.1531  R@100 0.4925  R@1000 0.8062  (25 q, 0.74 ms/q)
+    dev   1b_query+step        nDCG@10 0.1718  R@100 0.5163  R@1000 0.7974  (51 q, 0.6 ms/q)
+
+[t1/bitcoin] 76,706 docs on GPU (0s)
+    train 1a                   nDCG@10 0.1530  R@100 0.5235  R@1000 0.8070  (70 q, 0.83 ms/q)
+    train 1b_query+step        nDCG@10 0.1622  R@100 0.5960  R@1000 0.8782  (132 q, 0.67 ms/q)
+    dev   1a                   nDCG@10 0.1869  R@100 0.5524  R@1000 0.8252  (30 q, 0.62 ms/q)
+    dev   1b_query+step        nDCG@10 0.1853  R@100 0.6250  R@1000 0.8571  (56 q, 0.55 ms/q)
+wrote ../research/runs_v12/dense/bge-small_L512/t1/results.json

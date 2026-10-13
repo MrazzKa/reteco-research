@@ -28,6 +28,55 @@ def snip(text, n):
     return t if len(t) <= n else t[:n] + " …"
 
 
+def pct(c, k):
+    n = sum(c.values())
+    return n, [f"{c[x]} ({100 * c[x] / n:.1f}%)" for x in CATS]
+
+
+def tables(rep):
+    """Category counts: overall by track/condition at k=10/100, then per domain."""
+    c = rep["counts"]
+    head = "| " + " | ".join(TITLE[x] for x in CATS) + " |"
+    L = ["## 1. How many gold documents each system finds (dev, all domains)", "",
+         "Unit: one (topic, gold document) pair. A gold document is *found* by a system if it is "
+         "in that system's top k.", "",
+         "| track | condition | k | gold pairs " + head, "| --- | --- | ---: | ---: |" + " ---: |" * 4]
+    for key in sorted(k for k in c if "|ALL|" in k):
+        tr, cond, _, k = key.split("|")
+        n, cells = pct(c[key], k)
+        L.append(f"| {tr} | {cond} | {k} | {n} | " + " | ".join(cells) + " |")
+    L.append("")
+    for cond in ("1a", "1b_query+step", "2a_current", "2a_history"):
+        tr = "1" if cond.startswith("1") else "2"
+        doms = sorted({k.split("|")[2] for k in c if k.startswith(f"{tr}|{cond}|") and "|ALL|" not in k})
+        L += [f"### Per domain — Track {tr} `{cond}`", "",
+              "| domain | gold pairs | k=10: " + " | ".join(TITLE[x] for x in CATS)
+              + " | k=100: " + " | ".join(TITLE[x] for x in CATS) + " |",
+              "| --- | ---: |" + " ---: |" * 8]
+        for dom in doms:
+            n, c10 = pct(c[f"{tr}|{cond}|{dom}|10"], 10)
+            _, c100 = pct(c[f"{tr}|{cond}|{dom}|100"], 100)
+            L.append(f"| {dom} | {n} | " + " | ".join(c10) + " | " + " | ".join(c100) + " |")
+        L.append("")
+    f = rep["features_k100"]
+    L += ["## 2. What separates the categories (all pairs, k=100)", "",
+          "Means over every pair in the category (not just the examples). `overlap` = share of the "
+          "query's content stems found in the gold document; `overlap in window` = same, counting "
+          f"only the first ~{int(0.75 * rep['window'])} words the encoder sees; `match only beyond "
+          "window` = overlap rises by more than 0.1 once the rest of the document is counted.", "",
+          "| track / condition | category | pairs | overlap | overlap in window | gold words | "
+          "gold longer than window | match only beyond window | query has a number | its numbers found in gold |",
+          "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |"]
+    for key in sorted(f):
+        tr, cond, cat = key.split("|")
+        v = f[key]
+        nh = "" if v.get("nums_hit") is None else f"{v['nums_hit']:.2f}"
+        L.append(f"| {tr} `{cond}` | {TITLE[cat]} | {v['n']} | {v['overlap']:.2f} | {v['overlap_win']:.2f} | "
+                 f"{v['gold_words']:.0f} | {v['gold_beyond_window']:.2f} | {v['match_only_beyond_window']:.2f} | "
+                 f"{v['q_nums']:.2f} | {nh} |")
+    return L + [""]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--data", required=True)
@@ -35,12 +84,18 @@ def main():
     ap.add_argument("--bm25", required=True)
     ap.add_argument("--dense", required=True)
     ap.add_argument("--split", default="dev")
+    ap.add_argument("--readings", help="JSON {\"<category>|<n>\": text} of hand-written readings")
+    ap.add_argument("--intro", help="Markdown file placed before the generated tables")
+    ap.add_argument("--outro", help="Markdown file appended after the examples")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     rep = json.load(open(os.path.join(a.cats, "categories.json")))
-    L = []
+    readings = json.load(open(a.readings)) if a.readings else {}
+    L = open(a.intro).read().rstrip().split("\n") + [""] if a.intro else []
+    L += tables(rep)
+    L += ["## 3. Examples (dev, category at k=100, fixed-seed sample)", ""]
     for cat in CATS:
-        L += [f"## {TITLE[cat]} (at k=100)", ""]
+        L += [f"### 3.{CATS.index(cat) + 1} {TITLE[cat]}", ""]
         for n, ex in enumerate(rep["examples"][cat], 1):
             tr, dom, cond, qid, g = ex["track"], ex["domain"], ex["cond"], ex["qid"], ex["doc"]
             pre = f"t{tr}_{dom}_{a.split}_{cond}.tsv"
@@ -51,7 +106,7 @@ def main():
             texts = fetch(a.data, tr, dom, {g} | {d for d, _ in bm[:3]} | {d for d, _ in de[:3]} | set(golds))
             rb = "not in top 1000" if ex["bm25_rank"] is None else ex["bm25_rank"]
             rd = "not in top 1000" if ex["dense_rank"] is None else ex["dense_rank"]
-            L += [f"### {TITLE[cat]} {n}: Track {tr}, `{dom}`, `{qid}` ({cond})", "",
+            L += [f"#### {TITLE[cat]} {n}: Track {tr}, `{dom}`, `{qid}` ({cond})", "",
                   f"Gold document `{g}` — **BM25 rank: {rb} · dense rank: {rd}** "
                   f"(this topic has {len(golds)} gold document(s))", ""]
             if tr == 2 and tops[qid].get("history"):
@@ -64,7 +119,10 @@ def main():
                     mark = " ✅ gold" if d in golds else ""
                     L.append(f"{r}. `{d}`{mark} — {snip(texts.get(d, ''), 220)}")
                 L.append("")
-            L += ["**Reading (preliminary, not human-validated):** ", "", "---", ""]
+            L += [f"**Reading (preliminary, not human-validated):** {readings.get(f'{cat}|{n}', '')}",
+                  "", "---", ""]
+    if a.outro:
+        L += open(a.outro).read().rstrip().split("\n")
     with open(a.out, "w") as f:
         f.write("\n".join(L))
     print(f"wrote {a.out}")

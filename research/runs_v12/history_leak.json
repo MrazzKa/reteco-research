@@ -1,0 +1,176 @@
+{
+ "train": {
+  "ALL|first_turn": {
+   "n_turns": 496,
+   "2a_current|bm25": 0.2687,
+   "2a_current|dense": 0.3275,
+   "2a_current|hybrid": 0.3581,
+   "2a_history|bm25": 0.2687,
+   "2a_history|dense": 0.3275,
+   "2a_history|hybrid": 0.3579
+  },
+  "ALL|new_gold": {
+   "n_turns": 162,
+   "2a_current|bm25": 0.1719,
+   "2a_current|dense": 0.2253,
+   "2a_current|hybrid": 0.2881,
+   "2a_history|bm25": 0.1802,
+   "2a_history|dense": 0.1616,
+   "2a_history|hybrid": 0.196
+  },
+  "ALL|recycled_gold": {
+   "n_turns": 1455,
+   "2a_current|bm25": 0.1509,
+   "2a_current|dense": 0.2035,
+   "2a_current|hybrid": 0.2428,
+   "2a_history|bm25": 0.539,
+   "2a_history|dense": 0.4977,
+   "2a_history|hybrid": 0.5623
+  },
+  "BRIGHT|first_turn": {
+   "n_turns": 342,
+   "2a_current|bm25": 0.3137,
+   "2a_current|dense": 0.3356,
+   "2a_current|hybrid": 0.3876,
+   "2a_history|bm25": 0.3137,
+   "2a_history|dense": 0.3355,
+   "2a_history|hybrid": 0.3876
+  },
+  "BRIGHT|new_gold": {
+   "n_turns": 99,
+   "2a_current|bm25": 0.1952,
+   "2a_current|dense": 0.2354,
+   "2a_current|hybrid": 0.3118,
+   "2a_history|bm25": 0.2733,
+   "2a_history|dense": 0.2242,
+   "2a_history|hybrid": 0.2846
+  },
+  "BRIGHT|recycled_gold": {
+   "n_turns": 976,
+   "2a_current|bm25": 0.1714,
+   "2a_current|dense": 0.1959,
+   "2a_current|hybrid": 0.2531,
+   "2a_history|bm25": 0.6375,
+   "2a_history|dense": 0.538,
+   "2a_history|hybrid": 0.6268
+  },
+  "StackExchange|first_turn": {
+   "n_turns": 154,
+   "2a_current|bm25": 0.1688,
+   "2a_current|dense": 0.3095,
+   "2a_current|hybrid": 0.2926,
+   "2a_history|bm25": 0.1688,
+   "2a_history|dense": 0.3095,
+   "2a_history|hybrid": 0.292
+  },
+  "StackExchange|new_gold": {
+   "n_turns": 63,
+   "2a_current|bm25": 0.1354,
+   "2a_current|dense": 0.2094,
+   "2a_current|hybrid": 0.2509,
+   "2a_history|bm25": 0.0339,
+   "2a_history|dense": 0.0633,
+   "2a_history|hybrid": 0.0566
+  },
+  "StackExchange|recycled_gold": {
+   "n_turns": 479,
+   "2a_current|bm25": 0.1093,
+   "2a_current|dense": 0.2189,
+   "2a_current|hybrid": 0.2219,
+   "2a_history|bm25": 0.3384,
+   "2a_history|dense": 0.4155,
+   "2a_history|hybrid": 0.431
+  },
+  "later_turns_with_any_recycled_gold": {
+   "StackExchange": 0.8838,
+   "BRIGHT": 0.9079
+  }
+ },
+ "dev": {
+  "ALL|first_turn": {
+   "n_turns": 211,
+   "2a_current|bm25": 0.2611,
+   "2a_current|dense": 0.2993,
+   "2a_current|hybrid": 0.3479,
+   "2a_history|bm25": 0.2611,
+   "2a_history|dense": 0.2993,
+   "2a_history|hybrid": 0.3479
+  },
+  "ALL|new_gold": {
+   "n_turns": 79,
+   "2a_current|bm25": 0.1781,
+   "2a_current|dense": 0.2143,
+   "2a_current|hybrid": 0.2445,
+   "2a_history|bm25": 0.1971,
+   "2a_history|dense": 0.2041,
+   "2a_history|hybrid": 0.2082
+  },
+  "ALL|recycled_gold": {
+   "n_turns": 568,
+   "2a_current|bm25": 0.1629,
+   "2a_current|dense": 0.1777,
+   "2a_current|hybrid": 0.2216,
+   "2a_history|bm25": 0.5563,
+   "2a_history|dense": 0.4701,
+   "2a_history|hybrid": 0.5338
+  },
+  "BRIGHT|first_turn": {
+   "n_turns": 145,
+   "2a_current|bm25": 0.275,
+   "2a_current|dense": 0.2809,
+   "2a_current|hybrid": 0.3465,
+   "2a_history|bm25": 0.275,
+   "2a_history|dense": 0.2809,
+   "2a_history|hybrid": 0.3465
+  },
+  "BRIGHT|new_gold": {
+   "n_turns": 52,
+   "2a_current|bm25": 0.2535,
+   "2a_current|dense": 0.2785,
+   "2a_current|hybrid": 0.3264,
+   "2a_history|bm25": 0.2689,
+   "2a_history|dense": 0.2624,
+   "2a_history|hybrid": 0.2935
+  },
+  "BRIGHT|recycled_gold": {
+   "n_turns": 401,
+   "2a_current|bm25": 0.184,
+   "2a_current|dense": 0.1695,
+   "2a_current|hybrid": 0.2274,
+   "2a_history|bm25": 0.6509,
+   "2a_history|dense": 0.5131,
+   "2a_history|hybrid": 0.6001
+  },
+  "StackExchange|first_turn": {
+   "n_turns": 66,
+   "2a_current|bm25": 0.2308,
+   "2a_current|dense": 0.3398,
+   "2a_current|hybrid": 0.351,
+   "2a_history|bm25": 0.2308,
+   "2a_history|dense": 0.3398,
+   "2a_history|hybrid": 0.351
+  },
+  "StackExchange|new_gold": {
+   "n_turns": 27,
+   "2a_current|bm25": 0.0328,
+   "2a_current|dense": 0.0906,
+   "2a_current|hybrid": 0.0867,
+   "2a_history|bm25": 0.0588,
+   "2a_history|dense": 0.0919,
+   "2a_history|hybrid": 0.0441
+  },
+  "StackExchange|recycled_gold": {
+   "n_turns": 167,
+   "2a_current|bm25": 0.1121,
+   "2a_current|dense": 0.1973,
+   "2a_current|hybrid": 0.2075,
+   "2a_history|bm25": 0.3289,
+   "2a_history|dense": 0.3666,
+   "2a_history|hybrid": 0.3747
+  },
+  "later_turns_with_any_recycled_gold": {
+   "StackExchange": 0.8608,
+   "BRIGHT": 0.8852
+  }
+ }
+}

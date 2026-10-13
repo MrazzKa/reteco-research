@@ -1,0 +1,74 @@
+  [biology] bm25 2a_current: raw 0.1962..0.1962  tiebreak 0.1962..0.1962
+  [biology] bm25 2a_history: raw 0.5478..0.5509  tiebreak 0.5529..0.5529
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 2969.51it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (8s)
+  [biology] dense 2a_current: raw range 0.0015  tiebreak range 0.0000
+  [biology] dense 2a_history: raw range 0.0124  tiebreak range 0.0000
+  [biology] ann 2a_current: [{'ndcg10': 0.2142, 'recall10_vs_exact': 0.9896}, {'ndcg10': 0.2139, 'recall10_vs_exact': 0.987}, {'ndcg10': 0.2106, 'recall10_vs_exact': 0.9896}]
+  [drones] bm25 2a_current: raw 0.1235..0.1235  tiebreak 0.1235..0.1235
+  [drones] bm25 2a_history: raw 0.2590..0.2590  tiebreak 0.2590..0.2590
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 2297.44it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (3s)
+  [drones] dense 2a_current: raw range 0.0031  tiebreak range 0.0000
+  [drones] dense 2a_history: raw range 0.0005  tiebreak range 0.0000
+  [drones] ann 2a_current: [{'ndcg10': 0.1689, 'recall10_vs_exact': 0.9947}, {'ndcg10': 0.1689, 'recall10_vs_exact': 0.9947}, {'ndcg10': 0.1689, 'recall10_vs_exact': 0.9921}]
+  [earth_science] bm25 2a_current: raw 0.2058..0.2070  tiebreak 0.2058..0.2058
+  [earth_science] bm25 2a_history: raw 0.6040..0.6061  tiebreak 0.6040..0.6040
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3202.37it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (2s)
+  [earth_science] dense 2a_current: raw range 0.0029  tiebreak range 0.0000
+  [earth_science] dense 2a_history: raw range 0.0069  tiebreak range 0.0000
+GraphAndTreeIndex::createIndexWithInsertionOrder: Processed 100000 objects. time= 9.4985 (s) vm size=37.23 G:37.23 G
+GraphAndTreeIndex::createIndexWithInsertionOrder: Processed 100000 objects. time= 11.59 (s) vm size=37.2 G:37.23 G
+GraphAndTreeIndex::createIndexWithInsertionOrder: Processed 100000 objects. time= 9.98869 (s) vm size=37.2 G:37.23 G
+  [earth_science] ann 2a_current: [{'ndcg10': 0.2504, 'recall10_vs_exact': 0.9865}, {'ndcg10': 0.2504, 'recall10_vs_exact': 0.9872}, {'ndcg10': 0.2514, 'recall10_vs_exact': 0.9865}]
+  [economics] bm25 2a_current: raw 0.1783..0.1783  tiebreak 0.1783..0.1783
+  [economics] bm25 2a_history: raw 0.4322..0.4322  tiebreak 0.4322..0.4322
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3279.90it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (2s)
+  [economics] dense 2a_current: raw range 0.0000  tiebreak range 0.0000
+  [economics] dense 2a_history: raw range 0.0010  tiebreak range 0.0000
+  [hardware] bm25 2a_current: raw 0.1559..0.1559  tiebreak 0.1559..0.1559
+  [hardware] bm25 2a_history: raw 0.2899..0.2899  tiebreak 0.2899..0.2899
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 5598.33it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (3s)
+  [hardware] dense 2a_current: raw range 0.0097  tiebreak range 0.0000
+  [hardware] dense 2a_history: raw range 0.0046  tiebreak range 0.0000
+  [law] bm25 2a_current: raw 0.1356..0.1356  tiebreak 0.1356..0.1356
+  [law] bm25 2a_history: raw 0.3508..0.3508  tiebreak 0.3508..0.3508
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3848.46it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (3s)
+  [law] dense 2a_current: raw range 0.0045  tiebreak range 0.0000
+  [law] dense 2a_history: raw range 0.0044  tiebreak range 0.0000
+  [medicalsciences] bm25 2a_current: raw 0.0973..0.0973  tiebreak 0.0973..0.0973
+  [medicalsciences] bm25 2a_history: raw 0.1282..0.1282  tiebreak 0.1282..0.1282
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 2337.92it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (2s)
+  [medicalsciences] dense 2a_current: raw range 0.0006  tiebreak range 0.0000
+  [medicalsciences] dense 2a_history: raw range 0.0004  tiebreak range 0.0000
+  [politics] bm25 2a_current: raw 0.1458..0.1458  tiebreak 0.1458..0.1458
+  [politics] bm25 2a_history: raw 0.3016..0.3016  tiebreak 0.3016..0.3016
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3026.57it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (3s)
+  [politics] dense 2a_current: raw range 0.0043  tiebreak range 0.0000
+  [politics] dense 2a_history: raw range 0.0037  tiebreak range 0.0000
+  [psychology] bm25 2a_current: raw 0.2369..0.2369  tiebreak 0.2369..0.2369
+  [psychology] bm25 2a_history: raw 0.5226..0.5226  tiebreak 0.5226..0.5226
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3308.48it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (3s)
+  [psychology] dense 2a_current: raw range 0.0005  tiebreak range 0.0000
+  [psychology] dense 2a_history: raw range 0.0003  tiebreak range 0.0000
+  [robotics] bm25 2a_current: raw 0.1628..0.1628  tiebreak 0.1628..0.1628
+  [robotics] bm25 2a_history: raw 0.4709..0.4711  tiebreak 0.4709..0.4709
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 2776.44it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (3s)
+  [robotics] dense 2a_current: raw range 0.0000  tiebreak range 0.0000
+  [robotics] dense 2a_history: raw range 0.0001  tiebreak range 0.0000
+  [sustainable_living] bm25 2a_current: raw 0.2959..0.2959  tiebreak 0.2959..0.2959
+  [sustainable_living] bm25 2a_history: raw 0.5257..0.5257  tiebreak 0.5257..0.5257
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 2836.64it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (2s)
+  [sustainable_living] dense 2a_current: raw range 0.0017  tiebreak range 0.0000
+  [sustainable_living] dense 2a_history: raw range 0.0009  tiebreak range 0.0000
+wrote ../research/runs_v12/order/t2.json

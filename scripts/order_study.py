@@ -27,6 +27,9 @@ import time
 from collections import defaultdict
 
 import numpy as np
+import torch
+
+torch.backends.cuda.matmul.allow_tf32 = False  # exact float32 scores
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from bm25s_run import analyze, ndcg_fn  # noqa: E402
@@ -126,7 +129,6 @@ def main():
                   f"tiebreak {min(tb):.4f}..{max(tb):.4f}", flush=True)
         del texts
         # ---- dense: permuted rows, exact search
-        import torch
         from embed_models import load_encoder
         enc = load_encoder(a.model, a.max_len)
         cids, shards, _ = load_cache(domain_dir(a.emb, a.model, a.max_len, a.track, dom))
@@ -135,13 +137,13 @@ def main():
             name = "2a_history_qfirst" if c == "2a_history" else c
             queries, gold = pl[name]
             uniq = sorted({q for _, q in queries})
-            qemb = torch.from_numpy(enc.encode_queries(uniq)).cuda()
+            qemb = torch.from_numpy(enc.encode_queries(uniq)).cuda().float()
             vals = {"raw": [], "tiebreak": []}
             for p in perms:
                 order = p if p is not None else np.arange(len(cids))
                 pid = [cids[i] for i in order]
-                m = torch.from_numpy(mat[order]).cuda()
-                sims = (qemb @ m.T).float()
+                m = torch.from_numpy(mat[order]).cuda().float()
+                sims = qemb @ m.T
                 v, ix = torch.topk(sims, 132, dim=1)
                 v, ix = v.cpu().numpy(), ix.cpu().numpy()
                 rr, rt = {}, {}

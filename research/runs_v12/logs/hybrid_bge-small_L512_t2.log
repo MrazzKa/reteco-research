@@ -1,0 +1,31 @@
+
+== track 2 2a_current (dense: 2a_current) — train 11 dom, dev 11 dom
+  bm25             train 0.1667  dev 0.1758   kind=bm25
+  dense            train 0.2337  dev 0.2081   kind=dense
+  rerank           train 0.2378  dev 0.2232   kind=rerank
+  linear*          train 0.2639  dev 0.2435   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.7
+  rrf*             train 0.2482  dev 0.2395   kind=rrf|kb=50|kd=50|c=30
+  pool_rerank*     train 0.2337  dev 0.2081   kind=pool_rerank|kb=100|kd=100
+  rrf_c60_100+100  train 0.2464  dev 0.2360   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.0677, 'ci95': [0.0509, 0.0845], 'p_le_0': 0.0}
+  dev rrf* - bm25: {'diff': 0.0636, 'ci95': [0.0489, 0.0786], 'p_le_0': 0.0}
+  dev linear* - rerank: {'diff': 0.0204, 'ci95': [0.0088, 0.032], 'p_le_0': 0.0002}
+  dev dense - bm25: {'diff': 0.0323, 'ci95': [0.0114, 0.0531], 'p_le_0': 0.0017}
+  dev rerank - bm25: {'diff': 0.0474, 'ci95': [0.0273, 0.0674], 'p_le_0': 0.0}
+  dev linear* - dense: {'diff': 0.0354, 'ci95': [0.0236, 0.047], 'p_le_0': 0.0}
+
+== track 2 2a_history (dense: 2a_history_qfirst) — train 11 dom, dev 11 dom
+  bm25             train 0.4082  dev 0.4034   kind=bm25
+  dense            train 0.4143  dev 0.3820   kind=dense
+  rerank           train 0.4239  dev 0.3865   kind=rerank
+  linear*          train 0.4587  dev 0.4238   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.7
+  rrf*             train 0.4510  dev 0.4229   kind=rrf|kb=50|kd=50|c=10
+  pool_rerank*     train 0.4143  dev 0.3820   kind=pool_rerank|kb=100|kd=100
+  rrf_c60_100+100  train 0.4419  dev 0.4074   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.0204, 'ci95': [0.0025, 0.0382], 'p_le_0': 0.0126}
+  dev rrf* - bm25: {'diff': 0.0194, 'ci95': [0.0055, 0.0333], 'p_le_0': 0.0044}
+  dev linear* - rerank: {'diff': 0.0373, 'ci95': [0.0251, 0.0494], 'p_le_0': 0.0}
+  dev dense - bm25: {'diff': -0.0214, 'ci95': [-0.0442, 0.0009], 'p_le_0': 0.9704}
+  dev rerank - bm25: {'diff': -0.017, 'ci95': [-0.0392, 0.005], 'p_le_0': 0.9369}
+  dev linear* - dense: {'diff': 0.0418, 'ci95': [0.0296, 0.054], 'p_le_0': 0.0}
+wrote ../research/runs_v12/hybrid/bge-small_L512_t2.json
