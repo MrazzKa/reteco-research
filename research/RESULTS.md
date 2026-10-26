@@ -12,9 +12,9 @@ Same machine and data as week 4. Exact score ties are now broken by sha1(doc id)
 
 | sub-track | system (chosen on train) | train | dev | week-4 dev (doc-id ties) | week-4 system, sha1 ties | dev − week-4 system [95% CI] |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
-| `1a` | BM25 + dense hybrid, query q+r+h | 0.2949 | **0.3258** | 0.2834 | 0.2834 | +0.0425 [+0.0214, +0.0630] |
-| `1b_query+step` | BM25 + dense hybrid, query q+r+h | 0.3226 | **0.3505** | 0.2865 | 0.2865 | +0.0640 [+0.0467, +0.0817] |
-| `2a_current` | BM25 + MaxP dense hybrid, query q+r+h | 0.3507 | **0.3319** | 0.3001 | 0.3003 | +0.0317 [+0.0133, +0.0502] |
+| `1a` | BM25 + dense hybrid, query q+r+h + ReasonEmbed (interp=0.8, top 50) | 0.3078 | **0.3667** | 0.2834 | 0.2834 | +0.0834 [+0.0598, +0.1082] |
+| `1b_query+step` | BM25 + dense hybrid, query q+r+h + ReasonEmbed (interp=0.7, top 50) | 0.3754 | **0.4053** | 0.2865 | 0.2865 | +0.1187 [+0.0958, +0.1419] |
+| `2a_current` | BM25 + MaxP dense hybrid, query q+r+h + ReasonEmbed (interp=0.8, top 50) | 0.4359 | **0.3901** | 0.3001 | 0.3003 | +0.0899 [+0.0708, +0.1089] |
 | `2a_history` | BM25 + bge-base hybrid (week 4, not expanded) | 0.4806 | **0.4352** | 0.4342 | 0.4352 | same system |
 
 Train numbers of a cross-encoder or embedder stage are on its train subsample (≤ 30 topics per domain), as the depth/weight was chosen there.
@@ -204,6 +204,18 @@ Top 100 of the adopted hybrid; score = (1 − w)·minmax(hybrid) + w·T, T = sha
 | `1b_query+step__q+r+h` | 0.48 / 0.78 | 0.3226 | 0.3505 | none, w = 0.0 | 0.3226 | 0.3505 | no |
 
 Every year weight lowers train nDCG@10, monotonically in w (full grid in `runs_v13/temporal/t1.json`).
+
+## S. Reasoning embedder (ReasonEmbed-Qwen3-4B, NF4) over the hybrid pool (rule 8)
+
+`hanhainebula/reason-embed-qwen3-4b-0928`, 4-bit NF4 (bitsandbytes), 512 tokens, query instruction per domain; rescoring the top 50 of the adopted system. `top=N`: top N reordered by the embedder; `interp=w`: (1 − w)·minmax(hybrid) + w·minmax(embedder). Train = subsample ≤ 30 topics per domain.
+
+| condition | none train | none dev | best on train | its train | its dev | train boot best − none | docs encoded | encode (s) |
+| --- | ---: | ---: | --- | ---: | ---: | --- | ---: | ---: |
+| `1a__q+r+h` | 0.2823 | 0.3258 | `interp=0.8` | 0.3078 | 0.3667 | +0.0254 [+0.0073, +0.0448] | 34,417 | 5185 |
+| `1b_query+step__q+r+h` | 0.3442 | 0.3505 | `interp=0.7` | 0.3754 | 0.4053 | +0.0312 [+0.0120, +0.0507] | 13,608 | 2049 |
+| `2a_current__q+r+h` | 0.3828 | 0.3319 | `interp=0.8` | 0.4359 | 0.3901 | +0.0531 [+0.0312, +0.0749] | 33,937 | 4407 |
+
+Track 2 by source (dev): BRIGHT 0.4099 → 0.4686; StackExchange 0.2384 → 0.2960. Unlike the query expansion (section O), the embedder helps both sources.
 
 # Week 4 (GPU): dense retrieval over every corpus, hybrid, depth, error analysis
 

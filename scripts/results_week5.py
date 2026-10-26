@@ -173,7 +173,10 @@ def week5(root):
         L += ["", "Every year weight lowers train nDCG@10, monotonically in w (full grid in `runs_v13/temporal/t1.json`).", ""]
     re_ = {t: jload(os.path.join(R, f"reason/t{t}_reasonembed-4b.json")) for t in (1, 2)}
     if any(re_.values()):
-        L += ["## S. Reasoning embedder (ReasonEmbed-Qwen3-4B, FP8) over the hybrid pool (rule 8)", "",
+        L += ["## S. Reasoning embedder (ReasonEmbed-Qwen3-4B, NF4) over the hybrid pool (rule 8)", "",
+              "`hanhainebula/reason-embed-qwen3-4b-0928`, 4-bit NF4 (bitsandbytes), 512 tokens, query instruction "
+              "per domain; rescoring the top 50 of the adopted system. `top=N`: top N reordered by the embedder; "
+              "`interp=w`: (1 − w)·minmax(hybrid) + w·minmax(embedder). Train = subsample ≤ 30 topics per domain.", "",
               "| condition | none train | none dev | best on train | its train | its dev | train boot best − none | docs encoded | encode (s) |",
               "| --- | ---: | ---: | --- | ---: | ---: | --- | ---: | ---: |"]
         for t, rep in re_.items():
@@ -186,4 +189,14 @@ def week5(root):
                          f"{ci(r['train_bootstrap_best_minus_none']) if r.get('train_bootstrap_best_minus_none') else ''} | "
                          f"{r['docs_encoded']:,} | {r['encode_s']:.0f} |")
         L.append("")
+        r2 = (re_.get(2) or {}).get("2a_current__q+r+h")
+        if r2 and "dev_per_topic_best" in r2:
+            B = ["biology", "earth_science", "economics", "psychology", "robotics", "sustainable_living"]
+
+            def m(d, doms):
+                return sum(sum(d[x]) / len(d[x]) for x in doms) / len(doms)
+            b, n = r2["dev_per_topic_best"], r2["dev_per_topic_none"]
+            se = [d for d in b if d not in B]
+            L += [f"Track 2 by source (dev): BRIGHT {m(n, B):.4f} → {m(b, B):.4f}; StackExchange {m(n, se):.4f} → "
+                  f"{m(b, se):.4f}. Unlike the query expansion (section O), the embedder helps both sources.", ""]
     return L

@@ -1015,3 +1015,14 @@ result (train subsample / dev): none 0.2823 / 0.3258 · top-N N=10 0.2737/0.3275
 conclusion: The reasoning embedder also helps Track 1, where last week's cross-encoder hurt at every depth.
   Pure reordering of the top 10 is slightly harmful on train; mixing its score with the hybrid's (w 0.8) is best on
   both tracks.
+
+## 2026-10-26 19:01–19:35 — rule 8 result, 1b: ReasonEmbed over the top 50 — adopted
+input: q+r+h hybrid (`qexp/t1/hybrid_1b.json`); query = query + step (as in 1b_query+step) with the 1b instruction.
+cost: 13,608 new documents (the rest cached from 1a) + 1,590 queries, 34 min.
+result (train subsample / dev): none 0.3442 / 0.3505 · top-N N=10 0.3398/0.3513, N=20 0.3496/0.3800, N=50
+  0.3490/0.3927 · interpolation w=0.5 0.3740/0.3947, 0.6 0.3743/0.4045, **w=0.7 0.3754/0.4053**, 0.8 0.3748/0.4083,
+  0.9 0.3641/0.4014. Best on train w=0.7; train − none +0.0312 [+0.0120, +0.0507] → **adopted**. Dev − none
+  +0.0548 [+0.0364, +0.0730]; better in 13/13 domains (largest genealogy +0.113, quant +0.100, workplace +0.083).
+conclusion: Rule 8 adopted the reasoning embedder on all three conditions (interpolation weight 0.7–0.8 over the top
+  50). Final systems: LLM query expansion → BM25 + dense hybrid (+ MaxP on Track 2) → ReasonEmbed-4B mixed into the
+  top 50. Total GPU time for rule 8: 3 h 14 min (82k documents at 5–8 per second).

@@ -1,0 +1,91 @@
+=== 16:21:06 attempt 1: --track 2 --conditions 2a_current__q+r+h --query-cond 2a_current --hybrid ../research/runs_v13/maxp/t2/hybrid_2a_current.json --bm25 ../research/runs_v13/maxp/t2/bm25/runs --dense ../research/runs_v13/maxp/t2/dense/runs
+  [2a_current__q+r+h] docs 2000/33937 (374s)
+  [2a_current__q+r+h] docs 4000/33937 (732s)
+  [2a_current__q+r+h] docs 6000/33937 (1068s)
+  [2a_current__q+r+h] docs 8000/33937 (1396s)
+  [2a_current__q+r+h] docs 10000/33937 (1750s)
+  [2a_current__q+r+h] docs 12000/33937 (2062s)
+  [2a_current__q+r+h] docs 14000/33937 (2348s)
+  [2a_current__q+r+h] docs 16000/33937 (2635s)
+  [2a_current__q+r+h] docs 18000/33937 (2885s)
+  [2a_current__q+r+h] docs 20000/33937 (3091s)
+  [2a_current__q+r+h] docs 22000/33937 (3234s)
+  [2a_current__q+r+h] docs 24000/33937 (3425s)
+  [2a_current__q+r+h] docs 26000/33937 (3622s)
+  [2a_current__q+r+h] docs 28000/33937 (3837s)
+  [2a_current__q+r+h] docs 30000/33937 (4038s)
+  [2a_current__q+r+h] docs 32000/33937 (4202s)
+  [2a_current__q+r+h] docs 33937/33937 (4366s)
+  [2a_current__q+r+h] 33937 docs + 1188 queries in 4407s
+== t2 2a_current__q+r+h: none train 0.3828 dev 0.3319 | best on train ('interp', 0.8): train 0.4359 dev 0.3901 train boot {'diff': 0.0531, 'ci95': [0.0312, 0.0749], 'p_le_0': 0.0}
+   none=0: train 0.3828  dev 0.3319
+   top=10: train 0.3871  dev 0.3565
+   top=20: train 0.401  dev 0.3752
+   top=50: train 0.4106  dev 0.3811
+   interp=0.1: train 0.3889  dev 0.3395
+   interp=0.2: train 0.3932  dev 0.3473
+   interp=0.3: train 0.3992  dev 0.3596
+   interp=0.4: train 0.4055  dev 0.3674
+   interp=0.5: train 0.4167  dev 0.3775
+   interp=0.6: train 0.4267  dev 0.3858
+   interp=0.7: train 0.431  dev 0.388
+   interp=0.8: train 0.4359  dev 0.3901
+   interp=0.9: train 0.425  dev 0.3888
+=== 17:34:45 attempt 1: --track 1 --conditions 1a__q+r+h --query-cond 1a --hybrid ../research/runs_v13/qexp/t1/hybrid_1a.json --bm25 ../research/runs_v13/qexp/t1/bm25/runs --dense ../research/runs_v13/qexp/t1/dense/runs
+  [1a__q+r+h] docs 2000/34417 (337s)
+  [1a__q+r+h] docs 4000/34417 (612s)
+  [1a__q+r+h] docs 6000/34417 (876s)
+  [1a__q+r+h] docs 8000/34417 (1144s)
+  [1a__q+r+h] docs 10000/34417 (1449s)
+  [1a__q+r+h] docs 12000/34417 (1742s)
+  [1a__q+r+h] docs 14000/34417 (2034s)
+  [1a__q+r+h] docs 16000/34417 (2377s)
+  [1a__q+r+h] docs 18000/34417 (2668s)
+  [1a__q+r+h] docs 20000/34417 (2942s)
+  [1a__q+r+h] docs 22000/34417 (3289s)
+  [1a__q+r+h] docs 24000/34417 (3595s)
+  [1a__q+r+h] docs 26000/34417 (3882s)
+  [1a__q+r+h] docs 28000/34417 (4165s)
+  [1a__q+r+h] docs 30000/34417 (4445s)
+  [1a__q+r+h] docs 32000/34417 (4733s)
+  [1a__q+r+h] docs 34000/34417 (5023s)
+  [1a__q+r+h] docs 34417/34417 (5084s)
+  [1a__q+r+h] 34417 docs + 869 queries in 5185s
+== t1 1a__q+r+h: none train 0.2823 dev 0.3258 | best on train ('interp', 0.8): train 0.3078 dev 0.3667 train boot {'diff': 0.0254, 'ci95': [0.0073, 0.0448], 'p_le_0': 0.0029}
+   none=0: train 0.2823  dev 0.3258
+   top=10: train 0.2737  dev 0.3275
+   top=20: train 0.2888  dev 0.3431
+   top=50: train 0.2893  dev 0.3538
+   interp=0.1: train 0.2867  dev 0.3315
+   interp=0.2: train 0.2882  dev 0.3383
+   interp=0.3: train 0.2951  dev 0.3442
+   interp=0.4: train 0.2992  dev 0.3496
+   interp=0.5: train 0.3024  dev 0.3553
+   interp=0.6: train 0.3021  dev 0.3602
+   interp=0.7: train 0.3072  dev 0.3647
+   interp=0.8: train 0.3078  dev 0.3667
+   interp=0.9: train 0.3034  dev 0.3631
+=== 19:01:16 attempt 1: --track 1 --conditions 1b_query+step__q+r+h --query-cond 1b_query+step --hybrid ../research/runs_v13/qexp/t1/hybrid_1b.json --bm25 ../research/runs_v13/qexp/t1/bm25/runs --dense ../research/runs_v13/qexp/t1/dense/runs
+  [1b_query+step__q+r+h] docs 2000/13608 (260s)
+  [1b_query+step__q+r+h] docs 4000/13608 (528s)
+  [1b_query+step__q+r+h] docs 6000/13608 (823s)
+  [1b_query+step__q+r+h] docs 8000/13608 (1116s)
+  [1b_query+step__q+r+h] docs 10000/13608 (1379s)
+  [1b_query+step__q+r+h] docs 12000/13608 (1636s)
+  [1b_query+step__q+r+h] docs 13608/13608 (1843s)
+  [1b_query+step__q+r+h] 13608 docs + 1590 queries in 2049s
+== t1 1b_query+step__q+r+h: none train 0.3442 dev 0.3505 | best on train ('interp', 0.7): train 0.3754 dev 0.4053 train boot {'diff': 0.0312, 'ci95': [0.012, 0.0507], 'p_le_0': 0.0005}
+   none=0: train 0.3442  dev 0.3505
+   top=10: train 0.3398  dev 0.3513
+   top=20: train 0.3496  dev 0.38
+   top=50: train 0.349  dev 0.3927
+   interp=0.1: train 0.3521  dev 0.3587
+   interp=0.2: train 0.3536  dev 0.3685
+   interp=0.3: train 0.3576  dev 0.3794
+   interp=0.4: train 0.3662  dev 0.3835
+   interp=0.5: train 0.374  dev 0.3947
+   interp=0.6: train 0.3743  dev 0.4045
+   interp=0.7: train 0.3754  dev 0.4053
+   interp=0.8: train 0.3748  dev 0.4083
+   interp=0.9: train 0.3641  dev 0.4014
+=== 19:35:35 ALLDONE

@@ -1,53 +1,53 @@
 {
  "1a": {
-  "system": "BM25 + dense hybrid, query q+r+h",
-  "train": 0.2949,
-  "dev": 0.3258,
+  "system": "BM25 + dense hybrid, query q+r+h + ReasonEmbed (interp=0.8, top 50)",
+  "train": 0.3078,
+  "dev": 0.3667,
   "week4_system": "bge-small L256 hybrid",
   "week4_dev": 0.2834,
   "week4_dev_sha1": 0.2834,
   "week4_dev_sha1_recomputed": 0.2834,
   "dev_boot": {
-   "diff": 0.0425,
+   "diff": 0.0834,
    "ci95": [
-    0.0214,
-    0.063
+    0.0598,
+    0.1082
    ],
    "p_le_0": 0.0
   }
  },
  "1b_query+step": {
-  "system": "BM25 + dense hybrid, query q+r+h",
-  "train": 0.3226,
-  "dev": 0.3505,
+  "system": "BM25 + dense hybrid, query q+r+h + ReasonEmbed (interp=0.7, top 50)",
+  "train": 0.3754,
+  "dev": 0.4053,
   "week4_system": "bge-small L256 hybrid",
   "week4_dev": 0.2865,
   "week4_dev_sha1": 0.2865,
   "week4_dev_sha1_recomputed": 0.2865,
   "dev_boot": {
-   "diff": 0.064,
+   "diff": 0.1187,
    "ci95": [
-    0.0467,
-    0.0817
+    0.0958,
+    0.1419
    ],
    "p_le_0": 0.0
   }
  },
  "2a_current": {
-  "system": "BM25 + MaxP dense hybrid, query q+r+h",
-  "train": 0.3507,
-  "dev": 0.3319,
+  "system": "BM25 + MaxP dense hybrid, query q+r+h + ReasonEmbed (interp=0.8, top 50)",
+  "train": 0.4359,
+  "dev": 0.3901,
   "week4_system": "bge-base hybrid + cross-encoder top 50",
   "week4_dev": 0.3001,
   "week4_dev_sha1": 0.3003,
   "week4_dev_sha1_recomputed": 0.3003,
   "dev_boot": {
-   "diff": 0.0317,
+   "diff": 0.0899,
    "ci95": [
-    0.0133,
-    0.0502
+    0.0708,
+    0.1089
    ],
-   "p_le_0": 0.0007
+   "p_le_0": 0.0
   }
  },
  "2a_history": {

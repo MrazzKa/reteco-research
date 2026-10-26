@@ -5,15 +5,18 @@ Directed Research (INFO 492, University of Arizona) on **SemEval-2027 Task 1 —
 
 Code, experiment log and generated results only. Notes and meeting briefs are kept outside the repo.
 
-**Where things stand (week 5, 2026-10-26):** every final system now starts from a local LLM
-(Qwen3-4B-Instruct-2507, AWQ 4-bit, vLLM) that writes a short reasoning about the query and a
-hypothetical answer passage; BM25 and the dense encoder search with the query plus both texts, and the
-two lists are fused (weights tuned on train). Dev nDCG@10 of the systems chosen on train (LOG rules 6–9):
-Track 1a 0.2834 → **0.3258**, 1b 0.2865 → **0.3505**, Track 2 current turn 0.3003 → **0.3319**
-(dense side scored per passage, MaxP — see the length caveat in RESULTS section P; without MaxP 0.3100),
+**Where things stand (week 5, 2026-10-26):** the final systems have three stages. (1) A local LLM
+(Qwen3-4B-Instruct-2507, AWQ 4-bit, vLLM) writes a short reasoning about the query and a hypothetical
+answer passage. (2) BM25 and the dense encoder search with the query plus both texts, and the two lists
+are fused (weights tuned on train; on Track 2 the dense side scores passages, MaxP). (3) A reasoning
+embedder (ReasonEmbed-Qwen3-4B, 4-bit) rescores the top 50, mixed with the fused score. Dev nDCG@10 of the
+systems chosen on train (LOG rules 6–9), week 4 → week 5:
+Track 1a 0.2834 → **0.3667**, 1b 0.2865 → **0.4053**, Track 2 current turn 0.3003 → **0.3901**,
 +history 0.4352 (unchanged). Not adopted on train: the cross-encoder over the expanded Track-2 list,
-MaxP on Track 1, explicit years on Track 1. Exact score ties are broken by sha1(doc id) since week 5
-(the doc-id order was a hidden use of the id; it changed no final dev number by more than 0.001).
+MaxP on Track 1, explicit years on Track 1. Caveats: the MaxP gain on Track 2 is partly a length effect
+(long BRIGHT documents are mostly gold), and the LLM expansion helps the BRIGHT-derived domains but not
+the StackExchange ones (RESULTS sections O, P). Exact score ties are broken by sha1(doc id) since week 5
+(the doc-id order changed no final dev number by more than 0.001).
 Tables: `research/RESULTS.md` (sections M–S = week 5). Examples: `research/cases/query_reasoning_dev.md`.
 
 Week 4 for reference: BM25 + dense hybrid, encoder comparison, cross-encoder, error analysis

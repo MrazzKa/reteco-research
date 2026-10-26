@@ -1,0 +1,63 @@
+{
+ "2a_current__q+r+h": {
+  "checkpoint": "hanhainebula/reason-embed-qwen3-4b-0928",
+  "bits": 4,
+  "max_len": 512,
+  "pool": 100,
+  "hybrid_cfg": {
+   "kind": "linear",
+   "kb": 100,
+   "kd": 100,
+   "norm": "zscore",
+   "alpha": 0.6
+  },
+  "query_condition": "2a_current",
+  "train_topics_per_domain_max": 30,
+  "docs_encoded": 2061,
+  "encode_s": 288.16614508628845,
+  "by_how": {
+   "none=0": {
+    "dev": 0.2568
+   },
+   "top=10": {
+    "dev": 0.3066
+   },
+   "top=20": {
+    "dev": 0.3182
+   },
+   "top=50": {
+    "dev": 0.3099
+   },
+   "top=100": {
+    "dev": 0.3137
+   },
+   "interp=0.1": {
+    "dev": 0.2744
+   },
+   "interp=0.2": {
+    "dev": 0.2785
+   },
+   "interp=0.3": {
+    "dev": 0.2975
+   },
+   "interp=0.4": {
+    "dev": 0.3042
+   },
+   "interp=0.5": {
+    "dev": 0.3106
+   },
+   "interp=0.6": {
+    "dev": 0.3128
+   },
+   "interp=0.7": {
+    "dev": 0.3107
+   },
+   "interp=0.8": {
+    "dev": 0.3092
+   },
+   "interp=0.9": {
+    "dev": 0.3149
+   }
+  }
+ }
+}
