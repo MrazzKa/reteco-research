@@ -1,0 +1,2575 @@
+{
+ "id|1a|train|iota": {
+  "bm25": {
+   "gold_top10": 3
+  },
+  "dense": {
+   "gold_top10": 8,
+   "gold_tied": 2,
+   "gold_tied_first": 1
+  },
+  "hybrid": {
+   "gold_top10": 10,
+   "gold_tied": 2,
+   "gold_tied_first": 1
+  },
+  "ce": {}
+ },
+ "id|1a|train|quant": {
+  "bm25": {
+   "gold_top10": 1
+  },
+  "dense": {
+   "gold_top10": 11
+  },
+  "hybrid": {
+   "gold_top10": 11
+  },
+  "ce": {}
+ },
+ "id|1a|train|law": {
+  "bm25": {
+   "gold_top10": 6
+  },
+  "dense": {
+   "gold_top10": 23
+  },
+  "hybrid": {
+   "gold_top10": 17
+  },
+  "ce": {}
+ },
+ "id|1a|train|workplace": {
+  "bm25": {
+   "gold_top10": 5
+  },
+  "dense": {
+   "gold_top10": 23
+  },
+  "hybrid": {
+   "gold_top10": 26
+  },
+  "ce": {}
+ },
+ "id|1a|train|cardano": {
+  "bm25": {
+   "gold_top10": 20
+  },
+  "dense": {
+   "gold_top10": 28,
+   "gold_tied": 3,
+   "gold_tied_first": 2
+  },
+  "hybrid": {
+   "gold_top10": 37
+  },
+  "ce": {}
+ },
+ "id|1a|train|monero": {
+  "bm25": {
+   "gold_top10": 6,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "dense": {
+   "gold_top10": 32
+  },
+  "hybrid": {
+   "gold_top10": 25
+  },
+  "ce": {}
+ },
+ "id|1a|train|economics": {
+  "bm25": {
+   "gold_top10": 14
+  },
+  "dense": {
+   "gold_top10": 33
+  },
+  "hybrid": {
+   "gold_top10": 37
+  },
+  "ce": {}
+ },
+ "id|1a|train|bitcoin": {
+  "bm25": {
+   "gold_top10": 11
+  },
+  "dense": {
+   "gold_top10": 45
+  },
+  "hybrid": {
+   "gold_top10": 45
+  },
+  "ce": {}
+ },
+ "id|1a|train|politics": {
+  "bm25": {
+   "gold_top10": 100
+  },
+  "dense": {
+   "gold_top10": 108
+  },
+  "hybrid": {
+   "gold_top10": 141
+  },
+  "ce": {}
+ },
+ "id|1a|train|genealogy": {
+  "bm25": {
+   "gold_top10": 36
+  },
+  "dense": {
+   "gold_top10": 72,
+   "gold_tied": 1
+  },
+  "hybrid": {
+   "gold_top10": 83
+  },
+  "ce": {}
+ },
+ "id|1a|train|travel": {
+  "bm25": {
+   "gold_top10": 9
+  },
+  "dense": {
+   "gold_top10": 57
+  },
+  "hybrid": {
+   "gold_top10": 42
+  },
+  "ce": {}
+ },
+ "id|1a|train|hsm": {
+  "bm25": {
+   "gold_top10": 73
+  },
+  "dense": {
+   "gold_top10": 71
+  },
+  "hybrid": {
+   "gold_top10": 97
+  },
+  "ce": {}
+ },
+ "id|1a|train|history": {
+  "bm25": {
+   "gold_top10": 106
+  },
+  "dense": {
+   "gold_top10": 566,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "hybrid": {
+   "gold_top10": 554,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "ce": {}
+ },
+ "id|1a|dev|iota": {
+  "bm25": {
+   "gold_top10": 4
+  },
+  "dense": {
+   "gold_top10": 5
+  },
+  "hybrid": {
+   "gold_top10": 5
+  },
+  "ce": {}
+ },
+ "id|1a|dev|quant": {
+  "bm25": {},
+  "dense": {
+   "gold_top10": 3
+  },
+  "hybrid": {
+   "gold_top10": 2
+  },
+  "ce": {}
+ },
+ "id|1a|dev|law": {
+  "bm25": {
+   "gold_top10": 2
+  },
+  "dense": {
+   "gold_top10": 12
+  },
+  "hybrid": {
+   "gold_top10": 12
+  },
+  "ce": {}
+ },
+ "id|1a|dev|workplace": {
+  "bm25": {},
+  "dense": {
+   "gold_top10": 12
+  },
+  "hybrid": {
+   "gold_top10": 11
+  },
+  "ce": {}
+ },
+ "id|1a|dev|cardano": {
+  "bm25": {
+   "gold_top10": 4
+  },
+  "dense": {
+   "gold_top10": 10,
+   "gold_tied": 1
+  },
+  "hybrid": {
+   "gold_top10": 11
+  },
+  "ce": {}
+ },
+ "id|1a|dev|monero": {
+  "bm25": {
+   "gold_top10": 3
+  },
+  "dense": {
+   "gold_top10": 6
+  },
+  "hybrid": {
+   "gold_top10": 9
+  },
+  "ce": {}
+ },
+ "id|1a|dev|economics": {
+  "bm25": {
+   "gold_top10": 5
+  },
+  "dense": {
+   "gold_top10": 18
+  },
+  "hybrid": {
+   "gold_top10": 21
+  },
+  "ce": {}
+ },
+ "id|1a|dev|bitcoin": {
+  "bm25": {
+   "gold_top10": 6
+  },
+  "dense": {
+   "gold_top10": 27,
+   "gold_tied": 1
+  },
+  "hybrid": {
+   "gold_top10": 26
+  },
+  "ce": {}
+ },
+ "id|1a|dev|politics": {
+  "bm25": {
+   "gold_top10": 37
+  },
+  "dense": {
+   "gold_top10": 37
+  },
+  "hybrid": {
+   "gold_top10": 50
+  },
+  "ce": {}
+ },
+ "id|1a|dev|genealogy": {
+  "bm25": {
+   "gold_top10": 18
+  },
+  "dense": {
+   "gold_top10": 28
+  },
+  "hybrid": {
+   "gold_top10": 34
+  },
+  "ce": {}
+ },
+ "id|1a|dev|travel": {
+  "bm25": {
+   "gold_top10": 4
+  },
+  "dense": {
+   "gold_top10": 28
+  },
+  "hybrid": {
+   "gold_top10": 27
+  },
+  "ce": {}
+ },
+ "id|1a|dev|hsm": {
+  "bm25": {
+   "gold_top10": 31
+  },
+  "dense": {
+   "gold_top10": 41
+  },
+  "hybrid": {
+   "gold_top10": 60
+  },
+  "ce": {}
+ },
+ "id|1a|dev|history": {
+  "bm25": {
+   "gold_top10": 59,
+   "gold_tied": 1
+  },
+  "dense": {
+   "gold_top10": 240
+  },
+  "hybrid": {
+   "gold_top10": 237
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|train|iota": {
+  "bm25": {
+   "gold_top10": 4
+  },
+  "dense": {
+   "gold_top10": 8,
+   "gold_tied": 2,
+   "gold_tied_first": 2
+  },
+  "hybrid": {
+   "gold_top10": 10,
+   "gold_tied": 2,
+   "gold_tied_first": 2
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|train|quant": {
+  "bm25": {
+   "gold_top10": 1
+  },
+  "dense": {
+   "gold_top10": 14
+  },
+  "hybrid": {
+   "gold_top10": 15
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|train|law": {
+  "bm25": {
+   "gold_top10": 13
+  },
+  "dense": {
+   "gold_top10": 31
+  },
+  "hybrid": {
+   "gold_top10": 29
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|train|workplace": {
+  "bm25": {
+   "gold_top10": 8
+  },
+  "dense": {
+   "gold_top10": 21
+  },
+  "hybrid": {
+   "gold_top10": 22
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|train|cardano": {
+  "bm25": {
+   "gold_top10": 28
+  },
+  "dense": {
+   "gold_top10": 37,
+   "gold_tied": 6,
+   "gold_tied_first": 4
+  },
+  "hybrid": {
+   "gold_top10": 43
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|train|monero": {
+  "bm25": {
+   "gold_top10": 13,
+   "gold_tied": 2,
+   "gold_tied_first": 2
+  },
+  "dense": {
+   "gold_top10": 41,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "hybrid": {
+   "gold_top10": 35,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|train|economics": {
+  "bm25": {
+   "gold_top10": 23
+  },
+  "dense": {
+   "gold_top10": 47
+  },
+  "hybrid": {
+   "gold_top10": 55
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|train|bitcoin": {
+  "bm25": {
+   "gold_top10": 17
+  },
+  "dense": {
+   "gold_top10": 44
+  },
+  "hybrid": {
+   "gold_top10": 48
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|train|politics": {
+  "bm25": {
+   "gold_top10": 166
+  },
+  "dense": {
+   "gold_top10": 187
+  },
+  "hybrid": {
+   "gold_top10": 238
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|train|genealogy": {
+  "bm25": {
+   "gold_top10": 45
+  },
+  "dense": {
+   "gold_top10": 103,
+   "gold_tied": 2
+  },
+  "hybrid": {
+   "gold_top10": 117
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|train|travel": {
+  "bm25": {
+   "gold_top10": 9
+  },
+  "dense": {
+   "gold_top10": 66
+  },
+  "hybrid": {
+   "gold_top10": 54
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|train|hsm": {
+  "bm25": {
+   "gold_top10": 111
+  },
+  "dense": {
+   "gold_top10": 120
+  },
+  "hybrid": {
+   "gold_top10": 161
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|train|history": {
+  "bm25": {
+   "gold_top10": 175
+  },
+  "dense": {
+   "gold_top10": 799,
+   "gold_tied": 2,
+   "gold_tied_first": 2
+  },
+  "hybrid": {
+   "gold_top10": 787,
+   "gold_tied": 2,
+   "gold_tied_first": 2
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|dev|iota": {
+  "bm25": {
+   "gold_top10": 4
+  },
+  "dense": {
+   "gold_top10": 5
+  },
+  "hybrid": {
+   "gold_top10": 5
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|dev|quant": {
+  "bm25": {},
+  "dense": {
+   "gold_top10": 3
+  },
+  "hybrid": {
+   "gold_top10": 3
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|dev|law": {
+  "bm25": {
+   "gold_top10": 4
+  },
+  "dense": {
+   "gold_top10": 13
+  },
+  "hybrid": {
+   "gold_top10": 13
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|dev|workplace": {
+  "bm25": {
+   "gold_top10": 3
+  },
+  "dense": {
+   "gold_top10": 15
+  },
+  "hybrid": {
+   "gold_top10": 14
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|dev|cardano": {
+  "bm25": {
+   "gold_top10": 6
+  },
+  "dense": {
+   "gold_top10": 13,
+   "gold_tied": 1
+  },
+  "hybrid": {
+   "gold_top10": 20
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|dev|monero": {
+  "bm25": {
+   "gold_top10": 2
+  },
+  "dense": {
+   "gold_top10": 9
+  },
+  "hybrid": {
+   "gold_top10": 10
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|dev|economics": {
+  "bm25": {
+   "gold_top10": 9
+  },
+  "dense": {
+   "gold_top10": 21
+  },
+  "hybrid": {
+   "gold_top10": 27
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|dev|bitcoin": {
+  "bm25": {
+   "gold_top10": 7
+  },
+  "dense": {
+   "gold_top10": 28,
+   "gold_tied": 1
+  },
+  "hybrid": {
+   "gold_top10": 28
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|dev|politics": {
+  "bm25": {
+   "gold_top10": 62
+  },
+  "dense": {
+   "gold_top10": 60
+  },
+  "hybrid": {
+   "gold_top10": 79
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|dev|genealogy": {
+  "bm25": {
+   "gold_top10": 29
+  },
+  "dense": {
+   "gold_top10": 35
+  },
+  "hybrid": {
+   "gold_top10": 44
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|dev|travel": {
+  "bm25": {
+   "gold_top10": 5
+  },
+  "dense": {
+   "gold_top10": 33
+  },
+  "hybrid": {
+   "gold_top10": 34
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|dev|hsm": {
+  "bm25": {
+   "gold_top10": 46
+  },
+  "dense": {
+   "gold_top10": 62
+  },
+  "hybrid": {
+   "gold_top10": 85
+  },
+  "ce": {}
+ },
+ "id|1b_query+step|dev|history": {
+  "bm25": {
+   "gold_top10": 114,
+   "gold_tied": 1
+  },
+  "dense": {
+   "gold_top10": 382
+  },
+  "hybrid": {
+   "gold_top10": 371
+  },
+  "ce": {}
+ },
+ "id|2a_current|train|drones": {
+  "bm25": {
+   "gold_top10": 52
+  },
+  "dense": {
+   "gold_top10": 91
+  },
+  "hybrid": {
+   "gold_top10": 96
+  },
+  "ce": {
+   "gold_top10": 22
+  }
+ },
+ "id|2a_current|train|politics": {
+  "bm25": {
+   "gold_top10": 88
+  },
+  "dense": {
+   "gold_top10": 146
+  },
+  "hybrid": {
+   "gold_top10": 147
+  },
+  "ce": {
+   "gold_top10": 39
+  }
+ },
+ "id|2a_current|train|law": {
+  "bm25": {
+   "gold_top10": 65
+  },
+  "dense": {
+   "gold_top10": 130
+  },
+  "hybrid": {
+   "gold_top10": 138
+  },
+  "ce": {
+   "gold_top10": 28,
+   "gold_tied": 1
+  }
+ },
+ "id|2a_current|train|medicalsciences": {
+  "bm25": {
+   "gold_top10": 49
+  },
+  "dense": {
+   "gold_top10": 138
+  },
+  "hybrid": {
+   "gold_top10": 117
+  },
+  "ce": {
+   "gold_top10": 31
+  }
+ },
+ "id|2a_current|train|hardware": {
+  "bm25": {
+   "gold_top10": 47
+  },
+  "dense": {
+   "gold_top10": 76
+  },
+  "hybrid": {
+   "gold_top10": 87
+  },
+  "ce": {
+   "gold_top10": 19
+  }
+ },
+ "id|2a_current|train|economics": {
+  "bm25": {
+   "gold_top10": 82
+  },
+  "dense": {
+   "gold_top10": 123
+  },
+  "hybrid": {
+   "gold_top10": 151
+  },
+  "ce": {
+   "gold_top10": 32
+  }
+ },
+ "id|2a_current|train|psychology": {
+  "bm25": {
+   "gold_top10": 111
+  },
+  "dense": {
+   "gold_top10": 190
+  },
+  "hybrid": {
+   "gold_top10": 194
+  },
+  "ce": {
+   "gold_top10": 35
+  }
+ },
+ "id|2a_current|train|biology": {
+  "bm25": {
+   "gold_top10": 102,
+   "gold_tied": 10,
+   "gold_tied_first": 5
+  },
+  "dense": {
+   "gold_top10": 131,
+   "gold_tied": 12,
+   "gold_tied_first": 4
+  },
+  "hybrid": {
+   "gold_top10": 161,
+   "gold_tied": 14,
+   "gold_tied_first": 6
+  },
+  "ce": {
+   "gold_top10": 28,
+   "gold_tied": 3,
+   "gold_tied_first": 3
+  }
+ },
+ "id|2a_current|train|sustainable_living": {
+  "bm25": {
+   "gold_top10": 128
+  },
+  "dense": {
+   "gold_top10": 161
+  },
+  "hybrid": {
+   "gold_top10": 179
+  },
+  "ce": {
+   "gold_top10": 25
+  }
+ },
+ "id|2a_current|train|robotics": {
+  "bm25": {
+   "gold_top10": 69,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "dense": {
+   "gold_top10": 69
+  },
+  "hybrid": {
+   "gold_top10": 86
+  },
+  "ce": {
+   "gold_top10": 27
+  }
+ },
+ "id|2a_current|train|earth_science": {
+  "bm25": {
+   "gold_top10": 176,
+   "gold_tied": 3,
+   "gold_tied_first": 3
+  },
+  "dense": {
+   "gold_top10": 180
+  },
+  "hybrid": {
+   "gold_top10": 212,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "ce": {
+   "gold_top10": 28,
+   "gold_tied": 2,
+   "gold_tied_first": 2
+  }
+ },
+ "id|2a_current|dev|drones": {
+  "bm25": {
+   "gold_top10": 19
+  },
+  "dense": {
+   "gold_top10": 30
+  },
+  "hybrid": {
+   "gold_top10": 31
+  },
+  "ce": {
+   "gold_top10": 37,
+   "gold_tied": 1
+  }
+ },
+ "id|2a_current|dev|politics": {
+  "bm25": {
+   "gold_top10": 29
+  },
+  "dense": {
+   "gold_top10": 58
+  },
+  "hybrid": {
+   "gold_top10": 58
+  },
+  "ce": {
+   "gold_top10": 60
+  }
+ },
+ "id|2a_current|dev|law": {
+  "bm25": {
+   "gold_top10": 26
+  },
+  "dense": {
+   "gold_top10": 45
+  },
+  "hybrid": {
+   "gold_top10": 45
+  },
+  "ce": {
+   "gold_top10": 54
+  }
+ },
+ "id|2a_current|dev|medicalsciences": {
+  "bm25": {
+   "gold_top10": 15
+  },
+  "dense": {
+   "gold_top10": 33
+  },
+  "hybrid": {
+   "gold_top10": 28
+  },
+  "ce": {
+   "gold_top10": 27,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  }
+ },
+ "id|2a_current|dev|hardware": {
+  "bm25": {
+   "gold_top10": 30
+  },
+  "dense": {
+   "gold_top10": 41
+  },
+  "hybrid": {
+   "gold_top10": 44
+  },
+  "ce": {
+   "gold_top10": 45,
+   "gold_tied": 1
+  }
+ },
+ "id|2a_current|dev|economics": {
+  "bm25": {
+   "gold_top10": 40
+  },
+  "dense": {
+   "gold_top10": 31
+  },
+  "hybrid": {
+   "gold_top10": 43
+  },
+  "ce": {
+   "gold_top10": 51
+  }
+ },
+ "id|2a_current|dev|psychology": {
+  "bm25": {
+   "gold_top10": 46
+  },
+  "dense": {
+   "gold_top10": 47
+  },
+  "hybrid": {
+   "gold_top10": 54
+  },
+  "ce": {
+   "gold_top10": 55,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  }
+ },
+ "id|2a_current|dev|biology": {
+  "bm25": {
+   "gold_top10": 45
+  },
+  "dense": {
+   "gold_top10": 66,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "hybrid": {
+   "gold_top10": 73
+  },
+  "ce": {
+   "gold_top10": 98,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  }
+ },
+ "id|2a_current|dev|sustainable_living": {
+  "bm25": {
+   "gold_top10": 55
+  },
+  "dense": {
+   "gold_top10": 59
+  },
+  "hybrid": {
+   "gold_top10": 71
+  },
+  "ce": {
+   "gold_top10": 81,
+   "gold_tied": 1
+  }
+ },
+ "id|2a_current|dev|robotics": {
+  "bm25": {
+   "gold_top10": 29
+  },
+  "dense": {
+   "gold_top10": 19
+  },
+  "hybrid": {
+   "gold_top10": 29
+  },
+  "ce": {
+   "gold_top10": 43
+  }
+ },
+ "id|2a_current|dev|earth_science": {
+  "bm25": {
+   "gold_top10": 57,
+   "gold_tied": 2
+  },
+  "dense": {
+   "gold_top10": 61,
+   "gold_tied": 2
+  },
+  "hybrid": {
+   "gold_top10": 72,
+   "gold_tied": 2
+  },
+  "ce": {
+   "gold_top10": 85,
+   "gold_tied": 3
+  }
+ },
+ "id|2a_history|train|drones": {
+  "bm25": {
+   "gold_top10": 90
+  },
+  "dense": {
+   "gold_top10": 132
+  },
+  "hybrid": {
+   "gold_top10": 127
+  },
+  "ce": {}
+ },
+ "id|2a_history|train|politics": {
+  "bm25": {
+   "gold_top10": 205
+  },
+  "dense": {
+   "gold_top10": 241
+  },
+  "hybrid": {
+   "gold_top10": 236
+  },
+  "ce": {}
+ },
+ "id|2a_history|train|law": {
+  "bm25": {
+   "gold_top10": 143
+  },
+  "dense": {
+   "gold_top10": 223
+  },
+  "hybrid": {
+   "gold_top10": 210
+  },
+  "ce": {}
+ },
+ "id|2a_history|train|medicalsciences": {
+  "bm25": {
+   "gold_top10": 96
+  },
+  "dense": {
+   "gold_top10": 181
+  },
+  "hybrid": {
+   "gold_top10": 153
+  },
+  "ce": {}
+ },
+ "id|2a_history|train|hardware": {
+  "bm25": {
+   "gold_top10": 94
+  },
+  "dense": {
+   "gold_top10": 114
+  },
+  "hybrid": {
+   "gold_top10": 122
+  },
+  "ce": {}
+ },
+ "id|2a_history|train|economics": {
+  "bm25": {
+   "gold_top10": 218
+  },
+  "dense": {
+   "gold_top10": 228
+  },
+  "hybrid": {
+   "gold_top10": 272
+  },
+  "ce": {}
+ },
+ "id|2a_history|train|psychology": {
+  "bm25": {
+   "gold_top10": 247
+  },
+  "dense": {
+   "gold_top10": 305
+  },
+  "hybrid": {
+   "gold_top10": 315
+  },
+  "ce": {}
+ },
+ "id|2a_history|train|biology": {
+  "bm25": {
+   "gold_top10": 257,
+   "gold_tied": 28,
+   "gold_tied_first": 8
+  },
+  "dense": {
+   "gold_top10": 223,
+   "gold_tied": 25,
+   "gold_tied_first": 8
+  },
+  "hybrid": {
+   "gold_top10": 263,
+   "gold_tied": 27,
+   "gold_tied_first": 9
+  },
+  "ce": {}
+ },
+ "id|2a_history|train|sustainable_living": {
+  "bm25": {
+   "gold_top10": 258
+  },
+  "dense": {
+   "gold_top10": 263
+  },
+  "hybrid": {
+   "gold_top10": 282
+  },
+  "ce": {}
+ },
+ "id|2a_history|train|robotics": {
+  "bm25": {
+   "gold_top10": 173,
+   "gold_tied": 2,
+   "gold_tied_first": 2
+  },
+  "dense": {
+   "gold_top10": 137
+  },
+  "hybrid": {
+   "gold_top10": 186
+  },
+  "ce": {}
+ },
+ "id|2a_history|train|earth_science": {
+  "bm25": {
+   "gold_top10": 397,
+   "gold_tied": 7,
+   "gold_tied_first": 7
+  },
+  "dense": {
+   "gold_top10": 308,
+   "gold_tied": 5,
+   "gold_tied_first": 4
+  },
+  "hybrid": {
+   "gold_top10": 394,
+   "gold_tied": 7,
+   "gold_tied_first": 7
+  },
+  "ce": {}
+ },
+ "id|2a_history|dev|drones": {
+  "bm25": {
+   "gold_top10": 36
+  },
+  "dense": {
+   "gold_top10": 50
+  },
+  "hybrid": {
+   "gold_top10": 51
+  },
+  "ce": {}
+ },
+ "id|2a_history|dev|politics": {
+  "bm25": {
+   "gold_top10": 48
+  },
+  "dense": {
+   "gold_top10": 79
+  },
+  "hybrid": {
+   "gold_top10": 69
+  },
+  "ce": {}
+ },
+ "id|2a_history|dev|law": {
+  "bm25": {
+   "gold_top10": 59
+  },
+  "dense": {
+   "gold_top10": 67
+  },
+  "hybrid": {
+   "gold_top10": 70
+  },
+  "ce": {}
+ },
+ "id|2a_history|dev|medicalsciences": {
+  "bm25": {
+   "gold_top10": 24
+  },
+  "dense": {
+   "gold_top10": 56
+  },
+  "hybrid": {
+   "gold_top10": 40
+  },
+  "ce": {}
+ },
+ "id|2a_history|dev|hardware": {
+  "bm25": {
+   "gold_top10": 48
+  },
+  "dense": {
+   "gold_top10": 54
+  },
+  "hybrid": {
+   "gold_top10": 58
+  },
+  "ce": {}
+ },
+ "id|2a_history|dev|economics": {
+  "bm25": {
+   "gold_top10": 87
+  },
+  "dense": {
+   "gold_top10": 80
+  },
+  "hybrid": {
+   "gold_top10": 97
+  },
+  "ce": {}
+ },
+ "id|2a_history|dev|psychology": {
+  "bm25": {
+   "gold_top10": 90
+  },
+  "dense": {
+   "gold_top10": 99
+  },
+  "hybrid": {
+   "gold_top10": 112
+  },
+  "ce": {}
+ },
+ "id|2a_history|dev|biology": {
+  "bm25": {
+   "gold_top10": 121,
+   "gold_tied": 7,
+   "gold_tied_first": 7
+  },
+  "dense": {
+   "gold_top10": 114,
+   "gold_tied": 9,
+   "gold_tied_first": 9
+  },
+  "hybrid": {
+   "gold_top10": 124,
+   "gold_tied": 8,
+   "gold_tied_first": 8
+  },
+  "ce": {}
+ },
+ "id|2a_history|dev|sustainable_living": {
+  "bm25": {
+   "gold_top10": 108
+  },
+  "dense": {
+   "gold_top10": 94
+  },
+  "hybrid": {
+   "gold_top10": 110
+  },
+  "ce": {}
+ },
+ "id|2a_history|dev|robotics": {
+  "bm25": {
+   "gold_top10": 82,
+   "gold_tied": 1
+  },
+  "dense": {
+   "gold_top10": 59
+  },
+  "hybrid": {
+   "gold_top10": 76
+  },
+  "ce": {}
+ },
+ "id|2a_history|dev|earth_science": {
+  "bm25": {
+   "gold_top10": 131,
+   "gold_tied": 5
+  },
+  "dense": {
+   "gold_top10": 107,
+   "gold_tied": 4
+  },
+  "hybrid": {
+   "gold_top10": 135,
+   "gold_tied": 5
+  },
+  "ce": {}
+ },
+ "sha1|1a|train|iota": {
+  "bm25": {
+   "gold_top10": 3
+  },
+  "dense": {
+   "gold_top10": 8,
+   "gold_tied": 2,
+   "gold_tied_first": 1
+  },
+  "hybrid": {
+   "gold_top10": 10,
+   "gold_tied": 2,
+   "gold_tied_first": 1
+  },
+  "ce": {}
+ },
+ "sha1|1a|train|quant": {
+  "bm25": {
+   "gold_top10": 1
+  },
+  "dense": {
+   "gold_top10": 11
+  },
+  "hybrid": {
+   "gold_top10": 11
+  },
+  "ce": {}
+ },
+ "sha1|1a|train|law": {
+  "bm25": {
+   "gold_top10": 6
+  },
+  "dense": {
+   "gold_top10": 23
+  },
+  "hybrid": {
+   "gold_top10": 17
+  },
+  "ce": {}
+ },
+ "sha1|1a|train|workplace": {
+  "bm25": {
+   "gold_top10": 5
+  },
+  "dense": {
+   "gold_top10": 23
+  },
+  "hybrid": {
+   "gold_top10": 26
+  },
+  "ce": {}
+ },
+ "sha1|1a|train|cardano": {
+  "bm25": {
+   "gold_top10": 20
+  },
+  "dense": {
+   "gold_top10": 28,
+   "gold_tied": 3,
+   "gold_tied_first": 1
+  },
+  "hybrid": {
+   "gold_top10": 37
+  },
+  "ce": {}
+ },
+ "sha1|1a|train|monero": {
+  "bm25": {
+   "gold_top10": 6,
+   "gold_tied": 1
+  },
+  "dense": {
+   "gold_top10": 32
+  },
+  "hybrid": {
+   "gold_top10": 25
+  },
+  "ce": {}
+ },
+ "sha1|1a|train|economics": {
+  "bm25": {
+   "gold_top10": 14
+  },
+  "dense": {
+   "gold_top10": 34,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "hybrid": {
+   "gold_top10": 37
+  },
+  "ce": {}
+ },
+ "sha1|1a|train|bitcoin": {
+  "bm25": {
+   "gold_top10": 11
+  },
+  "dense": {
+   "gold_top10": 45
+  },
+  "hybrid": {
+   "gold_top10": 45
+  },
+  "ce": {}
+ },
+ "sha1|1a|train|politics": {
+  "bm25": {
+   "gold_top10": 100
+  },
+  "dense": {
+   "gold_top10": 108
+  },
+  "hybrid": {
+   "gold_top10": 141
+  },
+  "ce": {}
+ },
+ "sha1|1a|train|genealogy": {
+  "bm25": {
+   "gold_top10": 36
+  },
+  "dense": {
+   "gold_top10": 72,
+   "gold_tied": 1
+  },
+  "hybrid": {
+   "gold_top10": 83
+  },
+  "ce": {}
+ },
+ "sha1|1a|train|travel": {
+  "bm25": {
+   "gold_top10": 9
+  },
+  "dense": {
+   "gold_top10": 57
+  },
+  "hybrid": {
+   "gold_top10": 42
+  },
+  "ce": {}
+ },
+ "sha1|1a|train|hsm": {
+  "bm25": {
+   "gold_top10": 73
+  },
+  "dense": {
+   "gold_top10": 71
+  },
+  "hybrid": {
+   "gold_top10": 97
+  },
+  "ce": {}
+ },
+ "sha1|1a|train|history": {
+  "bm25": {
+   "gold_top10": 106
+  },
+  "dense": {
+   "gold_top10": 566,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "hybrid": {
+   "gold_top10": 554,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "ce": {}
+ },
+ "sha1|1a|dev|iota": {
+  "bm25": {
+   "gold_top10": 4
+  },
+  "dense": {
+   "gold_top10": 5
+  },
+  "hybrid": {
+   "gold_top10": 5
+  },
+  "ce": {}
+ },
+ "sha1|1a|dev|quant": {
+  "bm25": {},
+  "dense": {
+   "gold_top10": 3
+  },
+  "hybrid": {
+   "gold_top10": 2
+  },
+  "ce": {}
+ },
+ "sha1|1a|dev|law": {
+  "bm25": {
+   "gold_top10": 2
+  },
+  "dense": {
+   "gold_top10": 12
+  },
+  "hybrid": {
+   "gold_top10": 12
+  },
+  "ce": {}
+ },
+ "sha1|1a|dev|workplace": {
+  "bm25": {},
+  "dense": {
+   "gold_top10": 12
+  },
+  "hybrid": {
+   "gold_top10": 11
+  },
+  "ce": {}
+ },
+ "sha1|1a|dev|cardano": {
+  "bm25": {
+   "gold_top10": 4
+  },
+  "dense": {
+   "gold_top10": 10,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "hybrid": {
+   "gold_top10": 11
+  },
+  "ce": {}
+ },
+ "sha1|1a|dev|monero": {
+  "bm25": {
+   "gold_top10": 3
+  },
+  "dense": {
+   "gold_top10": 6
+  },
+  "hybrid": {
+   "gold_top10": 9
+  },
+  "ce": {}
+ },
+ "sha1|1a|dev|economics": {
+  "bm25": {
+   "gold_top10": 5
+  },
+  "dense": {
+   "gold_top10": 18
+  },
+  "hybrid": {
+   "gold_top10": 21
+  },
+  "ce": {}
+ },
+ "sha1|1a|dev|bitcoin": {
+  "bm25": {
+   "gold_top10": 6
+  },
+  "dense": {
+   "gold_top10": 27,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "hybrid": {
+   "gold_top10": 26
+  },
+  "ce": {}
+ },
+ "sha1|1a|dev|politics": {
+  "bm25": {
+   "gold_top10": 37
+  },
+  "dense": {
+   "gold_top10": 37
+  },
+  "hybrid": {
+   "gold_top10": 50
+  },
+  "ce": {}
+ },
+ "sha1|1a|dev|genealogy": {
+  "bm25": {
+   "gold_top10": 18
+  },
+  "dense": {
+   "gold_top10": 28
+  },
+  "hybrid": {
+   "gold_top10": 34
+  },
+  "ce": {}
+ },
+ "sha1|1a|dev|travel": {
+  "bm25": {
+   "gold_top10": 4
+  },
+  "dense": {
+   "gold_top10": 28
+  },
+  "hybrid": {
+   "gold_top10": 27
+  },
+  "ce": {}
+ },
+ "sha1|1a|dev|hsm": {
+  "bm25": {
+   "gold_top10": 31
+  },
+  "dense": {
+   "gold_top10": 41
+  },
+  "hybrid": {
+   "gold_top10": 60
+  },
+  "ce": {}
+ },
+ "sha1|1a|dev|history": {
+  "bm25": {
+   "gold_top10": 59,
+   "gold_tied": 1
+  },
+  "dense": {
+   "gold_top10": 240
+  },
+  "hybrid": {
+   "gold_top10": 237
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|train|iota": {
+  "bm25": {
+   "gold_top10": 4
+  },
+  "dense": {
+   "gold_top10": 8,
+   "gold_tied": 2
+  },
+  "hybrid": {
+   "gold_top10": 10,
+   "gold_tied": 2
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|train|quant": {
+  "bm25": {
+   "gold_top10": 1
+  },
+  "dense": {
+   "gold_top10": 14
+  },
+  "hybrid": {
+   "gold_top10": 15
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|train|law": {
+  "bm25": {
+   "gold_top10": 13
+  },
+  "dense": {
+   "gold_top10": 31
+  },
+  "hybrid": {
+   "gold_top10": 29
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|train|workplace": {
+  "bm25": {
+   "gold_top10": 8
+  },
+  "dense": {
+   "gold_top10": 21
+  },
+  "hybrid": {
+   "gold_top10": 22
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|train|cardano": {
+  "bm25": {
+   "gold_top10": 28
+  },
+  "dense": {
+   "gold_top10": 37,
+   "gold_tied": 6,
+   "gold_tied_first": 2
+  },
+  "hybrid": {
+   "gold_top10": 43
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|train|monero": {
+  "bm25": {
+   "gold_top10": 13,
+   "gold_tied": 2
+  },
+  "dense": {
+   "gold_top10": 41,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "hybrid": {
+   "gold_top10": 35,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|train|economics": {
+  "bm25": {
+   "gold_top10": 23
+  },
+  "dense": {
+   "gold_top10": 47
+  },
+  "hybrid": {
+   "gold_top10": 55
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|train|bitcoin": {
+  "bm25": {
+   "gold_top10": 17
+  },
+  "dense": {
+   "gold_top10": 44
+  },
+  "hybrid": {
+   "gold_top10": 48
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|train|politics": {
+  "bm25": {
+   "gold_top10": 166
+  },
+  "dense": {
+   "gold_top10": 187
+  },
+  "hybrid": {
+   "gold_top10": 238
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|train|genealogy": {
+  "bm25": {
+   "gold_top10": 45
+  },
+  "dense": {
+   "gold_top10": 103,
+   "gold_tied": 2,
+   "gold_tied_first": 1
+  },
+  "hybrid": {
+   "gold_top10": 117
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|train|travel": {
+  "bm25": {
+   "gold_top10": 9
+  },
+  "dense": {
+   "gold_top10": 66
+  },
+  "hybrid": {
+   "gold_top10": 54
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|train|hsm": {
+  "bm25": {
+   "gold_top10": 111
+  },
+  "dense": {
+   "gold_top10": 120
+  },
+  "hybrid": {
+   "gold_top10": 161
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|train|history": {
+  "bm25": {
+   "gold_top10": 175
+  },
+  "dense": {
+   "gold_top10": 799,
+   "gold_tied": 2,
+   "gold_tied_first": 2
+  },
+  "hybrid": {
+   "gold_top10": 787,
+   "gold_tied": 2,
+   "gold_tied_first": 2
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|dev|iota": {
+  "bm25": {
+   "gold_top10": 4
+  },
+  "dense": {
+   "gold_top10": 5
+  },
+  "hybrid": {
+   "gold_top10": 5
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|dev|quant": {
+  "bm25": {},
+  "dense": {
+   "gold_top10": 3
+  },
+  "hybrid": {
+   "gold_top10": 3
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|dev|law": {
+  "bm25": {
+   "gold_top10": 4
+  },
+  "dense": {
+   "gold_top10": 13
+  },
+  "hybrid": {
+   "gold_top10": 13
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|dev|workplace": {
+  "bm25": {
+   "gold_top10": 3
+  },
+  "dense": {
+   "gold_top10": 15
+  },
+  "hybrid": {
+   "gold_top10": 14
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|dev|cardano": {
+  "bm25": {
+   "gold_top10": 6
+  },
+  "dense": {
+   "gold_top10": 13,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "hybrid": {
+   "gold_top10": 20
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|dev|monero": {
+  "bm25": {
+   "gold_top10": 2
+  },
+  "dense": {
+   "gold_top10": 9
+  },
+  "hybrid": {
+   "gold_top10": 10
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|dev|economics": {
+  "bm25": {
+   "gold_top10": 9
+  },
+  "dense": {
+   "gold_top10": 21
+  },
+  "hybrid": {
+   "gold_top10": 27
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|dev|bitcoin": {
+  "bm25": {
+   "gold_top10": 7
+  },
+  "dense": {
+   "gold_top10": 28,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "hybrid": {
+   "gold_top10": 28
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|dev|politics": {
+  "bm25": {
+   "gold_top10": 62
+  },
+  "dense": {
+   "gold_top10": 60
+  },
+  "hybrid": {
+   "gold_top10": 79
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|dev|genealogy": {
+  "bm25": {
+   "gold_top10": 29
+  },
+  "dense": {
+   "gold_top10": 35
+  },
+  "hybrid": {
+   "gold_top10": 44
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|dev|travel": {
+  "bm25": {
+   "gold_top10": 5
+  },
+  "dense": {
+   "gold_top10": 33
+  },
+  "hybrid": {
+   "gold_top10": 34
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|dev|hsm": {
+  "bm25": {
+   "gold_top10": 46
+  },
+  "dense": {
+   "gold_top10": 62
+  },
+  "hybrid": {
+   "gold_top10": 85
+  },
+  "ce": {}
+ },
+ "sha1|1b_query+step|dev|history": {
+  "bm25": {
+   "gold_top10": 114,
+   "gold_tied": 1
+  },
+  "dense": {
+   "gold_top10": 382
+  },
+  "hybrid": {
+   "gold_top10": 371
+  },
+  "ce": {}
+ },
+ "sha1|2a_current|train|drones": {
+  "bm25": {
+   "gold_top10": 52
+  },
+  "dense": {
+   "gold_top10": 91
+  },
+  "hybrid": {
+   "gold_top10": 96
+  },
+  "ce": {
+   "gold_top10": 22
+  }
+ },
+ "sha1|2a_current|train|politics": {
+  "bm25": {
+   "gold_top10": 88
+  },
+  "dense": {
+   "gold_top10": 146
+  },
+  "hybrid": {
+   "gold_top10": 147
+  },
+  "ce": {
+   "gold_top10": 39
+  }
+ },
+ "sha1|2a_current|train|law": {
+  "bm25": {
+   "gold_top10": 65
+  },
+  "dense": {
+   "gold_top10": 130
+  },
+  "hybrid": {
+   "gold_top10": 138
+  },
+  "ce": {
+   "gold_top10": 28,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  }
+ },
+ "sha1|2a_current|train|medicalsciences": {
+  "bm25": {
+   "gold_top10": 49
+  },
+  "dense": {
+   "gold_top10": 138
+  },
+  "hybrid": {
+   "gold_top10": 117
+  },
+  "ce": {
+   "gold_top10": 31
+  }
+ },
+ "sha1|2a_current|train|hardware": {
+  "bm25": {
+   "gold_top10": 47
+  },
+  "dense": {
+   "gold_top10": 76
+  },
+  "hybrid": {
+   "gold_top10": 87
+  },
+  "ce": {
+   "gold_top10": 19
+  }
+ },
+ "sha1|2a_current|train|economics": {
+  "bm25": {
+   "gold_top10": 82
+  },
+  "dense": {
+   "gold_top10": 123
+  },
+  "hybrid": {
+   "gold_top10": 151
+  },
+  "ce": {
+   "gold_top10": 32
+  }
+ },
+ "sha1|2a_current|train|psychology": {
+  "bm25": {
+   "gold_top10": 111
+  },
+  "dense": {
+   "gold_top10": 190
+  },
+  "hybrid": {
+   "gold_top10": 194
+  },
+  "ce": {
+   "gold_top10": 35
+  }
+ },
+ "sha1|2a_current|train|biology": {
+  "bm25": {
+   "gold_top10": 102,
+   "gold_tied": 10,
+   "gold_tied_first": 5
+  },
+  "dense": {
+   "gold_top10": 131,
+   "gold_tied": 12,
+   "gold_tied_first": 7
+  },
+  "hybrid": {
+   "gold_top10": 161,
+   "gold_tied": 14,
+   "gold_tied_first": 7
+  },
+  "ce": {
+   "gold_top10": 28,
+   "gold_tied": 3,
+   "gold_tied_first": 1
+  }
+ },
+ "sha1|2a_current|train|sustainable_living": {
+  "bm25": {
+   "gold_top10": 128
+  },
+  "dense": {
+   "gold_top10": 161
+  },
+  "hybrid": {
+   "gold_top10": 179
+  },
+  "ce": {
+   "gold_top10": 25
+  }
+ },
+ "sha1|2a_current|train|robotics": {
+  "bm25": {
+   "gold_top10": 69,
+   "gold_tied": 1
+  },
+  "dense": {
+   "gold_top10": 69
+  },
+  "hybrid": {
+   "gold_top10": 86
+  },
+  "ce": {
+   "gold_top10": 27
+  }
+ },
+ "sha1|2a_current|train|earth_science": {
+  "bm25": {
+   "gold_top10": 175,
+   "gold_tied": 2,
+   "gold_tied_first": 1
+  },
+  "dense": {
+   "gold_top10": 180
+  },
+  "hybrid": {
+   "gold_top10": 212,
+   "gold_tied": 1
+  },
+  "ce": {
+   "gold_top10": 28,
+   "gold_tied": 2,
+   "gold_tied_first": 1
+  }
+ },
+ "sha1|2a_current|dev|drones": {
+  "bm25": {
+   "gold_top10": 19
+  },
+  "dense": {
+   "gold_top10": 30
+  },
+  "hybrid": {
+   "gold_top10": 31
+  },
+  "ce": {
+   "gold_top10": 37,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  }
+ },
+ "sha1|2a_current|dev|politics": {
+  "bm25": {
+   "gold_top10": 29
+  },
+  "dense": {
+   "gold_top10": 58
+  },
+  "hybrid": {
+   "gold_top10": 58
+  },
+  "ce": {
+   "gold_top10": 60
+  }
+ },
+ "sha1|2a_current|dev|law": {
+  "bm25": {
+   "gold_top10": 26
+  },
+  "dense": {
+   "gold_top10": 45
+  },
+  "hybrid": {
+   "gold_top10": 45
+  },
+  "ce": {
+   "gold_top10": 54
+  }
+ },
+ "sha1|2a_current|dev|medicalsciences": {
+  "bm25": {
+   "gold_top10": 15
+  },
+  "dense": {
+   "gold_top10": 33
+  },
+  "hybrid": {
+   "gold_top10": 28
+  },
+  "ce": {
+   "gold_top10": 27,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  }
+ },
+ "sha1|2a_current|dev|hardware": {
+  "bm25": {
+   "gold_top10": 30
+  },
+  "dense": {
+   "gold_top10": 41
+  },
+  "hybrid": {
+   "gold_top10": 44
+  },
+  "ce": {
+   "gold_top10": 45,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  }
+ },
+ "sha1|2a_current|dev|economics": {
+  "bm25": {
+   "gold_top10": 40
+  },
+  "dense": {
+   "gold_top10": 31
+  },
+  "hybrid": {
+   "gold_top10": 43
+  },
+  "ce": {
+   "gold_top10": 51
+  }
+ },
+ "sha1|2a_current|dev|psychology": {
+  "bm25": {
+   "gold_top10": 46
+  },
+  "dense": {
+   "gold_top10": 47
+  },
+  "hybrid": {
+   "gold_top10": 54
+  },
+  "ce": {
+   "gold_top10": 54
+  }
+ },
+ "sha1|2a_current|dev|biology": {
+  "bm25": {
+   "gold_top10": 45
+  },
+  "dense": {
+   "gold_top10": 66,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "hybrid": {
+   "gold_top10": 73
+  },
+  "ce": {
+   "gold_top10": 98,
+   "gold_tied": 1
+  }
+ },
+ "sha1|2a_current|dev|sustainable_living": {
+  "bm25": {
+   "gold_top10": 55
+  },
+  "dense": {
+   "gold_top10": 59
+  },
+  "hybrid": {
+   "gold_top10": 71
+  },
+  "ce": {
+   "gold_top10": 81,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  }
+ },
+ "sha1|2a_current|dev|robotics": {
+  "bm25": {
+   "gold_top10": 29
+  },
+  "dense": {
+   "gold_top10": 19
+  },
+  "hybrid": {
+   "gold_top10": 29
+  },
+  "ce": {
+   "gold_top10": 43
+  }
+ },
+ "sha1|2a_current|dev|earth_science": {
+  "bm25": {
+   "gold_top10": 57,
+   "gold_tied": 2,
+   "gold_tied_first": 2
+  },
+  "dense": {
+   "gold_top10": 61,
+   "gold_tied": 2,
+   "gold_tied_first": 2
+  },
+  "hybrid": {
+   "gold_top10": 72,
+   "gold_tied": 2,
+   "gold_tied_first": 2
+  },
+  "ce": {
+   "gold_top10": 85,
+   "gold_tied": 3,
+   "gold_tied_first": 2
+  }
+ },
+ "sha1|2a_history|train|drones": {
+  "bm25": {
+   "gold_top10": 90
+  },
+  "dense": {
+   "gold_top10": 132
+  },
+  "hybrid": {
+   "gold_top10": 127
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|train|politics": {
+  "bm25": {
+   "gold_top10": 205
+  },
+  "dense": {
+   "gold_top10": 241
+  },
+  "hybrid": {
+   "gold_top10": 236
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|train|law": {
+  "bm25": {
+   "gold_top10": 143
+  },
+  "dense": {
+   "gold_top10": 223
+  },
+  "hybrid": {
+   "gold_top10": 210
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|train|medicalsciences": {
+  "bm25": {
+   "gold_top10": 96
+  },
+  "dense": {
+   "gold_top10": 181
+  },
+  "hybrid": {
+   "gold_top10": 153
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|train|hardware": {
+  "bm25": {
+   "gold_top10": 94
+  },
+  "dense": {
+   "gold_top10": 114
+  },
+  "hybrid": {
+   "gold_top10": 122
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|train|economics": {
+  "bm25": {
+   "gold_top10": 218
+  },
+  "dense": {
+   "gold_top10": 228
+  },
+  "hybrid": {
+   "gold_top10": 272
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|train|psychology": {
+  "bm25": {
+   "gold_top10": 247
+  },
+  "dense": {
+   "gold_top10": 305
+  },
+  "hybrid": {
+   "gold_top10": 315
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|train|biology": {
+  "bm25": {
+   "gold_top10": 257,
+   "gold_tied": 28,
+   "gold_tied_first": 16
+  },
+  "dense": {
+   "gold_top10": 223,
+   "gold_tied": 25,
+   "gold_tied_first": 14
+  },
+  "hybrid": {
+   "gold_top10": 262,
+   "gold_tied": 26,
+   "gold_tied_first": 14
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|train|sustainable_living": {
+  "bm25": {
+   "gold_top10": 258
+  },
+  "dense": {
+   "gold_top10": 263
+  },
+  "hybrid": {
+   "gold_top10": 282
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|train|robotics": {
+  "bm25": {
+   "gold_top10": 173,
+   "gold_tied": 2
+  },
+  "dense": {
+   "gold_top10": 137
+  },
+  "hybrid": {
+   "gold_top10": 186
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|train|earth_science": {
+  "bm25": {
+   "gold_top10": 397,
+   "gold_tied": 7,
+   "gold_tied_first": 4
+  },
+  "dense": {
+   "gold_top10": 308,
+   "gold_tied": 5,
+   "gold_tied_first": 3
+  },
+  "hybrid": {
+   "gold_top10": 394,
+   "gold_tied": 7,
+   "gold_tied_first": 4
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|dev|drones": {
+  "bm25": {
+   "gold_top10": 36
+  },
+  "dense": {
+   "gold_top10": 50
+  },
+  "hybrid": {
+   "gold_top10": 51
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|dev|politics": {
+  "bm25": {
+   "gold_top10": 48
+  },
+  "dense": {
+   "gold_top10": 79
+  },
+  "hybrid": {
+   "gold_top10": 69
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|dev|law": {
+  "bm25": {
+   "gold_top10": 59
+  },
+  "dense": {
+   "gold_top10": 67
+  },
+  "hybrid": {
+   "gold_top10": 70
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|dev|medicalsciences": {
+  "bm25": {
+   "gold_top10": 24
+  },
+  "dense": {
+   "gold_top10": 56
+  },
+  "hybrid": {
+   "gold_top10": 40
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|dev|hardware": {
+  "bm25": {
+   "gold_top10": 48
+  },
+  "dense": {
+   "gold_top10": 54
+  },
+  "hybrid": {
+   "gold_top10": 58
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|dev|economics": {
+  "bm25": {
+   "gold_top10": 87
+  },
+  "dense": {
+   "gold_top10": 80
+  },
+  "hybrid": {
+   "gold_top10": 97
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|dev|psychology": {
+  "bm25": {
+   "gold_top10": 90
+  },
+  "dense": {
+   "gold_top10": 99
+  },
+  "hybrid": {
+   "gold_top10": 112
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|dev|biology": {
+  "bm25": {
+   "gold_top10": 121,
+   "gold_tied": 7,
+   "gold_tied_first": 5
+  },
+  "dense": {
+   "gold_top10": 114,
+   "gold_tied": 9,
+   "gold_tied_first": 6
+  },
+  "hybrid": {
+   "gold_top10": 124,
+   "gold_tied": 8,
+   "gold_tied_first": 5
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|dev|sustainable_living": {
+  "bm25": {
+   "gold_top10": 108
+  },
+  "dense": {
+   "gold_top10": 94
+  },
+  "hybrid": {
+   "gold_top10": 110
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|dev|robotics": {
+  "bm25": {
+   "gold_top10": 82,
+   "gold_tied": 1,
+   "gold_tied_first": 1
+  },
+  "dense": {
+   "gold_top10": 59
+  },
+  "hybrid": {
+   "gold_top10": 76
+  },
+  "ce": {}
+ },
+ "sha1|2a_history|dev|earth_science": {
+  "bm25": {
+   "gold_top10": 131,
+   "gold_tied": 5,
+   "gold_tied_first": 5
+  },
+  "dense": {
+   "gold_top10": 107,
+   "gold_tied": 4,
+   "gold_tied_first": 4
+  },
+  "hybrid": {
+   "gold_top10": 135,
+   "gold_tied": 5,
+   "gold_tied_first": 5
+  },
+  "ce": {}
+ }
+}

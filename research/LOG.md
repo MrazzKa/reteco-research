@@ -746,3 +746,95 @@ result: train N=0 0.2830, N=10 0.3039, N=20 0.3252, N=50 0.3435 → N=50, and 0.
   dev 0.2540 → **0.3001**, CE − hybrid +0.0462 [+0.0311, +0.0614]; better in 10/11 domains.
 conclusion: Final Track-2 current-turn system = BM25 ∪ bge-base hybrid, top 50 reordered by bge-reranker-v2-m3:
   dev 0.1758 (BM25) → 0.3001. Final systems overall (dev): 1a 0.2834, 1b 0.2865, 2a current 0.3001, 2a history 0.4342.
+
+---
+
+# Week 5 (2026-10-26 →)
+
+Context: meeting with Steve 2026-10-19 (answers to the 17.10 email): report the Track-2 id pattern to the organisers
+(they published News on 17.10: ids are not a signal; test queries are built from documents not positive for any
+train/dev query); Track-2 headline metric = current turn (+ the turns with new gold), +history reported separately;
+order of work: LLM query reasoning → passage-level MaxP → reasoning embedders → temporal Track 1; register for 1a,
+1b, 2a. Test evaluation 10–31 January 2027. Upstream RETECO pulled to `49f96ab` (News "Document IDs are not a
+signal"; evaluation page: official 1a/1b/2a scores are averaged per domain, then over domains — what we do).
+Week-5 outputs go to `research/runs_v13/`.
+
+## 2026-10-26 13:24 — the doc-id tie-break is a hidden use of the id; corpus file order too
+finding: every ranking script broke exact score ties by doc id ascending (bm25s_run.search, dense_search lexsort,
+  hybrid.rank_by `(-key(d), d)`, rerank_ce). In the Track-2 StackExchange corpora gold ids are
+  `<q>_doc_<n>` and negatives `<q>_google_neg_<n>`; "doc" < "google", so among exact duplicates gold came first.
+  The neutral alternative suggested first, the corpus file position, leaks as well: gold documents sit at the start
+  of the file (mean relative position of train+dev gold: drones 0.0067, biology 0.0020; LOG 13:24). Any order-dependent step
+  (bm25s's native tie order, ANN insertion order) inherits this.
+change: new `scripts/tiebreak.py`: tie key = sha1(doc id) (a fixed pseudo-random order), used by bm25s_run.py,
+  dense_search.py, hybrid.py, rerank_ce.py, dense_run.py; `--tiebreak id` restores the old order. bm25s_run.search
+  now retrieves k+32 and cuts after sorting, so ties at the depth cut are also ordered by the key (dense_search
+  already did this). rerank_ce.py caches cross-encoder scores per (topic, document) and scores only missing pairs.
+plan (no selection involved; the hybrid grid is re-tuned on train as before, dev once): re-run the final systems
+  with the sha1 key into runs_v13 — BM25 depth 1000 (both tracks), dense bge-small L256 (Track 1) and bge-base L512
+  (Track 2) from the week-4 embedding caches, hybrid, cross-encoder top 50 on 2a current (N chosen on train, N=0
+  allowed). Old = runs_v12 (doc-id key). The new numbers are the baseline for every later comparison.
+
+## 2026-10-26 13:33 — LLM for query-side reasoning: install and speed test
+setup: vLLM 0.32.0 in a separate venv `~/semeval-reteco/.venv-llm` (Python 3.14, torch 2.13.0+cu130). WSL has no
+  gcc and no sudo: triton's launcher is compiled with `zig cc` (pip `ziglang`) through a wrapper
+  `~/semeval-reteco/tools/bin/cc` (CC=…), with Python 3.14 headers unpacked from the Ubuntu .debs (`apt-get download`
+  + `dpkg -x`, no root). Eager mode (no CUDA graphs).
+model: `cyankiwi/Qwen3-4B-Instruct-2507-AWQ-4bit` rev `b37d1ccb77e27a70fe4222d995fda27940eead5a` (AWQ W4A16,
+  compressed-tensors; quantisation of Qwen/Qwen3-4B-Instruct-2507; 3.29 GiB on the GPU). The official FP8 build
+  does not fit: Windows holds 1.7–4.3 GB of the 8 GB, varying over the session.
+speed test: 50 Track-2 current-turn questions, prompt "reason", temperature 0, ≤ 256 new tokens, KV cache of only
+  2,016 tokens (gpu-util 0.485): 15 s, 3.4 questions/s, 459 generated tokens/s, mean 136 tokens, none cut at 256.
+estimate: 2 prompts × (2,971 Track-2 turns + 1,730 Track-1 queries + 3,976 Track-1 steps) = 17,354 generations
+  ≈ 1.4 h at that rate (< 8 h), so everything is generated, Track 2 current first, then 1a, then 1b.
+script: `scripts/llm_expand.py`, queue `research/runs_v13/logs/llm_gen.sh`, cache `research/runs_v13/llm/` (ignored).
+  Prompts and model are in `llm/t*/meta.json`. The model sees only the query text (HTML stripped, ≤ 3,000 chars),
+  never a qid or doc id.
+
+## 2026-10-26 13:37 — rule 6 (before any expansion result): LLM query expansion per condition
+conditions: 1a, 1b_query+step, 2a_current (Track-2 history is not expanded; it is secondary per the 19.10 meeting).
+candidates: query variants v ∈ {q, q+r, r, q+h, h, q+r+h} (q original, r "reason" text, h "hyde" passage;
+  `scripts/qexp_search.py`: BM25 on the concatenated text; dense on the normalised mean of the query vectors, r
+  encoded as a query, h as a document), dense = the final encoder of the track (Track 1 bge-small L256, Track 2
+  bge-base L512). For every v: hybrid(BM25_v, dense_v) tuned on train with the hybrid.py grid (as in week 4).
+choice: v* = argmax train macro nDCG@10 of the tuned hybrid. Adopt v* only if train macro(v*) − train macro(q)
+  ≥ +0.005 AND the paired bootstrap (topics resampled within domain, 10,000 draws, seed 20260921) of
+  v* − q over train topics has a 95% lower bound > 0. Otherwise keep q ("do not expand" is always allowed).
+  Dev: one measurement per configuration (all six are reported; only the train choice is the system).
+  2a_current then: cross-encoder (bge-reranker-v2-m3, top 50, N ∈ {0, 10, 20, 50} on the train subsample as in
+  rule 5) over the chosen hybrid; the cross-encoder always sees the original current question.
+
+## 2026-10-26 13:37 — rule 7 (before any MaxP result): passage-level scoring (MaxP)
+system: dense score of a document = max over passages of 510 tokens with 128 overlap (first window = the existing
+  L512 cache; windows 2+ only exist for documents > 510 tokens; ≤ 200 passages per document). Encoder: bge-small
+  for Track 1, bge-base for Track 2 (the final families). `scripts/passage_index.py` + `qexp_search.py --passages`.
+candidates per condition (1a, 1b_query+step, 2a_current): hybrid(BM25_v, MaxP_v) for v ∈ {q, rule-6 choice}.
+choice: compared against the system adopted under rule 6 for that condition; MaxP adopted under the same margin
+  (train ≥ +0.005 and train bootstrap lower bound > 0). Dev once.
+
+## 2026-10-26 13:24–13:42 — step 1 result: final systems with the sha1 tie key (runs_v13) vs doc id (runs_v12)
+command: `research/runs_v13/logs/tiebreak.sh` (log `tiebreak.log`), then `scripts/tiebreak_compare.py --out
+  research/runs_v13/tiebreak/compare.json` and `scripts/tie_study.py --out research/runs_v13/tiebreak/ties.json`.
+cost: BM25 depth 1000 both tracks 7.5 min; dense 1.5 min; hybrid grids 8 min; cross-encoder 15 new pairs (cache
+  copied from runs_v12/ce_bge-base and now kept per (topic, document)).
+result (macro nDCG@10, train old → new / dev old → new):
+  1a          BM25 0.1005 → 0.1005 / 0.1127 → 0.1127 · dense 0.2271 → 0.2251 / 0.2429 → 0.2430 · hybrid 0.2479 → 0.2462 / 0.2834 → **0.2834**
+  1b          BM25 0.1101 → 0.1101 / 0.1181 → 0.1181 · dense 0.2407 → 0.2372 / 0.2417 → 0.2418 · hybrid 0.2694 → 0.2665 / 0.2865 → **0.2865**
+  2a current  BM25 0.1667 → 0.1665 / 0.1758 → 0.1759 · dense 0.2573 → 0.2574 / 0.2350 → 0.2353 · hybrid 0.2803 → 0.2805 / 0.2540 → 0.2543
+              + CE (N=50 again; train N=0 0.2828 → N=50 0.3430) 0.3435 → 0.3430 / 0.3001 → **0.3003**
+  2a history  BM25 0.4082 → 0.4081 / 0.4034 → 0.4037 · dense 0.4387 → 0.4388 / 0.3839 → 0.3843 · hybrid 0.4806 → 0.4806 / 0.4342 → **0.4352**
+  Hybrid configurations unchanged (min-max α 0.7 for 1a/1b/2a current; z-score α 0.6 for history, 100+100).
+  Dev domains that change: hybrid 2a current only earth_science (+0.0038); history earth_science +0.0116,
+  biology −0.0007 (dev new − old +0.0010 [+0.0002, +0.0021]); Track-1 hybrids identical on dev; Track-1 dense
+  bitcoin +0.0002, cardano +0.0010. The five StackExchange domains (the ones with `_doc_` / `_google_neg_` ids) do
+  not change at all: they hold no exact duplicates (order study, 2026-10-13), so the id order never decided a tie.
+  The Track-1 train change (dense 1b −0.0035) is in iota (7/16 topics) and cardano: at 256 tokens documents
+  sharing their first 256 tokens get identical vectors; `--tiebreak id` reproduces the old numbers exactly.
+gold in the top 10 tied with a non-gold document (all judged topics; id key → sha1 key): dev 2a current hybrid
+  2 of 548 (ranked first among its twins 0 → 2), CE 9 of 636 → 8 of 635; dev history hybrid 13 of 942 (8 → 10);
+  dev 1a/1b hybrid 0; train at most 34 of 2,560 (history hybrid). Under the id key the tied gold was ranked first
+  in 0–64% of the cases depending on the list, i.e. not systematically.
+conclusion: The id tie-break was a hidden use of the id in principle, but it did not inflate any result: final
+  dev systems move by ≤ 0.001 (history +0.001). The sha1 key is now the default everywhere; the runs_v13 numbers
+  (1a 0.2834, 1b 0.2865, 2a current 0.3003, history 0.4352) are the baseline from here on. The corpus file
+  order would have been a worse "neutral" key (gold sits at the start of the files).

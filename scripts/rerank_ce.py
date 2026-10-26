@@ -30,6 +30,7 @@ from dense_index import T1, T2  # noqa: E402
 from dense_search import plan  # noqa: E402
 from gold_categories import fetch  # noqa: E402
 from hybrid import Query, bootstrap, read_run, system  # noqa: E402
+import tiebreak  # noqa: E402
 
 DEPTHS = (10, 20, 50)
 POOL = 50  # documents scored per topic
@@ -48,8 +49,12 @@ def main():
     ap.add_argument("--train-per-domain", type=int, default=30)
     ap.add_argument("--batch", type=int, default=64)
     ap.add_argument("--domains", nargs="+", default=["all"])
+    ap.add_argument("--query-cond", help="condition whose query text the cross-encoder sees "
+                    "(default: the dense condition on Track 2, the condition on Track 1)")
     ap.add_argument("--out", required=True)
+    tiebreak.add_arg(ap)
     a = ap.parse_args()
+    tiebreak.set_mode(a.tiebreak)
     import torch
     from sentence_transformers import CrossEncoder
     from embed_models import revision
@@ -67,7 +72,7 @@ def main():
         hc = hyb["conditions"][cond]
         cfg = hc["systems"]["linear*"]["cfg"]
         dcond = hc["dense_condition"]
-        qcond = dcond if a.track == 2 else cond
+        qcond = a.query_cond or (dcond if a.track == 2 else cond)
         per = {}
         for split in ("train", "dev"):
             per[split] = {}
@@ -84,23 +89,20 @@ def main():
                     qids = sorted(random.Random(20260921).sample(qids, a.train_per_domain))
                 hyb_lists = {q: system(Query(bm.get(q, []), de.get(q, [])), cfg)[:POOL] for q in qids}
                 scores = json.load(open(cache)) if os.path.exists(cache) else {}
-                todo = [q for q in qids if q not in scores]
+                # cache is per (topic, document): only pairs not scored before are scored
+                todo = [(q, d) for q in qids for d in hyb_lists[q] if d not in scores.get(q, {})]
                 if todo:
-                    texts = fetch(a.data, a.track, dom, {d for q in todo for d in hyb_lists[q]})
+                    texts = fetch(a.data, a.track, dom, {d for _, d in todo})
                     t0 = time.time()
                     # documents cut at 4,000 characters (beyond what 512 tokens can hold) and
                     # pairs scored in length order to limit padding; scores mapped back.
-                    pairs = [(qtext[q], texts.get(d, "")[:4000]) for q in todo for d in hyb_lists[q]]
+                    pairs = [(qtext[q], texts.get(d, "")[:4000]) for q, d in todo]
                     order = sorted(range(len(pairs)), key=lambda i: len(pairs[i][0]) + len(pairs[i][1]))
                     with torch.inference_mode():
                         ss = ce.predict([pairs[i] for i in order], batch_size=a.batch, show_progress_bar=False)
-                    s = [0.0] * len(pairs)
                     for j, i in enumerate(order):
-                        s[i] = ss[j]
-                    i = 0
-                    for q in todo:
-                        scores[q] = {d: float(s[i + j]) for j, d in enumerate(hyb_lists[q])}
-                        i += len(hyb_lists[q])
+                        q, d = todo[i]
+                        scores.setdefault(q, {})[d] = float(ss[j])
                     json.dump(scores, open(cache, "w"))
                     print(f"  [{cond}/{split}/{dom}] {len(pairs)} pairs, {time.time() - t0:.0f}s "
                           f"({len(pairs) / max(time.time() - t0, 1e-9):.0f}/s)", flush=True)
@@ -111,7 +113,7 @@ def main():
             for dom, (qids, hl, sc, gold) in per[split].items():
                 v = []
                 for q in qids:
-                    head = sorted(hl[q][:n], key=lambda d: (-sc[q][d], d)) if n else hl[q]
+                    head = sorted(hl[q][:n], key=lambda d: (-sc[q][d], tiebreak.key(d))) if n else hl[q]
                     v.append(ndcg(head + hl[q][n:], gold[q], 10))
                 out[dom] = v
             return out

@@ -18,3 +18,8 @@ research/runs_v12/index/
 research/runs_v12/categories/pairs.jsonl
 research/runs_v12/ce/scores_*.json
 research/runs_v12/ce_*/scores_*.json
+# week 5: score / generation / passage caches
+research/runs_v13/ce*/scores_*.json
+research/runs_v13/llm/
+research/runs_v13/emb/
+research/runs_v13/cache/

@@ -2,7 +2,7 @@
 """Exact dense retrieval over a cached corpus embedding (dense_index.py), on the GPU.
 
 For every domain, split and condition: encode the queries, score every document
-(fp16 matmul on the GPU, shard by shard), keep the top-k with ties broken by doc id,
+(float32 on the GPU), keep the top-k with ties broken by tiebreak.key (sha1 of the id),
 write a TREC run (depth k) and report nDCG@10 and recall@k.
 
 Track-2 history conditions for an encoder: `2a_history` is the starter-kit string
@@ -31,6 +31,7 @@ from bm25s_run import by_turn, ndcg_fn  # noqa: E402
 from dense_run import plan_track1, plan_track2  # noqa: E402
 from dense_index import T1, T2, domain_dir, load_cache  # noqa: E402
 from embed_models import load_encoder  # noqa: E402
+import tiebreak  # noqa: E402
 
 KS = (10, 20, 50, 100, 200, 500, 1000)
 
@@ -74,8 +75,8 @@ class GpuIndex:
         # stored as float16; scored in float32 (fp16 matmul accumulation flips near-ties:
         # recall@10 0.982 against FAISS float32 exact search on drones)
         self.mat = torch.cat([torch.from_numpy(np.array(s)) for s in shards]).cuda().float()
-        # rank of each id in lexicographic order, for tie-breaking by doc id
-        order = sorted(range(len(self.ids)), key=self.ids.__getitem__)
+        # rank of each id under the tie key (sha1 of the id; the id itself before week 5)
+        order = sorted(range(len(self.ids)), key=lambda i: tiebreak.key(self.ids[i]))
         self.lex = np.empty(len(self.ids), dtype=np.int64)
         self.lex[order] = np.arange(len(self.ids))
 
@@ -85,7 +86,7 @@ class GpuIndex:
         out = []
         for s in range(0, q.shape[0], 256):
             sims = q[s:s + 256] @ self.mat.T
-            # take a margin beyond k so ties at the cut can be ordered by id
+            # take a margin beyond k so ties at the cut can be ordered by the tie key
             kk = min(k + 32, sims.shape[1])
             val, idx = torch.topk(sims, kk, dim=1)
             val, idx = val.cpu().numpy(), idx.cpu().numpy()
@@ -112,7 +113,9 @@ def main():
     ap.add_argument("--k", type=int, default=1000)
     ap.add_argument("--emb", required=True)
     ap.add_argument("--out", required=True)
+    tiebreak.add_arg(ap)
     a = ap.parse_args()
+    tiebreak.set_mode(a.tiebreak)
     doms = (T1 if a.track == 1 else T2) if a.domains == ["all"] else a.domains
     ndcg = ndcg_fn(a.kit)
     runs_dir = os.path.join(a.out, "runs")

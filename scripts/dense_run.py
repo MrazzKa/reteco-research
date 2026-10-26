@@ -24,6 +24,7 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from week1_run import REF, load_qrels, read_jsonl, write_run  # noqa: E402
 from bm25s_run import by_turn, ndcg_fn, score  # noqa: E402
+import tiebreak  # noqa: E402
 
 # name -> (checkpoint, query prefix, doc prefix). Prefixes are the ones the model
 # cards prescribe; using the wrong prefix silently costs several nDCG points.
@@ -86,7 +87,7 @@ def rrf(lists, k=60, depth=100):
     for ranked in lists:
         for rank, doc in enumerate(ranked[:depth], 1):
             scores[doc] += 1.0 / (k + rank)
-    top = sorted(scores.items(), key=lambda x: (-x[1], x[0]))[:depth]
+    top = sorted(scores.items(), key=lambda x: (-x[1], tiebreak.key(x[0])))[:depth]
     return top
 
 

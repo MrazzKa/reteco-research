@@ -36,6 +36,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from week1_run import load_qrels  # noqa: E402
 from bm25s_run import ndcg_fn  # noqa: E402
 from dense_index import T1, T2  # noqa: E402
+import tiebreak  # noqa: E402
 
 KS = (10, 20, 50, 100, 200, 500, 1000)
 DEPTHS = (50, 100, 200, 500)
@@ -100,7 +101,7 @@ class Query:
 
 
 def rank_by(docs, key):
-    return [d for d in sorted(docs, key=lambda d: (-key(d), d))]
+    return [d for d in sorted(docs, key=lambda d: (-key(d), tiebreak.key(d)))]
 
 
 def system(q, cfg):
@@ -252,7 +253,9 @@ def main():
     ap.add_argument("--domains", nargs="+", default=["all"])
     ap.add_argument("--boot", type=int, default=10000)
     ap.add_argument("--out", required=True)
+    tiebreak.add_arg(ap)
     a = ap.parse_args()
+    tiebreak.set_mode(a.tiebreak)
     ndcg = ndcg_fn(a.kit)
     doms = (T1 if a.track == 1 else T2) if a.domains == ["all"] else a.domains
     dconds = a.dense_cond or a.conditions
@@ -283,9 +286,7 @@ def main():
                           "train": pt, "dev": pd}
             print(f"  {label:<16} train {mt:.4f}  dev {md:.4f}   {cfg_name(cfg)}", flush=True)
         dev_pt = {lab: {d: r["dev"][d].pop("per_topic") for d in r["dev"]} for lab, r in res.items()}
-        for r in res.values():
-            for d in r["train"]:
-                r["train"][d].pop("per_topic", None)
+        train_pt = {lab: {d: r["train"][d].pop("per_topic") for d in r["train"]} for lab, r in res.items()}
         boots = {}
         for x, y in [("linear*", "bm25"), ("rrf*", "bm25"), ("linear*", "rerank"), ("dense", "bm25"),
                      ("rerank", "bm25"), ("linear*", "dense")]:
@@ -294,6 +295,8 @@ def main():
         report["conditions"][cond] = {
             "dev_bootstrap": boots,
             "dev_per_topic": dev_pt,
+            # per-topic train nDCG@10 (sorted topic ids per domain) for train-side bootstraps
+            "train_per_topic": {lab: train_pt[lab] for lab in ("bm25", "dense", "linear*")},
             "dense_condition": dcond, "systems": res,
             "grid_top10_train": [(round(m, 4), c) for m, c in tuned[:10]],
             "grid_size": len(tuned),

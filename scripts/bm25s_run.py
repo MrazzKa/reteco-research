@@ -24,6 +24,7 @@ import Stemmer
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from week1_run import REF, load_qrels, read_jsonl, write_run  # noqa: E402
+import tiebreak  # noqa: E402
 
 STEMMER = Stemmer.Stemmer("english")
 
@@ -51,20 +52,23 @@ def build(corpus_path, key, analyzer):
     return retriever, ids
 
 
-def search(retriever, ids, queries, analyzer, label, k=100, threads=-1, tiebreak=True):
+def search(retriever, ids, queries, analyzer, label, k=100, threads=-1, break_ties=True):
     """queries: list of (qid, text). Identical texts are searched once."""
     t0 = time.time()
     uniq = sorted({q for _, q in queries})
     tokens = analyze(uniq, analyzer)
-    idx, scores = retriever.retrieve(tokens, k=min(k, retriever.scores["num_docs"]),
-                                     n_threads=threads, show_progress=False)
+    # a margin beyond k so that ties at the cut are ordered by the tie key, not by bm25s
+    kk = min(k + 32, retriever.scores["num_docs"]) if break_ties else min(k, retriever.scores["num_docs"])
+    idx, scores = retriever.retrieve(tokens, k=kk, n_threads=threads, show_progress=False)
     by_text = {}
     for i, text in enumerate(uniq):
         # Exact score ties are common (duplicate passages, esp. in the non-deduplicated
         # Track-2 corpora) and bm25s orders them arbitrarily, depending on k. Break ties
-        # by doc id, as the starter kit does, so a run no longer depends on its depth.
+        # by tiebreak.key (sha1 of the id; the doc id itself before week 5), so a run no
+        # longer depends on its depth.
         ranked = [(ids[int(idx[i, j])], float(scores[i, j])) for j in range(idx.shape[1])]
-        by_text[text] = sorted(ranked, key=lambda x: (-x[1], x[0])) if tiebreak else ranked
+        by_text[text] = (sorted(ranked, key=lambda x: (-x[1], tiebreak.key(x[0])))[:k]
+                         if break_ties else ranked)
     print(f"    {label:<24} {len(queries):>5} topics ({len(uniq)} unique) "
           f"{time.time() - t0:6.1f}s", flush=True)
     return {qid: by_text[q] for qid, q in queries}
@@ -119,7 +123,7 @@ def track1(a, dom, ndcg, runs_dir, results, index=None):
         if not queries or (a.conditions and name not in a.conditions):
             continue
         run = search(retriever, ids, queries, a.analyzer, name, k=a.k, threads=a.threads,
-                     tiebreak=not a.no_tiebreak)
+                     break_ties=not a.no_tiebreak)
         write_run(os.path.join(runs_dir, f"t1_{dom}_{a.split}_{name}.tsv"), run, name)
         m, _ = score(run, gold, ndcg)
         ref_key = "1a" if name == "1a" else ("1b" if name == "1b_query+step" else None)
@@ -170,7 +174,7 @@ def track2(a, dom, ndcg, runs_dir, results, index=None):
         if a.conditions and name not in a.conditions:
             continue
         run = search(retriever, ids, queries, a.analyzer, name, k=a.k, threads=a.threads,
-                     tiebreak=not a.no_tiebreak)
+                     break_ties=not a.no_tiebreak)
         write_run(os.path.join(runs_dir, f"t2_{dom}_{a.split}_{name}.tsv"), run, name)
         m, per = score(run, gold, ndcg)
         ref = REF.get(name, {}).get(dom)
@@ -191,6 +195,7 @@ def main():
     ap.add_argument("--splits", nargs="+", choices=("train", "dev"),
                     help="several splits from one index build (overrides --split)")
     ap.add_argument("--k", type=int, default=100, help="run depth")
+    tiebreak.add_arg(ap)
     ap.add_argument("--no-tiebreak", action="store_true",
                     help="keep bm25s's arbitrary order among tied scores (old behaviour)")
     ap.add_argument("--conditions", nargs="*", help="only these condition names")
@@ -200,6 +205,7 @@ def main():
     ap.add_argument("--threads", type=int, default=-1)
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
+    tiebreak.set_mode(a.tiebreak)
 
     ndcg = ndcg_fn(a.kit)
     runs_dir = os.path.join(a.out, "runs")

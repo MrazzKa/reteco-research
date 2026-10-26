@@ -1,0 +1,368 @@
+{
+ "1a": {
+  "bm25": {
+   "train_old": 0.1005,
+   "train_new": 0.1005,
+   "dev_old": 0.1127,
+   "dev_new": 0.1127,
+   "dev_domain_diff": {
+    "bitcoin": 0.0,
+    "cardano": 0.0,
+    "economics": 0.0,
+    "genealogy": 0.0,
+    "history": 0.0,
+    "hsm": 0.0,
+    "iota": 0.0,
+    "law": 0.0,
+    "monero": 0.0,
+    "politics": 0.0,
+    "quant": 0.0,
+    "travel": 0.0,
+    "workplace": 0.0
+   }
+  },
+  "dense": {
+   "train_old": 0.2271,
+   "train_new": 0.2251,
+   "dev_old": 0.2429,
+   "dev_new": 0.243,
+   "dev_domain_diff": {
+    "bitcoin": 0.0002,
+    "cardano": 0.001,
+    "economics": 0.0,
+    "genealogy": 0.0,
+    "history": 0.0,
+    "hsm": 0.0,
+    "iota": 0.0,
+    "law": 0.0,
+    "monero": 0.0,
+    "politics": 0.0,
+    "quant": 0.0,
+    "travel": 0.0,
+    "workplace": 0.0
+   }
+  },
+  "hybrid": {
+   "cfg_old": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "cfg_new": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "train_old": 0.2479,
+   "train_new": 0.2462,
+   "dev_old": 0.2834,
+   "dev_new": 0.2834,
+   "dev_domain_diff": {
+    "bitcoin": 0.0,
+    "cardano": 0.0,
+    "economics": 0.0,
+    "genealogy": 0.0,
+    "history": 0.0,
+    "hsm": 0.0,
+    "iota": 0.0,
+    "law": 0.0,
+    "monero": 0.0,
+    "politics": 0.0,
+    "quant": 0.0,
+    "travel": 0.0,
+    "workplace": 0.0
+   },
+   "dev_bootstrap_new_minus_old": {
+    "diff": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "p_le_0": 1.0
+   }
+  }
+ },
+ "1b_query+step": {
+  "bm25": {
+   "train_old": 0.1101,
+   "train_new": 0.1101,
+   "dev_old": 0.1181,
+   "dev_new": 0.1181,
+   "dev_domain_diff": {
+    "bitcoin": 0.0,
+    "cardano": 0.0,
+    "economics": 0.0,
+    "genealogy": 0.0,
+    "history": 0.0,
+    "hsm": 0.0,
+    "iota": 0.0,
+    "law": 0.0,
+    "monero": 0.0,
+    "politics": 0.0,
+    "quant": 0.0,
+    "travel": 0.0,
+    "workplace": 0.0
+   }
+  },
+  "dense": {
+   "train_old": 0.2407,
+   "train_new": 0.2372,
+   "dev_old": 0.2417,
+   "dev_new": 0.2418,
+   "dev_domain_diff": {
+    "bitcoin": 0.0002,
+    "cardano": 0.001,
+    "economics": 0.0,
+    "genealogy": 0.0,
+    "history": 0.0,
+    "hsm": 0.0,
+    "iota": 0.0,
+    "law": 0.0,
+    "monero": 0.0,
+    "politics": 0.0,
+    "quant": 0.0,
+    "travel": 0.0,
+    "workplace": 0.0
+   }
+  },
+  "hybrid": {
+   "cfg_old": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "cfg_new": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "train_old": 0.2694,
+   "train_new": 0.2665,
+   "dev_old": 0.2865,
+   "dev_new": 0.2865,
+   "dev_domain_diff": {
+    "bitcoin": 0.0,
+    "cardano": 0.0,
+    "economics": 0.0,
+    "genealogy": 0.0,
+    "history": 0.0,
+    "hsm": 0.0,
+    "iota": 0.0,
+    "law": 0.0,
+    "monero": 0.0,
+    "politics": 0.0,
+    "quant": 0.0,
+    "travel": 0.0,
+    "workplace": 0.0
+   },
+   "dev_bootstrap_new_minus_old": {
+    "diff": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "p_le_0": 1.0
+   }
+  }
+ },
+ "2a_current": {
+  "bm25": {
+   "train_old": 0.1667,
+   "train_new": 0.1665,
+   "dev_old": 0.1758,
+   "dev_new": 0.1759,
+   "dev_domain_diff": {
+    "biology": 0.0,
+    "drones": 0.0,
+    "earth_science": 0.0012,
+    "economics": 0.0,
+    "hardware": 0.0,
+    "law": 0.0,
+    "medicalsciences": 0.0,
+    "politics": 0.0,
+    "psychology": 0.0,
+    "robotics": 0.0,
+    "sustainable_living": 0.0
+   }
+  },
+  "dense": {
+   "train_old": 0.2573,
+   "train_new": 0.2574,
+   "dev_old": 0.235,
+   "dev_new": 0.2353,
+   "dev_domain_diff": {
+    "biology": 0.0,
+    "drones": 0.0,
+    "earth_science": 0.0033,
+    "economics": 0.0,
+    "hardware": 0.0,
+    "law": 0.0,
+    "medicalsciences": 0.0,
+    "politics": 0.0,
+    "psychology": 0.0,
+    "robotics": 0.0,
+    "sustainable_living": 0.0
+   }
+  },
+  "hybrid": {
+   "cfg_old": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "minmax",
+    "alpha": 0.7
+   },
+   "cfg_new": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "minmax",
+    "alpha": 0.7
+   },
+   "train_old": 0.2803,
+   "train_new": 0.2805,
+   "dev_old": 0.254,
+   "dev_new": 0.2543,
+   "dev_domain_diff": {
+    "biology": 0.0,
+    "drones": 0.0,
+    "earth_science": 0.0038,
+    "economics": 0.0,
+    "hardware": 0.0,
+    "law": 0.0,
+    "medicalsciences": 0.0,
+    "politics": 0.0,
+    "psychology": 0.0,
+    "robotics": 0.0,
+    "sustainable_living": 0.0
+   },
+   "dev_bootstrap_new_minus_old": {
+    "diff": 0.0003,
+    "ci95": [
+     0.0,
+     0.0009
+    ],
+    "p_le_0": 0.1367
+   }
+  },
+  "ce": {
+   "N_old": 50,
+   "N_new": 50,
+   "train_old": 0.3435,
+   "train_new": 0.343,
+   "train_N0_new": 0.2828,
+   "dev_old": 0.3001,
+   "dev_new": 0.3003,
+   "dev_domain_diff": {
+    "biology": -0.0001,
+    "drones": 0.0034,
+    "earth_science": 0.0007,
+    "economics": 0.0,
+    "hardware": 0.0002,
+    "law": 0.0,
+    "medicalsciences": 0.0,
+    "politics": 0.0,
+    "psychology": -0.0029,
+    "robotics": 0.0,
+    "sustainable_living": 0.0003
+   },
+   "dev_bootstrap_ce_minus_hybrid_new": {
+    "diff": 0.046,
+    "ci95": [
+     0.0307,
+     0.0613
+    ],
+    "p_le_0": 0.0
+   }
+  }
+ },
+ "2a_history": {
+  "bm25": {
+   "train_old": 0.4082,
+   "train_new": 0.4081,
+   "dev_old": 0.4034,
+   "dev_new": 0.4037,
+   "dev_domain_diff": {
+    "biology": -0.0002,
+    "drones": 0.0,
+    "earth_science": 0.0026,
+    "economics": 0.0,
+    "hardware": 0.0,
+    "law": 0.0,
+    "medicalsciences": 0.0,
+    "politics": 0.0,
+    "psychology": 0.0,
+    "robotics": 0.0002,
+    "sustainable_living": 0.0
+   }
+  },
+  "dense": {
+   "train_old": 0.4387,
+   "train_new": 0.4388,
+   "dev_old": 0.3839,
+   "dev_new": 0.3843,
+   "dev_domain_diff": {
+    "biology": -0.0006,
+    "drones": 0.0,
+    "earth_science": 0.0053,
+    "economics": 0.0,
+    "hardware": 0.0,
+    "law": 0.0,
+    "medicalsciences": 0.0,
+    "politics": 0.0,
+    "psychology": 0.0,
+    "robotics": 0.0,
+    "sustainable_living": 0.0
+   }
+  },
+  "hybrid": {
+   "cfg_old": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "cfg_new": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "train_old": 0.4806,
+   "train_new": 0.4806,
+   "dev_old": 0.4342,
+   "dev_new": 0.4352,
+   "dev_domain_diff": {
+    "biology": -0.0007,
+    "drones": 0.0,
+    "earth_science": 0.0116,
+    "economics": 0.0,
+    "hardware": 0.0,
+    "law": 0.0,
+    "medicalsciences": 0.0,
+    "politics": 0.0,
+    "psychology": 0.0,
+    "robotics": 0.0,
+    "sustainable_living": 0.0
+   },
+   "dev_bootstrap_new_minus_old": {
+    "diff": 0.001,
+    "ci95": [
+     0.0002,
+     0.0021
+    ],
+    "p_le_0": 0.0113
+   }
+  }
+ }
+}
