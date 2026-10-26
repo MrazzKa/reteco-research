@@ -154,6 +154,7 @@ def main():
     ap.add_argument("--max-len", type=int, default=512)
     ap.add_argument("--pool", type=int, default=100)
     ap.add_argument("--batch", type=int, default=8)
+    ap.add_argument("--chunk", type=int, default=3000, help="texts per embedding call (vectors saved after each)")
     ap.add_argument("--train-per-domain", type=int, default=30)
     ap.add_argument("--domains", nargs="+", default=["all"])
     ap.add_argument("--splits", nargs="+", default=["train", "dev"])
@@ -199,33 +200,32 @@ def main():
                 per[split][dom] = (qids, pools, gold, [f"Instruct: {ins}\nQuery: {clean(qtext[q])}" for q in qids])
         need = {dom: sorted({d for sp in per for q in per[sp].get(dom, ([],))[0] for d, _ in per[sp][dom][1][q]}
                             - set(caches[dom])) for dom in caches}
-        texts, index = [], []
+        # phase 2: embed in chunks; document vectors are saved after every chunk (resumable)
+        t1 = time.time()
+        doc_items = []
         for dom, ds in need.items():
             if ds:
                 got = fetch(a.data, a.track, dom, set(ds))
-                texts += [got.get(d, "")[:4000] for d in ds]
-                index += [("doc", dom, d) for d in ds]
-        for sp in per:
-            for dom, (qids, _, _, qt) in per[sp].items():
-                texts += qt
-                index += [("q", sp, dom, q) for q in qids]
-        # phase 2: embed everything in one call
-        t1 = time.time()
-        vec = embed(a, ckpt, texts)
-        stats["encode_s"] = round(time.time() - t1, 1)
-        stats["docs_encoded"] = sum(1 for x in index if x[0] == "doc")
-        stats["queries_encoded"] = sum(1 for x in index if x[0] == "q")
-        print(f"  [{cond}] {stats['docs_encoded']} docs + {stats['queries_encoded']} queries in "
-              f"{stats['encode_s']:.0f}s ({len(texts) / max(stats['encode_s'], 1e-9):.1f}/s)", flush=True)
-        qv = {}
-        for x, v in zip(index, vec):
-            if x[0] == "doc":
-                caches[x[1]][x[2]] = v
-            else:
-                qv[(x[1], x[2], x[3])] = v
-        for dom, ds in need.items():
-            if ds:
+                doc_items += [(dom, d, got.get(d, "")[:4000]) for d in ds]
+        for c in range(0, len(doc_items), a.chunk):
+            part = doc_items[c:c + a.chunk]
+            vec = embed(a, ckpt, [t for _, _, t in part])
+            for (dom, d, _), v in zip(part, vec):
+                caches[dom][d] = v
+            for dom in {x[0] for x in part}:
                 save_cache(os.path.join(cdir, f"docs_{dom}"), caches[dom])
+            print(f"  [{cond}] docs {c + len(part)}/{len(doc_items)} ({time.time() - t1:.0f}s)", flush=True)
+        q_items = [(sp, dom, q, t) for sp in per for dom, (qids, _, _, qt) in per[sp].items() for q, t in zip(qids, qt)]
+        qv = {}
+        for c in range(0, len(q_items), a.chunk):
+            part = q_items[c:c + a.chunk]
+            for (sp, dom, q, _), v in zip(part, embed(a, ckpt, [t for *_, t in part])):
+                qv[(sp, dom, q)] = v
+        stats["encode_s"] = round(time.time() - t1, 1)
+        stats["docs_encoded"] = len(doc_items)
+        stats["queries_encoded"] = len(q_items)
+        print(f"  [{cond}] {stats['docs_encoded']} docs + {stats['queries_encoded']} queries in "
+              f"{stats['encode_s']:.0f}s", flush=True)
         # phase 3: scores
         for sp in per:
             for dom, (qids, pools, gold, _) in list(per[sp].items()):

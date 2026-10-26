@@ -969,3 +969,24 @@ conclusion: Second negative result for explicit years on Track 1 (after the week
   pool, year agreement does not separate gold from the other on-topic documents; the LLM's stated time raises
   coverage to ~75% of topics but not usefulness. Temporal relevance in TEMPO seems to be carried by content
   (events, versions, periods described in words), which the expanded query already captures better than years.
+
+## 2026-10-26 16:13 — analysis (no choice made): where the week-5 gains come from
+Track 1: q+r+h hybrid beats the plain-query hybrid in 12 of 13 domains on train and on dev (1a and 1b); the
+  exception is iota (dev 1a −0.102, 1b −0.016; 10 dev queries). Largest dev gains: workplace +0.13, politics +0.09,
+  economics +0.08/+0.11.
+Track 2 current turn, dev macro by source (BRIGHT 6 domains / StackExchange 5 domains):
+  week-4 hybrid 0.2610 / 0.2463 · week-4 hybrid + CE 0.3189 / 0.2780 · q+r+h hybrid 0.3727 / 0.2348 ·
+  MaxP q+r+h 0.4099 / 0.2384. Train: week-4 hybrid 0.2842 / 0.2760 · q+r+h 0.3917 / 0.2707 · MaxP q+r+h 0.4181 / 0.2698.
+reading: the LLM expansion helps the BRIGHT-derived domains a lot (+0.11 dev, +0.11 train) and does nothing or
+  slightly hurts on StackExchange (−0.01 dev, −0.005 train); on StackExchange the week-4 cross-encoder system is
+  the best we have (0.278 dev). Possible reasons, untested: BRIGHT gold are encyclopaedic/web pages whose wording an
+  LLM reproduces well, StackExchange gold are other posts; and the BRIGHT data are public since 2024 and may be in
+  the LLM's training data. A per-source system (e.g. CE for StackExchange domains) is NOT selected here, because the
+  idea came from this dev breakdown; it is a question for Steve and would need a new train-only rule.
+
+## 2026-10-26 16:21 — rule 8 run: FP8 attempt crashed; switched to NF4, chunked and restartable
+16:07–16:19: the vLLM FP8 job (all 2a documents in one call) died after 11 min with `CUDA error: unknown error`
+  while Windows' share of the GPU rose to 5.3 GB / 38% utilisation; nothing was saved. No result was produced.
+change (before any rule-8 train result): backend bitsandbytes NF4 in-process (2.7 GB, 7.2 docs/s), batch 4,
+  documents embedded in chunks of 2,000 with the cache saved after each, and the job restarted automatically up to
+  20 times (`runs_v13/logs/step5b.sh`). Pool 50, conditions and choice rule as amended at 16:07.
