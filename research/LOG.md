@@ -838,3 +838,66 @@ conclusion: The id tie-break was a hidden use of the id in principle, but it did
   dev systems move by ≤ 0.001 (history +0.001). The sha1 key is now the default everywhere; the runs_v13 numbers
   (1a 0.2834, 1b 0.2865, 2a current 0.3003, history 0.4352) are the baseline from here on. The corpus file
   order would have been a worse "neutral" key (gold sits at the start of the files).
+
+## 2026-10-26 13:45 — side finding: Track-2 corpus file order reveals gold
+check: relative position of train+dev gold documents in `documents.jsonl`: Track 2 drones 0.007, politics 0.008,
+  economics 0.003, biology 0.002, earth_science 0.001, robotics 0.002 — in all six domains checked 100% of gold
+  sits in the first 5% of the file. Track 1 (v1.1, deduplicated): iota 0.477, law 0.468, history 0.494, politics
+  0.511 (5% in the first 5%, i.e. shuffled). Not used by any system; worth telling the organisers together with
+  the id pattern (anything order-dependent — bm25s's native tie order, ANN insertion order — inherits it).
+
+## 2026-10-26 13:46 — rule for the step-2 examples (written before any expansion result is seen)
+file: `research/cases/query_reasoning_dev.md`. Conditions 2a_current and 1a, dev. System "after" = the rule-6 choice
+  for the condition, or, if rule 6 keeps q, its best-on-train variant (labelled as such); "before" = q (the
+  runs_v13 hybrid). Per condition, topics are split into improved (hybrid nDCG@10 after > before) and worsened
+  (after < before); from each, 2 topics drawn with random.Random(20260921) over sorted qids → 8 examples. Shown:
+  query, the generated text(s) the variant uses, each gold document (first 300 chars) with its hybrid rank before
+  and after. No resampling.
+
+## 2026-10-26 13:48 — rule 8 (before any reasoning-embedder result): reasoning embedder over the hybrid pool
+model: ReasonEmbed `hanhainebula/reason-embed-qwen3-4b-0928` (BRIGHT 37.1 with original queries per its card),
+  NF4 4-bit via bitsandbytes 0.50.2 (fp16 does not fit next to Windows' share of the GPU), last-token pooling,
+  query instruction "Given a <domain> question, retrieve documents that help answer the question." (1b: "… and one
+  research step, retrieve documents that help with that step."), documents ≤ 4,000 chars / 512 tokens.
+  Caveat to report: ReasonEmbed's synthetic training data is built from BRIGHT-style corpora; six Track-2 domains
+  are BRIGHT-derived, so a gain there may partly be domain exposure.
+use: `scripts/reason_rerank.py`, over the pool (top 100) of the system adopted for the condition after rules 6–7;
+  candidates: none, top-N reorder (N ∈ 10, 20, 50, 100), interpolation w ∈ 0.1…0.9 of min-max hybrid and embedder
+  scores. Train subsample ≤ 30 topics per domain (seed 20260921), dev all topics.
+choice: best on train; adopted only if train − none ≥ +0.005 and the train bootstrap lower bound > 0.
+  2a current: the baseline is the cross-encoder system (hybrid + CE top 50); the embedder is adopted there only if
+  its best train configuration beats the CE system's train macro on the same subsample by the same margin.
+  Speed is measured first; full-corpus encoding with a 4B model is out of scope (Track 1: 1.17M documents).
+
+## 2026-10-26 14:32 — LLM generation done; a key bug caught before any choice
+generation: `llm_gen.sh` 13:40–14:32 (52 min) for 17,354 inputs (Track 2 2,971 × 2 prompts; Track 1 1a 1,730 × 2,
+  1b 3,976 × 2): 4.2–10 inputs/s, 640–650 generated tokens/s with gpu-util 0.75 (KV cache ~ 2 GB). Mean output
+  123–164 tokens; cut at 256 tokens: 0.03–0.4%; empty outputs 0.
+bug: the first Track-2 `qexp_search.py` run (14:32–14:34) looked generations up by (split, qid). Track-2 qids such as
+  `2_turn_1` repeat across the BRIGHT domains (524 train/dev collisions), so e.g. economics topics received
+  earth_science expansions (train BM25 q+r economics 0.145 → 0.026, earth_science 0.244 → 0.463). Track 1 has no
+  collisions. Fixed (key = (domain, split, qid)), `qexp/t2` deleted and re-run in `logs/step2b.sh`; the generations
+  themselves were keyed by input text and are unaffected. No hybrid or rule-6 choice was computed on the broken runs.
+
+## 2026-10-26 14:34–15:13 — rule 6 result: LLM query expansion
+command: `research/runs_v13/logs/step2b.sh` (`qexp_search.py` per condition; `hybrid.py` with the six variants as
+  conditions, logs `hyb_{2a,1a,1b}.log`), then `research/runs_v13/logs/select6.sh` → `runs_v13/select/rule6_*.json`.
+cost: retrieval with all six variants 2 min (Track 2), 9 min (1a), 7 min (1b); hybrid grids 14–23 min (CPU, parallel).
+result (macro nDCG@10; train / dev):
+  2a current  q: BM25 0.1665/0.1759 · dense 0.2574/0.2353 · hybrid 0.2805/0.2543
+              q+r+h: BM25 0.2959/0.2869 · dense 0.2943/0.2652 · hybrid **0.3367/0.3100**
+              (q+r 0.3301/0.3040, q+h 0.3272/0.3114, h 0.3092/0.2918, r 0.3001/0.2725)
+  1a          q: BM25 0.1005/0.1127 · dense 0.2251/0.2430 · hybrid 0.2462/0.2834
+              q+r+h: BM25 0.1323/0.1620 · dense 0.2583/0.2899 · hybrid **0.2949/0.3258**
+              (q+h 0.2879/0.3212, q+r 0.2837/0.3245, r 0.2781/0.3003, h 0.2773/0.2953)
+  1b          q: BM25 0.1101/0.1181 · dense 0.2372/0.2418 · hybrid 0.2665/0.2865
+              q+r+h: BM25 0.1470/0.1620 · dense 0.2779/0.3097 · hybrid **0.3226/0.3505**
+              (q+h 0.3150/0.3377, h 0.3104/0.3341, q+r 0.3032/0.3386, r 0.2969/0.3284)
+rule 6: best on train = q+r+h in all three conditions; train bootstrap q+r+h − q: 2a +0.0562 [+0.0460, +0.0661],
+  1a +0.0486 [+0.0348, +0.0627], 1b +0.0560 [+0.0440, +0.0688] → **adopted** everywhere.
+  dev q+r+h − q: 2a +0.0557 [+0.0406, +0.0705], 1a +0.0425 [+0.0214, +0.0630], 1b +0.0640 [+0.0467, +0.0817].
+  Fusion configs (train, all 100+100): 2a z-score α 0.6; 1a min-max α 0.6; 1b z-score α 0.7.
+conclusion: Query-side reasoning with a 4B local LLM is the largest single gain since the hybrid: +0.04 to +0.06
+  nDCG@10 on every sub-track, train and dev agree, every expansion variant beats the plain query, and using both
+  generated texts with the query is best. BM25 gains most on Track 2 (0.176 → 0.287 dev: the LLM supplies the
+  vocabulary of the answer); text-only expansions (r, h without q) are weaker than adding them to the query.

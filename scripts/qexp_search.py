@@ -81,8 +81,9 @@ def main():
     ndcg = ndcg_fn(a.kit)
     doms = (T1 if a.track == 1 else T2) if a.domains == ["all"] else a.domains
     gen = {p: load_gen(a.llm, p) for p in ("reason", "hyde")}
-    # body shown to the LLM per (split, qid) -> generation via the cache key
-    body = {(sp, qid): b for _, sp, qid, b in llm_inputs(a.data, a.track, a.cond)}
+    # body shown to the LLM per (domain, split, qid) -> generation via the cache key
+    # (Track-2 qids such as `2_turn_1` repeat across the BRIGHT domains: the domain is part of the key)
+    body = {(dom, sp, qid): b for dom, sp, qid, b in llm_inputs(a.data, a.track, a.cond)}
     sub, key = ("track1_tempo", "id") if a.track == 1 else ("track2_recor", "doc_id")
     bdir, ddir = os.path.join(a.out, "bm25", "runs"), os.path.join(a.out, "dense", "runs")
     os.makedirs(bdir, exist_ok=True)
@@ -107,7 +108,7 @@ def main():
             (_, queries, gold), = [p for p in plan(a.track, d, sp) if p[0] == a.cond]
             texts = {}
             for qid, q in queries:
-                k = body.get((sp, qid))
+                k = body.get((dom, sp, qid))
                 r = gen["reason"].get(key_of("reason", k), "") if k else ""
                 h = gen["hyde"].get(key_of("hyde", k), "") if k else ""
                 missing += (not r) + (not h)

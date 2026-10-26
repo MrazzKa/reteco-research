@@ -1,0 +1,18 @@
+{
+ "model": "cyankiwi/Qwen3-4B-Instruct-2507-AWQ-4bit",
+ "revision": "b37d1ccb77e27a70fe4222d995fda27940eead5a",
+ "quant": "AWQ W4A16 (compressed-tensors)",
+ "engine": "vllm",
+ "temperature": 0.0,
+ "max_new_tokens": 256,
+ "system": "You help a search engine find documents. Answer in plain English text only.",
+ "prompts": {
+  "reason": "Read the question below. First, reason briefly about what knowledge is needed to answer it. Then describe what a relevant document would look like: its topic, the key concepts, terms and entities it would mention{time}. Keep the whole answer under 150 words.\n\n{body}",
+  "hyde": "Write a short passage (about 100 words) that could appear in a document that helps answer the question below. Write it as factual reference text, not as a reply to the asker{time}.\n\n{body}"
+ },
+ "time_hint": {
+  "reason": "; if the question refers to a time (years, periods, events), state that time explicitly",
+  "hyde": "; if the question refers to a time (years, periods, events), place the passage in that time"
+ },
+ "max_input_chars": 3000
+}

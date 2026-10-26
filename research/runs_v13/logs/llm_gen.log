@@ -1,0 +1,83 @@
+=== 13:40:12 gpu-util 0.75: --track 2 --conditions 2a_current --prompts reason hyde --out ../research/runs_v13/llm/t2
+(EngineCore pid=5123) INFO 10-26 13:40:39 [kv_cache_utils.py:2327] GPU KV cache size: 17,088 tokens, Maximum concurrency for 1,536 tokens per request: 11.12x
+[reason/2a_current] 2971 inputs, 2971 unique, 2921 to generate
+  256/2921  chunk 26s  1402 tok/s  9.96 q/s
+  512/2921  chunk 26s  1406 tok/s  9.96 q/s
+  768/2921  chunk 26s  1403 tok/s  9.92 q/s
+  1024/2921  chunk 24s  1406 tok/s  10.06 q/s
+  1280/2921  chunk 27s  1393 tok/s  9.96 q/s
+  1536/2921  chunk 28s  1367 tok/s  9.80 q/s
+  1792/2921  chunk 28s  1353 tok/s  9.71 q/s
+  2048/2921  chunk 29s  1341 tok/s  9.61 q/s
+  2304/2921  chunk 29s  1331 tok/s  9.53 q/s
+  2560/2921  chunk 51s  1218 tok/s  8.74 q/s
+  2816/2921  chunk 29s  1218 tok/s  8.75 q/s
+  2921/2921  chunk 12s  1220 tok/s  8.75 q/s
+[hyde/2a_current] 2971 inputs, 2971 unique, 2971 to generate
+  256/2971  chunk 24s  1275 tok/s  10.49 q/s
+  512/2971  chunk 26s  1245 tok/s  10.13 q/s
+  768/2971  chunk 26s  1244 tok/s  10.05 q/s
+  1024/2971  chunk 25s  1241 tok/s  10.12 q/s
+  1280/2971  chunk 25s  1247 tok/s  10.13 q/s
+  1536/2971  chunk 24s  1256 tok/s  10.22 q/s
+  1792/2971  chunk 25s  1256 tok/s  10.21 q/s
+  2048/2971  chunk 24s  1265 tok/s  10.27 q/s
+  2304/2971  chunk 25s  1264 tok/s  10.27 q/s
+  2560/2971  chunk 25s  1261 tok/s  10.26 q/s
+  2816/2971  chunk 24s  1266 tok/s  10.31 q/s
+  2971/2971  chunk 16s  1263 tok/s  10.27 q/s
+=== 13:51:15 gpu-util 0.75: --track 1 --conditions 1a --prompts reason hyde --out ../research/runs_v13/llm/t1
+(EngineCore pid=6353) INFO 10-26 13:51:47 [kv_cache_utils.py:2327] GPU KV cache size: 17,088 tokens, Maximum concurrency for 1,536 tokens per request: 11.12x
+[reason/1a] 1730 inputs, 1730 unique, 1730 to generate
+  256/1730  chunk 54s  750 tok/s  4.77 q/s
+  512/1730  chunk 63s  705 tok/s  4.40 q/s
+  768/1730  chunk 65s  686 tok/s  4.23 q/s
+  1024/1730  chunk 66s  676 tok/s  4.14 q/s
+  1280/1730  chunk 64s  671 tok/s  4.11 q/s
+  1536/1730  chunk 64s  668 tok/s  4.09 q/s
+  1730/1730  chunk 53s  663 tok/s  4.04 q/s
+[hyde/1a] 1730 inputs, 1730 unique, 1730 to generate
+  256/1730  chunk 53s  708 tok/s  4.86 q/s
+  512/1730  chunk 59s  682 tok/s  4.58 q/s
+  768/1730  chunk 64s  658 tok/s  4.37 q/s
+  1024/1730  chunk 63s  650 tok/s  4.28 q/s
+  1280/1730  chunk 61s  644 tok/s  4.26 q/s
+  1536/1730  chunk 61s  644 tok/s  4.25 q/s
+  1730/1730  chunk 51s  639 tok/s  4.20 q/s
+=== 14:05:53 gpu-util 0.75: --track 1 --conditions 1b_query+step --prompts reason hyde --out ../research/runs_v13/llm/t1
+(EngineCore pid=7084) INFO 10-26 14:06:13 [kv_cache_utils.py:2327] GPU KV cache size: 17,088 tokens, Maximum concurrency for 1,536 tokens per request: 11.12x
+[reason/1b_query+step] 3976 inputs, 3976 unique, 3976 to generate
+  256/3976  chunk 45s  889 tok/s  5.70 q/s
+  512/3976  chunk 45s  888 tok/s  5.68 q/s
+  768/3976  chunk 50s  873 tok/s  5.48 q/s
+  1024/3976  chunk 52s  853 tok/s  5.34 q/s
+  1280/3976  chunk 49s  853 tok/s  5.31 q/s
+  1536/3976  chunk 49s  853 tok/s  5.29 q/s
+  1792/3976  chunk 50s  853 tok/s  5.26 q/s
+  2048/3976  chunk 48s  856 tok/s  5.27 q/s
+  2304/3976  chunk 51s  854 tok/s  5.24 q/s
+  2560/3976  chunk 52s  850 tok/s  5.21 q/s
+  2816/3976  chunk 48s  850 tok/s  5.22 q/s
+  3072/3976  chunk 46s  853 tok/s  5.25 q/s
+  3328/3976  chunk 49s  852 tok/s  5.25 q/s
+  3584/3976  chunk 51s  851 tok/s  5.23 q/s
+  3840/3976  chunk 53s  848 tok/s  5.20 q/s
+  3976/3976  chunk 28s  847 tok/s  5.19 q/s
+[hyde/1b_query+step] 3976 inputs, 3976 unique, 3976 to generate
+  256/3976  chunk 46s  880 tok/s  5.62 q/s
+  512/3976  chunk 48s  872 tok/s  5.48 q/s
+  768/3976  chunk 48s  860 tok/s  5.42 q/s
+  1024/3976  chunk 52s  851 tok/s  5.30 q/s
+  1280/3976  chunk 51s  851 tok/s  5.25 q/s
+  1536/3976  chunk 51s  847 tok/s  5.21 q/s
+  1792/3976  chunk 50s  845 tok/s  5.19 q/s
+  2048/3976  chunk 50s  847 tok/s  5.19 q/s
+  2304/3976  chunk 52s  844 tok/s  5.15 q/s
+  2560/3976  chunk 53s  842 tok/s  5.12 q/s
+  2816/3976  chunk 50s  840 tok/s  5.12 q/s
+  3072/3976  chunk 47s  842 tok/s  5.14 q/s
+  3328/3976  chunk 49s  843 tok/s  5.15 q/s
+  3584/3976  chunk 53s  840 tok/s  5.12 q/s
+  3840/3976  chunk 54s  838 tok/s  5.10 q/s
+  3976/3976  chunk 29s  837 tok/s  5.08 q/s
+=== 14:32:07 ALLDONE

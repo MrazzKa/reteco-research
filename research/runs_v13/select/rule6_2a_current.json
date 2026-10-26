@@ -1,0 +1,171 @@
+{
+ "rule": "6",
+ "cond": "2a_current",
+ "baseline": "q",
+ "margin": 0.005,
+ "best_on_train": "q+r+h",
+ "train_bootstrap_best_minus_baseline": {
+  "diff": 0.0562,
+  "ci95": [
+   0.046,
+   0.0661
+  ],
+  "p_le_0": 0.0
+ },
+ "adopted": true,
+ "chosen": "q+r+h",
+ "dev_bootstrap_chosen_minus_baseline": {
+  "diff": 0.0557,
+  "ci95": [
+   0.0406,
+   0.0705
+  ],
+  "p_le_0": 0.0
+ },
+ "candidates": {
+  "q": {
+   "report": "../research/runs_v13/qexp/t2/hybrid_2a_current.json",
+   "condition": "2a_current__q",
+   "cfg": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "minmax",
+    "alpha": 0.7
+   },
+   "train": 0.2805,
+   "dev": 0.2543,
+   "bm25_train": 0.1665,
+   "bm25_dev": 0.1759,
+   "dense_train": 0.2574,
+   "dense_dev": 0.2353
+  },
+  "q+r": {
+   "report": "../research/runs_v13/qexp/t2/hybrid_2a_current.json",
+   "condition": "2a_current__q+r",
+   "cfg": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "train": 0.3301,
+   "dev": 0.304,
+   "bm25_train": 0.2856,
+   "bm25_dev": 0.2789,
+   "dense_train": 0.2898,
+   "dense_dev": 0.2584
+  },
+  "r": {
+   "report": "../research/runs_v13/qexp/t2/hybrid_2a_current.json",
+   "condition": "2a_current__r",
+   "cfg": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.5
+   },
+   "train": 0.3001,
+   "dev": 0.2725,
+   "bm25_train": 0.2714,
+   "bm25_dev": 0.2637,
+   "dense_train": 0.258,
+   "dense_dev": 0.2219
+  },
+  "q+h": {
+   "report": "../research/runs_v13/qexp/t2/hybrid_2a_current.json",
+   "condition": "2a_current__q+h",
+   "cfg": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "train": 0.3272,
+   "dev": 0.3114,
+   "bm25_train": 0.2772,
+   "bm25_dev": 0.2776,
+   "dense_train": 0.2843,
+   "dense_dev": 0.2549
+  },
+  "h": {
+   "report": "../research/runs_v13/qexp/t2/hybrid_2a_current.json",
+   "condition": "2a_current__h",
+   "cfg": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.5
+   },
+   "train": 0.3092,
+   "dev": 0.2918,
+   "bm25_train": 0.2632,
+   "bm25_dev": 0.2615,
+   "dense_train": 0.2695,
+   "dense_dev": 0.2476
+  },
+  "q+r+h": {
+   "report": "../research/runs_v13/qexp/t2/hybrid_2a_current.json",
+   "condition": "2a_current__q+r+h",
+   "cfg": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "train": 0.3367,
+   "dev": 0.31,
+   "bm25_train": 0.2959,
+   "bm25_dev": 0.2869,
+   "dense_train": 0.2943,
+   "dense_dev": 0.2652
+  }
+ },
+ "dev_bootstrap_each_minus_baseline": {
+  "q+r": {
+   "diff": 0.0497,
+   "ci95": [
+    0.0352,
+    0.0639
+   ],
+   "p_le_0": 0.0
+  },
+  "r": {
+   "diff": 0.0182,
+   "ci95": [
+    0.0005,
+    0.0356
+   ],
+   "p_le_0": 0.0225
+  },
+  "q+h": {
+   "diff": 0.0571,
+   "ci95": [
+    0.0427,
+    0.0714
+   ],
+   "p_le_0": 0.0
+  },
+  "h": {
+   "diff": 0.0375,
+   "ci95": [
+    0.0193,
+    0.0554
+   ],
+   "p_le_0": 0.0
+  },
+  "q+r+h": {
+   "diff": 0.0557,
+   "ci95": [
+    0.0406,
+    0.0705
+   ],
+   "p_le_0": 0.0
+  }
+ }
+}
