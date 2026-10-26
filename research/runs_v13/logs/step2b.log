@@ -1,0 +1,595 @@
+=== 14:40:11 python qexp_search.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 2 --cond 2a_current --llm ../research/runs_v13/llm/t2 --model bge-base --max-len 512 --emb ../research/runs_v12/emb --out ../research/runs_v13/qexp/t2
+    model BAAI/bge-base-en-v1.5 rev a5beb1e3e6 dim 768 max_len 512 fp16=True (5s)
+    index: 16,381 docs, 1s (lucene)
+[t2/drones] indexes ready (1s)
+    2a_current__q              104 topics (104 unique)    0.1s
+  train q      bm25 0.1319  dense 0.3100
+    2a_current__q+r            104 topics (104 unique)    0.3s
+  train q+r    bm25 0.1734  dense 0.3066
+    2a_current__r              104 topics (104 unique)    0.3s
+  train r      bm25 0.1580  dense 0.2484
+    2a_current__q+h            104 topics (104 unique)    0.3s
+  train q+h    bm25 0.1400  dense 0.3291
+    2a_current__h              104 topics (104 unique)    0.2s
+  train h      bm25 0.1274  dense 0.3068
+    2a_current__q+r+h          104 topics (104 unique)    0.5s
+  train q+r+h  bm25 0.1604  dense 0.3136
+    2a_current__q               38 topics (38 unique)    0.0s
+    2a_current__q+r             38 topics (38 unique)    0.1s
+    2a_current__r               38 topics (38 unique)    0.1s
+    2a_current__q+h             38 topics (38 unique)    0.1s
+    2a_current__h               38 topics (38 unique)    0.1s
+    2a_current__q+r+h           38 topics (38 unique)    0.2s
+    index: 16,712 docs, 1s (lucene)
+[t2/politics] indexes ready (1s)
+    2a_current__q              159 topics (159 unique)    0.2s
+  train q      bm25 0.1643  dense 0.2721
+    2a_current__q+r            159 topics (159 unique)    0.5s
+  train q+r    bm25 0.2459  dense 0.2747
+    2a_current__r              159 topics (159 unique)    0.4s
+  train r      bm25 0.2195  dense 0.2291
+    2a_current__q+h            159 topics (159 unique)    0.5s
+  train q+h    bm25 0.2388  dense 0.3037
+    2a_current__h              159 topics (159 unique)    0.5s
+  train h      bm25 0.2216  dense 0.2810
+    2a_current__q+r+h          159 topics (159 unique)    0.9s
+  train q+r+h  bm25 0.2523  dense 0.2933
+    2a_current__q               54 topics (54 unique)    0.1s
+    2a_current__q+r             54 topics (54 unique)    0.2s
+    2a_current__r               54 topics (54 unique)    0.2s
+    2a_current__q+h             54 topics (54 unique)    0.2s
+    2a_current__h               54 topics (54 unique)    0.1s
+    2a_current__q+r+h           54 topics (54 unique)    0.3s
+    index: 20,027 docs, 1s (lucene)
+[t2/law] indexes ready (1s)
+    2a_current__q              164 topics (164 unique)    0.2s
+  train q      bm25 0.1040  dense 0.2474
+    2a_current__q+r            164 topics (164 unique)    0.6s
+  train q+r    bm25 0.1344  dense 0.2814
+    2a_current__r              164 topics (164 unique)    0.5s
+  train r      bm25 0.1212  dense 0.2249
+    2a_current__q+h            164 topics (164 unique)    0.5s
+  train q+h    bm25 0.1334  dense 0.2686
+    2a_current__h              164 topics (164 unique)    0.4s
+  train h      bm25 0.1176  dense 0.2387
+    2a_current__q+r+h          164 topics (164 unique)    0.9s
+  train q+r+h  bm25 0.1368  dense 0.2837
+    2a_current__q               66 topics (66 unique)    0.1s
+    2a_current__q+r             66 topics (66 unique)    0.2s
+    2a_current__r               66 topics (66 unique)    0.2s
+    2a_current__q+h             66 topics (66 unique)    0.2s
+    2a_current__h               66 topics (66 unique)    0.2s
+    2a_current__q+r+h           66 topics (66 unique)    0.3s
+    index: 23,297 docs, 2s (lucene)
+[t2/medicalsciences] indexes ready (2s)
+    2a_current__q              139 topics (139 unique)    0.1s
+  train q      bm25 0.1101  dense 0.3575
+    2a_current__q+r            139 topics (139 unique)    0.5s
+  train q+r    bm25 0.1355  dense 0.3689
+    2a_current__r              139 topics (139 unique)    0.4s
+  train r      bm25 0.1287  dense 0.3212
+    2a_current__q+h            139 topics (139 unique)    0.5s
+  train q+h    bm25 0.1432  dense 0.3830
+    2a_current__h              139 topics (139 unique)    0.4s
+  train h      bm25 0.1308  dense 0.3624
+    2a_current__q+r+h          139 topics (139 unique)    0.8s
+  train q+r+h  bm25 0.1367  dense 0.3770
+    2a_current__q               44 topics (44 unique)    0.1s
+    2a_current__q+r             44 topics (44 unique)    0.2s
+    2a_current__r               44 topics (44 unique)    0.1s
+    2a_current__q+h             44 topics (44 unique)    0.2s
+    2a_current__h               44 topics (44 unique)    0.1s
+    2a_current__q+r+h           44 topics (44 unique)    0.3s
+    index: 26,308 docs, 1s (lucene)
+[t2/hardware] indexes ready (1s)
+    2a_current__q              130 topics (130 unique)    0.1s
+  train q      bm25 0.1130  dense 0.2062
+    2a_current__q+r            130 topics (130 unique)    0.5s
+  train q+r    bm25 0.1383  dense 0.2112
+    2a_current__r              130 topics (130 unique)    0.4s
+  train r      bm25 0.1278  dense 0.1842
+    2a_current__q+h            130 topics (130 unique)    0.4s
+  train q+h    bm25 0.1199  dense 0.2230
+    2a_current__h              130 topics (130 unique)    0.4s
+  train h      bm25 0.1085  dense 0.2026
+    2a_current__q+r+h          130 topics (130 unique)    0.8s
+  train q+r+h  bm25 0.1366  dense 0.2233
+    2a_current__q               58 topics (58 unique)    0.1s
+    2a_current__q+r             58 topics (58 unique)    0.2s
+    2a_current__r               58 topics (58 unique)    0.2s
+    2a_current__q+h             58 topics (58 unique)    0.2s
+    2a_current__h               58 topics (58 unique)    0.2s
+    2a_current__q+r+h           58 topics (58 unique)    0.3s
+    index: 50,220 docs, 2s (lucene)
+[t2/economics] indexes ready (2s)
+    2a_current__q              196 topics (196 unique)    0.2s
+  train q      bm25 0.1450  dense 0.2135
+    2a_current__q+r            196 topics (196 unique)    0.7s
+  train q+r    bm25 0.2787  dense 0.2910
+    2a_current__r              196 topics (196 unique)    0.6s
+  train r      bm25 0.2746  dense 0.2748
+    2a_current__q+h            196 topics (196 unique)    0.6s
+  train q+h    bm25 0.3032  dense 0.2536
+    2a_current__h              196 topics (196 unique)    0.6s
+  train h      bm25 0.2924  dense 0.2412
+    2a_current__q+r+h          196 topics (196 unique)    1.1s
+  train q+r+h  bm25 0.3136  dense 0.2865
+    2a_current__q               92 topics (92 unique)    0.1s
+    2a_current__q+r             92 topics (92 unique)    0.3s
+    2a_current__r               92 topics (92 unique)    0.3s
+    2a_current__q+h             92 topics (92 unique)    0.3s
+    2a_current__h               92 topics (92 unique)    0.3s
+    2a_current__q+r+h           92 topics (92 unique)    0.5s
+    index: 52,835 docs, 2s (lucene)
+[t2/psychology] indexes ready (2s)
+    2a_current__q              234 topics (234 unique)    0.3s
+  train q      bm25 0.1936  dense 0.2627
+    2a_current__q+r            234 topics (234 unique)    0.7s
+  train q+r    bm25 0.3688  dense 0.3093
+    2a_current__r              234 topics (234 unique)    0.7s
+  train r      bm25 0.3546  dense 0.2792
+    2a_current__q+h            234 topics (234 unique)    0.7s
+  train q+h    bm25 0.3659  dense 0.2926
+    2a_current__h              234 topics (234 unique)    0.6s
+  train h      bm25 0.3573  dense 0.2813
+    2a_current__q+r+h          234 topics (234 unique)    1.2s
+  train q+r+h  bm25 0.3925  dense 0.3122
+    2a_current__q               99 topics (99 unique)    0.1s
+    2a_current__q+r             99 topics (99 unique)    0.3s
+    2a_current__r               99 topics (99 unique)    0.3s
+    2a_current__q+h             99 topics (99 unique)    0.3s
+    2a_current__h               99 topics (99 unique)    0.3s
+    2a_current__q+r+h           99 topics (99 unique)    0.5s
+    index: 57,359 docs, 2s (lucene)
+[t2/biology] indexes ready (2s)
+    2a_current__q              247 topics (247 unique)    0.3s
+  train q      bm25 0.2008  dense 0.2234
+    2a_current__q+r            247 topics (247 unique)    0.9s
+  train q+r    bm25 0.5427  dense 0.3055
+    2a_current__r              247 topics (247 unique)    0.7s
+  train r      bm25 0.5339  dense 0.3298
+    2a_current__q+h            247 topics (247 unique)    0.8s
+  train q+h    bm25 0.5295  dense 0.2789
+    2a_current__h              247 topics (247 unique)    0.7s
+  train h      bm25 0.5292  dense 0.3028
+    2a_current__q+r+h          247 topics (247 unique)    1.3s
+  train q+r+h  bm25 0.5827  dense 0.3217
+    2a_current__q              115 topics (115 unique)    0.1s
+    2a_current__q+r            115 topics (115 unique)    0.4s
+    2a_current__r              115 topics (115 unique)    0.3s
+    2a_current__q+h            115 topics (115 unique)    0.4s
+    2a_current__h              115 topics (115 unique)    0.3s
+    2a_current__q+r+h          115 topics (115 unique)    0.6s
+    index: 60,792 docs, 2s (lucene)
+[t2/sustainable_living] indexes ready (2s)
+    2a_current__q              235 topics (235 unique)    0.3s
+  train q      bm25 0.2653  dense 0.3255
+    2a_current__q+r            235 topics (235 unique)    0.8s
+  train q+r    bm25 0.4114  dense 0.3472
+    2a_current__r              235 topics (235 unique)    0.7s
+  train r      bm25 0.3907  dense 0.2980
+    2a_current__q+h            235 topics (235 unique)    0.8s
+  train q+h    bm25 0.3976  dense 0.3468
+    2a_current__h              235 topics (235 unique)    0.7s
+  train h      bm25 0.3689  dense 0.3364
+    2a_current__q+r+h          235 topics (235 unique)    1.3s
+  train q+r+h  bm25 0.4221  dense 0.3528
+    2a_current__q               84 topics (84 unique)    0.1s
+    2a_current__q+r             84 topics (84 unique)    0.3s
+    2a_current__r               84 topics (84 unique)    0.3s
+    2a_current__q+h             84 topics (84 unique)    0.2s
+    2a_current__h               84 topics (84 unique)    0.2s
+    2a_current__q+r+h           84 topics (84 unique)    0.5s
+    index: 61,961 docs, 1s (lucene)
+[t2/robotics] indexes ready (2s)
+    2a_current__q              184 topics (184 unique)    0.3s
+  train q      bm25 0.1596  dense 0.1511
+    2a_current__q+r            184 topics (184 unique)    0.7s
+  train q+r    bm25 0.2495  dense 0.1901
+    2a_current__r              184 topics (184 unique)    0.6s
+  train r      bm25 0.2343  dense 0.1731
+    2a_current__q+h            184 topics (184 unique)    0.6s
+  train q+h    bm25 0.2152  dense 0.1682
+    2a_current__h              184 topics (184 unique)    0.5s
+  train h      bm25 0.1964  dense 0.1508
+    2a_current__q+r+h          184 topics (184 unique)    1.0s
+  train q+r+h  bm25 0.2375  dense 0.1780
+    2a_current__q               75 topics (75 unique)    0.1s
+    2a_current__q+r             75 topics (75 unique)    0.3s
+    2a_current__r               75 topics (75 unique)    0.2s
+    2a_current__q+h             75 topics (75 unique)    0.2s
+    2a_current__h               75 topics (75 unique)    0.2s
+    2a_current__q+r+h           75 topics (75 unique)    0.4s
+    index: 121,249 docs, 4s (lucene)
+[t2/earth_science] indexes ready (4s)
+    2a_current__q              321 topics (321 unique)    0.4s
+  train q      bm25 0.2438  dense 0.2619
+    2a_current__q+r            321 topics (321 unique)    1.2s
+  train q+r    bm25 0.4630  dense 0.3019
+    2a_current__r              321 topics (321 unique)    1.0s
+  train r      bm25 0.4425  dense 0.2750
+    2a_current__q+h            321 topics (321 unique)    1.1s
+  train q+h    bm25 0.4627  dense 0.2798
+    2a_current__h              321 topics (321 unique)    0.9s
+  train h      bm25 0.4456  dense 0.2609
+    2a_current__q+r+h          321 topics (321 unique)    1.8s
+  train q+r+h  bm25 0.4837  dense 0.2956
+    2a_current__q              133 topics (133 unique)    0.2s
+    2a_current__q+r            133 topics (133 unique)    0.5s
+    2a_current__r              133 topics (133 unique)    0.4s
+    2a_current__q+h            133 topics (133 unique)    0.4s
+    2a_current__h              133 topics (133 unique)    0.4s
+    2a_current__q+r+h          133 topics (133 unique)    0.7s
+missing generations: 0; wrote ../research/runs_v13/qexp/t2/results.json
+=== exit 0
+=== 14:42:16 python qexp_search.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 1 --cond 1b_query+step --llm ../research/runs_v13/llm/t1 --model bge-small --max-len 256 --emb ../research/runs_v12/emb --out ../research/runs_v13/qexp/t1
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 256 fp16=True (5s)
+    index: 9,680 docs, 3s (lucene)
+[t1/iota] indexes ready (3s)
+    1b_query+step__q            16 topics (16 unique)    0.0s
+  train q      bm25 0.1458  dense 0.2889
+    1b_query+step__q+r          16 topics (16 unique)    0.1s
+  train q+r    bm25 0.1984  dense 0.2774
+    1b_query+step__r            16 topics (16 unique)    0.0s
+  train r      bm25 0.1811  dense 0.1767
+    1b_query+step__q+h          16 topics (16 unique)    0.1s
+  train q+h    bm25 0.1551  dense 0.3712
+    1b_query+step__h            16 topics (16 unique)    0.0s
+  train h      bm25 0.1513  dense 0.3183
+    1b_query+step__q+r+h        16 topics (16 unique)    0.1s
+  train q+r+h  bm25 0.2032  dense 0.2816
+    1b_query+step__q             8 topics (8 unique)    0.0s
+    1b_query+step__q+r           8 topics (8 unique)    0.0s
+    1b_query+step__r             8 topics (8 unique)    0.0s
+    1b_query+step__q+h           8 topics (8 unique)    0.0s
+    1b_query+step__h             8 topics (8 unique)    0.0s
+    1b_query+step__q+r+h         8 topics (8 unique)    0.1s
+    index: 25,040 docs, 3s (lucene)
+[t1/quant] indexes ready (3s)
+    1b_query+step__q            37 topics (37 unique)    0.2s
+  train q      bm25 0.0090  dense 0.2236
+    1b_query+step__q+r          37 topics (37 unique)    0.3s
+  train q+r    bm25 0.0000  dense 0.2338
+    1b_query+step__r            37 topics (37 unique)    0.1s
+  train r      bm25 0.0142  dense 0.2112
+    1b_query+step__q+h          37 topics (37 unique)    0.3s
+  train q+h    bm25 0.0000  dense 0.2049
+    1b_query+step__h            37 topics (37 unique)    0.1s
+  train h      bm25 0.0324  dense 0.2317
+    1b_query+step__q+r+h        37 topics (37 unique)    0.4s
+  train q+r+h  bm25 0.0000  dense 0.2146
+    1b_query+step__q            15 topics (15 unique)    0.1s
+    1b_query+step__q+r          15 topics (15 unique)    0.1s
+    1b_query+step__r            15 topics (15 unique)    0.0s
+    1b_query+step__q+h          15 topics (15 unique)    0.1s
+    1b_query+step__h            15 topics (15 unique)    0.1s
+    1b_query+step__q+r+h        15 topics (15 unique)    0.2s
+    index: 36,110 docs, 6s (lucene)
+[t1/law] indexes ready (6s)
+    1b_query+step__q            53 topics (53 unique)    0.2s
+  train q      bm25 0.0540  dense 0.2302
+    1b_query+step__q+r          53 topics (53 unique)    0.4s
+  train q+r    bm25 0.1000  dense 0.3199
+    1b_query+step__r            53 topics (53 unique)    0.2s
+  train r      bm25 0.1297  dense 0.3462
+    1b_query+step__q+h          53 topics (53 unique)    0.4s
+  train q+h    bm25 0.0935  dense 0.2736
+    1b_query+step__h            53 topics (53 unique)    0.2s
+  train h      bm25 0.1308  dense 0.2779
+    1b_query+step__q+r+h        53 topics (53 unique)    0.5s
+  train q+r+h  bm25 0.1146  dense 0.3206
+    1b_query+step__q            23 topics (23 unique)    0.1s
+    1b_query+step__q+r          23 topics (23 unique)    0.2s
+    1b_query+step__r            23 topics (23 unique)    0.1s
+    1b_query+step__q+h          23 topics (23 unique)    0.2s
+    1b_query+step__h            23 topics (23 unique)    0.1s
+    1b_query+step__q+r+h        23 topics (23 unique)    0.2s
+    index: 43,584 docs, 5s (lucene)
+[t1/workplace] indexes ready (5s)
+    1b_query+step__q            31 topics (31 unique)    0.2s
+  train q      bm25 0.1341  dense 0.2493
+    1b_query+step__q+r          31 topics (31 unique)    0.3s
+  train q+r    bm25 0.2646  dense 0.3293
+    1b_query+step__r            31 topics (31 unique)    0.1s
+  train r      bm25 0.3203  dense 0.2452
+    1b_query+step__q+h          31 topics (31 unique)    0.3s
+  train q+h    bm25 0.2224  dense 0.2984
+    1b_query+step__h            31 topics (31 unique)    0.1s
+  train h      bm25 0.2188  dense 0.2944
+    1b_query+step__q+r+h        31 topics (31 unique)    0.4s
+  train q+r+h  bm25 0.2653  dense 0.3275
+    1b_query+step__q            20 topics (20 unique)    0.1s
+    1b_query+step__q+r          20 topics (20 unique)    0.2s
+    1b_query+step__r            20 topics (20 unique)    0.1s
+    1b_query+step__q+h          20 topics (20 unique)    0.2s
+    1b_query+step__h            20 topics (20 unique)    0.1s
+    1b_query+step__q+r+h        20 topics (20 unique)    0.2s
+    index: 47,509 docs, 7s (lucene)
+[t1/cardano] indexes ready (7s)
+    1b_query+step__q            57 topics (57 unique)    0.2s
+  train q      bm25 0.2158  dense 0.2854
+    1b_query+step__q+r          57 topics (57 unique)    0.3s
+  train q+r    bm25 0.2136  dense 0.2640
+    1b_query+step__r            57 topics (57 unique)    0.2s
+  train r      bm25 0.1868  dense 0.2183
+    1b_query+step__q+h          57 topics (57 unique)    0.3s
+  train q+h    bm25 0.1961  dense 0.2739
+    1b_query+step__h            57 topics (57 unique)    0.2s
+  train h      bm25 0.1821  dense 0.1933
+    1b_query+step__q+r+h        57 topics (57 unique)    0.5s
+  train q+r+h  bm25 0.2206  dense 0.2679
+    1b_query+step__q            33 topics (33 unique)    0.1s
+    1b_query+step__q+r          33 topics (33 unique)    0.2s
+    1b_query+step__r            33 topics (33 unique)    0.1s
+    1b_query+step__q+h          33 topics (33 unique)    0.2s
+    1b_query+step__h            33 topics (33 unique)    0.1s
+    1b_query+step__q+r+h        33 topics (33 unique)    0.3s
+    index: 53,955 docs, 9s (lucene)
+[t1/monero] indexes ready (9s)
+    1b_query+step__q            73 topics (73 unique)    0.3s
+  train q      bm25 0.0825  dense 0.2829
+    1b_query+step__q+r          73 topics (73 unique)    0.5s
+  train q+r    bm25 0.0675  dense 0.3015
+    1b_query+step__r            73 topics (73 unique)    0.3s
+  train r      bm25 0.0513  dense 0.2388
+    1b_query+step__q+h          73 topics (73 unique)    0.5s
+  train q+h    bm25 0.0541  dense 0.3196
+    1b_query+step__h            73 topics (73 unique)    0.3s
+  train h      bm25 0.0196  dense 0.2750
+    1b_query+step__q+r+h        73 topics (73 unique)    0.7s
+  train q+r+h  bm25 0.0488  dense 0.3220
+    1b_query+step__q            28 topics (28 unique)    0.1s
+    1b_query+step__q+r          28 topics (28 unique)    0.2s
+    1b_query+step__r            28 topics (28 unique)    0.1s
+    1b_query+step__q+h          28 topics (28 unique)    0.2s
+    1b_query+step__h            28 topics (28 unique)    0.1s
+    1b_query+step__q+r+h        28 topics (28 unique)    0.3s
+    index: 74,692 docs, 12s (lucene)
+[t1/economics] indexes ready (12s)
+    1b_query+step__q           130 topics (130 unique)    0.7s
+  train q      bm25 0.0414  dense 0.1169
+    1b_query+step__q+r         130 topics (130 unique)    1.1s
+  train q+r    bm25 0.0742  dense 0.1403
+    1b_query+step__r           130 topics (130 unique)    0.5s
+  train r      bm25 0.0953  dense 0.1404
+    1b_query+step__q+h         130 topics (130 unique)    1.1s
+  train q+h    bm25 0.0668  dense 0.1508
+    1b_query+step__h           130 topics (130 unique)    0.5s
+  train h      bm25 0.0839  dense 0.1551
+    1b_query+step__q+r+h       130 topics (130 unique)    1.6s
+  train q+r+h  bm25 0.0802  dense 0.1623
+    1b_query+step__q            51 topics (51 unique)    0.3s
+    1b_query+step__q+r          51 topics (51 unique)    0.4s
+    1b_query+step__r            51 topics (51 unique)    0.2s
+    1b_query+step__q+h          51 topics (51 unique)    0.4s
+    1b_query+step__h            51 topics (51 unique)    0.2s
+    1b_query+step__q+r+h        51 topics (51 unique)    0.6s
+    index: 76,706 docs, 12s (lucene)
+[t1/bitcoin] indexes ready (12s)
+    1b_query+step__q           132 topics (132 unique)    0.6s
+  train q      bm25 0.0686  dense 0.1700
+    1b_query+step__q+r         132 topics (132 unique)    1.0s
+  train q+r    bm25 0.0677  dense 0.1800
+    1b_query+step__r           132 topics (132 unique)    0.5s
+  train r      bm25 0.0547  dense 0.1513
+    1b_query+step__q+h         132 topics (132 unique)    1.0s
+  train q+h    bm25 0.0697  dense 0.1657
+    1b_query+step__h           132 topics (132 unique)    0.5s
+  train h      bm25 0.0674  dense 0.1494
+    1b_query+step__q+r+h       132 topics (132 unique)    1.4s
+  train q+r+h  bm25 0.0673  dense 0.1737
+    1b_query+step__q            56 topics (56 unique)    0.3s
+    1b_query+step__q+r          56 topics (56 unique)    0.5s
+    1b_query+step__r            56 topics (56 unique)    0.2s
+    1b_query+step__q+h          56 topics (56 unique)    0.5s
+    1b_query+step__h            56 topics (56 unique)    0.2s
+    1b_query+step__q+r+h        56 topics (56 unique)    0.6s
+    index: 135,207 docs, 25s (lucene)
+[t1/politics] indexes ready (25s)
+    1b_query+step__q           266 topics (266 unique)    2.2s
+  train q      bm25 0.2757  dense 0.2845
+    1b_query+step__q+r         266 topics (266 unique)    3.1s
+  train q+r    bm25 0.3370  dense 0.3311
+    1b_query+step__r           266 topics (266 unique)    1.2s
+  train r      bm25 0.3558  dense 0.3142
+    1b_query+step__q+h         266 topics (266 unique)    3.2s
+  train q+h    bm25 0.3486  dense 0.3388
+    1b_query+step__h           266 topics (266 unique)    1.3s
+  train h      bm25 0.3896  dense 0.3269
+    1b_query+step__q+r+h       266 topics (266 unique)    4.1s
+  train q+r+h  bm25 0.3630  dense 0.3560
+    1b_query+step__q           119 topics (119 unique)    0.9s
+    1b_query+step__q+r         119 topics (119 unique)    1.4s
+    1b_query+step__r           119 topics (119 unique)    0.5s
+    1b_query+step__q+h         119 topics (119 unique)    1.4s
+    1b_query+step__h           119 topics (119 unique)    0.6s
+    1b_query+step__q+r+h       119 topics (119 unique)    1.8s
+    index: 136,101 docs, 27s (lucene)
+[t1/genealogy] indexes ready (28s)
+    1b_query+step__q           159 topics (159 unique)    1.2s
+  train q      bm25 0.1146  dense 0.2809
+    1b_query+step__q+r         159 topics (159 unique)    1.6s
+  train q+r    bm25 0.1365  dense 0.3611
+    1b_query+step__r           159 topics (159 unique)    0.7s
+  train r      bm25 0.1854  dense 0.3645
+    1b_query+step__q+h         159 topics (159 unique)    1.7s
+  train q+h    bm25 0.1208  dense 0.3485
+    1b_query+step__h           159 topics (159 unique)    0.8s
+  train h      bm25 0.1609  dense 0.3409
+    1b_query+step__q+r+h       159 topics (159 unique)    2.3s
+  train q+r+h  bm25 0.1439  dense 0.3627
+    1b_query+step__q            68 topics (68 unique)    0.5s
+    1b_query+step__q+r          68 topics (68 unique)    0.7s
+    1b_query+step__r            68 topics (68 unique)    0.3s
+    1b_query+step__q+h          68 topics (68 unique)    0.7s
+    1b_query+step__h            68 topics (68 unique)    0.3s
+    1b_query+step__q+r+h        68 topics (68 unique)    0.9s
+    index: 158,771 docs, 23s (lucene)
+[t1/travel] indexes ready (24s)
+    1b_query+step__q           133 topics (133 unique)    1.0s
+  train q      bm25 0.0365  dense 0.2188
+    1b_query+step__q+r         133 topics (133 unique)    1.5s
+  train q+r    bm25 0.0413  dense 0.2609
+    1b_query+step__r           133 topics (133 unique)    0.6s
+  train r      bm25 0.0385  dense 0.2472
+    1b_query+step__q+h         133 topics (133 unique)    1.5s
+  train q+h    bm25 0.0241  dense 0.2506
+    1b_query+step__h           133 topics (133 unique)    0.7s
+  train h      bm25 0.0168  dense 0.2782
+    1b_query+step__q+r+h       133 topics (133 unique)    2.0s
+  train q+r+h  bm25 0.0309  dense 0.2617
+    1b_query+step__q            52 topics (52 unique)    0.3s
+    1b_query+step__q+r          52 topics (52 unique)    0.5s
+    1b_query+step__r            52 topics (52 unique)    0.2s
+    1b_query+step__q+h          52 topics (52 unique)    0.5s
+    1b_query+step__h            52 topics (52 unique)    0.3s
+    1b_query+step__q+r+h        52 topics (52 unique)    0.7s
+    index: 169,552 docs, 30s (lucene)
+[t1/hsm] indexes ready (31s)
+    1b_query+step__q           254 topics (254 unique)    2.0s
+  train q      bm25 0.2066  dense 0.2315
+    1b_query+step__q+r         254 topics (254 unique)    2.9s
+  train q+r    bm25 0.2783  dense 0.2889
+    1b_query+step__r           254 topics (254 unique)    1.2s
+  train r      bm25 0.2978  dense 0.2619
+    1b_query+step__q+h         254 topics (254 unique)    2.9s
+  train q+h    bm25 0.2941  dense 0.2867
+    1b_query+step__h           254 topics (254 unique)    1.3s
+  train h      bm25 0.3194  dense 0.2889
+    1b_query+step__q+r+h       254 topics (254 unique)    3.8s
+  train q+r+h  bm25 0.3099  dense 0.3018
+    1b_query+step__q           105 topics (105 unique)    0.6s
+    1b_query+step__q+r         105 topics (105 unique)    1.0s
+    1b_query+step__r           105 topics (105 unique)    0.5s
+    1b_query+step__q+h         105 topics (105 unique)    1.0s
+    1b_query+step__h           105 topics (105 unique)    0.5s
+    1b_query+step__q+r+h       105 topics (105 unique)    1.4s
+    index: 200,252 docs, 54s (lucene)
+[t1/history] indexes ready (54s)
+    1b_query+step__q          1421 topics (1421 unique)   13.0s
+  train q      bm25 0.0461  dense 0.2211
+    1b_query+step__q+r        1421 topics (1421 unique)   18.5s
+  train q+r    bm25 0.0608  dense 0.2508
+    1b_query+step__r          1421 topics (1421 unique)    7.3s
+  train r      bm25 0.0762  dense 0.2380
+    1b_query+step__q+h        1421 topics (1421 unique)   18.9s
+  train q+h    bm25 0.0578  dense 0.2541
+    1b_query+step__h          1421 topics (1421 unique)    8.2s
+  train h      bm25 0.0713  dense 0.2558
+    1b_query+step__q+r+h      1421 topics (1421 unique)   25.1s
+  train q+r+h  bm25 0.0638  dense 0.2604
+    1b_query+step__q           636 topics (636 unique)    6.5s
+    1b_query+step__q+r         636 topics (636 unique)    9.1s
+    1b_query+step__r           636 topics (636 unique)    3.2s
+    1b_query+step__q+h         636 topics (636 unique)    9.3s
+    1b_query+step__h           636 topics (636 unique)    3.5s
+    1b_query+step__q+r+h       636 topics (636 unique)   11.8s
+missing generations: 0; wrote ../research/runs_v13/qexp/t1/results.json
+=== exit 0
+=== 14:50:45 python passage_index.py --data ../../reteco_data_v11 --track 2 --model bge-base --first ../research/runs_v12/emb --out ../research/runs_v13/emb
+    model BAAI/bge-base-en-v1.5 rev a5beb1e3e6 dim 768 max_len 512 fp16=True (9s)
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (829 > 512). Running this sequence through the model will result in indexing errors
+  out = np.zeros((len(wins), self.st.get_sentence_embedding_dimension()), dtype=np.float16)
+  [t2/drones] DONE 16,381 docs, 621 extra passages (608 docs), encode 2s, tokenize 1s, cos min 0.9997
+  [t2/politics] DONE 16,712 docs, 1,268 extra passages (1,057 docs), encode 3s, tokenize 1s, cos min 0.9995
+  [t2/law] shard 0: 20,000 docs, 952 passages, 3s
+  [t2/law] DONE 20,027 docs, 952 extra passages (930 docs), encode 2s, tokenize 1s, cos min 0.9996
+  [t2/medicalsciences] shard 0: 20,000 docs, 2,028 passages, 5s
+  [t2/medicalsciences] DONE 23,297 docs, 2,258 extra passages (2,221 docs), encode 5s, tokenize 1s, cos min 0.9996
+  [t2/hardware] shard 0: 20,000 docs, 1,005 passages, 3s
+  [t2/hardware] DONE 26,308 docs, 1,250 extra passages (1,219 docs), encode 3s, tokenize 1s, cos min 0.9996
+  [t2/economics] shard 0: 20,000 docs, 2,277 passages, 9s
+  [t2/economics] shard 1: 40,000 docs, 3,684 passages, 15s
+  [t2/economics] DONE 50,220 docs, 4,864 extra passages (2,546 docs), encode 18s, tokenize 1s, cos min 0.9995
+  [t2/psychology] shard 0: 20,000 docs, 2,292 passages, 12s
+  [t2/psychology] shard 1: 40,000 docs, 4,561 passages, 24s
+  [t2/psychology] DONE 52,835 docs, 5,457 extra passages (1,534 docs), encode 27s, tokenize 1s, cos min 0.9996
+  [t2/biology] shard 0: 20,000 docs, 332 passages, 2s
+  [t2/biology] shard 1: 40,000 docs, 344 passages, 3s
+  [t2/biology] DONE 57,359 docs, 373 extra passages (141 docs), encode 2s, tokenize 1s, cos min 0.9997
+  [t2/sustainable_living] shard 0: 20,000 docs, 1,287 passages, 7s
+  [t2/sustainable_living] shard 1: 40,000 docs, 2,886 passages, 15s
+  [t2/sustainable_living] shard 2: 60,000 docs, 3,869 passages, 21s
+  [t2/sustainable_living] DONE 60,792 docs, 3,878 extra passages (1,259 docs), encode 19s, tokenize 2s, cos min 0.9996
+  [t2/robotics] shard 0: 20,000 docs, 4,527 passages, 20s
+  [t2/robotics] shard 1: 40,000 docs, 6,021 passages, 27s
+  [t2/robotics] shard 2: 60,000 docs, 7,026 passages, 33s
+  [t2/robotics] DONE 61,961 docs, 7,163 extra passages (3,809 docs), encode 32s, tokenize 2s, cos min 0.9996
+  [t2/earth_science] shard 0: 20,000 docs, 1,773 passages, 11s
+  [t2/earth_science] shard 1: 40,000 docs, 2,263 passages, 14s
+  [t2/earth_science] shard 2: 60,000 docs, 2,407 passages, 16s
+  [t2/earth_science] shard 3: 80,000 docs, 2,800 passages, 18s
+  [t2/earth_science] shard 4: 100,000 docs, 2,881 passages, 20s
+  [t2/earth_science] shard 5: 120,000 docs, 3,480 passages, 24s
+  [t2/earth_science] DONE 121,249 docs, 3,491 extra passages (410 docs), encode 19s, tokenize 5s, cos min 0.9996
+=== exit 0
+=== 14:53:31 python passage_index.py --data ../../reteco_data_v11 --track 1 --model bge-small --first ../research/runs_v12/emb --out ../research/runs_v13/emb
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (8s)
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (1270 > 512). Running this sequence through the model will result in indexing errors
+  out = np.zeros((len(wins), self.st.get_sentence_embedding_dimension()), dtype=np.float16)
+  [t1/iota] DONE 9,680 docs, 8,376 extra passages (1,652 docs), encode 16s, tokenize 3s, cos min 0.9995
+  [t1/quant] shard 0: 20,000 docs, 9,323 passages, 20s
+  [t1/quant] DONE 25,040 docs, 12,114 extra passages (2,283 docs), encode 22s, tokenize 4s, cos min 0.9997
+  [t1/law] shard 0: 20,000 docs, 12,823 passages, 27s
+  [t1/law] DONE 36,110 docs, 22,943 extra passages (4,353 docs), encode 41s, tokenize 6s, cos min 0.9997
+  [t1/workplace] shard 0: 20,000 docs, 7,437 passages, 16s
+  [t1/workplace] shard 1: 40,000 docs, 15,117 passages, 33s
+  [t1/workplace] DONE 43,584 docs, 16,368 extra passages (4,495 docs), encode 29s, tokenize 7s, cos min 0.9995
+  [t1/cardano] shard 0: 20,000 docs, 7,906 passages, 16s
+  [t1/cardano] shard 1: 40,000 docs, 15,712 passages, 31s
+  [t1/cardano] DONE 47,509 docs, 19,116 extra passages (6,229 docs), encode 31s, tokenize 7s, cos min 0.9997
+  [t1/monero] shard 0: 20,000 docs, 12,380 passages, 26s
+  [t1/monero] shard 1: 40,000 docs, 23,382 passages, 49s
+  [t1/monero] DONE 53,955 docs, 31,690 extra passages (6,190 docs), encode 57s, tokenize 9s, cos min 0.9995
+  [t1/economics] shard 0: 20,000 docs, 12,358 passages, 25s
+  [t1/economics] shard 1: 40,000 docs, 23,675 passages, 49s
+  [t1/economics] shard 2: 60,000 docs, 37,213 passages, 77s
+  [t1/economics] DONE 74,692 docs, 46,587 extra passages (9,024 docs), encode 83s, tokenize 12s, cos min 0.9995
+  [t1/bitcoin] shard 0: 20,000 docs, 11,150 passages, 23s
+  [t1/bitcoin] shard 1: 40,000 docs, 21,742 passages, 45s
+  [t1/bitcoin] shard 2: 60,000 docs, 31,361 passages, 64s
+  [t1/bitcoin] DONE 76,706 docs, 40,103 extra passages (10,405 docs), encode 69s, tokenize 12s, cos min 0.9996
+  [t1/politics] shard 0: 20,000 docs, 11,838 passages, 25s
+  [t1/politics] shard 1: 40,000 docs, 22,562 passages, 47s
+  [t1/politics] shard 2: 60,000 docs, 34,185 passages, 71s
+  [t1/politics] shard 3: 80,000 docs, 47,786 passages, 99s
+  [t1/politics] shard 4: 100,000 docs, 61,304 passages, 129s
+  [t1/politics] shard 5: 120,000 docs, 73,421 passages, 154s
+  [t1/politics] DONE 135,207 docs, 82,968 extra passages (16,665 docs), encode 148s, tokenize 22s, cos min 0.9993
+  [t1/genealogy] shard 0: 20,000 docs, 12,531 passages, 26s
+  [t1/genealogy] shard 1: 40,000 docs, 23,378 passages, 58s
+  [t1/genealogy] shard 2: 60,000 docs, 34,769 passages, 85s
+  [t1/genealogy] shard 3: 80,000 docs, 46,424 passages, 113s
+  [t1/genealogy] shard 4: 100,000 docs, 58,022 passages, 140s
+  [t1/genealogy] shard 5: 120,000 docs, 68,303 passages, 167s
+  [t1/genealogy] DONE 136,101 docs, 77,392 extra passages (19,793 docs), encode 161s, tokenize 28s, cos min 0.9996
+  [t1/travel] shard 0: 20,000 docs, 7,056 passages, 17s
+  [t1/travel] shard 1: 40,000 docs, 13,635 passages, 33s
+  [t1/travel] shard 2: 60,000 docs, 20,388 passages, 49s
+  [t1/travel] shard 3: 80,000 docs, 27,209 passages, 65s
+  [t1/travel] shard 4: 100,000 docs, 33,845 passages, 81s
+  [t1/travel] shard 5: 120,000 docs, 39,926 passages, 96s
+  [t1/travel] shard 6: 140,000 docs, 46,521 passages, 116s
+  [t1/travel] DONE 158,771 docs, 52,880 extra passages (23,610 docs), encode 116s, tokenize 17s, cos min 0.9995
+  [t1/hsm] shard 0: 20,000 docs, 12,597 passages, 30s
+  [t1/hsm] shard 1: 40,000 docs, 26,004 passages, 63s
+  [t1/hsm] shard 2: 60,000 docs, 37,819 passages, 98s
+  [t1/hsm] shard 3: 80,000 docs, 50,970 passages, 136s
+  [t1/hsm] shard 4: 100,000 docs, 62,760 passages, 156s
+  [t1/hsm] shard 5: 120,000 docs, 77,058 passages, 180s
+  [t1/hsm] shard 6: 140,000 docs, 90,370 passages, 205s
+  [t1/hsm] shard 7: 160,000 docs, 102,480 passages, 228s
+  [t1/hsm] DONE 169,552 docs, 108,341 extra passages (25,600 docs), encode 210s, tokenize 27s, cos min 0.9996
+  [t1/history] shard 0: 20,000 docs, 35,278 passages, 75s
+  [t1/history] shard 1: 40,000 docs, 70,507 passages, 147s
+  [t1/history] shard 2: 60,000 docs, 107,371 passages, 232s
+  [t1/history] shard 3: 80,000 docs, 143,477 passages, 306s
+  [t1/history] shard 4: 100,000 docs, 180,248 passages, 382s
+  [t1/history] shard 5: 120,000 docs, 214,261 passages, 453s
+  [t1/history] shard 6: 140,000 docs, 248,277 passages, 529s
+  [t1/history] shard 7: 160,000 docs, 286,135 passages, 604s
+  [t1/history] shard 8: 180,000 docs, 322,424 passages, 675s
+  [t1/history] shard 9: 200,000 docs, 359,383 passages, 748s
+  [t1/history] DONE 200,252 docs, 359,733 extra passages (36,775 docs), encode 675s, tokenize 67s, cos min 0.9995
+=== exit 0
+=== 15:25:37 ALLDONE

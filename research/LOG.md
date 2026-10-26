@@ -901,3 +901,48 @@ conclusion: Query-side reasoning with a 4B local LLM is the largest single gain 
   nDCG@10 on every sub-track, train and dev agree, every expansion variant beats the plain query, and using both
   generated texts with the query is best. BM25 gains most on Track 2 (0.176 → 0.287 dev: the LLM supplies the
   vocabulary of the answer); text-only expansions (r, h without q) are weaker than adding them to the query.
+
+## 2026-10-26 15:45–15:51 — rule 6, 2a current: cross-encoder over the q+r+h hybrid — not adopted
+command: `research/runs_v13/logs/step4.sh` (rerank_ce.py --conditions 2a_current__q+r+h --query-cond 2a_current, cache
+  from runs_v13/ce reused per (topic, document); out `runs_v13/ce_final/t2.json`).
+result (train subsample ≤ 30 topics/domain): N=0 0.3671, N=10 0.3604, N=20 0.3578, N=50 0.3456 → the best N (10) is
+  below N=0, so under rule 6 (N ∈ {0, 10, 20, 50}) the cross-encoder is **not applied**. (The script prints its
+  best non-zero N; the rule's choice is N=0.) Dev, reported once: N=0 0.3100, N=10 0.3208, N=20 0.3176, N=50 0.3138.
+conclusion: Once the query carries the LLM's reasoning and HyDE text, the general cross-encoder (which sees only the
+  short original question) no longer helps on train; on dev it would still add ~+0.01 (CI includes 0). We keep the
+  train decision.
+
+## 2026-10-26 14:53–16:06 — passage index and rule 7 (MaxP)
+index: `passage_index.py` (log `step2b.log`): Track 1 bge-small 878,611 extra passages for 167,074 documents (14% of
+  1,167,159; 331 documents hit the 200-passage cap), encode 28 min + tokenise 4 min; Track 2 bge-base 31,575 extra
+  passages for 15,734 documents (3%), 2.5 min. First-window re-encoding check cos ≥ 0.9993 in every domain.
+  Summary `runs_v13/maxp/index_summary.json`. Search with MaxP: `step3.sh` (qexp_search.py --passages, all six
+  variants), hybrids `maxp_hyb_*.log`; choice `logs/select7.sh` → `runs_v13/select/rule7_*.json`.
+result (train / dev; baseline = rule-6 system):
+  2a current  rule-6 q+r+h hybrid 0.3367/0.3100 · MaxP q 0.2989/0.2738 · MaxP q+r+h **0.3507/0.3319**
+              train MaxP − rule 6 +0.0140 [+0.0103, +0.0177] → **adopted**; dev +0.0219 [+0.0149, +0.0295].
+              dense alone (q): 0.2574 → 0.2783 train, 0.2353 → 0.2581 dev.
+  1a          rule-6 0.2949/0.3258 · MaxP q 0.2257/0.2666 · MaxP q+r+h 0.2714/0.3174 → not adopted.
+  1b          rule-6 0.3226/0.3505 · MaxP q 0.2461/0.2560 · MaxP q+r+h 0.2878/0.3221 → not adopted.
+  On Track 1 MaxP dense alone is about level with the L256 first window (1a q+r+h 0.2606 vs 0.2583 train), but the
+  hybrid loses 2–4 points: the max over many passages shifts the score distribution of long documents and the
+  fusion (tuned per variant) does not recover. (MaxP here also means a 512-token first window, while the Track-1
+  system uses 256: two changes at once.)
+caveat (checked after the result, before adopting it anywhere): the Track-2 gain sits in BRIGHT domains with few
+  long documents — biology +0.075 train / +0.081 dev with only 141 documents > 510 tokens, earth_science +0.117 /
+  +0.078 with 410. In those corpora long documents are mostly gold: biology 100 of 141 long documents are train/dev
+  gold (71%), earth_science 166 of 410 (40%), psychology 7%, economics 5%; StackExchange domains ≈ 0%. MaxP gives a
+  long document several chances, so part of the gain is a length effect that matches how the BRIGHT corpora were
+  built, not better matching. It reads only text, so it is within the rules, but whether it survives on test
+  (gold = documents not positive for any train/dev query) is unknown. Both 2a systems (with and without MaxP) are
+  reported; this goes to Steve as a question.
+
+## 2026-10-26 16:07 — rule 8 amended before any train result (cost): pool 50, FP8 through vLLM
+speed: ReasonEmbed-4B is compute-bound on this GPU: 7.2 docs/s with bitsandbytes NF4 (batch 8, 512 tokens) and
+  8.7 docs/s with vLLM FP8 (`scripts/embed_vllm.py`, pooling runner; vectors agree with NF4 at cos 0.98–0.99, so
+  the pooling is the card's last-token pooling). Pool 100 for 1a + 1b + 2a ≈ 150k documents ≈ 5 h; therefore:
+  pool = top 50 (N ∈ 10, 20, 50; interpolation over the top 50), backend vLLM FP8, order 2a current → 1a → 1b.
+  Baselines (the systems adopted after rules 6–7): 2a = MaxP q+r+h hybrid, 1a/1b = q+r+h hybrid. Choice as written
+  at 13:48 (train margin +0.005 and bootstrap lower bound > 0; "none" allowed).
+disclosure: the speed test (15:51) ran on the 38 dev topics of drones and printed their dev nDCG for every way of
+  using the score (none 0.2568, best 0.3182). It was not intended as a measurement; the choice below uses train only.

@@ -1,0 +1,68 @@
+{
+ "2a_current__q+r+h": {
+  "checkpoint": "BAAI/bge-reranker-v2-m3",
+  "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+  "hybrid_cfg": {
+   "kind": "linear",
+   "kb": 100,
+   "kd": 100,
+   "norm": "zscore",
+   "alpha": 0.6
+  },
+  "query_condition": "2a_current",
+  "train_topics_per_domain_max": 30,
+  "chosen_depth_on_train": 10,
+  "by_depth": {
+   "0": {
+    "train_macro": 0.3671,
+    "dev_macro": 0.31
+   },
+   "10": {
+    "train_macro": 0.3604,
+    "dev_macro": 0.3208
+   },
+   "20": {
+    "train_macro": 0.3578,
+    "dev_macro": 0.3176
+   },
+   "50": {
+    "train_macro": 0.3456,
+    "dev_macro": 0.3138
+   }
+  },
+  "dev_per_domain_chosen": {
+   "drones": 0.2858,
+   "politics": 0.3201,
+   "law": 0.2657,
+   "medicalsciences": 0.1836,
+   "hardware": 0.2681,
+   "economics": 0.2872,
+   "psychology": 0.3591,
+   "biology": 0.4894,
+   "sustainable_living": 0.4433,
+   "robotics": 0.229,
+   "earth_science": 0.3975
+  },
+  "dev_per_domain_hybrid": {
+   "drones": 0.2568,
+   "politics": 0.2608,
+   "law": 0.244,
+   "medicalsciences": 0.1538,
+   "hardware": 0.2586,
+   "economics": 0.3292,
+   "psychology": 0.3815,
+   "biology": 0.4747,
+   "sustainable_living": 0.4156,
+   "robotics": 0.2178,
+   "earth_science": 0.4173
+  },
+  "dev_bootstrap_ce_minus_hybrid": {
+   "diff": 0.0108,
+   "ci95": [
+    -0.001,
+    0.0228
+   ],
+   "p_le_0": 0.0355
+  }
+ }
+}

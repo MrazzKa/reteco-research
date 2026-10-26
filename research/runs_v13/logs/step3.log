@@ -1,0 +1,760 @@
+=== 14:35:05 stopped together with step2.sh; restarted by step2b.sh
+=== 15:25:42 python qexp_search.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 2 --cond 2a_current --llm ../research/runs_v13/llm/t2 --model bge-base --max-len 512 --emb ../research/runs_v12/emb --passages ../research/runs_v13/emb --out ../research/runs_v13/maxp/t2
+    model BAAI/bge-base-en-v1.5 rev a5beb1e3e6 dim 768 max_len 512 fp16=True (9s)
+    index: 16,381 docs, 1s (lucene)
+[t2/drones] indexes ready (1s)
+    2a_current__q              104 topics (104 unique)    0.1s
+  train q      bm25 0.1319  dense 0.3029
+    2a_current__q+r            104 topics (104 unique)    0.4s
+  train q+r    bm25 0.1734  dense 0.3007
+    2a_current__r              104 topics (104 unique)    0.3s
+  train r      bm25 0.1580  dense 0.2403
+    2a_current__q+h            104 topics (104 unique)    0.3s
+  train q+h    bm25 0.1400  dense 0.3209
+    2a_current__h              104 topics (104 unique)    0.3s
+  train h      bm25 0.1274  dense 0.2972
+    2a_current__q+r+h          104 topics (104 unique)    0.6s
+  train q+r+h  bm25 0.1604  dense 0.3079
+    2a_current__q               38 topics (38 unique)    0.0s
+    2a_current__q+r             38 topics (38 unique)    0.1s
+    2a_current__r               38 topics (38 unique)    0.1s
+    2a_current__q+h             38 topics (38 unique)    0.1s
+    2a_current__h               38 topics (38 unique)    0.1s
+    2a_current__q+r+h           38 topics (38 unique)    0.2s
+    index: 16,712 docs, 1s (lucene)
+[t2/politics] indexes ready (1s)
+    2a_current__q              159 topics (159 unique)    0.2s
+  train q      bm25 0.1643  dense 0.2765
+    2a_current__q+r            159 topics (159 unique)    0.6s
+  train q+r    bm25 0.2459  dense 0.2818
+    2a_current__r              159 topics (159 unique)    0.5s
+  train r      bm25 0.2195  dense 0.2318
+    2a_current__q+h            159 topics (159 unique)    0.5s
+  train q+h    bm25 0.2388  dense 0.3135
+    2a_current__h              159 topics (159 unique)    0.4s
+  train h      bm25 0.2216  dense 0.3021
+    2a_current__q+r+h          159 topics (159 unique)    0.9s
+  train q+r+h  bm25 0.2523  dense 0.3047
+    2a_current__q               54 topics (54 unique)    0.1s
+    2a_current__q+r             54 topics (54 unique)    0.2s
+    2a_current__r               54 topics (54 unique)    0.2s
+    2a_current__q+h             54 topics (54 unique)    0.2s
+    2a_current__h               54 topics (54 unique)    0.2s
+    2a_current__q+r+h           54 topics (54 unique)    0.3s
+    index: 20,027 docs, 1s (lucene)
+[t2/law] indexes ready (1s)
+    2a_current__q              164 topics (164 unique)    0.2s
+  train q      bm25 0.1040  dense 0.2484
+    2a_current__q+r            164 topics (164 unique)    0.6s
+  train q+r    bm25 0.1344  dense 0.2891
+    2a_current__r              164 topics (164 unique)    0.5s
+  train r      bm25 0.1212  dense 0.2287
+    2a_current__q+h            164 topics (164 unique)    0.5s
+  train q+h    bm25 0.1334  dense 0.2724
+    2a_current__h              164 topics (164 unique)    0.5s
+  train h      bm25 0.1176  dense 0.2433
+    2a_current__q+r+h          164 topics (164 unique)    1.0s
+  train q+r+h  bm25 0.1368  dense 0.2896
+    2a_current__q               66 topics (66 unique)    0.1s
+    2a_current__q+r             66 topics (66 unique)    0.2s
+    2a_current__r               66 topics (66 unique)    0.2s
+    2a_current__q+h             66 topics (66 unique)    0.2s
+    2a_current__h               66 topics (66 unique)    0.2s
+    2a_current__q+r+h           66 topics (66 unique)    0.4s
+    index: 23,297 docs, 2s (lucene)
+[t2/medicalsciences] indexes ready (2s)
+    2a_current__q              139 topics (139 unique)    0.2s
+  train q      bm25 0.1101  dense 0.3490
+    2a_current__q+r            139 topics (139 unique)    0.5s
+  train q+r    bm25 0.1355  dense 0.3595
+    2a_current__r              139 topics (139 unique)    0.4s
+  train r      bm25 0.1287  dense 0.3185
+    2a_current__q+h            139 topics (139 unique)    0.5s
+  train q+h    bm25 0.1432  dense 0.3770
+    2a_current__h              139 topics (139 unique)    0.4s
+  train h      bm25 0.1308  dense 0.3617
+    2a_current__q+r+h          139 topics (139 unique)    0.9s
+  train q+r+h  bm25 0.1367  dense 0.3731
+    2a_current__q               44 topics (44 unique)    0.1s
+    2a_current__q+r             44 topics (44 unique)    0.2s
+    2a_current__r               44 topics (44 unique)    0.1s
+    2a_current__q+h             44 topics (44 unique)    0.2s
+    2a_current__h               44 topics (44 unique)    0.1s
+    2a_current__q+r+h           44 topics (44 unique)    0.3s
+    index: 26,308 docs, 1s (lucene)
+[t2/hardware] indexes ready (2s)
+    2a_current__q              130 topics (130 unique)    0.2s
+  train q      bm25 0.1130  dense 0.2026
+    2a_current__q+r            130 topics (130 unique)    0.5s
+  train q+r    bm25 0.1383  dense 0.2085
+    2a_current__r              130 topics (130 unique)    0.4s
+  train r      bm25 0.1278  dense 0.1790
+    2a_current__q+h            130 topics (130 unique)    0.5s
+  train q+h    bm25 0.1199  dense 0.2236
+    2a_current__h              130 topics (130 unique)    0.4s
+  train h      bm25 0.1085  dense 0.2009
+    2a_current__q+r+h          130 topics (130 unique)    0.8s
+  train q+r+h  bm25 0.1366  dense 0.2244
+    2a_current__q               58 topics (58 unique)    0.1s
+    2a_current__q+r             58 topics (58 unique)    0.2s
+    2a_current__r               58 topics (58 unique)    0.2s
+    2a_current__q+h             58 topics (58 unique)    0.2s
+    2a_current__h               58 topics (58 unique)    0.2s
+    2a_current__q+r+h           58 topics (58 unique)    0.4s
+    index: 50,220 docs, 2s (lucene)
+[t2/economics] indexes ready (2s)
+    2a_current__q              196 topics (196 unique)    0.3s
+  train q      bm25 0.1450  dense 0.2234
+    2a_current__q+r            196 topics (196 unique)    0.9s
+  train q+r    bm25 0.2787  dense 0.2954
+    2a_current__r              196 topics (196 unique)    0.7s
+  train r      bm25 0.2746  dense 0.2792
+    2a_current__q+h            196 topics (196 unique)    0.8s
+  train q+h    bm25 0.3032  dense 0.2663
+    2a_current__h              196 topics (196 unique)    0.7s
+  train h      bm25 0.2924  dense 0.2516
+    2a_current__q+r+h          196 topics (196 unique)    1.2s
+  train q+r+h  bm25 0.3136  dense 0.2930
+    2a_current__q               92 topics (92 unique)    0.1s
+    2a_current__q+r             92 topics (92 unique)    0.4s
+    2a_current__r               92 topics (92 unique)    0.3s
+    2a_current__q+h             92 topics (92 unique)    0.3s
+    2a_current__h               92 topics (92 unique)    0.3s
+    2a_current__q+r+h           92 topics (92 unique)    0.6s
+    index: 52,835 docs, 2s (lucene)
+[t2/psychology] indexes ready (2s)
+    2a_current__q              234 topics (234 unique)    0.3s
+  train q      bm25 0.1936  dense 0.2933
+    2a_current__q+r            234 topics (234 unique)    0.8s
+  train q+r    bm25 0.3688  dense 0.3515
+    2a_current__r              234 topics (234 unique)    0.8s
+  train r      bm25 0.3546  dense 0.3135
+    2a_current__q+h            234 topics (234 unique)    0.8s
+  train q+h    bm25 0.3659  dense 0.3326
+    2a_current__h              234 topics (234 unique)    0.8s
+  train h      bm25 0.3573  dense 0.3252
+    2a_current__q+r+h          234 topics (234 unique)    1.3s
+  train q+r+h  bm25 0.3925  dense 0.3589
+    2a_current__q               99 topics (99 unique)    0.2s
+    2a_current__q+r             99 topics (99 unique)    0.4s
+    2a_current__r               99 topics (99 unique)    0.3s
+    2a_current__q+h             99 topics (99 unique)    0.3s
+    2a_current__h               99 topics (99 unique)    0.3s
+    2a_current__q+r+h           99 topics (99 unique)    0.6s
+    index: 57,359 docs, 2s (lucene)
+[t2/biology] indexes ready (2s)
+    2a_current__q              247 topics (247 unique)    0.4s
+  train q      bm25 0.2008  dense 0.2981
+    2a_current__q+r            247 topics (247 unique)    1.0s
+  train q+r    bm25 0.5427  dense 0.3863
+    2a_current__r              247 topics (247 unique)    0.9s
+  train r      bm25 0.5339  dense 0.4018
+    2a_current__q+h            247 topics (247 unique)    0.9s
+  train q+h    bm25 0.5295  dense 0.3679
+    2a_current__h              247 topics (247 unique)    0.8s
+  train h      bm25 0.5292  dense 0.3738
+    2a_current__q+r+h          247 topics (247 unique)    1.5s
+  train q+r+h  bm25 0.5827  dense 0.4023
+    2a_current__q              115 topics (115 unique)    0.2s
+    2a_current__q+r            115 topics (115 unique)    0.5s
+    2a_current__r              115 topics (115 unique)    0.3s
+    2a_current__q+h            115 topics (115 unique)    0.4s
+    2a_current__h              115 topics (115 unique)    0.3s
+    2a_current__q+r+h          115 topics (115 unique)    0.7s
+    index: 60,792 docs, 2s (lucene)
+[t2/sustainable_living] indexes ready (3s)
+[W1026 15:27:53.860787090 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 134217728 bytes (free: 1533939712, total: 8585216000).
+    2a_current__q              235 topics (235 unique)    0.3s
+  train q      bm25 0.2653  dense 0.3286
+    2a_current__q+r            235 topics (235 unique)    0.9s
+  train q+r    bm25 0.4114  dense 0.3545
+    2a_current__r              235 topics (235 unique)    0.7s
+  train r      bm25 0.3907  dense 0.3000
+    2a_current__q+h            235 topics (235 unique)    0.8s
+  train q+h    bm25 0.3976  dense 0.3532
+    2a_current__h              235 topics (235 unique)    0.8s
+  train h      bm25 0.3689  dense 0.3456
+    2a_current__q+r+h          235 topics (235 unique)    1.4s
+  train q+r+h  bm25 0.4221  dense 0.3586
+    2a_current__q               84 topics (84 unique)    0.1s
+    2a_current__q+r             84 topics (84 unique)    0.3s
+    2a_current__r               84 topics (84 unique)    0.3s
+    2a_current__q+h             84 topics (84 unique)    0.3s
+    2a_current__h               84 topics (84 unique)    0.3s
+    2a_current__q+r+h           84 topics (84 unique)    0.5s
+    index: 61,961 docs, 1s (lucene)
+[t2/robotics] indexes ready (3s)
+[W1026 15:28:22.602985101 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 148897792 bytes (free: 1525809152, total: 8585216000).
+[W1026 15:28:35.789177935 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 148897792 bytes (free: 1588084736, total: 8585216000).
+[W1026 15:28:48.951358001 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 148897792 bytes (free: 1589002240, total: 8585216000).
+    CUDA OOM -> batch 64
+    2a_current__q              184 topics (184 unique)    0.3s
+  train q      bm25 0.1596  dense 0.1592
+    2a_current__q+r            184 topics (184 unique)    0.8s
+  train q+r    bm25 0.2495  dense 0.1962
+    2a_current__r              184 topics (184 unique)    0.6s
+  train r      bm25 0.2343  dense 0.1744
+    2a_current__q+h            184 topics (184 unique)    0.6s
+  train q+h    bm25 0.2152  dense 0.1783
+    2a_current__h              184 topics (184 unique)    0.6s
+  train h      bm25 0.1964  dense 0.1611
+    2a_current__q+r+h          184 topics (184 unique)    1.1s
+  train q+r+h  bm25 0.2375  dense 0.1848
+    2a_current__q               75 topics (75 unique)    0.1s
+    2a_current__q+r             75 topics (75 unique)    0.3s
+    2a_current__r               75 topics (75 unique)    0.2s
+    2a_current__q+h             75 topics (75 unique)    0.2s
+    2a_current__h               75 topics (75 unique)    0.2s
+    2a_current__q+r+h           75 topics (75 unique)    0.4s
+    index: 121,249 docs, 6s (lucene)
+[t2/earth_science] indexes ready (12s)
+    2a_current__q              321 topics (321 unique)    0.5s
+  train q      bm25 0.2438  dense 0.3791
+    2a_current__q+r            321 topics (321 unique)    1.4s
+  train q+r    bm25 0.4630  dense 0.4047
+    2a_current__r              321 topics (321 unique)    1.3s
+  train r      bm25 0.4425  dense 0.3580
+    2a_current__q+h            321 topics (321 unique)    1.2s
+  train q+h    bm25 0.4627  dense 0.4048
+    2a_current__h              321 topics (321 unique)    1.1s
+  train h      bm25 0.4456  dense 0.3764
+    2a_current__q+r+h          321 topics (321 unique)    2.0s
+  train q+r+h  bm25 0.4837  dense 0.4082
+    2a_current__q              133 topics (133 unique)    0.2s
+    2a_current__q+r            133 topics (133 unique)    0.5s
+    2a_current__r              133 topics (133 unique)    0.4s
+    2a_current__q+h            133 topics (133 unique)    0.5s
+    2a_current__h              133 topics (133 unique)    0.4s
+    2a_current__q+r+h          133 topics (133 unique)    0.8s
+missing generations: 0; wrote ../research/runs_v13/maxp/t2/results.json
+=== exit 0
+=== 15:29:34 python qexp_search.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 1 --cond 1a --llm ../research/runs_v13/llm/t1 --model bge-small --max-len 512 --emb ../research/runs_v12/emb --passages ../research/runs_v13/emb --out ../research/runs_v13/maxp/t1
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (9s)
+    index: 9,680 docs, 3s (lucene)
+[t1/iota] indexes ready (3s)
+    1a__q                        7 topics (7 unique)    0.0s
+  train q      bm25 0.1444  dense 0.2758
+    1a__q+r                      7 topics (7 unique)    0.0s
+  train q+r    bm25 0.1966  dense 0.2828
+    1a__r                        7 topics (7 unique)    0.0s
+  train r      bm25 0.2226  dense 0.2522
+    1a__q+h                      7 topics (7 unique)    0.0s
+  train q+h    bm25 0.1444  dense 0.3399
+    1a__h                        7 topics (7 unique)    0.0s
+  train h      bm25 0.0837  dense 0.3063
+    1a__q+r+h                    7 topics (7 unique)    0.1s
+  train q+r+h  bm25 0.1662  dense 0.3567
+    1a__q                        3 topics (3 unique)    0.0s
+    1a__q+r                      3 topics (3 unique)    0.0s
+    1a__r                        3 topics (3 unique)    0.0s
+    1a__q+h                      3 topics (3 unique)    0.0s
+    1a__h                        3 topics (3 unique)    0.0s
+    1a__q+r+h                    3 topics (3 unique)    0.0s
+    index: 25,040 docs, 5s (lucene)
+[W1026 15:30:03.554341084 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 20971520 bytes (free: 7285506048, total: 8585216000).
+[t1/quant] indexes ready (16s)
+    1a__q                       24 topics (24 unique)    0.2s
+  train q      bm25 0.0255  dense 0.1542
+    1a__q+r                     24 topics (24 unique)    0.2s
+  train q+r    bm25 0.0110  dense 0.1755
+    1a__r                       24 topics (24 unique)    0.1s
+  train r      bm25 0.0439  dense 0.2036
+    1a__q+h                     24 topics (24 unique)    0.2s
+  train q+h    bm25 0.0000  dense 0.1422
+    1a__h                       24 topics (24 unique)    0.1s
+  train h      bm25 0.0210  dense 0.1408
+    1a__q+r+h                   24 topics (24 unique)    0.3s
+  train q+r+h  bm25 0.0049  dense 0.1655
+    1a__q                       10 topics (10 unique)    0.1s
+    1a__q+r                     10 topics (10 unique)    0.1s
+    1a__r                       10 topics (10 unique)    0.0s
+    1a__q+h                     10 topics (10 unique)    0.1s
+    1a__h                       10 topics (10 unique)    0.0s
+    1a__q+r+h                   10 topics (10 unique)    0.1s
+    index: 36,110 docs, 9s (lucene)
+[t1/law] indexes ready (10s)
+    1a__q                       24 topics (24 unique)    0.1s
+  train q      bm25 0.0439  dense 0.2196
+    1a__q+r                     24 topics (24 unique)    0.2s
+  train q+r    bm25 0.0796  dense 0.2447
+    1a__r                       24 topics (24 unique)    0.1s
+  train r      bm25 0.0869  dense 0.3385
+    1a__q+h                     24 topics (24 unique)    0.2s
+  train q+h    bm25 0.0894  dense 0.2568
+    1a__h                       24 topics (24 unique)    0.1s
+  train h      bm25 0.1039  dense 0.2381
+    1a__q+r+h                   24 topics (24 unique)    0.3s
+  train q+r+h  bm25 0.0911  dense 0.2643
+    1a__q                       11 topics (11 unique)    0.1s
+    1a__q+r                     11 topics (11 unique)    0.1s
+    1a__r                       11 topics (11 unique)    0.0s
+    1a__q+h                     11 topics (11 unique)    0.1s
+    1a__h                       11 topics (11 unique)    0.0s
+    1a__q+r+h                   11 topics (11 unique)    0.2s
+    index: 43,584 docs, 6s (lucene)
+[t1/workplace] indexes ready (6s)
+    1a__q                       25 topics (25 unique)    0.3s
+  train q      bm25 0.0778  dense 0.2411
+    1a__q+r                     25 topics (25 unique)    0.3s
+  train q+r    bm25 0.2188  dense 0.3333
+    1a__r                       25 topics (25 unique)    0.1s
+  train r      bm25 0.2821  dense 0.2823
+    1a__q+h                     25 topics (25 unique)    0.3s
+  train q+h    bm25 0.1379  dense 0.3220
+    1a__h                       25 topics (25 unique)    0.1s
+  train h      bm25 0.1853  dense 0.2834
+    1a__q+r+h                   25 topics (25 unique)    0.4s
+  train q+r+h  bm25 0.2004  dense 0.3347
+    1a__q                       11 topics (11 unique)    0.1s
+    1a__q+r                     11 topics (11 unique)    0.1s
+    1a__r                       11 topics (11 unique)    0.1s
+    1a__q+h                     11 topics (11 unique)    0.1s
+    1a__h                       11 topics (11 unique)    0.1s
+    1a__q+r+h                   11 topics (11 unique)    0.1s
+    index: 47,509 docs, 11s (lucene)
+[t1/cardano] indexes ready (11s)
+    1a__q                       36 topics (36 unique)    0.1s
+  train q      bm25 0.2100  dense 0.2529
+    1a__q+r                     36 topics (36 unique)    0.2s
+  train q+r    bm25 0.2149  dense 0.2584
+    1a__r                       36 topics (36 unique)    0.1s
+  train r      bm25 0.2011  dense 0.1781
+    1a__q+h                     36 topics (36 unique)    0.2s
+  train q+h    bm25 0.1792  dense 0.2447
+    1a__h                       36 topics (36 unique)    0.1s
+  train h      bm25 0.1541  dense 0.1980
+    1a__q+r+h                   36 topics (36 unique)    0.3s
+  train q+r+h  bm25 0.1823  dense 0.2347
+    1a__q                       15 topics (15 unique)    0.1s
+    1a__q+r                     15 topics (15 unique)    0.1s
+    1a__r                       15 topics (15 unique)    0.1s
+    1a__q+h                     15 topics (15 unique)    0.1s
+    1a__h                       15 topics (15 unique)    0.1s
+    1a__q+r+h                   15 topics (15 unique)    0.2s
+    index: 53,955 docs, 12s (lucene)
+[t1/monero] indexes ready (12s)
+    1a__q                       46 topics (46 unique)    0.2s
+  train q      bm25 0.0329  dense 0.1897
+    1a__q+r                     46 topics (46 unique)    0.3s
+  train q+r    bm25 0.0236  dense 0.1922
+    1a__r                       46 topics (46 unique)    0.2s
+  train r      bm25 0.0342  dense 0.1392
+    1a__q+h                     46 topics (46 unique)    0.3s
+  train q+h    bm25 0.0274  dense 0.1849
+    1a__h                       46 topics (46 unique)    0.2s
+  train h      bm25 0.0147  dense 0.1609
+    1a__q+r+h                   46 topics (46 unique)    0.4s
+  train q+r+h  bm25 0.0242  dense 0.1937
+    1a__q                       19 topics (19 unique)    0.1s
+    1a__q+r                     19 topics (19 unique)    0.1s
+    1a__r                       19 topics (19 unique)    0.1s
+    1a__q+h                     19 topics (19 unique)    0.1s
+    1a__h                       19 topics (19 unique)    0.1s
+    1a__q+r+h                   19 topics (19 unique)    0.2s
+    index: 74,692 docs, 14s (lucene)
+[t1/economics] indexes ready (14s)
+    1a__q                       58 topics (58 unique)    0.3s
+  train q      bm25 0.0508  dense 0.1402
+    1a__q+r                     58 topics (58 unique)    0.6s
+  train q+r    bm25 0.0744  dense 0.1830
+    1a__r                       58 topics (58 unique)    0.3s
+  train r      bm25 0.1021  dense 0.1797
+    1a__q+h                     58 topics (58 unique)    0.6s
+  train q+h    bm25 0.0677  dense 0.1762
+    1a__h                       58 topics (58 unique)    0.3s
+  train h      bm25 0.0858  dense 0.1619
+    1a__q+r+h                   58 topics (58 unique)    0.8s
+  train q+r+h  bm25 0.0886  dense 0.1877
+    1a__q                       25 topics (25 unique)    0.1s
+    1a__q+r                     25 topics (25 unique)    0.2s
+    1a__r                       25 topics (25 unique)    0.1s
+    1a__q+h                     25 topics (25 unique)    0.2s
+    1a__h                       25 topics (25 unique)    0.1s
+    1a__q+r+h                   25 topics (25 unique)    0.3s
+    index: 76,706 docs, 14s (lucene)
+[t1/bitcoin] indexes ready (15s)
+    1a__q                       70 topics (70 unique)    0.3s
+  train q      bm25 0.0526  dense 0.1419
+    1a__q+r                     70 topics (70 unique)    0.5s
+  train q+r    bm25 0.0495  dense 0.1721
+    1a__r                       70 topics (70 unique)    0.3s
+  train r      bm25 0.0461  dense 0.1630
+    1a__q+h                     70 topics (70 unique)    0.5s
+  train q+h    bm25 0.0482  dense 0.1638
+    1a__h                       70 topics (70 unique)    0.3s
+  train h      bm25 0.0427  dense 0.1611
+    1a__q+r+h                   70 topics (70 unique)    0.7s
+  train q+r+h  bm25 0.0398  dense 0.1775
+    1a__q                       30 topics (30 unique)    0.2s
+    1a__q+r                     30 topics (30 unique)    0.2s
+    1a__r                       30 topics (30 unique)    0.1s
+    1a__q+h                     30 topics (30 unique)    0.2s
+    1a__h                       30 topics (30 unique)    0.1s
+    1a__q+r+h                   30 topics (30 unique)    0.3s
+    index: 135,207 docs, 30s (lucene)
+[t1/politics] indexes ready (30s)
+    1a__q                      105 topics (105 unique)    0.8s
+  train q      bm25 0.2855  dense 0.3218
+    1a__q+r                    105 topics (105 unique)    1.3s
+  train q+r    bm25 0.3497  dense 0.3451
+    1a__r                      105 topics (105 unique)    0.5s
+  train r      bm25 0.3589  dense 0.3126
+    1a__q+h                    105 topics (105 unique)    1.2s
+  train q+h    bm25 0.3695  dense 0.3788
+    1a__h                      105 topics (105 unique)    0.5s
+  train h      bm25 0.3841  dense 0.3336
+    1a__q+r+h                  105 topics (105 unique)    1.6s
+  train q+r+h  bm25 0.3893  dense 0.3631
+    1a__q                       45 topics (45 unique)    0.4s
+    1a__q+r                     45 topics (45 unique)    0.5s
+    1a__r                       45 topics (45 unique)    0.2s
+    1a__q+h                     45 topics (45 unique)    0.5s
+    1a__h                       45 topics (45 unique)    0.2s
+    1a__q+r+h                   45 topics (45 unique)    0.7s
+    index: 136,101 docs, 29s (lucene)
+[t1/genealogy] indexes ready (30s)
+    1a__q                       80 topics (80 unique)    0.6s
+  train q      bm25 0.0881  dense 0.2339
+    1a__q+r                     80 topics (80 unique)    1.0s
+  train q+r    bm25 0.1212  dense 0.3213
+    1a__r                       80 topics (80 unique)    0.4s
+  train r      bm25 0.1581  dense 0.3106
+    1a__q+h                     80 topics (80 unique)    0.9s
+  train q+h    bm25 0.1182  dense 0.3057
+    1a__h                       80 topics (80 unique)    0.4s
+  train h      bm25 0.1331  dense 0.3072
+    1a__q+r+h                   80 topics (80 unique)    1.2s
+  train q+r+h  bm25 0.1296  dense 0.3220
+    1a__q                       35 topics (35 unique)    0.3s
+    1a__q+r                     35 topics (35 unique)    0.4s
+    1a__r                       35 topics (35 unique)    0.2s
+    1a__q+h                     35 topics (35 unique)    0.4s
+    1a__h                       35 topics (35 unique)    0.2s
+    1a__q+r+h                   35 topics (35 unique)    0.5s
+    index: 158,771 docs, 25s (lucene)
+[t1/travel] indexes ready (25s)
+    1a__q                       70 topics (70 unique)    0.5s
+  train q      bm25 0.0445  dense 0.2056
+    1a__q+r                     70 topics (70 unique)    0.8s
+  train q+r    bm25 0.0417  dense 0.2298
+    1a__r                       70 topics (70 unique)    0.4s
+  train r      bm25 0.0451  dense 0.2121
+    1a__q+h                     70 topics (70 unique)    0.8s
+  train q+h    bm25 0.0268  dense 0.2336
+    1a__h                       70 topics (70 unique)    0.4s
+  train h      bm25 0.0185  dense 0.2310
+    1a__q+r+h                   70 topics (70 unique)    1.1s
+  train q+r+h  bm25 0.0345  dense 0.2432
+    1a__q                       30 topics (30 unique)    0.2s
+    1a__q+r                     30 topics (30 unique)    0.3s
+    1a__r                       30 topics (30 unique)    0.2s
+    1a__q+h                     30 topics (30 unique)    0.3s
+    1a__h                       30 topics (30 unique)    0.2s
+    1a__q+r+h                   30 topics (30 unique)    0.4s
+    index: 169,552 docs, 37s (lucene)
+[t1/hsm] indexes ready (38s)
+    1a__q                      105 topics (105 unique)    0.8s
+  train q      bm25 0.2067  dense 0.2550
+    1a__q+r                    105 topics (105 unique)    1.2s
+  train q+r    bm25 0.2787  dense 0.3194
+    1a__r                      105 topics (105 unique)    0.5s
+  train r      bm25 0.2783  dense 0.2891
+    1a__q+h                    105 topics (105 unique)    1.1s
+  train q+h    bm25 0.2877  dense 0.3050
+    1a__h                      105 topics (105 unique)    0.5s
+  train h      bm25 0.3128  dense 0.2819
+    1a__q+r+h                  105 topics (105 unique)    1.6s
+  train q+r+h  bm25 0.3030  dense 0.3139
+    1a__q                       45 topics (45 unique)    0.3s
+    1a__q+r                     45 topics (45 unique)    0.5s
+    1a__r                       45 topics (45 unique)    0.2s
+    1a__q+h                     45 topics (45 unique)    0.4s
+    1a__h                       45 topics (45 unique)    0.2s
+    1a__q+r+h                   45 topics (45 unique)    0.6s
+    index: 200,252 docs, 60s (lucene)
+[t1/history] indexes ready (61s)
+    1a__q                      561 topics (561 unique)    4.9s
+  train q      bm25 0.0436  dense 0.2016
+    1a__q+r                    561 topics (561 unique)    7.5s
+  train q+r    bm25 0.0665  dense 0.2231
+    1a__r                      561 topics (561 unique)    3.2s
+  train r      bm25 0.0794  dense 0.2078
+    1a__q+h                    561 topics (561 unique)    7.4s
+  train q+h    bm25 0.0589  dense 0.2248
+    1a__h                      561 topics (561 unique)    3.0s
+  train h      bm25 0.0694  dense 0.2248
+    1a__q+r+h                  561 topics (561 unique)    9.7s
+  train q+r+h  bm25 0.0662  dense 0.2304
+    1a__q                      240 topics (240 unique)    2.3s
+    1a__q+r                    240 topics (240 unique)    3.3s
+    1a__r                      240 topics (240 unique)    1.3s
+    1a__q+h                    240 topics (240 unique)    3.3s
+    1a__h                      240 topics (240 unique)    1.3s
+    1a__q+r+h                  240 topics (240 unique)    4.4s
+missing generations: 0; wrote ../research/runs_v13/maxp/t1/results.json
+=== exit 0
+=== 15:36:35 python qexp_search.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 1 --cond 1b_query+step --llm ../research/runs_v13/llm/t1 --model bge-small --max-len 512 --emb ../research/runs_v12/emb --passages ../research/runs_v13/emb --out ../research/runs_v13/maxp/t1
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 512 fp16=True (6s)
+    index: 9,680 docs, 3s (lucene)
+[t1/iota] indexes ready (3s)
+    1b_query+step__q            16 topics (16 unique)    0.0s
+  train q      bm25 0.1458  dense 0.2301
+    1b_query+step__q+r          16 topics (16 unique)    0.1s
+  train q+r    bm25 0.1984  dense 0.2124
+    1b_query+step__r            16 topics (16 unique)    0.0s
+  train r      bm25 0.1811  dense 0.1499
+    1b_query+step__q+h          16 topics (16 unique)    0.1s
+  train q+h    bm25 0.1551  dense 0.2933
+    1b_query+step__h            16 topics (16 unique)    0.0s
+  train h      bm25 0.1513  dense 0.2735
+    1b_query+step__q+r+h        16 topics (16 unique)    0.1s
+  train q+r+h  bm25 0.2032  dense 0.2429
+    1b_query+step__q             8 topics (8 unique)    0.0s
+    1b_query+step__q+r           8 topics (8 unique)    0.0s
+    1b_query+step__r             8 topics (8 unique)    0.0s
+    1b_query+step__q+h           8 topics (8 unique)    0.0s
+    1b_query+step__h             8 topics (8 unique)    0.0s
+    1b_query+step__q+r+h         8 topics (8 unique)    0.1s
+    index: 25,040 docs, 4s (lucene)
+[t1/quant] indexes ready (4s)
+    1b_query+step__q            37 topics (37 unique)    0.2s
+  train q      bm25 0.0090  dense 0.2056
+    1b_query+step__q+r          37 topics (37 unique)    0.4s
+  train q+r    bm25 0.0000  dense 0.2246
+    1b_query+step__r            37 topics (37 unique)    0.1s
+  train r      bm25 0.0142  dense 0.2062
+    1b_query+step__q+h          37 topics (37 unique)    0.3s
+  train q+h    bm25 0.0000  dense 0.2116
+    1b_query+step__h            37 topics (37 unique)    0.1s
+  train h      bm25 0.0324  dense 0.2052
+    1b_query+step__q+r+h        37 topics (37 unique)    0.4s
+  train q+r+h  bm25 0.0000  dense 0.2244
+    1b_query+step__q            15 topics (15 unique)    0.1s
+    1b_query+step__q+r          15 topics (15 unique)    0.1s
+    1b_query+step__r            15 topics (15 unique)    0.1s
+    1b_query+step__q+h          15 topics (15 unique)    0.1s
+    1b_query+step__h            15 topics (15 unique)    0.1s
+    1b_query+step__q+r+h        15 topics (15 unique)    0.2s
+    index: 36,110 docs, 7s (lucene)
+[t1/law] indexes ready (7s)
+    1b_query+step__q            53 topics (53 unique)    0.2s
+  train q      bm25 0.0540  dense 0.2301
+    1b_query+step__q+r          53 topics (53 unique)    0.4s
+  train q+r    bm25 0.1000  dense 0.3336
+    1b_query+step__r            53 topics (53 unique)    0.2s
+  train r      bm25 0.1297  dense 0.3322
+    1b_query+step__q+h          53 topics (53 unique)    0.4s
+  train q+h    bm25 0.0935  dense 0.2691
+    1b_query+step__h            53 topics (53 unique)    0.2s
+  train h      bm25 0.1308  dense 0.2798
+    1b_query+step__q+r+h        53 topics (53 unique)    0.6s
+  train q+r+h  bm25 0.1146  dense 0.3247
+    1b_query+step__q            23 topics (23 unique)    0.1s
+    1b_query+step__q+r          23 topics (23 unique)    0.2s
+    1b_query+step__r            23 topics (23 unique)    0.1s
+    1b_query+step__q+h          23 topics (23 unique)    0.2s
+    1b_query+step__h            23 topics (23 unique)    0.1s
+    1b_query+step__q+r+h        23 topics (23 unique)    0.3s
+    index: 43,584 docs, 5s (lucene)
+[t1/workplace] indexes ready (5s)
+    1b_query+step__q            31 topics (31 unique)    0.2s
+  train q      bm25 0.1341  dense 0.2266
+    1b_query+step__q+r          31 topics (31 unique)    0.3s
+  train q+r    bm25 0.2646  dense 0.3017
+    1b_query+step__r            31 topics (31 unique)    0.1s
+  train r      bm25 0.3203  dense 0.2852
+    1b_query+step__q+h          31 topics (31 unique)    0.3s
+  train q+h    bm25 0.2224  dense 0.2883
+    1b_query+step__h            31 topics (31 unique)    0.1s
+  train h      bm25 0.2188  dense 0.2936
+    1b_query+step__q+r+h        31 topics (31 unique)    0.4s
+  train q+r+h  bm25 0.2653  dense 0.2929
+    1b_query+step__q            20 topics (20 unique)    0.1s
+    1b_query+step__q+r          20 topics (20 unique)    0.2s
+    1b_query+step__r            20 topics (20 unique)    0.1s
+    1b_query+step__q+h          20 topics (20 unique)    0.2s
+    1b_query+step__h            20 topics (20 unique)    0.1s
+    1b_query+step__q+r+h        20 topics (20 unique)    0.2s
+    index: 47,509 docs, 8s (lucene)
+[t1/cardano] indexes ready (8s)
+    1b_query+step__q            57 topics (57 unique)    0.2s
+  train q      bm25 0.2158  dense 0.2520
+    1b_query+step__q+r          57 topics (57 unique)    0.3s
+  train q+r    bm25 0.2136  dense 0.2607
+    1b_query+step__r            57 topics (57 unique)    0.2s
+  train r      bm25 0.1868  dense 0.2096
+    1b_query+step__q+h          57 topics (57 unique)    0.4s
+  train q+h    bm25 0.1961  dense 0.2231
+    1b_query+step__h            57 topics (57 unique)    0.2s
+  train h      bm25 0.1821  dense 0.1904
+    1b_query+step__q+r+h        57 topics (57 unique)    0.5s
+  train q+r+h  bm25 0.2206  dense 0.2401
+    1b_query+step__q            33 topics (33 unique)    0.1s
+    1b_query+step__q+r          33 topics (33 unique)    0.2s
+    1b_query+step__r            33 topics (33 unique)    0.1s
+    1b_query+step__q+h          33 topics (33 unique)    0.2s
+    1b_query+step__h            33 topics (33 unique)    0.1s
+    1b_query+step__q+r+h        33 topics (33 unique)    0.3s
+    index: 53,955 docs, 9s (lucene)
+[t1/monero] indexes ready (10s)
+    1b_query+step__q            73 topics (73 unique)    0.3s
+  train q      bm25 0.0825  dense 0.2741
+    1b_query+step__q+r          73 topics (73 unique)    0.5s
+  train q+r    bm25 0.0675  dense 0.2931
+    1b_query+step__r            73 topics (73 unique)    0.3s
+  train r      bm25 0.0513  dense 0.2321
+    1b_query+step__q+h          73 topics (73 unique)    0.5s
+  train q+h    bm25 0.0541  dense 0.3129
+    1b_query+step__h            73 topics (73 unique)    0.3s
+  train h      bm25 0.0196  dense 0.2782
+    1b_query+step__q+r+h        73 topics (73 unique)    0.7s
+  train q+r+h  bm25 0.0488  dense 0.3031
+    1b_query+step__q            28 topics (28 unique)    0.1s
+    1b_query+step__q+r          28 topics (28 unique)    0.2s
+    1b_query+step__r            28 topics (28 unique)    0.1s
+    1b_query+step__q+h          28 topics (28 unique)    0.2s
+    1b_query+step__h            28 topics (28 unique)    0.1s
+    1b_query+step__q+r+h        28 topics (28 unique)    0.3s
+    index: 74,692 docs, 12s (lucene)
+[t1/economics] indexes ready (13s)
+    1b_query+step__q           130 topics (130 unique)    0.8s
+  train q      bm25 0.0414  dense 0.1413
+    1b_query+step__q+r         130 topics (130 unique)    1.2s
+  train q+r    bm25 0.0742  dense 0.1499
+    1b_query+step__r           130 topics (130 unique)    0.5s
+  train r      bm25 0.0953  dense 0.1503
+    1b_query+step__q+h         130 topics (130 unique)    1.2s
+  train q+h    bm25 0.0668  dense 0.1809
+    1b_query+step__h           130 topics (130 unique)    0.5s
+  train h      bm25 0.0839  dense 0.1836
+    1b_query+step__q+r+h       130 topics (130 unique)    1.6s
+  train q+r+h  bm25 0.0802  dense 0.1833
+    1b_query+step__q            51 topics (51 unique)    0.3s
+    1b_query+step__q+r          51 topics (51 unique)    0.4s
+    1b_query+step__r            51 topics (51 unique)    0.2s
+    1b_query+step__q+h          51 topics (51 unique)    0.4s
+    1b_query+step__h            51 topics (51 unique)    0.2s
+    1b_query+step__q+r+h        51 topics (51 unique)    0.6s
+    index: 76,706 docs, 12s (lucene)
+[t1/bitcoin] indexes ready (13s)
+    1b_query+step__q           132 topics (132 unique)    0.7s
+  train q      bm25 0.0686  dense 0.1523
+    1b_query+step__q+r         132 topics (132 unique)    1.0s
+  train q+r    bm25 0.0677  dense 0.1621
+    1b_query+step__r           132 topics (132 unique)    0.5s
+  train r      bm25 0.0547  dense 0.1421
+    1b_query+step__q+h         132 topics (132 unique)    1.1s
+  train q+h    bm25 0.0697  dense 0.1685
+    1b_query+step__h           132 topics (132 unique)    0.5s
+  train h      bm25 0.0674  dense 0.1582
+    1b_query+step__q+r+h       132 topics (132 unique)    1.5s
+  train q+r+h  bm25 0.0673  dense 0.1660
+    1b_query+step__q            56 topics (56 unique)    0.3s
+    1b_query+step__q+r          56 topics (56 unique)    0.5s
+    1b_query+step__r            56 topics (56 unique)    0.2s
+    1b_query+step__q+h          56 topics (56 unique)    0.5s
+    1b_query+step__h            56 topics (56 unique)    0.2s
+    1b_query+step__q+r+h        56 topics (56 unique)    0.7s
+    index: 135,207 docs, 25s (lucene)
+[t1/politics] indexes ready (25s)
+    1b_query+step__q           266 topics (266 unique)    2.3s
+  train q      bm25 0.2757  dense 0.3135
+    1b_query+step__q+r         266 topics (266 unique)    3.3s
+  train q+r    bm25 0.3370  dense 0.3685
+    1b_query+step__r           266 topics (266 unique)    1.3s
+  train r      bm25 0.3558  dense 0.3417
+    1b_query+step__q+h         266 topics (266 unique)    3.4s
+  train q+h    bm25 0.3486  dense 0.3713
+    1b_query+step__h           266 topics (266 unique)    1.3s
+  train h      bm25 0.3896  dense 0.3494
+    1b_query+step__q+r+h       266 topics (266 unique)    4.4s
+  train q+r+h  bm25 0.3630  dense 0.3718
+    1b_query+step__q           119 topics (119 unique)    1.0s
+    1b_query+step__q+r         119 topics (119 unique)    1.4s
+    1b_query+step__r           119 topics (119 unique)    0.6s
+    1b_query+step__q+h         119 topics (119 unique)    1.5s
+    1b_query+step__h           119 topics (119 unique)    0.6s
+    1b_query+step__q+r+h       119 topics (119 unique)    1.9s
+    index: 136,101 docs, 28s (lucene)
+[t1/genealogy] indexes ready (29s)
+    1b_query+step__q           159 topics (159 unique)    1.2s
+  train q      bm25 0.1146  dense 0.3056
+    1b_query+step__q+r         159 topics (159 unique)    1.7s
+  train q+r    bm25 0.1365  dense 0.3820
+    1b_query+step__r           159 topics (159 unique)    0.7s
+  train r      bm25 0.1854  dense 0.3549
+    1b_query+step__q+h         159 topics (159 unique)    1.8s
+  train q+h    bm25 0.1208  dense 0.3630
+    1b_query+step__h           159 topics (159 unique)    0.8s
+  train h      bm25 0.1609  dense 0.3480
+    1b_query+step__q+r+h       159 topics (159 unique)    2.4s
+  train q+r+h  bm25 0.1439  dense 0.3879
+    1b_query+step__q            68 topics (68 unique)    0.5s
+    1b_query+step__q+r          68 topics (68 unique)    0.7s
+    1b_query+step__r            68 topics (68 unique)    0.3s
+    1b_query+step__q+h          68 topics (68 unique)    0.7s
+    1b_query+step__h            68 topics (68 unique)    0.3s
+    1b_query+step__q+r+h        68 topics (68 unique)    1.0s
+    index: 158,771 docs, 24s (lucene)
+[t1/travel] indexes ready (24s)
+    1b_query+step__q           133 topics (133 unique)    1.0s
+  train q      bm25 0.0365  dense 0.1990
+    1b_query+step__q+r         133 topics (133 unique)    1.7s
+  train q+r    bm25 0.0413  dense 0.2463
+    1b_query+step__r           133 topics (133 unique)    0.7s
+  train r      bm25 0.0385  dense 0.2446
+    1b_query+step__q+h         133 topics (133 unique)    1.5s
+  train q+h    bm25 0.0241  dense 0.2439
+    1b_query+step__h           133 topics (133 unique)    0.7s
+  train h      bm25 0.0168  dense 0.2647
+    1b_query+step__q+r+h       133 topics (133 unique)    2.1s
+  train q+r+h  bm25 0.0309  dense 0.2482
+    1b_query+step__q            52 topics (52 unique)    0.4s
+    1b_query+step__q+r          52 topics (52 unique)    0.6s
+    1b_query+step__r            52 topics (52 unique)    0.3s
+    1b_query+step__q+h          52 topics (52 unique)    0.6s
+    1b_query+step__h            52 topics (52 unique)    0.3s
+    1b_query+step__q+r+h        52 topics (52 unique)    0.8s
+    index: 169,552 docs, 32s (lucene)
+[t1/hsm] indexes ready (33s)
+    1b_query+step__q           254 topics (254 unique)    2.1s
+  train q      bm25 0.2066  dense 0.2620
+    1b_query+step__q+r         254 topics (254 unique)    2.9s
+  train q+r    bm25 0.2783  dense 0.3167
+    1b_query+step__r           254 topics (254 unique)    1.2s
+  train r      bm25 0.2978  dense 0.2731
+    1b_query+step__q+h         254 topics (254 unique)    3.0s
+  train q+h    bm25 0.2941  dense 0.3273
+    1b_query+step__h           254 topics (254 unique)    1.3s
+  train h      bm25 0.3194  dense 0.3104
+    1b_query+step__q+r+h       254 topics (254 unique)    4.0s
+  train q+r+h  bm25 0.3099  dense 0.3349
+    1b_query+step__q           105 topics (105 unique)    0.7s
+    1b_query+step__q+r         105 topics (105 unique)    1.1s
+    1b_query+step__r           105 topics (105 unique)    0.5s
+    1b_query+step__q+h         105 topics (105 unique)    1.1s
+    1b_query+step__h           105 topics (105 unique)    0.5s
+    1b_query+step__q+r+h       105 topics (105 unique)    1.5s
+    index: 200,252 docs, 58s (lucene)
+[t1/history] indexes ready (59s)
+    1b_query+step__q          1421 topics (1421 unique)   13.4s
+  train q      bm25 0.0461  dense 0.1964
+    1b_query+step__q+r        1421 topics (1421 unique)   19.5s
+  train q+r    bm25 0.0608  dense 0.2268
+    1b_query+step__r          1421 topics (1421 unique)    7.5s
+  train r      bm25 0.0762  dense 0.2147
+    1b_query+step__q+h        1421 topics (1421 unique)   20.1s
+  train q+h    bm25 0.0578  dense 0.2333
+    1b_query+step__h          1421 topics (1421 unique)    8.5s
+  train h      bm25 0.0713  dense 0.2423
+    1b_query+step__q+r+h      1421 topics (1421 unique)   26.4s
+  train q+r+h  bm25 0.0638  dense 0.2422
+    1b_query+step__q           636 topics (636 unique)    6.7s
+    1b_query+step__q+r         636 topics (636 unique)    9.4s
+    1b_query+step__r           636 topics (636 unique)    3.4s
+    1b_query+step__q+h         636 topics (636 unique)    9.7s
+    1b_query+step__h           636 topics (636 unique)    3.7s
+    1b_query+step__q+r+h       636 topics (636 unique)   12.6s
+missing generations: 0; wrote ../research/runs_v13/maxp/t1/results.json
+=== exit 0
+=== 16:06:16 ALLDONE

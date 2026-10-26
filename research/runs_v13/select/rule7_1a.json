@@ -1,0 +1,82 @@
+{
+ "rule": "7",
+ "cond": "1a",
+ "baseline": "rule6_q+r+h",
+ "margin": 0.005,
+ "best_on_train": "rule6_q+r+h",
+ "train_bootstrap_best_minus_baseline": null,
+ "adopted": false,
+ "chosen": "rule6_q+r+h",
+ "dev_bootstrap_chosen_minus_baseline": null,
+ "candidates": {
+  "rule6_q+r+h": {
+   "report": "../research/runs_v13/qexp/t1/hybrid_1a.json",
+   "condition": "1a__q+r+h",
+   "cfg": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "minmax",
+    "alpha": 0.6
+   },
+   "train": 0.2949,
+   "dev": 0.3258,
+   "bm25_train": 0.1323,
+   "bm25_dev": 0.162,
+   "dense_train": 0.2583,
+   "dense_dev": 0.2899
+  },
+  "maxp_q": {
+   "report": "../research/runs_v13/maxp/t1/hybrid_1a.json",
+   "condition": "1a__q",
+   "cfg": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "minmax",
+    "alpha": 0.8
+   },
+   "train": 0.2257,
+   "dev": 0.2666,
+   "bm25_train": 0.1005,
+   "bm25_dev": 0.1127,
+   "dense_train": 0.218,
+   "dense_dev": 0.2653
+  },
+  "maxp_q+r+h": {
+   "report": "../research/runs_v13/maxp/t1/hybrid_1a.json",
+   "condition": "1a__q+r+h",
+   "cfg": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "minmax",
+    "alpha": 0.8
+   },
+   "train": 0.2714,
+   "dev": 0.3174,
+   "bm25_train": 0.1323,
+   "bm25_dev": 0.162,
+   "dense_train": 0.2606,
+   "dense_dev": 0.3031
+  }
+ },
+ "dev_bootstrap_each_minus_baseline": {
+  "maxp_q": {
+   "diff": -0.0592,
+   "ci95": [
+    -0.0823,
+    -0.0357
+   ],
+   "p_le_0": 1.0
+  },
+  "maxp_q+r+h": {
+   "diff": -0.0084,
+   "ci95": [
+    -0.0207,
+    0.0039
+   ],
+   "p_le_0": 0.9087
+  }
+ }
+}

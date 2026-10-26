@@ -1,0 +1,73 @@
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+=== 15:45:49 python rerank_ce.py --track 2 --conditions 2a_current__q+r+h --query-cond 2a_current --hybrid ../research/runs_v13/qexp/t2/hybrid_2a_current.json --bm25 ../research/runs_v13/qexp/t2/bm25/runs --dense ../research/runs_v13/qexp/t2/dense/runs --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out ../research/runs_v13/ce_final
+  [2a_current__q+r+h/train/drones] 588 pairs, 10s (58/s)
+  [2a_current__q+r+h/train/politics] 521 pairs, 8s (69/s)
+  [2a_current__q+r+h/train/law] 615 pairs, 8s (75/s)
+  [2a_current__q+r+h/train/medicalsciences] 494 pairs, 8s (61/s)
+  [2a_current__q+r+h/train/hardware] 724 pairs, 11s (67/s)
+  [2a_current__q+r+h/train/economics] 703 pairs, 10s (67/s)
+  [2a_current__q+r+h/train/psychology] 774 pairs, 11s (71/s)
+  [2a_current__q+r+h/train/biology] 647 pairs, 5s (137/s)
+  [2a_current__q+r+h/train/sustainable_living] 685 pairs, 9s (77/s)
+  [2a_current__q+r+h/train/robotics] 717 pairs, 8s (88/s)
+  [2a_current__q+r+h/train/earth_science] 738 pairs, 7s (109/s)
+  [2a_current__q+r+h/dev/drones] 759 pairs, 11s (70/s)
+  [2a_current__q+r+h/dev/politics] 930 pairs, 15s (62/s)
+  [2a_current__q+r+h/dev/law] 1332 pairs, 21s (64/s)
+  [2a_current__q+r+h/dev/medicalsciences] 701 pairs, 12s (61/s)
+  [2a_current__q+r+h/dev/hardware] 1239 pairs, 17s (71/s)
+  [2a_current__q+r+h/dev/economics] 1960 pairs, 28s (71/s)
+  [2a_current__q+r+h/dev/psychology] 2506 pairs, 35s (72/s)
+  [2a_current__q+r+h/dev/biology] 2541 pairs, 18s (143/s)
+  [2a_current__q+r+h/dev/sustainable_living] 1850 pairs, 21s (89/s)
+  [2a_current__q+r+h/dev/robotics] 1689 pairs, 20s (86/s)
+  [2a_current__q+r+h/dev/earth_science] 2962 pairs, 25s (118/s)
+== t2 2a_current__q+r+h: N=0: train 0.3671 dev 0.3100  N=10: train 0.3604 dev 0.3208  N=20: train 0.3578 dev 0.3176  N=50: train 0.3456 dev 0.3138  -> chosen N=10 on train; dev CE-hybrid {'diff': 0.0108, 'ci95': [-0.001, 0.0228], 'p_le_0': 0.0355}
+=== exit 0
+=== 15:51:34 python reason_rerank.py --track 2 --conditions 2a_current__q+r+h --query-cond 2a_current --hybrid ../research/runs_v13/qexp/t2/hybrid_2a_current.json --bm25 ../research/runs_v13/qexp/t2/bm25/runs --dense ../research/runs_v13/qexp/t2/dense/runs --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --domains drones --splits dev --out ../research/runs_v13/reason_speedtest
+Traceback (most recent call last):
+  File "/home/timur_rk/semeval-reteco/reteco-research/scripts/reason_rerank.py", line 225, in <module>
+    main()
+    ~~~~^^
+  File "/home/timur_rk/semeval-reteco/reteco-research/scripts/reason_rerank.py", line 145, in main
+    emb = Embedder(ckpt, a.bits, a.max_len)
+  File "/home/timur_rk/semeval-reteco/reteco-research/scripts/reason_rerank.py", line 70, in __init__
+    self.model = AutoModel.from_pretrained(ckpt, **kw).eval()
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/home/timur_rk/semeval-reteco/.venv/lib/python3.14/site-packages/transformers/models/auto/auto_factory.py", line 411, in from_pretrained
+    return model_class.from_pretrained(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        pretrained_model_name_or_path, *model_args, config=config, **hub_kwargs, **kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/timur_rk/semeval-reteco/.venv/lib/python3.14/site-packages/transformers/modeling_utils.py", line 4192, in from_pretrained
+    device_map = check_and_set_device_map(device_map)  # warn, error and fix the device map
+  File "/home/timur_rk/semeval-reteco/.venv/lib/python3.14/site-packages/transformers/integrations/accelerate.py", line 137, in check_and_set_device_map
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Using a `device_map`, `tp_plan`, `torch.device` context manager or setting `torch.set_default_device(device)` requires `accelerate`. You can install it with `pip install accelerate`
+=== exit 1
+=== 15:51:44 ALLDONE

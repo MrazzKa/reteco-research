@@ -1,0 +1,93 @@
+=== 15:45:35 python hybrid.py --track 1 --conditions 1a__q 1a__q+r 1a__r 1a__q+h 1a__h 1a__q+r+h --bm25 ../research/runs_v13/maxp/t1/bm25/runs --dense ../research/runs_v13/maxp/t1/dense/runs --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out ../research/runs_v13/maxp/t1/hybrid_1a.json
+
+== track 1 1a__q (dense: 1a__q) — train 13 dom, dev 13 dom
+  bm25             train 0.1005  dev 0.1127   kind=bm25
+  dense            train 0.2180  dev 0.2653   kind=dense
+  rerank           train 0.1879  dev 0.2375   kind=rerank
+  linear*          train 0.2257  dev 0.2666   kind=linear|kb=100|kd=100|norm=minmax|alpha=0.8
+  pool_rerank*     train 0.2180  dev 0.2653   kind=pool_rerank|kb=100|kd=100
+  rrf*             train 0.1949  dev 0.2212   kind=rrf|kb=50|kd=50|c=10
+  rrf_c60_100+100  train 0.1856  dev 0.2117   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.1539, 'ci95': [0.1195, 0.1908], 'p_le_0': 0.0}
+  dev rrf* - bm25: {'diff': 0.1085, 'ci95': [0.0869, 0.1297], 'p_le_0': 0.0}
+  dev linear* - rerank: {'diff': 0.0291, 'ci95': [0.0096, 0.0489], 'p_le_0': 0.002}
+  dev dense - bm25: {'diff': 0.1526, 'ci95': [0.1149, 0.1918], 'p_le_0': 0.0}
+  dev rerank - bm25: {'diff': 0.1248, 'ci95': [0.0854, 0.1692], 'p_le_0': 0.0}
+  dev linear* - dense: {'diff': 0.0013, 'ci95': [-0.0101, 0.012], 'p_le_0': 0.404}
+
+== track 1 1a__q+r (dense: 1a__q+r) — train 13 dom, dev 13 dom
+  bm25             train 0.1328  dev 0.1559   kind=bm25
+  dense            train 0.2524  dev 0.2958   kind=dense
+  rerank           train 0.2391  dev 0.2667   kind=rerank
+  linear*          train 0.2645  dev 0.3019   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.8
+  pool_rerank*     train 0.2524  dev 0.2958   kind=pool_rerank|kb=100|kd=100
+  rrf*             train 0.2298  dev 0.2711   kind=rrf|kb=50|kd=50|c=10
+  rrf_c60_100+100  train 0.2219  dev 0.2570   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.146, 'ci95': [0.1125, 0.1816], 'p_le_0': 0.0}
+  dev rrf* - bm25: {'diff': 0.1152, 'ci95': [0.0883, 0.1434], 'p_le_0': 0.0}
+  dev linear* - rerank: {'diff': 0.0351, 'ci95': [0.0122, 0.0596], 'p_le_0': 0.0012}
+  dev dense - bm25: {'diff': 0.1399, 'ci95': [0.1073, 0.1744], 'p_le_0': 0.0}
+  dev rerank - bm25: {'diff': 0.1108, 'ci95': [0.08, 0.1436], 'p_le_0': 0.0}
+  dev linear* - dense: {'diff': 0.006, 'ci95': [-0.0049, 0.0169], 'p_le_0': 0.1464}
+
+== track 1 1a__r (dense: 1a__r) — train 13 dom, dev 13 dom
+  bm25             train 0.1491  dev 0.1847   kind=bm25
+  dense            train 0.2361  dev 0.2703   kind=dense
+  rerank           train 0.2416  dev 0.2572   kind=rerank
+  linear*          train 0.2573  dev 0.2771   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.7
+  pool_rerank*     train 0.2361  dev 0.2703   kind=pool_rerank|kb=100|kd=100
+  rrf*             train 0.2324  dev 0.2603   kind=rrf|kb=50|kd=50|c=10
+  rrf_c60_100+100  train 0.2261  dev 0.2479   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.0924, 'ci95': [0.0647, 0.1206], 'p_le_0': 0.0}
+  dev rrf* - bm25: {'diff': 0.0756, 'ci95': [0.0548, 0.0973], 'p_le_0': 0.0}
+  dev linear* - rerank: {'diff': 0.0199, 'ci95': [0.0013, 0.0403], 'p_le_0': 0.0168}
+  dev dense - bm25: {'diff': 0.0856, 'ci95': [0.055, 0.1169], 'p_le_0': 0.0}
+  dev rerank - bm25: {'diff': 0.0725, 'ci95': [0.044, 0.1018], 'p_le_0': 0.0}
+  dev linear* - dense: {'diff': 0.0068, 'ci95': [-0.0084, 0.022], 'p_le_0': 0.1969}
+
+== track 1 1a__q+h (dense: 1a__q+h) — train 13 dom, dev 13 dom
+  bm25             train 0.1196  dev 0.1422   kind=bm25
+  dense            train 0.2522  dev 0.3012   kind=dense
+  rerank           train 0.2406  dev 0.2605   kind=rerank
+  linear*          train 0.2665  dev 0.3039   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.8
+  pool_rerank*     train 0.2522  dev 0.3012   kind=pool_rerank|kb=100|kd=100
+  rrf*             train 0.2280  dev 0.2544   kind=rrf|kb=50|kd=50|c=10
+  rrf_c60_100+100  train 0.2210  dev 0.2400   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.1617, 'ci95': [0.1294, 0.1957], 'p_le_0': 0.0}
+  dev rrf* - bm25: {'diff': 0.1122, 'ci95': [0.0901, 0.1352], 'p_le_0': 0.0}
+  dev linear* - rerank: {'diff': 0.0435, 'ci95': [0.0206, 0.0685], 'p_le_0': 0.0}
+  dev dense - bm25: {'diff': 0.159, 'ci95': [0.1261, 0.1942], 'p_le_0': 0.0}
+  dev rerank - bm25: {'diff': 0.1183, 'ci95': [0.0876, 0.1498], 'p_le_0': 0.0}
+  dev linear* - dense: {'diff': 0.0027, 'ci95': [-0.0079, 0.0133], 'p_le_0': 0.3116}
+
+== track 1 1a__h (dense: 1a__h) — train 13 dom, dev 13 dom
+  bm25             train 0.1238  dev 0.1570   kind=bm25
+  dense            train 0.2330  dev 0.2810   kind=dense
+  rerank           train 0.2289  dev 0.2612   kind=rerank
+  linear*          train 0.2549  dev 0.2896   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.7
+  pool_rerank*     train 0.2330  dev 0.2810   kind=pool_rerank|kb=100|kd=100
+  rrf*             train 0.2260  dev 0.2469   kind=rrf|kb=50|kd=50|c=10
+  rrf_c60_100+100  train 0.2157  dev 0.2280   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.1326, 'ci95': [0.1049, 0.1619], 'p_le_0': 0.0}
+  dev rrf* - bm25: {'diff': 0.0899, 'ci95': [0.0701, 0.1108], 'p_le_0': 0.0}
+  dev linear* - rerank: {'diff': 0.0284, 'ci95': [0.0086, 0.0508], 'p_le_0': 0.0011}
+  dev dense - bm25: {'diff': 0.124, 'ci95': [0.0942, 0.1559], 'p_le_0': 0.0}
+  dev rerank - bm25: {'diff': 0.1042, 'ci95': [0.0804, 0.1294], 'p_le_0': 0.0}
+  dev linear* - dense: {'diff': 0.0086, 'ci95': [-0.0065, 0.0235], 'p_le_0': 0.1293}
+
+== track 1 1a__q+r+h (dense: 1a__q+r+h) — train 13 dom, dev 13 dom
+  bm25             train 0.1323  dev 0.1620   kind=bm25
+  dense            train 0.2606  dev 0.3031   kind=dense
+  rerank           train 0.2468  dev 0.2816   kind=rerank
+  linear*          train 0.2714  dev 0.3174   kind=linear|kb=100|kd=100|norm=minmax|alpha=0.8
+  pool_rerank*     train 0.2606  dev 0.3031   kind=pool_rerank|kb=100|kd=100
+  rrf*             train 0.2394  dev 0.2803   kind=rrf|kb=50|kd=50|c=10
+  rrf_c60_100+100  train 0.2292  dev 0.2649   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.1554, 'ci95': [0.1231, 0.1898], 'p_le_0': 0.0}
+  dev rrf* - bm25: {'diff': 0.1183, 'ci95': [0.0909, 0.1473], 'p_le_0': 0.0}
+  dev linear* - rerank: {'diff': 0.0358, 'ci95': [0.0166, 0.057], 'p_le_0': 0.0001}
+  dev dense - bm25: {'diff': 0.1411, 'ci95': [0.1081, 0.1774], 'p_le_0': 0.0}
+  dev rerank - bm25: {'diff': 0.1196, 'ci95': [0.0885, 0.1532], 'p_le_0': 0.0}
+  dev linear* - dense: {'diff': 0.0143, 'ci95': [0.0014, 0.0268], 'p_le_0': 0.0134}
+wrote ../research/runs_v13/maxp/t1/hybrid_1a.json
+=== exit 0

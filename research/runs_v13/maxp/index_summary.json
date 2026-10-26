@@ -1,0 +1,26 @@
+{
+ "t1": {
+  "model": "bge-small",
+  "domains": 13,
+  "n_docs": 1167159,
+  "docs_with_extra_passages": 167074,
+  "extra_passages": 878611,
+  "docs_capped": 331,
+  "encode_s": 1655.9,
+  "tokenize_s": 218.4,
+  "wall_s": 1912.8,
+  "cos_min": 0.99933
+ },
+ "t2": {
+  "model": "bge-base",
+  "domains": 11,
+  "n_docs": 507141,
+  "docs_with_extra_passages": 15734,
+  "extra_passages": 31575,
+  "docs_capped": 3,
+  "encode_s": 130.9,
+  "tokenize_s": 17.0,
+  "wall_s": 154.6,
+  "cos_min": 0.99954
+ }
+}

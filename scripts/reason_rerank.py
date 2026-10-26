@@ -2,9 +2,10 @@
 """A reasoning embedder as a second signal over the hybrid pool (LOG rule 8).
 
 The frozen hybrid (`linear*` of a hybrid.py report) gives each topic a ranked pool (top
---pool). A reasoning-oriented embedder (default ReasonEmbed-Qwen3-4B, 4-bit NF4 through
-bitsandbytes, last-token pooling, instruction on the query side as in its model card)
-scores every pool document. Ways of using the score, chosen on TRAIN (N = 0 / w = 0, i.e.
+--pool). A reasoning-oriented embedder (default ReasonEmbed-Qwen3-4B; FP8 through vLLM in
+the LLM venv via embed_vllm.py, or 4-bit NF4 through bitsandbytes with --backend bnb;
+last-token pooling, instruction on the query side as in its model card) scores every pool
+document. Ways of using the score, chosen on TRAIN (N = 0 / w = 0, i.e.
 "do not use it", is always a candidate):
 
   top N reordered by the embedder score (N in 10, 20, 50, 100; the rest keeps hybrid order)
@@ -84,6 +85,25 @@ class Embedder:
         return out
 
 
+def embed(a, ckpt, texts):
+    """L2-normalised float32 vectors for texts, through the chosen backend."""
+    if not texts:
+        return np.zeros((0, 1), dtype=np.float32)
+    if a.backend == "bnb":
+        if not hasattr(a, "_emb"):
+            a._emb = Embedder(ckpt, a.bits, a.max_len)
+        return a._emb.encode(texts, a.batch)
+    import subprocess
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        inp, out = os.path.join(tmp, "texts.json"), os.path.join(tmp, "vecs.npy")
+        json.dump(texts, open(inp, "w"))
+        subprocess.run([os.path.expanduser("~/semeval-reteco/.venv-llm/bin/python"),
+                        os.path.join(os.path.dirname(os.path.abspath(__file__)), "embed_vllm.py"),
+                        "--model", ckpt, "--inp", inp, "--out", out, "--max-len", str(a.max_len)], check=True)
+        return np.load(out)
+
+
 def load_cache(path):
     if os.path.exists(path + ".npy"):
         ids = json.load(open(path + ".ids.json"))
@@ -128,7 +148,9 @@ def main():
     ap.add_argument("--data", required=True)
     ap.add_argument("--kit", required=True)
     ap.add_argument("--model", default="reasonembed-4b", choices=sorted(MODELS))
-    ap.add_argument("--bits", type=int, default=4, choices=(4, 8, 16))
+    ap.add_argument("--backend", default="vllm", choices=("vllm", "bnb"),
+                    help="vllm: FP8 through embed_vllm.py in the LLM venv; bnb: bitsandbytes in this process")
+    ap.add_argument("--bits", type=int, default=4, choices=(4, 8, 16), help="bnb backend only")
     ap.add_argument("--max-len", type=int, default=512)
     ap.add_argument("--pool", type=int, default=100)
     ap.add_argument("--batch", type=int, default=8)
@@ -141,13 +163,11 @@ def main():
     tiebreak.set_mode(a.tiebreak)
     ndcg = ndcg_fn(a.kit)
     ckpt = MODELS[a.model]
-    t0 = time.time()
-    emb = Embedder(ckpt, a.bits, a.max_len)
-    print(f"model {ckpt} {a.bits}-bit loaded in {time.time() - t0:.0f}s", flush=True)
     hyb = json.load(open(a.hybrid))
     doms = (T1 if a.track == 1 else T2) if a.domains == ["all"] else a.domains
     sub = "track1_tempo" if a.track == 1 else "track2_recor"
-    cdir = os.path.join(a.out, "cache", f"{a.model}_{a.bits}bit_L{a.max_len}", f"t{a.track}")
+    tag = "fp8" if a.backend == "vllm" else f"{a.bits}bit"
+    cdir = os.path.join(a.out, "cache", f"{a.model}_{tag}_L{a.max_len}", f"t{a.track}")
     os.makedirs(cdir, exist_ok=True)
     rpath = os.path.join(a.out, f"t{a.track}_{a.model}.json")
     report = json.load(open(rpath)) if os.path.exists(rpath) else {}
@@ -157,7 +177,9 @@ def main():
         cfg = hc["systems"]["linear*"]["cfg"]
         dcond = hc["dense_condition"]
         qcond = qc or cond
-        per, stats = {}, {"docs_encoded": 0, "encode_s": 0.0}
+        stats = {"docs_encoded": 0, "queries_encoded": 0, "encode_s": 0.0, "backend": a.backend}
+        # phase 1: pools, missing documents, query texts
+        per, caches, jobs = {}, {}, []
         for split in a.splits:
             per[split] = {}
             for dom in doms:
@@ -171,24 +193,46 @@ def main():
                 if split == "train" and len(qids) > a.train_per_domain:
                     qids = sorted(random.Random(20260921).sample(qids, a.train_per_domain))
                 pools = {q: order(fused(Query(bm.get(q, []), de.get(q, [])), cfg))[:a.pool] for q in qids}
-                dpath = os.path.join(cdir, f"docs_{dom}")
-                dc = load_cache(dpath)
-                need = sorted({d for q in qids for d, _ in pools[q]} - set(dc))
-                if need:
-                    texts = fetch(a.data, a.track, dom, set(need))
-                    t1 = time.time()
-                    vec = emb.encode([texts.get(d, "")[:4000] for d in need], a.batch)
-                    stats["encode_s"] += time.time() - t1
-                    stats["docs_encoded"] += len(need)
-                    dc.update(zip(need, vec))
-                    save_cache(dpath, dc)
-                    print(f"  [{cond}/{split}/{dom}] {len(need)} docs, {time.time() - t1:.0f}s "
-                          f"({len(need) / max(time.time() - t1, 1e-9):.1f}/s)", flush=True)
+                if dom not in caches:
+                    caches[dom] = load_cache(os.path.join(cdir, f"docs_{dom}"))
                 ins = instruction(a.track, cond, dom)
-                qv = emb.encode([f"Instruct: {ins}\nQuery: {clean(qtext[q])}" for q in qids], a.batch)
-                sc = {q: {d: float(np.dot(qv[i], dc[d].astype(np.float32))) for d, _ in pools[q]}
-                      for i, q in enumerate(qids)}
-                per[split][dom] = (qids, pools, sc, gold)
+                per[split][dom] = (qids, pools, gold, [f"Instruct: {ins}\nQuery: {clean(qtext[q])}" for q in qids])
+        need = {dom: sorted({d for sp in per for q in per[sp].get(dom, ([],))[0] for d, _ in per[sp][dom][1][q]}
+                            - set(caches[dom])) for dom in caches}
+        texts, index = [], []
+        for dom, ds in need.items():
+            if ds:
+                got = fetch(a.data, a.track, dom, set(ds))
+                texts += [got.get(d, "")[:4000] for d in ds]
+                index += [("doc", dom, d) for d in ds]
+        for sp in per:
+            for dom, (qids, _, _, qt) in per[sp].items():
+                texts += qt
+                index += [("q", sp, dom, q) for q in qids]
+        # phase 2: embed everything in one call
+        t1 = time.time()
+        vec = embed(a, ckpt, texts)
+        stats["encode_s"] = round(time.time() - t1, 1)
+        stats["docs_encoded"] = sum(1 for x in index if x[0] == "doc")
+        stats["queries_encoded"] = sum(1 for x in index if x[0] == "q")
+        print(f"  [{cond}] {stats['docs_encoded']} docs + {stats['queries_encoded']} queries in "
+              f"{stats['encode_s']:.0f}s ({len(texts) / max(stats['encode_s'], 1e-9):.1f}/s)", flush=True)
+        qv = {}
+        for x, v in zip(index, vec):
+            if x[0] == "doc":
+                caches[x[1]][x[2]] = v
+            else:
+                qv[(x[1], x[2], x[3])] = v
+        for dom, ds in need.items():
+            if ds:
+                save_cache(os.path.join(cdir, f"docs_{dom}"), caches[dom])
+        # phase 3: scores
+        for sp in per:
+            for dom, (qids, pools, gold, _) in list(per[sp].items()):
+                dc = caches[dom]
+                sc = {q: {d: float(np.dot(qv[(sp, dom, q)], dc[d].astype(np.float32))) for d, _ in pools[q]}
+                      for q in qids}
+                per[sp][dom] = (qids, pools, sc, gold)
 
         def evaluate(split, how):
             out = {}
@@ -196,13 +240,13 @@ def main():
                 out[dom] = [ndcg(rank(pools[q], how, sc[q]), gold[q], 10) for q in qids]
             return out
 
-        hows = [("none", 0)] + [("top", n) for n in DEPTHS] + [("interp", w) for w in WEIGHTS]
+        hows = [("none", 0)] + [("top", n) for n in DEPTHS if n <= a.pool] + [("interp", w) for w in WEIGHTS]
         res = {}
         for how in hows:
             r = {s: evaluate(s, how) for s in a.splits}
             res[how] = {s: (round(sum(sum(v) / len(v) for v in r[s].values()) / len(r[s]), 4), r[s])
                         for s in a.splits}
-        row = {"checkpoint": ckpt, "bits": a.bits, "max_len": a.max_len, "pool": a.pool, "hybrid_cfg": cfg,
+        row = {"checkpoint": ckpt, "quant": tag, "max_len": a.max_len, "pool": a.pool, "hybrid_cfg": cfg,
                "query_condition": qcond, "train_topics_per_domain_max": a.train_per_domain, **stats,
                "by_how": {f"{k}={p}": {s: v[0] for s, v in r.items()} for (k, p), r in res.items()}}
         if "train" in a.splits and "dev" in a.splits:

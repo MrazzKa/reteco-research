@@ -1,0 +1,96 @@
+{
+ "rule": "7",
+ "cond": "2a_current",
+ "baseline": "rule6_q+r+h",
+ "margin": 0.005,
+ "best_on_train": "maxp_q+r+h",
+ "train_bootstrap_best_minus_baseline": {
+  "diff": 0.014,
+  "ci95": [
+   0.0103,
+   0.0177
+  ],
+  "p_le_0": 0.0
+ },
+ "adopted": true,
+ "chosen": "maxp_q+r+h",
+ "dev_bootstrap_chosen_minus_baseline": {
+  "diff": 0.0219,
+  "ci95": [
+   0.0149,
+   0.0295
+  ],
+  "p_le_0": 0.0
+ },
+ "candidates": {
+  "rule6_q+r+h": {
+   "report": "../research/runs_v13/qexp/t2/hybrid_2a_current.json",
+   "condition": "2a_current__q+r+h",
+   "cfg": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "train": 0.3367,
+   "dev": 0.31,
+   "bm25_train": 0.2959,
+   "bm25_dev": 0.2869,
+   "dense_train": 0.2943,
+   "dense_dev": 0.2652
+  },
+  "maxp_q": {
+   "report": "../research/runs_v13/maxp/t2/hybrid_2a_current.json",
+   "condition": "2a_current__q",
+   "cfg": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "minmax",
+    "alpha": 0.7
+   },
+   "train": 0.2989,
+   "dev": 0.2738,
+   "bm25_train": 0.1665,
+   "bm25_dev": 0.1759,
+   "dense_train": 0.2783,
+   "dense_dev": 0.2581
+  },
+  "maxp_q+r+h": {
+   "report": "../research/runs_v13/maxp/t2/hybrid_2a_current.json",
+   "condition": "2a_current__q+r+h",
+   "cfg": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "train": 0.3507,
+   "dev": 0.3319,
+   "bm25_train": 0.2959,
+   "bm25_dev": 0.2869,
+   "dense_train": 0.3187,
+   "dense_dev": 0.2933
+  }
+ },
+ "dev_bootstrap_each_minus_baseline": {
+  "maxp_q": {
+   "diff": -0.0362,
+   "ci95": [
+    -0.0516,
+    -0.0204
+   ],
+   "p_le_0": 1.0
+  },
+  "maxp_q+r+h": {
+   "diff": 0.0219,
+   "ci95": [
+    0.0149,
+    0.0295
+   ],
+   "p_le_0": 0.0
+  }
+ }
+}
