@@ -1004,3 +1004,14 @@ conclusion: Unlike the LLM expansion, the reasoning embedder helps the StackExch
   ones, so its gain is not only BRIGHT exposure (caveat stays: its training data are BRIGHT-style). It also
   replaces the cross-encoder's role on StackExchange (0.278 with the week-4 CE system → 0.296).
   Track-2 current-turn system: query reasoning + MaxP hybrid + ReasonEmbed (w 0.8 over the top 50): dev 0.3901.
+
+## 2026-10-26 17:34–19:01 — rule 8 result, 1a: ReasonEmbed over the top 50 — adopted
+input: q+r+h hybrid (`qexp/t1/hybrid_1a.json`); query = original 1a query (HTML stripped) with the instruction.
+cost: 34,417 documents + 909 queries, 86 min (Track-1 documents fill the 512-token window more often).
+result (train subsample / dev): none 0.2823 / 0.3258 · top-N N=10 0.2737/0.3275, N=20 0.2888/0.3431,
+  N=50 0.2893/0.3538 · interpolation w=0.5 0.3024/0.3553, 0.7 0.3072/0.3647, **w=0.8 0.3078/0.3667**, 0.9
+  0.3034/0.3631. Best on train w=0.8; train − none +0.0254 [+0.0073, +0.0448] → **adopted**. Dev − none +0.0409
+  [+0.0190, +0.0639]; better in 12/13 domains (hsm −0.025; largest history +0.098, monero +0.097, economics +0.083).
+conclusion: The reasoning embedder also helps Track 1, where last week's cross-encoder hurt at every depth.
+  Pure reordering of the top 10 is slightly harmful on train; mixing its score with the hybrid's (w 0.8) is best on
+  both tracks.
