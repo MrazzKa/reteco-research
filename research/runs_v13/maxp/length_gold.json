@@ -1,0 +1,123 @@
+{
+ "drones": {
+  "docs": 16381,
+  "long_docs": 608,
+  "gold": 146,
+  "gold_and_long": 1,
+  "share_long_that_is_gold": 0.002,
+  "share_gold_that_is_long": 0.007,
+  "share_corpus_long": 0.0371,
+  "dense_q_gain_train": -0.0071,
+  "dense_q_gain_dev": 0.0
+ },
+ "politics": {
+  "docs": 16712,
+  "long_docs": 1057,
+  "gold": 191,
+  "gold_and_long": 14,
+  "share_long_that_is_gold": 0.013,
+  "share_gold_that_is_long": 0.073,
+  "share_corpus_long": 0.0632,
+  "dense_q_gain_train": 0.0044,
+  "dense_q_gain_dev": -0.0037
+ },
+ "law": {
+  "docs": 20027,
+  "long_docs": 930,
+  "gold": 213,
+  "gold_and_long": 9,
+  "share_long_that_is_gold": 0.01,
+  "share_gold_that_is_long": 0.042,
+  "share_corpus_long": 0.0464,
+  "dense_q_gain_train": 0.001,
+  "dense_q_gain_dev": 0.003
+ },
+ "medicalsciences": {
+  "docs": 23297,
+  "long_docs": 2221,
+  "gold": 170,
+  "gold_and_long": 4,
+  "share_long_that_is_gold": 0.002,
+  "share_gold_that_is_long": 0.024,
+  "share_corpus_long": 0.0953,
+  "dense_q_gain_train": -0.0085,
+  "dense_q_gain_dev": -0.0032
+ },
+ "hardware": {
+  "docs": 26308,
+  "long_docs": 1219,
+  "gold": 181,
+  "gold_and_long": 3,
+  "share_long_that_is_gold": 0.002,
+  "share_gold_that_is_long": 0.017,
+  "share_corpus_long": 0.0463,
+  "dense_q_gain_train": -0.0036,
+  "dense_q_gain_dev": -0.008
+ },
+ "economics": {
+  "docs": 50220,
+  "long_docs": 2546,
+  "gold": 320,
+  "gold_and_long": 137,
+  "share_long_that_is_gold": 0.054,
+  "share_gold_that_is_long": 0.428,
+  "share_corpus_long": 0.0507,
+  "dense_q_gain_train": 0.0099,
+  "dense_q_gain_dev": 0.0149
+ },
+ "psychology": {
+  "docs": 52835,
+  "long_docs": 1534,
+  "gold": 310,
+  "gold_and_long": 107,
+  "share_long_that_is_gold": 0.07,
+  "share_gold_that_is_long": 0.345,
+  "share_corpus_long": 0.029,
+  "dense_q_gain_train": 0.0306,
+  "dense_q_gain_dev": 0.0736
+ },
+ "biology": {
+  "docs": 57359,
+  "long_docs": 141,
+  "gold": 232,
+  "gold_and_long": 100,
+  "share_long_that_is_gold": 0.709,
+  "share_gold_that_is_long": 0.431,
+  "share_corpus_long": 0.0025,
+  "dense_q_gain_train": 0.0747,
+  "dense_q_gain_dev": 0.081
+ },
+ "sustainable_living": {
+  "docs": 60792,
+  "long_docs": 1259,
+  "gold": 291,
+  "gold_and_long": 43,
+  "share_long_that_is_gold": 0.034,
+  "share_gold_that_is_long": 0.148,
+  "share_corpus_long": 0.0207,
+  "dense_q_gain_train": 0.0031,
+  "dense_q_gain_dev": 0.0132
+ },
+ "robotics": {
+  "docs": 61961,
+  "long_docs": 3809,
+  "gold": 199,
+  "gold_and_long": 67,
+  "share_long_that_is_gold": 0.018,
+  "share_gold_that_is_long": 0.337,
+  "share_corpus_long": 0.0615,
+  "dense_q_gain_train": 0.0081,
+  "dense_q_gain_dev": 0.0022
+ },
+ "earth_science": {
+  "docs": 121249,
+  "long_docs": 410,
+  "gold": 253,
+  "gold_and_long": 166,
+  "share_long_that_is_gold": 0.405,
+  "share_gold_that_is_long": 0.656,
+  "share_corpus_long": 0.0034,
+  "dense_q_gain_train": 0.1172,
+  "dense_q_gain_dev": 0.0776
+ }
+}

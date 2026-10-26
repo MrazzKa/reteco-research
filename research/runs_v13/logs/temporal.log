@@ -1,0 +1,30 @@
+  [1a__q+r+h/train] pools ready
+  [1a__q+r+h/dev] pools ready
+== 1a__q+r+h: topics with years {'train': {'q': 0.47233691164327, 'q+r': 0.7299752270850537}, 'dev': {'q': 0.4277456647398844, 'q+r': 0.7148362235067437}}
+   none|0.0: train 0.2949 dev 0.3258
+   q|0.05: train 0.2934 dev 0.3253
+   q|0.1: train 0.2924 dev 0.324
+   q|0.2: train 0.2885 dev 0.3177
+   q|0.3: train 0.2819 dev 0.3144
+   q|0.5: train 0.2536 dev 0.2769
+   q+r|0.05: train 0.2943 dev 0.3247
+   q+r|0.1: train 0.2899 dev 0.3239
+   q+r|0.2: train 0.2848 dev 0.3138
+   q+r|0.3: train 0.273 dev 0.3049
+   q+r|0.5: train 0.2248 dev 0.248
+   best on train ('none', 0.0); train boot None; adopted=False
+  [1b_query+step__q+r+h/train] pools ready
+  [1b_query+step__q+r+h/dev] pools ready
+== 1b_query+step__q+r+h: topics with years {'train': {'q': 0.47574221578566256, 'q+r': 0.782404055032585}, 'dev': {'q': 0.45799011532125206, 'q+r': 0.7965403624382208}}
+   none|0.0: train 0.3226 dev 0.3505
+   q|0.05: train 0.3208 dev 0.349
+   q|0.1: train 0.3196 dev 0.3479
+   q|0.2: train 0.3156 dev 0.345
+   q|0.3: train 0.312 dev 0.3426
+   q|0.5: train 0.2873 dev 0.3141
+   q+r|0.05: train 0.3212 dev 0.348
+   q+r|0.1: train 0.3183 dev 0.347
+   q+r|0.2: train 0.3107 dev 0.3374
+   q+r|0.3: train 0.3024 dev 0.3276
+   q+r|0.5: train 0.2527 dev 0.2759
+   best on train ('none', 0.0); train boot None; adopted=False

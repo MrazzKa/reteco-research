@@ -946,3 +946,26 @@ speed: ReasonEmbed-4B is compute-bound on this GPU: 7.2 docs/s with bitsandbytes
   at 13:48 (train margin +0.005 and bootstrap lower bound > 0; "none" allowed).
 disclosure: the speed test (15:51) ran on the 38 dev topics of drones and printed their dev nDCG for every way of
   using the score (none 0.2568, best 0.3182). It was not intended as a measurement; the choice below uses train only.
+
+## 2026-10-26 16:08 — rule 9 (before running): temporal signal inside the Track-1 ranking (step 5)
+system: over the top 100 of the adopted Track-1 system (q+r+h hybrid), score = (1 − w)·minmax(hybrid fused score)
+  + w·T(d), T(d) = share of the query's years y for which the document mentions a year in [y − 1, y + 1]
+  (years 1500–2099 and decades "1990s" expanded; documents fully scanned). Topics without a year keep the hybrid
+  order. Year source ∈ {query text, query + the LLM "reason" text (asked to state the time explicitly)};
+  w ∈ {0.05, 0.1, 0.2, 0.3, 0.5}; "none" allowed. 1a and 1b separately; all train topics.
+choice: best on train, adopted only with train − none ≥ +0.005 and train bootstrap lower bound > 0. Dev once.
+  (The week-3 version — a post-hoc reorder of BM25's top 100 — lost on train; this one is a weighted feature
+  inside the fusion, over a much better pool.)
+
+## 2026-10-26 16:09–16:10 — rule 9 result: temporal signal inside the Track-1 ranking — negative
+command: `python3 temporal_rerank.py --conditions 1a__q+r+h 1b_query+step__q+r+h --query-cond 1a 1b_query+step
+  --hybrid runs_v13/qexp/t1/hybrid_{1a,1b}.json … --llm runs_v13/llm/t1 --out runs_v13/temporal/t1.json`
+  (log `logs/temporal.log`; document-year caches in `temporal/cache/`, git-ignored).
+coverage: topics with at least one year — from the query 47% (train 1a) / 48% (1b); query + LLM reason 73% / 78%.
+result (train / dev): 1a none 0.2949/0.3258; best year feature q|0.05 0.2934/0.3253, q+r|0.05 0.2943/0.3247; every
+  weight lowers train, monotonically in w (w = 0.5: 0.2536 / 0.2248). 1b none 0.3226/0.3505; q+r|0.05
+  0.3212/0.3480 … w = 0.5: 0.2527. Best on train = none → **not adopted** (both conditions).
+conclusion: Second negative result for explicit years on Track 1 (after the week-3 post-hoc reorder). Inside a strong
+  pool, year agreement does not separate gold from the other on-topic documents; the LLM's stated time raises
+  coverage to ~75% of topics but not usefulness. Temporal relevance in TEMPO seems to be carried by content
+  (events, versions, periods described in words), which the expanded query already captures better than years.

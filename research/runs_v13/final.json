@@ -1,0 +1,62 @@
+{
+ "1a": {
+  "system": "BM25 + dense hybrid, query q+r+h",
+  "train": 0.2949,
+  "dev": 0.3258,
+  "week4_system": "bge-small L256 hybrid",
+  "week4_dev": 0.2834,
+  "week4_dev_sha1": 0.2834,
+  "week4_dev_sha1_recomputed": 0.2834,
+  "dev_boot": {
+   "diff": 0.0425,
+   "ci95": [
+    0.0214,
+    0.063
+   ],
+   "p_le_0": 0.0
+  }
+ },
+ "1b_query+step": {
+  "system": "BM25 + dense hybrid, query q+r+h",
+  "train": 0.3226,
+  "dev": 0.3505,
+  "week4_system": "bge-small L256 hybrid",
+  "week4_dev": 0.2865,
+  "week4_dev_sha1": 0.2865,
+  "week4_dev_sha1_recomputed": 0.2865,
+  "dev_boot": {
+   "diff": 0.064,
+   "ci95": [
+    0.0467,
+    0.0817
+   ],
+   "p_le_0": 0.0
+  }
+ },
+ "2a_current": {
+  "system": "BM25 + MaxP dense hybrid, query q+r+h",
+  "train": 0.3507,
+  "dev": 0.3319,
+  "week4_system": "bge-base hybrid + cross-encoder top 50",
+  "week4_dev": 0.3001,
+  "week4_dev_sha1": 0.3003,
+  "week4_dev_sha1_recomputed": 0.3003,
+  "dev_boot": {
+   "diff": 0.0317,
+   "ci95": [
+    0.0133,
+    0.0502
+   ],
+   "p_le_0": 0.0007
+  }
+ },
+ "2a_history": {
+  "system": "BM25 + bge-base hybrid (week 4, not expanded)",
+  "train": 0.4806,
+  "dev": 0.4352,
+  "week4_system": "same",
+  "week4_dev": 0.4342,
+  "week4_dev_sha1": 0.4352,
+  "dev_boot": null
+ }
+}

@@ -5,13 +5,19 @@ Directed Research (INFO 492, University of Arizona) on **SemEval-2027 Task 1 —
 
 Code, experiment log and generated results only. Notes and meeting briefs are kept outside the repo.
 
-**Where things stand (week 4, 2026-10-13):** BM25, dense retrieval over every corpus
-(GPU), a BM25 + dense hybrid tuned on train, a cross-encoder, and an encoder comparison.
-Dev nDCG@10 of the frozen systems chosen on train (LOG rules 1–5; the cross-encoder hurts on Track 1 and with history): Track 1a 0.1127 → 0.2834,
-1b 0.1181 → 0.2865 (bge-small, 256 tokens), Track 2 current 0.1758 → 0.3001 (bge-base hybrid
-+ bge-reranker-v2-m3 on the top 50), +history 0.4034 → 0.4342 (bge-base hybrid). The analysis system (bge-small, 512 tokens; RESULTS section A and the
-case study) scores 0.2956 / 0.2966 / 0.2441 / 0.4242. Tables: `research/RESULTS.md` (section L =
-which system is final and why). Error analysis with examples: `research/cases/retrieval_categories_dev.md`.
+**Where things stand (week 5, 2026-10-26):** every final system now starts from a local LLM
+(Qwen3-4B-Instruct-2507, AWQ 4-bit, vLLM) that writes a short reasoning about the query and a
+hypothetical answer passage; BM25 and the dense encoder search with the query plus both texts, and the
+two lists are fused (weights tuned on train). Dev nDCG@10 of the systems chosen on train (LOG rules 6–9):
+Track 1a 0.2834 → **0.3258**, 1b 0.2865 → **0.3505**, Track 2 current turn 0.3003 → **0.3319**
+(dense side scored per passage, MaxP — see the length caveat in RESULTS section P; without MaxP 0.3100),
++history 0.4352 (unchanged). Not adopted on train: the cross-encoder over the expanded Track-2 list,
+MaxP on Track 1, explicit years on Track 1. Exact score ties are broken by sha1(doc id) since week 5
+(the doc-id order was a hidden use of the id; it changed no final dev number by more than 0.001).
+Tables: `research/RESULTS.md` (sections M–S = week 5). Examples: `research/cases/query_reasoning_dev.md`.
+
+Week 4 for reference: BM25 + dense hybrid, encoder comparison, cross-encoder, error analysis
+(`research/cases/retrieval_categories_dev.md`, RESULTS sections A–L).
 
 ## Layout
 
@@ -20,6 +26,8 @@ semeval-reteco/                  (not a repo)
   RETECO/                        official task repo (read-only; now at eebd377)
   reteco_data_v11/               release v1.1 — use for BOTH tracks (Track 2 is unchanged from v1.0)
   .venv/                         Python 3.14, torch 2.14.1+cu130 (WSL2, RTX 4060)
+  .venv-llm/                     vLLM 0.32.0 (torch 2.13.0+cu130) for llm_expand.py / embed_vllm.py
+  tools/                         zig-cc wrapper + Python headers so triton can compile without gcc/sudo
   reteco-research/               <- this repo
     scripts/                     all code
     research/
@@ -42,6 +50,14 @@ semeval-reteco/                  (not a repo)
         ann/ order/ ce/ ce_bge-base/  ANN vs exact; indexing-order study; cross-encoder (score caches git-ignored)
         logs/                    process logs and the shell queues that produced them
         emb/                     embedding caches (git-ignored; bge-small 1.2 GB per window, bge-base 2.5 GB)
+      runs_v13/                  week 5 (sha1 tie key): bm25/ dense/ hybrid/ ce/ = week-4 systems re-run,
+        tiebreak/                id vs sha1 tie key, tied gold
+        llm/                     LLM generations (git-ignored jsonl; prompts and model in meta.json)
+        qexp/ maxp/              runs and hybrids per query variant, without / with MaxP
+        select/                  rule-6/7 choices (train) with bootstraps; final.json = final systems
+        ce_final/ reason/ temporal/   cross-encoder, ReasonEmbed and year-feature stages
+        recovery/                week-4 gold categories under the new systems
+        emb/                     passage embeddings (git-ignored, 0.7 GB)
 ```
 
 Git-ignored and regenerable: `*.tsv` run files, `*.npy` / `*.ids.json` embedding shards,
@@ -51,7 +67,7 @@ Git-ignored and regenerable: `*.tsv` run files, `*.npy` / `*.ids.json` embedding
 
 | script | purpose |
 | --- | --- |
-| `bm25s_run.py` | BM25 (bm25s, Lucene formula, Snowball + stopwords). `--k` depth, `--splits train dev` from one index, `--conditions`. Ties broken by doc id. |
+| `bm25s_run.py` | BM25 (bm25s, Lucene formula, Snowball + stopwords). `--k` depth, `--splits train dev` from one index, `--conditions`. Ties broken by `tiebreak.key`. |
 | `embed_models.py` | Encoder registry following the model cards (prefixes/instructions, pooling via sentence-transformers config, revision), fp16, OOM fallback. |
 | `dense_index.py` | Chunked, resumable float16 embedding cache per domain, with id-alignment and re-encode validation. |
 | `dense_search.py` | Exact dense retrieval over a cache (float32 on GPU), top 1000, recall@k. |
@@ -60,10 +76,19 @@ Git-ignored and regenerable: `*.tsv` run files, `*.npy` / `*.ids.json` embedding
 | `history_leak.py` | Track 2: history gain on turns with recycled vs new gold. |
 | `order_study.py` | Document order, duplicates, ANN insertion order. |
 | `ann_eval.py` | NGT / FAISS HNSW / FAISS flat vs exact search. |
-| `rerank_ce.py` | Cross-encoder (bge-reranker-v2-m3) over the hybrid list, depth chosen on train. |
 | `id_artifact.py` | Data check: Track-2 ids that reveal gold documents. |
 | `gpu_bench.py` | Encoding throughput by batch size / precision. |
-| `make_results.py` (+ `results_week4.py`) | Regenerate `research/RESULTS.md`. |
+| `tiebreak.py` | Tie key for every ranking script: sha1(doc id) (default) or the doc id (`--tiebreak id`, weeks 1–4). |
+| `tiebreak_compare.py` · `tie_study.py` | Final systems under both tie keys; gold tied with non-gold in the top 10. |
+| `llm_expand.py` | Query reasoning / HyDE generation with a local LLM (vLLM, temperature 0), cached and resumable; LLM venv. |
+| `qexp_search.py` | BM25 + dense retrieval for the six query variants (q, q+r, r, q+h, h, q+r+h); `--passages` = MaxP. |
+| `passage_index.py` | Passage embeddings (510 tokens, overlap 128) beyond the first window; `MaxPIndex` for search. |
+| `select_rule.py` | Applies a pre-registered train rule (margin + train bootstrap) over hybrid reports. |
+| `rerank_ce.py` | Cross-encoder; `--query-cond` to score with the original query; cache per (topic, document). |
+| `reason_rerank.py` · `embed_vllm.py` | Reasoning embedder (ReasonEmbed-4B, FP8 via vLLM or NF4 via bitsandbytes) over the hybrid pool. |
+| `temporal_rerank.py` | Year-agreement feature inside the Track-1 fusion (rule 9; negative). |
+| `pair_recovery.py` · `cases_qreason.py` · `maxp_length_check.py` · `final_systems.py` | Week-5 analyses, examples, final table. |
+| `make_results.py` (+ `results_week4.py`, `results_week5.py`) | Regenerate `research/RESULTS.md`. |
 | `dense_rerank.py` · `dense_run.py` · `ann_index.py` · `query_view.py` | Weeks 2–3 (CPU) tools, kept for the earlier runs. |
 | `week1_run.py` · `aggregate_week1.py` · `run_remaining.py` · `date_*.py` · `get_data.py` · `check_open_questions.py` · `inspect_release.py` · `smoke_sample.py` | Week-1 tools. |
 
@@ -85,8 +110,21 @@ python hybrid.py --track 1 --conditions 1a 1b_query+step --domains iota quant \
 python make_results.py --root .. --out ../research/RESULTS.md
 ```
 
+Week 5 (LLM query expansion; the LLM venv needs `CC` pointing at the zig wrapper, see LOG 2026-10-26 13:33):
+
+```bash
+export CC=~/semeval-reteco/tools/bin/cc PATH=~/semeval-reteco/tools/bin:$PATH
+R=../research/runs_v13
+~/semeval-reteco/.venv-llm/bin/python llm_expand.py --data $D --track 2 --conditions 2a_current \
+    --prompts reason hyde --out $R/llm/t2
+python qexp_search.py --data $D --kit $K --track 2 --cond 2a_current --llm $R/llm/t2 --model bge-base \
+    --max-len 512 --emb ../research/runs_v12/emb --out $R/qexp/t2      # add --passages $R/emb for MaxP
+python hybrid.py --track 2 --conditions 2a_current__q 2a_current__q+r+h --bm25 $R/qexp/t2/bm25/runs \
+    --dense $R/qexp/t2/dense/runs --data $D --kit $K --out $R/qexp/t2/hybrid_2a_current.json
+```
+
 The exact commands of every reported run are in `research/LOG.md` and in the queue scripts
-under `research/runs_v12/logs/*.sh`.
+under `research/runs_v12/logs/*.sh` and `research/runs_v13/logs/*.sh`.
 
 ## Rules
 
@@ -97,14 +135,17 @@ under `research/runs_v12/logs/*.sh`.
 4. Examples are sampled with a fixed seed (20260921) by a rule written before reading them.
    Never resample. Labels proposed by the assistant are preliminary until a human confirms them.
 5. Negative and surprising results are reported as results.
-6. Do not read document ids for ranking (Track-2 ids reveal gold documents — see LOG 2026-10-13).
+6. Do not read document ids for ranking (Track-2 ids reveal gold documents — see LOG 2026-10-13), not even
+   to break ties (sha1 key), and never show ids to the LLM. Track-2 corpus file order also reveals gold.
 
 ## Gotchas
 
 - Track-2 qids are `<conv>_turn_<n>`; the curated sample uses `<conv>#turn<n>`. A mismatch scores silently as 0.
 - The corpus is never split: always retrieve over the full domain corpus, for train and dev.
 - Exact score ties are common in the BRIGHT-derived Track-2 corpora (duplicate passages). Always break
-  ties deterministically (doc id); bm25s's own order depends on the requested depth.
+  ties deterministically with `tiebreak.key` (sha1 of the id); bm25s's own order depends on the requested depth.
+- Track-2 qids (`2_turn_1`, …) repeat across the BRIGHT domains: key anything per (domain, split, qid).
+- In BRIGHT-derived Track-2 corpora long documents are mostly gold (biology 71%); passage-max scoring benefits.
 - Score dense retrieval in float32: fp16 matmul flips near-ties (recall@10 0.98 against exact).
 - Encoders truncate on the right: put the current question before the history.
 - Large jobs one at a time (12 GB RAM): an indexer next to an ANN build was OOM-killed once.

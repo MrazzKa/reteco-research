@@ -102,7 +102,7 @@ def week5(root):
             for cat in ("neither", "dense_only", "bm25_only", "bm25_only|beyond_window", "bm25_only|within", "both"):
                 v = r["by_category"].get(cat)
                 if v:
-                    L.append(f"| {lab} | `{r['cond']}` | {cat} | {v['n']} | {v['hybrid@100']} | {v['hybrid@10']} | "
+                    L.append(f"| {lab} | `{r['cond']}` | {cat.replace('|', ': ').replace('_', ' ')} | {v['n']} | {v['hybrid@100']} | {v['hybrid@10']} | "
                              f"{v['bm25@100']} | {v['dense@100']} |")
         L.append("")
 
@@ -123,6 +123,19 @@ def week5(root):
             for k, x in s["candidates"].items():
                 L.append(f"| {k} | {f4(x['dense_train'])} | {f4(x['dense_dev'])} | {f4(x['train'])} | {f4(x['dev'])} |")
             L.append("")
+        lg = jload(os.path.join(R, "maxp/length_gold.json"))
+        if lg:
+            L += ["Why MaxP helps on Track 2 (checked after the result): plain dense retrieval (query `q`) gains most in "
+                  "BRIGHT domains with very few long documents, where long documents are largely gold.", "",
+                  "| domain | docs | long docs (> 510 tokens) | train+dev gold | gold among long | share of long that is gold | "
+                  "share of gold that is long | dense q MaxP − first window, train | dev |",
+                  "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |"]
+            for dom, x in lg.items():
+                L.append(f"| {dom} | {x['docs']:,} | {x['long_docs']:,} | {x['gold']} | {x['gold_and_long']} | "
+                         f"{x['share_long_that_is_gold']:.2f} | {x['share_gold_that_is_long']:.2f} | "
+                         f"{x['dense_q_gain_train']:+.4f} | {x['dense_q_gain_dev']:+.4f} |")
+            L += ["", "So part of the MaxP gain is a length effect tied to how the BRIGHT corpora were built; the "
+                  "rule-6 system without MaxP (section O, `q+r+h`) is the conservative Track-2 alternative.", ""]
         man = jload(os.path.join(R, "maxp/index_summary.json"))
         if man:
             L += ["| track | docs | docs with extra passages | extra passages | encode (s) |", "| --- | ---: | ---: | ---: | ---: |"]
@@ -134,6 +147,9 @@ def week5(root):
     ce = jload(os.path.join(R, "ce_final/t2.json"))
     if ce:
         L += ["## Q. Cross-encoder over the week-5 Track-2 current-turn hybrid", "",
+              "Rule 6 allows N = 0; the cross-encoder is applied only if its best N beats N = 0 on train. Over the "
+              "expanded hybrid it does not, so it is **not** part of the week-5 system (the `chosen N` column is the "
+              "script's best non-zero N).", "",
               "| input hybrid | N=0 train | N=10 | N=20 | N=50 | chosen N | dev N=0 | dev chosen | dev CE − hybrid [95% CI] |",
               "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |"]
         for cond, r in ce.items():
@@ -142,9 +158,22 @@ def week5(root):
                      f"{f4(b['50']['train_macro'])} | {r['chosen_depth_on_train']} | {f4(b['0']['dev_macro'])} | "
                      f"{f4(b[str(r['chosen_depth_on_train'])]['dev_macro'])} | {ci(r['dev_bootstrap_ce_minus_hybrid'])} |")
         L.append("")
+    tm = jload(os.path.join(R, "temporal/t1.json"))
+    if tm:
+        L += ["## R. Temporal signal inside the Track-1 ranking (rule 9) — negative", "",
+              "Top 100 of the adopted hybrid; score = (1 − w)·minmax(hybrid) + w·T, T = share of the query's years "
+              "that the document mentions (±1 year). Year source: query text (`q`) or query + LLM reasoning (`q+r`).", "",
+              "| condition | topics with years (train, q / q+r) | none train | none dev | best on train | its train | its dev | adopted |",
+              "| --- | --- | ---: | ---: | --- | ---: | ---: | --- |"]
+        for cond, r in tm.items():
+            b, c = r["by_candidate"], r["share_topics_with_years"]["train"]
+            L.append(f"| `{cond}` | {c['q']:.2f} / {c['q+r']:.2f} | {f4(b['none|0.0']['train'])} | {f4(b['none|0.0']['dev'])} | "
+                     f"{r['best_on_train'].replace('|', ', w = ')} | {f4(b[r['best_on_train']]['train'])} | {f4(b[r['best_on_train']]['dev'])} | "
+                     f"{'yes' if r['adopted'] else 'no'} |")
+        L += ["", "Every year weight lowers train nDCG@10, monotonically in w (full grid in `runs_v13/temporal/t1.json`).", ""]
     re_ = {t: jload(os.path.join(R, f"reason/t{t}_reasonembed-4b.json")) for t in (1, 2)}
     if any(re_.values()):
-        L += ["## R. Reasoning embedder (ReasonEmbed-Qwen3-4B, NF4) over the hybrid pool (rule 8)", "",
+        L += ["## S. Reasoning embedder (ReasonEmbed-Qwen3-4B, FP8) over the hybrid pool (rule 8)", "",
               "| condition | none train | none dev | best on train | its train | its dev | train boot best − none | docs encoded | encode (s) |",
               "| --- | ---: | ---: | --- | ---: | ---: | --- | ---: | ---: |"]
         for t, rep in re_.items():
