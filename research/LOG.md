@@ -990,3 +990,17 @@ reading: the LLM expansion helps the BRIGHT-derived domains a lot (+0.11 dev, +0
 change (before any rule-8 train result): backend bitsandbytes NF4 in-process (2.7 GB, 7.2 docs/s), batch 4,
   documents embedded in chunks of 2,000 with the cache saved after each, and the job restarted automatically up to
   20 times (`runs_v13/logs/step5b.sh`). Pool 50, conditions and choice rule as amended at 16:07.
+
+## 2026-10-26 16:21–17:34 — rule 8 result, 2a current: ReasonEmbed over the top 50 — adopted
+command: `research/runs_v13/logs/step5b.sh` (reason_rerank.py --backend bnb --bits 4 --pool 50, input = MaxP q+r+h
+  hybrid; query = the original current question with the instruction; out `runs_v13/reason/t2_reasonembed-4b.json`).
+cost: 33,937 documents + 1,188 queries, 73 min (≈ 7.7 texts/s), one attempt, no GPU failure.
+result (train = subsample ≤ 30 topics/domain; dev all): none 0.3828 / 0.3319 · top-N reorder N=10 0.3871/0.3565,
+  N=20 0.4010/0.3752, N=50 0.4106/0.3811 · interpolation w=0.5 0.4167/0.3775, 0.7 0.4310/0.3880,
+  **w=0.8 0.4359/0.3901**, 0.9 0.4250/0.3888. Best on train w=0.8; train − none +0.0531 [+0.0312, +0.0749] →
+  **adopted**. Dev − none +0.0582 [+0.0450, +0.0714]; better in 11/11 domains; BRIGHT 0.4099 → 0.4686,
+  StackExchange 0.2384 → 0.2960 (largest: medicalsciences +0.106, robotics +0.083, economics +0.076).
+conclusion: Unlike the LLM expansion, the reasoning embedder helps the StackExchange domains as much as the BRIGHT
+  ones, so its gain is not only BRIGHT exposure (caveat stays: its training data are BRIGHT-style). It also
+  replaces the cross-encoder's role on StackExchange (0.278 with the week-4 CE system → 0.296).
+  Track-2 current-turn system: query reasoning + MaxP hybrid + ReasonEmbed (w 0.8 over the top 50): dev 0.3901.
