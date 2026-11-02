@@ -1026,3 +1026,51 @@ result (train subsample / dev): none 0.3442 / 0.3505 · top-N N=10 0.3398/0.3513
 conclusion: Rule 8 adopted the reasoning embedder on all three conditions (interpolation weight 0.7–0.8 over the top
   50). Final systems: LLM query expansion → BM25 + dense hybrid (+ MaxP on Track 2) → ReasonEmbed-4B mixed into the
   top 50. Total GPU time for rule 8: 3 h 14 min (82k documents at 5–8 per second).
+
+## 2026-11-02 13:05 — step 0: sync and checks
+repo: local main = origin/main = `0f3e6ad` (week 5 pushed); working tree clean.
+RETECO kit: `git pull --ff-only` 49f96ab → 7ee8acf: only `docs/index.html` (News 26.10 "RETECO is now in Pyserini":
+  prebuilt Lucene indexes and BM25/BM25QS baselines for the 13 Track-1 domains of data v1.1; the starter kit stays
+  the reference baseline). scorer.py, format_checker.py and the data format are unchanged. No other News since 17.10.
+plan for today (estimates written before starting; session ends 17:00): step 1 foreign-gold diagnostics + rule 10
+  ~1 h CPU (+ ~15 min GPU for ReasonEmbed over the no-MaxP pool); step 3 history pipeline: LLM generations ~35 min
+  GPU, retrieval + hybrid grids ~30 min CPU, ReasonEmbed ~45 min GPU; step 4 contamination ablation: download
+  ~10 min, generations ~25 min GPU, retrieval + grids ~30 min CPU; step 2 submission pipeline ~2 h (coding while
+  the GPU runs, then an end-to-end dev check). GPU jobs run one at a time (queue: history generations → Llama
+  generations → ReasonEmbed no-MaxP → ReasonEmbed history). Step 5 (several HyDE samples) only if time is left.
+
+## 2026-11-02 13:07 — rules 10–13 (written before any of the runs they govern)
+definitions (step 1, `scripts/foreign_gold.py`): for a topic q of domain D, a *foreign gold* document is a train or
+  dev gold document of another topic of D that is not gold for q (on test all train/dev gold are negatives: News
+  17.10). A *test-like* topic is one none of whose gold documents is gold for any topic of the other split.
+  Long document = more than one 510-token passage in the MaxP index (bge tokenizer), i.e. > 510 tokens.
+rule 10 (2a current, MaxP): A = current main run (ReasonEmbed w 0.8 over the top 50 of the MaxP q+r+h hybrid);
+  B = the same without MaxP (ReasonEmbed over the top 50 of the rule-6 q+r+h hybrid, weight chosen on train from the
+  rule-8 grid {none, top-N, interp 0.1…0.9}). Train = the rule-8 subsample (≤ 30 topics per domain, seed 20260921).
+  MaxP stays in the main run only if on train BOTH (a) the foreign-gold share of the top-10 slots of A minus that of
+  B is < 1 percentage point, and (b) on the test-like train topics A − B ≥ +0.005 macro nDCG@10 with paired-bootstrap
+  95% lower bound > 0 (topics resampled within domain, 10,000 draws, seed 20260921). Otherwise the main run is B and
+  A is the fallback run. For the LLM expansion and ReasonEmbed stages: report only, no choice.
+rule 11 (2a with history, week-5 pipeline): LLM inputs (same model, prompts reason + hyde, temperature 0):
+  (a) `2a_hist3q` = current question first, then the last ≤ 3 earlier user questions; (b) `2a_hist3qa` = (a) with the
+  earlier answers from `conversation_history` (part of the released input). Retrieval: q = the week-4 history text
+  with the current question first (`2a_history_qfirst`), BM25 and bge-base L512 dense (no MaxP), variants q and
+  q+r+h, hybrid grid tuned on train as in week 4. Candidates: H0 = week-4 history hybrid (train 0.4806), Ha, Hb
+  (q+r+h with the generations of (a) / (b)). Best on train adopted over H0 only with train ≥ +0.005 and bootstrap
+  lower bound > 0; between Ha and Hb the more complex (b) needs the same margin over (a). Then ReasonEmbed over the top
+  50 of the adopted hybrid: query = current question first, then the earlier turns in the form of the adopted input
+  (questions only for H0 / (a), Q/A for (b)), instruction "Given a <domain> conversation, retrieve documents that help
+  answer the current question.", ≤ 512 tokens; weight from the rule-8 grid on the train subsample, adopted with the
+  same margin over "none".
+rule 12 (main 2a run): main = the system with the best train macro nDCG@10 (rule-8 subsample) among {best current-turn
+  system after rule 10, best history system after rule 11}; the more complex one (history) needs ≥ +0.005 and
+  bootstrap lower bound > 0 over the other. Both are reported on dev, plus the 79 dev turns with new gold and the
+  T1…T5+ depth breakdown, plus the foreign-gold share.
+rule 13 (several HyDE samples, only if time): n ∈ {1, 3, 5} HyDE generations at temperature 0.7, seed 0, plus
+  reason at temperature 0; dense = mean of the vectors, BM25 = concatenation; n chosen on train with the usual margin
+  (n = 1 always allowed), then ReasonEmbed on top with its weight re-chosen on train. Order 2a (rule-12 main), 1a, 1b.
+step 4 setup (ablation, no choice): LLM without BRIGHT exposure = Llama-3.2-3B-Instruct (knowledge cutoff December
+  2023 per Meta's model card; BRIGHT was released July 2024). meta-llama repo is gated and no HF token is configured
+  here, so the ungated mirror `unsloth/Llama-3.2-3B-Instruct` rev `006f5dcd1393c3add266de40994ba96225e9689d` (same
+  weights, bf16) is used with vLLM online FP8 quantisation. Same prompts, temperature 0, conditions 2a current and
+  1a (1b if time). Report q+r+h − q of the train-tuned hybrid for both LLMs, BRIGHT vs StackExchange.

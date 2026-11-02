@@ -27,3 +27,7 @@ research/runs_v13/cache/
 # week 5: temporal year caches, reasoning-embedder caches
 research/runs_v13/temporal/cache/
 research/runs_v13/reason*/cache/
+# 2026-11-02: contamination-ablation generations, foreign-gold / submission caches and runs
+research/runs_v13/llm_*/
+research/runs_v13/submit/
+research/runs_v13/foreign/cache/

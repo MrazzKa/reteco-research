@@ -19,6 +19,7 @@ cached per domain (doc id -> vector; the id is only a cache key) and shared by c
         --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out ../research/runs_v13/reason
 """
 import argparse
+import hashlib
 import html
 import json
 import os
@@ -44,8 +45,13 @@ DEPTHS = (10, 20, 50, 100)
 WEIGHTS = [round(0.1 * i, 1) for i in range(1, 10)]
 
 
-def instruction(track, cond, dom):
+HIST_QCONDS = {"2a_hist3q": False, "2a_hist3qa": True}  # query = current question first + earlier turns
+
+
+def instruction(track, cond, dom, qcond=None):
     name = dom.replace("_", " ")
+    if qcond in HIST_QCONDS:
+        return f"Given a {name} conversation, retrieve documents that help answer the current question."
     if cond.startswith("1b"):
         return f"Given a {name} question and one research step, retrieve documents that help with that step."
     return f"Given a {name} question, retrieve documents that help answer the question."
@@ -158,6 +164,8 @@ def main():
     ap.add_argument("--train-per-domain", type=int, default=30)
     ap.add_argument("--domains", nargs="+", default=["all"])
     ap.add_argument("--splits", nargs="+", default=["train", "dev"])
+    ap.add_argument("--name", nargs="*", help="report key per --conditions entry (default: the condition)")
+    ap.add_argument("--save-runs", help="write TREC runs (rule-chosen way and 'none') of every scored topic here")
     ap.add_argument("--out", required=True)
     tiebreak.add_arg(ap)
     a = ap.parse_args()
@@ -173,7 +181,10 @@ def main():
     rpath = os.path.join(a.out, f"t{a.track}_{a.model}.json")
     report = json.load(open(rpath)) if os.path.exists(rpath) else {}
     qconds = a.query_cond or [None] * len(a.conditions)
-    for cond, qc in zip(a.conditions, qconds):
+    names = a.name or list(a.conditions)
+    qcache_path = os.path.join(cdir, "queries")
+    qcache = load_cache(qcache_path)  # sha1(query text with instruction) -> vector
+    for cond, qc, rname in zip(a.conditions, qconds, names):
         hc = hyb["conditions"][cond]
         cfg = hc["systems"]["linear*"]["cfg"]
         dcond = hc["dense_condition"]
@@ -187,16 +198,24 @@ def main():
                 pre = f"t{a.track}_{dom}_{split}"
                 bm = read_run(os.path.join(a.bm25, f"{pre}_{cond}.tsv"))
                 de = read_run(os.path.join(a.dense, f"{pre}_{dcond}.tsv"))
+                pq = "2a_current" if qcond in HIST_QCONDS else qcond
                 (_, queries, gold), = [p for p in plan(a.track, os.path.join(a.data, sub, dom), split)
-                                       if p[0] == qcond]
+                                       if p[0] == pq]
                 qtext = dict(queries)
+                if qcond in HIST_QCONDS:
+                    from llm_expand import history_body
+                    bench = json.load(open(os.path.join(a.data, sub, dom, f"benchmark_{split}.json"),
+                                           encoding="utf-8"))
+                    bench = [bench] if isinstance(bench, dict) else bench
+                    qtext = {f"{c['id']}_turn_{t['turn_id']}": history_body(t, HIST_QCONDS[qcond])
+                             for c in bench for t in c["turns"]}
                 qids = sorted(q for q in gold if q in qtext)
                 if split == "train" and len(qids) > a.train_per_domain:
                     qids = sorted(random.Random(20260921).sample(qids, a.train_per_domain))
                 pools = {q: order(fused(Query(bm.get(q, []), de.get(q, [])), cfg))[:a.pool] for q in qids}
                 if dom not in caches:
                     caches[dom] = load_cache(os.path.join(cdir, f"docs_{dom}"))
-                ins = instruction(a.track, cond, dom)
+                ins = instruction(a.track, cond, dom, qcond)
                 per[split][dom] = (qids, pools, gold, [f"Instruct: {ins}\nQuery: {clean(qtext[q])}" for q in qids])
         need = {dom: sorted({d for sp in per for q in per[sp].get(dom, ([],))[0] for d, _ in per[sp][dom][1][q]}
                             - set(caches[dom])) for dom in caches}
@@ -217,10 +236,17 @@ def main():
             print(f"  [{cond}] docs {c + len(part)}/{len(doc_items)} ({time.time() - t1:.0f}s)", flush=True)
         q_items = [(sp, dom, q, t) for sp in per for dom, (qids, _, _, qt) in per[sp].items() for q, t in zip(qids, qt)]
         qv = {}
-        for c in range(0, len(q_items), a.chunk):
-            part = q_items[c:c + a.chunk]
-            for (sp, dom, q, _), v in zip(part, embed(a, ckpt, [t for *_, t in part])):
-                qv[(sp, dom, q)] = v
+        qkey = {it: hashlib.sha1(it[3].encode("utf-8")).hexdigest() for it in q_items}
+        q_todo = [it for it in q_items if qkey[it] not in qcache]
+        for c in range(0, len(q_todo), a.chunk):
+            part = q_todo[c:c + a.chunk]
+            for it, v in zip(part, embed(a, ckpt, [t for *_, t in part])):
+                qcache[qkey[it]] = v
+        if q_todo:
+            save_cache(qcache_path, qcache)
+        for it in q_items:
+            qv[it[:3]] = qcache[qkey[it]].astype(np.float32)
+        q_items = q_todo
         stats["encode_s"] = round(time.time() - t1, 1)
         stats["docs_encoded"] = len(doc_items)
         stats["queries_encoded"] = len(q_items)
@@ -261,7 +287,20 @@ def main():
                   f"train boot {tb}", flush=True)
         for h in hows:
             print(f"   {h[0]}={h[1]}: " + "  ".join(f"{s} {res[h][s][0]}" for s in a.splits), flush=True)
-        report[cond] = row
+        if a.save_runs:
+            os.makedirs(a.save_runs, exist_ok=True)
+            best = row.get("best_on_train", "none=0")
+            k, p = best.split("=")
+            for label, how in (("best", (k, float(p) if k == "interp" else int(p))), ("none", ("none", 0))):
+                for sp in per:
+                    for dom, (qids, pools, sc, _) in per[sp].items():
+                        path = os.path.join(a.save_runs, f"t{a.track}_{dom}_{sp}_{rname}__{label}.tsv")
+                        with open(path, "w") as f:
+                            for q in qids:
+                                for r, d in enumerate(rank(pools[q], how, sc[q]), 1):
+                                    f.write(f"{q} Q0 {d} {r} {1.0 / r:.6f} {rname}-{label}\n")
+            row["saved_runs"] = {"dir": a.save_runs, "best": best}
+        report[rname] = row
         json.dump(report, open(rpath, "w"), indent=1)
 
 

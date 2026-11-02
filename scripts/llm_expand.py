@@ -31,7 +31,11 @@ T1 = ["iota", "quant", "law", "workplace", "cardano", "monero", "economics", "bi
 T2 = ["drones", "politics", "law", "medicalsciences", "hardware", "economics", "psychology",
       "biology", "sustainable_living", "robotics", "earth_science"]
 MODEL = "cyankiwi/Qwen3-4B-Instruct-2507-AWQ-4bit"  # AWQ W4A16 of Qwen/Qwen3-4B-Instruct-2507
+# alternative LLMs (contamination ablation, LOG step 4 of 2026-11-02): name -> (checkpoint, vLLM quantization)
+LLMS = {"qwen3-4b": (MODEL, None),
+        "llama3.2-3b": ("unsloth/Llama-3.2-3B-Instruct", "fp8")}  # ungated mirror of meta-llama/Llama-3.2-3B-Instruct
 MAX_INPUT_CHARS = 3000
+HIST_TURNS = 3  # history conditions: at most the last 3 earlier turns
 
 SYSTEM = "You help a search engine find documents. Answer in plain English text only."
 PROMPTS = {
@@ -50,6 +54,39 @@ TIME_HINT = {
 def clean(text):
     text = re.sub(r"<[^>]+>", " ", html.unescape(text or ""))
     return re.sub(r"\s+", " ", text).strip()[:MAX_INPUT_CHARS]
+
+
+def history_pairs(t):
+    """[(question, answer)] of the earlier turns, parsed from the released conversation_history string."""
+    h = t.get("conversation_history", "") or ""
+    if h.lower().startswith("no previous"):
+        return []
+    pairs, cur = [], None
+    for ln in h.splitlines():
+        s = ln.strip()
+        if s.startswith("Q:"):
+            cur = [s[2:].strip(), ""]
+            pairs.append(cur)
+        elif s.startswith("A:") and cur is not None:
+            cur[1] = s[2:].strip()
+        elif cur is not None and s:
+            cur[1 if cur[1] else 0] += " " + s
+    return [(clean(q), clean(a)) for q, a in pairs]
+
+
+def history_body(t, answers):
+    """Track-2 history conditions: current question first, then the last <= 3 earlier turns
+    (questions only, or questions with the answers that are part of the released input)."""
+    prev = history_pairs(t)[-HIST_TURNS:]
+    body = f"Current question: {clean(t['query'])}"
+    if prev:
+        if answers:
+            ctx = "\n".join(f"Q: {q}\nA: {a}" for q, a in prev)
+        else:
+            ctx = "\n".join(f"- {q}" for q, _ in prev)
+        body += ("\n\nEarlier in the same conversation (oldest first; use it only to understand the current "
+                 f"question):\n{ctx}")
+    return body[:MAX_INPUT_CHARS]
 
 
 def read_jsonl(p):
@@ -80,20 +117,26 @@ def inputs(data, track, cond):
                 bench = [bench] if isinstance(bench, dict) else bench
                 for c in bench:
                     for t in c["turns"]:
-                        out.append((dom, split, f"{c['id']}_turn_{t['turn_id']}",
-                                    f"Question: {clean(t['query'])}"))
+                        if cond == "2a_hist3q":
+                            b = history_body(t, answers=False)
+                        elif cond == "2a_hist3qa":
+                            b = history_body(t, answers=True)
+                        else:
+                            b = f"Question: {clean(t['query'])}"
+                        out.append((dom, split, f"{c['id']}_turn_{t['turn_id']}", b))
     return out
 
 
-def key_of(prompt, body):
-    return hashlib.sha1(f"{prompt}\n{MODEL}\n{body}".encode("utf-8")).hexdigest()
+def key_of(prompt, body, model=MODEL):
+    return hashlib.sha1(f"{prompt}\n{model}\n{body}".encode("utf-8")).hexdigest()
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--data", required=True)
+    ap.add_argument("--data")
     ap.add_argument("--track", type=int, required=True, choices=(1, 2))
-    ap.add_argument("--conditions", nargs="+", required=True)
+    ap.add_argument("--conditions", nargs="+", default=[])
+    ap.add_argument("--bodies", help="JSON list of input texts to generate for (submission mode, scripts/submit.py)")
     ap.add_argument("--prompts", nargs="+", default=["reason", "hyde"], choices=sorted(PROMPTS))
     ap.add_argument("--limit", type=int, help="only the first N unique inputs (speed test)")
     ap.add_argument("--max-new", type=int, default=256)
@@ -102,19 +145,26 @@ def main():
     ap.add_argument("--max-seqs", type=int, default=32)
     ap.add_argument("--max-batched", type=int, default=1536)
     ap.add_argument("--chunk", type=int, default=256, help="inputs per generate() call (cache flush)")
+    ap.add_argument("--llm", default="qwen3-4b", choices=sorted(LLMS))
+    ap.add_argument("--splits", nargs="+", default=["train", "dev"])
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
+    model, quant = LLMS[a.llm]
     from vllm import LLM, SamplingParams
     from huggingface_hub.constants import HF_HUB_CACHE
-    rev_path = os.path.join(HF_HUB_CACHE, "models--" + MODEL.replace("/", "--"), "refs", "main")
-    rev = open(rev_path).read().strip() if os.path.exists(rev_path) else "unknown"
-    llm = LLM(model=MODEL, revision=rev, gpu_memory_utilization=a.gpu_util, max_model_len=a.max_model_len,
+    rev_path = os.path.join(HF_HUB_CACHE, "models--" + model.replace("/", "--"), "refs", "main")
+    rev = open(rev_path).read().strip() if os.path.exists(rev_path) else None
+    if rev is None:  # downloaded by explicit revision: the snapshot directory name is the revision
+        snaps = os.path.join(HF_HUB_CACHE, "models--" + model.replace("/", "--"), "snapshots")
+        rev = sorted(os.listdir(snaps))[0] if os.path.isdir(snaps) else None
+    llm = LLM(model=model, revision=rev, quantization=quant, gpu_memory_utilization=a.gpu_util, max_model_len=a.max_model_len,
               enforce_eager=True, seed=0, max_num_seqs=a.max_seqs,
               max_num_batched_tokens=a.max_batched)
     tok = llm.get_tokenizer()
     sp = SamplingParams(temperature=0.0, max_tokens=a.max_new, seed=0)
     os.makedirs(a.out, exist_ok=True)
-    meta = {"model": MODEL, "revision": rev, "quant": "AWQ W4A16 (compressed-tensors)", "engine": "vllm",
+    meta = {"model": model, "revision": rev,
+            "quant": quant or "AWQ W4A16 (compressed-tensors)", "engine": "vllm",
             "temperature": 0.0, "max_new_tokens": a.max_new, "system": SYSTEM, "prompts": PROMPTS,
             "time_hint": TIME_HINT, "max_input_chars": MAX_INPUT_CHARS}
     json.dump(meta, open(os.path.join(a.out, "meta.json"), "w"), indent=1)
@@ -124,11 +174,14 @@ def main():
         if os.path.exists(path):
             with open(path, encoding="utf-8") as f:
                 done = {json.loads(x)["key"] for x in f if x.strip()}
-        for cond in a.conditions:
-            rows = inputs(a.data, a.track, cond)
+        for cond in (a.conditions or ["bodies"]):
+            if a.bodies:
+                rows = [(None, None, None, b) for b in json.load(open(a.bodies, encoding="utf-8"))]
+            else:
+                rows = [r for r in inputs(a.data, a.track, cond) if r[1] in a.splits]
             uniq = {}
             for _, _, _, body in rows:
-                uniq.setdefault(key_of(prompt, body), body)
+                uniq.setdefault(key_of(prompt, body, model), body)
             todo = [(k, b) for k, b in uniq.items() if k not in done]
             if a.limit:
                 todo = todo[:a.limit]

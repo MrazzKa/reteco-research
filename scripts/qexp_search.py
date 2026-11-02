@@ -74,6 +74,9 @@ def main():
     ap.add_argument("--k", type=int, default=1000)
     ap.add_argument("--passages", help="passage_index.py root: dense = MaxP over passages "
                     "(first window from --emb at L512) instead of the --max-len cache")
+    ap.add_argument("--query-cond", help="condition whose query text is q (default --cond; e.g. 2a_history_qfirst "
+                    "for the history LLM inputs 2a_hist3q / 2a_hist3qa)")
+    ap.add_argument("--llm-model", default=None, help="checkpoint name used in the generation cache key")
     ap.add_argument("--out", required=True)
     tiebreak.add_arg(ap)
     a = ap.parse_args()
@@ -105,12 +108,13 @@ def main():
               if a.passages else GpuIndex(domain_dir(a.emb, a.model, a.max_len, a.track, dom)))
         print(f"[t{a.track}/{dom}] indexes ready ({time.time() - t0:.0f}s)", flush=True)
         for sp in ("train", "dev"):
-            (_, queries, gold), = [p for p in plan(a.track, d, sp) if p[0] == a.cond]
+            (_, queries, gold), = [p for p in plan(a.track, d, sp) if p[0] == (a.query_cond or a.cond)]
             texts = {}
             for qid, q in queries:
                 k = body.get((dom, sp, qid))
-                r = gen["reason"].get(key_of("reason", k), "") if k else ""
-                h = gen["hyde"].get(key_of("hyde", k), "") if k else ""
+                km = {"model": a.llm_model} if a.llm_model else {}
+                r = gen["reason"].get(key_of("reason", k, **km), "") if k else ""
+                h = gen["hyde"].get(key_of("hyde", k, **km), "") if k else ""
                 missing += (not r) + (not h)
                 texts[qid] = (q, r, h)
             qids = [qid for qid, _ in queries]
