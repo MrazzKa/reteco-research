@@ -1,0 +1,85 @@
+{
+ "rule": "11",
+ "chosen": "Hb",
+ "train": {
+  "H0": 0.4806,
+  "Ha": 0.48,
+  "Hb": 0.5112
+ },
+ "dev": {
+  "H0": 0.4352,
+  "Ha": 0.4452,
+  "Hb": 0.4601
+ },
+ "cfg": {
+  "H0": {
+   "kind": "linear",
+   "kb": 100,
+   "kd": 100,
+   "norm": "zscore",
+   "alpha": 0.6
+  },
+  "Ha": {
+   "kind": "linear",
+   "kb": 100,
+   "kd": 100,
+   "norm": "zscore",
+   "alpha": 0.5
+  },
+  "Hb": {
+   "kind": "linear",
+   "kb": 100,
+   "kd": 100,
+   "norm": "zscore",
+   "alpha": 0.6
+  }
+ },
+ "train_tests": {
+  "Ha_vs_H0": {
+   "diff": -0.0006,
+   "ci95": [
+    -0.0113,
+    0.0099
+   ],
+   "p_le_0": 0.5367
+  },
+  "Hb_vs_H0": {
+   "diff": 0.0306,
+   "ci95": [
+    0.0202,
+    0.0407
+   ],
+   "p_le_0": 0.0
+  },
+  "Hb_vs_Ha": {
+   "diff": 0.0312,
+   "ci95": [
+    0.0248,
+    0.0378
+   ],
+   "p_le_0": 0.0
+  }
+ },
+ "dev_minus_H0": {
+  "Ha": {
+   "diff": 0.0101,
+   "ci95": [
+    -0.0056,
+    0.0257
+   ],
+   "p_le_0": 0.1008
+  },
+  "Hb": {
+   "diff": 0.025,
+   "ci95": [
+    0.0099,
+    0.0399
+   ],
+   "p_le_0": 0.0004
+  }
+ },
+ "chosen_spec": {
+  "report": "../research/runs_v13/hist/t2/hybrid.json",
+  "condition": "2a_hist3qa__q+r+h"
+ }
+}

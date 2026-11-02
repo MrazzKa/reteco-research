@@ -1125,3 +1125,37 @@ rule 10: (a) foreign share A − B on train = +0.25 pp < 1 pp → satisfied; (b)
   evidence for it (once ReasonEmbed is on top) is weak; we keep the train decision and report both.
 note: the test-like criterion barely bites (train and dev share almost no gold), so (b) amounts to "MaxP must
   still help clearly on train once ReasonEmbed rescoring is on top"; this is stated in RESULTS.
+
+## 2026-11-02 13:50–14:22 — step 2: end-to-end submission pipeline, dev check
+code: `configs/submission.json` (everything frozen: LLM checkpoint + revision + quantisation + prompts + temperature +
+  seed, BM25 parameters, encoder + window + MaxP flag, fusion config from the train-chosen hybrid reports, ReasonEmbed
+  checkpoint, NF4, pool 50, weight, instructions, tie key sha1, seeds); `scripts/submit.py` (reads only that file,
+  the release topic files and the corpora — no qrels; LLM cache keyed by sha1(prompt + model + text); missing
+  generations through `llm_expand.py --bodies` in the LLM venv; BM25 → dense (+MaxP) → fusion → ReasonEmbed top 50 →
+  then rest of the fused pool, the dense list and the BM25 list, cut at 1000; one file per (variant, domain) because
+  Track-2 topic ids repeat across domains; run ids `UA_<sub>_<variant>`); `scripts/score_submission.py` (official
+  format_checker with qrels + corpus, own sanity checks, official scorer.py per domain, macro over domains).
+pre-check (CPU): topic texts, LLM inputs and history texts built by submit.py equal the research ones for every dev
+  topic of 1a, 1b, 2a current, 2a_hist3q, 2a_hist3qa (0 mismatches).
+commands: `submit.py --variants 2a_nomaxp 2a_maxp 1a` and `--variants 1b --data ../../reteco_data_v11 --split dev
+  --out runs_v13/submit/dev` (logs `submit_dev.log`, `submit_dev_1b.log`; generations and ReasonEmbed vectors from cache:
+  0 new generations, 0 new documents), then `score_submission.py --variants 1a 1b 2a_nomaxp 2a_maxp --out
+  runs_v13/submit_check.json`.
+result (official macro nDCG@10 vs research): 1a 0.3667 = 0.3667 · 1b 0.4053 = 0.4053 · 2a no-MaxP 0.3779 = 0.3779 ·
+  2a MaxP 0.3901 = 0.3901 (all differences 0.0000; per domain identical, e.g. drones 0.3049). format_checker exit 0 for
+  every file; judged topics missing 0, duplicate doc ids 0, unknown doc ids 0, score order violations 0, depth 1000.
+timing on dev (cached LLM/ReasonEmbed, so these are retrieval costs only): Track-1 BM25 indexing dominates (288–309 s
+  for 13 domains, rebuilt per variant), Track 2 25–28 s; BM25 search 0.01–0.02 s/topic; dense 0.01–0.02 s/topic
+  (1b 0.22 s/topic while the Llama job shared the GPU); fusion 1 ms/topic.
+test-time estimate (~350 1a queries, ~820 1b steps at the dev ratio 2.34 steps/query, ~200 2a turns, 2–3 2a variants):
+  LLM 2 prompts × ~1,600–1,800 inputs at 5–8 inputs/s ≈ 6–10 min (+ ~2 min model load per call); BM25 indexes ≈ 11 min;
+  dense < 2 min; ReasonEmbed is the cost: pool documents per topic on dev 43.8 (1a), 22.6 (1b, steps share pools),
+  28.3 (2a); only 9–15% of dev pool documents were already in the train-subsample pools, so expect ≈ 15k (1a) + ~9k
+  (1b beyond 1a) + ~6k per 2a variant ≈ 35–40k new documents at 7–8 docs/s ≈ 75–90 min. Total ≈ 1.75–2 h on this
+  laptop, restartable (vectors saved every 2,000 documents).
+
+## 2026-11-02 13:53–14:19 — step 4 generations: Llama-3.2-3B-Instruct (FP8), reason + hyde
+command: `queue_1102.sh` → `llm_expand.py --llm llama3.2-3b --track 2 --conditions 2a_current` and `--track 1
+  --conditions 1a` (out `runs_v13/llm_llama/t{1,2}`, git-ignored; meta.json records model, revision 006f5dc…, fp8).
+cost: 2a 5,942 generations at ~13 inputs/s (1,619 tokens/s); 1a 3,460 at ~3.4 inputs/s (longer Track-1 inputs);
+  26 min in total, gpu-util 0.75. Mean reason output ~170 tokens (longer than Qwen's ~136).

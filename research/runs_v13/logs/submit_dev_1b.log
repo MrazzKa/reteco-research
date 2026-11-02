@@ -1,0 +1,30 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights:  58%|█████▊    | 115/199 [00:00<00:00, 1149.08it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 1600.47it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 256 fp16=True (8s)
+    index: 9,680 docs, 3s (lucene)
+    1b                           8 topics (8 unique)    0.1s
+    index: 25,040 docs, 5s (lucene)
+    1b                          15 topics (15 unique)    0.2s
+    index: 36,110 docs, 8s (lucene)
+    1b                          23 topics (23 unique)    0.4s
+    index: 43,584 docs, 6s (lucene)
+    1b                          20 topics (20 unique)    0.3s
+    index: 47,509 docs, 9s (lucene)
+    1b                          33 topics (33 unique)    0.5s
+    index: 53,955 docs, 12s (lucene)
+    1b                          28 topics (28 unique)    0.4s
+    index: 74,692 docs, 16s (lucene)
+    1b                          51 topics (51 unique)    0.8s
+    index: 76,706 docs, 16s (lucene)
+    1b                          56 topics (56 unique)    0.9s
+    index: 135,207 docs, 35s (lucene)
+    1b                         119 topics (119 unique)    2.9s
+    index: 136,101 docs, 35s (lucene)
+    1b                          68 topics (68 unique)    1.4s
+    index: 158,771 docs, 29s (lucene)
+    1b                          52 topics (52 unique)    1.1s
+    index: 169,552 docs, 41s (lucene)
+    1b                         105 topics (105 unique)    2.0s
+    index: 200,252 docs, 70s (lucene)
+    1b                         636 topics (636 unique)   17.8s
+[1b] 1214 topics, timing {'llm_total_s': 0.2, 'bm25_index_s': 287.9, 'bm25_search_s': 29.1, 'dense_index_load_s': 2.7, 'dense_search_s': 267.8, 'fusion_s': 0.9, 'reasonembed_s': 0.8, 'reasonembed_new_docs': 0}

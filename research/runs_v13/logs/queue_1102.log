@@ -1,0 +1,120 @@
+=== 13:40:51 gpu-util 0.75: --track 2 --conditions 2a_hist3q 2a_hist3qa --prompts reason hyde --out ../research/runs_v13/llm/t2
+(EngineCore pid=6654) INFO 11-02 13:41:24 [kv_cache_utils.py:2327] GPU KV cache size: 17,088 tokens, Maximum concurrency for 1,536 tokens per request: 11.12x
+[reason/2a_hist3q] 2971 inputs, 2971 unique, 0 to generate
+[reason/2a_hist3qa] 2971 inputs, 2971 unique, 0 to generate
+[hyde/2a_hist3q] 2971 inputs, 2971 unique, 0 to generate
+[hyde/2a_hist3qa] 2971 inputs, 2971 unique, 0 to generate
+=== 13:41:29 HISTGEN_DONE
+=== 13:41:29 attempt 1: --track 2 --conditions 2a_current__q+r+h --query-cond 2a_current --name 2a_maxp --hybrid ../research/runs_v13/maxp/t2/hybrid_2a_current.json --bm25 ../research/runs_v13/maxp/t2/bm25/runs --dense ../research/runs_v13/maxp/t2/dense/runs
+  [2a_current__q+r+h] 0 docs + 1188 queries in 80s
+== t2 2a_current__q+r+h: none train 0.3828 dev 0.3319 | best on train ('interp', 0.8): train 0.4359 dev 0.3901 train boot {'diff': 0.0531, 'ci95': [0.0312, 0.0749], 'p_le_0': 0.0}
+   none=0: train 0.3828  dev 0.3319
+   top=10: train 0.3872  dev 0.3566
+   top=20: train 0.401  dev 0.3755
+   top=50: train 0.4106  dev 0.3809
+   interp=0.1: train 0.3889  dev 0.3395
+   interp=0.2: train 0.3932  dev 0.3473
+   interp=0.3: train 0.3992  dev 0.3596
+   interp=0.4: train 0.4055  dev 0.3674
+   interp=0.5: train 0.4167  dev 0.3774
+   interp=0.6: train 0.4267  dev 0.3858
+   interp=0.7: train 0.4312  dev 0.388
+   interp=0.8: train 0.4359  dev 0.3901
+   interp=0.9: train 0.4251  dev 0.3888
+=== 13:43:01 attempt 1: --track 2 --conditions 2a_current__q+r+h --query-cond 2a_current --name 2a_nomaxp --hybrid ../research/runs_v13/qexp/t2/hybrid_2a_current.json --bm25 ../research/runs_v13/qexp/t2/bm25/runs --dense ../research/runs_v13/qexp/t2/dense/runs
+  [2a_current__q+r+h] docs 1324/1324 (210s)
+  [2a_current__q+r+h] 1324 docs + 0 queries in 210s
+== t2 2a_current__q+r+h: none train 0.3671 dev 0.31 | best on train ('interp', 0.8): train 0.4317 dev 0.3779 train boot {'diff': 0.0645, 'ci95': [0.043, 0.0857], 'p_le_0': 0.0}
+   none=0: train 0.3671  dev 0.31
+   top=10: train 0.3787  dev 0.3429
+   top=20: train 0.4012  dev 0.3668
+   top=50: train 0.4069  dev 0.376
+   interp=0.1: train 0.3749  dev 0.3183
+   interp=0.2: train 0.3814  dev 0.3257
+   interp=0.3: train 0.3908  dev 0.3374
+   interp=0.4: train 0.399  dev 0.3468
+   interp=0.5: train 0.4093  dev 0.3602
+   interp=0.6: train 0.4209  dev 0.3677
+   interp=0.7: train 0.4226  dev 0.3731
+   interp=0.8: train 0.4317  dev 0.3779
+   interp=0.9: train 0.4213  dev 0.3789
+=== 13:46:39 attempt 1: --track 1 --conditions 1a__q+r+h --query-cond 1a --name 1a_rerun --hybrid ../research/runs_v13/qexp/t1/hybrid_1a.json --bm25 ../research/runs_v13/qexp/t1/bm25/runs --dense ../research/runs_v13/qexp/t1/dense/runs
+  [1a__q+r+h] 0 docs + 869 queries in 123s
+== t1 1a__q+r+h: none train 0.2823 dev 0.3258 | best on train ('interp', 0.8): train 0.3078 dev 0.3667 train boot {'diff': 0.0254, 'ci95': [0.0073, 0.0448], 'p_le_0': 0.0029}
+   none=0: train 0.2823  dev 0.3258
+   top=10: train 0.2736  dev 0.3275
+   top=20: train 0.2888  dev 0.3431
+   top=50: train 0.2893  dev 0.3539
+   interp=0.1: train 0.2867  dev 0.3315
+   interp=0.2: train 0.2882  dev 0.3383
+   interp=0.3: train 0.2951  dev 0.3442
+   interp=0.4: train 0.2992  dev 0.3496
+   interp=0.5: train 0.3026  dev 0.3553
+   interp=0.6: train 0.3021  dev 0.3602
+   interp=0.7: train 0.3072  dev 0.3646
+   interp=0.8: train 0.3078  dev 0.3667
+   interp=0.9: train 0.3033  dev 0.3633
+=== 13:48:49 attempt 1: --track 1 --conditions 1b_query+step__q+r+h --query-cond 1b_query+step --name 1b_rerun --hybrid ../research/runs_v13/qexp/t1/hybrid_1b.json --bm25 ../research/runs_v13/qexp/t1/bm25/runs --dense ../research/runs_v13/qexp/t1/dense/runs
+  [1b_query+step__q+r+h] 0 docs + 1590 queries in 260s
+== t1 1b_query+step__q+r+h: none train 0.3442 dev 0.3505 | best on train ('interp', 0.7): train 0.3754 dev 0.4053 train boot {'diff': 0.0312, 'ci95': [0.012, 0.0507], 'p_le_0': 0.0005}
+   none=0: train 0.3442  dev 0.3505
+   top=10: train 0.3389  dev 0.3513
+   top=20: train 0.3486  dev 0.38
+   top=50: train 0.3481  dev 0.3927
+   interp=0.1: train 0.3521  dev 0.3587
+   interp=0.2: train 0.3536  dev 0.3685
+   interp=0.3: train 0.3576  dev 0.3794
+   interp=0.4: train 0.3662  dev 0.3835
+   interp=0.5: train 0.374  dev 0.3947
+   interp=0.6: train 0.3743  dev 0.4045
+   interp=0.7: train 0.3754  dev 0.4053
+   interp=0.8: train 0.3748  dev 0.4083
+   interp=0.9: train 0.3641  dev 0.4014
+=== 13:53:21 REASON1_DONE
+=== 13:53:21 gpu-util 0.75: --llm llama3.2-3b --track 2 --conditions 2a_current --prompts reason hyde --out ../research/runs_v13/llm_llama/t2
+(EngineCore pid=9253) INFO 11-02 13:54:10 [kv_cache_utils.py:2327] GPU KV cache size: 19,424 tokens, Maximum concurrency for 1,536 tokens per request: 12.65x
+[reason/2a_current] 2971 inputs, 2971 unique, 2971 to generate
+  256/2971  chunk 64s  675 tok/s  4.03 q/s
+  512/2971  chunk 25s  975 tok/s  5.79 q/s
+  768/2971  chunk 28s  1116 tok/s  6.60 q/s
+  1024/2971  chunk 28s  1204 tok/s  7.10 q/s
+  1280/2971  chunk 28s  1263 tok/s  7.42 q/s
+  1536/2971  chunk 31s  1285 tok/s  7.54 q/s
+  1792/2971  chunk 24s  1335 tok/s  7.87 q/s
+  2048/2971  chunk 26s  1374 tok/s  8.08 q/s
+  2304/2971  chunk 32s  1373 tok/s  8.08 q/s
+  2560/2971  chunk 27s  1391 tok/s  8.20 q/s
+  2816/2971  chunk 27s  1412 tok/s  8.31 q/s
+  2971/2971  chunk 18s  1417 tok/s  8.34 q/s
+[hyde/2a_current] 2971 inputs, 2971 unique, 2971 to generate
+  256/2971  chunk 19s  1646 tok/s  13.45 q/s
+  512/2971  chunk 19s  1649 tok/s  13.41 q/s
+  768/2971  chunk 21s  1608 tok/s  12.97 q/s
+  1024/2971  chunk 19s  1623 tok/s  13.14 q/s
+  1280/2971  chunk 19s  1636 tok/s  13.22 q/s
+  1536/2971  chunk 19s  1646 tok/s  13.28 q/s
+  1792/2971  chunk 21s  1628 tok/s  13.08 q/s
+  2048/2971  chunk 19s  1633 tok/s  13.11 q/s
+  2304/2971  chunk 19s  1636 tok/s  13.16 q/s
+  2560/2971  chunk 19s  1638 tok/s  13.19 q/s
+  2816/2971  chunk 21s  1628 tok/s  13.10 q/s
+  2971/2971  chunk 13s  1619 tok/s  13.01 q/s
+=== 14:04:09 gpu-util 0.75: --llm llama3.2-3b --track 1 --conditions 1a --prompts reason hyde --out ../research/runs_v13/llm_llama/t1
+(EngineCore pid=10248) INFO 11-02 14:04:40 [kv_cache_utils.py:2327] GPU KV cache size: 19,424 tokens, Maximum concurrency for 1,536 tokens per request: 12.65x
+[reason/1a] 1730 inputs, 1730 unique, 1730 to generate
+  256/1730  chunk 41s  1061 tok/s  6.21 q/s
+  512/1730  chunk 50s  966 tok/s  5.60 q/s
+  768/1730  chunk 51s  933 tok/s  5.41 q/s
+  1024/1730  chunk 50s  925 tok/s  5.33 q/s
+  1280/1730  chunk 49s  921 tok/s  5.30 q/s
+  1536/1730  chunk 105s  768 tok/s  4.43 q/s
+  1730/1730  chunk 46s  767 tok/s  4.41 q/s
+[hyde/1a] 1730 inputs, 1730 unique, 1730 to generate
+  256/1730  chunk 42s  978 tok/s  6.10 q/s
+  512/1730  chunk 224s  298 tok/s  1.93 q/s
+  768/1730  chunk 45s  381 tok/s  2.47 q/s
+  1024/1730  chunk 72s  411 tok/s  2.68 q/s
+  1280/1730  chunk 44s  461 tok/s  3.00 q/s
+  1536/1730  chunk 45s  499 tok/s  3.26 q/s
+  1730/1730  chunk 36s  523 tok/s  3.41 q/s
+=== 14:19:53 ALLDONE

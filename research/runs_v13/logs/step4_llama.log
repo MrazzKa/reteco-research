@@ -1,0 +1,1 @@
+=== 14:20:10 python qexp_search.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 2 --cond 2a_current --variants q+r+h --llm ../research/runs_v13/llm_llama/t2 --llm-model unsloth/Llama-3.2-3B-Instruct --model bge-base --max-len 512 --emb ../research/runs_v12/emb --out ../research/runs_v13/llama/t2

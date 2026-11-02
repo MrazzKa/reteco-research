@@ -1,0 +1,217 @@
+=== 13:41:37 python qexp_search.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 2 --cond 2a_hist3q --query-cond 2a_history_qfirst --variants q q+r+h --llm ../research/runs_v13/llm/t2 --model bge-base --max-len 512 --emb ../research/runs_v12/emb --out ../research/runs_v13/hist/t2
+    model BAAI/bge-base-en-v1.5 rev a5beb1e3e6 dim 768 max_len 512 fp16=True (9s)
+    index: 16,381 docs, 2s (lucene)
+[t2/drones] indexes ready (2s)
+    2a_hist3q__q               104 topics (104 unique)    0.7s
+  train q      bm25 0.2546  dense 0.4293
+    2a_hist3q__q+r+h           104 topics (104 unique)    1.3s
+  train q+r+h  bm25 0.2505  dense 0.3940
+    2a_hist3q__q                38 topics (38 unique)    0.2s
+    2a_hist3q__q+r+h            38 topics (38 unique)    0.5s
+    index: 16,712 docs, 2s (lucene)
+[t2/politics] indexes ready (2s)
+    2a_hist3q__q               159 topics (159 unique)    1.0s
+  train q      bm25 0.4011  dense 0.4833
+    2a_hist3q__q+r+h           159 topics (159 unique)    1.8s
+  train q+r+h  bm25 0.4175  dense 0.4605
+    2a_hist3q__q                54 topics (54 unique)    0.3s
+    2a_hist3q__q+r+h            54 topics (54 unique)    0.5s
+    index: 20,027 docs, 2s (lucene)
+[t2/law] indexes ready (2s)
+    2a_hist3q__q               164 topics (164 unique)    0.9s
+  train q      bm25 0.2615  dense 0.4119
+    2a_hist3q__q+r+h           164 topics (164 unique)    1.7s
+  train q+r+h  bm25 0.2691  dense 0.4028
+    2a_hist3q__q                66 topics (66 unique)    0.3s
+    2a_hist3q__q+r+h            66 topics (66 unique)    0.7s
+    index: 23,297 docs, 2s (lucene)
+[t2/medicalsciences] indexes ready (2s)
+    2a_hist3q__q               139 topics (139 unique)    0.7s
+  train q      bm25 0.2015  dense 0.4710
+    2a_hist3q__q+r+h           139 topics (139 unique)    1.4s
+  train q+r+h  bm25 0.2057  dense 0.4800
+    2a_hist3q__q                44 topics (44 unique)    0.2s
+    2a_hist3q__q+r+h            44 topics (44 unique)    0.4s
+    index: 26,308 docs, 2s (lucene)
+[t2/hardware] indexes ready (2s)
+    2a_hist3q__q               130 topics (130 unique)    0.7s
+  train q      bm25 0.2238  dense 0.3111
+    2a_hist3q__q+r+h           130 topics (130 unique)    1.4s
+  train q+r+h  bm25 0.2163  dense 0.3169
+    2a_hist3q__q                58 topics (58 unique)    0.3s
+    2a_hist3q__q+r+h            58 topics (58 unique)    0.6s
+    index: 50,220 docs, 2s (lucene)
+[t2/economics] indexes ready (2s)
+    2a_hist3q__q               196 topics (196 unique)    0.9s
+  train q      bm25 0.4334  dense 0.4096
+    2a_hist3q__q+r+h           196 topics (196 unique)    1.8s
+  train q+r+h  bm25 0.4900  dense 0.3953
+    2a_hist3q__q                92 topics (92 unique)    0.5s
+    2a_hist3q__q+r+h            92 topics (92 unique)    1.0s
+    index: 52,835 docs, 2s (lucene)
+[t2/psychology] indexes ready (2s)
+    2a_hist3q__q               234 topics (234 unique)    1.1s
+  train q      bm25 0.4626  dense 0.5182
+    2a_hist3q__q+r+h           234 topics (234 unique)    2.3s
+  train q+r+h  bm25 0.5660  dense 0.4975
+    2a_hist3q__q                99 topics (99 unique)    0.5s
+    2a_hist3q__q+r+h            99 topics (99 unique)    0.9s
+    index: 57,359 docs, 2s (lucene)
+[t2/biology] indexes ready (2s)
+    2a_hist3q__q               247 topics (247 unique)    1.2s
+  train q      bm25 0.5932  dense 0.4284
+    2a_hist3q__q+r+h           247 topics (247 unique)    2.4s
+  train q+r+h  bm25 0.7277  dense 0.4574
+    2a_hist3q__q               115 topics (115 unique)    0.6s
+    2a_hist3q__q+r+h           115 topics (115 unique)    1.4s
+    index: 60,792 docs, 2s (lucene)
+[t2/sustainable_living] indexes ready (3s)
+    2a_hist3q__q               235 topics (235 unique)    1.5s
+  train q      bm25 0.5604  dense 0.5416
+    2a_hist3q__q+r+h           235 topics (235 unique)    4.0s
+  train q+r+h  bm25 0.5974  dense 0.5322
+    2a_hist3q__q                84 topics (84 unique)    0.4s
+    2a_hist3q__q+r+h            84 topics (84 unique)    0.9s
+    index: 61,961 docs, 2s (lucene)
+[t2/robotics] indexes ready (2s)
+    2a_hist3q__q               184 topics (184 unique)    0.7s
+  train q      bm25 0.4911  dense 0.3769
+    2a_hist3q__q+r+h           184 topics (184 unique)    1.7s
+  train q+r+h  bm25 0.4584  dense 0.3086
+    2a_hist3q__q                75 topics (75 unique)    0.3s
+    2a_hist3q__q+r+h            75 topics (75 unique)    0.7s
+    index: 121,249 docs, 4s (lucene)
+[t2/earth_science] indexes ready (5s)
+    2a_hist3q__q               321 topics (321 unique)    1.9s
+  train q      bm25 0.6062  dense 0.4457
+    2a_hist3q__q+r+h           321 topics (321 unique)    3.6s
+  train q+r+h  bm25 0.6345  dense 0.4007
+    2a_hist3q__q               133 topics (133 unique)    0.7s
+    2a_hist3q__q+r+h           133 topics (133 unique)    1.4s
+missing generations: 0; wrote ../research/runs_v13/hist/t2/results.json
+=== exit 0
+=== 13:44:03 python qexp_search.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 2 --cond 2a_hist3qa --query-cond 2a_history_qfirst --variants q+r+h --llm ../research/runs_v13/llm/t2 --model bge-base --max-len 512 --emb ../research/runs_v12/emb --out ../research/runs_v13/hist/t2
+    model BAAI/bge-base-en-v1.5 rev a5beb1e3e6 dim 768 max_len 512 fp16=True (6s)
+    index: 16,381 docs, 1s (lucene)
+[t2/drones] indexes ready (1s)
+    2a_hist3qa__q+r+h          104 topics (104 unique)    1.0s
+  train q+r+h  bm25 0.2632  dense 0.4492
+    2a_hist3qa__q+r+h           38 topics (38 unique)    0.3s
+    index: 16,712 docs, 1s (lucene)
+[t2/politics] indexes ready (2s)
+    2a_hist3qa__q+r+h          159 topics (159 unique)    1.8s
+  train q+r+h  bm25 0.4295  dense 0.4818
+    2a_hist3qa__q+r+h           54 topics (54 unique)    0.5s
+    index: 20,027 docs, 1s (lucene)
+[t2/law] indexes ready (2s)
+    2a_hist3qa__q+r+h          164 topics (164 unique)    1.7s
+  train q+r+h  bm25 0.2951  dense 0.4446
+    2a_hist3qa__q+r+h           66 topics (66 unique)    0.7s
+    index: 23,297 docs, 2s (lucene)
+[t2/medicalsciences] indexes ready (2s)
+    2a_hist3qa__q+r+h          139 topics (139 unique)    1.5s
+  train q+r+h  bm25 0.2235  dense 0.5020
+    2a_hist3qa__q+r+h           44 topics (44 unique)    0.4s
+    index: 26,308 docs, 2s (lucene)
+[t2/hardware] indexes ready (2s)
+    2a_hist3qa__q+r+h          130 topics (130 unique)    1.5s
+  train q+r+h  bm25 0.2425  dense 0.3531
+    2a_hist3qa__q+r+h           58 topics (58 unique)    0.7s
+    index: 50,220 docs, 2s (lucene)
+[t2/economics] indexes ready (2s)
+    2a_hist3qa__q+r+h          196 topics (196 unique)    2.0s
+  train q+r+h  bm25 0.4883  dense 0.4438
+    2a_hist3qa__q+r+h           92 topics (92 unique)    1.0s
+    index: 52,835 docs, 2s (lucene)
+[t2/psychology] indexes ready (2s)
+    2a_hist3qa__q+r+h          234 topics (234 unique)    2.4s
+  train q+r+h  bm25 0.6060  dense 0.5452
+    2a_hist3qa__q+r+h           99 topics (99 unique)    1.0s
+    index: 57,359 docs, 2s (lucene)
+[t2/biology] indexes ready (2s)
+    2a_hist3qa__q+r+h          247 topics (247 unique)    2.6s
+  train q+r+h  bm25 0.7283  dense 0.4905
+    2a_hist3qa__q+r+h          115 topics (115 unique)    1.3s
+    index: 60,792 docs, 2s (lucene)
+[t2/sustainable_living] indexes ready (2s)
+    2a_hist3qa__q+r+h          235 topics (235 unique)    2.5s
+  train q+r+h  bm25 0.6128  dense 0.5611
+    2a_hist3qa__q+r+h           84 topics (84 unique)    0.8s
+    index: 61,961 docs, 2s (lucene)
+[t2/robotics] indexes ready (2s)
+    2a_hist3qa__q+r+h          184 topics (184 unique)    1.8s
+  train q+r+h  bm25 0.4939  dense 0.3559
+    2a_hist3qa__q+r+h           75 topics (75 unique)    0.7s
+    index: 121,249 docs, 6s (lucene)
+[t2/earth_science] indexes ready (6s)
+    2a_hist3qa__q+r+h          321 topics (321 unique)    4.2s
+  train q+r+h  bm25 0.6524  dense 0.4256
+    2a_hist3qa__q+r+h          133 topics (133 unique)    1.7s
+missing generations: 0; wrote ../research/runs_v13/hist/t2/results.json
+=== exit 0
+=== 13:46:15 python hybrid.py --track 2 --conditions 2a_hist3q__q 2a_hist3q__q+r+h 2a_hist3qa__q+r+h --bm25 ../research/runs_v13/hist/t2/bm25/runs --dense ../research/runs_v13/hist/t2/dense/runs --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out ../research/runs_v13/hist/t2/hybrid.json
+
+== track 2 2a_hist3q__q (dense: 2a_hist3q__q) — train 11 dom, dev 11 dom
+  bm25             train 0.4081  dev 0.4037   kind=bm25
+  dense            train 0.4388  dev 0.3843   kind=dense
+  rerank           train 0.4446  dev 0.3870   kind=rerank
+  linear*          train 0.4806  dev 0.4352   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.6
+  rrf*             train 0.4690  dev 0.4273   kind=rrf|kb=50|kd=50|c=10
+  pool_rerank*     train 0.4388  dev 0.3843   kind=pool_rerank|kb=100|kd=100
+  rrf_c60_100+100  train 0.4579  dev 0.4073   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.0315, 'ci95': [0.0161, 0.0466], 'p_le_0': 0.0001}
+  dev rrf* - bm25: {'diff': 0.0236, 'ci95': [0.0095, 0.0374], 'p_le_0': 0.0009}
+  dev linear* - rerank: {'diff': 0.0481, 'ci95': [0.0352, 0.0612], 'p_le_0': 0.0}
+  dev dense - bm25: {'diff': -0.0194, 'ci95': [-0.0428, 0.0033], 'p_le_0': 0.9511}
+  dev rerank - bm25: {'diff': -0.0167, 'ci95': [-0.0385, 0.0049], 'p_le_0': 0.932}
+  dev linear* - dense: {'diff': 0.0509, 'ci95': [0.0367, 0.0652], 'p_le_0': 0.0}
+
+== track 2 2a_hist3q__q+r+h (dense: 2a_hist3q__q+r+h) — train 11 dom, dev 11 dom
+  bm25             train 0.4394  dev 0.4287   kind=bm25
+  dense            train 0.4223  dev 0.3777   kind=dense
+  rerank           train 0.4323  dev 0.3949   kind=rerank
+  linear*          train 0.4800  dev 0.4452   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.5
+  rrf*             train 0.4673  dev 0.4332   kind=rrf|kb=50|kd=50|c=10
+  pool_rerank*     train 0.4223  dev 0.3777   kind=pool_rerank|kb=100|kd=100
+  rrf_c60_100+100  train 0.4512  dev 0.4155   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.0165, 'ci95': [0.0035, 0.0295], 'p_le_0': 0.0062}
+  dev rrf* - bm25: {'diff': 0.0045, 'ci95': [-0.0098, 0.0188], 'p_le_0': 0.2704}
+  dev linear* - rerank: {'diff': 0.0503, 'ci95': [0.0351, 0.0653], 'p_le_0': 0.0}
+  dev dense - bm25: {'diff': -0.051, 'ci95': [-0.074, -0.0284], 'p_le_0': 1.0}
+  dev rerank - bm25: {'diff': -0.0337, 'ci95': [-0.056, -0.0113], 'p_le_0': 0.9989}
+  dev linear* - dense: {'diff': 0.0675, 'ci95': [0.0516, 0.0834], 'p_le_0': 0.0}
+
+== track 2 2a_hist3qa__q+r+h (dense: 2a_hist3qa__q+r+h) — train 11 dom, dev 11 dom
+  bm25             train 0.4578  dev 0.4500   kind=bm25
+  dense            train 0.4593  dev 0.4056   kind=dense
+  rerank           train 0.4684  dev 0.4191   kind=rerank
+  linear*          train 0.5112  dev 0.4601   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.6
+  rrf*             train 0.4940  dev 0.4597   kind=rrf|kb=50|kd=50|c=10
+  pool_rerank*     train 0.4593  dev 0.4056   kind=pool_rerank|kb=100|kd=100
+  rrf_c60_100+100  train 0.4773  dev 0.4404   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.0102, 'ci95': [-0.0048, 0.025], 'p_le_0': 0.0894}
+  dev rrf* - bm25: {'diff': 0.0097, 'ci95': [-0.004, 0.0236], 'p_le_0': 0.0794}
+  dev linear* - rerank: {'diff': 0.041, 'ci95': [0.0273, 0.0546], 'p_le_0': 0.0}
+  dev dense - bm25: {'diff': -0.0443, 'ci95': [-0.0675, -0.0224], 'p_le_0': 1.0}
+  dev rerank - bm25: {'diff': -0.0309, 'ci95': [-0.0533, -0.0092], 'p_le_0': 0.9975}
+  dev linear* - dense: {'diff': 0.0545, 'ci95': [0.0393, 0.0691], 'p_le_0': 0.0}
+wrote ../research/runs_v13/hist/t2/hybrid.json
+=== exit 0
+=== 13:53:41 python select_rule.py --rule 11 --cond 2a_history --baseline H0 --cand H0=../research/runs_v13/hybrid/bge-base_L512_t2.json:2a_history Ha=../research/runs_v13/hist/t2/hybrid.json:2a_hist3q__q+r+h Hb=../research/runs_v13/hist/t2/hybrid.json:2a_hist3qa__q+r+h --out ../research/runs_v13/select/rule11_hybrid.json
+Traceback (most recent call last):
+  File "/home/timur_rk/semeval-reteco/reteco-research/scripts/select_rule.py", line 67, in <module>
+    main()
+    ~~~~^^
+  File "/home/timur_rk/semeval-reteco/reteco-research/scripts/select_rule.py", line 39, in main
+    "dev": s["dev_macro"], "train_pt": rep["train_per_topic"][a.system],
+                                       ~~~^^^^^^^^^^^^^^^^^^^
+KeyError: 'train_per_topic'
+=== exit 1
+=== 13:53:41 python select_rule.py --rule 11 --cond 2a_history --baseline Ha --cand Ha=../research/runs_v13/hist/t2/hybrid.json:2a_hist3q__q+r+h Hb=../research/runs_v13/hist/t2/hybrid.json:2a_hist3qa__q+r+h --out ../research/runs_v13/select/rule11_a_vs_b.json
+rule 11 2a_history:
+  Hb         bm25 0.4578/0.4500  dense 0.4593/0.4056  hybrid train 0.5112  dev 0.4601
+  Ha         bm25 0.4394/0.4287  dense 0.4223/0.3777  hybrid train 0.4800  dev 0.4452
+  best on train Hb; train bootstrap {'diff': 0.0312, 'ci95': [0.0248, 0.0378], 'p_le_0': 0.0}; adopted=True -> Hb
+  dev chosen - baseline {'diff': 0.0149, 'ci95': [0.0058, 0.0243], 'p_le_0': 0.0009}
+=== exit 0
+=== 13:53:49 ALLDONE

@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/home/timur_rk/semeval-reteco/reteco-research/scripts/rule11_choice.py", line 59, in <module>
+    main()
+    ~~~~^^
+  File "/home/timur_rk/semeval-reteco/reteco-research/scripts/rule11_choice.py", line 36, in main
+    c = {"H0": load(f"{R}/hybrid/bge-base_L512_t2.json", "2a_history"),
+               ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/timur_rk/semeval-reteco/reteco-research/scripts/rule11_choice.py", line 21, in load
+    "train_pt": rep["train_per_topic"]["linear*"], "dev_pt": rep["dev_per_topic"]["linear*"]}
+                ~~~^^^^^^^^^^^^^^^^^^^
+KeyError: 'train_per_topic'

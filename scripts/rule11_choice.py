@@ -33,7 +33,7 @@ def main():
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     R = a.runs
-    c = {"H0": load(f"{R}/hybrid/bge-base_L512_t2.json", "2a_history"),
+    c = {"H0": load(f"{R}/hist/t2/hybrid_h0.json", "2a_history"),  # week-4 history hybrid, re-run with per-topic output
          "Ha": load(f"{R}/hist/t2/hybrid.json", "2a_hist3q__q+r+h"),
          "Hb": load(f"{R}/hist/t2/hybrid.json", "2a_hist3qa__q+r+h")}
     tests = {}

@@ -1,0 +1,5 @@
+Hint: A new version of huggingface_hub (2.4.0) is available! You are using version 2.3.0.
+To update, run: hf update
+Hint: The `hf-cli` skill is not installed. Run `hf skills add -g` to teach your AI agents how to use the `hf` CLI.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+path=/home/timur_rk/.cache/huggingface/hub/models--unsloth--Llama-3.2-3B-Instruct/snapshots/006f5dcd1393c3add266de40994ba96225e9689d

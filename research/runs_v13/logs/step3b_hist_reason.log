@@ -1,0 +1,2 @@
+=== 13:57:52 rule 11 hybrid choice: Hb
+=== 14:20:12 attempt 1: --conditions 2a_hist3qa__q+r+h --query-cond 2a_hist3qa --hybrid ../research/runs_v13/hist/t2/hybrid.json --bm25 ../research/runs_v13/hist/t2/bm25/runs --dense ../research/runs_v13/hist/t2/dense/runs
