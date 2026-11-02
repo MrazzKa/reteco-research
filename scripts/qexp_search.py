@@ -41,6 +41,7 @@ from passage_index import MaxPIndex, pdir  # noqa: E402
 import tiebreak  # noqa: E402
 
 VARIANTS = ("q", "q+r", "r", "q+h", "h", "q+r+h")
+SAMPLED = {"q+r+h1s": 1, "q+r+h3": 3, "q+r+h5": 5}  # rule 13: HyDE sampled at temperature 0.7 (first n of 5)
 
 
 def load_gen(llm_dir, prompt):
@@ -70,7 +71,7 @@ def main():
     ap.add_argument("--max-len", type=int, required=True)
     ap.add_argument("--emb", required=True)
     ap.add_argument("--domains", nargs="+", default=["all"])
-    ap.add_argument("--variants", nargs="+", default=list(VARIANTS))
+    ap.add_argument("--variants", nargs="+", default=list(VARIANTS), choices=list(VARIANTS) + list(SAMPLED))
     ap.add_argument("--k", type=int, default=1000)
     ap.add_argument("--passages", help="passage_index.py root: dense = MaxP over passages "
                     "(first window from --emb at L512) instead of the --max-len cache")
@@ -84,6 +85,14 @@ def main():
     ndcg = ndcg_fn(a.kit)
     doms = (T1 if a.track == 1 else T2) if a.domains == ["all"] else a.domains
     gen = {p: load_gen(a.llm, p) for p in ("reason", "hyde")}
+    samp = {}
+    sp_path = os.path.join(a.llm, "hyde_t0.7_n5.jsonl")
+    if any(v in SAMPLED for v in a.variants):
+        with open(sp_path, encoding="utf-8") as f:
+            for line in f:
+                if line.strip():
+                    r_ = json.loads(line)
+                    samp[r_["key"]] = r_["outputs"]
     # body shown to the LLM per (domain, split, qid) -> generation via the cache key
     # (Track-2 qids such as `2_turn_1` repeat across the BRIGHT domains: the domain is part of the key)
     body = {(dom, sp, qid): b for dom, sp, qid, b in llm_inputs(a.data, a.track, a.cond)}
@@ -116,19 +125,32 @@ def main():
                 r = gen["reason"].get(key_of("reason", k, **km), "") if k else ""
                 h = gen["hyde"].get(key_of("hyde", k, **km), "") if k else ""
                 missing += (not r) + (not h)
-                texts[qid] = (q, r, h)
+                texts[qid] = (q, r, h, samp.get(key_of("hyde", k, **km), []) if (k and samp) else [])
             qids = [qid for qid, _ in queries]
             # dense vectors, one encoding per distinct text
             eq = dict(zip(qids, enc.encode_queries([texts[x][0] for x in qids]).astype(np.float32)))
             er = dict(zip(qids, enc.encode_queries([texts[x][1] for x in qids]).astype(np.float32)))
             eh = dict(zip(qids, enc.encode_docs([texts[x][2] for x in qids]).astype(np.float32)))
             parts = {"q": (eq,), "q+r": (eq, er), "r": (er,), "q+h": (eq, eh), "h": (eh,), "q+r+h": (eq, er, eh)}
+            for v, n in SAMPLED.items():
+                if v in a.variants:
+                    hs = [texts[x][3][:n] for x in qids]
+                    missing += sum(len(x) < n for x in hs)
+                    flat = enc.encode_docs([t for x in hs for t in x]).astype(np.float32)
+                    ems, i = {}, 0
+                    for qid, x in zip(qids, hs):
+                        ems[qid] = flat[i:i + len(x)].mean(axis=0)
+                        i += len(x)
+                    parts[v] = (eq, er, ems)
             for v in a.variants:
                 if (sp, v) not in todo:
                     continue
                 name = f"{a.cond}__{v}"
-                bq = [(qid, "\n".join(texts[qid][{"q": 0, "r": 1, "h": 2}[c]] for c in v.split("+")))
-                      for qid in qids]
+                if v in SAMPLED:
+                    bq = [(qid, "\n".join([texts[qid][0], texts[qid][1]] + texts[qid][3][:SAMPLED[v]])) for qid in qids]
+                else:
+                    bq = [(qid, "\n".join(texts[qid][{"q": 0, "r": 1, "h": 2}[c]] for c in v.split("+")))
+                          for qid in qids]
                 runs = {"bm25": search(bm, ids, bq, "lucene", name, k=a.k, threads=8)}
                 mat = norm(sum(np.stack([p[qid] for qid in qids]) for p in parts[v]))
                 hits = gi.search(mat.astype(np.float32), a.k)

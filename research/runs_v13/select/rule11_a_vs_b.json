@@ -1,0 +1,71 @@
+{
+ "rule": "11",
+ "cond": "2a_history",
+ "baseline": "Ha",
+ "margin": 0.005,
+ "best_on_train": "Hb",
+ "train_bootstrap_best_minus_baseline": {
+  "diff": 0.0312,
+  "ci95": [
+   0.0248,
+   0.0378
+  ],
+  "p_le_0": 0.0
+ },
+ "adopted": true,
+ "chosen": "Hb",
+ "dev_bootstrap_chosen_minus_baseline": {
+  "diff": 0.0149,
+  "ci95": [
+   0.0058,
+   0.0243
+  ],
+  "p_le_0": 0.0009
+ },
+ "candidates": {
+  "Ha": {
+   "report": "../research/runs_v13/hist/t2/hybrid.json",
+   "condition": "2a_hist3q__q+r+h",
+   "cfg": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.5
+   },
+   "train": 0.48,
+   "dev": 0.4452,
+   "bm25_train": 0.4394,
+   "bm25_dev": 0.4287,
+   "dense_train": 0.4223,
+   "dense_dev": 0.3777
+  },
+  "Hb": {
+   "report": "../research/runs_v13/hist/t2/hybrid.json",
+   "condition": "2a_hist3qa__q+r+h",
+   "cfg": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "train": 0.5112,
+   "dev": 0.4601,
+   "bm25_train": 0.4578,
+   "bm25_dev": 0.45,
+   "dense_train": 0.4593,
+   "dense_dev": 0.4056
+  }
+ },
+ "dev_bootstrap_each_minus_baseline": {
+  "Hb": {
+   "diff": 0.0149,
+   "ci95": [
+    0.0058,
+    0.0243
+   ],
+   "p_le_0": 0.0009
+  }
+ }
+}

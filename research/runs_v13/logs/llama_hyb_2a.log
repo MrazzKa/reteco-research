@@ -1,0 +1,18 @@
+=== 14:26:53 python hybrid.py --track 2 --conditions 2a_current__q+r+h --bm25 ../research/runs_v13/llama/t2/bm25/runs --dense ../research/runs_v13/llama/t2/dense/runs --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out ../research/runs_v13/llama/t2/hybrid.json
+
+== track 2 2a_current__q+r+h (dense: 2a_current__q+r+h) — train 11 dom, dev 11 dom
+  bm25             train 0.2564  dev 0.2573   kind=bm25
+  dense            train 0.2806  dev 0.2440   kind=dense
+  rerank           train 0.2892  dev 0.2553   kind=rerank
+  linear*          train 0.3040  dev 0.2825   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.6
+  rrf*             train 0.2962  dev 0.2794   kind=rrf|kb=50|kd=50|c=10
+  pool_rerank*     train 0.2806  dev 0.2440   kind=pool_rerank|kb=100|kd=100
+  rrf_c60_100+100  train 0.2847  dev 0.2664   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.0252, 'ci95': [0.0113, 0.0387], 'p_le_0': 0.0004}
+  dev rrf* - bm25: {'diff': 0.0221, 'ci95': [0.0095, 0.0344], 'p_le_0': 0.0}
+  dev linear* - rerank: {'diff': 0.0272, 'ci95': [0.0158, 0.0383], 'p_le_0': 0.0}
+  dev dense - bm25: {'diff': -0.0133, 'ci95': [-0.0333, 0.0062], 'p_le_0': 0.9052}
+  dev rerank - bm25: {'diff': -0.002, 'ci95': [-0.0213, 0.0172], 'p_le_0': 0.574}
+  dev linear* - dense: {'diff': 0.0385, 'ci95': [0.026, 0.0509], 'p_le_0': 0.0}
+wrote ../research/runs_v13/llama/t2/hybrid.json
+=== exit 0

@@ -147,6 +147,8 @@ def main():
     ap.add_argument("--chunk", type=int, default=256, help="inputs per generate() call (cache flush)")
     ap.add_argument("--llm", default="qwen3-4b", choices=sorted(LLMS))
     ap.add_argument("--splits", nargs="+", default=["train", "dev"])
+    ap.add_argument("--samples", type=int, default=1, help="rule 13: n sampled outputs per input (stored as a list)")
+    ap.add_argument("--temperature", type=float, default=0.0)
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     model, quant = LLMS[a.llm]
@@ -161,15 +163,16 @@ def main():
               enforce_eager=True, seed=0, max_num_seqs=a.max_seqs,
               max_num_batched_tokens=a.max_batched)
     tok = llm.get_tokenizer()
-    sp = SamplingParams(temperature=0.0, max_tokens=a.max_new, seed=0)
+    sp = SamplingParams(temperature=a.temperature, max_tokens=a.max_new, seed=0, n=a.samples)
     os.makedirs(a.out, exist_ok=True)
+    suffix = f"_t{a.temperature:g}_n{a.samples}" if a.samples > 1 or a.temperature > 0 else ""
     meta = {"model": model, "revision": rev,
             "quant": quant or "AWQ W4A16 (compressed-tensors)", "engine": "vllm",
-            "temperature": 0.0, "max_new_tokens": a.max_new, "system": SYSTEM, "prompts": PROMPTS,
+            "temperature": a.temperature, "samples": a.samples, "max_new_tokens": a.max_new, "system": SYSTEM, "prompts": PROMPTS,
             "time_hint": TIME_HINT, "max_input_chars": MAX_INPUT_CHARS}
-    json.dump(meta, open(os.path.join(a.out, "meta.json"), "w"), indent=1)
+    json.dump(meta, open(os.path.join(a.out, f"meta{suffix}.json"), "w"), indent=1)
     for prompt in a.prompts:
-        path = os.path.join(a.out, f"{prompt}.jsonl")
+        path = os.path.join(a.out, f"{prompt}{suffix}.jsonl")
         done = set()
         if os.path.exists(path):
             with open(path, encoding="utf-8") as f:
@@ -199,11 +202,14 @@ def main():
                 with open(path, "a", encoding="utf-8") as f:
                     for (k, b), r in zip(part, res):
                         o = r.outputs[0]
-                        n_tok += len(o.token_ids)
-                        f.write(json.dumps({"key": k, "prompt": prompt, "track": a.track, "cond": cond,
-                                            "input": b, "output": o.text.strip(),
-                                            "n_tokens": len(o.token_ids),
-                                            "finish": o.finish_reason}) + "\n")
+                        n_tok += sum(len(x.token_ids) for x in r.outputs)
+                        row = {"key": k, "prompt": prompt, "track": a.track, "cond": cond,
+                               "input": b, "output": o.text.strip(),
+                               "n_tokens": len(o.token_ids), "finish": o.finish_reason}
+                        if a.samples > 1:
+                            row["outputs"] = [x.text.strip() for x in r.outputs]
+                            row["temperature"] = a.temperature
+                        f.write(json.dumps(row) + "\n")
                 el = time.time() - t_all
                 print(f"  {s + len(part)}/{len(todo)}  chunk {time.time() - t0:.0f}s  "
                       f"{n_tok / max(el, 1e-9):.0f} tok/s  {(s + len(part)) / max(el, 1e-9):.2f} q/s", flush=True)

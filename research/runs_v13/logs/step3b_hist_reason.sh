@@ -3,7 +3,7 @@
 cd ~/semeval-reteco/reteco-research/scripts
 D=../../reteco_data_v11; K=../../RETECO/starter_kit; R=../research/runs_v13; PY=~/semeval-reteco/.venv/bin/python
 while ! grep -q ALLDONE $R/logs/step3_hist.log; do sleep 20; done
-$PY rule11_choice.py --runs $R --out $R/select/rule11.json > $R/logs/rule11_choice.log 2>&1
+[ -f $R/select/rule11.json ] || $PY rule11_choice.py --runs $R --out $R/select/rule11.json > $R/logs/rule11_choice.log 2>&1
 CH=$($PY -c "import json;print(json.load(open('$R/select/rule11.json'))['chosen'])")
 echo "=== $(date +%H:%M:%S) rule 11 hybrid choice: $CH"
 case $CH in

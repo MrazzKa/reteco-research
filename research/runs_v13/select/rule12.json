@@ -1,0 +1,22 @@
+{
+ "rule": "12",
+ "current_system": "+ ReasonEmbed (no MaxP) = B",
+ "history_system": "rule 11 Hb + ReasonEmbed (interp=0.9)",
+ "train": {
+  "current": 0.4317,
+  "history": 0.583
+ },
+ "dev": {
+  "current": 0.3779,
+  "history": 0.5475
+ },
+ "train_history_minus_current": {
+  "diff": 0.1513,
+  "ci95": [
+   0.1172,
+   0.1871
+  ],
+  "p_le_0": 0.0
+ },
+ "decision": "main 2a = with history"
+}

@@ -1,1 +1,129 @@
 === 14:20:10 python qexp_search.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 2 --cond 2a_current --variants q+r+h --llm ../research/runs_v13/llm_llama/t2 --llm-model unsloth/Llama-3.2-3B-Instruct --model bge-base --max-len 512 --emb ../research/runs_v12/emb --out ../research/runs_v13/llama/t2
+    model BAAI/bge-base-en-v1.5 rev a5beb1e3e6 dim 768 max_len 512 fp16=True (9s)
+    index: 16,381 docs, 1s (lucene)
+[t2/drones] indexes ready (1s)
+    2a_current__q+r+h          104 topics (104 unique)    0.9s
+  train q+r+h  bm25 0.1399  dense 0.3025
+    2a_current__q+r+h           38 topics (38 unique)    0.4s
+    index: 16,712 docs, 2s (lucene)
+[t2/politics] indexes ready (2s)
+    2a_current__q+r+h          159 topics (159 unique)    1.6s
+  train q+r+h  bm25 0.1960  dense 0.2890
+    2a_current__q+r+h           54 topics (54 unique)    0.6s
+    index: 20,027 docs, 2s (lucene)
+[t2/law] indexes ready (2s)
+    2a_current__q+r+h          164 topics (164 unique)    1.4s
+  train q+r+h  bm25 0.1298  dense 0.2803
+    2a_current__q+r+h           66 topics (66 unique)    0.6s
+    index: 23,297 docs, 3s (lucene)
+[t2/medicalsciences] indexes ready (3s)
+    2a_current__q+r+h          139 topics (139 unique)    1.0s
+  train q+r+h  bm25 0.0953  dense 0.3525
+    2a_current__q+r+h           44 topics (44 unique)    0.3s
+    index: 26,308 docs, 2s (lucene)
+[t2/hardware] indexes ready (2s)
+    2a_current__q+r+h          130 topics (130 unique)    1.0s
+  train q+r+h  bm25 0.1250  dense 0.2392
+    2a_current__q+r+h           58 topics (58 unique)    0.4s
+    index: 50,220 docs, 2s (lucene)
+[t2/economics] indexes ready (2s)
+    2a_current__q+r+h          196 topics (196 unique)    1.3s
+  train q+r+h  bm25 0.2526  dense 0.2371
+    2a_current__q+r+h           92 topics (92 unique)    0.6s
+    index: 52,835 docs, 2s (lucene)
+[t2/psychology] indexes ready (2s)
+    2a_current__q+r+h          234 topics (234 unique)    1.6s
+  train q+r+h  bm25 0.3257  dense 0.3045
+    2a_current__q+r+h           99 topics (99 unique)    0.6s
+    index: 57,359 docs, 2s (lucene)
+[t2/biology] indexes ready (2s)
+    2a_current__q+r+h          247 topics (247 unique)    1.6s
+  train q+r+h  bm25 0.4958  dense 0.2820
+    2a_current__q+r+h          115 topics (115 unique)    0.8s
+    index: 60,792 docs, 2s (lucene)
+[t2/sustainable_living] indexes ready (3s)
+    2a_current__q+r+h          235 topics (235 unique)    1.7s
+  train q+r+h  bm25 0.3786  dense 0.3381
+    2a_current__q+r+h           84 topics (84 unique)    0.6s
+    index: 61,961 docs, 2s (lucene)
+[t2/robotics] indexes ready (2s)
+    2a_current__q+r+h          184 topics (184 unique)    1.2s
+  train q+r+h  bm25 0.2488  dense 0.1923
+    2a_current__q+r+h           75 topics (75 unique)    0.5s
+    index: 121,249 docs, 4s (lucene)
+[t2/earth_science] indexes ready (5s)
+    2a_current__q+r+h          321 topics (321 unique)    2.2s
+  train q+r+h  bm25 0.4332  dense 0.2692
+    2a_current__q+r+h          133 topics (133 unique)    0.9s
+missing generations: 0; wrote ../research/runs_v13/llama/t2/results.json
+=== exit 0
+=== 14:21:53 python qexp_search.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 1 --cond 1a --variants q+r+h --llm ../research/runs_v13/llm_llama/t1 --llm-model unsloth/Llama-3.2-3B-Instruct --model bge-small --max-len 256 --emb ../research/runs_v12/emb --out ../research/runs_v13/llama/t1
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 256 fp16=True (6s)
+    index: 9,680 docs, 3s (lucene)
+[t1/iota] indexes ready (3s)
+    1a__q+r+h                    7 topics (7 unique)    0.1s
+  train q+r+h  bm25 0.0779  dense 0.2521
+    1a__q+r+h                    3 topics (3 unique)    0.0s
+    index: 25,040 docs, 4s (lucene)
+[t1/quant] indexes ready (4s)
+    1a__q+r+h                   24 topics (24 unique)    0.4s
+  train q+r+h  bm25 0.0000  dense 0.1960
+    1a__q+r+h                   10 topics (10 unique)    0.1s
+    index: 36,110 docs, 7s (lucene)
+[t1/law] indexes ready (7s)
+    1a__q+r+h                   24 topics (24 unique)    0.3s
+  train q+r+h  bm25 0.0731  dense 0.2647
+    1a__q+r+h                   11 topics (11 unique)    0.1s
+    index: 43,584 docs, 5s (lucene)
+[t1/workplace] indexes ready (5s)
+    1a__q+r+h                   25 topics (25 unique)    0.4s
+  train q+r+h  bm25 0.1984  dense 0.3614
+    1a__q+r+h                   11 topics (11 unique)    0.2s
+    index: 47,509 docs, 9s (lucene)
+[t1/cardano] indexes ready (9s)
+    1a__q+r+h                   36 topics (36 unique)    0.4s
+  train q+r+h  bm25 0.1785  dense 0.2357
+    1a__q+r+h                   15 topics (15 unique)    0.2s
+    index: 53,955 docs, 10s (lucene)
+[t1/monero] indexes ready (10s)
+    1a__q+r+h                   46 topics (46 unique)    0.5s
+  train q+r+h  bm25 0.0082  dense 0.1847
+    1a__q+r+h                   19 topics (19 unique)    0.2s
+    index: 74,692 docs, 13s (lucene)
+[t1/economics] indexes ready (13s)
+    1a__q+r+h                   58 topics (58 unique)    0.9s
+  train q+r+h  bm25 0.0756  dense 0.1397
+    1a__q+r+h                   25 topics (25 unique)    0.4s
+    index: 76,706 docs, 13s (lucene)
+[t1/bitcoin] indexes ready (13s)
+    1a__q+r+h                   70 topics (70 unique)    0.9s
+  train q+r+h  bm25 0.0436  dense 0.1826
+    1a__q+r+h                   30 topics (30 unique)    0.4s
+    index: 135,207 docs, 26s (lucene)
+[t1/politics] indexes ready (26s)
+    1a__q+r+h                  105 topics (105 unique)    2.0s
+  train q+r+h  bm25 0.3690  dense 0.2903
+    1a__q+r+h                   45 topics (45 unique)    0.8s
+    index: 136,101 docs, 28s (lucene)
+[t1/genealogy] indexes ready (28s)
+    1a__q+r+h                   80 topics (80 unique)    1.5s
+  train q+r+h  bm25 0.1411  dense 0.3112
+    1a__q+r+h                   35 topics (35 unique)    0.6s
+    index: 158,771 docs, 24s (lucene)
+[t1/travel] indexes ready (25s)
+    1a__q+r+h                   70 topics (70 unique)    1.3s
+  train q+r+h  bm25 0.0368  dense 0.2498
+    1a__q+r+h                   30 topics (30 unique)    0.5s
+    index: 169,552 docs, 33s (lucene)
+[t1/hsm] indexes ready (33s)
+    1a__q+r+h                  105 topics (105 unique)    2.0s
+  train q+r+h  bm25 0.2488  dense 0.2291
+    1a__q+r+h                   45 topics (45 unique)    0.8s
+    index: 200,252 docs, 62s (lucene)
+[t1/history] indexes ready (63s)
+    1a__q+r+h                  561 topics (561 unique)   12.2s
+  train q+r+h  bm25 0.0583  dense 0.2394
+    1a__q+r+h                  240 topics (240 unique)    5.4s
+missing generations: 0; wrote ../research/runs_v13/llama/t1/results.json
+=== exit 0
+=== 14:29:19 ALLDONE

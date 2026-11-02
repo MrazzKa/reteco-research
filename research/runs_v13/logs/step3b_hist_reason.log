@@ -1,2 +1,21 @@
 === 13:57:52 rule 11 hybrid choice: Hb
 === 14:20:12 attempt 1: --conditions 2a_hist3qa__q+r+h --query-cond 2a_hist3qa --hybrid ../research/runs_v13/hist/t2/hybrid.json --bm25 ../research/runs_v13/hist/t2/bm25/runs --dense ../research/runs_v13/hist/t2/dense/runs
+  [2a_hist3qa__q+r+h] docs 2000/4506 (366s)
+  [2a_hist3qa__q+r+h] docs 4000/4506 (561s)
+  [2a_hist3qa__q+r+h] docs 4506/4506 (599s)
+  [2a_hist3qa__q+r+h] 4506 docs + 1188 queries in 751s
+== t2 2a_hist3qa__q+r+h: none train 0.517 dev 0.4601 | best on train ('interp', 0.9): train 0.583 dev 0.5475 train boot {'diff': 0.066, 'ci95': [0.0406, 0.0911], 'p_le_0': 0.0}
+   none=0: train 0.517  dev 0.4601
+   top=10: train 0.5419  dev 0.498
+   top=20: train 0.5658  dev 0.5296
+   top=50: train 0.5812  dev 0.5438
+   interp=0.1: train 0.5265  dev 0.4709
+   interp=0.2: train 0.5319  dev 0.4846
+   interp=0.3: train 0.538  dev 0.4926
+   interp=0.4: train 0.5503  dev 0.5037
+   interp=0.5: train 0.5585  dev 0.5154
+   interp=0.6: train 0.5694  dev 0.5251
+   interp=0.7: train 0.575  dev 0.5343
+   interp=0.8: train 0.5818  dev 0.5386
+   interp=0.9: train 0.583  dev 0.5475
+=== 14:32:54 ALLDONE

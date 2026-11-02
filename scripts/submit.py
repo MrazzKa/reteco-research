@@ -214,7 +214,7 @@ def run_variant(a, name, cfg, enc_cache):
     qcache = load_cache(qcache_path)
     n_new_docs = 0
     scores = {}
-    for dom in doms:
+    for dom in doms if rc.get("use", True) else []:
         ts, pools, _, _, _ = pending[dom]
         cache = load_cache(os.path.join(cdir, f"docs_{dom}"))
         need = sorted({d for q in pools for d, _ in pools[q][:rc["pool"]]} - set(cache))
@@ -257,7 +257,7 @@ def run_variant(a, name, cfg, enc_cache):
                     continue
                 seen_topics.add(q)
                 pool = pools[q][:rc["pool"]]
-                head = rank(pool, how, scores[dom][q]) if how[0] != "none" else [d for d, _ in pool]
+                head = rank(pool, how, scores[dom][q]) if how[0] != "none" else [d for d, _ in pool]  # none: fused order
                 lst, seen = [], set()
                 for d in head + [d for d, _ in pools[q][rc["pool"]:]] + [d for d, _ in dres[q]] + [d for d, _ in bres[q]]:
                     if d in seen:

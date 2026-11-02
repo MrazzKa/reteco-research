@@ -1,0 +1,122 @@
+{
+ "rows": [
+  {
+   "sub": "1a",
+   "role": "main",
+   "run_id": "UA_1a_main",
+   "what": "Qwen3-4B q+r+h \u2192 BM25 + bge-small L256 hybrid \u2192 ReasonEmbed top 50 (interp=0.8)",
+   "stage": "+ ReasonEmbed",
+   "train": 0.3078,
+   "dev": 0.3667,
+   "dev_testlike": 0.3689,
+   "n_testlike": 511,
+   "foreign_dev": 0.0677,
+   "foreign_train": 0.0701
+  },
+  {
+   "sub": "1a",
+   "role": "fallback",
+   "run_id": "UA_1a_noRE",
+   "what": "same without ReasonEmbed",
+   "stage": "+ q+r+h",
+   "train": 0.2823,
+   "dev": 0.3258,
+   "dev_testlike": 0.3279,
+   "n_testlike": 511,
+   "foreign_dev": 0.0628,
+   "foreign_train": 0.0568
+  },
+  {
+   "sub": "1b",
+   "role": "main",
+   "run_id": "UA_1b_main",
+   "what": "Qwen3-4B q+r+h (query + step) \u2192 BM25 + bge-small L256 hybrid \u2192 ReasonEmbed top 50 (interp=0.7)",
+   "stage": "+ ReasonEmbed",
+   "train": 0.3754,
+   "dev": 0.4053,
+   "dev_testlike": 0.4063,
+   "n_testlike": 1205,
+   "foreign_dev": 0.0579,
+   "foreign_train": 0.063
+  },
+  {
+   "sub": "1b",
+   "role": "fallback",
+   "run_id": "UA_1b_noRE",
+   "what": "same without ReasonEmbed",
+   "stage": "+ q+r+h",
+   "train": 0.3442,
+   "dev": 0.3505,
+   "dev_testlike": 0.3515,
+   "n_testlike": 1205,
+   "foreign_dev": 0.053,
+   "foreign_train": 0.058
+  },
+  {
+   "sub": "2a",
+   "role": "main",
+   "run_id": "UA_2a_history",
+   "what": "history: Qwen3-4B q+r+h on current question + \u2264 3 earlier turns (Hb) \u2192 hybrid \u2192 ReasonEmbed top 50 (interp=0.9)",
+   "stage": "hist + ReasonEmbed (rule 11)",
+   "train": 0.583,
+   "dev": 0.5475,
+   "dev_testlike": 0.5477,
+   "n_testlike": 854,
+   "foreign_dev": 0.0216,
+   "foreign_train": 0.0191
+  },
+  {
+   "sub": "2a",
+   "role": "fallback",
+   "run_id": "UA_2a_nomaxp",
+   "what": "Qwen3-4B q+r+h \u2192 BM25 + bge-base hybrid (no MaxP) \u2192 ReasonEmbed top 50 (interp=0.8)",
+   "stage": "+ ReasonEmbed (no MaxP) = B",
+   "train": 0.4317,
+   "dev": 0.3779,
+   "dev_testlike": 0.3786,
+   "n_testlike": 854,
+   "foreign_dev": 0.0245,
+   "foreign_train": 0.023
+  },
+  {
+   "sub": "2a",
+   "role": "fallback",
+   "run_id": "UA_2a_maxp",
+   "what": "Qwen3-4B q+r+h \u2192 BM25 + bge-base MaxP hybrid \u2192 ReasonEmbed top 50 (interp=0.8)",
+   "stage": "+ ReasonEmbed (MaxP pool) = A",
+   "train": 0.4359,
+   "dev": 0.3901,
+   "dev_testlike": 0.391,
+   "n_testlike": 854,
+   "foreign_dev": 0.0259,
+   "foreign_train": 0.0255
+  }
+ ],
+ "notes": [
+  "1a/1b fallbacks are the train-chosen q+r+h hybrids without ReasonEmbed. Train column = the rule-8 subsample (\u2264 30 topics per domain) for every row, so rows are comparable.",
+  "Rule 10: main = B (no MaxP), A = fallback; rule 11 hybrid choice Hb; rule 12: main 2a = with history.",
+  "Test-like topics are almost all topics (train and dev share very few gold documents), so this column is close to the full dev number; the foreign-gold share is the more informative column."
+ ],
+ "rule12": {
+  "rule": "12",
+  "current_system": "+ ReasonEmbed (no MaxP) = B",
+  "history_system": "rule 11 Hb + ReasonEmbed (interp=0.9)",
+  "train": {
+   "current": 0.4317,
+   "history": 0.583
+  },
+  "dev": {
+   "current": 0.3779,
+   "history": 0.5475
+  },
+  "train_history_minus_current": {
+   "diff": 0.1513,
+   "ci95": [
+    0.1172,
+    0.1871
+   ],
+   "p_le_0": 0.0
+  },
+  "decision": "main 2a = with history"
+ }
+}

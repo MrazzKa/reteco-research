@@ -1,0 +1,43 @@
+=== 14:32:58 /home/timur_rk/semeval-reteco/.venv/bin/python foreign_gold.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --runs ../research/runs_v13 --conditions 2a_history --out ../research/runs_v13/foreign/report.json
+2a_history  week4 hybrid                     train     n=2113  nDCG 0.4806  foreign@10 0.0172 (corpus 0.0064)  long@10 0.1486 foreign-of-long 0.0646 (corpus 0.0414)  test-like n=2110 0.4801  removed 0.4834
+2a_history  week4 hybrid                     train_sub n=330   nDCG 0.4889  foreign@10 0.0161 (corpus 0.0064)  long@10 0.1527 foreign-of-long 0.0556 (corpus 0.0414)  test-like n=330 0.4889  removed 0.4907
+2a_history  week4 hybrid                     dev       n=858   nDCG 0.4352  foreign@10 0.0159 (corpus 0.0064)  long@10 0.1449 foreign-of-long 0.0771 (corpus 0.0414)  test-like n=854 0.4357  removed 0.437
+2a_history  hist q+r+h hybrid (rule 11)      train_sub n=330   nDCG 0.517  foreign@10 0.0194 (corpus 0.0064)  long@10 0.1618 foreign-of-long 0.0712 (corpus 0.0414)  test-like n=330 0.517  removed 0.5212
+2a_history  hist q+r+h hybrid (rule 11)      dev       n=858   nDCG 0.4601  foreign@10 0.0174 (corpus 0.0064)  long@10 0.1564 foreign-of-long 0.0855 (corpus 0.0414)  test-like n=854 0.4608  removed 0.4642
+2a_history  hist + ReasonEmbed (rule 11)     train_sub n=330   nDCG 0.583  foreign@10 0.0191 (corpus 0.0064)  long@10 0.1824 foreign-of-long 0.0615 (corpus 0.0414)  test-like n=330 0.583  removed 0.5869
+2a_history  hist + ReasonEmbed (rule 11)     dev       n=858   nDCG 0.5475  foreign@10 0.0216 (corpus 0.0064)  long@10 0.1752 foreign-of-long 0.0943 (corpus 0.0414)  test-like n=854 0.5477  removed 0.5503
+wrote ../research/runs_v13/foreign/report.json
+=== exit 0
+=== 14:33:04 /home/timur_rk/semeval-reteco/.venv/bin/python final_1102.py --runs ../research/runs_v13
+{
+ "rule": "12",
+ "current_system": "+ ReasonEmbed (no MaxP) = B",
+ "history_system": "rule 11 Hb + ReasonEmbed (interp=0.9)",
+ "train": {
+  "current": 0.4317,
+  "history": 0.583
+ },
+ "dev": {
+  "current": 0.3779,
+  "history": 0.5475
+ },
+ "train_history_minus_current": {
+  "diff": 0.1513,
+  "ci95": [
+   0.1172,
+   0.1871
+  ],
+  "p_le_0": 0.0
+ },
+ "decision": "main 2a = with history"
+}
+1a main UA_1a_main 0.3078 0.3667 0.3689 0.0677
+1a fallback UA_1a_noRE 0.2823 0.3258 0.3279 0.0628
+1b main UA_1b_main 0.3754 0.4053 0.4063 0.0579
+1b fallback UA_1b_noRE 0.3442 0.3505 0.3515 0.053
+2a main UA_2a_history 0.583 0.5475 0.5477 0.0216
+2a fallback UA_2a_nomaxp 0.4317 0.3779 0.3786 0.0245
+2a fallback UA_2a_maxp 0.4359 0.3901 0.391 0.0259
+=== exit 0
+=== rule 12: main 2a = with history
+=== 14:33:04 gen gpu-util 0.75

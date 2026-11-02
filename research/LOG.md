@@ -1159,3 +1159,88 @@ command: `queue_1102.sh` → `llm_expand.py --llm llama3.2-3b --track 2 --condit
   --conditions 1a` (out `runs_v13/llm_llama/t{1,2}`, git-ignored; meta.json records model, revision 006f5dc…, fp8).
 cost: 2a 5,942 generations at ~13 inputs/s (1,619 tokens/s); 1a 3,460 at ~3.4 inputs/s (longer Track-1 inputs);
   26 min in total, gpu-util 0.75. Mean reason output ~170 tokens (longer than Qwen's ~136).
+
+## 2026-11-02 13:41–13:58 — rule 11, hybrid stage: history with the LLM (Hb adopted)
+commands: `research/runs_v13/logs/step3_hist.sh` (log `step3_hist.log`): `qexp_search.py --track 2 --cond 2a_hist3q
+  --query-cond 2a_history_qfirst --variants q q+r+h` and `--cond 2a_hist3qa --variants q+r+h` (out `runs_v13/hist/t2`,
+  0 missing generations), `hybrid.py` over the three conditions (out `hist/t2/hybrid.json`, 7 min).
+incident: the scripted choice (`select_rule.py`, then `rule11_choice.py`) failed because the week-4 history report
+  (`runs_v13/hybrid/bge-base_L512_t2.json`) has no train per-topic values; the waiting ReasonEmbed job was stopped
+  before it ran. Fix: `hybrid.py --conditions 2a_history --dense-cond 2a_history_qfirst` re-run on the same runs_v13
+  BM25/dense files (out `hist/t2/hybrid_h0.json`, 3 min): same configuration (z-score α 0.6) and the same numbers
+  (train 0.4806, dev 0.4352); `rule11_choice.py` now reads H0 from there (`select/rule11.json`).
+result (train / dev, fusion chosen on train): H0 (week 4, no LLM) 0.4806 / 0.4352 · Ha (LLM input = current + ≤ 3
+  earlier questions) 0.4800 / 0.4452 · Hb (+ earlier answers) **0.5112 / 0.4601**.
+  train Ha − H0 −0.0006 [−0.0113, +0.0099]; Hb − H0 +0.0306 [+0.0202, +0.0407]; Hb − Ha +0.0312 [+0.0248, +0.0378]
+  → **Hb adopted** (margin over H0 and over Ha). Dev Hb − H0 +0.0250 [+0.0099, +0.0399]; Ha − H0 +0.0101 [−0.0056, +0.0257].
+reading: the LLM needs the earlier answers to help; with questions only it adds nothing over the plain history text
+  on train. Next: ReasonEmbed over the Hb top 50 (`step3b_hist_reason.sh`, after the GPU queue).
+
+## 2026-11-02 14:25 — rule for the history examples (written before any example is seen)
+file: `research/cases/history_llm_dev.md`. Systems: before = H0 (week-4 history hybrid), after = Hb (rule-11 hybrid,
+  LLM input with earlier answers). Dev turns with turn number ≥ 2, split into improved (nDCG@10 after > before) and
+  worsened; 2 from each drawn with random.Random(20260921) over sorted (domain, qid) → 4 examples. Shown: current
+  question, the history the LLM saw (first 400 chars), the LLM reason text (first 400 chars), each gold document's
+  first 250 chars with its rank before and after. No resampling.
+
+## 2026-11-02 14:24 — rule 13 clarified (before any sampled generation exists)
+"n = 1 always allowed" means: the baseline is the current system (one HyDE passage at temperature 0). Candidates:
+  n = 3 and n = 5 HyDE passages sampled at temperature 0.7 (vLLM, seed 0, one request with n = 5; n = 3 = the first
+  three samples), reason text unchanged (temperature 0). BM25 query = q + r + all n passages; dense = normalised sum of
+  e(q), e_query(r) and the mean of the n e_doc(h_i). n = 1 at temperature 0.7 is reported, not a candidate. Hybrid grid
+  tuned on train per candidate; n* = best train macro, adopted over the baseline with +0.005 and bootstrap lower
+  bound > 0; then ReasonEmbed over the top 50 with its weight re-chosen on the rule-8 train subsample, and the
+  final comparison against the current final system of the condition on that subsample with the same margin.
+  Order: 2a main (rule 12), then 1a, then 1b — as time allows before 17:00.
+
+## 2026-11-02 14:20–14:31 — step 4 result: contamination ablation with an LLM that predates BRIGHT (no choice)
+commands: `research/runs_v13/logs/step4_llama.sh` (log `step4_llama.log`): `qexp_search.py --variants q+r+h --llm
+  runs_v13/llm_llama/t{2,1} --llm-model unsloth/Llama-3.2-3B-Instruct` for 2a current and 1a (0 missing generations),
+  `hybrid.py` per condition (fusion tuned on train: 2a z-score α 0.6, 1a z-score α 0.7; logs `llama_hyb_*.log`);
+  bootstraps (train topics / dev topics, within domain) in `runs_v13/llama/bootstrap_full.json`.
+result (q+r+h hybrid − plain-query hybrid q; train / dev):
+  2a current, all 11 domains: Qwen3-4B +0.0562 [+0.046, +0.066] / +0.0557 [+0.041, +0.071];
+                              Llama-3.2-3B +0.0235 [+0.013, +0.033] / +0.0282 [+0.014, +0.043]
+    BRIGHT (6):         Qwen +0.1075 [+0.095, +0.121] / +0.1117 [+0.091, +0.133]; Llama +0.0665 [+0.054, +0.080] / +0.0747 [+0.056, +0.094]
+    StackExchange (5):  Qwen −0.0053 [−0.022, +0.011] / −0.0115 [−0.032, +0.009]; Llama −0.0280 [−0.044, −0.012] / −0.0276 [−0.051, −0.005]
+  1a (TEMPO, not BRIGHT): Qwen +0.0486 [+0.035, +0.063] / +0.0425 [+0.021, +0.063]; Llama +0.0274 [+0.013, +0.042] / +0.0231 [+0.001, +0.046]
+  macro train/dev: 2a q 0.2805/0.2543, Qwen 0.3367/0.3100, Llama 0.3040/0.2825; 1a q 0.2462/0.2834, Qwen 0.2949/0.3258,
+  Llama 0.2737/0.3064.
+reading: an LLM whose documented knowledge cutoff (December 2023) predates BRIGHT (July 2024) reproduces the same
+  pattern — a large gain in the BRIGHT-derived domains, none (here even a loss) in the StackExchange ones. Qwen is
+  stronger everywhere, and by a similar factor in BRIGHT domains (Llama reaches 62% of Qwen's train gain) and on Track 1
+  where BRIGHT plays no role (56%). So the BRIGHT gain is not mainly benchmark contamination; it is consistent with
+  BRIGHT gold being encyclopaedic text whose vocabulary any instruction LLM reproduces. Limits: the BRIGHT source
+  documents (Wikipedia pages, StackExchange posts) predate both models, so exposure to the documents themselves cannot
+  be excluded; one alternative model, one size (3B vs 4B), Llama via an ungated mirror with FP8 quantisation.
+
+## 2026-11-02 14:20–14:33 — rule 11, second stage: ReasonEmbed over the history hybrid (adopted)
+command: `research/runs_v13/logs/step3b_hist_reason.sh` (log `step3b_hist_reason.log`): `reason_rerank.py --track 2
+  --conditions 2a_hist3qa__q+r+h --query-cond 2a_hist3qa --name 2ah_hybrid --pool 50 --save-runs runs_v13/foreign/runs`
+  (query = current question first, then ≤ 3 earlier Q/A turns, instruction "Given a <domain> conversation, retrieve
+  documents that help answer the current question."; ≤ 512 tokens).
+cost: 4,506 new documents + 1,188 queries, 751 s.
+result (train subsample / dev): none 0.5170 / 0.4601 · top-N N=10 0.5419/0.4980, N=20 0.5658/0.5296, N=50 0.5812/0.5438 ·
+  interp 0.5 0.5585/0.5154, 0.7 0.5750/0.5343, 0.8 0.5818/0.5386, **0.9 0.5830/0.5475** (best on train).
+  train − none +0.0660 [+0.0406, +0.0911] → **adopted** (w 0.9). Dev − none +0.0874 [+0.0723, +0.1019].
+
+## 2026-11-02 14:33 — rule 12 result: the main 2a run is the history system
+command: `foreign_gold.py --conditions 2a_history` then `final_1102.py --runs runs_v13` (inside `step5_hyde.sh`, log
+  `step5_hyde.log`; out `select/rule12.json`, `final_1102.json`).
+result (train subsample, same 330 topics): current-turn best after rule 10 (B, no MaxP) 0.4317 vs history (Hb +
+  ReasonEmbed w 0.9) 0.5830; history − current +0.1513 [+0.1172, +0.1871] → **main 2a = with history**; fallbacks:
+  current turn without MaxP (B) and with MaxP (A). Dev: history 0.5475, B 0.3779, A 0.3901.
+foreign gold, 2a history (dev top 10): week-4 hybrid 1.59%, Hb hybrid 1.74%, + ReasonEmbed 2.16% (corpus 0.64%);
+  removing all foreign gold: 0.5475 → 0.5503.
+dev breakdown (`t2_breakdown.py`, out `foreign/t2_breakdown_dev.json`; mean over turns):
+  | system | macro | first turn (211) | recycled gold (568) | new gold (79) | T1 | T2 | T3 | T4 | T5+ |
+  | history main | 0.5475 | 0.5213 | 0.6371 | 0.3759 | 0.5213 | 0.5963 | 0.6021 | 0.6417 | 0.5870 |
+  | history hybrid (no ReasonEmbed) | 0.4601 | 0.4195 | 0.5556 | 0.3149 | 0.4195 | 0.4870 | 0.5199 | 0.5914 | 0.5430 |
+  | current, no MaxP (B) | 0.3779 | 0.5019 | 0.3805 | 0.3580 | 0.5019 | 0.3838 | 0.3629 | 0.3685 | 0.4062 |
+  | current, MaxP (A) | 0.3901 | 0.5188 | 0.3989 | 0.3677 | 0.5188 | 0.4017 | 0.3824 | 0.3815 | 0.4235 |
+reading: as in week 4, most of the history gain is on turns whose gold was already gold for an earlier turn (the
+  earlier answers are in the input) — 0.38 → 0.64. But unlike week 4 (history hybrid 0.208 vs current 0.245 on the 79
+  new-gold turns), the week-5 history system no longer loses on new-gold turns (0.376 vs 0.358 / 0.368). First turns
+  have no history; their difference (0.521 vs 0.502) comes from the different fusion weight, ReasonEmbed weight and
+  instruction. Caveat for test: how often test target turns reuse earlier gold is unknown; the current-turn runs stay
+  as fallbacks and as the analysis numbers (Steve, 19.10).
