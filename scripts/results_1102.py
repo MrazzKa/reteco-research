@@ -29,7 +29,7 @@ def week6(root):
     fin = jload(os.path.join(R, "final_1102.json"))
     if fin:
         L += ["## X. Submission systems (2026-11-02)", "",
-              "Train = rule-8 subsample (≤ 30 topics per domain) for systems with ReasonEmbed. Test-like = topics none "
+              "Train = rule-8 subsample (≤ 30 topics per domain, seed 20260921) for every row. Test-like = topics none "
               "of whose gold is gold for a topic of the other split. Foreign gold = train/dev gold of another query "
               "of the domain (on test all of them are negatives).", "",
               "| sub-task | run | what is in it | train | dev | dev, test-like topics (n) | foreign gold in dev top 10 |",
@@ -114,7 +114,7 @@ def week6(root):
             L.append(f"| {lab} | {f4(v['macro'])} | " + " | ".join(f4(v["groups"][g]["ndcg10"]) for g in groups) + " | "
                      + " | ".join(f4(v["depth"][b]["ndcg10"]) for b in depths) + " |")
         L.append("")
-    llama = {t: jload(os.path.join(R, "llama", t, "hybrid.json")) for t in ("t1", "t2")}
+    llama = {t: jload(os.path.join(R, "llama", t, "hybrid.json")) for t in ("t1", "t1b", "t2")}
     if any(llama.values()):
         L += ["## W. Contamination ablation: an LLM that predates BRIGHT (step 4, no choice)", "",
               "Llama-3.2-3B-Instruct (knowledge cutoff December 2023, BRIGHT released July 2024; ungated mirror "
@@ -124,7 +124,8 @@ def week6(root):
               "BRIGHT: Qwen / Llama gain | StackExchange: Qwen / Llama gain |",
               "| --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- |"]
         spec = {"t2": ("2a current", f"{R}/qexp/t2/hybrid_2a_current.json", "2a_current"),
-                "t1": ("1a", f"{R}/qexp/t1/hybrid_1a.json", "1a")}
+                "t1": ("1a", f"{R}/qexp/t1/hybrid_1a.json", "1a"),
+                "t1b": ("1b", f"{R}/qexp/t1/hybrid_1b.json", "1b_query+step")}
         for t, (label, qpath, cond) in spec.items():
             if not llama[t]:
                 continue
@@ -148,6 +149,20 @@ def week6(root):
         if abl:
             L += ["", "Paired bootstrap (dev): " + "; ".join(f"{k} {ci(v)}" for k, v in abl.items()) + "."]
         L.append("")
+    r13 = jload(os.path.join(R, "select", "rule13_hybrid.json"))
+    h5 = jload(os.path.join(R, "hyde5", "t2", "hybrid.json"))
+    if r13 and h5:
+        L += ["## Y. Several sampled HyDE passages (rule 13), 2a with history", "",
+              "HyDE sampled at temperature 0.7 (vLLM, seed 0, n = 5 per input; n = 3 = first three), reason text unchanged; "
+              "BM25 = q + r + all passages, dense = normalised sum of e(q), e(r) and the mean of the passage vectors. "
+              "Baseline = the rule-11 Hb hybrid (one passage at temperature 0).", "",
+              "| HyDE | train | dev |", "| --- | ---: | ---: |",
+              f"| 1 passage, temperature 0 (baseline) | {f4(r13['candidates']['n1_t0']['train'])} | {f4(r13['candidates']['n1_t0']['dev'])} |"]
+        for c, lab in (("2a_hist3qa__q+r+h1s", "1 sample, temperature 0.7 (reported only)"),
+                       ("2a_hist3qa__q+r+h3", "3 samples"), ("2a_hist3qa__q+r+h5", "5 samples")):
+            sy = h5["conditions"][c]["systems"]["linear*"]
+            L.append(f"| {lab} | {f4(sy['train_macro'])} | {f4(sy['dev_macro'])} |")
+        L += ["", f"Choice on train: **{r13['chosen']}** (adopted = {r13['adopted']}); not run for 1a / 1b (time).", ""]
     sc = jload(os.path.join(R, "submit_check.json"))
     if sc:
         L += ["## U. End-to-end submission check (dev, `scripts/submit.py` from the topic files, official tools)", "",
@@ -166,5 +181,8 @@ def week6(root):
                      f"{pt.get('bm25_index_s', 0) + pt.get('bm25_search_s', 0):.2f}, "
                      f"{pt.get('dense_index_load_s', 0) + pt.get('dense_search_s', 0):.2f}, {pt.get('fusion_s', 0):.3f}, "
                      f"{pt.get('reasonembed_s', 0):.2f} |")
-        L.append("")
+        L += ["", "Dev timings exclude the LLM and ReasonEmbed (both cached). Test-time estimate (LOG 2026-11-02 13:50–14:22): "
+              "LLM ≈ 6–10 min for ~350 1a queries, ~820 1b steps and ~200 2a turns; BM25 indexes ≈ 11 min; ReasonEmbed on "
+              "≈ 35–40k new pool documents (only 9–15% of dev pool documents were already in the train pools) at 7–8 docs/s "
+              "≈ 75–90 min; total ≈ 1.75–2 h on the RTX 4060 laptop, restartable.", ""]
     return L

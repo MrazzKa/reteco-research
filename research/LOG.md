@@ -1244,3 +1244,35 @@ reading: as in week 4, most of the history gain is on turns whose gold was alrea
   have no history; their difference (0.521 vs 0.502) comes from the different fusion weight, ReasonEmbed weight and
   instruction. Caveat for test: how often test target turns reuse earlier gold is unknown; the current-turn runs stay
   as fallbacks and as the analysis numbers (Steve, 19.10).
+
+## 2026-11-02 14:33–14:53 — incident: GPU overcommit stalled two jobs (no result affected)
+what: the dev check of the new variants (`submit.py --variants 2a_history 1a_noRE 1b_noRE`, log `submit_dev2.log`) ran
+  next to the rule-13 vLLM job (gpu-util 0.75, n = 5 sampling). GPU memory reached 7.7 of 8 GB; both processes sat at
+  100% with almost no progress (submit.py stuck in the dense stage of the 9th Track-2 domain for ~15 min; the first
+  generation chunk took ~20 min instead of ~3). Killed submit.py at 14:53; generation then ran at ~3 min per 256 inputs.
+  Fix (before re-running): `submit.py` skips the ReasonEmbed stage entirely when a variant has `use: false`; the dev
+  check of the new variants is re-run once the GPU is free. README now warns not to run submit.py next to vLLM.
+
+## 2026-11-02 14:33–15:37 — rule 13 result for 2a (history, the rule-12 main condition): several HyDE samples — negative
+commands: `research/runs_v13/logs/step5_hyde.sh` (log `step5_hyde.log`): `llm_expand.py --track 2 --conditions
+  2a_hist3qa --prompts hyde --samples 5 --temperature 0.7` (14,855 passages for 2,971 inputs; 14:33–15:27, ~20 min of
+  it stalled by the GPU overcommit above, then ~3 min per 256 inputs, 0.9 inputs/s, ~580 tokens/s); `qexp_search.py
+  --variants q+r+h1s q+r+h3 q+r+h5` (0 missing; out `runs_v13/hyde5/t2`); `hybrid.py` (6 min); `select_rule.py --rule 13`
+  (out `select/rule13_hybrid.json`).
+result (hybrid, fusion tuned on train: z-score α 0.6 for all; train / dev): baseline one HyDE at temperature 0
+  **0.5112 / 0.4601** · one sample at 0.7 (reported only) 0.5094 / 0.4603 · n = 3 0.5074 / 0.4588 · n = 5 0.5030 / 0.4569.
+  Best on train = the baseline → **not adopted**; the ReasonEmbed stage of rule 13 is therefore not run.
+reading: averaging several sampled passages makes the history query slightly worse, monotonically in n, on train and
+  dev. With the history and the earlier answers in the prompt, one deterministic passage already carries the useful
+  vocabulary; extra samples add drift.
+not done (time): rule 13 for 1a and 1b. 1a would need ~55 min of n = 5 generation (Track-1 inputs are long, ~0.5–0.9
+  inputs/s) and would have blocked the GPU for the dev check of the main 2a run; the queued job (`step5_hyde_1a.sh`)
+  was cancelled at 15:29 before generating anything.
+
+## 2026-11-02 15:31–15:41 — step 2, dev check of the main 2a run and the fallbacks (after the GPU was free)
+command: `submit.py --variants 2a_history 1a_noRE 1b_noRE --split dev` (log `submit_dev2.log`; 0 new generations,
+  0 new ReasonEmbed documents; the noRE variants skip ReasonEmbed), then `score_submission.py` over all seven variants
+  (out `runs_v13/submit_check.json`).
+result (official macro nDCG@10 = research number, all differences 0.0000): main runs 1a 0.3667, 1b 0.4053,
+  2a history 0.5475; fallbacks 1a no-ReasonEmbed 0.3258, 1b no-ReasonEmbed 0.3505, 2a current no-MaxP 0.3779,
+  2a current MaxP 0.3901. format_checker exit 0 everywhere; missing 0, duplicates 0, unknown ids 0, depth 1000.

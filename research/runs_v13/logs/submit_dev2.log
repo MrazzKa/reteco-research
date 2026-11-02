@@ -1,1 +1,82 @@
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 5058.58it/s]
+    model BAAI/bge-base-en-v1.5 rev a5beb1e3e6 dim 768 max_len 512 fp16=True (5s)
+    index: 16,381 docs, 1s (lucene)
+    2a_history                  38 topics (38 unique)    0.3s
+    index: 16,712 docs, 2s (lucene)
+    2a_history                  54 topics (54 unique)    0.5s
+    index: 20,027 docs, 1s (lucene)
+    2a_history                  66 topics (66 unique)    0.7s
+    index: 23,297 docs, 2s (lucene)
+    2a_history                  44 topics (44 unique)    0.4s
+    index: 26,308 docs, 2s (lucene)
+    2a_history                  58 topics (58 unique)    0.6s
+    index: 50,220 docs, 2s (lucene)
+    2a_history                  92 topics (92 unique)    0.8s
+    index: 52,835 docs, 2s (lucene)
+    2a_history                  99 topics (99 unique)    0.8s
+    index: 57,359 docs, 2s (lucene)
+    2a_history                 115 topics (115 unique)    1.0s
+    index: 60,792 docs, 2s (lucene)
+    2a_history                  84 topics (84 unique)    0.8s
+    index: 61,961 docs, 1s (lucene)
+    2a_history                  75 topics (75 unique)    0.6s
+    index: 121,249 docs, 4s (lucene)
+    2a_history                 133 topics (133 unique)    1.2s
+[2a_history] 858 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 21.0, 'bm25_search_s': 8.2, 'dense_index_load_s': 1.9, 'dense_search_s': 13.1, 'fusion_s': 0.4, 'reasonembed_s': 0.5, 'reasonembed_new_docs': 0}
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights:  65%|██████▍   | 129/199 [00:00<00:00, 1284.48it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 1944.30it/s]
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 256 fp16=True (3s)
+    index: 9,680 docs, 2s (lucene)
+    1a_noRE                      3 topics (3 unique)    0.0s
+    index: 25,040 docs, 3s (lucene)
+    1a_noRE                     10 topics (10 unique)    0.1s
+    index: 36,110 docs, 6s (lucene)
+    1a_noRE                     11 topics (11 unique)    0.1s
+    index: 43,584 docs, 5s (lucene)
+    1a_noRE                     11 topics (11 unique)    0.1s
+    index: 47,509 docs, 8s (lucene)
+    1a_noRE                     15 topics (15 unique)    0.1s
+    index: 53,955 docs, 9s (lucene)
+    1a_noRE                     19 topics (19 unique)    0.2s
+    index: 74,692 docs, 14s (lucene)
+    1a_noRE                     25 topics (25 unique)    0.3s
+    index: 76,706 docs, 14s (lucene)
+    1a_noRE                     30 topics (30 unique)    0.3s
+    index: 135,207 docs, 30s (lucene)
+    1a_noRE                     45 topics (45 unique)    0.7s
+    index: 136,101 docs, 30s (lucene)
+    1a_noRE                     35 topics (35 unique)    0.6s
+    index: 158,771 docs, 23s (lucene)
+    1a_noRE                     30 topics (30 unique)    0.4s
+    index: 169,552 docs, 34s (lucene)
+    1a_noRE                     45 topics (45 unique)    0.7s
+    index: 200,252 docs, 57s (lucene)
+    1a_noRE                    240 topics (240 unique)    4.6s
+[1a_noRE] 519 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 238.1, 'bm25_search_s': 8.6, 'dense_index_load_s': 3.1, 'dense_search_s': 3.8, 'fusion_s': 0.3, 'reasonembed_s': 0.0, 'reasonembed_new_docs': 0}
+    index: 9,680 docs, 3s (lucene)
+    1b_noRE                      8 topics (8 unique)    0.1s
+    index: 25,040 docs, 3s (lucene)
+    1b_noRE                     15 topics (15 unique)    0.2s
+    index: 36,110 docs, 6s (lucene)
+    1b_noRE                     23 topics (23 unique)    0.3s
+    index: 43,584 docs, 5s (lucene)
+    1b_noRE                     20 topics (20 unique)    0.2s
+    index: 47,509 docs, 7s (lucene)
+    1b_noRE                     33 topics (33 unique)    0.3s
+    index: 53,955 docs, 9s (lucene)
+    1b_noRE                     28 topics (28 unique)    0.3s
+    index: 74,692 docs, 12s (lucene)
+    1b_noRE                     51 topics (51 unique)    0.6s
+    index: 76,706 docs, 12s (lucene)
+    1b_noRE                     56 topics (56 unique)    0.6s
+    index: 135,207 docs, 24s (lucene)
+    1b_noRE                    119 topics (119 unique)    2.0s
+    index: 136,101 docs, 26s (lucene)
+    1b_noRE                     68 topics (68 unique)    0.9s
+    index: 158,771 docs, 22s (lucene)
+    1b_noRE                     52 topics (52 unique)    0.7s
+    index: 169,552 docs, 30s (lucene)
+    1b_noRE                    105 topics (105 unique)    1.6s
+    index: 200,252 docs, 50s (lucene)
+    1b_noRE                    636 topics (636 unique)   12.4s
+[1b_noRE] 1214 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 209.5, 'bm25_search_s': 20.5, 'dense_index_load_s': 2.6, 'dense_search_s': 6.0, 'fusion_s': 0.7, 'reasonembed_s': 0.0, 'reasonembed_new_docs': 0}

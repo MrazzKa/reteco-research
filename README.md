@@ -5,19 +5,18 @@ Directed Research (INFO 492, University of Arizona) on **SemEval-2027 Task 1 —
 
 Code, experiment log and generated results only. Notes and meeting briefs are kept outside the repo.
 
-**Where things stand (week 5, 2026-10-26):** the final systems have three stages. (1) A local LLM
-(Qwen3-4B-Instruct-2507, AWQ 4-bit, vLLM) writes a short reasoning about the query and a hypothetical
-answer passage. (2) BM25 and the dense encoder search with the query plus both texts, and the two lists
-are fused (weights tuned on train; on Track 2 the dense side scores passages, MaxP). (3) A reasoning
-embedder (ReasonEmbed-Qwen3-4B, 4-bit) rescores the top 50, mixed with the fused score. Dev nDCG@10 of the
-systems chosen on train (LOG rules 6–9), week 4 → week 5:
-Track 1a 0.2834 → **0.3667**, 1b 0.2865 → **0.4053**, Track 2 current turn 0.3003 → **0.3901**,
-+history 0.4352 (unchanged). Not adopted on train: the cross-encoder over the expanded Track-2 list,
-MaxP on Track 1, explicit years on Track 1. Caveats: the MaxP gain on Track 2 is partly a length effect
-(long BRIGHT documents are mostly gold), and the LLM expansion helps the BRIGHT-derived domains but not
-the StackExchange ones (RESULTS sections O, P). Exact score ties are broken by sha1(doc id) since week 5
-(the doc-id order changed no final dev number by more than 0.001).
-Tables: `research/RESULTS.md` (sections M–S = week 5). Examples: `research/cases/query_reasoning_dev.md`.
+**Where things stand (2026-11-02):** submission systems chosen on train (LOG rules 6–12), dev nDCG@10:
+Track 1a **0.3667**, 1b **0.4053** (LLM query reasoning → BM25 + dense hybrid → ReasonEmbed over the top 50);
+Track 2a main run = the **history** condition, **0.5475** (the LLM sees the current question plus the last ≤ 3 turns
+with their answers; hybrid; ReasonEmbed w 0.9), backups = current turn without MaxP 0.3779 (rule 10 moved MaxP out of
+the main run) and with MaxP 0.3901. `scripts/submit.py` + `configs/submission.json` rebuild every run from the topic
+files and reproduce these dev numbers exactly with the official scorer (RESULTS section U). Foreign-gold diagnostics
+(train/dev gold of other queries in the top 10; RESULTS T): small on Track 2 (≤ 2.6% of slots), 5–7% on Track 1.
+Contamination check (RESULTS W): Llama-3.2-3B, whose cutoff predates BRIGHT, shows the same BRIGHT-vs-StackExchange
+pattern as Qwen. Tables: `research/RESULTS.md` (sections T–X = 2026-11-02, M–S = week 5). How to submit: below.
+
+Week 5 (2026-10-26): LLM query expansion (Qwen3-4B-Instruct-2507 AWQ, reason + HyDE), MaxP on Track 2, ReasonEmbed-4B
+over the top 50 (sections M–S). Examples: `research/cases/query_reasoning_dev.md`, `research/cases/history_llm_dev.md`.
 
 Week 4 for reference: BM25 + dense hybrid, encoder comparison, cross-encoder, error analysis
 (`research/cases/retrieval_categories_dev.md`, RESULTS sections A–L).
@@ -91,7 +90,11 @@ Git-ignored and regenerable: `*.tsv` run files, `*.npy` / `*.ids.json` embedding
 | `reason_rerank.py` · `embed_vllm.py` | Reasoning embedder (ReasonEmbed-4B, FP8 via vLLM or NF4 via bitsandbytes) over the hybrid pool. |
 | `temporal_rerank.py` | Year-agreement feature inside the Track-1 fusion (rule 9; negative). |
 | `pair_recovery.py` · `cases_qreason.py` · `maxp_length_check.py` · `final_systems.py` | Week-5 analyses, examples, final table. |
-| `make_results.py` (+ `results_week4.py`, `results_week5.py`) | Regenerate `research/RESULTS.md`. |
+| `submit.py` · `score_submission.py` | Submission runs from `configs/submission.json` (no qrels); official checker + scorer on dev. |
+| `foreign_gold.py` · `t2_breakdown.py` | Foreign-gold diagnostics (rule 10); Track-2 turn groups and depth. |
+| `rule11_choice.py` · `final_1102.py` · `cases_history.py` | History choice (rule 11), rule 12 + submission table, history examples. |
+| `llm_expand.py --llm llama3.2-3b` · `--samples 5 --temperature 0.7` | Contamination ablation LLM; sampled HyDE (rule 13). |
+| `make_results.py` (+ `results_week4.py`, `results_week5.py`, `results_1102.py`) | Regenerate `research/RESULTS.md`. |
 | `dense_rerank.py` · `dense_run.py` · `ann_index.py` · `query_view.py` | Weeks 2–3 (CPU) tools, kept for the earlier runs. |
 | `week1_run.py` · `aggregate_week1.py` · `run_remaining.py` · `date_*.py` · `get_data.py` · `check_open_questions.py` · `inspect_release.py` · `smoke_sample.py` | Week-1 tools. |
 
@@ -134,7 +137,8 @@ under `research/runs_v12/logs/*.sh` and `research/runs_v13/logs/*.sh`.
 Everything that defines a submitted run is frozen in `configs/submission.json` (models and revisions,
 quantisation, prompts, fusion weights, depths, ReasonEmbed weight, MaxP on/off, tie key, seeds); `scripts/submit.py`
 reads only that file, the release topic files and the corpora (never qrels). One run file per (variant, domain),
-because Track-2 topic ids repeat across domains; the official format is `qid Q0 docid rank score run_id`, depth 1000.
+because Track-2 topic ids repeat across domains. Main runs: `1a`, `1b`, `2a_history`; fallbacks: `1a_noRE`, `1b_noRE`,
+`2a_nomaxp`, `2a_maxp` (also listed in the config under `_main_runs` / `_fallback_runs`). The official format is `qid Q0 docid rank score run_id`, depth 1000.
 
 ```bash
 cd ~/semeval-reteco/reteco-research/scripts && source ../../.venv/bin/activate
@@ -142,17 +146,18 @@ D=../../reteco_data_v11            # for test: the folder with the test release 
 K=../../RETECO/starter_kit
 # 1. runs (LLM generations are cached by sha1(prompt + model + text); missing ones are generated with vLLM in
 #    ../../.venv-llm, which needs CC=~/semeval-reteco/tools/bin/cc; ReasonEmbed document vectors are cached per domain)
-python submit.py --config ../configs/submission.json --variants 1a 1b 2a_main 2a_fallback \
+python submit.py --config ../configs/submission.json --variants 1a 1b 2a_history 2a_nomaxp 2a_maxp 1a_noRE 1b_noRE \
     --data $D --split test --out ../research/runs_v13/submit/test
 # 2. dev check of the same pipeline (official checker + scorer, compares with the research numbers)
-python submit.py --variants 1a 1b 2a_main --data $D --split dev --out ../research/runs_v13/submit/dev
-python score_submission.py --sub ../research/runs_v13/submit/dev --variants 1a 1b 2a_main \
+python submit.py --variants 1a 1b 2a_history --data $D --split dev --out ../research/runs_v13/submit/dev
+python score_submission.py --sub ../research/runs_v13/submit/dev --variants 1a 1b 2a_history \
     --data $D --kit $K --out ../research/runs_v13/submit_check.json
 # 3. per file: format check against the corpus (Track 1 doc key "id", Track 2 "doc_id")
 python $K/format_checker.py ../research/runs_v13/submit/test/1a/iota.txt --corpus $D/track1_tempo/iota/documents.jsonl --doc-key id
 ```
 
-Long GPU jobs: Windows takes 1.7–5.3 GB of the 8 GB GPU; ReasonEmbed saves document vectors every 2,000 documents,
+Do not run `submit.py` while another GPU job (vLLM generation) is running: on 2026-11-02 the two together overcommitted
+the 8 GB GPU and both stalled. Long GPU jobs: Windows takes 1.7–5.3 GB of the 8 GB GPU; ReasonEmbed saves document vectors every 2,000 documents,
 so an interrupted `submit.py` can simply be restarted. The cost estimate for the test set is in RESULTS section U.
 
 ## Rules
