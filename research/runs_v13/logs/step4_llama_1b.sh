@@ -5,7 +5,7 @@ cd ~/semeval-reteco/reteco-research/scripts
 D=../../reteco_data_v11; K=../../RETECO/starter_kit; R=../research/runs_v13; E=../research/runs_v12/emb
 PY=~/semeval-reteco/.venv/bin/python; LPY=~/semeval-reteco/.venv-llm/bin/python; M=unsloth/Llama-3.2-3B-Instruct
 step() { echo "=== $(date +%H:%M:%S) $*"; "$@" 2>&1 | grep -vE "Warning|Loading weights|warn\(|^\s+(train|dev)  "; echo "=== exit ${PIPESTATUS[0]}"; }
-while pgrep -f "submit.py --variants|score_submission.py" >/dev/null; do sleep 10; done
+# (the GPU is free when this is launched; no wait)
 for u in 0.75 0.65 0.55; do
   echo "=== $(date +%H:%M:%S) gen gpu-util $u"
   $LPY llm_expand.py --llm llama3.2-3b --data $D --gpu-util $u --max-seqs 64 --max-batched 2048 --track 1 --conditions 1b_query+step \

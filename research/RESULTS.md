@@ -142,8 +142,10 @@ Llama-3.2-3B-Instruct (knowledge cutoff December 2023, BRIGHT released July 2024
 | 2a current | dev | 0.2543 | 0.3100 | 0.2825 | +0.0557 | +0.0282 | +0.1117 / +0.0747 | -0.0115 / -0.0276 |
 | 1a | train | 0.2462 | 0.2949 | 0.2737 | +0.0487 | +0.0275 | n/a (TEMPO) | n/a (TEMPO) |
 | 1a | dev | 0.2834 | 0.3258 | 0.3064 | +0.0424 | +0.0230 | n/a (TEMPO) | n/a (TEMPO) |
+| 1b | train | 0.2665 | 0.3226 | 0.3083 | +0.0561 | +0.0418 | n/a (TEMPO) | n/a (TEMPO) |
+| 1b | dev | 0.2865 | 0.3505 | 0.3352 | +0.0640 | +0.0487 | n/a (TEMPO) | n/a (TEMPO) |
 
-Paired bootstrap (dev): 2a_current dev all +0.0282 [+0.0138, +0.0427]; 2a_current dev bright +0.0747 [+0.0561, +0.0935]; 2a_current dev se -0.0276 [-0.0507, -0.0054]; 1a dev all +0.0231 [+0.0009, +0.0460].
+Paired bootstrap (dev): 2a_current dev all +0.0282 [+0.0138, +0.0427]; 2a_current dev bright +0.0747 [+0.0561, +0.0935]; 2a_current dev se -0.0276 [-0.0507, -0.0054]; 1a dev all +0.0231 [+0.0009, +0.0460]; 1b dev all +0.0486 [+0.0282, +0.0696].
 
 ## Y. Several sampled HyDE passages (rule 13), 2a with history
 

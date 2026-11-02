@@ -1276,3 +1276,22 @@ command: `submit.py --variants 2a_history 1a_noRE 1b_noRE --split dev` (log `sub
 result (official macro nDCG@10 = research number, all differences 0.0000): main runs 1a 0.3667, 1b 0.4053,
   2a history 0.5475; fallbacks 1a no-ReasonEmbed 0.3258, 1b no-ReasonEmbed 0.3505, 2a current no-MaxP 0.3779,
   2a current MaxP 0.3901. format_checker exit 0 everywhere; missing 0, duplicates 0, unknown ids 0, depth 1000.
+
+## 2026-11-02 15:44–16:13 — step 4 extension: Llama-3.2-3B on 1b (ablation, no choice)
+command: `research/runs_v13/logs/step4_llama_1b.sh` (log `step4_llama_1b.log`): generations 7,952 (3,976 steps × 2
+  prompts) 15:44–16:05; `qexp_search.py --cond 1b_query+step --variants q+r+h` (0 missing; out `runs_v13/llama/t1b`);
+  `hybrid.py` (fusion tuned on train: z-score α 0.7). (A first launch at 15:39 waited on a `pgrep -f` pattern that
+  matched a stale waiting shell; relaunched without the wait at 15:44.)
+result (q+r+h hybrid − plain-query hybrid; train / dev): Qwen +0.0560 [+0.044, +0.069] / +0.0640 [+0.047, +0.082];
+  Llama +0.0417 [+0.029, +0.054] / +0.0486 [+0.028, +0.070]; macro Llama 0.3083 / 0.3352 (q 0.2665 / 0.2865,
+  Qwen 0.3226 / 0.3505). Llama reaches 74% of Qwen's train gain on 1b (56% on 1a, 62% on the BRIGHT domains of 2a).
+
+## 2026-11-02 16:15 — session summary and what is left
+submission systems (train-chosen; dev nDCG@10; `configs/submission.json`, RESULTS section X):
+  1a main 0.3667 (fallback without ReasonEmbed 0.3258) · 1b main 0.4053 (fallback 0.3505) · 2a main = history 0.5475
+  (rule 12; fallbacks current turn without MaxP 0.3779 — rule 10 — and with MaxP 0.3901). All seven variants are
+  reproduced exactly by `submit.py` from the topic files with the official checker and scorer.
+done today: step 0, step 1 (foreign gold + rule 10), step 2 (submission pipeline + dev check + test-time estimate),
+  step 3 (rules 11, 12), step 4 (2a, 1a and 1b), step 5 for 2a (negative).
+not done: rule 13 for 1a and 1b (time; cancelled before generating). Open: Steve's answers to the 26.10 questions
+  were never recorded; the format of the official run upload (one file per domain?) is not announced yet.
