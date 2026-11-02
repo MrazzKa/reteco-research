@@ -1074,3 +1074,54 @@ step 4 setup (ablation, no choice): LLM without BRIGHT exposure = Llama-3.2-3B-I
   here, so the ungated mirror `unsloth/Llama-3.2-3B-Instruct` rev `006f5dcd1393c3add266de40994ba96225e9689d` (same
   weights, bf16) is used with vLLM online FP8 quantisation. Same prompts, temperature 0, conditions 2a current and
   1a (1b if time). Report q+r+h − q of the train-tuned hybrid for both LLMs, BRIGHT vs StackExchange.
+
+## 2026-11-02 13:10 — step 1, part 1: foreign gold for the hybrid stages (no ReasonEmbed yet)
+command: `python3 foreign_gold.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --runs ../research/runs_v13
+  --out ../research/runs_v13/foreign/report_hybrid.json` (46 s, CPU). Definition detail fixed before the run: gold of
+  the same group (other steps of the same 1b query, other turns of the same conversation) is NOT foreign, because on
+  test those are test gold too; groups are keyed by (split, group).
+result (macro; foreign share of top-10 slots, corpus share in brackets; train all topics / dev):
+  1a  week-4 hybrid 5.6% / 4.8% (0.4%) · q+r+h 5.5% / 6.3%.  1b week-4 5.9% / 4.9% · q+r+h 5.8% / 5.3%.
+  2a current  week-4 hybrid 1.5% / 1.3% (0.64%) · q+r+h 2.5% / 2.0% · + MaxP 3.2% / 2.4%.
+  2a history  week-4 hybrid 1.7% / 1.6%.
+  Long documents (> 510 tokens) in the 2a-current top 10: 9.8% (week 4) → 14.1% (q+r+h) → 18.6% (MaxP) on train;
+  foreign gold among them 6.1% → 10.1% → 12.5% (all Track-2 long documents: 4.1% are train/dev gold).
+  Removing all foreign gold from the ranking raises nDCG@10 by 0.002–0.010 (2a current MaxP train 0.3507 → 0.3544).
+  Test-like topics: almost all (2a train 2110 of 2113, dev 854 of 858; 1a 1202/1211, 511/519): train and dev share
+  very few gold documents, so the test-like subset barely differs from the full set (noted for rule 10 (b)).
+reading so far: every stage that helps also pulls slightly more foreign gold into the top 10 (Track 2: 1.5% → 3.2%
+  of the slots, i.e. 2.4× → 5× the corpus share), MaxP most of all and mostly through long documents; in absolute
+  terms the effect is small (≤ 0.01 nDCG@10 if all foreign gold vanished). Track 1 is flat (~5–6%, 12–15× the corpus
+  share, the same for every stage: TEMPO queries of a domain share topics). ReasonEmbed stages follow (GPU queue).
+
+## 2026-11-02 13:07–13:41 — rule 11 inputs: history generations (Qwen3-4B, reason + hyde)
+command: `research/runs_v13/logs/gen_1102.sh` (first call), finished and re-checked by `queue_1102.sh` (log
+  `gen_1102.log`, `queue_1102.log`): `llm_expand.py --track 2 --conditions 2a_hist3q 2a_hist3qa --prompts reason hyde`.
+cost: 11,884 generations (2,971 turns × 2 inputs × 2 prompts) in 33 min, ~5.0 inputs/s, 634 generated tokens/s
+  (longer inputs than the current-turn run). Mean output 124–139 tokens; cut at 256: 0.03–0.07%; empty 0.
+  Same model, revision, prompts, temperature 0 as week 5; the model sees the current question and ≤ 3 earlier turns
+  (questions, or questions + released answers), never an id. Turn-1 bodies differ from the current-turn ones only
+  by the label "Current question:" and were regenerated.
+note: estimate was 35 min (written 13:05); actual 33 min. The queue was reordered at 13:10 (before any result):
+  ReasonEmbed jobs for step 1 / rule 10 now run before the Llama generations (step 1 has priority over step 4).
+
+## 2026-11-02 13:41–13:47 — rule 10 runs and result: MaxP leaves the main 2a current-turn run
+runs (queue `queue_1102.sh`, log `queue_1102.log`; `reason_rerank.py --save-runs runs_v13/foreign/runs`, query vectors
+  now cached by sha1(text)): (A) re-run of the rule-8 system on the MaxP pool (`--name 2a_maxp`): 0 new documents +
+  1,188 queries, 80 s; reproduces rule 8 (none 0.3828/0.3319, best interp 0.8 0.4359/0.3901; interp 0.9 train 0.4251
+  vs 0.4250 before — query vectors re-encoded in a different batch). (B) ReasonEmbed over the rule-6 q+r+h hybrid
+  without MaxP (`--name 2a_nomaxp`): 1,324 new documents, 210 s; train subsample / dev: none 0.3671/0.3100, top-50
+  0.4069/0.3760, interp 0.7 0.4226/0.3731, **0.8 0.4317/0.3779** (best on train), 0.9 0.4213/0.3789; train − none
+  +0.0645 [+0.0430, +0.0857].
+foreign gold: `foreign_gold.py --conditions 2a_current --out runs_v13/foreign/report.json` (train = rule-8 subsample,
+  330 topics, all of them test-like):
+  share of top-10 slots taken by foreign gold, train / dev: A 2.55% / 2.59%, B 2.30% / 2.45% (corpus 0.64%);
+  long documents in the top 10: A 18.4% / 17.5%, B 16.0% / 15.4%.
+rule 10: (a) foreign share A − B on train = +0.25 pp < 1 pp → satisfied; (b) test-like train topics A − B = +0.0042
+  [−0.0007, +0.0092] → below the +0.005 margin and the interval includes 0 → **not satisfied**.
+  **Decision: main 2a current-turn run = B (no MaxP, ReasonEmbed w 0.8); A (with MaxP) = fallback run.**
+  Dev, reported once: A − B = +0.0123 [+0.0073, +0.0174] (A 0.3901, B 0.3779): on dev MaxP still helps. The rule
+  was written to be conservative about a component whose gain is partly a corpus-construction effect, and the train
+  evidence for it (once ReasonEmbed is on top) is weak; we keep the train decision and report both.
+note: the test-like criterion barely bites (train and dev share almost no gold), so (b) amounts to "MaxP must
+  still help clearly on train once ReasonEmbed rescoring is on top"; this is stated in RESULTS.

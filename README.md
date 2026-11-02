@@ -129,6 +129,32 @@ python hybrid.py --track 2 --conditions 2a_current__q 2a_current__q+r+h --bm25 $
 The exact commands of every reported run are in `research/LOG.md` and in the queue scripts
 under `research/runs_v12/logs/*.sh` and `research/runs_v13/logs/*.sh`.
 
+## How to make a submission (2026-11-02)
+
+Everything that defines a submitted run is frozen in `configs/submission.json` (models and revisions,
+quantisation, prompts, fusion weights, depths, ReasonEmbed weight, MaxP on/off, tie key, seeds); `scripts/submit.py`
+reads only that file, the release topic files and the corpora (never qrels). One run file per (variant, domain),
+because Track-2 topic ids repeat across domains; the official format is `qid Q0 docid rank score run_id`, depth 1000.
+
+```bash
+cd ~/semeval-reteco/reteco-research/scripts && source ../../.venv/bin/activate
+D=../../reteco_data_v11            # for test: the folder with the test release (same layout, split name "test")
+K=../../RETECO/starter_kit
+# 1. runs (LLM generations are cached by sha1(prompt + model + text); missing ones are generated with vLLM in
+#    ../../.venv-llm, which needs CC=~/semeval-reteco/tools/bin/cc; ReasonEmbed document vectors are cached per domain)
+python submit.py --config ../configs/submission.json --variants 1a 1b 2a_main 2a_fallback \
+    --data $D --split test --out ../research/runs_v13/submit/test
+# 2. dev check of the same pipeline (official checker + scorer, compares with the research numbers)
+python submit.py --variants 1a 1b 2a_main --data $D --split dev --out ../research/runs_v13/submit/dev
+python score_submission.py --sub ../research/runs_v13/submit/dev --variants 1a 1b 2a_main \
+    --data $D --kit $K --out ../research/runs_v13/submit_check.json
+# 3. per file: format check against the corpus (Track 1 doc key "id", Track 2 "doc_id")
+python $K/format_checker.py ../research/runs_v13/submit/test/1a/iota.txt --corpus $D/track1_tempo/iota/documents.jsonl --doc-key id
+```
+
+Long GPU jobs: Windows takes 1.7–5.3 GB of the 8 GB GPU; ReasonEmbed saves document vectors every 2,000 documents,
+so an interrupted `submit.py` can simply be restarted. The cost estimate for the test set is in RESULTS section U.
+
 ## Rules
 
 1. Never modify `RETECO/` or the datasets.
