@@ -5603,10 +5603,6 @@
     0.0
    ]
   },
-  "saved_runs": {
-   "dir": "../research/runs_v13/foreign/runs",
-   "best": "interp=0.8"
-  },
   "saved_scores": "../research/runs_v13/scores/2a_nomaxp.json"
  },
  "2ah_hybrid": {

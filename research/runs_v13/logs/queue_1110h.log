@@ -363,3 +363,84 @@ FlashInfer kernels are disabled: flashinfer-cubin is not installed and nvcc (CUD
    interp=0.8: train 0.3078  dev 0.3667
    interp=0.9: train 0.3033  dev 0.3633
 === 14:59:17 attempt 1: qwen3-emb-4b --track 1 --conditions 1a__q+r+h --query-cond 1a --name 1a_rerun_q3e --hybrid ../research/runs_v13/qexp/t1/hybrid_1a.json --bm25 ../research/runs_v13/qexp/t1/bm25/runs --dense ../research/runs_v13/qexp/t1/dense/runs --save-scores ../research/runs_v13/scores/1a_rerun_q3e.json
+  [1a__q+r+h] docs 2000/34417 (313s)
+  [1a__q+r+h] docs 4000/34417 (587s)
+  [1a__q+r+h] docs 6000/34417 (858s)
+  [1a__q+r+h] docs 8000/34417 (1126s)
+  [1a__q+r+h] docs 10000/34417 (1431s)
+  [1a__q+r+h] docs 12000/34417 (1724s)
+  [1a__q+r+h] docs 14000/34417 (2016s)
+  [1a__q+r+h] docs 16000/34417 (2358s)
+  [1a__q+r+h] docs 18000/34417 (2649s)
+  [1a__q+r+h] docs 20000/34417 (2923s)
+  [1a__q+r+h] docs 22000/34417 (3270s)
+  [1a__q+r+h] docs 24000/34417 (3576s)
+  [1a__q+r+h] docs 26000/34417 (3862s)
+  [1a__q+r+h] docs 28000/34417 (4146s)
+  [1a__q+r+h] docs 30000/34417 (4427s)
+  [1a__q+r+h] docs 32000/34417 (4714s)
+  [1a__q+r+h] docs 34000/34417 (5005s)
+  [1a__q+r+h] docs 34417/34417 (5065s)
+  [1a__q+r+h] 34417 docs + 869 queries in 5165s
+== t1 1a__q+r+h: none train 0.2823 dev 0.3258 | best on train ('interp', 0.1): train 0.2828 dev 0.3253 train boot {'diff': 0.0005, 'ci95': [-0.003, 0.0038], 'p_le_0': 0.3675}
+   none=0: train 0.2823  dev 0.3258
+   top=10: train 0.2468  dev 0.2891
+   top=20: train 0.2281  dev 0.2784
+   top=50: train 0.2041  dev 0.2714
+   interp=0.1: train 0.2828  dev 0.3253
+   interp=0.2: train 0.2819  dev 0.326
+   interp=0.3: train 0.2826  dev 0.3273
+   interp=0.4: train 0.282  dev 0.3256
+   interp=0.5: train 0.2818  dev 0.3249
+   interp=0.6: train 0.2718  dev 0.322
+   interp=0.7: train 0.2597  dev 0.3158
+   interp=0.8: train 0.2457  dev 0.3023
+   interp=0.9: train 0.2301  dev 0.2902
+   "ci95": [
+    -0.0397,
+    -0.0053
+   ],
+   "p_le_0": 0.9956
+  }
+ },
+ "second_only_best": {
+  "how": "interp=0.1",
+  "train": 0.2828,
+  "dev": 0.3253,
+  "train_minus_current": {
+   "diff": -0.0249,
+   "ci95": [
+    -0.0434,
+    -0.0072
+   ],
+   "p_le_0": 0.9977
+  },
+  "dev_minus_current": {
+   "diff": -0.0414,
+   "ci95": [
+    -0.0633,
+    -0.0203
+   ],
+   "p_le_0": 0.9999
+  }
+ },
+ "adopted": false
+}
+=== 16:25:33 R18_1a_DONE
+=== 16:25:33 attempt 1: reasonembed-4b --track 2 --conditions 2a_current__q+r+h --query-cond 2a_current --name 2a_nomaxp --hybrid ../research/runs_v13/qexp/t2/hybrid_2a_current.json --bm25 ../research/runs_v13/qexp/t2/bm25/runs --dense ../research/runs_v13/qexp/t2/dense/runs --save-scores ../research/runs_v13/scores/2a_nomaxp.json
+  [2a_current__q+r+h] 0 docs + 0 queries in 0s
+== t2 2a_current__q+r+h: none train 0.3671 dev 0.31 | best on train ('interp', 0.8): train 0.4317 dev 0.3779 train boot {'diff': 0.0645, 'ci95': [0.043, 0.0857], 'p_le_0': 0.0}
+   none=0: train 0.3671  dev 0.31
+   top=10: train 0.3787  dev 0.3429
+   top=20: train 0.4012  dev 0.3668
+   top=50: train 0.4069  dev 0.376
+   interp=0.1: train 0.3749  dev 0.3183
+   interp=0.2: train 0.3814  dev 0.3257
+   interp=0.3: train 0.3908  dev 0.3374
+   interp=0.4: train 0.399  dev 0.3468
+   interp=0.5: train 0.4093  dev 0.3602
+   interp=0.6: train 0.4209  dev 0.3677
+   interp=0.7: train 0.4226  dev 0.3731
+   interp=0.8: train 0.4317  dev 0.3779
+   interp=0.9: train 0.4213  dev 0.3789
+=== 16:25:40 attempt 1: qwen3-emb-4b --track 2 --conditions 2a_current__q+r+h --query-cond 2a_current --name 2a_nomaxp_q3e --hybrid ../research/runs_v13/qexp/t2/hybrid_2a_current.json --bm25 ../research/runs_v13/qexp/t2/bm25/runs --dense ../research/runs_v13/qexp/t2/dense/runs --save-scores ../research/runs_v13/scores/2a_nomaxp_q3e.json

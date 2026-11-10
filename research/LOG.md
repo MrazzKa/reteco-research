@@ -1724,3 +1724,11 @@ reading: a fresh draw of the LLM texts moves the macro by up to ~0.003 (per doma
   the same generations (ReasonEmbed weight, pool depth, reranker — rules 8, 16, 17) are paired and not affected, but a
   margin of +0.005 is of the same order as this draw-to-draw noise for comparisons that change the LLM input (rules 6,
   11, 13, 14). For the paper: report dev numbers as "one LLM draw, ±0.003".
+
+## 2026-11-10 15:00–16:25 — rule 18 result, 1a: second embedder not adopted
+command: `queue_1110h.sh` → ReasonEmbed dump (pool 50, cached) + `reason_rerank.py --model qwen3-emb-4b --name
+  1a_rerun_q3e` (34,417 documents, ~6.8 docs/s, 84 min) + `ensemble_embed.py --cond 1a`.
+result (train sub / dev): current ReasonEmbed pool 50 (interp 0.8) 0.3078 / 0.3667 · Qwen3-Embedding alone (best on
+  train interp 0.1) 0.2828 / 0.3253 (≈ the hybrid alone) · ensemble (interp 0.5) 0.2973 / 0.3444; ensemble − current
+  train −0.0105 [−0.0244, +0.0032] → **not adopted**; dev −0.0223 [−0.0397, −0.0053]. (Compared with the pool-50
+  system; the adopted 1a main uses pool 100 — the ensemble is worse than either.)
