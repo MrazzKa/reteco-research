@@ -177,6 +177,9 @@ Same top-50 pool as the current system; E = mean of z(ReasonEmbed) and z(Qwen3-E
 
 | condition | current (ReasonEmbed) train / dev | Qwen3-Emb alone: way, train / dev | ensemble: way, train / dev | ensemble − current, train | dev | adopted |
 | --- | --- | --- | --- | --- | --- | --- |
+| 1a | 0.3078 / 0.3667 | interp=0.1: 0.2828 / 0.3253 | interp=0.5: 0.2973 / 0.3444 | -0.0105 [-0.0244, +0.0032] | -0.0223 [-0.0397, -0.0053] | False |
+| 1b | 0.3754 / 0.4053 | interp=0.4: 0.3536 / 0.3762 | interp=0.7: 0.3707 / 0.4060 | -0.0048 [-0.0158, +0.0062] | +0.0007 [-0.0112, +0.0130] | False |
+| 2a_current | 0.4317 / 0.3779 | interp=0.4: 0.3768 / 0.3233 | interp=0.8: 0.4083 / 0.3628 | -0.0234 [-0.0396, -0.0068] | -0.0150 [-0.0251, -0.0052] | False |
 | 2a_history | 0.5830 / 0.5475 | interp=0.5: 0.5335 / 0.4789 | interp=0.9: 0.5683 / 0.5242 | -0.0147 [-0.0313, +0.0014] | -0.0233 [-0.0352, -0.0111] | False |
 
 ## AH. Cold run on a slice of a synthetic test release (B3, phase B)
@@ -197,6 +200,19 @@ Synthetic test release (dev topics of iota, quant / drones, politics; gold remov
 | 2a_nomaxp (drones, politics) | 92 | 166 s | 1.81 s | reasonembed_new_docs 974 |
 
 Scaled to the full test by topics per sub-task (sum over all variants of the sub-task): 1a ≈ 91 min, 1b ≈ 21 min, 2a ≈ 25 min; total ≈ 2.3 h (+ BM25 indexing is per domain, not per topic, so this over-counts it for Track 1).
+
+## AI. Run-to-run noise from LLM nondeterminism on dev (B3b, analysis)
+
+vLLM at temperature 0 is not batch-invariant: a fresh generation of the same inputs differs. Dev runs rebuilt with an empty LLM cache (ReasonEmbed and reranker caches shared) against the cached runs.
+
+| variant | cached (reported) | fresh draw | fresh − cached [95% CI] |
+| --- | ---: | ---: | --- |
+| 1a_p100 | 0.3672 | 0.3704 | +0.0032 [-0.0017, +0.0087] |
+| 1b | 0.4053 | 0.4084 | +0.0031 [-0.0019, +0.0086] |
+| 2a_history_rr | 0.5507 | 0.5501 | -0.0006 [-0.0037, +0.0023] |
+| 2a_nomaxp_p100 | 0.3801 | 0.3778 | -0.0023 [-0.0064, +0.0018] |
+
+Identical generations (fresh vs cached): t1_reason 360/1733, t1_hyde 292/1733, t2_reason 361/1716, t2_hyde 401/1716.
 
 ## AF. Compute: models, revisions, throughput (B5)
 

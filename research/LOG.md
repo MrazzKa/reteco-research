@@ -1739,3 +1739,13 @@ command: `queue_1110h.sh` → `reason_rerank.py --model qwen3-emb-4b --name 2a_n
 result (train sub / dev): current (ReasonEmbed pool 50, interp 0.8) 0.4317 / 0.3779 · Qwen3-Embedding alone (interp
   0.4) 0.3768 / 0.3233 · ensemble (interp 0.8) 0.4083 / 0.3628; ensemble − current train −0.0234 [−0.0396, −0.0068] →
   **not adopted**; dev −0.0150 [−0.0251, −0.0052].
+
+## 2026-11-10 16:49–17:24 — rule 18 result, 1b: not adopted; rule 18 summary
+command: `queue_1110h.sh` → `reason_rerank.py --model qwen3-emb-4b --name 1b_rerun_q3e` (13,608 documents, ~31 min) +
+  `ensemble_embed.py --cond 1b`.
+result (train sub / dev): current (ReasonEmbed, interp 0.7) 0.3754 / 0.4053 · Qwen3-Embedding alone (interp 0.4)
+  0.3536 / 0.3762 · ensemble (interp 0.7) 0.3707 / 0.4060; ensemble − current train −0.0048 [−0.0158, +0.0062] →
+  **not adopted**; dev +0.0007 [−0.0112, +0.0130].
+rule 18 summary: the Qwen3-Embedding-4B ensemble is not adopted anywhere (train ensemble − current: 2a history −0.015,
+  1a −0.011, 2a current −0.023, 1b −0.005). The general embedder alone is far below ReasonEmbed in every condition.
+  GPU time ≈ 3.2 h for 87,184 documents.

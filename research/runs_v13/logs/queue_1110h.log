@@ -514,3 +514,58 @@ FlashInfer kernels are disabled: flashinfer-cubin is not installed and nvcc (CUD
    interp=0.8: train 0.3748  dev 0.4083
    interp=0.9: train 0.3639  dev 0.4014
 === 16:49:45 attempt 1: qwen3-emb-4b --track 1 --conditions 1b_query+step__q+r+h --query-cond 1b_query+step --name 1b_rerun_q3e --hybrid ../research/runs_v13/qexp/t1/hybrid_1b.json --bm25 ../research/runs_v13/qexp/t1/bm25/runs --dense ../research/runs_v13/qexp/t1/dense/runs --save-scores ../research/runs_v13/scores/1b_rerun_q3e.json
+  [1b_query+step__q+r+h] docs 2000/13608 (262s)
+  [1b_query+step__q+r+h] docs 4000/13608 (531s)
+  [1b_query+step__q+r+h] docs 6000/13608 (825s)
+  [1b_query+step__q+r+h] docs 8000/13608 (1118s)
+  [1b_query+step__q+r+h] docs 10000/13608 (1381s)
+  [1b_query+step__q+r+h] docs 12000/13608 (1637s)
+  [1b_query+step__q+r+h] docs 13608/13608 (1844s)
+  [1b_query+step__q+r+h] 13608 docs + 1590 queries in 2051s
+== t1 1b_query+step__q+r+h: none train 0.3442 dev 0.3505 | best on train ('interp', 0.4): train 0.3536 dev 0.3762 train boot {'diff': 0.0093, 'ci95': [-0.0017, 0.0207], 'p_le_0': 0.0499}
+   none=0: train 0.3442  dev 0.3505
+   top=10: train 0.3124  dev 0.3395
+   top=20: train 0.3051  dev 0.3622
+   top=50: train 0.2903  dev 0.3622
+   interp=0.1: train 0.3471  dev 0.3581
+   interp=0.2: train 0.3484  dev 0.3669
+   interp=0.3: train 0.3522  dev 0.372
+   interp=0.4: train 0.3536  dev 0.3762
+   interp=0.5: train 0.3509  dev 0.3803
+   interp=0.6: train 0.3499  dev 0.3823
+   interp=0.7: train 0.3393  dev 0.3774
+   interp=0.8: train 0.3229  dev 0.3803
+   interp=0.9: train 0.311  dev 0.3736
+   "ci95": [
+    -0.0112,
+    0.013
+   ],
+   "p_le_0": 0.4581
+  }
+ },
+ "second_only_best": {
+  "how": "interp=0.4",
+  "train": 0.3536,
+  "dev": 0.3762,
+  "train_minus_current": {
+   "diff": -0.0219,
+   "ci95": [
+    -0.0387,
+    -0.0053
+   ],
+   "p_le_0": 0.9948
+  },
+  "dev_minus_current": {
+   "diff": -0.029,
+   "ci95": [
+    -0.0415,
+    -0.0167
+   ],
+   "p_le_0": 1.0
+  }
+ },
+ "adopted": false
+}
+=== 17:24:15 R18_1b_DONE
+=== 17:24:15 R18_ALL_DONE
+=== 17:24:15 gen gpu-util 0.75
