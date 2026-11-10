@@ -162,3 +162,106 @@ wrote ../research/runs_v13/histq/t2/hybrid.json
    interp=0.9: train 0.5168  dev 0.4802
 === 08:33:42 A1_RE_DONE
 === 08:33:42 attempt 1: --track 2 --conditions 2a_current__q --query-cond 2a_current --name 2a_cur_q --hybrid ../research/runs_v13/qexp/t2/hybrid_2a_current.json --bm25 ../research/runs_v13/qexp/t2/bm25/runs --dense ../research/runs_v13/qexp/t2/dense/runs --save-scores ../research/runs_v13/scores/2a_cur_q.json
+  [2a_current__q] docs 2000/9136 (291s)
+  [2a_current__q] docs 4000/9136 (475s)
+  [2a_current__q] docs 6000/9136 (620s)
+  [2a_current__q] docs 8000/9136 (732s)
+  [2a_current__q] docs 9136/9136 (820s)
+  [2a_current__q] 9136 docs + 0 queries in 820s
+== t2 2a_current__q: none train 0.2828 dev 0.2543 | best on train ('interp', 0.9): train 0.3967 dev 0.3591 train boot {'diff': 0.1139, 'ci95': [0.089, 0.1383], 'p_le_0': 0.0}
+   none=0: train 0.2828  dev 0.2543
+   top=10: train 0.3194  dev 0.3008
+   top=20: train 0.3698  dev 0.3247
+   top=50: train 0.3961  dev 0.3554
+   interp=0.1: train 0.2966  dev 0.2616
+   interp=0.2: train 0.3106  dev 0.2741
+   interp=0.3: train 0.3261  dev 0.2858
+   interp=0.4: train 0.3395  dev 0.2985
+   interp=0.5: train 0.3566  dev 0.3114
+   interp=0.6: train 0.3726  dev 0.3306
+   interp=0.7: train 0.3825  dev 0.342
+   interp=0.8: train 0.3949  dev 0.3547
+   interp=0.9: train 0.3967  dev 0.3591
+=== 08:47:35 attempt 1: --track 2 --conditions 2a_history --query-cond 2a_hist3qa --name 2ah_h0 --hybrid ../research/runs_v13/hist/t2/hybrid_h0.json --bm25 ../research/runs_v13/bm25/t2/runs --dense ../research/runs_v13/dense/bge-base_L512/t2/runs --save-scores ../research/runs_v13/scores/2ah_h0.json
+  [2a_history] docs 1093/1093 (175s)
+  [2a_history] 1093 docs + 0 queries in 176s
+== t2 2a_history: none train 0.4889 dev 0.4352 | best on train ('interp', 0.9): train 0.5804 dev 0.5377 train boot {'diff': 0.0916, 'ci95': [0.0644, 0.1196], 'p_le_0': 0.0}
+   none=0: train 0.4889  dev 0.4352
+   top=10: train 0.5339  dev 0.4808
+   top=20: train 0.561  dev 0.5118
+   top=50: train 0.5796  dev 0.5359
+   interp=0.1: train 0.4949  dev 0.4455
+   interp=0.2: train 0.5044  dev 0.4583
+   interp=0.3: train 0.5153  dev 0.4673
+   interp=0.4: train 0.5244  dev 0.4801
+   interp=0.5: train 0.5418  dev 0.493
+   interp=0.6: train 0.5529  dev 0.5112
+   interp=0.7: train 0.5593  dev 0.5209
+   interp=0.8: train 0.573  dev 0.5271
+   interp=0.9: train 0.5804  dev 0.5377
+=== 08:50:44 A3_RE_DONE
+=== 08:50:44 attempt 1: --track 2 --conditions 2a_current__q+r+h --query-cond 2a_current --name 2a_nomaxp --hybrid ../research/runs_v13/qexp/t2/hybrid_2a_current.json --bm25 ../research/runs_v13/qexp/t2/bm25/runs --dense ../research/runs_v13/qexp/t2/dense/runs --save-scores ../research/runs_v13/scores/2a_nomaxp.json
+  [2a_current__q+r+h] 0 docs + 0 queries in 0s
+== t2 2a_current__q+r+h: none train 0.3671 dev 0.31 | best on train ('interp', 0.8): train 0.4317 dev 0.3779 train boot {'diff': 0.0645, 'ci95': [0.043, 0.0857], 'p_le_0': 0.0}
+   none=0: train 0.3671  dev 0.31
+   top=10: train 0.3787  dev 0.3429
+   top=20: train 0.4012  dev 0.3668
+   top=50: train 0.4069  dev 0.376
+   interp=0.1: train 0.3749  dev 0.3183
+   interp=0.2: train 0.3814  dev 0.3257
+   interp=0.3: train 0.3908  dev 0.3374
+   interp=0.4: train 0.399  dev 0.3468
+   interp=0.5: train 0.4093  dev 0.3602
+   interp=0.6: train 0.4209  dev 0.3677
+   interp=0.7: train 0.4226  dev 0.3731
+   interp=0.8: train 0.4317  dev 0.3779
+   interp=0.9: train 0.4213  dev 0.3789
+=== 08:50:53 attempt 1: --track 2 --conditions 2a_hist3qa__q+r+h --query-cond 2a_hist3qa --name 2ah_hybrid --hybrid ../research/runs_v13/hist/t2/hybrid.json --bm25 ../research/runs_v13/hist/t2/bm25/runs --dense ../research/runs_v13/hist/t2/dense/runs --save-scores ../research/runs_v13/scores/2ah_hybrid.json
+  [2a_hist3qa__q+r+h] 0 docs + 0 queries in 0s
+== t2 2a_hist3qa__q+r+h: none train 0.517 dev 0.4601 | best on train ('interp', 0.9): train 0.583 dev 0.5475 train boot {'diff': 0.066, 'ci95': [0.0406, 0.0911], 'p_le_0': 0.0}
+   none=0: train 0.517  dev 0.4601
+   top=10: train 0.5419  dev 0.498
+   top=20: train 0.5658  dev 0.5296
+   top=50: train 0.5811  dev 0.5438
+   interp=0.1: train 0.5265  dev 0.4709
+   interp=0.2: train 0.5319  dev 0.4846
+   interp=0.3: train 0.538  dev 0.4926
+   interp=0.4: train 0.5503  dev 0.5037
+   interp=0.5: train 0.5585  dev 0.5154
+   interp=0.6: train 0.5694  dev 0.5251
+   interp=0.7: train 0.575  dev 0.5344
+   interp=0.8: train 0.5818  dev 0.539
+   interp=0.9: train 0.583  dev 0.5475
+=== 08:51:01 attempt 1: --track 1 --conditions 1a__q+r+h --query-cond 1a --name 1a_rerun --hybrid ../research/runs_v13/qexp/t1/hybrid_1a.json --bm25 ../research/runs_v13/qexp/t1/bm25/runs --dense ../research/runs_v13/qexp/t1/dense/runs --save-scores ../research/runs_v13/scores/1a_rerun.json
+  [1a__q+r+h] 0 docs + 0 queries in 0s
+== t1 1a__q+r+h: none train 0.2823 dev 0.3258 | best on train ('interp', 0.8): train 0.3078 dev 0.3667 train boot {'diff': 0.0254, 'ci95': [0.0073, 0.0448], 'p_le_0': 0.0029}
+   none=0: train 0.2823  dev 0.3258
+   top=10: train 0.2736  dev 0.3275
+   top=20: train 0.2888  dev 0.3431
+   top=50: train 0.2894  dev 0.3539
+   interp=0.1: train 0.2867  dev 0.3315
+   interp=0.2: train 0.2882  dev 0.3383
+   interp=0.3: train 0.2951  dev 0.3442
+   interp=0.4: train 0.2992  dev 0.3496
+   interp=0.5: train 0.3026  dev 0.3553
+   interp=0.6: train 0.3021  dev 0.3602
+   interp=0.7: train 0.3072  dev 0.3646
+   interp=0.8: train 0.3078  dev 0.3667
+   interp=0.9: train 0.3033  dev 0.3633
+=== 08:51:07 attempt 1: --track 1 --conditions 1b_query+step__q+r+h --query-cond 1b_query+step --name 1b_rerun --hybrid ../research/runs_v13/qexp/t1/hybrid_1b.json --bm25 ../research/runs_v13/qexp/t1/bm25/runs --dense ../research/runs_v13/qexp/t1/dense/runs --save-scores ../research/runs_v13/scores/1b_rerun.json
+  [1b_query+step__q+r+h] 0 docs + 0 queries in 0s
+== t1 1b_query+step__q+r+h: none train 0.3442 dev 0.3505 | best on train ('interp', 0.7): train 0.3754 dev 0.4053 train boot {'diff': 0.0312, 'ci95': [0.012, 0.0507], 'p_le_0': 0.0005}
+   none=0: train 0.3442  dev 0.3505
+   top=10: train 0.3389  dev 0.3513
+   top=20: train 0.3486  dev 0.38
+   top=50: train 0.3481  dev 0.3927
+   interp=0.1: train 0.3521  dev 0.3587
+   interp=0.2: train 0.3536  dev 0.3685
+   interp=0.3: train 0.3576  dev 0.3792
+   interp=0.4: train 0.3662  dev 0.3835
+   interp=0.5: train 0.374  dev 0.3947
+   interp=0.6: train 0.3743  dev 0.4045
+   interp=0.7: train 0.3754  dev 0.4053
+   interp=0.8: train 0.3748  dev 0.4083
+   interp=0.9: train 0.3639  dev 0.4014
+=== 08:51:16 ALLDONE

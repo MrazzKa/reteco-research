@@ -1,0 +1,194 @@
+{
+ "rule": "15",
+ "groups": {
+  "BRIGHT": [
+   "biology",
+   "earth_science",
+   "economics",
+   "psychology",
+   "robotics",
+   "sustainable_living"
+  ],
+  "StackExchange": [
+   "drones",
+   "hardware",
+   "law",
+   "medicalsciences",
+   "politics"
+  ]
+ },
+ "conditions": {
+  "2a_current": {
+   "q_weight": "interp=0.9",
+   "q+r+h_weight": "interp=0.8",
+   "all": {
+    "q": {
+     "train": 0.3967,
+     "dev": 0.3591
+    },
+    "q+r+h": {
+     "train": 0.4317,
+     "dev": 0.3779
+    }
+   },
+   "groups": {
+    "BRIGHT": {
+     "macro": {
+      "q": {
+       "train": 0.4522,
+       "dev": 0.3916
+      },
+      "q+r+h": {
+       "train": 0.5145,
+       "dev": 0.4449
+      }
+     },
+     "train_q_minus_qrh": {
+      "diff": -0.0623,
+      "ci95": [
+       -0.0944,
+       -0.0328
+      ],
+      "p_le_0": 1.0
+     },
+     "dev_q_minus_qrh": {
+      "diff": -0.0533,
+      "ci95": [
+       -0.0669,
+       -0.0398
+      ],
+      "p_le_0": 1.0
+     },
+     "chosen": "q+r+h"
+    },
+    "StackExchange": {
+     "macro": {
+      "q": {
+       "train": 0.3301,
+       "dev": 0.32
+      },
+      "q+r+h": {
+       "train": 0.3323,
+       "dev": 0.2974
+      }
+     },
+     "train_q_minus_qrh": {
+      "diff": -0.0022,
+      "ci95": [
+       -0.0218,
+       0.0173
+      ],
+      "p_le_0": 0.591
+     },
+     "dev_q_minus_qrh": {
+      "diff": 0.0226,
+      "ci95": [
+       0.0053,
+       0.0407
+      ],
+      "p_le_0": 0.0051
+     },
+     "chosen": "q+r+h"
+    }
+   },
+   "combined": {
+    "train": 0.4317,
+    "dev": 0.3779
+   },
+   "combined_minus_current_dev": {
+    "diff": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "p_le_0": 1.0
+   }
+  },
+  "2a_history": {
+   "q_weight": "interp=0.9",
+   "q+r+h_weight": "interp=0.9",
+   "all": {
+    "q": {
+     "train": 0.5804,
+     "dev": 0.5377
+    },
+    "q+r+h": {
+     "train": 0.583,
+     "dev": 0.5475
+    }
+   },
+   "groups": {
+    "BRIGHT": {
+     "macro": {
+      "q": {
+       "train": 0.6626,
+       "dev": 0.6257
+      },
+      "q+r+h": {
+       "train": 0.6673,
+       "dev": 0.6406
+      }
+     },
+     "train_q_minus_qrh": {
+      "diff": -0.0047,
+      "ci95": [
+       -0.025,
+       0.0148
+      ],
+      "p_le_0": 0.6879
+     },
+     "dev_q_minus_qrh": {
+      "diff": -0.015,
+      "ci95": [
+       -0.0263,
+       -0.0039
+      ],
+      "p_le_0": 0.9957
+     },
+     "chosen": "q+r+h"
+    },
+    "StackExchange": {
+     "macro": {
+      "q": {
+       "train": 0.4819,
+       "dev": 0.4321
+      },
+      "q+r+h": {
+       "train": 0.4819,
+       "dev": 0.4358
+      }
+     },
+     "train_q_minus_qrh": {
+      "diff": -0.0,
+      "ci95": [
+       -0.0175,
+       0.0168
+      ],
+      "p_le_0": 0.4968
+     },
+     "dev_q_minus_qrh": {
+      "diff": -0.0036,
+      "ci95": [
+       -0.0146,
+       0.007
+      ],
+      "p_le_0": 0.732
+     },
+     "chosen": "q+r+h"
+    }
+   },
+   "combined": {
+    "train": 0.583,
+    "dev": 0.5475
+   },
+   "combined_minus_current_dev": {
+    "diff": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "p_le_0": 1.0
+   }
+  }
+ }
+}

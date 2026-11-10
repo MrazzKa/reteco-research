@@ -1,0 +1,183 @@
+{
+ "main, reference answers": {
+  "macro": 0.583,
+  "groups": {
+   "first_turn": {
+    "n": 79,
+    "ndcg10": 0.5593
+   },
+   "new_gold": {
+    "n": 28,
+    "ndcg10": 0.3334
+   },
+   "recycled_gold": {
+    "n": 223,
+    "ndcg10": 0.6228
+   }
+  },
+  "depth": {
+   "T1": {
+    "n": 79,
+    "ndcg10": 0.5593
+   },
+   "T2": {
+    "n": 80,
+    "ndcg10": 0.5703
+   },
+   "T3": {
+    "n": 69,
+    "ndcg10": 0.5728
+   },
+   "T4": {
+    "n": 46,
+    "ndcg10": 0.6716
+   },
+   "T5+": {
+    "n": 56,
+    "ndcg10": 0.5745
+   }
+  },
+  "vs_main, reference answers": null
+ },
+ "main, LLM-written answers": {
+  "macro": 0.5205,
+  "groups": {
+   "first_turn": {
+    "n": 79,
+    "ndcg10": 0.5593
+   },
+   "new_gold": {
+    "n": 28,
+    "ndcg10": 0.3144
+   },
+   "recycled_gold": {
+    "n": 223,
+    "ndcg10": 0.5326
+   }
+  },
+  "depth": {
+   "T1": {
+    "n": 79,
+    "ndcg10": 0.5593
+   },
+   "T2": {
+    "n": 80,
+    "ndcg10": 0.4744
+   },
+   "T3": {
+    "n": 69,
+    "ndcg10": 0.4923
+   },
+   "T4": {
+    "n": 46,
+    "ndcg10": 0.5831
+   },
+   "T5+": {
+    "n": 56,
+    "ndcg10": 0.5147
+   }
+  },
+  "vs_main, reference answers": {
+   "diff": -0.0626,
+   "ci95": [
+    -0.0808,
+    -0.0452
+   ],
+   "p_le_0": 1.0
+  }
+ },
+ "no answers (rule 14, H0q+RE)": {
+  "macro": 0.5168,
+  "groups": {
+   "first_turn": {
+    "n": 79,
+    "ndcg10": 0.525
+   },
+   "new_gold": {
+    "n": 28,
+    "ndcg10": 0.3318
+   },
+   "recycled_gold": {
+    "n": 223,
+    "ndcg10": 0.5371
+   }
+  },
+  "depth": {
+   "T1": {
+    "n": 79,
+    "ndcg10": 0.525
+   },
+   "T2": {
+    "n": 80,
+    "ndcg10": 0.4857
+   },
+   "T3": {
+    "n": 69,
+    "ndcg10": 0.5024
+   },
+   "T4": {
+    "n": 46,
+    "ndcg10": 0.5688
+   },
+   "T5+": {
+    "n": 56,
+    "ndcg10": 0.5247
+   }
+  },
+  "vs_main, reference answers": {
+   "diff": -0.0662,
+   "ci95": [
+    -0.0894,
+    -0.044
+   ],
+   "p_le_0": 1.0
+  }
+ },
+ "current turn B": {
+  "macro": 0.4317,
+  "groups": {
+   "first_turn": {
+    "n": 79,
+    "ndcg10": 0.5658
+   },
+   "new_gold": {
+    "n": 28,
+    "ndcg10": 0.4199
+   },
+   "recycled_gold": {
+    "n": 223,
+    "ndcg10": 0.3856
+   }
+  },
+  "depth": {
+   "T1": {
+    "n": 79,
+    "ndcg10": 0.5658
+   },
+   "T2": {
+    "n": 80,
+    "ndcg10": 0.4154
+   },
+   "T3": {
+    "n": 69,
+    "ndcg10": 0.3464
+   },
+   "T4": {
+    "n": 46,
+    "ndcg10": 0.3927
+   },
+   "T5+": {
+    "n": 56,
+    "ndcg10": 0.4028
+   }
+  },
+  "vs_main, reference answers": {
+   "diff": -0.1513,
+   "ci95": [
+    -0.1871,
+    -0.1171
+   ],
+   "p_le_0": 1.0
+  }
+ }
+}

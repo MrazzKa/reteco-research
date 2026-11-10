@@ -3802,8 +3802,8 @@
   "query_condition": "1a",
   "train_topics_per_domain_max": 30,
   "docs_encoded": 0,
-  "queries_encoded": 869,
-  "encode_s": 122.6,
+  "queries_encoded": 0,
+  "encode_s": 0.0,
   "backend": "bnb",
   "by_how": {
    "none=0": {
@@ -3819,7 +3819,7 @@
     "dev": 0.3431
    },
    "top=50": {
-    "train": 0.2893,
+    "train": 0.2894,
     "dev": 0.3539
    },
    "interp=0.1": {
@@ -3871,7 +3871,7 @@
   "dev_bootstrap_best_minus_none": {
    "diff": 0.0409,
    "ci95": [
-    0.019,
+    0.0189,
     0.0639
    ],
    "p_le_0": 0.0001
@@ -4200,7 +4200,7 @@
     0.49344424459786884,
     0.3853585682515056,
     0.0,
-    0.1480409554829326,
+    0.14126697285982898,
     0.430624116386567,
     0.38685280723454163,
     0.0,
@@ -4988,7 +4988,8 @@
   "saved_runs": {
    "dir": "../research/runs_v13/foreign/runs",
    "best": "interp=0.8"
-  }
+  },
+  "saved_scores": "../research/runs_v13/scores/1a_rerun.json"
  },
  "1b_rerun": {
   "checkpoint": "hanhainebula/reason-embed-qwen3-4b-0928",
@@ -5005,8 +5006,8 @@
   "query_condition": "1b_query+step",
   "train_topics_per_domain_max": 30,
   "docs_encoded": 0,
-  "queries_encoded": 1590,
-  "encode_s": 260.1,
+  "queries_encoded": 0,
+  "encode_s": 0.0,
   "backend": "bnb",
   "by_how": {
    "none=0": {
@@ -5035,7 +5036,7 @@
    },
    "interp=0.3": {
     "train": 0.3576,
-    "dev": 0.3794
+    "dev": 0.3792
    },
    "interp=0.4": {
     "train": 0.3662,
@@ -5058,7 +5059,7 @@
     "dev": 0.4083
    },
    "interp=0.9": {
-    "train": 0.3641,
+    "train": 0.3639,
     "dev": 0.4014
    }
   },
@@ -7581,6 +7582,7 @@
   "saved_runs": {
    "dir": "../research/runs_v13/foreign/runs",
    "best": "interp=0.7"
-  }
+  },
+  "saved_scores": "../research/runs_v13/scores/1b_rerun.json"
  }
 }

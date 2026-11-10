@@ -4,6 +4,7 @@
  "quant": "AWQ W4A16 (compressed-tensors)",
  "engine": "vllm",
  "temperature": 0.0,
+ "samples": 1,
  "max_new_tokens": 256,
  "system": "You help a search engine find documents. Answer in plain English text only.",
  "prompts": {

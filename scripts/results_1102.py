@@ -28,7 +28,7 @@ def week6(root):
          "and train bootstrap lower bound > 0; dev measured once per configuration).", ""]
     fin = jload(os.path.join(R, "final_1102.json"))
     if fin:
-        L += ["## X. Submission systems (2026-11-02)", "",
+        L += ["## X (2026-11-02, superseded by section X of 2026-11-10 above). Submission systems", "",
               "Train = rule-8 subsample (≤ 30 topics per domain, seed 20260921) for every row. Test-like = topics none "
               "of whose gold is gold for a topic of the other split. Foreign gold = train/dev gold of another query "
               "of the domain (on test all of them are negatives).", "",

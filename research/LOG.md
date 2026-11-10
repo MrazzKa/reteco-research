@@ -1420,3 +1420,78 @@ submission: `configs/submission.json` gains `2a_history_q` (variant "q": no LLM;
   normalisation before parsing (identity on train/dev).
 dev check: `submit.py --variants 2a_history_q --split dev` (45 s; 0 new ReasonEmbed documents) + `score_submission.py`
   → official macro **0.4802 = research 0.4802**; format_checker exit 0 for all 11 files, missing 0, dup 0, unknown 0.
+
+## 2026-11-10 08:36–08:51 — A3 / rule 15 result: per-source query variant — no change
+commands: `queue_1110a.sh` → `reason_rerank.py` over the plain-query pools: `--conditions 2a_current__q --query-cond
+  2a_current --name 2a_cur_q` (rule-6 q hybrid) and `--conditions 2a_history --query-cond 2a_hist3qa --name 2ah_h0`
+  (week-4 history hybrid H0, ReasonEmbed query = the main run's: current + ≤ 3 earlier Q/A); ~7 min each. Then
+  `rule15_choice.py` (out `select/rule15.json`). Score dumps of the four final systems re-made from cached vectors
+  (0 new documents; they reproduce 0.4317/0.3779 and 0.5830/0.5475 exactly) for rule 16.
+q-systems over all 11 domains (train sub / dev): current q 0.3967 / 0.3591 (w 0.9) vs q+r+h 0.4317 / 0.3779;
+  history H0 0.5804 / 0.5377 (w 0.9) vs Hb 0.5830 / 0.5475.
+result by group (train q − q+r+h [95%] → choice; dev q − q+r+h for reference):
+  2a current  BRIGHT        −0.0623 [−0.0944, −0.0328] → q+r+h   (dev −0.0533)
+  2a current  StackExchange −0.0022 [−0.0218, +0.0173] → q+r+h   (dev +0.0226 [+0.0053, +0.0407])
+  2a history  BRIGHT        −0.0047 [−0.0250, +0.0148] → q+r+h   (dev −0.0150)
+  2a history  StackExchange −0.0000 [−0.0175, +0.0168] → q+r+h   (dev −0.0036)
+  **Decision: no per-source split** (no group passes the margin on train); combined = current systems.
+reading: once ReasonEmbed is on top, the LLM's loss on StackExchange (−0.005 / −0.012 at the hybrid stage on 02.11)
+  disappears on train (−0.002) — the reasoning embedder absorbs it — while the BRIGHT gain stays (+0.06). On dev the
+  StackExchange current-turn q-system would have been better (+0.023); that is a dev observation only, the train
+  rule says no. With history, the LLM adds nothing measurable on top of H0 + ReasonEmbed in either group (train
+  +0.000 / +0.005): almost all of the history system's strength comes from the history text + ReasonEmbed.
+
+## 2026-11-10 08:52–09:17 — A2: the main 2a run with LLM-written earlier answers (analysis, no choice)
+code: `scripts/gen_answers.py` (generate: LLM venv; build: synthetic releases), `scripts/a2_report.py`.
+command: `research/runs_v13/logs/queue_1110b.sh` (log `queue_1110b.log`):
+  `gen_answers.py --phase generate` — targets = rule-8 train subsample (330 turns) + all dev turns (858); 407
+  conversations need earlier answers; 1,168 answers generated turn by turn in 10 rounds (5.3 min; mean 103 words, 2
+  cut at 256 tokens, 0 empty). Prompt (system "You are a helpful assistant in a conversation. Answer in plain English
+  text only."; user "Answer the current question below as a knowledgeable assistant would, in at most 150 words. Do
+  not ask questions back." + ≤ 3 earlier turns with OUR earlier answers + current question); Qwen3-4B AWQ, temperature 0.
+  `--phase build`: data_gen / data_ref releases (`benchmark_trainsub.json` = the 330 subsample turns, `benchmark_dev.json`
+  = all dev turns); 1,961 Q/A pairs replaced, question order matched 1,961/1,961, layout unchanged (summary lines kept).
+  Then the frozen main run `submit.py --variants 2a_history` on data_gen (trainsub: 502 new LLM generations + 319 new
+  ReasonEmbed documents, 6.8 min; dev: 12.5 min) and on data_ref trainsub (control, all cached).
+control: data_ref trainsub = 0.5830 = research train-subsample number (exact).
+result (macro nDCG@10; mean over turns for groups; bootstrap vs the reference-answer run):
+  | system | train sub | dev | dev first (211) | dev recycled (568) | dev new gold (79) |
+  | main, reference answers   | 0.5830 | 0.5475 | 0.5213 | 0.6371 | 0.3759 |
+  | main, LLM-written answers | 0.5205 | 0.4823 | 0.5213 | 0.5396 | 0.3663 |
+  | no answers (rule 14)      | 0.5168 | 0.4802 | 0.4797 | 0.5390 | 0.3766 |
+  | current turn B            | 0.4317 | 0.3779 | 0.5019 | 0.3805 | 0.3580 |
+  LLM-written − reference: train −0.0626 [−0.0808, −0.0452], dev −0.0652 [−0.0771, −0.0535].
+  dev by depth T2 / T3 / T4 / T5+: reference 0.596 / 0.602 / 0.642 / 0.587; LLM-written 0.503 / 0.509 / 0.534 / 0.551;
+  no answers 0.511 / 0.504 / 0.545 / 0.537.
+reading (paper: "what access to the reference answers is worth"): the whole advantage of the main run over the
+  answer-free run (+0.067 dev) comes from the reference answers being written from the gold documents. Answers our
+  own LLM writes without documents are worth nothing measurable over the questions alone (dev +0.002, train +0.004;
+  on recycled-gold turns 0.540 vs 0.539). The loss is entirely on later turns (T2+) and mostly on recycled-gold turns
+  (0.637 → 0.540); new-gold turns barely move (0.376 → 0.366). If test histories carry reference answers built like
+  train/dev, the main run should keep its dev level; if a deployed system had to use its own answers, expect ≈ 0.48.
+
+## 2026-11-10 09:17–09:27 — A1 check: synthetic test releases and the 2a automation
+code: `scripts/make_test_release.py` (dev topic files → split "test": Track-2 turn fields `gold_doc_ids`, `answer`,
+  `subquestion_reasoning(_metadata)`, conversation `original_answer` and the gold count in `metadata` removed; no
+  qrels; documents symlinked). Release 1 = released histories (647 turns ≥ 2 with answers); release 2 = the same
+  with every earlier answer removed (`--strip-answers`; 0 turns with answers after). Both outside the repo (scratchpad).
+commands (`queue_1110b.sh`): `submit.py --variants 2a_auto --split test` on each release; then format_checker (with the
+  dev qrels and the corpus) and nDCG@10 with the dev qrels (the topic ids are the dev ids).
+result:
+  release with answers: decision `2a_history` for 11/11 domains (counters per domain in stdout and decision.json:
+    turns ≥ 2 with answer = all, 0 unparsed lines, normalisation changed 0 strings); `2a_auto` = 0.5475 (= dev main).
+  release without answers: decision `2a_history_q` for 11/11 domains (turns ≥ 2 with answer 0; the stripped strings
+    keep their Q lines, so every pair parses with an empty answer); `2a_auto` = 0.4802 (= dev of the rule-14 run).
+  format_checker exit 0 for all 66 files (3 variants × 2 releases × 11 domains); run ids UA_2a_auto / UA_2a_history /
+  UA_2a_history_q. Both variants are built in both cases (the main run on the stripped release generated 1,294 new
+  LLM texts, 4.7 min).
+observation (dev only, not a rule-14 candidate): the main pipeline fed the answer-free histories (its LLM input then
+  has the earlier questions with empty "A:" lines; fusion α 0.6 and ReasonEmbed w 0.9 of the main run) scores 0.4908
+  on dev, above the rule-14 run (0.4802). Rule 14b is pre-registered below for phase B; until then the automation
+  follows rule 14.
+
+## 2026-11-10 09:28 — rule 14b (pre-registered, phase B; before any train run of it)
+candidate M0 = the frozen main 2a pipeline run on answer-free histories (`history.without_answers`), no re-tuning,
+  on the rule-8 train subsample via submit.py (as in A2). It replaces H0q + ReasonEmbed as the answer-free fallback only
+  if on train M0 − H0q+RE ≥ +0.005 with bootstrap lower bound > 0 (M0 is the more complex: it needs the LLM).
+  Dev is already known for M0 (0.4908, seen above) — it is reported, not used.
