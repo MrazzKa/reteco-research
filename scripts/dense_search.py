@@ -49,6 +49,17 @@ def plan(track, d, split):
         h = hist[qid][: -len(cur[qid])].strip() if hist[qid].endswith(cur[qid]) else ""
         qfirst.append((qid, (cur[qid] + "\n" + h).strip()))
     out.append(("2a_history_qfirst", qfirst, p["2a_current"][1]))
+    # rule 14: the same with every earlier answer removed (current question, then summary + earlier questions)
+    from history import answers, assert_answer_free, qonly_qfirst, questions
+    bench = json.load(open(os.path.join(d, f"benchmark_{split}.json"), encoding="utf-8"))
+    bench = [bench] if isinstance(bench, dict) else bench
+    qonly = []
+    for c in bench:
+        for t in c["turns"]:
+            txt = qonly_qfirst(t)
+            assert_answer_free(txt, answers(t), "2a_history_qonly_qfirst", questions(t))
+            qonly.append((f"{c['id']}_turn_{t['turn_id']}", txt))
+    out.append(("2a_history_qonly_qfirst", qonly, p["2a_current"][1]))
     return out
 
 

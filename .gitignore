@@ -31,3 +31,10 @@ research/runs_v13/reason*/cache/
 research/runs_v13/llm_*/
 research/runs_v13/submit/
 research/runs_v13/foreign/cache/
+# 2026-11-10: score dumps, A2 generated answers + synthetic releases + runs, reranker caches
+research/runs_v13/scores/
+research/runs_v13/a2/answers.jsonl
+research/runs_v13/a2/data_*/
+research/runs_v13/a2/sub_*/
+research/runs_v13/rerank/cache/
+research/runs_v13/rerank/runs/

@@ -43,6 +43,7 @@ from dense_index import domain_dir  # noqa: E402
 from dense_search import GpuIndex  # noqa: E402
 from embed_models import load_encoder  # noqa: E402
 from gold_categories import fetch  # noqa: E402
+import history as H  # noqa: E402
 from hybrid import Query  # noqa: E402
 from llm_expand import LLMS, MAX_INPUT_CHARS, clean as llm_clean, history_body, key_of  # noqa: E402
 from passage_index import MaxPIndex, pdir  # noqa: E402
@@ -93,8 +94,17 @@ def topics(data, split, cfg, dom):
     for c in bench:
         for t in c["turns"]:
             tid = f"{c['id']}_turn_{t['turn_id']}"
+            # label variants of the history are mapped to the canonical "Q: "/"A: " lines (identity on train/dev)
+            t = dict(t, conversation_history=H.normalize(t.get("conversation_history", "") or ""))
             if q == "2a_current":
                 out.append((tid, t["query"], f"Question: {llm_clean(t['query'])}", t["query"]))
+            elif q == "2a_hist3q_qonly":  # rule 14: no earlier answer in any input
+                qtext = H.qonly_qfirst(t)
+                body = history_body(t, False)
+                ans, qs = H.answers(t), H.questions(t)
+                for what, x in (("BM25/dense text", qtext), ("LLM input / ReasonEmbed query", body)):
+                    H.assert_answer_free(x, ans, what, qs)
+                out.append((tid, qtext, body, body))
             else:  # history: q = current question first, then the released history; LLM/embedder see <= 3 turns
                 answers = q == "2a_hist3qa"
                 qtext = (t["query"] + "\n" + hist_text(t).strip()).strip()
@@ -156,7 +166,11 @@ def run_variant(a, name, cfg, enc_cache):
     # 1. topics + LLM (all domains at once, one vLLM start)
     t0 = time.time()
     tops = {dom: topics(a.data, a.split, cfg, dom) for dom in doms}
-    gen = generations(cfg, sorted({b for ts in tops.values() for _, _, b, _ in ts}), timing)
+    plain = cfg.get("variant") == "q"  # rule 14 H0q: no LLM; BM25 on q, dense on e_query(q)
+    if plain:
+        gen = {p: defaultdict(str) for p in ("reason", "hyde")}
+    else:
+        gen = generations(cfg, sorted({b for ts in tops.values() for _, _, b, _ in ts}), timing)
     timing["llm_total_s"] += time.time() - t0
     dc = cfg["dense"]
     if dc["model"] not in enc_cache:
@@ -176,7 +190,7 @@ def run_variant(a, name, cfg, enc_cache):
         bm, ids = build(os.path.join(a.data, sub, dom, "documents.jsonl"), key, "lucene")
         timing["bm25_index_s"] += time.time() - t0
         t0 = time.time()
-        bq = [(q, "\n".join(texts[q])) for q in qids]
+        bq = [(q, texts[q][0] if plain else "\n".join(texts[q])) for q in qids]
         bres = search(bm, ids, bq, "lucene", name, k=1000, threads=8)
         bres = {q: [(d, r6(s)) for d, s in v] for q, v in bres.items()}
         timing["bm25_search_s"] += time.time() - t0
@@ -192,9 +206,12 @@ def run_variant(a, name, cfg, enc_cache):
         timing["dense_index_load_s"] += time.time() - t0
         t0 = time.time()
         eq = enc.encode_queries([texts[q][0] for q in qids]).astype(np.float32)
-        er = enc.encode_queries([texts[q][1] for q in qids]).astype(np.float32)
-        eh = enc.encode_docs([texts[q][2] for q in qids]).astype(np.float32)
-        mat = eq + er + eh
+        if plain:
+            mat = eq
+        else:
+            er = enc.encode_queries([texts[q][1] for q in qids]).astype(np.float32)
+            eh = enc.encode_docs([texts[q][2] for q in qids]).astype(np.float32)
+            mat = eq + er + eh
         mat = mat / np.linalg.norm(mat, axis=1, keepdims=True)
         hits = gi.search(mat.astype(np.float32), 1000)
         dres = {q: [(d, r6(s)) for d, s in h] for q, h in zip(qids, hits)}
@@ -218,7 +235,8 @@ def run_variant(a, name, cfg, enc_cache):
         ts, pools, _, _, _ = pending[dom]
         cache = load_cache(os.path.join(cdir, f"docs_{dom}"))
         need = sorted({d for q in pools for d, _ in pools[q][:rc["pool"]]} - set(cache))
-        ins = instruction(tr, cfg["query"], dom, cfg["query"] if cfg["query"].startswith("2a_hist") else None)
+        qc = {"2a_hist3q_qonly": "2a_hist3q"}.get(cfg["query"], cfg["query"])
+        ins = instruction(tr, cfg["query"], dom, qc if qc.startswith("2a_hist") else None)
         qtext = {t[0]: f"Instruct: {ins}\nQuery: {re_clean(t[3])}" for t in ts}
         qkey = {q: hashlib.sha1(x.encode("utf-8")).hexdigest() for q, x in qtext.items()}
         q_todo = sorted({qkey[q] for q in qkey if qkey[q] not in qcache})
@@ -283,6 +301,49 @@ def run_variant(a, name, cfg, enc_cache):
     return manifest
 
 
+def history_stats(data, split, dom):
+    """Counters of the history parser over one Track-2 topic file (no qrels)."""
+    bench = json.load(open(os.path.join(data, "track2_recor", dom, f"benchmark_{split}.json"), encoding="utf-8"))
+    bench = [bench] if isinstance(bench, dict) else bench
+    c = defaultdict(int)
+    for conv in bench:
+        for t in conv["turns"]:
+            c["turns"] += 1
+            h = t.get("conversation_history", "") or ""
+            try:
+                k = int(t["turn_id"])
+            except (TypeError, ValueError):
+                k = 0
+            c["normalized_differs"] += H.normalize(h) != h
+            if k < 2 and not H.raw(t).strip():
+                continue
+            r = H.parse(h)
+            c["turns_ge2"] += 1
+            c["turns_ge2_with_answer"] += any(a.strip() for _, a in r["pairs"])
+            c["qa_pairs"] += len(r["pairs"])
+            c["empty_answers"] += sum(1 for _, a in r["pairs"] if not a.strip())
+            c["summary_questions"] += len(r["summary"])
+            c["unparsed_lines"] += len(r["other"])
+            c["empty_history"] += not H.raw(t).strip()
+    return dict(c)
+
+
+def auto_2a(a, conf):
+    """Per Track-2 domain: earlier answers present (any turn >= 2 with a non-empty parsed answer) -> the main
+    history run, else the rule-14 run without answers. Both variants are always built; the chosen file is
+    copied to <out>/2a_auto/<domain>.txt with the decision in decision.json."""
+    rule = conf["_auto_2a"]
+    va, vq = rule["with_answers"], rule["without_answers"]
+    doms = a.domains or conf["variants"][va]["domains"]
+    dec = {"rule": rule, "split": a.split, "domains": {}}
+    for dom in doms:
+        st = history_stats(a.data, a.split, dom)
+        chosen = va if st.get("turns_ge2_with_answer", 0) > 0 else vq
+        dec["domains"][dom] = {"chosen": chosen, **st}
+        print(f"[2a_auto] {dom}: {chosen}  ({json.dumps(st)})", flush=True)
+    return dec
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default=os.path.join(ROOT, "configs", "submission.json"))
@@ -295,8 +356,32 @@ def main():
     conf = json.load(open(a.config))
     tiebreak.set_mode(conf.get("tie_key", "sha1"))
     enc_cache = {}
-    for v in a.variants:
+    variants = list(a.variants)
+    dec = None
+    if "2a_auto" in variants:  # decide first (cheap), then build both 2a variants as usual
+        dec = auto_2a(a, conf)
+        variants.remove("2a_auto")
+        for v in (conf["_auto_2a"]["with_answers"], conf["_auto_2a"]["without_answers"]):
+            if v not in variants:
+                variants.append(v)
+    for v in variants:
         run_variant(a, v, conf["variants"][v], enc_cache)
+    if dec is not None:
+        adir = os.path.join(a.out, "2a_auto")
+        os.makedirs(adir, exist_ok=True)
+        rid = conf["_auto_2a"].get("run_id", "UA_2a_auto")
+        for dom, d in dec["domains"].items():
+            src = os.path.join(a.out, d["chosen"], f"{dom}.txt")
+            with open(src, encoding="utf-8") as f, open(os.path.join(adir, f"{dom}.txt"), "w", encoding="utf-8") as g:
+                for line in f:  # same ranking, the auto run id
+                    p_ = line.split()
+                    g.write(" ".join(p_[:5] + [rid]) + "\n")
+            d["source_file"] = src
+        n = {v: sum(1 for d in dec["domains"].values() if d["chosen"] == v) for v in
+             (conf["_auto_2a"]["with_answers"], conf["_auto_2a"]["without_answers"])}
+        dec["summary"] = n
+        json.dump(dec, open(os.path.join(adir, "decision.json"), "w"), indent=1)
+        print(f"[2a_auto] domains per run: {n}; files in {adir}", flush=True)
 
 
 if __name__ == "__main__":

@@ -34,6 +34,8 @@ def main():
     ap.add_argument("--kit", required=True)
     ap.add_argument("--split", default="dev")
     ap.add_argument("--run", action="append", required=True, help="label=path pattern with {pre} = t2_<dom>_<split>")
+    ap.add_argument("--only-run-topics", action="store_true",
+                    help="score only the topics present in the first run (e.g. the rule-8 train subsample)")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     ndcg = ndcg_fn(a.kit)
@@ -56,9 +58,11 @@ def main():
                     continue
                 group[qid] = "first_turn" if not seen else ("recycled_gold" if g & seen else "new_gold")
                 seen |= g
+        runs = {lab: read_run(pat.format(pre=f"t2_{dom}_{a.split}", dom=dom)) for lab, pat in systems}
+        topics = sorted(q for q in gold if q in runs[systems[0][0]]) if a.only_run_topics else sorted(gold)
         for lab, pat in systems:
-            run = read_run(pat.format(pre=f"t2_{dom}_{a.split}"))
-            for qid in sorted(gold):
+            run = runs[lab]
+            for qid in topics:
                 v = ndcg([x for x, _ in run.get(qid, [])], gold[qid], 10)
                 per[lab][dom].append(v)
                 grp[lab][group.get(qid, "first_turn")].append(v)

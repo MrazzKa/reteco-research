@@ -1295,3 +1295,128 @@ done today: step 0, step 1 (foreign gold + rule 10), step 2 (submission pipeline
   step 3 (rules 11, 12), step 4 (2a, 1a and 1b), step 5 for 2a (negative).
 not done: rule 13 for 1a and 1b (time; cancelled before generating). Open: Steve's answers to the 26.10 questions
   were never recorded; the format of the official run upload (one file per domain?) is not announced yet.
+
+## 2026-11-10 08:09 — A0: sync and checks
+repo: local main = origin/main = `1261932`, working tree clean. RETECO kit: `git fetch` → nothing new (HEAD 7ee8acf);
+  scorer / format_checker / data unchanged. Website News checked 08:12: last item 26.10 (Pyserini); nothing on the test
+  format, the Track-2 test fields (`conversation_history`, earlier answers), the run upload format or a run limit
+  ("submission limits will be announced"); evaluation opens 10 Jan 2027, closes ≤ 31 Jan 2027. Disk 849 GB free.
+context (from the user, 09.11): Steve cancelled the 9.11 meeting and asked for a written update; on 02.11 he agreed to
+  all proposed next steps, so a per-source choice (BRIGHT / StackExchange) is now allowed under a written rule. Open
+  risk: whether test `conversation_history` contains the earlier answers is not stated anywhere (question sent to the
+  organisers' list on 09.11, no answer yet); the main 2a run depends on them.
+history format audit (all train+dev turns, CPU): turn 1 always "No previous conversation."; 2,264 turns ≥ 2, 0 empty
+  answers. 2,149 turns have one Q/A pair per earlier turn; 115 long conversations (turn ≥ 6) use another layout:
+  "Earlier discussion covered: Turn 1: <question>; Turn 2: …" (questions only) + "Recent conversation:" with the last
+  two Q/A pairs. The frozen parser (`llm_expand.history_pairs`) ignores the summary line, so those turns give the LLM
+  2 earlier turns instead of 3 — this is what produced the dev 0.5475 and stays frozen for the main run.
+  237 continuation lines (answers over several lines) are appended to the answer, as before.
+plan for phase A (10 h from 08:09; A6 starts by 17:30 at the latest). Estimates: A1 ~2 h (code 40 min, retrieval
+  + hybrid 15 min CPU/GPU, ReasonEmbed 2 × ~13 min GPU, submit/synthetic checks 30 min); A2 ~1.5 h (answer generation
+  ~15 min GPU, reason+hyde ~10 min, submit.py over train-sub + dev ~20 min); A3 ~1 h (2 × ReasonEmbed ~13 min GPU);
+  A4 ~3–4 h (download ~10 min, speed test, then scoring as time allows); A5 CPU check 15 min; A6 40 min.
+  GPU queue strictly one job at a time: A1 ReasonEmbed → A3 ReasonEmbed → A2 vLLM → A2 submit → A4 reranker.
+
+## 2026-11-10 08:13 — rules 14–17 and the A2 design (written before any of the runs they govern)
+rule 14 (2a fallback without earlier answers). "Without answers" = no text of any earlier answer reaches any input:
+  BM25 text, dense query, LLM input, ReasonEmbed query. Text without answers: q = current question + newline +
+  the released history with every answer removed (`history.strip_answers`; summary questions and Q lines kept) —
+  new condition `2a_history_qonly_qfirst`; the week-4 `2a_history_qfirst` text DOES contain the answers (it is the
+  whole history string), so H0 and Ha of rule 11 are not answer-free. LLM input = `2a_hist3q` (current + ≤ 3 earlier
+  questions; existing generations). ReasonEmbed query = the `2a_hist3q` body, instruction "Given a <domain>
+  conversation, retrieve documents that help answer the current question.", ≤ 512 tokens, pool 50, weight = best on
+  the train subsample in the rule-8 grid {none, top-N, interp 0.1…0.9}. Code asserts, per topic, that no earlier
+  answer (any 40-char prefix of a parsed answer of ≥ 20 chars) occurs in any of the four inputs.
+  Candidates, in order of complexity: (iii) B = current turn, no MaxP (rule 10; train-sub 0.4317);
+  (ii) H0q + ReasonEmbed (plain answer-free history text, BM25 + bge-base hybrid tuned on full train, no LLM);
+  (i) Haq + ReasonEmbed (q+r+h with the 2a_hist3q generations over the answer-free text, hybrid tuned on full train).
+  Choice on the rule-8 train subsample (330 topics): take the best by train macro; it is adopted only if it beats
+  every simpler candidate by ≥ +0.005 with paired-bootstrap 95% lower bound > 0 (10,000, seed 20260921, within
+  domain); otherwise drop it and repeat among the rest; B is the default. Dev once per candidate (+ the T1…T5+,
+  recycled / new gold breakdown).
+  submit.py: per Track-2 domain file, if at least one turn with turn ≥ 2 has a non-empty parsed answer → main
+  `2a_history`, else → the rule-14 fallback (new variant `2a_history_q`). Decision + counters in stdout and in
+  `<out>/2a_auto/decision.json`; the fallback variant is always built as its own run too.
+A2 (analysis, no choice): LLM-written earlier answers instead of the reference ones. Qwen3-4B (same checkpoint, vLLM,
+  temperature 0, max 256 new tokens), prompt: answer the question in ≤ 150 words, given the earlier turns of the same
+  conversation (≤ 3 earlier turns, with OUR generated answers — generated turn by turn, so no reference answer is
+  ever seen), no documents. The released history strings are rebuilt with each reference answer replaced by the
+  generated answer of that turn (same layout, same truncation of nothing else). Then the frozen main 2a pipeline
+  (Hb + ReasonEmbed w 0.9, fusion z-score α 0.6, no re-tuning) via submit.py on the rule-8 train subsample and on
+  dev. Report macro, recycled-gold (568 dev) / new-gold (79) turns, T1…T5+, against reference answers and rule 14.
+rule 15 (per-source query variant, Track 2). Groups by domain name: BRIGHT = biology, earth_science, economics,
+  psychology, robotics, sustainable_living; StackExchange = drones, hardware, law, medicalsciences, politics.
+  For 2a current (B) and 2a history (main), the q-system = plain-query hybrid (2a current: `2a_current__q`, rule-6
+  report; history: H0 = week-4 history hybrid, text with answers) + ReasonEmbed over its top 50 with the same query
+  and instruction as the current system of that condition and its weight chosen on the whole train subsample
+  (rule-8 grid). The q+r+h system is the current one. For each group G: the grouped system uses the q-system on G
+  only if, on the train-subsample topics of G, q-system − q+r+h system ≥ +0.005 with bootstrap lower bound > 0
+  (within domain, as above); otherwise unchanged. Dev reported once per group and for the combined system.
+rule 16 (LLM reranker). Qwen/Qwen3-Reranker-4B (pointwise yes/no, prompt exactly as in the model card), transformers
+  + bitsandbytes NF4 (fp16 compute); fallback Qwen3-Reranker-0.6B fp16 if 4B does not fit or runs < 5 pairs/s
+  (reason logged). Pool = top 20 of the final system of the condition (train subsample + dev, the saved rule-8/11
+  runs): 1a, 1b, 2a history (main), 2a current B. Instruction per domain in the ReasonEmbed style; query: 1a query;
+  1b query + step; 2a history = the ReasonEmbed query of Hb (current first, ≤ 3 earlier Q/A); 2a current = current
+  question. Document cut to 512 tokens; scores cached by sha1(instruction + query + document text).
+  Grid on the train subsample: none; reranker order over the top N; interpolation (1 − w)·z(final) + w·z(reranker)
+  over the top N, w ∈ {0.1 … 0.9}; N ∈ {10, 20}; z over the N pool documents of the topic; ties sha1. Best on train
+  adopted over none with +0.005 and bootstrap lower bound > 0; dev once. If adopted: new submission.json entry +
+  submit.py stage + dev check with score_submission.py. Order 2a history → 1a → 2a current → 1b.
+rule 17 (ReasonEmbed pool 50 → 100), conditional. CPU first: on train (all topics) the share of gold documents in
+  the top 100 but not the top 50 of the hybrid of each final system. ReasonEmbed at 100 is run for a condition only if
+  that share is ≥ 3% of its gold; then 50 vs 100 chosen on the train subsample (weight re-chosen in the rule-8 grid)
+  with the usual margin. If rule 16 adopts a reranker, rule 17 is evaluated without it (stated in RESULTS).
+
+## 2026-11-10 08:14–08:20 — A1 / rule 14, retrieval + hybrid stage on the answer-free history text
+code: `scripts/history.py` (new: label normalisation, `parse`, `has_answers`, `strip_answers`, `qonly_qfirst`,
+  `assert_answer_free`; audit `python3 history.py --data ../../reteco_data_v11`: normalisation changes 0 of 2,971
+  released strings, the frozen parser output changes for 0 turns, 2,264/2,264 turns ≥ 2 have answers, 0 after
+  `strip_answers`; all earlier turns are found (Q/A pairs + summary questions) for every turn; 0 unparsed lines).
+  `dense_search.plan` gains `2a_history_qonly_qfirst` (asserts answer-free per topic: 40-char windows from the start,
+  middle and end of each earlier answer, windows that also occur in a question excluded — answers often echo the
+  question). LLM input `2a_hist3q` = current + ≤ 3 earlier questions (frozen generations of 02.11, 0 missing).
+command: `research/runs_v13/logs/queue_1110a.sh` (log `queue_1110a.log`): `qexp_search.py --cond 2a_hist3q --query-cond
+  2a_history_qonly_qfirst --variants q q+r+h` (out `runs_v13/histq/t2`, 1.5 min) and `hybrid.py` (4.5 min).
+result (hybrid, fusion tuned on full train; train / dev macro nDCG@10):
+  H0q (plain answer-free history) z-score α 0.7: 0.3877 / 0.3545 (BM25 0.2678/0.2812, dense 0.3631/0.3245)
+  Haq (q+r+h, LLM sees questions only) z-score α 0.6: 0.4311 / 0.3917 (BM25 0.3762/0.3663, dense 0.3932/0.3446)
+  for reference: current-turn q+r+h hybrid 0.3367 / 0.3100; with answers H0 0.4806 / 0.4352, Hb 0.5112 / 0.4601.
+reading: without any answer the earlier questions still carry a lot (+0.09 train over the current-turn hybrid); the
+  answers add another +0.08 (Hb − Haq). ReasonEmbed stage running (then rule-14 choice).
+
+## 2026-11-10 08:19 — rule 17, CPU part: gold between ranks 51 and 100 of the frozen hybrids
+command: `python3 pool_depth.py --runs ../research/runs_v13 --data ../../reteco_data_v11 --out
+  ../research/runs_v13/select/rule17_ceiling.json` (23 s). Share of all gold documents (micro) that the hybrid puts in
+  its top 100 but not its top 50, train (all topics) / dev; recall@50 train in brackets:
+  1a 8.9% / 7.4% (0.538) · 1b 6.9% / 6.7% (0.717) · 2a current B 8.4% / 10.3% (0.681) · 2a history 5.3% / 7.1% (0.866).
+  All four ≥ 3% → ReasonEmbed over the top 100 is to be run for every condition (GPU; scheduled after A4 — phase B1
+  if it does not fit; note: a pool of 100 roughly doubles the documents to encode, ~40 min per condition).
+
+## 2026-11-10 08:20–08:36 — A1 / rule 14 result: the answer-free fallback is H0q + ReasonEmbed (no LLM)
+commands: `queue_1110a.sh` → `reason_rerank.py --backend bnb --bits 4 --pool 50 --query-cond 2a_hist3q` over the
+  `histq` hybrids (`--name 2ahq_haq`: 1,555 new documents + 898 queries, 260 s; `--name 2ahq_h0q`: 5,046 new
+  documents, 495 s; runs saved in `runs_v13/foreign/runs`, score dumps in `runs_v13/scores/`); then
+  `rule14_choice.py` (out `select/rule14.json`) and `t2_breakdown.py` (out `select/rule14_breakdown_dev.json`).
+  Answer-free check before scoring (CPU, all 2,971 train/dev turns): LLM input `2a_hist3q`, ReasonEmbed query and
+  BM25/dense text pass `assert_answer_free`; positive control: the check fires on 2,264/2,264 with-answer bodies.
+result (train subsample 330 topics / dev 858; ReasonEmbed weight chosen on train):
+  B (current turn, rule 10)           0.4317 / 0.3779 (w 0.8)
+  H0q + ReasonEmbed                   0.5168 / 0.4802 (w 0.9; hybrid alone 0.3970 / 0.3545)
+  Haq + ReasonEmbed                   0.5264 / 0.4852 (w 0.8; hybrid alone 0.4536 / 0.3917)
+  train tests: Haq − H0q +0.0096 [−0.0069, +0.0267] → fails; H0q − B +0.0851 [+0.0542, +0.1169] → passes.
+  **Decision: answer-free fallback = H0q + ReasonEmbed w 0.9** (no LLM at all). Dev − B: H0q +0.1023 [+0.0828, +0.1220];
+  Haq +0.1074 [+0.0899, +0.1250].
+dev breakdown (mean over turns): first turn (211) / recycled gold (568) / new gold (79):
+  main with answers 0.5213 / 0.6371 / 0.3759 · H0q+RE 0.4797 / 0.5390 / 0.3766 · Haq+RE 0.5014 / 0.5439 / 0.4022 ·
+  B 0.5019 / 0.3805 / 0.3580. T2…T5+: H0q+RE 0.511 / 0.504 / 0.545 / 0.537 (main 0.596 / 0.602 / 0.642 / 0.587).
+reading: the earlier QUESTIONS alone recover most of the history gain on recycled-gold turns (0.38 → 0.54; the
+  answers take it to 0.64). On first turns H0q+RE is below B (0.480 vs 0.502) because it has no LLM: a "B on turn 1,
+  H0q+RE later" combination looks better but was not a pre-registered candidate — noted, not adopted.
+submission: `configs/submission.json` gains `2a_history_q` (variant "q": no LLM; BM25 on the answer-free text; dense
+  e_query(q); z-score α 0.7; ReasonEmbed w 0.9 with the conversation instruction over current + ≤ 3 earlier
+  questions) and `_auto_2a` (with answers → `2a_history`, without → `2a_history_q`). `submit.py`: new query type
+  `2a_hist3q_qonly` (asserts answer-free inputs per topic), plain variant without LLM, `--variants 2a_auto` (decision +
+  parser counters per domain in stdout and `2a_auto/decision.json`; both variants always built), history label
+  normalisation before parsing (identity on train/dev).
+dev check: `submit.py --variants 2a_history_q --split dev` (45 s; 0 new ReasonEmbed documents) + `score_submission.py`
+  → official macro **0.4802 = research 0.4802**; format_checker exit 0 for all 11 files, missing 0, dup 0, unknown 0.

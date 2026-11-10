@@ -1,5 +1,5 @@
 {
- "_about": "Frozen submission configuration (LOG rules 6-12). Generated 2026-11-02 from the train-chosen reports; used by scripts/submit.py. Paths are relative to the repository root.",
+ "_about": "Frozen submission configuration (LOG rules 6-14). Generated 2026-11-02 from the train-chosen reports; used by scripts/submit.py. Paths are relative to the repository root. Updated 2026-11-10: rule-14 fallback 2a_history_q and the 2a automation (_auto_2a).",
  "tie_key": "sha1",
  "seeds": {
   "llm": 0,
@@ -91,7 +91,8 @@
    "depth": 1000,
    "source": "rule 6 (q+r+h), rule 8 (ReasonEmbed w 0.8)",
    "dev_research": 0.3667,
-   "role": "main"
+   "role": "main",
+   "train_research": 0.3078
   },
   "1b": {
    "track": 1,
@@ -177,7 +178,8 @@
    "depth": 1000,
    "source": "rule 6, rule 8 (w 0.7)",
    "dev_research": 0.4053,
-   "role": "main"
+   "role": "main",
+   "train_research": 0.3754
   },
   "2a_maxp": {
    "track": 2,
@@ -265,7 +267,8 @@
    "depth": 1000,
    "source": "rules 6, 7 (MaxP), 8 (w 0.8)",
    "dev_research": 0.3901,
-   "role": "fallback 2 (current turn + MaxP)"
+   "role": "fallback 2 (current turn + MaxP)",
+   "train_research": 0.4359
   },
   "2a_nomaxp": {
    "track": 2,
@@ -349,7 +352,8 @@
    "depth": 1000,
    "source": "rule 6 (q+r+h), rule 10 (no MaxP), ReasonEmbed w 0.8 (rule-8 grid on train)",
    "dev_research": 0.3779,
-   "role": "fallback 1 (current turn, rule 10 main)"
+   "role": "fallback 1 (current turn, rule 10 main)",
+   "train_research": 0.4317
   },
   "2a_history": {
    "track": 2,
@@ -438,7 +442,8 @@
     "q_text": "current question + newline + released conversation_history",
     "reasonembed_query": "same text as the LLM input, whitespace-collapsed"
    },
-   "role": "main (rule 12)"
+   "role": "main (rule 12)",
+   "train_research": 0.583
   },
   "1a_noRE": {
    "track": 1,
@@ -525,7 +530,8 @@
    "depth": 1000,
    "source": "rule 6 hybrid only",
    "dev_research": 0.3258,
-   "role": "fallback (no ReasonEmbed)"
+   "role": "fallback (no ReasonEmbed)",
+   "train_research": 0.2823
   },
   "1b_noRE": {
    "track": 1,
@@ -612,7 +618,73 @@
    "depth": 1000,
    "source": "rule 6 hybrid only",
    "dev_research": 0.3505,
-   "role": "fallback (no ReasonEmbed)"
+   "role": "fallback (no ReasonEmbed)",
+   "train_research": 0.3442
+  },
+  "2a_history_q": {
+   "track": 2,
+   "query": "2a_hist3q_qonly",
+   "run_id": "UA_2a_history_q",
+   "domains": [
+    "drones",
+    "politics",
+    "law",
+    "medicalsciences",
+    "hardware",
+    "economics",
+    "psychology",
+    "biology",
+    "sustainable_living",
+    "robotics",
+    "earth_science"
+   ],
+   "variant": "q",
+   "bm25": {
+    "impl": "bm25s 0.2 (Lucene variant)",
+    "k1": 0.9,
+    "b": 0.4,
+    "analyzer": "lucene",
+    "depth": 1000,
+    "text": "q"
+   },
+   "dense": {
+    "model": "bge-base",
+    "checkpoint": "BAAI/bge-base-en-v1.5",
+    "max_len": 512,
+    "emb": "research/runs_v12/emb",
+    "maxp": false,
+    "query_vector": "e_query(q)"
+   },
+   "hybrid": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.7
+   },
+   "reasonembed": {
+    "checkpoint": "hanhainebula/reason-embed-qwen3-4b-0928",
+    "quant": "bitsandbytes NF4, fp16 compute",
+    "pooling": "last token, L2-normalised",
+    "max_len": 512,
+    "doc_max_chars": 4000,
+    "pool": 50,
+    "how": "interp",
+    "cache": "research/runs_v13/reason/cache/reasonembed-4b_4bit_L512",
+    "instruction": "Given a <domain> conversation, retrieve documents that help answer the current question.",
+    "w": 0.9
+   },
+   "depth": 1000,
+   "source": "rule 14 (H0q: answer-free history text, BM25 + bge-base hybrid z-score a 0.7, no LLM) + ReasonEmbed w 0.9 (rule-8 grid on train)",
+   "dev_research": 0.4802,
+   "history": {
+    "llm_input": "none (no LLM)",
+    "q_text": "current question + newline + released conversation_history with every answer removed (history.strip_answers)",
+    "reasonembed_query": "current question first, then the last <=3 earlier questions (no answers), whitespace-collapsed",
+    "answer_free": "asserted per topic in submit.py (history.assert_answer_free)"
+   },
+   "role": "fallback (main 2a run when the test history has no earlier answers; rule 14)",
+   "train_research": 0.5168
   }
  },
  "_main_runs": {
@@ -628,8 +700,15 @@
    "1b_noRE"
   ],
   "2a": [
+   "2a_history_q",
    "2a_nomaxp",
    "2a_maxp"
   ]
+ },
+ "_auto_2a": {
+  "with_answers": "2a_history",
+  "without_answers": "2a_history_q",
+  "run_id": "UA_2a_auto",
+  "rule": "per Track-2 domain file: if any turn with turn_id >= 2 has a non-empty parsed earlier answer in conversation_history -> with_answers, else without_answers (LOG rule 14)"
  }
 }

@@ -143,6 +143,17 @@ def rank(lst, how, sc):
     return [d for d, _ in order([(d, (1 - p) * a + p * b) for d, a, b in zip(docs, h, r)])]
 
 
+def scored(lst, how, sc):
+    """[(doc, final score)] in final order (the score that `rank` sorts by; 'none'/'top': hybrid score,
+    with the embedder score for the reordered head of 'top')."""
+    kind, p = how
+    if kind == "interp":
+        h, r = minmax([s for _, s in lst]), minmax([sc[d] for d, _ in lst])
+        return order([(d, (1 - p) * a + p * b) for (d, _), a, b in zip(lst, h, r)])
+    return [(d, (sc[d] if kind == "top" and d in set(x for x, _ in lst[:p]) else s))
+            for d, s in [(d, dict(lst)[d]) for d in rank(lst, how, sc)]]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--track", type=int, required=True)
@@ -165,6 +176,8 @@ def main():
     ap.add_argument("--domains", nargs="+", default=["all"])
     ap.add_argument("--splits", nargs="+", default=["train", "dev"])
     ap.add_argument("--name", nargs="*", help="report key per --conditions entry (default: the condition)")
+    ap.add_argument("--save-scores", help="write {split: {domain: {qid: [[doc, final score], ...]}}} of the "
+                    "rule-chosen way (and 'none') here (JSON)")
     ap.add_argument("--save-runs", help="write TREC runs (rule-chosen way and 'none') of every scored topic here")
     ap.add_argument("--out", required=True)
     tiebreak.add_arg(ap)
@@ -300,6 +313,20 @@ def main():
                                 for r, d in enumerate(rank(pools[q], how, sc[q]), 1):
                                     f.write(f"{q} Q0 {d} {r} {1.0 / r:.6f} {rname}-{label}\n")
             row["saved_runs"] = {"dir": a.save_runs, "best": best}
+        if a.save_scores:
+            best = row.get("best_on_train", "none=0")
+            k, p = best.split("=")
+            how = (k, float(p) if k == "interp" else int(p))
+            dump = {"best": best, "how": list(how), "scores": {}, "none": {}}
+            for sp in per:
+                for dom, (qids, pools, sc, _) in per[sp].items():
+                    dump["scores"].setdefault(sp, {})[dom] = {q: [[d, round(x, 6)] for d, x in scored(pools[q], how, sc[q])]
+                                                              for q in qids}
+                    dump["none"].setdefault(sp, {})[dom] = {q: [[d, round(x, 6)] for d, x in pools[q]] for q in qids}
+            os.makedirs(os.path.dirname(os.path.abspath(a.save_scores)), exist_ok=True)
+            path = a.save_scores if len(names) == 1 else a.save_scores.replace(".json", f"_{rname}.json")
+            json.dump(dump, open(path, "w"))
+            row["saved_scores"] = path
         report[rname] = row
         json.dump(report, open(rpath, "w"), indent=1)
 

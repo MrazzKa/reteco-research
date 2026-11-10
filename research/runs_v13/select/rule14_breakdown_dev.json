@@ -1,0 +1,183 @@
+{
+ "history main (with answers)": {
+  "macro": 0.5475,
+  "groups": {
+   "first_turn": {
+    "n": 211,
+    "ndcg10": 0.5213
+   },
+   "new_gold": {
+    "n": 79,
+    "ndcg10": 0.3759
+   },
+   "recycled_gold": {
+    "n": 568,
+    "ndcg10": 0.6371
+   }
+  },
+  "depth": {
+   "T1": {
+    "n": 211,
+    "ndcg10": 0.5213
+   },
+   "T2": {
+    "n": 211,
+    "ndcg10": 0.5963
+   },
+   "T3": {
+    "n": 211,
+    "ndcg10": 0.6021
+   },
+   "T4": {
+    "n": 121,
+    "ndcg10": 0.6417
+   },
+   "T5+": {
+    "n": 104,
+    "ndcg10": 0.587
+   }
+  },
+  "vs_history main (with answers)": null
+ },
+ "H0q+RE (no answers, chosen)": {
+  "macro": 0.4802,
+  "groups": {
+   "first_turn": {
+    "n": 211,
+    "ndcg10": 0.4797
+   },
+   "new_gold": {
+    "n": 79,
+    "ndcg10": 0.3766
+   },
+   "recycled_gold": {
+    "n": 568,
+    "ndcg10": 0.539
+   }
+  },
+  "depth": {
+   "T1": {
+    "n": 211,
+    "ndcg10": 0.4797
+   },
+   "T2": {
+    "n": 211,
+    "ndcg10": 0.5105
+   },
+   "T3": {
+    "n": 211,
+    "ndcg10": 0.5042
+   },
+   "T4": {
+    "n": 121,
+    "ndcg10": 0.5448
+   },
+   "T5+": {
+    "n": 104,
+    "ndcg10": 0.5371
+   }
+  },
+  "vs_history main (with answers)": {
+   "diff": -0.0673,
+   "ci95": [
+    -0.0801,
+    -0.0543
+   ],
+   "p_le_0": 1.0
+  }
+ },
+ "Haq+RE (no answers)": {
+  "macro": 0.4852,
+  "groups": {
+   "first_turn": {
+    "n": 211,
+    "ndcg10": 0.5014
+   },
+   "new_gold": {
+    "n": 79,
+    "ndcg10": 0.4022
+   },
+   "recycled_gold": {
+    "n": 568,
+    "ndcg10": 0.5439
+   }
+  },
+  "depth": {
+   "T1": {
+    "n": 211,
+    "ndcg10": 0.5014
+   },
+   "T2": {
+    "n": 211,
+    "ndcg10": 0.5179
+   },
+   "T3": {
+    "n": 211,
+    "ndcg10": 0.5198
+   },
+   "T4": {
+    "n": 121,
+    "ndcg10": 0.5469
+   },
+   "T5+": {
+    "n": 104,
+    "ndcg10": 0.5344
+   }
+  },
+  "vs_history main (with answers)": {
+   "diff": -0.0623,
+   "ci95": [
+    -0.0746,
+    -0.0498
+   ],
+   "p_le_0": 1.0
+  }
+ },
+ "B current turn": {
+  "macro": 0.3779,
+  "groups": {
+   "first_turn": {
+    "n": 211,
+    "ndcg10": 0.5019
+   },
+   "new_gold": {
+    "n": 79,
+    "ndcg10": 0.358
+   },
+   "recycled_gold": {
+    "n": 568,
+    "ndcg10": 0.3805
+   }
+  },
+  "depth": {
+   "T1": {
+    "n": 211,
+    "ndcg10": 0.5019
+   },
+   "T2": {
+    "n": 211,
+    "ndcg10": 0.3838
+   },
+   "T3": {
+    "n": 211,
+    "ndcg10": 0.3629
+   },
+   "T4": {
+    "n": 121,
+    "ndcg10": 0.3685
+   },
+   "T5+": {
+    "n": 104,
+    "ndcg10": 0.4062
+   }
+  },
+  "vs_history main (with answers)": {
+   "diff": -0.1696,
+   "ci95": [
+    -0.1902,
+    -0.1486
+   ],
+   "p_le_0": 1.0
+  }
+ }
+}
