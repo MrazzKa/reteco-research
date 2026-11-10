@@ -1527,3 +1527,65 @@ submission: `configs/submission.json` gains `2a_history_rr` (= `2a_history` + `l
   scores rounded to 6 decimals as in the score dumps; same cache key) — the model is loaded only for missing pairs.
 dev check: `submit.py --variants 2a_history_rr --split dev` (1.7 min, 0 new pairs) + `score_submission.py` →
   official macro **0.5507 = research 0.5507**; format_checker exit 0 for all 11 files.
+
+## 2026-11-10 09:58 — B2 setup and rule 18 (written before any second-embedder result)
+candidates for a second reasoning embedder (≤ 8 GB in NF4), model cards / papers checked 09:40–09:55:
+  - ReasonIR-8B (reasonir/ReasonIR-8B, Llama-3.1-8B base, cc-by-nc-4.0): its hard-query training data
+    (reasonir/reasonir-data) takes positives from the BRIGHT document datastore (`xlangai/BRIGHT` documents, looked up
+    by id); the card does not say that BRIGHT evaluation positives were excluded → excluded here (rule: no model
+    trained on BRIGHT test material; six Track-2 domains are BRIGHT-derived). Also 8B in NF4 leaves < 1 GB headroom.
+  - Qwen3-Embedding-4B (Qwen/Qwen3-Embedding-4B rev 5cf2132abc99cad020ac570b19d031efec650f2b, apache-2.0, ungated):
+    general-purpose (MTEB); the card does not mention BRIGHT → candidate. Query = "Instruct: {task}\nQuery:{query}"
+    (no space after "Query:", as in the card), last-token pooling, left padding, L2-normalised; documents without
+    instruction; same 512-token / 4,000-char document cut and the same instructions as ReasonEmbed.
+  note for the paper (no change): ReasonEmbed's training data (ReMixer, arXiv 2510.08252 §3.1) is synthesised from
+    the 12 BRIGHT corpora, "excluding any documents labeled as positives for the evaluation queries in the BRIGHT
+    benchmark"; its contamination check covers queries only. So ReasonEmbed has seen BRIGHT corpus documents (not
+    BRIGHT positives) — relevant to the BRIGHT-vs-StackExchange gap on Track 2.
+rule 18: for each final system (order 2a history main, 1a, 2a current B, 1b; as GPU time allows), over the same
+  top-50 pool: E = mean of the z-scores (over the pool of the topic) of ReasonEmbed and Qwen3-Embedding; the
+  ensemble system = the rule-8 grid {top-N by E, (1 − w) minmax(fused) + w minmax(E), w 0.1…0.9} with the way chosen
+  on the train subsample. It replaces the current ReasonEmbed stage only if ensemble − current ≥ +0.005 on train
+  with bootstrap lower bound > 0. Qwen3-Embedding alone (same grid) is reported, not a candidate. Dev once. If a
+  rule-16 reranker is adopted for the condition, rule 18 is evaluated without it (stated in RESULTS).
+
+## 2026-11-10 09:51–10:07 — rule 16 result, 1a: reranker not adopted
+command: `queue_1110c.sh` → `llm_rerank.py --cond 1a --scores runs_v13/scores/1a_rerun.json` (17,380 pairs, ~16 min).
+result (train sub / dev): none 0.3078 / 0.3667 · only @10 0.2815 / 0.3327, @20 0.2561 / 0.3350 · interp @20 w 0.1
+  0.3101 / 0.3705 (best on train), w 0.2 0.3086 / 0.3740, w 0.3 0.3058 / 0.3794, w 0.5 0.2994 / 0.3786.
+  train best − none +0.0023 [−0.0012, +0.0058] → **not adopted**. Dev once (best on train): +0.0038 [+0.0000, +0.0078].
+reading: on TEMPO the 0.6B reranker disagrees with train (larger w hurts train, helps dev); no change.
+
+## 2026-11-10 10:12 — B5: rule for the error examples (written before any example is seen)
+file: `research/cases/errors_main_dev.md`. Systems = the main run of each sub-task as of the end of phase A
+  (1a final, 1b final, 2a = history main with the rule-16 reranker). Pool: dev topics whose nDCG@10 under the main
+  system is < 0.2, sorted by (domain, topic id); 3 per sub-task drawn with random.Random(20260921). Shown per example:
+  the query (first 400 chars; 1b: query + step; 2a: current question + the first 300 chars of the history), each gold
+  document's first 250 chars and its rank in the main run (> 50 = "not in the reranked top 50"), the system's rank-1
+  document (first 250 chars) and whether it is gold for another dev/train topic of the domain (foreign gold). No
+  resampling; a short neutral reading per example, written after seeing it and marked as such.
+B5 ablation (CPU, done 10:08): `scripts/ablation_1110.py` → `runs_v13/ablation_1110.json`; every stage scored on the same
+  topics (train subsample / all dev), CIs by bootstrap; re-run after the rule-16 queue so the reranker rows exist.
+
+## 2026-11-10 10:07–10:19 — rule 16 result, 2a current (B): reranker not adopted
+command: `queue_1110c.sh` → `llm_rerank.py --cond 2a_current --scores runs_v13/scores/2a_nomaxp.json` (23,760 pairs, 12 min).
+result (train sub / dev): none 0.4317 / 0.3779 · only @10 0.4025 / 0.3537, @20 0.3742 / 0.3352 · interp @20 w 0.1
+  0.4327 / 0.3794, w 0.2 0.4333 / 0.3837, **w 0.3 0.4358 / 0.3853** (best on train), w 0.4 0.4300 / 0.3858.
+  train best − none +0.0041 [−0.0068, +0.0154] → **not adopted** (below the margin). Dev once: +0.0074 [+0.0006, +0.0141].
+
+## 2026-11-10 10:28 — rule 17 queued (estimate before the run)
+`research/runs_v13/logs/queue_1110d.sh` (starts after the rule-16 queue): `reason_rerank.py --pool 100` over the four
+  final hybrids (names `<final>_p100`, runs saved, score dumps), `rule17_choice.py` after each. New documents to
+  encode (not yet in the ReasonEmbed cache, train subsample + dev, conditions share the cache): 2a history 8,152,
+  1a 19,796, 2a current 8,948, 1b 16,290 → ~18 / 44 / 20 / 36 min at 7.5 docs/s, ≈ 2 h in total.
+  Then `queue_1110e.sh` (B2 / rule 18: Qwen3-Embedding-4B over the same top-50 pools + ensemble).
+
+## 2026-11-10 10:19–10:49 — rule 16 result, 1b: reranker not adopted; rule 16 summary
+command: `queue_1110c.sh` → `llm_rerank.py --cond 1b --scores runs_v13/scores/1b_rerun.json` (31,800 pairs, 30 min).
+result (train sub / dev): none 0.3754 / 0.4053 · only @10 0.3412 / 0.3731, @20 0.3146 / 0.3599 · interp @20 w 0.2
+  0.3763 / 0.4111, **w 0.3 0.3783 / 0.4166** (best on train), w 0.4 0.3734 / 0.4112.
+  train best − none +0.0029 [−0.0071, +0.0126] → **not adopted**. Dev once: +0.0113 [+0.0003, +0.0234].
+rule 16 summary (Qwen3-Reranker-0.6B, top 20, z-interpolation): adopted only for 2a history (train +0.0169; dev
+  +0.0032). Not adopted: 1a (+0.0023 train / +0.0038 dev), 2a current (+0.0041 / +0.0074), 1b (+0.0029 / +0.0113).
+  Pattern: a light interpolation (w 0.1–0.4) is mildly positive on dev everywhere and small on train; the reranker alone
+  is always worse than the final system. Total cost: ~96,700 pairs in 78 min (≈ 20 pairs/s).

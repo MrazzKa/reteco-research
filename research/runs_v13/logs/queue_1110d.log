@@ -1,0 +1,1 @@
+=== 10:49:23 attempt 1: --track 2 --conditions 2a_hist3qa__q+r+h --query-cond 2a_hist3qa --name 2ah_hybrid_p100 --hybrid ../research/runs_v13/hist/t2/hybrid.json --bm25 ../research/runs_v13/hist/t2/bm25/runs --dense ../research/runs_v13/hist/t2/dense/runs --save-scores ../research/runs_v13/scores/2ah_hybrid_p100.json

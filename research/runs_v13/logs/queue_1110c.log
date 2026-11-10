@@ -85,3 +85,261 @@
 == 2a_history: none {'train': 0.583, 'dev': 0.5475} | best on train interp@20_w0.4 {'train': 0.5999, 'dev': 0.5507} | train boot {'diff': 0.0169, 'ci95': [0.0039, 0.0307], 'p_le_0': 0.0064} | adopted=True | dev boot {'diff': 0.0032, 'ci95': [-0.0059, 0.0124], 'p_le_0': 0.2449}
 === 09:50:51 R16_2AH_DONE
 === 09:50:51 attempt 1: --cond 1a --scores ../research/runs_v13/scores/1a_rerun.json
+[1a] 17380 pairs over 869 topics
+  400/17380 pairs, 394 scored in 24s (16.40 pairs/s), total 30s
+  800/17380 pairs, 394 scored in 19s (21.15 pairs/s), total 49s
+  1200/17380 pairs, 398 scored in 19s (20.68 pairs/s), total 68s
+  1600/17380 pairs, 400 scored in 31s (13.07 pairs/s), total 99s
+  2000/17380 pairs, 395 scored in 21s (19.00 pairs/s), total 120s
+  2400/17380 pairs, 399 scored in 16s (24.46 pairs/s), total 137s
+  2800/17380 pairs, 400 scored in 17s (24.01 pairs/s), total 153s
+  3200/17380 pairs, 400 scored in 21s (19.29 pairs/s), total 174s
+  3600/17380 pairs, 399 scored in 18s (22.28 pairs/s), total 193s
+  4000/17380 pairs, 400 scored in 18s (22.25 pairs/s), total 211s
+  4400/17380 pairs, 400 scored in 24s (16.38 pairs/s), total 236s
+  4800/17380 pairs, 399 scored in 25s (15.97 pairs/s), total 261s
+  5200/17380 pairs, 399 scored in 27s (14.84 pairs/s), total 288s
+  5600/17380 pairs, 400 scored in 20s (19.52 pairs/s), total 309s
+  6000/17380 pairs, 400 scored in 20s (19.61 pairs/s), total 329s
+  6400/17380 pairs, 400 scored in 22s (17.92 pairs/s), total 352s
+  6800/17380 pairs, 400 scored in 19s (21.01 pairs/s), total 371s
+  7200/17380 pairs, 399 scored in 20s (19.54 pairs/s), total 392s
+  7600/17380 pairs, 397 scored in 23s (17.51 pairs/s), total 415s
+  8000/17380 pairs, 395 scored in 19s (21.30 pairs/s), total 434s
+  8400/17380 pairs, 400 scored in 18s (22.45 pairs/s), total 452s
+  8800/17380 pairs, 400 scored in 23s (17.05 pairs/s), total 475s
+  9200/17380 pairs, 399 scored in 16s (24.48 pairs/s), total 492s
+  9600/17380 pairs, 399 scored in 22s (17.74 pairs/s), total 515s
+  10000/17380 pairs, 400 scored in 22s (18.00 pairs/s), total 537s
+  10400/17380 pairs, 400 scored in 27s (14.94 pairs/s), total 564s
+  10800/17380 pairs, 399 scored in 29s (13.58 pairs/s), total 594s
+  11200/17380 pairs, 397 scored in 21s (18.70 pairs/s), total 615s
+  11600/17380 pairs, 400 scored in 19s (21.54 pairs/s), total 634s
+  12000/17380 pairs, 400 scored in 21s (19.12 pairs/s), total 655s
+  12400/17380 pairs, 400 scored in 26s (15.55 pairs/s), total 681s
+  12800/17380 pairs, 400 scored in 22s (18.20 pairs/s), total 704s
+  13200/17380 pairs, 400 scored in 22s (17.87 pairs/s), total 726s
+  13600/17380 pairs, 400 scored in 19s (21.39 pairs/s), total 745s
+  14000/17380 pairs, 400 scored in 24s (16.35 pairs/s), total 770s
+  14400/17380 pairs, 400 scored in 21s (19.35 pairs/s), total 791s
+  14800/17380 pairs, 399 scored in 24s (16.48 pairs/s), total 816s
+  15200/17380 pairs, 399 scored in 26s (15.47 pairs/s), total 842s
+  15600/17380 pairs, 399 scored in 24s (16.57 pairs/s), total 866s
+  16000/17380 pairs, 398 scored in 22s (17.98 pairs/s), total 889s
+  16400/17380 pairs, 400 scored in 21s (19.48 pairs/s), total 910s
+  16800/17380 pairs, 400 scored in 25s (15.83 pairs/s), total 935s
+  17200/17380 pairs, 400 scored in 23s (17.59 pairs/s), total 959s
+  17380/17380 pairs, 180 scored in 11s (16.29 pairs/s), total 970s
+   none@20          train 0.3078  dev 0.3667
+   only@10          train 0.2815  dev 0.3327
+   only@20          train 0.2561  dev 0.3350
+   interp@10_w0.1   train 0.3082  dev 0.3667
+   interp@10_w0.2   train 0.3063  dev 0.3653
+   interp@10_w0.3   train 0.3055  dev 0.3657
+   interp@10_w0.4   train 0.3057  dev 0.3639
+   interp@10_w0.5   train 0.3026  dev 0.3610
+   interp@10_w0.6   train 0.2976  dev 0.3568
+   interp@10_w0.7   train 0.2943  dev 0.3490
+   interp@10_w0.8   train 0.2908  dev 0.3427
+   interp@10_w0.9   train 0.2844  dev 0.3423
+   interp@20_w0.1   train 0.3101  dev 0.3705
+   interp@20_w0.2   train 0.3086  dev 0.3740
+   interp@20_w0.3   train 0.3058  dev 0.3794
+   interp@20_w0.4   train 0.3066  dev 0.3777
+   interp@20_w0.5   train 0.2994  dev 0.3786
+   interp@20_w0.6   train 0.2943  dev 0.3756
+   interp@20_w0.7   train 0.2877  dev 0.3642
+   interp@20_w0.8   train 0.2758  dev 0.3526
+   interp@20_w0.9   train 0.2658  dev 0.3485
+== 1a: none {'train': 0.3078, 'dev': 0.3667} | best on train interp@20_w0.1 {'train': 0.3101, 'dev': 0.3705} | train boot {'diff': 0.0023, 'ci95': [-0.0012, 0.0058], 'p_le_0': 0.0968} | adopted=False | dev boot {'diff': 0.0038, 'ci95': [0.0, 0.0078], 'p_le_0': 0.024}
+=== 10:07:23 R16_1A_DONE
+=== 10:07:23 attempt 1: --cond 2a_current --scores ../research/runs_v13/scores/2a_nomaxp.json
+[2a_current] 23760 pairs over 1188 topics
+  400/23760 pairs, 400 scored in 14s (29.09 pairs/s), total 18s
+  800/23760 pairs, 400 scored in 14s (28.60 pairs/s), total 32s
+  1200/23760 pairs, 400 scored in 15s (26.26 pairs/s), total 47s
+  1600/23760 pairs, 400 scored in 14s (28.59 pairs/s), total 62s
+  2000/23760 pairs, 400 scored in 14s (28.79 pairs/s), total 76s
+  2400/23760 pairs, 400 scored in 15s (26.34 pairs/s), total 91s
+  2800/23760 pairs, 400 scored in 14s (28.54 pairs/s), total 105s
+  3200/23760 pairs, 395 scored in 13s (29.45 pairs/s), total 119s
+  3600/23760 pairs, 400 scored in 13s (31.78 pairs/s), total 132s
+  4000/23760 pairs, 392 scored in 12s (33.06 pairs/s), total 144s
+  4400/23760 pairs, 383 scored in 11s (36.23 pairs/s), total 155s
+  4800/23760 pairs, 352 scored in 7s (49.89 pairs/s), total 162s
+  5200/23760 pairs, 399 scored in 10s (39.49 pairs/s), total 172s
+  5600/23760 pairs, 398 scored in 10s (38.25 pairs/s), total 182s
+  6000/23760 pairs, 352 scored in 9s (40.28 pairs/s), total 191s
+  6400/23760 pairs, 393 scored in 10s (38.14 pairs/s), total 202s
+  6800/23760 pairs, 396 scored in 12s (33.67 pairs/s), total 214s
+  7200/23760 pairs, 400 scored in 13s (31.78 pairs/s), total 226s
+  7600/23760 pairs, 400 scored in 14s (27.90 pairs/s), total 241s
+  8000/23760 pairs, 400 scored in 14s (28.96 pairs/s), total 255s
+  8400/23760 pairs, 400 scored in 15s (27.47 pairs/s), total 270s
+  8800/23760 pairs, 400 scored in 14s (29.23 pairs/s), total 283s
+  9200/23760 pairs, 400 scored in 14s (28.99 pairs/s), total 297s
+  9600/23760 pairs, 400 scored in 15s (27.32 pairs/s), total 312s
+  10000/23760 pairs, 400 scored in 13s (30.31 pairs/s), total 325s
+  10400/23760 pairs, 400 scored in 15s (26.32 pairs/s), total 341s
+  10800/23760 pairs, 400 scored in 14s (29.31 pairs/s), total 354s
+  11200/23760 pairs, 400 scored in 14s (29.12 pairs/s), total 368s
+  11600/23760 pairs, 400 scored in 12s (32.58 pairs/s), total 381s
+  12000/23760 pairs, 397 scored in 12s (33.30 pairs/s), total 393s
+  12400/23760 pairs, 392 scored in 13s (30.58 pairs/s), total 406s
+  12800/23760 pairs, 400 scored in 13s (29.90 pairs/s), total 419s
+  13200/23760 pairs, 399 scored in 13s (31.18 pairs/s), total 432s
+  13600/23760 pairs, 399 scored in 16s (25.23 pairs/s), total 448s
+  14000/23760 pairs, 400 scored in 12s (34.49 pairs/s), total 460s
+  14400/23760 pairs, 397 scored in 12s (32.79 pairs/s), total 472s
+  14800/23760 pairs, 390 scored in 12s (31.96 pairs/s), total 484s
+  15200/23760 pairs, 397 scored in 14s (28.32 pairs/s), total 498s
+  15600/23760 pairs, 398 scored in 13s (31.79 pairs/s), total 511s
+  16000/23760 pairs, 367 scored in 8s (45.15 pairs/s), total 519s
+  16400/23760 pairs, 374 scored in 8s (48.46 pairs/s), total 527s
+  16800/23760 pairs, 365 scored in 7s (49.45 pairs/s), total 534s
+  17200/23760 pairs, 388 scored in 7s (53.39 pairs/s), total 542s
+  17600/23760 pairs, 381 scored in 7s (51.21 pairs/s), total 549s
+  18000/23760 pairs, 384 scored in 8s (48.73 pairs/s), total 557s
+  18400/23760 pairs, 399 scored in 11s (37.93 pairs/s), total 568s
+  18800/23760 pairs, 397 scored in 9s (42.15 pairs/s), total 577s
+  19200/23760 pairs, 400 scored in 10s (39.95 pairs/s), total 587s
+  19600/23760 pairs, 393 scored in 8s (47.04 pairs/s), total 596s
+  20000/23760 pairs, 351 scored in 9s (37.97 pairs/s), total 605s
+  20400/23760 pairs, 383 scored in 9s (41.89 pairs/s), total 614s
+  20800/23760 pairs, 389 scored in 11s (36.78 pairs/s), total 625s
+  21200/23760 pairs, 375 scored in 8s (45.75 pairs/s), total 633s
+  21600/23760 pairs, 397 scored in 9s (42.59 pairs/s), total 643s
+  22000/23760 pairs, 400 scored in 9s (42.15 pairs/s), total 652s
+  22400/23760 pairs, 396 scored in 9s (42.25 pairs/s), total 662s
+  22800/23760 pairs, 384 scored in 8s (46.76 pairs/s), total 670s
+  23200/23760 pairs, 388 scored in 10s (40.53 pairs/s), total 680s
+  23600/23760 pairs, 395 scored in 10s (37.92 pairs/s), total 690s
+  23760/23760 pairs, 154 scored in 3s (46.76 pairs/s), total 693s
+   none@20          train 0.4317  dev 0.3779
+   only@10          train 0.4025  dev 0.3537
+   only@20          train 0.3742  dev 0.3352
+   interp@10_w0.1   train 0.4310  dev 0.3800
+   interp@10_w0.2   train 0.4327  dev 0.3838
+   interp@10_w0.3   train 0.4330  dev 0.3843
+   interp@10_w0.4   train 0.4349  dev 0.3831
+   interp@10_w0.5   train 0.4315  dev 0.3808
+   interp@10_w0.6   train 0.4263  dev 0.3775
+   interp@10_w0.7   train 0.4226  dev 0.3731
+   interp@10_w0.8   train 0.4132  dev 0.3664
+   interp@10_w0.9   train 0.4049  dev 0.3609
+   interp@20_w0.1   train 0.4327  dev 0.3794
+   interp@20_w0.2   train 0.4333  dev 0.3837
+   interp@20_w0.3   train 0.4358  dev 0.3853
+   interp@20_w0.4   train 0.4300  dev 0.3858
+   interp@20_w0.5   train 0.4294  dev 0.3833
+   interp@20_w0.6   train 0.4201  dev 0.3785
+   interp@20_w0.7   train 0.4082  dev 0.3681
+   interp@20_w0.8   train 0.3924  dev 0.3603
+   interp@20_w0.9   train 0.3829  dev 0.3488
+== 2a_current: none {'train': 0.4317, 'dev': 0.3779} | best on train interp@20_w0.3 {'train': 0.4358, 'dev': 0.3853} | train boot {'diff': 0.0041, 'ci95': [-0.0068, 0.0154], 'p_le_0': 0.2282} | adopted=False | dev boot {'diff': 0.0074, 'ci95': [0.0006, 0.0141], 'p_le_0': 0.0163}
+=== 10:19:05 R16_2AC_DONE
+=== 10:19:05 attempt 1: --cond 1b --scores ../research/runs_v13/scores/1b_rerun.json
+[1b] 31800 pairs over 1590 topics
+  400/31800 pairs, 387 scored in 19s (19.90 pairs/s), total 23s
+  800/31800 pairs, 400 scored in 24s (16.70 pairs/s), total 47s
+  1200/31800 pairs, 400 scored in 20s (19.65 pairs/s), total 68s
+  1600/31800 pairs, 400 scored in 18s (21.81 pairs/s), total 86s
+  2000/31800 pairs, 400 scored in 25s (15.69 pairs/s), total 112s
+  2400/31800 pairs, 399 scored in 18s (21.83 pairs/s), total 130s
+  2800/31800 pairs, 396 scored in 15s (26.31 pairs/s), total 145s
+  3200/31800 pairs, 399 scored in 15s (25.88 pairs/s), total 161s
+  3600/31800 pairs, 400 scored in 20s (20.44 pairs/s), total 181s
+  4000/31800 pairs, 399 scored in 18s (22.39 pairs/s), total 199s
+  4400/31800 pairs, 399 scored in 17s (23.17 pairs/s), total 216s
+  4800/31800 pairs, 400 scored in 24s (16.99 pairs/s), total 240s
+  5200/31800 pairs, 394 scored in 26s (15.42 pairs/s), total 266s
+  5600/31800 pairs, 399 scored in 27s (15.04 pairs/s), total 292s
+  6000/31800 pairs, 400 scored in 22s (18.18 pairs/s), total 315s
+  6400/31800 pairs, 400 scored in 21s (18.71 pairs/s), total 336s
+  6800/31800 pairs, 400 scored in 27s (14.85 pairs/s), total 363s
+  7200/31800 pairs, 400 scored in 20s (20.36 pairs/s), total 383s
+  7600/31800 pairs, 399 scored in 20s (19.65 pairs/s), total 404s
+  8000/31800 pairs, 397 scored in 20s (19.61 pairs/s), total 424s
+  8400/31800 pairs, 399 scored in 21s (19.13 pairs/s), total 445s
+  8800/31800 pairs, 400 scored in 20s (19.65 pairs/s), total 466s
+  9200/31800 pairs, 394 scored in 16s (23.94 pairs/s), total 482s
+  9600/31800 pairs, 395 scored in 23s (17.25 pairs/s), total 505s
+  10000/31800 pairs, 400 scored in 15s (27.18 pairs/s), total 520s
+  10400/31800 pairs, 400 scored in 19s (21.05 pairs/s), total 539s
+  10800/31800 pairs, 400 scored in 23s (17.77 pairs/s), total 562s
+  11200/31800 pairs, 400 scored in 18s (22.14 pairs/s), total 580s
+  11600/31800 pairs, 397 scored in 17s (23.38 pairs/s), total 597s
+  12000/31800 pairs, 399 scored in 20s (20.11 pairs/s), total 617s
+  12400/31800 pairs, 398 scored in 21s (18.98 pairs/s), total 638s
+  12800/31800 pairs, 400 scored in 23s (17.19 pairs/s), total 661s
+  13200/31800 pairs, 400 scored in 20s (19.78 pairs/s), total 682s
+  13600/31800 pairs, 398 scored in 22s (17.89 pairs/s), total 704s
+  14000/31800 pairs, 400 scored in 24s (16.45 pairs/s), total 728s
+  14400/31800 pairs, 400 scored in 28s (14.19 pairs/s), total 757s
+  14800/31800 pairs, 400 scored in 26s (15.15 pairs/s), total 783s
+  15200/31800 pairs, 398 scored in 22s (18.32 pairs/s), total 805s
+  15600/31800 pairs, 398 scored in 25s (15.86 pairs/s), total 830s
+  16000/31800 pairs, 395 scored in 22s (17.57 pairs/s), total 853s
+  16400/31800 pairs, 400 scored in 16s (25.57 pairs/s), total 869s
+  16800/31800 pairs, 400 scored in 21s (19.04 pairs/s), total 890s
+  17200/31800 pairs, 400 scored in 19s (21.50 pairs/s), total 909s
+  17600/31800 pairs, 400 scored in 21s (19.05 pairs/s), total 930s
+  18000/31800 pairs, 400 scored in 25s (16.13 pairs/s), total 955s
+  18400/31800 pairs, 400 scored in 25s (15.82 pairs/s), total 980s
+  18800/31800 pairs, 400 scored in 19s (20.57 pairs/s), total 1000s
+  19200/31800 pairs, 400 scored in 19s (20.75 pairs/s), total 1019s
+  19600/31800 pairs, 400 scored in 20s (19.79 pairs/s), total 1040s
+  20000/31800 pairs, 345 scored in 21s (16.08 pairs/s), total 1061s
+  20400/31800 pairs, 400 scored in 23s (17.12 pairs/s), total 1085s
+  20800/31800 pairs, 400 scored in 22s (18.05 pairs/s), total 1107s
+  21200/31800 pairs, 400 scored in 20s (20.10 pairs/s), total 1127s
+  21600/31800 pairs, 400 scored in 20s (20.39 pairs/s), total 1147s
+  22000/31800 pairs, 400 scored in 24s (16.77 pairs/s), total 1171s
+  22400/31800 pairs, 400 scored in 23s (17.07 pairs/s), total 1194s
+  22800/31800 pairs, 400 scored in 23s (17.66 pairs/s), total 1217s
+  23200/31800 pairs, 400 scored in 23s (17.25 pairs/s), total 1240s
+  23600/31800 pairs, 400 scored in 23s (17.60 pairs/s), total 1263s
+  24000/31800 pairs, 400 scored in 20s (20.28 pairs/s), total 1283s
+  24400/31800 pairs, 396 scored in 24s (16.23 pairs/s), total 1308s
+  24800/31800 pairs, 400 scored in 28s (14.36 pairs/s), total 1336s
+  25200/31800 pairs, 400 scored in 26s (15.64 pairs/s), total 1361s
+  25600/31800 pairs, 400 scored in 25s (15.98 pairs/s), total 1387s
+  26000/31800 pairs, 399 scored in 29s (13.91 pairs/s), total 1416s
+  26400/31800 pairs, 400 scored in 27s (14.71 pairs/s), total 1443s
+  26800/31800 pairs, 360 scored in 22s (16.49 pairs/s), total 1465s
+  27200/31800 pairs, 399 scored in 20s (20.37 pairs/s), total 1485s
+  27600/31800 pairs, 400 scored in 23s (17.42 pairs/s), total 1508s
+  28000/31800 pairs, 400 scored in 21s (18.74 pairs/s), total 1529s
+  28400/31800 pairs, 400 scored in 21s (19.01 pairs/s), total 1550s
+  28800/31800 pairs, 400 scored in 23s (17.04 pairs/s), total 1574s
+  29200/31800 pairs, 400 scored in 24s (16.52 pairs/s), total 1598s
+  29600/31800 pairs, 400 scored in 29s (13.91 pairs/s), total 1627s
+  30000/31800 pairs, 400 scored in 25s (16.27 pairs/s), total 1652s
+  30400/31800 pairs, 400 scored in 28s (14.46 pairs/s), total 1680s
+  30800/31800 pairs, 400 scored in 23s (17.21 pairs/s), total 1703s
+  31200/31800 pairs, 400 scored in 25s (16.26 pairs/s), total 1728s
+  31600/31800 pairs, 400 scored in 24s (16.35 pairs/s), total 1753s
+  31800/31800 pairs, 200 scored in 13s (15.76 pairs/s), total 1765s
+   none@20          train 0.3754  dev 0.4053
+   only@10          train 0.3412  dev 0.3731
+   only@20          train 0.3146  dev 0.3599
+   interp@10_w0.1   train 0.3761  dev 0.4050
+   interp@10_w0.2   train 0.3730  dev 0.4024
+   interp@10_w0.3   train 0.3736  dev 0.4038
+   interp@10_w0.4   train 0.3711  dev 0.3979
+   interp@10_w0.5   train 0.3677  dev 0.3994
+   interp@10_w0.6   train 0.3627  dev 0.3973
+   interp@10_w0.7   train 0.3593  dev 0.3923
+   interp@10_w0.8   train 0.3472  dev 0.3832
+   interp@10_w0.9   train 0.3426  dev 0.3760
+   interp@20_w0.1   train 0.3762  dev 0.4085
+   interp@20_w0.2   train 0.3763  dev 0.4111
+   interp@20_w0.3   train 0.3783  dev 0.4166
+   interp@20_w0.4   train 0.3734  dev 0.4112
+   interp@20_w0.5   train 0.3678  dev 0.4116
+   interp@20_w0.6   train 0.3622  dev 0.4061
+   interp@20_w0.7   train 0.3541  dev 0.3981
+   interp@20_w0.8   train 0.3374  dev 0.3818
+   interp@20_w0.9   train 0.3302  dev 0.3655
+== 1b: none {'train': 0.3754, 'dev': 0.4053} | best on train interp@20_w0.3 {'train': 0.3783, 'dev': 0.4166} | train boot {'diff': 0.0029, 'ci95': [-0.0071, 0.0126], 'p_le_0': 0.2814} | adopted=False | dev boot {'diff': 0.0113, 'ci95': [0.0003, 0.0234], 'p_le_0': 0.0213}
+=== 10:49:02 ALLDONE

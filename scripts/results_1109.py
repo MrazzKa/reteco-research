@@ -118,6 +118,20 @@ def week7(root):
                 L.append(f"| {k} | {f4(v['p50']['train'])} / {f4(v['p50']['dev'])} | {f4(v['p100']['train'])} / "
                          f"{f4(v['p100']['dev'])} | {ci(v['train_boot'])} | {v['chosen']} |")
             L += [""]
+    ab = jload(os.path.join(R, "ablation_1110.json"))
+    if ab:
+        L += ["## AE. Ablation by stage, per sub-task (B5; same topics for every stage)", "",
+              "Train = rule-8 subsample, dev = all topics; every stage on exactly the same topics. 95% interval = "
+              "bootstrap of the domain macro; Δ = paired difference to the previous stage (topics resampled within "
+              "domain). Fusion, ReasonEmbed weight and reranker weight as chosen on train.", ""]
+        for name, x in ab.items():
+            L += [f"### {name} (train {x['topics']['train']} / dev {x['topics']['dev']} topics)", "",
+                  "| stage | train [95% CI] | Δ train | dev [95% CI] | Δ dev |", "| --- | --- | --- | --- | --- |"]
+            for r in x["rows"]:
+                L.append(f"| {r['stage']} | {f4(r['train'])} [{f4(r['train_ci95'][0])}, {f4(r['train_ci95'][1])}] | "
+                         f"{ci(r['train_minus_prev'])} | {f4(r['dev'])} [{f4(r['dev_ci95'][0])}, {f4(r['dev_ci95'][1])}] | "
+                         f"{ci(r['dev_minus_prev'])} |")
+            L += [""]
     return L
 
 

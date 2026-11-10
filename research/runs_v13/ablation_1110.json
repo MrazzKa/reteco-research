@@ -1,0 +1,558 @@
+{
+ "1a": {
+  "topics": {
+   "train": 350,
+   "dev": 519
+  },
+  "rows": [
+   {
+    "stage": "BM25 (query)",
+    "train": 0.1041,
+    "train_ci95": [
+     0.0821,
+     0.127
+    ],
+    "train_minus_prev": null,
+    "dev": 0.1127,
+    "dev_ci95": [
+     0.0792,
+     0.1441
+    ],
+    "dev_minus_prev": null
+   },
+   {
+    "stage": "+ dense: hybrid (query)",
+    "train": 0.2351,
+    "train_ci95": [
+     0.2055,
+     0.2651
+    ],
+    "train_minus_prev": {
+     "diff": 0.131,
+     "ci95": [
+      0.1061,
+      0.1579
+     ],
+     "p_le_0": 0.0
+    },
+    "dev": 0.2834,
+    "dev_ci95": [
+     0.2539,
+     0.3142
+    ],
+    "dev_minus_prev": {
+     "diff": 0.1707,
+     "ci95": [
+      0.1367,
+      0.2075
+     ],
+     "p_le_0": 0.0
+    }
+   },
+   {
+    "stage": "+ LLM reasoning (q+r+h hybrid)",
+    "train": 0.2823,
+    "train_ci95": [
+     0.2515,
+     0.3145
+    ],
+    "train_minus_prev": {
+     "diff": 0.0472,
+     "ci95": [
+      0.03,
+      0.0644
+     ],
+     "p_le_0": 0.0
+    },
+    "dev": 0.3258,
+    "dev_ci95": [
+     0.2886,
+     0.3637
+    ],
+    "dev_minus_prev": {
+     "diff": 0.0425,
+     "ci95": [
+      0.0214,
+      0.063
+     ],
+     "p_le_0": 0.0
+    }
+   },
+   {
+    "stage": "+ ReasonEmbed top 50 (final)",
+    "train": 0.3078,
+    "train_ci95": [
+     0.2764,
+     0.3401
+    ],
+    "train_minus_prev": {
+     "diff": 0.0254,
+     "ci95": [
+      0.0073,
+      0.0448
+     ],
+     "p_le_0": 0.0029
+    },
+    "dev": 0.3667,
+    "dev_ci95": [
+     0.3292,
+     0.4042
+    ],
+    "dev_minus_prev": {
+     "diff": 0.0409,
+     "ci95": [
+      0.0189,
+      0.0639
+     ],
+     "p_le_0": 0.0001
+    }
+   },
+   {
+    "stage": "+ LLM reranker (not adopted)",
+    "train": 0.3101,
+    "train_ci95": [
+     0.2782,
+     0.343
+    ],
+    "train_minus_prev": {
+     "diff": 0.0023,
+     "ci95": [
+      -0.0012,
+      0.0058
+     ],
+     "p_le_0": 0.0968
+    },
+    "dev": 0.3705,
+    "dev_ci95": [
+     0.3332,
+     0.408
+    ],
+    "dev_minus_prev": {
+     "diff": 0.0038,
+     "ci95": [
+      0.0,
+      0.0078
+     ],
+     "p_le_0": 0.024
+    }
+   }
+  ]
+ },
+ "1b": {
+  "topics": {
+   "train": 376,
+   "dev": 1214
+  },
+  "rows": [
+   {
+    "stage": "BM25 (query + step)",
+    "train": 0.1174,
+    "train_ci95": [
+     0.0946,
+     0.1419
+    ],
+    "train_minus_prev": null,
+    "dev": 0.1181,
+    "dev_ci95": [
+     0.0909,
+     0.1462
+    ],
+    "dev_minus_prev": null
+   },
+   {
+    "stage": "+ dense: hybrid",
+    "train": 0.2758,
+    "train_ci95": [
+     0.2426,
+     0.31
+    ],
+    "train_minus_prev": {
+     "diff": 0.1583,
+     "ci95": [
+      0.1326,
+      0.1845
+     ],
+     "p_le_0": 0.0
+    },
+    "dev": 0.2865,
+    "dev_ci95": [
+     0.2508,
+     0.322
+    ],
+    "dev_minus_prev": {
+     "diff": 0.1684,
+     "ci95": [
+      0.1379,
+      0.2014
+     ],
+     "p_le_0": 0.0
+    }
+   },
+   {
+    "stage": "+ LLM reasoning (q+r+h hybrid)",
+    "train": 0.3442,
+    "train_ci95": [
+     0.3083,
+     0.3805
+    ],
+    "train_minus_prev": {
+     "diff": 0.0685,
+     "ci95": [
+      0.0479,
+      0.0897
+     ],
+     "p_le_0": 0.0
+    },
+    "dev": 0.3505,
+    "dev_ci95": [
+     0.3126,
+     0.3884
+    ],
+    "dev_minus_prev": {
+     "diff": 0.064,
+     "ci95": [
+      0.0467,
+      0.0817
+     ],
+     "p_le_0": 0.0
+    }
+   },
+   {
+    "stage": "+ ReasonEmbed top 50 (final)",
+    "train": 0.3754,
+    "train_ci95": [
+     0.3398,
+     0.4116
+    ],
+    "train_minus_prev": {
+     "diff": 0.0312,
+     "ci95": [
+      0.012,
+      0.0507
+     ],
+     "p_le_0": 0.0005
+    },
+    "dev": 0.4053,
+    "dev_ci95": [
+     0.37,
+     0.4408
+    ],
+    "dev_minus_prev": {
+     "diff": 0.0548,
+     "ci95": [
+      0.0364,
+      0.073
+     ],
+     "p_le_0": 0.0
+    }
+   },
+   {
+    "stage": "+ LLM reranker (not adopted)",
+    "train": 0.3783,
+    "train_ci95": [
+     0.3434,
+     0.4143
+    ],
+    "train_minus_prev": {
+     "diff": 0.0029,
+     "ci95": [
+      -0.0071,
+      0.0126
+     ],
+     "p_le_0": 0.2814
+    },
+    "dev": 0.4166,
+    "dev_ci95": [
+     0.3839,
+     0.45
+    ],
+    "dev_minus_prev": {
+     "diff": 0.0113,
+     "ci95": [
+      0.0003,
+      0.0234
+     ],
+     "p_le_0": 0.0213
+    }
+   }
+  ]
+ },
+ "2a_current": {
+  "topics": {
+   "train": 330,
+   "dev": 858
+  },
+  "rows": [
+   {
+    "stage": "BM25 (current turn)",
+    "train": 0.1772,
+    "train_ci95": [
+     0.1485,
+     0.2073
+    ],
+    "train_minus_prev": null,
+    "dev": 0.1759,
+    "dev_ci95": [
+     0.1573,
+     0.195
+    ],
+    "dev_minus_prev": null
+   },
+   {
+    "stage": "+ dense: hybrid",
+    "train": 0.2828,
+    "train_ci95": [
+     0.2477,
+     0.3192
+    ],
+    "train_minus_prev": {
+     "diff": 0.1057,
+     "ci95": [
+      0.0771,
+      0.1343
+     ],
+     "p_le_0": 0.0
+    },
+    "dev": 0.2543,
+    "dev_ci95": [
+     0.2327,
+     0.2766
+    ],
+    "dev_minus_prev": {
+     "diff": 0.0784,
+     "ci95": [
+      0.0611,
+      0.0962
+     ],
+     "p_le_0": 0.0
+    }
+   },
+   {
+    "stage": "+ LLM reasoning (q+r+h hybrid)",
+    "train": 0.3671,
+    "train_ci95": [
+     0.3292,
+     0.4057
+    ],
+    "train_minus_prev": {
+     "diff": 0.0843,
+     "ci95": [
+      0.0578,
+      0.1119
+     ],
+     "p_le_0": 0.0
+    },
+    "dev": 0.31,
+    "dev_ci95": [
+     0.2869,
+     0.3329
+    ],
+    "dev_minus_prev": {
+     "diff": 0.0557,
+     "ci95": [
+      0.0406,
+      0.0705
+     ],
+     "p_le_0": 0.0
+    }
+   },
+   {
+    "stage": "+ ReasonEmbed top 50 (final B)",
+    "train": 0.4317,
+    "train_ci95": [
+     0.3931,
+     0.4697
+    ],
+    "train_minus_prev": {
+     "diff": 0.0645,
+     "ci95": [
+      0.043,
+      0.0857
+     ],
+     "p_le_0": 0.0
+    },
+    "dev": 0.3779,
+    "dev_ci95": [
+     0.3533,
+     0.4028
+    ],
+    "dev_minus_prev": {
+     "diff": 0.0679,
+     "ci95": [
+      0.0553,
+      0.0806
+     ],
+     "p_le_0": 0.0
+    }
+   },
+   {
+    "stage": "+ LLM reranker (not adopted)",
+    "train": 0.4358,
+    "train_ci95": [
+     0.3975,
+     0.4741
+    ],
+    "train_minus_prev": {
+     "diff": 0.0041,
+     "ci95": [
+      -0.0068,
+      0.0154
+     ],
+     "p_le_0": 0.2282
+    },
+    "dev": 0.3853,
+    "dev_ci95": [
+     0.3601,
+     0.4106
+    ],
+    "dev_minus_prev": {
+     "diff": 0.0074,
+     "ci95": [
+      0.0006,
+      0.0141
+     ],
+     "p_le_0": 0.0163
+    }
+   }
+  ]
+ },
+ "2a_history": {
+  "topics": {
+   "train": 330,
+   "dev": 858
+  },
+  "rows": [
+   {
+    "stage": "BM25 (history text)",
+    "train": 0.4025,
+    "train_ci95": [
+     0.3656,
+     0.4389
+    ],
+    "train_minus_prev": null,
+    "dev": 0.4037,
+    "dev_ci95": [
+     0.3795,
+     0.427
+    ],
+    "dev_minus_prev": null
+   },
+   {
+    "stage": "+ dense: hybrid H0",
+    "train": 0.4889,
+    "train_ci95": [
+     0.4509,
+     0.5259
+    ],
+    "train_minus_prev": {
+     "diff": 0.0864,
+     "ci95": [
+      0.0667,
+      0.1062
+     ],
+     "p_le_0": 0.0
+    },
+    "dev": 0.4352,
+    "dev_ci95": [
+     0.4119,
+     0.4588
+    ],
+    "dev_minus_prev": {
+     "diff": 0.0315,
+     "ci95": [
+      0.0161,
+      0.0466
+     ],
+     "p_le_0": 0.0001
+    }
+   },
+   {
+    "stage": "+ LLM with earlier Q/A (Hb hybrid)",
+    "train": 0.517,
+    "train_ci95": [
+     0.4785,
+     0.5544
+    ],
+    "train_minus_prev": {
+     "diff": 0.0281,
+     "ci95": [
+      0.0036,
+      0.0536
+     ],
+     "p_le_0": 0.012
+    },
+    "dev": 0.4601,
+    "dev_ci95": [
+     0.436,
+     0.4837
+    ],
+    "dev_minus_prev": {
+     "diff": 0.025,
+     "ci95": [
+      0.0099,
+      0.0399
+     ],
+     "p_le_0": 0.0004
+    }
+   },
+   {
+    "stage": "+ ReasonEmbed top 50",
+    "train": 0.583,
+    "train_ci95": [
+     0.5467,
+     0.6181
+    ],
+    "train_minus_prev": {
+     "diff": 0.066,
+     "ci95": [
+      0.0406,
+      0.0911
+     ],
+     "p_le_0": 0.0
+    },
+    "dev": 0.5475,
+    "dev_ci95": [
+     0.5241,
+     0.5711
+    ],
+    "dev_minus_prev": {
+     "diff": 0.0874,
+     "ci95": [
+      0.0723,
+      0.102
+     ],
+     "p_le_0": 0.0
+    }
+   },
+   {
+    "stage": "+ LLM reranker (final main)",
+    "train": 0.5999,
+    "train_ci95": [
+     0.5639,
+     0.6347
+    ],
+    "train_minus_prev": {
+     "diff": 0.0169,
+     "ci95": [
+      0.0039,
+      0.0307
+     ],
+     "p_le_0": 0.0064
+    },
+    "dev": 0.5507,
+    "dev_ci95": [
+     0.5274,
+     0.5741
+    ],
+    "dev_minus_prev": {
+     "diff": 0.0032,
+     "ci95": [
+      -0.0059,
+      0.0124
+     ],
+     "p_le_0": 0.2449
+    }
+   }
+  ]
+ }
+}

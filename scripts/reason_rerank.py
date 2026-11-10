@@ -40,7 +40,12 @@ from tie_study import fused, order  # noqa: E402
 import tiebreak  # noqa: E402
 
 MODELS = {"reasonembed-4b": "hanhainebula/reason-embed-qwen3-4b-0928",
-          "diver-4b": "AQ-MedAI/Diver-Retriever-4B"}
+          "diver-4b": "AQ-MedAI/Diver-Retriever-4B",
+          "qwen3-emb-4b": "Qwen/Qwen3-Embedding-4B"}  # rule 18 (B2); revision pinned in REVISIONS
+REVISIONS = {"qwen3-emb-4b": "5cf2132abc99cad020ac570b19d031efec650f2b"}
+# query template per model card: ReasonEmbed "Instruct: ...\nQuery: ..."; Qwen3-Embedding "Instruct: ...\nQuery:..."
+QFMT = {"qwen3-emb-4b": "Instruct: {ins}\nQuery:{q}"}
+QFMT_DEFAULT = "Instruct: {ins}\nQuery: {q}"
 DEPTHS = (10, 20, 50, 100)
 WEIGHTS = [round(0.1 * i, 1) for i in range(1, 10)]
 
@@ -62,13 +67,13 @@ def clean(t):
 
 
 class Embedder:
-    def __init__(self, ckpt, bits, max_len):
+    def __init__(self, ckpt, bits, max_len, revision=None):
         import torch
         from transformers import AutoModel, AutoTokenizer, BitsAndBytesConfig
         self.torch, self.max_len = torch, max_len
-        self.tok = AutoTokenizer.from_pretrained(ckpt)
+        self.tok = AutoTokenizer.from_pretrained(ckpt, revision=revision)
         self.tok.padding_side = "left"
-        kw = {"dtype": torch.float16, "device_map": "cuda"}
+        kw = {"dtype": torch.float16, "device_map": "cuda", "revision": revision}
         if bits == 4:
             kw["quantization_config"] = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_quant_type="nf4",
                                                            bnb_4bit_compute_dtype=torch.float16)
@@ -97,7 +102,7 @@ def embed(a, ckpt, texts):
         return np.zeros((0, 1), dtype=np.float32)
     if a.backend == "bnb":
         if not hasattr(a, "_emb"):
-            a._emb = Embedder(ckpt, a.bits, a.max_len)
+            a._emb = Embedder(ckpt, a.bits, a.max_len, REVISIONS.get(a.model))
         return a._emb.encode(texts, a.batch)
     import subprocess
     import tempfile
@@ -229,7 +234,8 @@ def main():
                 if dom not in caches:
                     caches[dom] = load_cache(os.path.join(cdir, f"docs_{dom}"))
                 ins = instruction(a.track, cond, dom, qcond)
-                per[split][dom] = (qids, pools, gold, [f"Instruct: {ins}\nQuery: {clean(qtext[q])}" for q in qids])
+                fmt = QFMT.get(a.model, QFMT_DEFAULT)
+                per[split][dom] = (qids, pools, gold, [fmt.format(ins=ins, q=clean(qtext[q])) for q in qids])
         need = {dom: sorted({d for sp in per for q in per[sp].get(dom, ([],))[0] for d, _ in per[sp][dom][1][q]}
                             - set(caches[dom])) for dom in caches}
         # phase 2: embed in chunks; document vectors are saved after every chunk (resumable)
@@ -317,12 +323,13 @@ def main():
             best = row.get("best_on_train", "none=0")
             k, p = best.split("=")
             how = (k, float(p) if k == "interp" else int(p))
-            dump = {"best": best, "how": list(how), "scores": {}, "none": {}}
+            dump = {"best": best, "how": list(how), "scores": {}, "none": {}, "raw": {}}
             for sp in per:
                 for dom, (qids, pools, sc, _) in per[sp].items():
                     dump["scores"].setdefault(sp, {})[dom] = {q: [[d, round(x, 6)] for d, x in scored(pools[q], how, sc[q])]
                                                               for q in qids}
                     dump["none"].setdefault(sp, {})[dom] = {q: [[d, round(x, 6)] for d, x in pools[q]] for q in qids}
+                    dump["raw"].setdefault(sp, {})[dom] = {q: {d: round(x, 6) for d, x in sc[q].items()} for q in qids}
             os.makedirs(os.path.dirname(os.path.abspath(a.save_scores)), exist_ok=True)
             path = a.save_scores if len(names) == 1 else a.save_scores.replace(".json", f"_{rname}.json")
             json.dump(dump, open(path, "w"))
