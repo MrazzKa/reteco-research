@@ -1732,3 +1732,10 @@ result (train sub / dev): current ReasonEmbed pool 50 (interp 0.8) 0.3078 / 0.36
   train interp 0.1) 0.2828 / 0.3253 (≈ the hybrid alone) · ensemble (interp 0.5) 0.2973 / 0.3444; ensemble − current
   train −0.0105 [−0.0244, +0.0032] → **not adopted**; dev −0.0223 [−0.0397, −0.0053]. (Compared with the pool-50
   system; the adopted 1a main uses pool 100 — the ensemble is worse than either.)
+
+## 2026-11-10 16:25–16:49 — rule 18 result, 2a current (B): second embedder not adopted
+command: `queue_1110h.sh` → `reason_rerank.py --model qwen3-emb-4b --name 2a_nomaxp_q3e` (12,316 documents + 1,188
+  queries, 24 min) + `ensemble_embed.py --cond 2a_current`.
+result (train sub / dev): current (ReasonEmbed pool 50, interp 0.8) 0.4317 / 0.3779 · Qwen3-Embedding alone (interp
+  0.4) 0.3768 / 0.3233 · ensemble (interp 0.8) 0.4083 / 0.3628; ensemble − current train −0.0234 [−0.0396, −0.0068] →
+  **not adopted**; dev −0.0150 [−0.0251, −0.0052].

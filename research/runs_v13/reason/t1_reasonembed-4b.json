@@ -7575,10 +7575,6 @@
     0.9197207891481876
    ]
   },
-  "saved_runs": {
-   "dir": "../research/runs_v13/foreign/runs",
-   "best": "interp=0.7"
-  },
   "saved_scores": "../research/runs_v13/scores/1b_rerun.json"
  },
  "1a_rerun_p100": {

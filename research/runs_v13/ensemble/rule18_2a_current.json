@@ -1,0 +1,161 @@
+{
+ "cond": "2a_current",
+ "current_way": "interp=0.8",
+ "current": {
+  "train": 0.4317,
+  "dev": 0.3779
+ },
+ "grid": {
+  "ensemble": {
+   "none=0": {
+    "train": 0.3671,
+    "dev": 0.31
+   },
+   "top=10": {
+    "train": 0.3705,
+    "dev": 0.3321
+   },
+   "top=20": {
+    "train": 0.3891,
+    "dev": 0.349
+   },
+   "top=50": {
+    "train": 0.3932,
+    "dev": 0.3564
+   },
+   "interp=0.1": {
+    "train": 0.3741,
+    "dev": 0.3176
+   },
+   "interp=0.2": {
+    "train": 0.3795,
+    "dev": 0.3236
+   },
+   "interp=0.3": {
+    "train": 0.385,
+    "dev": 0.3304
+   },
+   "interp=0.4": {
+    "train": 0.3946,
+    "dev": 0.3386
+   },
+   "interp=0.5": {
+    "train": 0.4008,
+    "dev": 0.3457
+   },
+   "interp=0.6": {
+    "train": 0.4008,
+    "dev": 0.3548
+   },
+   "interp=0.7": {
+    "train": 0.4031,
+    "dev": 0.3591
+   },
+   "interp=0.8": {
+    "train": 0.4083,
+    "dev": 0.3628
+   },
+   "interp=0.9": {
+    "train": 0.4066,
+    "dev": 0.3607
+   }
+  },
+  "second_only": {
+   "none=0": {
+    "train": 0.3671,
+    "dev": 0.31
+   },
+   "top=10": {
+    "train": 0.3417,
+    "dev": 0.2929
+   },
+   "top=20": {
+    "train": 0.3331,
+    "dev": 0.2824
+   },
+   "top=50": {
+    "train": 0.3152,
+    "dev": 0.2672
+   },
+   "interp=0.1": {
+    "train": 0.3716,
+    "dev": 0.3129
+   },
+   "interp=0.2": {
+    "train": 0.3729,
+    "dev": 0.3189
+   },
+   "interp=0.3": {
+    "train": 0.3747,
+    "dev": 0.3231
+   },
+   "interp=0.4": {
+    "train": 0.3768,
+    "dev": 0.3233
+   },
+   "interp=0.5": {
+    "train": 0.3756,
+    "dev": 0.3253
+   },
+   "interp=0.6": {
+    "train": 0.3755,
+    "dev": 0.3231
+   },
+   "interp=0.7": {
+    "train": 0.3674,
+    "dev": 0.3154
+   },
+   "interp=0.8": {
+    "train": 0.3494,
+    "dev": 0.3056
+   },
+   "interp=0.9": {
+    "train": 0.3327,
+    "dev": 0.2872
+   }
+  }
+ },
+ "ensemble_best": {
+  "how": "interp=0.8",
+  "train": 0.4083,
+  "dev": 0.3628,
+  "train_minus_current": {
+   "diff": -0.0234,
+   "ci95": [
+    -0.0396,
+    -0.0068
+   ],
+   "p_le_0": 0.9975
+  },
+  "dev_minus_current": {
+   "diff": -0.015,
+   "ci95": [
+    -0.0251,
+    -0.0052
+   ],
+   "p_le_0": 0.9994
+  }
+ },
+ "second_only_best": {
+  "how": "interp=0.4",
+  "train": 0.3768,
+  "dev": 0.3233,
+  "train_minus_current": {
+   "diff": -0.0549,
+   "ci95": [
+    -0.0738,
+    -0.0358
+   ],
+   "p_le_0": 1.0
+  },
+  "dev_minus_current": {
+   "diff": -0.0546,
+   "ci95": [
+    -0.0671,
+    -0.0426
+   ],
+   "p_le_0": 1.0
+  }
+ },
+ "adopted": false
+}
