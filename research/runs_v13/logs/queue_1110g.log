@@ -1,0 +1,2 @@
+{"t1_topics": 58, "t1_steps": 142, "t2_turns": 92, "t2_turns_with_answers_after": 68}
+wrote ../research/runs_v13/cold/submission_cold.json; caches under /home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache

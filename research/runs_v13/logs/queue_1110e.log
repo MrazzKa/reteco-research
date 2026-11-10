@@ -80,3 +80,23 @@ data_noans written
 === 13:49:29 R18_2a_history_DONE
 {"t1_topics": 58, "t1_steps": 142, "t2_turns": 92, "t2_turns_with_answers_after": 68}
 wrote ../research/runs_v13/cold/submission_cold.json; caches under /home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache
+[reason/bodies] 13 inputs, 13 unique, 13 to generate
+[hyde/bodies] 13 inputs, 13 unique, 13 to generate
+[1a_p100] 13 topics, timing {'llm_reason_generate_s': 61.5, 'llm_reason_generated': 13, 'llm_hyde_generate_s': 40.3, 'llm_hyde_generated': 13, 'llm_total_s': 101.7, 'bm25_index_s': 5.7, 'bm25_search_s': 0.1, 'dense_index_load_s': 0.1, 'dense_search_s': 0.8, 'fusion_s': 0.0, 'reasonembed_s': 186.3, 'reasonembed_new_docs': 1109}
+[1a] 13 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 5.9, 'bm25_search_s': 0.1, 'dense_index_load_s': 0.1, 'dense_search_s': 0.3, 'fusion_s': 0.0, 'reasonembed_s': 0.0, 'reasonembed_new_docs': 0}
+(EngineCore pid=24060) ERROR 11-10 13:54:59 [core.py:1510] Traceback (most recent call last):
+(EngineCore pid=24060) ERROR 11-10 13:54:59 [core.py:1510]     raise ValueError(
+(EngineCore pid=24060) ERROR 11-10 13:54:59 [core.py:1510] ValueError: No available memory for the cache blocks. Try increasing `gpu_memory_utilization` when initializing the engine (this flag also controls CPU memory reservation on the CPU backend, despite its name). See https://docs.vllm.ai/en/latest/configuration/conserving_memory/ for more details.
+Traceback (most recent call last):
+    raise ValueError(
+ValueError: No available memory for the cache blocks. Try increasing `gpu_memory_utilization` when initializing the engine (this flag also controls CPU memory reservation on the CPU backend, despite its name). See https://docs.vllm.ai/en/latest/configuration/conserving_memory/ for more details.
+[rank0]:[W1110 13:55:00.215692762 ProcessGroupNCCL.cpp:1624] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+Traceback (most recent call last):
+    raise RuntimeError(
+RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+Traceback (most recent call last):
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/home/timur_rk/semeval-reteco/.venv-llm/bin/python', '/home/timur_rk/semeval-reteco/reteco-research/scripts/llm_expand.py', '--track', '1', '--llm', 'qwen3-4b', '--bodies', '/tmp/tmpsqgloh_6/bodies.json', '--prompts', 'reason', '--out', '/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/llm/t1', '--gpu-util', '0.6', '--max-seqs', '64', '--max-batched', '2048']' returned non-zero exit status 1.
+[2a_auto] drones: 2a_history_rr  ({"turns": 38, "normalized_differs": 0, "turns_ge2": 27, "turns_ge2_with_answer": 27, "qa_pairs": 49, "empty_answers": 0, "summary_questions": 0, "unparsed_lines": 0, "empty_history": 0})
+[2a_auto] politics: 2a_history_rr  ({"turns": 54, "normalized_differs": 0, "turns_ge2": 41, "turns_ge2_with_answer": 41, "qa_pairs": 92, "empty_answers": 0, "summary_questions": 0, "unparsed_lines": 0, "empty_history": 0})
+[reason/bodies] 92 inputs, 92 unique, 92 to generate

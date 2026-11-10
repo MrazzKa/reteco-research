@@ -1666,3 +1666,16 @@ result (train sub / dev): current (ReasonEmbed, interp 0.9) 0.5830 / 0.5475 · Q
   ensemble − current: train −0.0147 [−0.0313, +0.0014] → **not adopted**; dev −0.0233 [−0.0352, −0.0111].
 reading: the general-purpose Qwen3-Embedding-4B adds little over the hybrid (+0.017 train) and averaging it with
   ReasonEmbed dilutes the reasoning embedder. Rule 18 for 1a, 2a current, 1b still runs after B3 (queue order).
+
+## 2026-11-10 13:50–14:00 — B3 found a submit.py bug on a cold run; fixed before any test use
+what: the first cold run (`queue_1110e.sh`, empty caches, 2 Track-1 domains) built `1a_p100` (13 topics: 26 LLM
+  generations 102 s incl. vLLM start, 1,109 ReasonEmbed documents 186 s) and `1a`, then crashed on `1b`: its missing
+  LLM generations start vLLM in a subprocess while ReasonEmbed (NF4) and the encoder were still resident in the
+  submit.py process → "No available memory for the cache blocks". With warm caches (all dev checks so far) no
+  generation is ever needed, so this never showed. On a real test release it would have stopped the run.
+fix (`submit.py`): `pregenerate()` runs every LLM generation of every requested variant first, before any model is
+  loaded in the process (one vLLM start per LLM config and prompt; timing in `<out>/pregenerate_timing.json`); each
+  variant frees its in-process GPU models at the end (gc + `torch.cuda.empty_cache()`). Regression: `submit.py
+  --variants 2a_history_rr 2a_nomaxp_p100 --split dev` gives byte-identical run files.
+the stopped queue (`queue_1110e.sh`, its submit.py and the orphan vLLM engine) was killed by PID; B3 re-runs from
+  empty caches in `queue_1110g.sh` (then rule 18 for 1a, 2a current, 1b); `queue_1110f.sh` (B4) now waits for g.

@@ -264,6 +264,7 @@ def run_variant(a, name, cfg, enc_cache):
     # 5. LLM reranker over the top N of the final list (rule 16), scores cached by sha1(instruction + query + doc)
     how = (rc["how"], rc["w"]) if rc.get("use", True) else ("none", 0)
     rerank_head = {}
+    rr = None
     lr = cfg.get("llm_rerank")
     if lr and lr.get("use", True):
         import llm_rerank as LR
@@ -333,12 +334,44 @@ def run_variant(a, name, cfg, enc_cache):
         n_topics += len(seen_topics)
         manifest["domains"][dom] = {"topics": len(seen_topics), "file": path, "duplicates": dup,
                                     "unknown_docs": unknown}
+    # free in-process GPU models (ReasonEmbed, reranker) before the next variant: a later vLLM start needs the memory
+    emb = rr = None  # noqa: F841
+    try:
+        import gc
+        import torch
+        gc.collect()
+        torch.cuda.empty_cache()
+    except Exception:
+        pass
     manifest["timing_s"] = {k: round(v, 1) for k, v in timing.items()}
     manifest["n_topics"] = n_topics
     manifest["per_topic_s"] = {k: round(v / max(1, n_topics), 3) for k, v in timing.items() if k.endswith("_s")}
     json.dump(manifest, open(os.path.join(vdir, "manifest.json"), "w"), indent=1)
     print(f"[{name}] {n_topics} topics, timing {manifest['timing_s']}", flush=True)
     return manifest
+
+
+def pregenerate(a, conf, variants):
+    """All LLM generations of all requested variants, before any GPU model is loaded in this process (a vLLM
+    start next to a loaded ReasonEmbed / encoder fails on the 8 GB GPU: B3 cold run, LOG 2026-11-10). One vLLM
+    start per (LLM config, prompt); variants sharing a cache share generations."""
+    groups, cfgs = defaultdict(set), {}
+    for v in variants:
+        cfg = conf["variants"][v]
+        if cfg.get("variant") == "q" or "llm" not in cfg:
+            continue
+        key = json.dumps(cfg["llm"], sort_keys=True)
+        cfgs[key] = cfg
+        for dom in (a.domains or cfg["domains"]):
+            groups[key] |= {b for _, _, b, _ in topics(a.data, a.split, cfg, dom)}
+    timing = defaultdict(float)
+    t0 = time.time()
+    for key, bodies in groups.items():
+        generations(cfgs[key], sorted(bodies), timing)
+    timing["pregenerate_total_s"] = time.time() - t0
+    os.makedirs(a.out, exist_ok=True)
+    json.dump({k: round(v, 1) for k, v in timing.items()}, open(os.path.join(a.out, "pregenerate_timing.json"), "w"), indent=1)
+    print(f"[pregenerate] {dict(timing)}", flush=True)
 
 
 def history_stats(data, split, dom):
@@ -404,6 +437,7 @@ def main():
         for v in (conf["_auto_2a"]["with_answers"], conf["_auto_2a"]["without_answers"]):
             if v not in variants:
                 variants.append(v)
+    pregenerate(a, conf, variants)
     for v in variants:
         run_variant(a, v, conf["variants"][v], enc_cache)
     if dec is not None:
