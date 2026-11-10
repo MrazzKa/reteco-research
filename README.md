@@ -17,7 +17,7 @@ Fallbacks: `2a_history` 0.5475, current turn `2a_nomaxp_p100` 0.3801 / `2a_maxp`
 Whether test histories contain the earlier answers is not announced (asked on the organisers' list, 09.11). The
 main run's whole advantage over the answer-free run comes from the reference answers: with answers written by our
 own LLM it drops to 0.4823 (RESULTS AA). Not adopted on train: a per-source query variant (rule 15), the reranker on
-1a / 1b / 2a current (rule 16), ReasonEmbed pool 100 on 1b and 2a history (rule 17). Tables: `research/RESULTS.md` (X, Z–AF = 2026-11-10; T–Y = 2026-11-02; M–S = week 5).
+1a / 1b / 2a current (rule 16), ReasonEmbed pool 100 on 1b and 2a history (rule 17). Tables: `research/RESULTS.md` (X, Z–AJ = 2026-11-10; T–Y = 2026-11-02; M–S = week 5).
 Every number in this paragraph is reproduced exactly by `scripts/submit.py` from the topic files with the official
 scorer.
 
@@ -203,7 +203,11 @@ for cold timing runs.
 Do not run `submit.py` while another GPU job (vLLM generation) is running: on 2026-11-02 the two together overcommitted
 the 8 GB GPU and both stalled. Long GPU jobs: Windows takes 1.7–5.3 GB of the 8 GB GPU; ReasonEmbed saves document
 vectors every 2,000 documents and reranker scores are appended per chunk, so an interrupted `submit.py` can simply be
-restarted. The cost estimate for the test set is in RESULTS section U (re-measured cold in phase B, section AF).
+restarted. `submit.py` runs every missing LLM generation first, before any model is loaded in the process (a vLLM start
+next to a loaded ReasonEmbed fails on 8 GB; found by the cold run, LOG 2026-11-10 13:50). Cold cost of the full test:
+≈ 2.3 h (RESULTS AH). vLLM at temperature 0 is not batch-invariant: a fresh run differs from the cached dev
+generations and moves the dev macro by up to ~0.003 (RESULTS AI); the dev numbers are reproduced exactly only from the
+cached generations.
 
 ## Rules
 

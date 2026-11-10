@@ -1769,3 +1769,14 @@ result (train sub / dev): n = 5 hybrid + ReasonEmbed (interp 0.7, re-chosen) 0.3
   disappears once ReasonEmbed rescoring is on top, as with MaxP in rule 10). Dev +0.0031 [−0.0034, +0.0109].
 next: rule 13 for 1a (the task list puts it last, "only if time is left"): same procedure, queue `queue_1110j.sh`;
   estimate 1a generation ~45–60 min (1,730 long inputs × 5 samples at ~0.5–1 inputs/s) + retrieval/grid ~20 min.
+
+## 2026-11-10 18:42–19:17 — rule 13 for 1a: not adopted; end of the phase-B list
+command: `queue_1110j.sh`: 5 HyDE samples at temperature 0.7 for 1,730 1a inputs (25 min), `qexp_search.py`, `hybrid.py`,
+  `select_rule.py --rule 13` (out `select/rule13_1a_hybrid.json`).
+result (hybrid, train / dev): one HyDE at temperature 0 0.2949 / 0.3258 (best on train) · n = 3 0.2932 / 0.3276 ·
+  n = 5 0.2942 / 0.3322 → **not adopted** (baseline best on train); ReasonEmbed stage not run.
+phase B summary (12:50–19:17): rule 14b not adopted; B3 cold run found and fixed a submit.py crash (pre-generation),
+  full-test estimate ≈ 2.3 h; B3b: vLLM at temperature 0 is not reproducible (17–23% identical texts), dev macro moves
+  ≤ 0.003 between draws; rule 18 (Qwen3-Embedding-4B ensemble) not adopted anywhere; rule 13 (several HyDE) adopted at
+  the 1b hybrid stage but not after ReasonEmbed, not for 1a; B5 ablation / compute / error examples done. The
+  submission configuration is unchanged since the end of phase A (1a_p100, 1b, 2a_auto + fallbacks).

@@ -169,6 +169,18 @@ def week7(root):
             L.append(f"| {v} | {f4(x['cached'])} | {f4(x['fresh'])} | {ci(x['fresh_minus_cached'])} |")
         L += ["", "Identical generations (fresh vs cached): " + ", ".join(
             f"{k} {x['identical']}/{x['fresh']}" for k, x in nd["generations"].items()) + ".", ""]
+    r13 = [(c, jload(os.path.join(R, "select", f"rule13_{c}_hybrid.json"))) for c in ("1b", "1a")]
+    r13 = [(c, x) for c, x in r13 if x]
+    if r13:
+        L += ["## AJ. Several sampled HyDE passages on Track 1 (rule 13, phase B)", "",
+              "n HyDE passages at temperature 0.7 (BM25: concatenated; dense: mean vector) against one at temperature 0; "
+              "hybrid fused on full train. For 1b the hybrid stage adopted n = 5, but with ReasonEmbed on top the gain "
+              "is +0.0023 [−0.0048, +0.0094] on train (dev +0.0031) — not adopted (LOG 18:41).", "",
+              "| sub-task | candidate | hybrid train | hybrid dev |", "| --- | --- | ---: | ---: |"]
+        for c, x in r13:
+            for k, v in x["candidates"].items():
+                L.append(f"| {c} | {k} | {f4(v['train'])} | {f4(v['dev'])} |")
+        L += [""]
     cp = jload(os.path.join(R, "compute_1110.json"))
     if cp:
         L += ["## AF. Compute: models, revisions, throughput (B5)", "", cp["machine"] + ".", "",

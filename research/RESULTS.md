@@ -214,6 +214,19 @@ vLLM at temperature 0 is not batch-invariant: a fresh generation of the same inp
 
 Identical generations (fresh vs cached): t1_reason 360/1733, t1_hyde 292/1733, t2_reason 361/1716, t2_hyde 401/1716.
 
+## AJ. Several sampled HyDE passages on Track 1 (rule 13, phase B)
+
+n HyDE passages at temperature 0.7 (BM25: concatenated; dense: mean vector) against one at temperature 0; hybrid fused on full train. For 1b the hybrid stage adopted n = 5, but with ReasonEmbed on top the gain is +0.0023 [−0.0048, +0.0094] on train (dev +0.0031) — not adopted (LOG 18:41).
+
+| sub-task | candidate | hybrid train | hybrid dev |
+| --- | --- | ---: | ---: |
+| 1b | n1_t0 | 0.3226 | 0.3505 |
+| 1b | n3 | 0.3310 | 0.3572 |
+| 1b | n5 | 0.3316 | 0.3573 |
+| 1a | n1_t0 | 0.2949 | 0.3258 |
+| 1a | n3 | 0.2932 | 0.3276 |
+| 1a | n5 | 0.2942 | 0.3322 |
+
 ## AF. Compute: models, revisions, throughput (B5)
 
 NVIDIA GeForce RTX 4060 Laptop GPU, 8 GB (Windows itself holds 0.9-5.3 GB of it); 20 logical CPUs; 12 GB RAM visible to WSL2; torch 2.14.1+cu130, transformers 5.19.0, bitsandbytes 0.50.2, vLLM 0.32.0 (separate venv).
@@ -228,7 +241,7 @@ NVIDIA GeForce RTX 4060 Laptop GPU, 8 GB (Windows itself holds 0.9-5.3 GB of it)
 | earlier-answer generation (A2, analysis only) | same Qwen3-4B AWQ | b37d1ccb77e2 | vLLM, temperature 0, <= 256 tokens | 1,168 answers in 5.3 min | 2026-11-10 08:52 |
 | second embedder (rule 18, phase B) | Qwen/Qwen3-Embedding-4B | 5cf2132abc99 | bitsandbytes NF4 | see rule 18 | 2026-11-10 09:58 |
 
-End to end: dev, all caches warm: 2a_history_rr 1.7 min, 2a_history_q 45 s; test estimate (RESULTS U, 2026-11-02): 1.75-2 h cold for all variants (to be re-measured in B3).
+End to end: dev, all caches warm: 2a_history_rr 1.7 min, 2a_history_q 45 s. Cold (B3, empty caches, after the pre-generation fix): 2 Track-1 domains 315 s, 2 Track-2 domains 825 s; scaled to the full test ≈ 2.3 h for all variants (RESULTS AH).
 
 # 2026-11-02: foreign gold, submission pipeline, 2a with history, contamination ablation
 
@@ -615,6 +628,7 @@ Every year weight lowers train nDCG@10, monotonically in w (full grid in `runs_v
 | `1b_rerun` | 0.3442 | 0.3505 | `interp=0.7` | 0.3754 | 0.4053 | +0.0312 [+0.0120, +0.0507] | 0 | 0 |
 | `1a_rerun_p100` | 0.2823 | 0.3258 | `interp=0.8` | 0.3139 | 0.3672 | +0.0316 [+0.0131, +0.0511] | 19,796 | 2772 |
 | `1b_rerun_p100` | 0.3442 | 0.3505 | `interp=0.7` | 0.3766 | 0.4044 | +0.0324 [+0.0129, +0.0523] | 16,290 | 2153 |
+| `1b_h5` | 0.3512 | 0.3573 | `interp=0.7` | 0.3777 | 0.4084 | +0.0265 [+0.0076, +0.0457] | 54 | 42 |
 | `2a_current__q+r+h` | 0.3828 | 0.3319 | `interp=0.8` | 0.4359 | 0.3901 | +0.0531 [+0.0312, +0.0749] | 33,937 | 4407 |
 | `2a_maxp` | 0.3828 | 0.3319 | `interp=0.8` | 0.4359 | 0.3901 | +0.0531 [+0.0312, +0.0749] | 0 | 80 |
 | `2a_nomaxp` | 0.3671 | 0.3100 | `interp=0.8` | 0.4317 | 0.3779 | +0.0645 [+0.0430, +0.0857] | 0 | 0 |

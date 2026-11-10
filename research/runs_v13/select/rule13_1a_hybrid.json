@@ -1,0 +1,82 @@
+{
+ "rule": "13",
+ "cond": "1a",
+ "baseline": "n1_t0",
+ "margin": 0.005,
+ "best_on_train": "n1_t0",
+ "train_bootstrap_best_minus_baseline": null,
+ "adopted": false,
+ "chosen": "n1_t0",
+ "dev_bootstrap_chosen_minus_baseline": null,
+ "candidates": {
+  "n1_t0": {
+   "report": "../research/runs_v13/qexp/t1/hybrid_1a.json",
+   "condition": "1a__q+r+h",
+   "cfg": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "minmax",
+    "alpha": 0.6
+   },
+   "train": 0.2949,
+   "dev": 0.3258,
+   "bm25_train": 0.1323,
+   "bm25_dev": 0.162,
+   "dense_train": 0.2583,
+   "dense_dev": 0.2899
+  },
+  "n3": {
+   "report": "../research/runs_v13/hyde5/t1/hybrid_1a.json",
+   "condition": "1a__q+r+h3",
+   "cfg": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "minmax",
+    "alpha": 0.6
+   },
+   "train": 0.2932,
+   "dev": 0.3276,
+   "bm25_train": 0.1332,
+   "bm25_dev": 0.1603,
+   "dense_train": 0.2574,
+   "dense_dev": 0.2843
+  },
+  "n5": {
+   "report": "../research/runs_v13/hyde5/t1/hybrid_1a.json",
+   "condition": "1a__q+r+h5",
+   "cfg": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "train": 0.2942,
+   "dev": 0.3322,
+   "bm25_train": 0.1365,
+   "bm25_dev": 0.1633,
+   "dense_train": 0.2609,
+   "dense_dev": 0.2861
+  }
+ },
+ "dev_bootstrap_each_minus_baseline": {
+  "n3": {
+   "diff": 0.0018,
+   "ci95": [
+    -0.0066,
+    0.0099
+   ],
+   "p_le_0": 0.3326
+  },
+  "n5": {
+   "diff": 0.0063,
+   "ci95": [
+    -0.0045,
+    0.0174
+   ],
+   "p_le_0": 0.1273
+  }
+ }
+}
