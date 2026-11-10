@@ -352,7 +352,7 @@
    "depth": 1000,
    "source": "rule 6 (q+r+h), rule 10 (no MaxP), ReasonEmbed w 0.8 (rule-8 grid on train)",
    "dev_research": 0.3779,
-   "role": "fallback 1 (current turn, rule 10 main)",
+   "role": "fallback (current turn, rule 10; ReasonEmbed pool 50)",
    "train_research": 0.4317
   },
   "2a_history": {
@@ -882,6 +882,91 @@
    "dev_research": 0.3672,
    "role": "main (rule 17)",
    "train_research": 0.3139
+  },
+  "2a_nomaxp_p100": {
+   "track": 2,
+   "query": "2a_current",
+   "run_id": "UA_2a_nomaxp_p100",
+   "domains": [
+    "drones",
+    "politics",
+    "law",
+    "medicalsciences",
+    "hardware",
+    "economics",
+    "psychology",
+    "biology",
+    "sustainable_living",
+    "robotics",
+    "earth_science"
+   ],
+   "llm": {
+    "name": "qwen3-4b",
+    "checkpoint": "cyankiwi/Qwen3-4B-Instruct-2507-AWQ-4bit",
+    "revision": "b37d1ccb77e27a70fe4222d995fda27940eead5a",
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "quant": "AWQ W4A16 (compressed-tensors)",
+    "engine": "vLLM 0.32.0, enforce_eager",
+    "temperature": 0.0,
+    "max_new_tokens": 256,
+    "seed": 0,
+    "max_input_chars": 3000,
+    "prompts": [
+     "reason",
+     "hyde"
+    ],
+    "prompt_texts": {
+     "reason": "Read the question below. First, reason briefly about what knowledge is needed to answer it. Then describe what a relevant document would look like: its topic, the key concepts, terms and entities it would mention{time}. Keep the whole answer under 150 words.\n\n{body}",
+     "hyde": "Write a short passage (about 100 words) that could appear in a document that helps answer the question below. Write it as factual reference text, not as a reply to the asker{time}.\n\n{body}"
+    },
+    "system": "You help a search engine find documents. Answer in plain English text only.",
+    "time_hint_track1": {
+     "reason": "; if the question refers to a time (years, periods, events), state that time explicitly",
+     "hyde": "; if the question refers to a time (years, periods, events), place the passage in that time"
+    },
+    "cache": "research/runs_v13/llm/t2"
+   },
+   "variant": "q+r+h",
+   "bm25": {
+    "impl": "bm25s 0.2 (Lucene variant)",
+    "k1": 0.9,
+    "b": 0.4,
+    "analyzer": "lucene",
+    "depth": 1000,
+    "text": "q \\n r \\n h"
+   },
+   "dense": {
+    "model": "bge-base",
+    "checkpoint": "BAAI/bge-base-en-v1.5",
+    "max_len": 512,
+    "emb": "research/runs_v12/emb",
+    "maxp": false,
+    "query_vector": "normalised sum of e_query(q), e_query(r), e_doc(h)"
+   },
+   "hybrid": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "reasonembed": {
+    "checkpoint": "hanhainebula/reason-embed-qwen3-4b-0928",
+    "quant": "bitsandbytes NF4, fp16 compute",
+    "pooling": "last token, L2-normalised",
+    "max_len": 512,
+    "doc_max_chars": 4000,
+    "pool": 100,
+    "how": "interp",
+    "cache": "research/runs_v13/reason/cache/reasonembed-4b_4bit_L512",
+    "instruction": "Given a <domain> question, retrieve documents that help answer the question.",
+    "w": 0.8
+   },
+   "depth": 1000,
+   "source": "rule 6 (q+r+h), rule 10 (no MaxP), ReasonEmbed w 0.8 (rule-8 grid on train); rule 17 (ReasonEmbed over the top 100, w 0.8)",
+   "dev_research": 0.3801,
+   "role": "fallback (current turn, rules 10 + 17)",
+   "train_research": 0.4389
   }
  },
  "_main_runs": {
@@ -900,6 +985,7 @@
   "2a": [
    "2a_history",
    "2a_history_q",
+   "2a_nomaxp_p100",
    "2a_nomaxp",
    "2a_maxp"
   ]

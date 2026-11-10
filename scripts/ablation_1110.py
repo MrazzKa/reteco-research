@@ -46,8 +46,9 @@ def main():
         "1a": (1, "1a", [("BM25 (query)", "run", f"{q1}/bm25/runs/{{pre}}_1a__q.tsv"),
                          ("+ dense: hybrid (query)", "hyb", (f"{q1}/hybrid_1a.json", "1a__q", f"{q1}/bm25/runs", f"{q1}/dense/runs")),
                          ("+ LLM reasoning (q+r+h hybrid)", "hyb", (f"{q1}/hybrid_1a.json", "1a__q+r+h", f"{q1}/bm25/runs", f"{q1}/dense/runs")),
-                         ("+ ReasonEmbed top 50 (final)", "run", f"{F}/{{pre}}_1a_rerun__best.tsv"),
-                         ("+ LLM reranker (not adopted)", "run", f"{RR}/{{pre}}_1a__rr.tsv")]),
+                         ("+ ReasonEmbed top 50", "run", f"{F}/{{pre}}_1a_rerun__best.tsv"),
+                         ("ReasonEmbed top 100 (final, rule 17)", "run", f"{F}/{{pre}}_1a_rerun_p100__best.tsv", "+ ReasonEmbed top 50"),
+                         ("+ LLM reranker over top-50 system (not adopted)", "run", f"{RR}/{{pre}}_1a__rr.tsv", "+ ReasonEmbed top 50")]),
         "1b": (1, "1b_query+step", [("BM25 (query + step)", "run", f"{q1}/bm25/runs/{{pre}}_1b_query+step__q.tsv"),
                                     ("+ dense: hybrid", "hyb", (f"{q1}/hybrid_1b.json", "1b_query+step__q", f"{q1}/bm25/runs", f"{q1}/dense/runs")),
                                     ("+ LLM reasoning (q+r+h hybrid)", "hyb", (f"{q1}/hybrid_1b.json", "1b_query+step__q+r+h", f"{q1}/bm25/runs", f"{q1}/dense/runs")),
@@ -70,9 +71,9 @@ def main():
         res = {}
         for sp in ("train", "dev"):
             # topics: those of the final (ReasonEmbed) saved run = train subsample / all dev
-            fin = [s for s in stages if "ReasonEmbed" in s[0]][0][2]
+            fin = [s for s in stages if "ReasonEmbed top 50" in s[0]][0][2]
             topics = {dom: sorted(read_run(fin.format(pre=f"t{tr}_{dom}_{sp}"))) for dom in doms}
-            for lab, kind, spec in stages:
+            for lab, kind, spec, *_ in stages:
                 per = {}
                 ok = True
                 for dom in doms:
@@ -94,17 +95,19 @@ def main():
                 if ok:
                     res.setdefault(lab, {})[sp] = per
         rows, prev = [], None
-        for lab, _, _ in stages:
+        for lab, _, _, *base in stages:
             if lab not in res:
                 continue
-            row = {"stage": lab}
+            b = base[0] if base else prev
+            row = {"stage": lab, "delta_vs": b}
             for sp in ("train", "dev"):
                 m, ci = macro_ci(res[lab][sp])
                 row[sp] = m
                 row[f"{sp}_ci95"] = ci
-                row[f"{sp}_minus_prev"] = bootstrap(res[lab][sp], res[prev][sp]) if prev else None
+                row[f"{sp}_minus_prev"] = bootstrap(res[lab][sp], res[b][sp]) if b else None
             rows.append(row)
-            prev = lab
+            if not base:
+                prev = lab
             print(f"{name:<11} {lab:<36} train {row['train']:.4f} {row['train_ci95']}  dev {row['dev']:.4f} {row['dev_ci95']}  "
                   f"Δdev {row['dev_minus_prev']['diff'] if row['dev_minus_prev'] else ''}", flush=True)
         out[name] = {"topics": {"train": sum(len(v) for v in res[rows[0]['stage']]["train"].values()),

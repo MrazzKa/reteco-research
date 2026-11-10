@@ -7,6 +7,7 @@
   "rows": [
    {
     "stage": "BM25 (query)",
+    "delta_vs": null,
     "train": 0.1041,
     "train_ci95": [
      0.0821,
@@ -22,6 +23,7 @@
    },
    {
     "stage": "+ dense: hybrid (query)",
+    "delta_vs": "BM25 (query)",
     "train": 0.2351,
     "train_ci95": [
      0.2055,
@@ -51,6 +53,7 @@
    },
    {
     "stage": "+ LLM reasoning (q+r+h hybrid)",
+    "delta_vs": "+ dense: hybrid (query)",
     "train": 0.2823,
     "train_ci95": [
      0.2515,
@@ -79,7 +82,8 @@
     }
    },
    {
-    "stage": "+ ReasonEmbed top 50 (final)",
+    "stage": "+ ReasonEmbed top 50",
+    "delta_vs": "+ LLM reasoning (q+r+h hybrid)",
     "train": 0.3078,
     "train_ci95": [
      0.2764,
@@ -108,7 +112,38 @@
     }
    },
    {
-    "stage": "+ LLM reranker (not adopted)",
+    "stage": "ReasonEmbed top 100 (final, rule 17)",
+    "delta_vs": "+ ReasonEmbed top 50",
+    "train": 0.3139,
+    "train_ci95": [
+     0.2823,
+     0.347
+    ],
+    "train_minus_prev": {
+     "diff": 0.0062,
+     "ci95": [
+      0.0012,
+      0.0121
+     ],
+     "p_le_0": 0.0064
+    },
+    "dev": 0.3672,
+    "dev_ci95": [
+     0.3302,
+     0.4046
+    ],
+    "dev_minus_prev": {
+     "diff": 0.0005,
+     "ci95": [
+      -0.0023,
+      0.0031
+     ],
+     "p_le_0": 0.3597
+    }
+   },
+   {
+    "stage": "+ LLM reranker over top-50 system (not adopted)",
+    "delta_vs": "+ ReasonEmbed top 50",
     "train": 0.3101,
     "train_ci95": [
      0.2782,
@@ -146,6 +181,7 @@
   "rows": [
    {
     "stage": "BM25 (query + step)",
+    "delta_vs": null,
     "train": 0.1174,
     "train_ci95": [
      0.0946,
@@ -161,6 +197,7 @@
    },
    {
     "stage": "+ dense: hybrid",
+    "delta_vs": "BM25 (query + step)",
     "train": 0.2758,
     "train_ci95": [
      0.2426,
@@ -190,6 +227,7 @@
    },
    {
     "stage": "+ LLM reasoning (q+r+h hybrid)",
+    "delta_vs": "+ dense: hybrid",
     "train": 0.3442,
     "train_ci95": [
      0.3083,
@@ -219,6 +257,7 @@
    },
    {
     "stage": "+ ReasonEmbed top 50 (final)",
+    "delta_vs": "+ LLM reasoning (q+r+h hybrid)",
     "train": 0.3754,
     "train_ci95": [
      0.3398,
@@ -248,6 +287,7 @@
    },
    {
     "stage": "+ LLM reranker (not adopted)",
+    "delta_vs": "+ ReasonEmbed top 50 (final)",
     "train": 0.3783,
     "train_ci95": [
      0.3434,
@@ -285,6 +325,7 @@
   "rows": [
    {
     "stage": "BM25 (current turn)",
+    "delta_vs": null,
     "train": 0.1772,
     "train_ci95": [
      0.1485,
@@ -300,6 +341,7 @@
    },
    {
     "stage": "+ dense: hybrid",
+    "delta_vs": "BM25 (current turn)",
     "train": 0.2828,
     "train_ci95": [
      0.2477,
@@ -329,6 +371,7 @@
    },
    {
     "stage": "+ LLM reasoning (q+r+h hybrid)",
+    "delta_vs": "+ dense: hybrid",
     "train": 0.3671,
     "train_ci95": [
      0.3292,
@@ -358,6 +401,7 @@
    },
    {
     "stage": "+ ReasonEmbed top 50 (final B)",
+    "delta_vs": "+ LLM reasoning (q+r+h hybrid)",
     "train": 0.4317,
     "train_ci95": [
      0.3931,
@@ -387,6 +431,7 @@
    },
    {
     "stage": "+ LLM reranker (not adopted)",
+    "delta_vs": "+ ReasonEmbed top 50 (final B)",
     "train": 0.4358,
     "train_ci95": [
      0.3975,
@@ -424,6 +469,7 @@
   "rows": [
    {
     "stage": "BM25 (history text)",
+    "delta_vs": null,
     "train": 0.4025,
     "train_ci95": [
      0.3656,
@@ -439,6 +485,7 @@
    },
    {
     "stage": "+ dense: hybrid H0",
+    "delta_vs": "BM25 (history text)",
     "train": 0.4889,
     "train_ci95": [
      0.4509,
@@ -468,6 +515,7 @@
    },
    {
     "stage": "+ LLM with earlier Q/A (Hb hybrid)",
+    "delta_vs": "+ dense: hybrid H0",
     "train": 0.517,
     "train_ci95": [
      0.4785,
@@ -497,6 +545,7 @@
    },
    {
     "stage": "+ ReasonEmbed top 50",
+    "delta_vs": "+ LLM with earlier Q/A (Hb hybrid)",
     "train": 0.583,
     "train_ci95": [
      0.5467,
@@ -526,6 +575,7 @@
    },
    {
     "stage": "+ LLM reranker (final main)",
+    "delta_vs": "+ ReasonEmbed top 50",
     "train": 0.5999,
     "train_ci95": [
      0.5639,

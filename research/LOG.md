@@ -1613,3 +1613,11 @@ result (train sub / dev): pool 50 (interp 0.8) 0.3078 / 0.3667; pool 100 (interp
 submission: `1a_p100` (= `1a` with ReasonEmbed pool 100, w 0.8) becomes the main 1a run; `1a` (pool 50) a fallback.
 dev check: `submit.py --variants 1a_p100 --split dev` (4.8 min, BM25 indexing 244 s, 0 new ReasonEmbed documents) +
   `score_submission.py` → official macro **0.3672 = research 0.3672**; format_checker exit 0 for all 13 files.
+
+## 2026-11-10 11:52–12:08 — rule 17 result, 2a current (B): pool 100 adopted (fallback run)
+command: `queue_1110d.sh` → `reason_rerank.py --pool 100 --name 2a_nomaxp_p100` (8,948 new documents, 16 min).
+result (train sub / dev): pool 50 (interp 0.8) 0.4317 / 0.3779; pool 100 (interp 0.8) 0.4389 / 0.3801.
+  train 100 − 50 +0.0072 [+0.0007, +0.0138] → **adopted**. Dev once: +0.0022 [−0.0015, +0.0060].
+submission: `2a_nomaxp_p100` replaces `2a_nomaxp` as the current-turn fallback (both kept in the config).
+dev check: `submit.py --variants 2a_nomaxp_p100 --split dev` (1 min, 0 new documents) → official **0.3801 = research
+  0.3801**; format_checker exit 0 (11 files).

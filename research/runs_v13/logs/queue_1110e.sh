@@ -48,7 +48,7 @@ C=$R/cold; rm -rf $C; mkdir -p $C
 $PY make_test_release.py --data $D --out $C/release --domains iota quant drones politics
 $PY cold_config.py --cache-root $C/cache --out $C/submission_cold.json
 T0=$(date +%s)
-CC=~/semeval-reteco/tools/bin/cc $PY submit.py --config $C/submission_cold.json --variants 1a 1b 1a_noRE 1b_noRE --data $C/release --split test --domains iota quant --out $C/sub 2>&1 | grep -E "^\[|Error|Traceback"
+CC=~/semeval-reteco/tools/bin/cc $PY submit.py --config $C/submission_cold.json --variants 1a_p100 1a 1b 1a_noRE 1b_noRE --data $C/release --split test --domains iota quant --out $C/sub 2>&1 | grep -E "^\[|Error|Traceback"
 T1=$(date +%s)
 CC=~/semeval-reteco/tools/bin/cc $PY submit.py --config $C/submission_cold.json --variants 2a_auto 2a_history 2a_nomaxp 2a_maxp --data $C/release --split test --domains drones politics --out $C/sub 2>&1 | grep -E "^\[|Error|Traceback"
 T2=$(date +%s)

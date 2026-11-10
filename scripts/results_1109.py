@@ -128,11 +128,11 @@ def week7(root):
               "domain). Fusion, ReasonEmbed weight and reranker weight as chosen on train.", ""]
         for name, x in ab.items():
             L += [f"### {name} (train {x['topics']['train']} / dev {x['topics']['dev']} topics)", "",
-                  "| stage | train [95% CI] | Δ train | dev [95% CI] | Δ dev |", "| --- | --- | --- | --- | --- |"]
+                  "| stage | train [95% CI] | Δ train | dev [95% CI] | Δ dev | Δ against |", "| --- | --- | --- | --- | --- | --- |"]
             for r in x["rows"]:
                 L.append(f"| {r['stage']} | {f4(r['train'])} [{f4(r['train_ci95'][0])}, {f4(r['train_ci95'][1])}] | "
                          f"{ci(r['train_minus_prev'])} | {f4(r['dev'])} [{f4(r['dev_ci95'][0])}, {f4(r['dev_ci95'][1])}] | "
-                         f"{ci(r['dev_minus_prev'])} |")
+                         f"{ci(r['dev_minus_prev'])} | {r.get('delta_vs') or ''} |")
             L += [""]
     cp = jload(os.path.join(R, "compute_1110.json"))
     if cp:
