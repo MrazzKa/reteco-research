@@ -47,7 +47,7 @@ import history as H  # noqa: E402
 from hybrid import Query  # noqa: E402
 from llm_expand import LLMS, MAX_INPUT_CHARS, clean as llm_clean, history_body, key_of  # noqa: E402
 from passage_index import MaxPIndex, pdir  # noqa: E402
-from reason_rerank import Embedder, clean as re_clean, instruction, load_cache, rank, save_cache  # noqa: E402
+from reason_rerank import Embedder, clean as re_clean, instruction, load_cache, rank, save_cache, scored  # noqa: E402
 from tie_study import fused, order  # noqa: E402
 import tiebreak  # noqa: E402
 
@@ -261,8 +261,45 @@ def run_variant(a, name, cfg, enc_cache):
                            for d, _ in pools[q][:rc["pool"]]} for q in pools}
     timing["reasonembed_s"] += time.time() - t0
     timing["reasonembed_new_docs"] = n_new_docs
-    # 5. write runs
+    # 5. LLM reranker over the top N of the final list (rule 16), scores cached by sha1(instruction + query + doc)
     how = (rc["how"], rc["w"]) if rc.get("use", True) else ("none", 0)
+    rerank_head = {}
+    lr = cfg.get("llm_rerank")
+    if lr and lr.get("use", True):
+        import llm_rerank as LR
+        t0 = time.time()
+        cpath = rp(lr["cache"])
+        rcache = LR.load_cache(cpath)
+        rr = LR.Reranker(lr["name"], lr["bits"], lr["doc_len"], lr["query_len"], load_model=False)
+        n_new = 0
+        for dom in doms:
+            ts, pools, _, _, _ = pending[dom]
+            ins = instruction(tr, lr["instruction_cond"], dom, lr.get("instruction_qcond"))
+            finals = {q: [(d, r6(x)) for d, x in scored(pools[q][:rc["pool"]], how, scores[dom][q])] for q in pools}
+            need = {d for q in finals for d, _ in finals[q][:lr["depth"]]}
+            docs = fetch(a.data, tr, dom, need)
+            cd = {d: rr.cut(re_clean(docs.get(d, ""))[:6000], lr["doc_len"]) for d in need}
+            items = {}
+            for q, _, _, qx in ts:
+                cq = rr.cut(re_clean(qx), lr["query_len"])
+                for d, _ in finals[q][:lr["depth"]]:
+                    it = (ins, cq, cd[d])
+                    items[(q, d)] = (hashlib.sha1("\n".join(it).encode("utf-8")).hexdigest(), it)
+            miss = sorted({k: it for k, it in items.values() if k not in rcache}.items())
+            if miss:
+                rr.load()
+                sc = rr.score([it for _, it in miss], 4)
+                with open(cpath, "a") as f:
+                    for (k, _), v in zip(miss, sc):
+                        rcache[k] = float(v)
+                        f.write(f"{k}\t{float(v):.5f}\n")
+                n_new += len(miss)
+            for q in finals:
+                rs = {d: rcache[items[(q, d)][0]] for d, _ in finals[q][:lr["depth"]]}
+                rerank_head[(dom, q)] = LR.rerank(finals[q], (lr["how"], lr["depth"], lr["w"]), rs)
+        timing["llm_rerank_s"] += time.time() - t0
+        timing["llm_rerank_new_pairs"] = n_new
+    # 6. write runs
     n_topics = 0
     for dom in doms:
         ts, pools, bres, dres, corpus_ids = pending[dom]
@@ -275,7 +312,10 @@ def run_variant(a, name, cfg, enc_cache):
                     continue
                 seen_topics.add(q)
                 pool = pools[q][:rc["pool"]]
-                head = rank(pool, how, scores[dom][q]) if how[0] != "none" else [d for d, _ in pool]  # none: fused order
+                if (dom, q) in rerank_head:
+                    head = rerank_head[(dom, q)]
+                else:
+                    head = rank(pool, how, scores[dom][q]) if how[0] != "none" else [d for d, _ in pool]  # none: fused order
                 lst, seen = [], set()
                 for d in head + [d for d, _ in pools[q][rc["pool"]:]] + [d for d, _ in dres[q]] + [d for d, _ in bres[q]]:
                     if d in seen:

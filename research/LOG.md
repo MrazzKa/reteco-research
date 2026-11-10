@@ -1495,3 +1495,35 @@ candidate M0 = the frozen main 2a pipeline run on answer-free histories (`histor
   on the rule-8 train subsample via submit.py (as in A2). It replaces H0q + ReasonEmbed as the answer-free fallback only
   if on train M0 − H0q+RE ≥ +0.005 with bootstrap lower bound > 0 (M0 is the more complex: it needs the LLM).
   Dev is already known for M0 (0.4908, seen above) — it is reported, not used.
+
+## 2026-11-10 09:26–09:33 — A4 / rule 16: reranker speed test → Qwen3-Reranker-0.6B (fp16)
+download: Qwen/Qwen3-Reranker-4B rev 22e683669bc0f0bd69640a1354a6d0aebcfeede5 (8.0 GB, ungated) and
+  Qwen/Qwen3-Reranker-0.6B rev e61197ed45024b0ed8a2d74b80b4d909f1255473 (1.2 GB); prompt strings copied from the 4B
+  model card (transformers example). Code: `scripts/llm_rerank.py`; score dumps of the final systems from
+  `reason_rerank.py --save-scores` (cached vectors; they reproduce the final train/dev numbers exactly).
+speed test (`llm_rerank.py --cond 2a_history --limit 200`, 4B NF4 fp16 compute, documents ≤ 512 tokens, 2a-history
+  queries up to ~700 tokens): batch 4 3.52 pairs/s, batch 8 3.32, batch 16 2.61 (compute-bound; GPU memory fine).
+  < 5 pairs/s → by rule 16 the reranker is **Qwen3-Reranker-0.6B fp16**. (4B would need ~8 h for the ~97k pairs:
+  2a history 23,760 · 1a 17,380 · 2a current 23,760 · 1b 31,800.) The 600 4B scores stay in the cache, unused.
+command: `research/runs_v13/logs/queue_1110c.sh` (log `queue_1110c.log`), order 2a history → 1a → 2a current → 1b;
+  estimate written before the run: 0.6B at ~15–25 pairs/s → ~20 min per Track-2 condition, ~1.5 h in total.
+
+## 2026-11-10 09:31–09:54 — rule 16 result, 2a history (main): LLM reranker adopted (w 0.4 over the top 20)
+command: `queue_1110c.sh` → `llm_rerank.py --model qwen3-reranker-0.6b --bits 16 --cond 2a_history --scores
+  runs_v13/scores/2ah_hybrid.json` (23,760 pairs = 1,188 topics × top 20; ~18 pairs/s, 20 min; cache
+  `rerank/cache/qwen3-reranker-0.6b_16bit_D512.tsv`; report `rerank/rule16_2a_history_qwen3-reranker-0.6b.json`).
+result (train subsample / dev): none 0.5830 / 0.5475 · reranker order only @10 0.5674 / 0.5141, @20 0.5537 / 0.4870 ·
+  interp @10 best w 0.4 0.5956 / 0.5479 · interp @20: w 0.2 0.5921 / 0.5499, w 0.3 0.5975 / 0.5498,
+  **w 0.4 0.5999 / 0.5507** (best on train), w 0.5 0.5934 / 0.5488, w 0.9 0.5661 / 0.5005.
+  train best − none +0.0169 [+0.0039, +0.0307] → **adopted** (margin and lower bound met). Dev once: +0.0032
+  [−0.0059, +0.0124].
+reading: the 0.6B reranker alone is clearly worse than the final system (−0.03 / −0.06), but as a light second
+  opinion (w 0.4) it adds +0.017 on train and only +0.003 on dev (interval includes 0). Adopted by the rule; the dev
+  gain is small.
+submission: `configs/submission.json` gains `2a_history_rr` (= `2a_history` + `llm_rerank` block: checkpoint,
+  revision, fp16, prompt, score = logit(yes) − logit(no), doc ≤ 512 / query ≤ 1,024 tokens, top 20, z-score
+  interpolation w 0.4, cache path); `_main_runs.2a` = `2a_history_rr`; `_auto_2a.with_answers` = `2a_history_rr`;
+  `2a_history` becomes a fallback. `submit.py`: new stage 5 (reranker over the top N of the ReasonEmbed list; final
+  scores rounded to 6 decimals as in the score dumps; same cache key) — the model is loaded only for missing pairs.
+dev check: `submit.py --variants 2a_history_rr --split dev` (1.7 min, 0 new pairs) + `score_submission.py` →
+  official macro **0.5507 = research 0.5507**; format_checker exit 0 for all 11 files.

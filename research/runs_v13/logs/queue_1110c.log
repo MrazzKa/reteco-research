@@ -1,0 +1,87 @@
+=== 09:31:06 speed test 3.52 pairs/s -> --model qwen3-reranker-0.6b --bits 16
+=== 09:31:06 attempt 1: --cond 2a_history --scores ../research/runs_v13/scores/2ah_hybrid.json
+[2a_history] 23760 pairs over 1188 topics
+  400/23760 pairs, 400 scored in 21s (18.94 pairs/s), total 27s
+  800/23760 pairs, 400 scored in 24s (16.78 pairs/s), total 51s
+  1200/23760 pairs, 400 scored in 26s (15.49 pairs/s), total 77s
+  1600/23760 pairs, 400 scored in 24s (17.02 pairs/s), total 101s
+  2000/23760 pairs, 400 scored in 23s (17.37 pairs/s), total 124s
+  2400/23760 pairs, 400 scored in 22s (17.82 pairs/s), total 147s
+  2800/23760 pairs, 400 scored in 27s (14.85 pairs/s), total 174s
+  3200/23760 pairs, 397 scored in 25s (16.06 pairs/s), total 199s
+  3600/23760 pairs, 398 scored in 20s (20.40 pairs/s), total 219s
+  4000/23760 pairs, 397 scored in 21s (18.77 pairs/s), total 240s
+  4400/23760 pairs, 383 scored in 21s (18.56 pairs/s), total 261s
+  4800/23760 pairs, 350 scored in 12s (28.20 pairs/s), total 273s
+  5200/23760 pairs, 399 scored in 17s (23.70 pairs/s), total 290s
+  5600/23760 pairs, 386 scored in 15s (24.94 pairs/s), total 306s
+  6000/23760 pairs, 358 scored in 16s (22.12 pairs/s), total 322s
+  6400/23760 pairs, 395 scored in 18s (21.88 pairs/s), total 340s
+  6800/23760 pairs, 397 scored in 19s (20.90 pairs/s), total 360s
+  7200/23760 pairs, 400 scored in 22s (18.15 pairs/s), total 382s
+  7600/23760 pairs, 400 scored in 22s (18.08 pairs/s), total 404s
+  8000/23760 pairs, 400 scored in 23s (17.63 pairs/s), total 427s
+  8400/23760 pairs, 400 scored in 24s (16.96 pairs/s), total 450s
+  8800/23760 pairs, 400 scored in 24s (16.89 pairs/s), total 474s
+  9200/23760 pairs, 400 scored in 23s (17.14 pairs/s), total 498s
+  9600/23760 pairs, 400 scored in 25s (16.21 pairs/s), total 522s
+  10000/23760 pairs, 400 scored in 21s (19.29 pairs/s), total 543s
+  10400/23760 pairs, 400 scored in 23s (17.42 pairs/s), total 566s
+  10800/23760 pairs, 400 scored in 21s (19.10 pairs/s), total 587s
+  11200/23760 pairs, 400 scored in 24s (16.63 pairs/s), total 611s
+  11600/23760 pairs, 400 scored in 21s (18.94 pairs/s), total 633s
+  12000/23760 pairs, 399 scored in 19s (21.10 pairs/s), total 652s
+  12400/23760 pairs, 393 scored in 22s (17.80 pairs/s), total 674s
+  12800/23760 pairs, 399 scored in 22s (18.25 pairs/s), total 696s
+  13200/23760 pairs, 400 scored in 20s (19.66 pairs/s), total 716s
+  13600/23760 pairs, 400 scored in 26s (15.52 pairs/s), total 742s
+  14000/23760 pairs, 400 scored in 18s (21.93 pairs/s), total 761s
+  14400/23760 pairs, 396 scored in 19s (20.76 pairs/s), total 780s
+  14800/23760 pairs, 386 scored in 18s (20.87 pairs/s), total 798s
+  15200/23760 pairs, 399 scored in 23s (17.15 pairs/s), total 822s
+  15600/23760 pairs, 398 scored in 21s (18.72 pairs/s), total 843s
+  16000/23760 pairs, 367 scored in 15s (24.37 pairs/s), total 858s
+  16400/23760 pairs, 382 scored in 14s (28.26 pairs/s), total 872s
+  16800/23760 pairs, 390 scored in 15s (26.46 pairs/s), total 887s
+  17200/23760 pairs, 388 scored in 15s (25.63 pairs/s), total 902s
+  17600/23760 pairs, 379 scored in 14s (26.74 pairs/s), total 916s
+  18000/23760 pairs, 382 scored in 15s (25.81 pairs/s), total 931s
+  18400/23760 pairs, 398 scored in 21s (19.21 pairs/s), total 952s
+  18800/23760 pairs, 397 scored in 17s (23.80 pairs/s), total 968s
+  19200/23760 pairs, 396 scored in 17s (23.95 pairs/s), total 985s
+  19600/23760 pairs, 394 scored in 14s (27.99 pairs/s), total 999s
+  20000/23760 pairs, 370 scored in 17s (22.28 pairs/s), total 1016s
+  20400/23760 pairs, 385 scored in 15s (25.19 pairs/s), total 1031s
+  20800/23760 pairs, 393 scored in 18s (22.19 pairs/s), total 1049s
+  21200/23760 pairs, 385 scored in 14s (26.64 pairs/s), total 1064s
+  21600/23760 pairs, 398 scored in 16s (25.07 pairs/s), total 1079s
+  22000/23760 pairs, 400 scored in 18s (22.75 pairs/s), total 1097s
+  22400/23760 pairs, 398 scored in 15s (26.54 pairs/s), total 1112s
+  22800/23760 pairs, 387 scored in 16s (23.75 pairs/s), total 1129s
+  23200/23760 pairs, 388 scored in 18s (21.24 pairs/s), total 1147s
+  23600/23760 pairs, 396 scored in 20s (19.83 pairs/s), total 1167s
+  23760/23760 pairs, 154 scored in 8s (19.02 pairs/s), total 1175s
+   none@20          train 0.5830  dev 0.5475
+   only@10          train 0.5674  dev 0.5141
+   only@20          train 0.5537  dev 0.4870
+   interp@10_w0.1   train 0.5878  dev 0.5470
+   interp@10_w0.2   train 0.5894  dev 0.5457
+   interp@10_w0.3   train 0.5930  dev 0.5463
+   interp@10_w0.4   train 0.5956  dev 0.5479
+   interp@10_w0.5   train 0.5906  dev 0.5441
+   interp@10_w0.6   train 0.5879  dev 0.5426
+   interp@10_w0.7   train 0.5883  dev 0.5365
+   interp@10_w0.8   train 0.5848  dev 0.5303
+   interp@10_w0.9   train 0.5771  dev 0.5206
+   interp@20_w0.1   train 0.5897  dev 0.5480
+   interp@20_w0.2   train 0.5921  dev 0.5499
+   interp@20_w0.3   train 0.5975  dev 0.5498
+   interp@20_w0.4   train 0.5999  dev 0.5507
+   interp@20_w0.5   train 0.5934  dev 0.5488
+   interp@20_w0.6   train 0.5951  dev 0.5434
+   interp@20_w0.7   train 0.5918  dev 0.5316
+   interp@20_w0.8   train 0.5829  dev 0.5198
+   interp@20_w0.9   train 0.5661  dev 0.5005
+== 2a_history: none {'train': 0.583, 'dev': 0.5475} | best on train interp@20_w0.4 {'train': 0.5999, 'dev': 0.5507} | train boot {'diff': 0.0169, 'ci95': [0.0039, 0.0307], 'p_le_0': 0.0064} | adopted=True | dev boot {'diff': 0.0032, 'ci95': [-0.0059, 0.0124], 'p_le_0': 0.2449}
+=== 09:50:51 R16_2AH_DONE
+=== 09:50:51 attempt 1: --cond 1a --scores ../research/runs_v13/scores/1a_rerun.json

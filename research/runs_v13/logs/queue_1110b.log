@@ -556,3 +556,8 @@ FlashInfer kernels are disabled: flashinfer-cubin is not installed and nvcc (CUD
 === exit 0
 === 09:26:05 A1_SYNTH_DONE
 === 09:26:05 /home/timur_rk/semeval-reteco/.venv/bin/python llm_rerank.py --cond 2a_history --scores ../research/runs_v13/scores/2ah_hybrid.json --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out ../research/runs_v13/rerank --limit 200 --batch 4
+[2a_history] 23760 pairs over 1188 topics
+  400/23760 pairs, 200 scored in 57s (3.52 pairs/s), total 71s
+speed test: 200 pairs
+=== exit 0
+=== 09:27:24 ALLDONE
