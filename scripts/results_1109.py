@@ -29,8 +29,10 @@ def week7(root):
               "= bootstrap of the domain macro (topics resampled within domain, 10,000 draws, seed 20260921). Train = "
               "rule-8 subsample (≤ 30 topics per domain), the number the run was chosen on.", "",
               "| sub-task | run | role | how it is built | train | dev [95% CI] |", "| --- | --- | --- | --- | ---: | --- |"]
-        for r in fin["rows"]:
-            L.append(f"| {r['track']}{'a' if r['query'] in ('1a',) else ''} {r['variant']} | `{r['run_id']}` | {r['role']} | "
+        subl = lambda r: "1a" if r["query"] == "1a" else ("1b" if r["query"].startswith("1b") else "2a")
+        rank_ = lambda r: (subl(r), 0 if str(r["role"]).startswith("main") else 1, -(r["dev"] or 0))
+        for r in sorted(fin["rows"], key=rank_):
+            L.append(f"| {subl(r)} | `{r['run_id']}` | {r['role']} | "
                      f"{r['source']} | {f4(r['train'])} | {f4(r['dev'])} [{f4(r['dev_ci95'][0])}, {f4(r['dev_ci95'][1])}] |")
         if fin.get("auto_2a"):
             au = fin["auto_2a"]
@@ -132,6 +134,13 @@ def week7(root):
                          f"{ci(r['train_minus_prev'])} | {f4(r['dev'])} [{f4(r['dev_ci95'][0])}, {f4(r['dev_ci95'][1])}] | "
                          f"{ci(r['dev_minus_prev'])} |")
             L += [""]
+    cp = jload(os.path.join(R, "compute_1110.json"))
+    if cp:
+        L += ["## AF. Compute: models, revisions, throughput (B5)", "", cp["machine"] + ".", "",
+              "| stage | model | revision | precision | measured throughput | LOG entry |", "| --- | --- | --- | --- | --- | --- |"]
+        for x in cp["components"]:
+            L.append(f"| {x['stage']} | {x['model']} | {x['revision']} | {x['precision']} | {x['throughput']} | {x['log']} |")
+        L += ["", "End to end: " + cp["end_to_end"] + ".", ""]
     return L
 
 

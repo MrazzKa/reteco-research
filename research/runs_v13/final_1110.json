@@ -1,0 +1,173 @@
+{
+ "rows": [
+  {
+   "variant": "1a",
+   "run_id": "UA_1a_main",
+   "role": "main",
+   "track": 1,
+   "query": "1a",
+   "source": "rule 6 (q+r+h), rule 8 (ReasonEmbed w 0.8)",
+   "train": 0.3078,
+   "dev": 0.3667,
+   "dev_ci95": [
+    0.3292,
+    0.4042
+   ],
+   "dev_research": 0.3667,
+   "topics": 519
+  },
+  {
+   "variant": "1b",
+   "run_id": "UA_1b_main",
+   "role": "main",
+   "track": 1,
+   "query": "1b_query+step",
+   "source": "rule 6, rule 8 (w 0.7)",
+   "train": 0.3754,
+   "dev": 0.4053,
+   "dev_ci95": [
+    0.37,
+    0.4408
+   ],
+   "dev_research": 0.4053,
+   "topics": 1214
+  },
+  {
+   "variant": "2a_maxp",
+   "run_id": "UA_2a_maxp",
+   "role": "fallback 2 (current turn + MaxP)",
+   "track": 2,
+   "query": "2a_current",
+   "source": "rules 6, 7 (MaxP), 8 (w 0.8)",
+   "train": 0.4359,
+   "dev": 0.3901,
+   "dev_ci95": [
+    0.3659,
+    0.4147
+   ],
+   "dev_research": 0.3901,
+   "topics": 858
+  },
+  {
+   "variant": "2a_nomaxp",
+   "run_id": "UA_2a_nomaxp",
+   "role": "fallback 1 (current turn, rule 10 main)",
+   "track": 2,
+   "query": "2a_current",
+   "source": "rule 6 (q+r+h), rule 10 (no MaxP), ReasonEmbed w 0.8 (rule-8 grid on train)",
+   "train": 0.4317,
+   "dev": 0.3779,
+   "dev_ci95": [
+    0.3533,
+    0.4028
+   ],
+   "dev_research": 0.3779,
+   "topics": 858
+  },
+  {
+   "variant": "2a_history",
+   "run_id": "UA_2a_history",
+   "role": "fallback (rule-12 main without the rule-16 reranker)",
+   "track": 2,
+   "query": "2a_hist3qa",
+   "source": "rule 11 (Hb: LLM input = current question first + last <= 3 earlier Q/A turns from conversation_history; q = history text, current question first), rule 11 ReasonEmbed w 0.9, rule 12 (main 2a run)",
+   "train": 0.583,
+   "dev": 0.5475,
+   "dev_ci95": [
+    0.5241,
+    0.5711
+   ],
+   "dev_research": 0.5475,
+   "topics": 858
+  },
+  {
+   "variant": "1a_noRE",
+   "run_id": "UA_1a_noRE",
+   "role": "fallback (no ReasonEmbed)",
+   "track": 1,
+   "query": "1a",
+   "source": "rule 6 hybrid only",
+   "train": 0.2823,
+   "dev": 0.3258,
+   "dev_ci95": [
+    0.2886,
+    0.3637
+   ],
+   "dev_research": 0.3258,
+   "topics": 519
+  },
+  {
+   "variant": "1b_noRE",
+   "run_id": "UA_1b_noRE",
+   "role": "fallback (no ReasonEmbed)",
+   "track": 1,
+   "query": "1b_query+step",
+   "source": "rule 6 hybrid only",
+   "train": 0.3442,
+   "dev": 0.3505,
+   "dev_ci95": [
+    0.3126,
+    0.3884
+   ],
+   "dev_research": 0.3505,
+   "topics": 1214
+  },
+  {
+   "variant": "2a_history_q",
+   "run_id": "UA_2a_history_q",
+   "role": "main when the history has no earlier answers (rule 14; chosen by 2a_auto)",
+   "track": 2,
+   "query": "2a_hist3q_qonly",
+   "source": "rule 14 (H0q: answer-free history text, BM25 + bge-base hybrid z-score a 0.7, no LLM) + ReasonEmbed w 0.9 (rule-8 grid on train)",
+   "train": 0.5168,
+   "dev": 0.4802,
+   "dev_ci95": [
+    0.4557,
+    0.5044
+   ],
+   "dev_research": 0.4802,
+   "topics": 858
+  },
+  {
+   "variant": "2a_history_rr",
+   "run_id": "UA_2a_history_rr",
+   "role": "main when earlier answers are present (rules 12 + 16; chosen by 2a_auto)",
+   "track": 2,
+   "query": "2a_hist3qa",
+   "source": "rule 11 (Hb: LLM input = current question first + last <= 3 earlier Q/A turns from conversation_history; q = history text, current question first), rule 11 ReasonEmbed w 0.9, rule 12 (main 2a run); rule 16: Qwen3-Reranker-0.6B over the final top 20, (1 - w) z(final) + w z(reranker), w 0.4",
+   "train": 0.5999,
+   "dev": 0.5507,
+   "dev_ci95": [
+    0.5274,
+    0.5741
+   ],
+   "dev_research": 0.5507,
+   "topics": 858
+  }
+ ],
+ "main": {
+  "1a": "1a",
+  "1b": "1b",
+  "2a": "2a_history_rr"
+ },
+ "fallbacks": {
+  "1a": [
+   "1a_noRE"
+  ],
+  "1b": [
+   "1b_noRE"
+  ],
+  "2a": [
+   "2a_history",
+   "2a_history_q",
+   "2a_nomaxp",
+   "2a_maxp"
+  ]
+ },
+ "auto_2a": {
+  "with_answers": "2a_history_rr",
+  "without_answers": "2a_history_q",
+  "run_id": "UA_2a_auto",
+  "rule": "per Track-2 domain file: if any turn with turn_id >= 2 has a non-empty parsed earlier answer in conversation_history -> with_answers, else without_answers (LOG rule 14)"
+ }
+}

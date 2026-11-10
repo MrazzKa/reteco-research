@@ -683,7 +683,7 @@
     "reasonembed_query": "current question first, then the last <=3 earlier questions (no answers), whitespace-collapsed",
     "answer_free": "asserted per topic in submit.py (history.assert_answer_free)"
    },
-   "role": "fallback (main 2a run when the test history has no earlier answers; rule 14)",
+   "role": "main when the history has no earlier answers (rule 14; chosen by 2a_auto)",
    "train_research": 0.5168
   },
   "2a_history_rr": {
@@ -773,7 +773,7 @@
     "q_text": "current question + newline + released conversation_history",
     "reasonembed_query": "same text as the LLM input, whitespace-collapsed"
    },
-   "role": "main (rule 16: history run + LLM reranker)",
+   "role": "main when earlier answers are present (rules 12 + 16; chosen by 2a_auto)",
    "train_research": 0.5999,
    "llm_rerank": {
     "name": "qwen3-reranker-0.6b",

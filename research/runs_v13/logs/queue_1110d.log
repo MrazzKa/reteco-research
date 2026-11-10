@@ -1,1 +1,25 @@
 === 10:49:23 attempt 1: --track 2 --conditions 2a_hist3qa__q+r+h --query-cond 2a_hist3qa --name 2ah_hybrid_p100 --hybrid ../research/runs_v13/hist/t2/hybrid.json --bm25 ../research/runs_v13/hist/t2/bm25/runs --dense ../research/runs_v13/hist/t2/dense/runs --save-scores ../research/runs_v13/scores/2ah_hybrid_p100.json
+  [2a_hist3qa__q+r+h] docs 2000/8152 (321s)
+  [2a_hist3qa__q+r+h] docs 4000/8152 (609s)
+  [2a_hist3qa__q+r+h] docs 6000/8152 (786s)
+  [2a_hist3qa__q+r+h] docs 8000/8152 (947s)
+  [2a_hist3qa__q+r+h] docs 8152/8152 (958s)
+  [2a_hist3qa__q+r+h] 8152 docs + 0 queries in 958s
+== t2 2a_hist3qa__q+r+h: none train 0.517 dev 0.4601 | best on train ('interp', 0.9): train 0.588 dev 0.549 train boot {'diff': 0.071, 'ci95': [0.0451, 0.0966], 'p_le_0': 0.0}
+   none=0: train 0.517  dev 0.4601
+   top=10: train 0.5419  dev 0.498
+   top=20: train 0.5658  dev 0.5296
+   top=50: train 0.5811  dev 0.5438
+   top=100: train 0.5868  dev 0.5451
+   interp=0.1: train 0.5262  dev 0.4708
+   interp=0.2: train 0.5311  dev 0.4833
+   interp=0.3: train 0.5396  dev 0.4942
+   interp=0.4: train 0.5478  dev 0.5039
+   interp=0.5: train 0.56  dev 0.5172
+   interp=0.6: train 0.5701  dev 0.5254
+   interp=0.7: train 0.5821  dev 0.5343
+   interp=0.8: train 0.5856  dev 0.5391
+   interp=0.9: train 0.588  dev 0.549
+2a_history_main {"p50": {"train": 0.583, "dev": 0.5475}, "p100": {"train": 0.588, "dev": 0.549}, "train_boot": {"diff": 0.005, "ci95": [-0.0009, 0.0115], "p_le_0": 0.0519}, "dev_boot": {"diff": 0.0015, "ci95": [-0.0016, 0.0045], "p_le_0": 0.1736}, "weights": {"p50": "interp=0.9", "p100": "interp=0.9"}, "chosen": "50"}
+=== 11:05:33 R17_2AH_DONE
+=== 11:05:33 attempt 1: --track 1 --conditions 1a__q+r+h --query-cond 1a --name 1a_rerun_p100 --hybrid ../research/runs_v13/qexp/t1/hybrid_1a.json --bm25 ../research/runs_v13/qexp/t1/bm25/runs --dense ../research/runs_v13/qexp/t1/dense/runs --save-scores ../research/runs_v13/scores/1a_rerun_p100.json

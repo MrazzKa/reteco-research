@@ -1,0 +1,63 @@
+{
+ "_about": "B5 compute table (2026-11-10). Every throughput is a measured number from research/LOG.md (entry given); machine = laptop, WSL2.",
+ "machine": "NVIDIA GeForce RTX 4060 Laptop GPU, 8 GB (Windows itself holds 0.9-5.3 GB of it); 20 logical CPUs; 12 GB RAM visible to WSL2; torch 2.14.1+cu130, transformers 5.19.0, bitsandbytes 0.50.2, vLLM 0.32.0 (separate venv)",
+ "components": [
+  {
+   "stage": "BM25",
+   "model": "bm25s 0.2, Lucene variant (k1 0.9, b 0.4), Snowball + stopwords",
+   "revision": "-",
+   "precision": "CPU",
+   "throughput": "index 20-30 s for all 11 Track-2 domains, 288-309 s for 13 Track-1 domains; search 0.01-0.02 s/topic",
+   "log": "2026-11-02 13:50"
+  },
+  {
+   "stage": "dense",
+   "model": "BAAI/bge-small-en-v1.5 (Track 1, 256 tokens) / BAAI/bge-base-en-v1.5 (Track 2, 512 tokens)",
+   "revision": "5c38ec7c405e / a5beb1e3e68b",
+   "precision": "fp16 encode, fp32 exact search on GPU",
+   "throughput": "corpus index built once (week 4); queries 0.01-0.02 s/topic",
+   "log": "2026-10-13 15:37, 2026-11-02 13:50"
+  },
+  {
+   "stage": "LLM query reasoning (reason + HyDE)",
+   "model": "Qwen/Qwen3-4B-Instruct-2507 as cyankiwi/Qwen3-4B-Instruct-2507-AWQ-4bit",
+   "revision": "b37d1ccb77e2",
+   "precision": "AWQ W4A16, vLLM enforce_eager, temperature 0",
+   "throughput": "5.0 inputs/s on history inputs (634 tok/s); 2.6-2.8 inputs/s inside submit.py; + ~2 min model load per call",
+   "log": "2026-11-02 13:07, 2026-11-10 08:52"
+  },
+  {
+   "stage": "ReasonEmbed over the top 50",
+   "model": "hanhainebula/reason-embed-qwen3-4b-0928",
+   "revision": "048461e2e410",
+   "precision": "bitsandbytes NF4, fp16 compute, 512 tokens",
+   "throughput": "~7-10 documents/s (5,046 docs in 495 s; 1,555 docs + 898 queries in 260 s)",
+   "log": "2026-11-10 08:20"
+  },
+  {
+   "stage": "LLM reranker (rule 16; 2a history only)",
+   "model": "Qwen/Qwen3-Reranker-0.6B",
+   "revision": "e61197ed4502",
+   "precision": "fp16, documents 512 tokens, queries 1,024",
+   "throughput": "~20 pairs/s (96,700 pairs in 78 min); 4B in NF4: 3.5 pairs/s (rejected)",
+   "log": "2026-11-10 09:26, 10:49"
+  },
+  {
+   "stage": "earlier-answer generation (A2, analysis only)",
+   "model": "same Qwen3-4B AWQ",
+   "revision": "b37d1ccb77e2",
+   "precision": "vLLM, temperature 0, <= 256 tokens",
+   "throughput": "1,168 answers in 5.3 min",
+   "log": "2026-11-10 08:52"
+  },
+  {
+   "stage": "second embedder (rule 18, phase B)",
+   "model": "Qwen/Qwen3-Embedding-4B",
+   "revision": "5cf2132abc99",
+   "precision": "bitsandbytes NF4",
+   "throughput": "see rule 18",
+   "log": "2026-11-10 09:58"
+  }
+ ],
+ "end_to_end": "dev, all caches warm: 2a_history_rr 1.7 min, 2a_history_q 45 s; test estimate (RESULTS U, 2026-11-02): 1.75-2 h cold for all variants (to be re-measured in B3)"
+}

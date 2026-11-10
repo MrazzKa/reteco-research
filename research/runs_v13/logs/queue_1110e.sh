@@ -3,6 +3,27 @@
 cd ~/semeval-reteco/reteco-research/scripts
 D=../../reteco_data_v11; K=../../RETECO/starter_kit; R=../research/runs_v13; PY=~/semeval-reteco/.venv/bin/python
 while ! grep -q "ALLDONE" $R/logs/queue_1110d.log; do sleep 30; done
+# rule 14b (cheap, decides the answer-free run): the rule-12 main pipeline on answer-free histories, train subsample
+$PY - <<'PYEOF'
+import json, os, sys
+sys.path.insert(0, ".")
+import history as H
+src, dst = "../research/runs_v13/a2/data_ref/track2_recor", "../research/runs_v13/a2/data_noans/track2_recor"
+for dom in sorted(os.listdir(src)):
+    os.makedirs(os.path.join(dst, dom), exist_ok=True)
+    lk = os.path.join(dst, dom, "documents.jsonl")
+    if not os.path.lexists(lk):
+        os.symlink(os.path.realpath(os.path.join(src, dom, "documents.jsonl")), lk)
+    for name in ("trainsub",):
+        b = json.load(open(os.path.join(src, dom, f"benchmark_{name}.json"), encoding="utf-8"))
+        for c in b:
+            c["turns"] = [H.without_answers(t) for t in c["turns"]]
+        assert not any(H.has_answers(t) for c in b for t in c["turns"])
+        json.dump(b, open(os.path.join(dst, dom, f"benchmark_{name}.json"), "w", encoding="utf-8"), ensure_ascii=False)
+print("data_noans written")
+PYEOF
+$PY submit.py --variants 2a_history --data $R/a2/data_noans --split trainsub --out $R/a2/sub_noans/trainsub 2>&1 | grep -E "^\[2a|Error|Traceback"
+echo "=== $(date +%H:%M:%S) R14B_DONE"
 rr() {  # $1 = model, rest = args
   m=$1; shift
   for i in $(seq 1 10); do

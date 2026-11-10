@@ -1589,3 +1589,10 @@ rule 16 summary (Qwen3-Reranker-0.6B, top 20, z-interpolation): adopted only for
   +0.0032). Not adopted: 1a (+0.0023 train / +0.0038 dev), 2a current (+0.0041 / +0.0074), 1b (+0.0029 / +0.0113).
   Pattern: a light interpolation (w 0.1–0.4) is mildly positive on dev everywhere and small on train; the reranker alone
   is always worse than the final system. Total cost: ~96,700 pairs in 78 min (≈ 20 pairs/s).
+
+## 2026-11-10 10:49–11:05 — rule 17 result, 2a history: pool 100 not adopted
+command: `queue_1110d.sh` → `reason_rerank.py --pool 100 --name 2ah_hybrid_p100` (8,152 new documents, ~6.2 docs/s,
+  16 min), `rule17_choice.py` (out `select/rule17.json`).
+result (train sub / dev; weight re-chosen in the rule-8 grid): pool 50 (interp 0.9) 0.5830 / 0.5475; pool 100
+  (interp 0.9) 0.5880 / 0.5490. train 100 − 50 +0.0050 [−0.0009, +0.0115] → **not adopted** (lower bound < 0).
+  Dev once: +0.0015 [−0.0016, +0.0045]. Note: evaluated without the rule-16 reranker (stated in RESULTS).

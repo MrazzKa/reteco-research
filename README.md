@@ -5,15 +5,23 @@ Directed Research (INFO 492, University of Arizona) on **SemEval-2027 Task 1 —
 
 Code, experiment log and generated results only. Notes and meeting briefs are kept outside the repo.
 
-**Where things stand (2026-11-02):** submission systems chosen on train (LOG rules 6–12), dev nDCG@10:
-Track 1a **0.3667**, 1b **0.4053** (LLM query reasoning → BM25 + dense hybrid → ReasonEmbed over the top 50);
-Track 2a main run = the **history** condition, **0.5475** (the LLM sees the current question plus the last ≤ 3 turns
-with their answers; hybrid; ReasonEmbed w 0.9), backups = current turn without MaxP 0.3779 (rule 10 moved MaxP out of
-the main run) and with MaxP 0.3901. `scripts/submit.py` + `configs/submission.json` rebuild every run from the topic
-files and reproduce these dev numbers exactly with the official scorer (RESULTS section U). Foreign-gold diagnostics
-(train/dev gold of other queries in the top 10; RESULTS T): small on Track 2 (≤ 2.6% of slots), 5–7% on Track 1.
-Contamination check (RESULTS W): Llama-3.2-3B, whose cutoff predates BRIGHT, shows the same BRIGHT-vs-StackExchange
-pattern as Qwen. Tables: `research/RESULTS.md` (sections T–X = 2026-11-02, M–S = week 5). How to submit: below.
+**Where things stand (2026-11-10):** submission systems chosen on train (LOG rules 6–16), dev nDCG@10 [95% CI]:
+Track 1a **0.3667** [0.329, 0.404], 1b **0.4053** [0.370, 0.441] (LLM query reasoning → BM25 + dense hybrid →
+ReasonEmbed over the top 50). Track 2a has two main runs and `submit.py` picks one per domain file automatically:
+- earlier answers present in `conversation_history` → `2a_history_rr` **0.5507** [0.527, 0.574] (history system of
+  rule 12 + Qwen3-Reranker-0.6B over the top 20, rule 16);
+- no earlier answers → `2a_history_q` **0.4802** [0.456, 0.504] (rule 14: answer-free history text, BM25 + dense,
+  ReasonEmbed; no LLM; no answer text reaches any input — asserted per topic).
+Fallbacks: `2a_history` 0.5475, current turn `2a_nomaxp` 0.3779 / `2a_maxp` 0.3901, `1a_noRE` 0.3258, `1b_noRE` 0.3505.
+Whether test histories contain the earlier answers is not announced (asked on the organisers' list, 09.11). The
+main run's whole advantage over the answer-free run comes from the reference answers: with answers written by our
+own LLM it drops to 0.4823 (RESULTS AA). Not adopted on train: a per-source query variant (rule 15), the reranker on
+1a / 1b / 2a current (rule 16). Tables: `research/RESULTS.md` (X, Z–AF = 2026-11-10; T–Y = 2026-11-02; M–S = week 5).
+Every number in this paragraph is reproduced exactly by `scripts/submit.py` from the topic files with the official
+scorer.
+
+2026-11-02: foreign-gold diagnostics (RESULTS T), contamination check with a pre-BRIGHT Llama (W), the history
+pipeline (V), several HyDE samples (Y, negative).
 
 Week 5 (2026-10-26): LLM query expansion (Qwen3-4B-Instruct-2507 AWQ, reason + HyDE), MaxP on Track 2, ReasonEmbed-4B
 over the top 50 (sections M–S). Examples: `research/cases/query_reasoning_dev.md`, `research/cases/history_llm_dev.md`.
@@ -60,6 +68,11 @@ semeval-reteco/                  (not a repo)
         ce_final/ reason/ temporal/   cross-encoder, ReasonEmbed and year-feature stages
         recovery/                week-4 gold categories under the new systems
         emb/                     passage embeddings (git-ignored, 0.7 GB)
+        histq/                   2026-11-10: answer-free history retrieval + hybrids (rule 14)
+        a2/                      LLM-written earlier answers: report.json (answers, synthetic releases, runs git-ignored)
+        rerank/                  rule-16 reranker reports (score cache and runs git-ignored)
+        scores/                  final-score dumps of each system (git-ignored), input to rules 16 and 18
+        ensemble/                rule-18 reports; select/ has rule14/15/17 choices; final_1110.json, ablation_1110.json
 ```
 
 Git-ignored and regenerable: `*.tsv` run files, `*.npy` / `*.ids.json` embedding shards,
@@ -85,6 +98,14 @@ Git-ignored and regenerable: `*.tsv` run files, `*.npy` / `*.ids.json` embedding
 | `llm_expand.py` | Query reasoning / HyDE generation with a local LLM (vLLM, temperature 0), cached and resumable; LLM venv. |
 | `qexp_search.py` | BM25 + dense retrieval for the six query variants (q, q+r, r, q+h, h, q+r+h); `--passages` = MaxP. |
 | `passage_index.py` | Passage embeddings (510 tokens, overlap 128) beyond the first window; `MaxPIndex` for search. |
+| `history.py` | Track-2 history: label normalisation, parse, answer detection, `strip_answers`, answer-leak assertion, audit. |
+| `submit.py` · `score_submission.py` · `final_1110.py` | Submission runs from the frozen config (incl. `2a_auto`); official check + score; submission table with dev CIs. |
+| `make_test_release.py` · `cold_config.py` | Synthetic test release from dev (gold removed, optionally answers removed); config copy with empty caches. |
+| `rule14_choice.py` · `rule15_choice.py` · `rule17_choice.py` | Train-only choices of rules 14 (answer-free 2a), 15 (per-source variant), 17 (pool 50 vs 100). |
+| `gen_answers.py` · `a2_report.py` | A2: earlier answers written by our LLM; synthetic releases; report vs reference answers. |
+| `llm_rerank.py` | Rule 16: Qwen3-Reranker (yes/no logit) over the top N of a final system, grid on train, cached scores. |
+| `ensemble_embed.py` | Rule 18: z-score ensemble of ReasonEmbed and a second embedder over the same pool. |
+| `pool_depth.py` · `ablation_1110.py` · `cases_errors.py` | Rule-17 ceiling (gold at ranks 51–100); stage-by-stage ablation with CIs; error examples. |
 | `select_rule.py` | Applies a pre-registered train rule (margin + train bootstrap) over hybrid reports. |
 | `rerank_ce.py` | Cross-encoder; `--query-cond` to score with the original query; cache per (topic, document). |
 | `reason_rerank.py` · `embed_vllm.py` | Reasoning embedder (ReasonEmbed-4B, FP8 via vLLM or NF4 via bitsandbytes) over the hybrid pool. |
@@ -132,33 +153,56 @@ python hybrid.py --track 2 --conditions 2a_current__q 2a_current__q+r+h --bm25 $
 The exact commands of every reported run are in `research/LOG.md` and in the queue scripts
 under `research/runs_v12/logs/*.sh` and `research/runs_v13/logs/*.sh`.
 
-## How to make a submission (2026-11-02)
+## How to make a submission (2026-11-10)
 
 Everything that defines a submitted run is frozen in `configs/submission.json` (models and revisions,
-quantisation, prompts, fusion weights, depths, ReasonEmbed weight, MaxP on/off, tie key, seeds); `scripts/submit.py`
-reads only that file, the release topic files and the corpora (never qrels). One run file per (variant, domain),
-because Track-2 topic ids repeat across domains. Main runs: `1a`, `1b`, `2a_history`; fallbacks: `1a_noRE`, `1b_noRE`,
-`2a_nomaxp`, `2a_maxp` (also listed in the config under `_main_runs` / `_fallback_runs`). The official format is `qid Q0 docid rank score run_id`, depth 1000.
+quantisation, prompts, fusion weights, depths, ReasonEmbed weight, reranker, MaxP on/off, tie key, seeds);
+`scripts/submit.py` reads only that file, the release topic files and the corpora (never qrels). One run file per
+(variant, domain), because Track-2 topic ids repeat across domains. Main runs: `1a`, `1b`, and for 2a the automatic
+`2a_auto` (= `2a_history_rr` or `2a_history_q` per domain file); fallbacks: `1a_noRE`, `1b_noRE`, `2a_history`,
+`2a_nomaxp`, `2a_maxp` (listed under `_main_runs` / `_fallback_runs` / `_auto_2a`). Official format
+`qid Q0 docid rank score run_id`, depth 1000.
 
 ```bash
 cd ~/semeval-reteco/reteco-research/scripts && source ../../.venv/bin/activate
 D=../../reteco_data_v11            # for test: the folder with the test release (same layout, split name "test")
 K=../../RETECO/starter_kit
-# 1. runs (LLM generations are cached by sha1(prompt + model + text); missing ones are generated with vLLM in
-#    ../../.venv-llm, which needs CC=~/semeval-reteco/tools/bin/cc; ReasonEmbed document vectors are cached per domain)
-python submit.py --config ../configs/submission.json --variants 1a 1b 2a_history 2a_nomaxp 2a_maxp 1a_noRE 1b_noRE \
+# 1. runs (LLM generations cached by sha1(prompt + model + text), generated with vLLM in ../../.venv-llm when missing,
+#    which needs CC=~/semeval-reteco/tools/bin/cc; ReasonEmbed vectors cached per domain; reranker scores cached)
+python submit.py --variants 1a 1b 2a_auto 2a_history 2a_nomaxp 2a_maxp 1a_noRE 1b_noRE \
     --data $D --split test --out ../research/runs_v13/submit/test
 # 2. dev check of the same pipeline (official checker + scorer, compares with the research numbers)
-python submit.py --variants 1a 1b 2a_history --data $D --split dev --out ../research/runs_v13/submit/dev
-python score_submission.py --sub ../research/runs_v13/submit/dev --variants 1a 1b 2a_history \
+python submit.py --variants 1a 1b 2a_history_rr 2a_history_q --data $D --split dev --out ../research/runs_v13/submit/dev
+python score_submission.py --sub ../research/runs_v13/submit/dev --variants 1a 1b 2a_history_rr 2a_history_q \
     --data $D --kit $K --out ../research/runs_v13/submit_check.json
 # 3. per file: format check against the corpus (Track 1 doc key "id", Track 2 "doc_id")
 python $K/format_checker.py ../research/runs_v13/submit/test/1a/iota.txt --corpus $D/track1_tempo/iota/documents.jsonl --doc-key id
 ```
 
+**2a automation (`--variants 2a_auto`, LOG rule 14).** For each Track-2 domain file `submit.py` parses every turn's
+`conversation_history` (`scripts/history.py`): if at least one turn with `turn_id` ≥ 2 has a non-empty earlier
+answer, the domain gets `2a_history_rr` (needs the answers), otherwise `2a_history_q` (uses none). Both variants are
+always built in full; the chosen files are copied to `<out>/2a_auto/<domain>.txt` with run id `UA_2a_auto`, and
+`<out>/2a_auto/decision.json` records the decision and the parser counters per domain (turns, turns ≥ 2, turns with an
+answer, Q/A pairs, empty answers, summary questions, unparsed lines). Check the counters on the real test files
+before submitting: `unparsed_lines` > 0 or `normalized_differs` > 0 means the test layout differs from train/dev.
+
+**History parser (`scripts/history.py`).** Released layouts: "No previous conversation." on turn 1; "Q: …\nA: …"
+lines (answers may span several lines); for long conversations "Earlier discussion covered: Turn 1: <q>; Turn 2: …"
+(questions only) followed by "Recent conversation:" and the last two Q/A pairs. `normalize` also accepts
+"Question:/Answer:", "User:/Assistant:", any case, extra spaces, a full-width colon and "Q: … A: …" on one line; on all
+2,971 released train/dev histories it changes nothing (`python3 history.py --data ../../reteco_data_v11` prints the
+audit). `strip_answers` removes every answer (summary and question lines kept); `assert_answer_free` is what
+`submit.py` uses to guarantee that the answer-free run never sees an answer.
+
+**Synthetic test release.** `make_test_release.py --data $D --out <dir> [--strip-answers]` copies the dev topic files as
+split "test" without any gold field (and, with the flag, without earlier answers) — used to check the automation and
+for cold timing runs.
+
 Do not run `submit.py` while another GPU job (vLLM generation) is running: on 2026-11-02 the two together overcommitted
-the 8 GB GPU and both stalled. Long GPU jobs: Windows takes 1.7–5.3 GB of the 8 GB GPU; ReasonEmbed saves document vectors every 2,000 documents,
-so an interrupted `submit.py` can simply be restarted. The cost estimate for the test set is in RESULTS section U.
+the 8 GB GPU and both stalled. Long GPU jobs: Windows takes 1.7–5.3 GB of the 8 GB GPU; ReasonEmbed saves document
+vectors every 2,000 documents and reranker scores are appended per chunk, so an interrupted `submit.py` can simply be
+restarted. The cost estimate for the test set is in RESULTS section U (re-measured cold in phase B, section AF).
 
 ## Rules
 
