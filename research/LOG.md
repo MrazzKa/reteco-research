@@ -1795,3 +1795,14 @@ pass criteria: no crash; format_checker exit 0 on every file; `2a_auto` chooses 
   A larger deviation is investigated, not tuned.
 estimate (scaled from the slice: 519 1a topics, 1,214 1b steps, 858 2a turns): Track 1 ≈ 2.0–2.5 h, Track 2 ≈
   1.5–2 h, total ≈ 3.5–4.5 h (upper bound: the slice over-counts vLLM start-up and BM25 indexing per topic).
+
+## 2026-11-10 21:45–23:59 — C1 paused by the user (partial result)
+command: `queue_1110k.sh` (see the C1 entry above); stopped by PID at 23:59 on the user's request, during 1b.
+done (empty caches, full synthetic test release from dev): pre-generation of all Track-1 LLM texts 801 s (1,733
+  reason + 1,733 HyDE inputs, 396 s + 405 s); `1a_p100` 519 topics: BM25 index 209 s, ReasonEmbed 6,030 s for 41,431
+  new documents (6.9 docs/s); `1a` and `1a_noRE` then 3.6 min each (shared caches, BM25 index rebuilt each time).
+  No crash up to the stop. Run files of 1a_p100 / 1a / 1a_noRE are complete; `sub/1b` is partial and will be rebuilt.
+  Measured so far: Track 1 up to 1a ≈ 2.2 h, i.e. the slice-based estimate (1a ≈ 91 min for the 350-query test)
+  holds within ~10% after scaling 519 → 350 queries.
+resume: `research/runs_v13/logs/queue_1110k_resume.sh` (keeps release and caches; runs 1b 1b_noRE, Track 2, scoring of
+  all runs, cold report). Caveat: the Track-1 LLM texts are already cached, so the resumed 1b timing excludes LLM time.
