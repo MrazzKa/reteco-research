@@ -7475,10 +7475,6 @@
     0.0
    ]
   },
-  "saved_runs": {
-   "dir": "../research/runs_v13/foreign/runs",
-   "best": "interp=0.9"
-  },
   "saved_scores": "../research/runs_v13/scores/2ah_hybrid.json"
  },
  "2ahq_haq": {

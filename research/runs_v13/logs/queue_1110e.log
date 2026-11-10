@@ -1,1 +1,20 @@
 data_noans written
+[2a_history] 330 topics, timing {'llm_reason_generate_s': 77.1, 'llm_reason_generated': 251, 'llm_hyde_generate_s': 76.9, 'llm_hyde_generated': 251, 'llm_total_s': 154.2, 'bm25_index_s': 18.9, 'bm25_search_s': 2.2, 'dense_index_load_s': 1.7, 'dense_search_s': 4.3, 'fusion_s': 0.2, 'reasonembed_s': 38.4, 'reasonembed_new_docs': 23}
+=== 12:48:22 R14B_DONE
+=== 12:48:22 attempt 1: reasonembed-4b --track 2 --conditions 2a_hist3qa__q+r+h --query-cond 2a_hist3qa --name 2ah_hybrid --hybrid ../research/runs_v13/hist/t2/hybrid.json --bm25 ../research/runs_v13/hist/t2/bm25/runs --dense ../research/runs_v13/hist/t2/dense/runs --save-scores ../research/runs_v13/scores/2ah_hybrid.json
+  [2a_hist3qa__q+r+h] 0 docs + 0 queries in 0s
+== t2 2a_hist3qa__q+r+h: none train 0.517 dev 0.4601 | best on train ('interp', 0.9): train 0.583 dev 0.5475 train boot {'diff': 0.066, 'ci95': [0.0406, 0.0911], 'p_le_0': 0.0}
+   none=0: train 0.517  dev 0.4601
+   top=10: train 0.5419  dev 0.498
+   top=20: train 0.5658  dev 0.5296
+   top=50: train 0.5811  dev 0.5438
+   interp=0.1: train 0.5265  dev 0.4709
+   interp=0.2: train 0.5319  dev 0.4846
+   interp=0.3: train 0.538  dev 0.4926
+   interp=0.4: train 0.5503  dev 0.5037
+   interp=0.5: train 0.5585  dev 0.5154
+   interp=0.6: train 0.5694  dev 0.5251
+   interp=0.7: train 0.575  dev 0.5344
+   interp=0.8: train 0.5818  dev 0.539
+   interp=0.9: train 0.583  dev 0.5475
+=== 12:48:30 attempt 1: qwen3-emb-4b --track 2 --conditions 2a_hist3qa__q+r+h --query-cond 2a_hist3qa --name 2ah_hybrid_q3e --hybrid ../research/runs_v13/hist/t2/hybrid.json --bm25 ../research/runs_v13/hist/t2/bm25/runs --dense ../research/runs_v13/hist/t2/dense/runs --save-scores ../research/runs_v13/scores/2ah_hybrid_q3e.json

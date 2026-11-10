@@ -1647,3 +1647,11 @@ RESULTS: new sections X (submission table with dev CIs), Z (rule 14), AA (A2), A
   `RETECO_report_2026-11-09.txt` (+ desktop copies).
 phase B running: `queue_1110e.sh` (rule 14b → rule 18 2a history → B3 cold run → rule 18 others), then `queue_1110f.sh`
   (B4: rule 13 for 1b).
+
+## 2026-11-10 12:45–12:49 — phase B, rule 14b result: the main pipeline on answer-free histories — not adopted
+command: `queue_1110e.sh`: `history.without_answers` applied to the train-subsample release (`a2/data_noans`, asserted 0
+  answers), `submit.py --variants 2a_history --split trainsub` (502 new LLM generations, 23 new ReasonEmbed documents,
+  3.5 min), then `t2_breakdown.py --split train --only-run-topics` (out `select/rule14b_train.json`).
+result (train subsample 330): M0 0.5220 vs H0q+RE 0.5168; M0 − H0q+RE +0.0052 [−0.0111, +0.0220] → **not adopted**
+  (lower bound < 0); the answer-free run stays `2a_history_q`. By group: first turns M0 0.559 vs 0.525 (M0 has the LLM),
+  recycled-gold turns 0.533 vs 0.537, new-gold 0.332 vs 0.332. Dev (seen earlier, not used): M0 0.4908 vs 0.4802.
