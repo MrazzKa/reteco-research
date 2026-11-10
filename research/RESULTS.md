@@ -14,7 +14,8 @@ Dev = official qrels over the `scripts/submit.py` files (identical to the resear
 
 | sub-task | run | role | how it is built | train | dev [95% CI] |
 | --- | --- | --- | --- | ---: | --- |
-| 1a | `UA_1a_main` | main | rule 6 (q+r+h), rule 8 (ReasonEmbed w 0.8) | 0.3078 | 0.3667 [0.3292, 0.4042] |
+| 1a | `UA_1a_main_p100` | main (rule 17) | rule 6 (q+r+h), rule 8 (ReasonEmbed w 0.8), rule 17 (ReasonEmbed over the top 100; w re-chosen: 0.8) | 0.3139 | 0.3672 [0.3302, 0.4046] |
+| 1a | `UA_1a_main` | fallback (rule-8 main, ReasonEmbed pool 50) | rule 6 (q+r+h), rule 8 (ReasonEmbed w 0.8) | 0.3078 | 0.3667 [0.3292, 0.4042] |
 | 1a | `UA_1a_noRE` | fallback (no ReasonEmbed) | rule 6 hybrid only | 0.2823 | 0.3258 [0.2886, 0.3637] |
 | 1b | `UA_1b_main` | main | rule 6, rule 8 (w 0.7) | 0.3754 | 0.4053 [0.3700, 0.4408] |
 | 1b | `UA_1b_noRE` | fallback (no ReasonEmbed) | rule 6 hybrid only | 0.3442 | 0.3505 [0.3126, 0.3884] |
@@ -22,7 +23,8 @@ Dev = official qrels over the `scripts/submit.py` files (identical to the resear
 | 2a | `UA_2a_history_q` | main when the history has no earlier answers (rule 14; chosen by 2a_auto) | rule 14 (H0q: answer-free history text, BM25 + bge-base hybrid z-score a 0.7, no LLM) + ReasonEmbed w 0.9 (rule-8 grid on train) | 0.5168 | 0.4802 [0.4557, 0.5044] |
 | 2a | `UA_2a_history` | fallback (rule-12 main without the rule-16 reranker) | rule 11 (Hb: LLM input = current question first + last <= 3 earlier Q/A turns from conversation_history; q = history text, current question first), rule 11 ReasonEmbed w 0.9, rule 12 (main 2a run) | 0.5830 | 0.5475 [0.5241, 0.5711] |
 | 2a | `UA_2a_maxp` | fallback 2 (current turn + MaxP) | rules 6, 7 (MaxP), 8 (w 0.8) | 0.4359 | 0.3901 [0.3659, 0.4147] |
-| 2a | `UA_2a_nomaxp` | fallback 1 (current turn, rule 10 main) | rule 6 (q+r+h), rule 10 (no MaxP), ReasonEmbed w 0.8 (rule-8 grid on train) | 0.4317 | 0.3779 [0.3533, 0.4028] |
+| 2a | `UA_2a_nomaxp_p100` | fallback (current turn, rules 10 + 17) | rule 6 (q+r+h), rule 10 (no MaxP), ReasonEmbed w 0.8 (rule-8 grid on train); rule 17 (ReasonEmbed over the top 100, w 0.8) | 0.4389 | 0.3801 [0.3555, 0.4047] |
+| 2a | `UA_2a_nomaxp` | fallback (current turn, rule 10; ReasonEmbed pool 50) | rule 6 (q+r+h), rule 10 (no MaxP), ReasonEmbed w 0.8 (rule-8 grid on train) | 0.4317 | 0.3779 [0.3533, 0.4028] |
 
 2a automation (`submit.py --variants 2a_auto`): per domain file, earlier answers present in `conversation_history` → `2a_history_rr`, otherwise → `2a_history_q`.
 
@@ -112,6 +114,9 @@ Share of all gold documents that the frozen hybrid ranks 51–100 (the most a po
 | system | pool 50 train / dev | pool 100 train / dev | train 100 − 50 | chosen |
 | --- | --- | --- | --- | --- |
 | 2a_history_main | 0.5830 / 0.5475 | 0.5880 / 0.5490 | +0.0050 [-0.0009, +0.0115] | 50 |
+| 1a | 0.3078 / 0.3667 | 0.3139 / 0.3672 | +0.0062 [+0.0012, +0.0121] | 100 |
+| 2a_current_B | 0.4317 / 0.3779 | 0.4389 / 0.3801 | +0.0072 [+0.0007, +0.0138] | 100 |
+| 1b | 0.3754 / 0.4053 | 0.3766 / 0.4044 | +0.0012 [-0.0032, +0.0058] | 50 |
 
 ## AE. Ablation by stage, per sub-task (B5; same topics for every stage)
 
@@ -119,43 +124,45 @@ Train = rule-8 subsample, dev = all topics; every stage on exactly the same topi
 
 ### 1a (train 350 / dev 519 topics)
 
-| stage | train [95% CI] | Δ train | dev [95% CI] | Δ dev |
-| --- | --- | --- | --- | --- |
-| BM25 (query) | 0.1041 [0.0821, 0.1270] |  | 0.1127 [0.0792, 0.1441] |  |
-| + dense: hybrid (query) | 0.2351 [0.2055, 0.2651] | +0.1310 [+0.1061, +0.1579] | 0.2834 [0.2539, 0.3142] | +0.1707 [+0.1367, +0.2075] |
-| + LLM reasoning (q+r+h hybrid) | 0.2823 [0.2515, 0.3145] | +0.0472 [+0.0300, +0.0644] | 0.3258 [0.2886, 0.3637] | +0.0425 [+0.0214, +0.0630] |
-| + ReasonEmbed top 50 (final) | 0.3078 [0.2764, 0.3401] | +0.0254 [+0.0073, +0.0448] | 0.3667 [0.3292, 0.4042] | +0.0409 [+0.0189, +0.0639] |
-| + LLM reranker (not adopted) | 0.3101 [0.2782, 0.3430] | +0.0023 [-0.0012, +0.0058] | 0.3705 [0.3332, 0.4080] | +0.0038 [+0.0000, +0.0078] |
+| stage | train [95% CI] | Δ train | dev [95% CI] | Δ dev | Δ against |
+| --- | --- | --- | --- | --- | --- |
+| BM25 (query) | 0.1041 [0.0821, 0.1270] |  | 0.1127 [0.0792, 0.1441] |  |  |
+| + dense: hybrid (query) | 0.2351 [0.2055, 0.2651] | +0.1310 [+0.1061, +0.1579] | 0.2834 [0.2539, 0.3142] | +0.1707 [+0.1367, +0.2075] | BM25 (query) |
+| + LLM reasoning (q+r+h hybrid) | 0.2823 [0.2515, 0.3145] | +0.0472 [+0.0300, +0.0644] | 0.3258 [0.2886, 0.3637] | +0.0425 [+0.0214, +0.0630] | + dense: hybrid (query) |
+| + ReasonEmbed top 50 | 0.3078 [0.2764, 0.3401] | +0.0254 [+0.0073, +0.0448] | 0.3667 [0.3292, 0.4042] | +0.0409 [+0.0189, +0.0639] | + LLM reasoning (q+r+h hybrid) |
+| ReasonEmbed top 100 (final, rule 17) | 0.3139 [0.2823, 0.3470] | +0.0062 [+0.0012, +0.0121] | 0.3672 [0.3302, 0.4046] | +0.0005 [-0.0023, +0.0031] | + ReasonEmbed top 50 |
+| + LLM reranker over top-50 system (not adopted) | 0.3101 [0.2782, 0.3430] | +0.0023 [-0.0012, +0.0058] | 0.3705 [0.3332, 0.4080] | +0.0038 [+0.0000, +0.0078] | + ReasonEmbed top 50 |
 
 ### 1b (train 376 / dev 1214 topics)
 
-| stage | train [95% CI] | Δ train | dev [95% CI] | Δ dev |
-| --- | --- | --- | --- | --- |
-| BM25 (query + step) | 0.1174 [0.0946, 0.1419] |  | 0.1181 [0.0909, 0.1462] |  |
-| + dense: hybrid | 0.2758 [0.2426, 0.3100] | +0.1583 [+0.1326, +0.1845] | 0.2865 [0.2508, 0.3220] | +0.1684 [+0.1379, +0.2014] |
-| + LLM reasoning (q+r+h hybrid) | 0.3442 [0.3083, 0.3805] | +0.0685 [+0.0479, +0.0897] | 0.3505 [0.3126, 0.3884] | +0.0640 [+0.0467, +0.0817] |
-| + ReasonEmbed top 50 (final) | 0.3754 [0.3398, 0.4116] | +0.0312 [+0.0120, +0.0507] | 0.4053 [0.3700, 0.4408] | +0.0548 [+0.0364, +0.0730] |
-| + LLM reranker (not adopted) | 0.3783 [0.3434, 0.4143] | +0.0029 [-0.0071, +0.0126] | 0.4166 [0.3839, 0.4500] | +0.0113 [+0.0003, +0.0234] |
+| stage | train [95% CI] | Δ train | dev [95% CI] | Δ dev | Δ against |
+| --- | --- | --- | --- | --- | --- |
+| BM25 (query + step) | 0.1174 [0.0946, 0.1419] |  | 0.1181 [0.0909, 0.1462] |  |  |
+| + dense: hybrid | 0.2758 [0.2426, 0.3100] | +0.1583 [+0.1326, +0.1845] | 0.2865 [0.2508, 0.3220] | +0.1684 [+0.1379, +0.2014] | BM25 (query + step) |
+| + LLM reasoning (q+r+h hybrid) | 0.3442 [0.3083, 0.3805] | +0.0685 [+0.0479, +0.0897] | 0.3505 [0.3126, 0.3884] | +0.0640 [+0.0467, +0.0817] | + dense: hybrid |
+| + ReasonEmbed top 50 (final) | 0.3754 [0.3398, 0.4116] | +0.0312 [+0.0120, +0.0507] | 0.4053 [0.3700, 0.4408] | +0.0548 [+0.0364, +0.0730] | + LLM reasoning (q+r+h hybrid) |
+| + LLM reranker (not adopted) | 0.3783 [0.3434, 0.4143] | +0.0029 [-0.0071, +0.0126] | 0.4166 [0.3839, 0.4500] | +0.0113 [+0.0003, +0.0234] | + ReasonEmbed top 50 (final) |
 
 ### 2a_current (train 330 / dev 858 topics)
 
-| stage | train [95% CI] | Δ train | dev [95% CI] | Δ dev |
-| --- | --- | --- | --- | --- |
-| BM25 (current turn) | 0.1772 [0.1485, 0.2073] |  | 0.1759 [0.1573, 0.1950] |  |
-| + dense: hybrid | 0.2828 [0.2477, 0.3192] | +0.1057 [+0.0771, +0.1343] | 0.2543 [0.2327, 0.2766] | +0.0784 [+0.0611, +0.0962] |
-| + LLM reasoning (q+r+h hybrid) | 0.3671 [0.3292, 0.4057] | +0.0843 [+0.0578, +0.1119] | 0.3100 [0.2869, 0.3329] | +0.0557 [+0.0406, +0.0705] |
-| + ReasonEmbed top 50 (final B) | 0.4317 [0.3931, 0.4697] | +0.0645 [+0.0430, +0.0857] | 0.3779 [0.3533, 0.4028] | +0.0679 [+0.0553, +0.0806] |
-| + LLM reranker (not adopted) | 0.4358 [0.3975, 0.4741] | +0.0041 [-0.0068, +0.0154] | 0.3853 [0.3601, 0.4106] | +0.0074 [+0.0006, +0.0141] |
+| stage | train [95% CI] | Δ train | dev [95% CI] | Δ dev | Δ against |
+| --- | --- | --- | --- | --- | --- |
+| BM25 (current turn) | 0.1772 [0.1485, 0.2073] |  | 0.1759 [0.1573, 0.1950] |  |  |
+| + dense: hybrid | 0.2828 [0.2477, 0.3192] | +0.1057 [+0.0771, +0.1343] | 0.2543 [0.2327, 0.2766] | +0.0784 [+0.0611, +0.0962] | BM25 (current turn) |
+| + LLM reasoning (q+r+h hybrid) | 0.3671 [0.3292, 0.4057] | +0.0843 [+0.0578, +0.1119] | 0.3100 [0.2869, 0.3329] | +0.0557 [+0.0406, +0.0705] | + dense: hybrid |
+| + ReasonEmbed top 50 | 0.4317 [0.3931, 0.4697] | +0.0645 [+0.0430, +0.0857] | 0.3779 [0.3533, 0.4028] | +0.0679 [+0.0553, +0.0806] | + LLM reasoning (q+r+h hybrid) |
+| ReasonEmbed top 100 (final B, rule 17) | 0.4389 [0.4008, 0.4769] | +0.0072 [+0.0007, +0.0138] | 0.3801 [0.3555, 0.4047] | +0.0022 [-0.0015, +0.0060] | + ReasonEmbed top 50 |
+| + LLM reranker over top-50 system (not adopted) | 0.4358 [0.3975, 0.4741] | +0.0041 [-0.0068, +0.0154] | 0.3853 [0.3601, 0.4106] | +0.0074 [+0.0006, +0.0141] | + ReasonEmbed top 50 |
 
 ### 2a_history (train 330 / dev 858 topics)
 
-| stage | train [95% CI] | Δ train | dev [95% CI] | Δ dev |
-| --- | --- | --- | --- | --- |
-| BM25 (history text) | 0.4025 [0.3656, 0.4389] |  | 0.4037 [0.3795, 0.4270] |  |
-| + dense: hybrid H0 | 0.4889 [0.4509, 0.5259] | +0.0864 [+0.0667, +0.1062] | 0.4352 [0.4119, 0.4588] | +0.0315 [+0.0161, +0.0466] |
-| + LLM with earlier Q/A (Hb hybrid) | 0.5170 [0.4785, 0.5544] | +0.0281 [+0.0036, +0.0536] | 0.4601 [0.4360, 0.4837] | +0.0250 [+0.0099, +0.0399] |
-| + ReasonEmbed top 50 | 0.5830 [0.5467, 0.6181] | +0.0660 [+0.0406, +0.0911] | 0.5475 [0.5241, 0.5711] | +0.0874 [+0.0723, +0.1020] |
-| + LLM reranker (final main) | 0.5999 [0.5639, 0.6347] | +0.0169 [+0.0039, +0.0307] | 0.5507 [0.5274, 0.5741] | +0.0032 [-0.0059, +0.0124] |
+| stage | train [95% CI] | Δ train | dev [95% CI] | Δ dev | Δ against |
+| --- | --- | --- | --- | --- | --- |
+| BM25 (history text) | 0.4025 [0.3656, 0.4389] |  | 0.4037 [0.3795, 0.4270] |  |  |
+| + dense: hybrid H0 | 0.4889 [0.4509, 0.5259] | +0.0864 [+0.0667, +0.1062] | 0.4352 [0.4119, 0.4588] | +0.0315 [+0.0161, +0.0466] | BM25 (history text) |
+| + LLM with earlier Q/A (Hb hybrid) | 0.5170 [0.4785, 0.5544] | +0.0281 [+0.0036, +0.0536] | 0.4601 [0.4360, 0.4837] | +0.0250 [+0.0099, +0.0399] | + dense: hybrid H0 |
+| + ReasonEmbed top 50 | 0.5830 [0.5467, 0.6181] | +0.0660 [+0.0406, +0.0911] | 0.5475 [0.5241, 0.5711] | +0.0874 [+0.0723, +0.1020] | + LLM with earlier Q/A (Hb hybrid) |
+| + LLM reranker (final main) | 0.5999 [0.5639, 0.6347] | +0.0169 [+0.0039, +0.0307] | 0.5507 [0.5274, 0.5741] | +0.0032 [-0.0059, +0.0124] | + ReasonEmbed top 50 |
 
 ## AF. Compute: models, revisions, throughput (B5)
 
@@ -556,6 +563,8 @@ Every year weight lowers train nDCG@10, monotonically in w (full grid in `runs_v
 | `1b_query+step__q+r+h` | 0.3442 | 0.3505 | `interp=0.7` | 0.3754 | 0.4053 | +0.0312 [+0.0120, +0.0507] | 13,608 | 2049 |
 | `1a_rerun` | 0.2823 | 0.3258 | `interp=0.8` | 0.3078 | 0.3667 | +0.0254 [+0.0073, +0.0448] | 0 | 0 |
 | `1b_rerun` | 0.3442 | 0.3505 | `interp=0.7` | 0.3754 | 0.4053 | +0.0312 [+0.0120, +0.0507] | 0 | 0 |
+| `1a_rerun_p100` | 0.2823 | 0.3258 | `interp=0.8` | 0.3139 | 0.3672 | +0.0316 [+0.0131, +0.0511] | 19,796 | 2772 |
+| `1b_rerun_p100` | 0.3442 | 0.3505 | `interp=0.7` | 0.3766 | 0.4044 | +0.0324 [+0.0129, +0.0523] | 16,290 | 2153 |
 | `2a_current__q+r+h` | 0.3828 | 0.3319 | `interp=0.8` | 0.4359 | 0.3901 | +0.0531 [+0.0312, +0.0749] | 33,937 | 4407 |
 | `2a_maxp` | 0.3828 | 0.3319 | `interp=0.8` | 0.4359 | 0.3901 | +0.0531 [+0.0312, +0.0749] | 0 | 80 |
 | `2a_nomaxp` | 0.3671 | 0.3100 | `interp=0.8` | 0.4317 | 0.3779 | +0.0645 [+0.0430, +0.0857] | 0 | 0 |
@@ -565,6 +574,7 @@ Every year weight lowers train nDCG@10, monotonically in w (full grid in `runs_v
 | `2a_cur_q` | 0.2828 | 0.2543 | `interp=0.9` | 0.3967 | 0.3591 | +0.1139 [+0.0890, +0.1383] | 9,136 | 820 |
 | `2ah_h0` | 0.4889 | 0.4352 | `interp=0.9` | 0.5804 | 0.5377 | +0.0916 [+0.0644, +0.1196] | 1,093 | 176 |
 | `2ah_hybrid_p100` | 0.5170 | 0.4601 | `interp=0.9` | 0.5880 | 0.5490 | +0.0710 [+0.0451, +0.0966] | 8,152 | 958 |
+| `2a_nomaxp_p100` | 0.3671 | 0.3100 | `interp=0.8` | 0.4389 | 0.3801 | +0.0718 [+0.0488, +0.0940] | 8,948 | 951 |
 
 Track 2 by source (dev): BRIGHT 0.4099 → 0.4686; StackExchange 0.2384 → 0.2960. Unlike the query expansion (section O), the embedder helps both sources.
 

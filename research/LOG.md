@@ -1621,3 +1621,29 @@ result (train sub / dev): pool 50 (interp 0.8) 0.4317 / 0.3779; pool 100 (interp
 submission: `2a_nomaxp_p100` replaces `2a_nomaxp` as the current-turn fallback (both kept in the config).
 dev check: `submit.py --variants 2a_nomaxp_p100 --split dev` (1 min, 0 new documents) → official **0.3801 = research
   0.3801**; format_checker exit 0 (11 files).
+
+## 2026-11-10 12:08–12:44 — rule 17 result, 1b: pool 100 not adopted; rule 17 summary
+command: `queue_1110d.sh` → `reason_rerank.py --pool 100 --name 1b_rerun_p100` (16,290 new documents, 36 min).
+result (train sub / dev): pool 50 (interp 0.7) 0.3754 / 0.4053; pool 100 (interp 0.7) 0.3766 / 0.4044.
+  train 100 − 50 +0.0012 [−0.0032, +0.0058] → **not adopted**. Dev once: −0.0009 [−0.0048, +0.0028].
+rule 17 summary (train gain of pool 100 → decision; dev gain): 1a +0.0062 → adopted (+0.0005); 2a current B +0.0072 →
+  adopted for the fallback run (+0.0022); 2a history +0.0050 [−0.0009, …] → not adopted (+0.0015); 1b +0.0012 → not
+  (−0.0009). Evaluated without the rule-16 reranker. Actual GPU time 115 min (estimate 2 h).
+
+## 2026-11-10 12:50 — A6: end of phase A (started 08:09; 4 h 41 min of the 10 h budget)
+submission systems after phase A (dev nDCG@10 [95% CI], all reproduced exactly by `submit.py` + official scorer;
+  `final_1110.py` → `runs_v13/final_1110.json`, RESULTS X):
+  1a main `1a_p100` 0.3672 [0.3302, 0.4046] (rule 17) — fallbacks `1a` 0.3667, `1a_noRE` 0.3258
+  1b main `1b` 0.4053 [0.3700, 0.4408] — fallback `1b_noRE` 0.3505
+  2a `2a_auto`: with earlier answers → `2a_history_rr` 0.5507 [0.5274, 0.5741] (rules 12 + 16); without →
+     `2a_history_q` 0.4802 [0.4557, 0.5044] (rule 14) — fallbacks `2a_history` 0.5475, `2a_nomaxp_p100` 0.3801,
+     `2a_maxp` 0.3901, `2a_nomaxp` 0.3779.
+estimates vs actual: A0 10 min / 5 min · A1 ~2 h / 1 h 15 min (code + retrieval + 2 ReasonEmbed runs + synthetic check)
+  · A2 ~1.5 h / 35 min · A3 ~1 h / 15 min · A4 3–4 h / 1 h 25 min (0.6B instead of 4B) · A5 CPU 15 min / 1 min, GPU
+  ~2 h / 1 h 55 min · A6 40 min.
+RESULTS: new sections X (submission table with dev CIs), Z (rule 14), AA (A2), AB (rule 15), AC (rule 16), AD (rule
+  17), AE (ablation by stage, B5), AF (compute, B5) via `results_1109.py`; README: status, submission, 2a automation,
+  history parser. Notes outside the repo: `~/semeval-reteco/notes/email_steven_update_2026-11-09.txt` and
+  `RETECO_report_2026-11-09.txt` (+ desktop copies).
+phase B running: `queue_1110e.sh` (rule 14b → rule 18 2a history → B3 cold run → rule 18 others), then `queue_1110f.sh`
+  (B4: rule 13 for 1b).

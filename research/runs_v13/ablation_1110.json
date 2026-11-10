@@ -400,7 +400,7 @@
     }
    },
    {
-    "stage": "+ ReasonEmbed top 50 (final B)",
+    "stage": "+ ReasonEmbed top 50",
     "delta_vs": "+ LLM reasoning (q+r+h hybrid)",
     "train": 0.4317,
     "train_ci95": [
@@ -430,8 +430,38 @@
     }
    },
    {
-    "stage": "+ LLM reranker (not adopted)",
-    "delta_vs": "+ ReasonEmbed top 50 (final B)",
+    "stage": "ReasonEmbed top 100 (final B, rule 17)",
+    "delta_vs": "+ ReasonEmbed top 50",
+    "train": 0.4389,
+    "train_ci95": [
+     0.4008,
+     0.4769
+    ],
+    "train_minus_prev": {
+     "diff": 0.0072,
+     "ci95": [
+      0.0007,
+      0.0138
+     ],
+     "p_le_0": 0.0155
+    },
+    "dev": 0.3801,
+    "dev_ci95": [
+     0.3555,
+     0.4047
+    ],
+    "dev_minus_prev": {
+     "diff": 0.0022,
+     "ci95": [
+      -0.0015,
+      0.006
+     ],
+     "p_le_0": 0.1217
+    }
+   },
+   {
+    "stage": "+ LLM reranker over top-50 system (not adopted)",
+    "delta_vs": "+ ReasonEmbed top 50",
     "train": 0.4358,
     "train_ci95": [
      0.3975,

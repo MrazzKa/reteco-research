@@ -3,7 +3,7 @@
   {
    "variant": "1a",
    "run_id": "UA_1a_main",
-   "role": "main",
+   "role": "fallback (rule-8 main, ReasonEmbed pool 50)",
    "track": 1,
    "query": "1a",
    "source": "rule 6 (q+r+h), rule 8 (ReasonEmbed w 0.8)",
@@ -51,7 +51,7 @@
   {
    "variant": "2a_nomaxp",
    "run_id": "UA_2a_nomaxp",
-   "role": "fallback 1 (current turn, rule 10 main)",
+   "role": "fallback (current turn, rule 10; ReasonEmbed pool 50)",
    "track": 2,
    "query": "2a_current",
    "source": "rule 6 (q+r+h), rule 10 (no MaxP), ReasonEmbed w 0.8 (rule-8 grid on train)",
@@ -143,15 +143,48 @@
    ],
    "dev_research": 0.5507,
    "topics": 858
+  },
+  {
+   "variant": "1a_p100",
+   "run_id": "UA_1a_main_p100",
+   "role": "main (rule 17)",
+   "track": 1,
+   "query": "1a",
+   "source": "rule 6 (q+r+h), rule 8 (ReasonEmbed w 0.8), rule 17 (ReasonEmbed over the top 100; w re-chosen: 0.8)",
+   "train": 0.3139,
+   "dev": 0.3672,
+   "dev_ci95": [
+    0.3302,
+    0.4046
+   ],
+   "dev_research": 0.3672,
+   "topics": 519
+  },
+  {
+   "variant": "2a_nomaxp_p100",
+   "run_id": "UA_2a_nomaxp_p100",
+   "role": "fallback (current turn, rules 10 + 17)",
+   "track": 2,
+   "query": "2a_current",
+   "source": "rule 6 (q+r+h), rule 10 (no MaxP), ReasonEmbed w 0.8 (rule-8 grid on train); rule 17 (ReasonEmbed over the top 100, w 0.8)",
+   "train": 0.4389,
+   "dev": 0.3801,
+   "dev_ci95": [
+    0.3555,
+    0.4047
+   ],
+   "dev_research": 0.3801,
+   "topics": 858
   }
  ],
  "main": {
-  "1a": "1a",
+  "1a": "1a_p100",
   "1b": "1b",
   "2a": "2a_history_rr"
  },
  "fallbacks": {
   "1a": [
+   "1a",
    "1a_noRE"
   ],
   "1b": [
@@ -160,6 +193,7 @@
   "2a": [
    "2a_history",
    "2a_history_q",
+   "2a_nomaxp_p100",
    "2a_nomaxp",
    "2a_maxp"
   ]

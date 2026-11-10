@@ -79,3 +79,33 @@
 2a_current_B {"p50": {"train": 0.4317, "dev": 0.3779}, "p100": {"train": 0.4389, "dev": 0.3801}, "train_boot": {"diff": 0.0072, "ci95": [0.0007, 0.0138], "p_le_0": 0.0155}, "dev_boot": {"diff": 0.0022, "ci95": [-0.0015, 0.006], "p_le_0": 0.1217}, "weights": {"p50": "interp=0.8", "p100": "interp=0.8"}, "chosen": "100"}
 === 12:08:04 R17_2AC_DONE
 === 12:08:04 attempt 1: --track 1 --conditions 1b_query+step__q+r+h --query-cond 1b_query+step --name 1b_rerun_p100 --hybrid ../research/runs_v13/qexp/t1/hybrid_1b.json --bm25 ../research/runs_v13/qexp/t1/bm25/runs --dense ../research/runs_v13/qexp/t1/dense/runs --save-scores ../research/runs_v13/scores/1b_rerun_p100.json
+  [1b_query+step__q+r+h] docs 2000/16290 (279s)
+  [1b_query+step__q+r+h] docs 4000/16290 (512s)
+  [1b_query+step__q+r+h] docs 6000/16290 (783s)
+  [1b_query+step__q+r+h] docs 8000/16290 (1043s)
+  [1b_query+step__q+r+h] docs 10000/16290 (1353s)
+  [1b_query+step__q+r+h] docs 12000/16290 (1609s)
+  [1b_query+step__q+r+h] docs 14000/16290 (1861s)
+  [1b_query+step__q+r+h] docs 16000/16290 (2117s)
+  [1b_query+step__q+r+h] docs 16290/16290 (2153s)
+  [1b_query+step__q+r+h] 16290 docs + 0 queries in 2153s
+== t1 1b_query+step__q+r+h: none train 0.3442 dev 0.3505 | best on train ('interp', 0.7): train 0.3766 dev 0.4044 train boot {'diff': 0.0324, 'ci95': [0.0129, 0.0523], 'p_le_0': 0.0006}
+   none=0: train 0.3442  dev 0.3505
+   top=10: train 0.3389  dev 0.3513
+   top=20: train 0.3486  dev 0.38
+   top=50: train 0.3481  dev 0.3927
+   top=100: train 0.3419  dev 0.3884
+   interp=0.1: train 0.3515  dev 0.3587
+   interp=0.2: train 0.3551  dev 0.3688
+   interp=0.3: train 0.3566  dev 0.3781
+   interp=0.4: train 0.3633  dev 0.3854
+   interp=0.5: train 0.3715  dev 0.3935
+   interp=0.6: train 0.3713  dev 0.4046
+   interp=0.7: train 0.3766  dev 0.4044
+   interp=0.8: train 0.3752  dev 0.4084
+   interp=0.9: train 0.3649  dev 0.4027
+2a_history_main {"p50": {"train": 0.583, "dev": 0.5475}, "p100": {"train": 0.588, "dev": 0.549}, "train_boot": {"diff": 0.005, "ci95": [-0.0009, 0.0115], "p_le_0": 0.0519}, "dev_boot": {"diff": 0.0015, "ci95": [-0.0016, 0.0045], "p_le_0": 0.1736}, "weights": {"p50": "interp=0.9", "p100": "interp=0.9"}, "chosen": "50"}
+1a {"p50": {"train": 0.3078, "dev": 0.3667}, "p100": {"train": 0.3139, "dev": 0.3672}, "train_boot": {"diff": 0.0062, "ci95": [0.0012, 0.0121], "p_le_0": 0.0064}, "dev_boot": {"diff": 0.0005, "ci95": [-0.0023, 0.0031], "p_le_0": 0.3597}, "weights": {"p50": "interp=0.8", "p100": "interp=0.8"}, "chosen": "100"}
+2a_current_B {"p50": {"train": 0.4317, "dev": 0.3779}, "p100": {"train": 0.4389, "dev": 0.3801}, "train_boot": {"diff": 0.0072, "ci95": [0.0007, 0.0138], "p_le_0": 0.0155}, "dev_boot": {"diff": 0.0022, "ci95": [-0.0015, 0.006], "p_le_0": 0.1217}, "weights": {"p50": "interp=0.8", "p100": "interp=0.8"}, "chosen": "100"}
+1b {"p50": {"train": 0.3754, "dev": 0.4053}, "p100": {"train": 0.3766, "dev": 0.4044}, "train_boot": {"diff": 0.0012, "ci95": [-0.0032, 0.0058], "p_le_0": 0.2952}, "dev_boot": {"diff": -0.0009, "ci95": [-0.0048, 0.0028], "p_le_0": 0.6702}, "weights": {"p50": "interp=0.7", "p100": "interp=0.7"}, "chosen": "50"}
+=== 12:44:20 ALLDONE
