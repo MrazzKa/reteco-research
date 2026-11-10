@@ -7,6 +7,20 @@ D=../../reteco_data_v11; K=../../RETECO/starter_kit; R=../research/runs_v13; E=.
 PY=~/semeval-reteco/.venv/bin/python; LPY=~/semeval-reteco/.venv-llm/bin/python
 step() { echo "=== $(date +%H:%M:%S) $*"; "$@" 2>&1 | grep --line-buffered -vE "Warning|Loading weights|warn\(|^\s+(train|dev)  "; echo "=== exit ${PIPESTATUS[0]}"; }
 while ! grep -q "ALLDONE" $R/logs/queue_1110g.log; do sleep 30; done
+# B3b: LLM nondeterminism on dev (fresh LLM cache, shared ReasonEmbed / reranker caches)
+N=$R/nondet; mkdir -p $N
+$PY - <<'PYEOF'
+import json
+c = json.load(open("../configs/submission.json"))
+for v in c["variants"].values():
+    if "llm" in v:
+        v["llm"]["cache"] = f"research/runs_v13/nondet/llm/t{v['track']}"
+json.dump(c, open("../research/runs_v13/nondet/submission_freshllm.json", "w"), indent=1)
+PYEOF
+step $PY submit.py --config $N/submission_freshllm.json --variants 1a_p100 1b --data $D --split dev --out $N/sub
+step $PY submit.py --config $N/submission_freshllm.json --variants 2a_history_rr 2a_nomaxp_p100 --data $D --split dev --out $N/sub
+step $PY nondet_report.py --runs $R --data $D --kit $K
+echo "=== $(date +%H:%M:%S) B3B_DONE"
 C=1b_query+step
 for u in 0.75 0.65 0.55; do
   echo "=== $(date +%H:%M:%S) gen gpu-util $u"

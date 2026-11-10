@@ -1,2 +1,73 @@
 {"t1_topics": 58, "t1_steps": 142, "t2_turns": 92, "t2_turns_with_answers_after": 68}
 wrote ../research/runs_v13/cold/submission_cold.json; caches under /home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache
+[reason/bodies] 36 inputs, 36 unique, 36 to generate
+[hyde/bodies] 36 inputs, 36 unique, 36 to generate
+[pregenerate] {'llm_reason_generate_s': 33.9, 'llm_reason_generated': 36, 'llm_hyde_generate_s': 31.8, 'llm_hyde_generated': 36, 'pregenerate_total_s': 65.75207495689392}
+[1a_p100] 13 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 5.9, 'bm25_search_s': 0.1, 'dense_index_load_s': 0.1, 'dense_search_s': 0.7, 'fusion_s': 0.0, 'reasonembed_s': 182.3, 'reasonembed_new_docs': 1110}
+[1a] 13 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 5.8, 'bm25_search_s': 0.1, 'dense_index_load_s': 0.1, 'dense_search_s': 0.3, 'fusion_s': 0.0, 'reasonembed_s': 0.0, 'reasonembed_new_docs': 0}
+[1b] 23 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 5.7, 'bm25_search_s': 0.2, 'dense_index_load_s': 0.1, 'dense_search_s': 0.4, 'fusion_s': 0.0, 'reasonembed_s': 22.0, 'reasonembed_new_docs': 51}
+[1a_noRE] 13 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 5.8, 'bm25_search_s': 0.1, 'dense_index_load_s': 0.1, 'dense_search_s': 0.3, 'fusion_s': 0.0, 'reasonembed_s': 0.0, 'reasonembed_new_docs': 0}
+[1b_noRE] 23 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 5.7, 'bm25_search_s': 0.2, 'dense_index_load_s': 0.1, 'dense_search_s': 0.4, 'fusion_s': 0.0, 'reasonembed_s': 0.0, 'reasonembed_new_docs': 0}
+[2a_auto] drones: 2a_history_rr  ({"turns": 38, "normalized_differs": 0, "turns_ge2": 27, "turns_ge2_with_answer": 27, "qa_pairs": 49, "empty_answers": 0, "summary_questions": 0, "unparsed_lines": 0, "empty_history": 0})
+[2a_auto] politics: 2a_history_rr  ({"turns": 54, "normalized_differs": 0, "turns_ge2": 41, "turns_ge2_with_answer": 41, "qa_pairs": 92, "empty_answers": 0, "summary_questions": 0, "unparsed_lines": 0, "empty_history": 0})
+[reason/bodies] 184 inputs, 184 unique, 184 to generate
+[hyde/bodies] 184 inputs, 184 unique, 184 to generate
+[pregenerate] {'llm_reason_generate_s': 58.9, 'llm_reason_generated': 184, 'llm_hyde_generate_s': 54.4, 'llm_hyde_generated': 184, 'pregenerate_total_s': 113.24713969230652}
+[2a_history] 92 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 2.3, 'bm25_search_s': 0.9, 'dense_index_load_s': 0.1, 'dense_search_s': 1.3, 'fusion_s': 0.0, 'reasonembed_s': 341.3, 'reasonembed_new_docs': 1857}
+[2a_nomaxp] 92 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 2.3, 'bm25_search_s': 0.5, 'dense_index_load_s': 0.1, 'dense_search_s': 0.5, 'fusion_s': 0.0, 'reasonembed_s': 163.0, 'reasonembed_new_docs': 974}
+[2a_maxp] 92 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 2.3, 'bm25_search_s': 0.6, 'dense_index_load_s': 0.1, 'dense_search_s': 0.5, 'fusion_s': 0.0, 'reasonembed_s': 20.6, 'reasonembed_new_docs': 41}
+[2a_history_rr] 92 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 2.4, 'bm25_search_s': 0.8, 'dense_index_load_s': 0.1, 'dense_search_s': 1.2, 'fusion_s': 0.0, 'reasonembed_s': 0.0, 'reasonembed_new_docs': 0, 'llm_rerank_s': 101.6, 'llm_rerank_new_pairs': 1840}
+[2a_history_q] 92 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 2.3, 'bm25_search_s': 0.2, 'dense_index_load_s': 0.1, 'dense_search_s': 0.3, 'fusion_s': 0.0, 'reasonembed_s': 55.3, 'reasonembed_new_docs': 282}
+[2a_auto] domains per run: {'2a_history_rr': 2, '2a_history_q': 0}; files in ../research/runs_v13/cold/sub/2a_auto
+=== 14:16:54 COLD track1 315 s, track2 825 s
+{
+ "about": "Synthetic test release (dev topics of iota, quant / drones, politics; gold removed), every cache empty (LLM generations, ReasonEmbed vectors, reranker scores) in research/runs_v13/cold; corpus artefacts (dense corpus index, MaxP passages) prebuilt. Wall time = sum of the stage timings of submit.py; LLM time includes ~2 min of vLLM start-up per prompt and variant that needs generations.",
+ "totals_measured": {
+  "track1_s": 315,
+  "track2_s": 825
+ },
+ "per_subtask_s": {
+  "1a": 201.70000000000002,
+  "1b": 34.8,
+  "2a": 700.7
+ },
+ "topics_per_subtask": {
+  "1a": 13,
+  "1b": 23,
+  "2a": 92
+ },
+ "scaled_full_test_s": {
+  "1a": 5430.384615384616,
+  "1b": 1240.695652173913,
+  "2a": 1523.2608695652175
+ },
+ "estimate": "Scaled to the full test by topics per sub-task (sum over all variants of the sub-task): 1a \u2248 91 min, 1b \u2248 21 min, 2a \u2248 25 min; total \u2248 2.3 h (+ BM25 indexing is per domain, not per topic, so this over-counts it for Track 1)."
+}
+1a (iota, quant) 13 6 reasonembed_new_docs 0
+1a_noRE (iota, quant) 13 6 reasonembed_new_docs 0
+1a_p100 (iota, quant) 13 189 reasonembed_new_docs 1110
+1b (iota, quant) 23 28 reasonembed_new_docs 51
+1b_noRE (iota, quant) 23 6 reasonembed_new_docs 0
+2a_history (drones, politics) 92 346 reasonembed_new_docs 1857
+2a_history_q (drones, politics) 92 58 reasonembed_new_docs 282
+2a_history_rr (drones, politics) 92 106 reasonembed_new_docs 0, llm_rerank_new_pairs 1840
+2a_maxp (drones, politics) 92 24 reasonembed_new_docs 41
+2a_nomaxp (drones, politics) 92 166 reasonembed_new_docs 974
+=== 14:16:54 B3_DONE
+=== 14:16:54 attempt 1: reasonembed-4b --track 1 --conditions 1a__q+r+h --query-cond 1a --name 1a_rerun --hybrid ../research/runs_v13/qexp/t1/hybrid_1a.json --bm25 ../research/runs_v13/qexp/t1/bm25/runs --dense ../research/runs_v13/qexp/t1/dense/runs --save-scores ../research/runs_v13/scores/1a_rerun.json
+  [1a__q+r+h] 0 docs + 0 queries in 0s
+== t1 1a__q+r+h: none train 0.2823 dev 0.3258 | best on train ('interp', 0.8): train 0.3078 dev 0.3667 train boot {'diff': 0.0254, 'ci95': [0.0073, 0.0448], 'p_le_0': 0.0029}
+   none=0: train 0.2823  dev 0.3258
+   top=10: train 0.2736  dev 0.3275
+   top=20: train 0.2888  dev 0.3431
+   top=50: train 0.2894  dev 0.3539
+   interp=0.1: train 0.2867  dev 0.3315
+   interp=0.2: train 0.2882  dev 0.3383
+   interp=0.3: train 0.2951  dev 0.3442
+   interp=0.4: train 0.2992  dev 0.3496
+   interp=0.5: train 0.3026  dev 0.3553
+   interp=0.6: train 0.3021  dev 0.3602
+   interp=0.7: train 0.3072  dev 0.3646
+   interp=0.8: train 0.3078  dev 0.3667
+   interp=0.9: train 0.3033  dev 0.3633
+=== 14:17:00 attempt 1: qwen3-emb-4b --track 1 --conditions 1a__q+r+h --query-cond 1a --name 1a_rerun_q3e --hybrid ../research/runs_v13/qexp/t1/hybrid_1a.json --bm25 ../research/runs_v13/qexp/t1/bm25/runs --dense ../research/runs_v13/qexp/t1/dense/runs --save-scores ../research/runs_v13/scores/1a_rerun_q3e.json

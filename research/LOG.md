@@ -1679,3 +1679,29 @@ fix (`submit.py`): `pregenerate()` runs every LLM generation of every requested 
   --variants 2a_history_rr 2a_nomaxp_p100 --split dev` gives byte-identical run files.
 the stopped queue (`queue_1110e.sh`, its submit.py and the orphan vLLM engine) was killed by PID; B3 re-runs from
   empty caches in `queue_1110g.sh` (then rule 18 for 1a, 2a current, 1b); `queue_1110f.sh` (B4) now waits for g.
+
+## 2026-11-10 14:01–14:17 — B3 result: cold run on a slice; LLM generations are not reproducible
+command: `queue_1110g.sh`: `make_test_release.py --domains iota quant drones politics` (gold removed), `cold_config.py`
+  (LLM / ReasonEmbed / reranker caches under `runs_v13/cold/cache`, empty), `submit.py` Track 1 (`1a_p100 1a 1b 1a_noRE
+  1b_noRE`, iota + quant) and Track 2 (`2a_auto 2a_history 2a_nomaxp 2a_maxp`, drones + politics), `cold_report.py`.
+timing (wall): Track 1 315 s for 13 queries / 23 steps (pre-generation 66 s incl. two vLLM starts; ReasonEmbed 1,110 +
+  51 new documents 204 s; BM25 indexing ~6 s per variant for these two small domains); Track 2 825 s for 92 turns
+  (pre-generation 113 s; ReasonEmbed 1,857 + 974 + 41 + 282 new documents ≈ 580 s; reranker 1,840 pairs 102 s incl.
+  load). 2a_auto chose `2a_history_rr` for both domains. Scaled by topics (over-counts fixed costs): 1a ≈ 91 min,
+  1b ≈ 21 min, 2a ≈ 25 min, ≈ 2.3 h for the full test (RESULTS U estimate on 02.11: 1.75–2 h). Track-1 BM25 indexing of
+  the large domains (~4–5 min per variant for all 13) comes on top.
+finding (reproducibility): cold vs warm run files differ for every variant that uses the LLM. Identical generations
+  (same input, same model, temperature 0, seed 0): Track 1 reason 5/36, hyde 6/36; Track 2 reason 38/184, hyde 36/184 —
+  vLLM output at temperature 0 depends on the batch composition (cold = only these inputs; warm = generated with all
+  train+dev inputs). Per-domain nDCG@10 cold − warm: 1a_p100 iota +0.038, quant +0.017; 1b iota −0.014; 1b_noRE quant
+  +0.032; 2a_history_rr drones +0.004, politics +0.006; 2a_nomaxp drones +0.006. The LLM-free run `2a_history_q` is
+  nearly identical (top 10 identical for 37/38 and 51/54 turns; ReasonEmbed batch effects only).
+  So "submit.py reproduces dev exactly" holds with the cached generations only; a fresh run is a different draw.
+
+## 2026-11-10 14:25 — B3b (analysis, no choice; written before running): size of the LLM-nondeterminism noise on dev
+design: config copy whose LLM cache is a new empty folder (ReasonEmbed and reranker caches shared — vectors are
+  keyed by document id, scores by text, so only the LLM varies, plus encoding of documents that newly enter the
+  pools); `submit.py --split dev` for `1a_p100 1b 2a_history_rr 2a_nomaxp_p100` (all dev topics, one pre-generation
+  per LLM config); report per variant the official macro of the fresh draw vs the cached one, the paired bootstrap
+  difference, and the share of identical generations. Purpose: compare the run-to-run noise with the +0.005 margin
+  of the rules and with the dev differences reported so far. Runs in `queue_1110f.sh` before B4.

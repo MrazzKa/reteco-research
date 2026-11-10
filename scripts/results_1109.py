@@ -159,6 +159,16 @@ def week7(root):
         for r in cold["rows"]:
             L.append(f"| {r['part']} | {r['topics']} | {r['wall_s']:.0f} s | {r['per_topic_s']:.2f} s | {r.get('notes', '')} |")
         L += ["", cold.get("estimate", ""), ""]
+    nd = jload(os.path.join(R, "nondet", "report.json"))
+    if nd:
+        L += ["## AI. Run-to-run noise from LLM nondeterminism on dev (B3b, analysis)", "",
+              "vLLM at temperature 0 is not batch-invariant: a fresh generation of the same inputs differs. Dev runs rebuilt "
+              "with an empty LLM cache (ReasonEmbed and reranker caches shared) against the cached runs.", "",
+              "| variant | cached (reported) | fresh draw | fresh − cached [95% CI] |", "| --- | ---: | ---: | --- |"]
+        for v, x in nd["variants"].items():
+            L.append(f"| {v} | {f4(x['cached'])} | {f4(x['fresh'])} | {ci(x['fresh_minus_cached'])} |")
+        L += ["", "Identical generations (fresh vs cached): " + ", ".join(
+            f"{k} {x['identical']}/{x['fresh']}" for k, x in nd["generations"].items()) + ".", ""]
     cp = jload(os.path.join(R, "compute_1110.json"))
     if cp:
         L += ["## AF. Compute: models, revisions, throughput (B5)", "", cp["machine"] + ".", "",

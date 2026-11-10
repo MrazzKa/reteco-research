@@ -164,6 +164,40 @@ Train = rule-8 subsample, dev = all topics; every stage on exactly the same topi
 | + ReasonEmbed top 50 | 0.5830 [0.5467, 0.6181] | +0.0660 [+0.0406, +0.0911] | 0.5475 [0.5241, 0.5711] | +0.0874 [+0.0723, +0.1020] | + LLM with earlier Q/A (Hb hybrid) |
 | + LLM reranker (final main) | 0.5999 [0.5639, 0.6347] | +0.0169 [+0.0039, +0.0307] | 0.5507 [0.5274, 0.5741] | +0.0032 [-0.0059, +0.0124] | + ReasonEmbed top 50 |
 
+### Rule 14b (phase B): the main pipeline on answer-free histories vs the rule-14 run, train subsample
+
+| system | macro | first turn | recycled gold | new gold | T1 | T2 | T3 | T4 | T5+ | vs first row |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| H0q+RE (rule 14) | 0.5168 | 0.5250 (79) | 0.5371 (223) | 0.3318 (28) | 0.5250 (79) | 0.4857 (80) | 0.5024 (69) | 0.5688 (46) | 0.5247 (56) |  |
+| M0 main pipeline, no answers | 0.5220 | 0.5593 (79) | 0.5327 (223) | 0.3315 (28) | 0.5593 (79) | 0.4839 (80) | 0.5231 (69) | 0.5423 (46) | 0.5056 (56) | +0.0052 [-0.0111, +0.0220] |
+
+## AG. Second reasoning embedder: Qwen3-Embedding-4B, alone and averaged with ReasonEmbed (rule 18, phase B)
+
+Same top-50 pool as the current system; E = mean of z(ReasonEmbed) and z(Qwen3-Embedding) per topic; way (top-N or interpolation weight) chosen on the train subsample. ReasonIR-8B was excluded (training positives drawn from the BRIGHT datastore; LOG 2026-11-10 09:58).
+
+| condition | current (ReasonEmbed) train / dev | Qwen3-Emb alone: way, train / dev | ensemble: way, train / dev | ensemble − current, train | dev | adopted |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2a_history | 0.5830 / 0.5475 | interp=0.5: 0.5335 / 0.4789 | interp=0.9: 0.5683 / 0.5242 | -0.0147 [-0.0313, +0.0014] | -0.0233 [-0.0352, -0.0111] | False |
+
+## AH. Cold run on a slice of a synthetic test release (B3, phase B)
+
+Synthetic test release (dev topics of iota, quant / drones, politics; gold removed), every cache empty (LLM generations, ReasonEmbed vectors, reranker scores) in research/runs_v13/cold; corpus artefacts (dense corpus index, MaxP passages) prebuilt. Wall time = sum of the stage timings of submit.py; LLM time includes ~2 min of vLLM start-up per prompt and variant that needs generations.
+
+| part | topics | wall time | per topic | notes |
+| --- | ---: | ---: | ---: | --- |
+| 1a (iota, quant) | 13 | 6 s | 0.48 s | reasonembed_new_docs 0 |
+| 1a_noRE (iota, quant) | 13 | 6 s | 0.48 s | reasonembed_new_docs 0 |
+| 1a_p100 (iota, quant) | 13 | 189 s | 14.55 s | reasonembed_new_docs 1110 |
+| 1b (iota, quant) | 23 | 28 s | 1.23 s | reasonembed_new_docs 51 |
+| 1b_noRE (iota, quant) | 23 | 6 s | 0.28 s | reasonembed_new_docs 0 |
+| 2a_history (drones, politics) | 92 | 346 s | 3.76 s | reasonembed_new_docs 1857 |
+| 2a_history_q (drones, politics) | 92 | 58 s | 0.63 s | reasonembed_new_docs 282 |
+| 2a_history_rr (drones, politics) | 92 | 106 s | 1.15 s | reasonembed_new_docs 0, llm_rerank_new_pairs 1840 |
+| 2a_maxp (drones, politics) | 92 | 24 s | 0.26 s | reasonembed_new_docs 41 |
+| 2a_nomaxp (drones, politics) | 92 | 166 s | 1.81 s | reasonembed_new_docs 974 |
+
+Scaled to the full test by topics per sub-task (sum over all variants of the sub-task): 1a ≈ 91 min, 1b ≈ 21 min, 2a ≈ 25 min; total ≈ 2.3 h (+ BM25 indexing is per domain, not per topic, so this over-counts it for Track 1).
+
 ## AF. Compute: models, revisions, throughput (B5)
 
 NVIDIA GeForce RTX 4060 Laptop GPU, 8 GB (Windows itself holds 0.9-5.3 GB of it); 20 logical CPUs; 12 GB RAM visible to WSL2; torch 2.14.1+cu130, transformers 5.19.0, bitsandbytes 0.50.2, vLLM 0.32.0 (separate venv).

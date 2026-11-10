@@ -38,3 +38,10 @@ research/runs_v13/a2/data_*/
 research/runs_v13/a2/sub_*/
 research/runs_v13/rerank/cache/
 research/runs_v13/rerank/runs/
+# 2026-11-10 phase B: cold-run and nondeterminism caches / runs / releases (reports kept)
+research/runs_v13/cold/cache/
+research/runs_v13/cold/sub/
+research/runs_v13/cold/release/
+research/runs_v13/nondet/llm/
+research/runs_v13/nondet/sub/
+research/runs_v13/a2/sub_noans/
