@@ -1708,3 +1708,19 @@ design: config copy whose LLM cache is a new empty folder (ReasonEmbed and reran
 14:30 queue reordered (before any B3b or further rule-18 result): `queue_1110g.sh` (rule 18 for 1a had just started;
   no Qwen3-Emb vector saved yet) and the waiting `queue_1110f.sh` stopped by PID; `queue_1110h.sh` = B3b → rule 18 for
   1a, 2a current, 1b → B4. Reason: B3b bears on how to read every +0.005 margin; rule 18 was clearly negative on 2a.
+
+## 2026-11-10 14:31–14:59 — B3b result: run-to-run noise from LLM nondeterminism on dev (analysis, no choice)
+command: `queue_1110h.sh`: config copy with an empty LLM cache (`runs_v13/nondet/submission_freshllm.json`), `submit.py
+  --split dev` for `1a_p100 1b` (pre-generation 1,733 inputs × 2 prompts in 13.5 min) and `2a_history_rr 2a_nomaxp_p100`
+  (1,716 × 2 in 10.5 min; new ReasonEmbed documents 964 + 83 + 3 + 1,526, reranker pairs 596), `nondet_report.py`
+  (out `nondet/report.json`).
+identical generations (fresh vs cached, same key): Track 1 reason 360/1,733 (21%), hyde 292/1,733 (17%); Track 2
+  reason 361/1,716 (21%), hyde 401/1,716 (23%).
+result (official macro nDCG@10, fresh draw vs the reported cached run; paired bootstrap):
+  1a_p100 0.3704 vs 0.3672: +0.0032 [−0.0017, +0.0087] · 1b 0.4084 vs 0.4053: +0.0031 [−0.0019, +0.0086] ·
+  2a_history_rr 0.5501 vs 0.5507: −0.0006 [−0.0037, +0.0023] · 2a_nomaxp_p100 0.3778 vs 0.3801: −0.0023 [−0.0064, +0.0018].
+reading: a fresh draw of the LLM texts moves the macro by up to ~0.003 (per domain up to ±0.04 on the small Track-1
+  domains), always inside the bootstrap interval. The dev numbers are one draw; differences between systems that share
+  the same generations (ReasonEmbed weight, pool depth, reranker — rules 8, 16, 17) are paired and not affected, but a
+  margin of +0.005 is of the same order as this draw-to-draw noise for comparisons that change the LLM input (rules 6,
+  11, 13, 14). For the paper: report dev numbers as "one LLM draw, ±0.003".

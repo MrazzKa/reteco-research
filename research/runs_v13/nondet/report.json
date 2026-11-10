@@ -1,0 +1,126 @@
+{
+ "generations": {
+  "t1_reason": {
+   "fresh": 1733,
+   "identical": 360
+  },
+  "t1_hyde": {
+   "fresh": 1733,
+   "identical": 292
+  },
+  "t2_reason": {
+   "fresh": 1716,
+   "identical": 361
+  },
+  "t2_hyde": {
+   "fresh": 1716,
+   "identical": 401
+  }
+ },
+ "variants": {
+  "1a_p100": {
+   "fresh": 0.3704,
+   "cached": 0.3672,
+   "fresh_minus_cached": {
+    "diff": 0.0032,
+    "ci95": [
+     -0.0017,
+     0.0087
+    ],
+    "p_le_0": 0.1112
+   },
+   "per_domain_diff": {
+    "iota": 0.0288,
+    "quant": -0.0209,
+    "law": 0.0109,
+    "workplace": 0.0055,
+    "cardano": 0.0005,
+    "monero": -0.0006,
+    "economics": -0.0029,
+    "bitcoin": 0.0028,
+    "politics": 0.0049,
+    "genealogy": 0.006,
+    "travel": -0.0,
+    "hsm": 0.0059,
+    "history": 0.0011
+   }
+  },
+  "1b": {
+   "fresh": 0.4084,
+   "cached": 0.4053,
+   "fresh_minus_cached": {
+    "diff": 0.0031,
+    "ci95": [
+     -0.0019,
+     0.0086
+    ],
+    "p_le_0": 0.1193
+   },
+   "per_domain_diff": {
+    "iota": -0.0033,
+    "quant": 0.0028,
+    "law": 0.0023,
+    "workplace": 0.0353,
+    "cardano": 0.0143,
+    "monero": 0.0015,
+    "economics": 0.0072,
+    "bitcoin": -0.0027,
+    "politics": -0.0127,
+    "genealogy": -0.0032,
+    "travel": -0.0004,
+    "hsm": -0.0013,
+    "history": 0.0004
+   }
+  },
+  "2a_history_rr": {
+   "fresh": 0.5501,
+   "cached": 0.5507,
+   "fresh_minus_cached": {
+    "diff": -0.0006,
+    "ci95": [
+     -0.0037,
+     0.0023
+    ],
+    "p_le_0": 0.6659
+   },
+   "per_domain_diff": {
+    "drones": -0.0048,
+    "politics": -0.0029,
+    "law": 0.0033,
+    "medicalsciences": -0.0071,
+    "hardware": -0.0019,
+    "economics": 0.0052,
+    "psychology": -0.0011,
+    "biology": -0.0018,
+    "sustainable_living": 0.0045,
+    "robotics": -0.0027,
+    "earth_science": 0.0025
+   }
+  },
+  "2a_nomaxp_p100": {
+   "fresh": 0.3778,
+   "cached": 0.3801,
+   "fresh_minus_cached": {
+    "diff": -0.0023,
+    "ci95": [
+     -0.0064,
+     0.0018
+    ],
+    "p_le_0": 0.8669
+   },
+   "per_domain_diff": {
+    "drones": -0.0065,
+    "politics": 0.0025,
+    "law": -0.0102,
+    "medicalsciences": 0.0043,
+    "hardware": 0.0034,
+    "economics": -0.0062,
+    "psychology": 0.0078,
+    "biology": -0.0018,
+    "sustainable_living": -0.0132,
+    "robotics": 0.001,
+    "earth_science": -0.0065
+   }
+  }
+ }
+}
