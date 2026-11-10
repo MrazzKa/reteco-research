@@ -43,6 +43,17 @@ one() {  # cond track hybrid-cond query-cond name hybrid bm25 dense
   echo "=== $(date +%H:%M:%S) R18_${c}_DONE"
 }
 one 2a_history 2 2a_hist3qa__q+r+h 2a_hist3qa 2ah_hybrid $R/hist/t2/hybrid.json $R/hist/t2/bm25/runs $R/hist/t2/dense/runs
+# B3: cold run on a slice (2 Track-1 + 2 Track-2 domains, synthetic test release, empty caches), all variants
+C=$R/cold; rm -rf $C; mkdir -p $C
+$PY make_test_release.py --data $D --out $C/release --domains iota quant drones politics
+$PY cold_config.py --cache-root $C/cache --out $C/submission_cold.json
+T0=$(date +%s)
+CC=~/semeval-reteco/tools/bin/cc $PY submit.py --config $C/submission_cold.json --variants 1a 1b 1a_noRE 1b_noRE --data $C/release --split test --domains iota quant --out $C/sub 2>&1 | grep -E "^\[|Error|Traceback"
+T1=$(date +%s)
+CC=~/semeval-reteco/tools/bin/cc $PY submit.py --config $C/submission_cold.json --variants 2a_auto 2a_history 2a_nomaxp 2a_maxp --data $C/release --split test --domains drones politics --out $C/sub 2>&1 | grep -E "^\[|Error|Traceback"
+T2=$(date +%s)
+echo "=== $(date +%H:%M:%S) COLD track1 $((T1-T0)) s, track2 $((T2-T1)) s"
+echo "=== $(date +%H:%M:%S) B3_DONE"
 one 1a 1 1a__q+r+h 1a 1a_rerun $R/qexp/t1/hybrid_1a.json $R/qexp/t1/bm25/runs $R/qexp/t1/dense/runs
 one 2a_current 2 2a_current__q+r+h 2a_current 2a_nomaxp $R/qexp/t2/hybrid_2a_current.json $R/qexp/t2/bm25/runs $R/qexp/t2/dense/runs
 one 1b 1 1b_query+step__q+r+h 1b_query+step 1b_rerun $R/qexp/t1/hybrid_1b.json $R/qexp/t1/bm25/runs $R/qexp/t1/dense/runs

@@ -23,3 +23,34 @@
 2a_history_main {"p50": {"train": 0.583, "dev": 0.5475}, "p100": {"train": 0.588, "dev": 0.549}, "train_boot": {"diff": 0.005, "ci95": [-0.0009, 0.0115], "p_le_0": 0.0519}, "dev_boot": {"diff": 0.0015, "ci95": [-0.0016, 0.0045], "p_le_0": 0.1736}, "weights": {"p50": "interp=0.9", "p100": "interp=0.9"}, "chosen": "50"}
 === 11:05:33 R17_2AH_DONE
 === 11:05:33 attempt 1: --track 1 --conditions 1a__q+r+h --query-cond 1a --name 1a_rerun_p100 --hybrid ../research/runs_v13/qexp/t1/hybrid_1a.json --bm25 ../research/runs_v13/qexp/t1/bm25/runs --dense ../research/runs_v13/qexp/t1/dense/runs --save-scores ../research/runs_v13/scores/1a_rerun_p100.json
+  [1a__q+r+h] docs 2000/19796 (299s)
+  [1a__q+r+h] docs 4000/19796 (543s)
+  [1a__q+r+h] docs 6000/19796 (818s)
+  [1a__q+r+h] docs 8000/19796 (1102s)
+  [1a__q+r+h] docs 10000/19796 (1417s)
+  [1a__q+r+h] docs 12000/19796 (1686s)
+  [1a__q+r+h] docs 14000/19796 (2001s)
+  [1a__q+r+h] docs 16000/19796 (2267s)
+  [1a__q+r+h] docs 18000/19796 (2530s)
+  [1a__q+r+h] docs 19796/19796 (2772s)
+  [1a__q+r+h] 19796 docs + 0 queries in 2772s
+== t1 1a__q+r+h: none train 0.2823 dev 0.3258 | best on train ('interp', 0.8): train 0.3139 dev 0.3672 train boot {'diff': 0.0316, 'ci95': [0.0131, 0.0511], 'p_le_0': 0.0005}
+   none=0: train 0.2823  dev 0.3258
+   top=10: train 0.2736  dev 0.3275
+   top=20: train 0.2888  dev 0.3431
+   top=50: train 0.2894  dev 0.3539
+   top=100: train 0.2938  dev 0.3494
+   interp=0.1: train 0.2859  dev 0.3328
+   interp=0.2: train 0.2883  dev 0.3387
+   interp=0.3: train 0.2949  dev 0.3433
+   interp=0.4: train 0.2999  dev 0.3516
+   interp=0.5: train 0.3035  dev 0.3556
+   interp=0.6: train 0.3064  dev 0.3579
+   interp=0.7: train 0.3117  dev 0.3676
+   interp=0.8: train 0.3139  dev 0.3672
+   interp=0.9: train 0.3124  dev 0.3656
+2a_history_main {"p50": {"train": 0.583, "dev": 0.5475}, "p100": {"train": 0.588, "dev": 0.549}, "train_boot": {"diff": 0.005, "ci95": [-0.0009, 0.0115], "p_le_0": 0.0519}, "dev_boot": {"diff": 0.0015, "ci95": [-0.0016, 0.0045], "p_le_0": 0.1736}, "weights": {"p50": "interp=0.9", "p100": "interp=0.9"}, "chosen": "50"}
+1a {"p50": {"train": 0.3078, "dev": 0.3667}, "p100": {"train": 0.3139, "dev": 0.3672}, "train_boot": {"diff": 0.0062, "ci95": [0.0012, 0.0121], "p_le_0": 0.0064}, "dev_boot": {"diff": 0.0005, "ci95": [-0.0023, 0.0031], "p_le_0": 0.3597}, "weights": {"p50": "interp=0.8", "p100": "interp=0.8"}, "chosen": "100"}
+=== 11:51:55 R17_1A_DONE
+=== 11:51:55 attempt 1: --track 2 --conditions 2a_current__q+r+h --query-cond 2a_current --name 2a_nomaxp_p100 --hybrid ../research/runs_v13/qexp/t2/hybrid_2a_current.json --bm25 ../research/runs_v13/qexp/t2/bm25/runs --dense ../research/runs_v13/qexp/t2/dense/runs --save-scores ../research/runs_v13/scores/2a_nomaxp_p100.json
+  [2a_current__q+r+h] docs 2000/8948 (296s)

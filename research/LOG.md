@@ -1596,3 +1596,20 @@ command: `queue_1110d.sh` → `reason_rerank.py --pool 100 --name 2ah_hybrid_p10
 result (train sub / dev; weight re-chosen in the rule-8 grid): pool 50 (interp 0.9) 0.5830 / 0.5475; pool 100
   (interp 0.9) 0.5880 / 0.5490. train 100 − 50 +0.0050 [−0.0009, +0.0115] → **not adopted** (lower bound < 0).
   Dev once: +0.0015 [−0.0016, +0.0045]. Note: evaluated without the rule-16 reranker (stated in RESULTS).
+
+## 2026-11-10 11:50 — phase-B GPU queues (estimates before the runs)
+`queue_1110e.sh` (after rule 17): rule 14b (main pipeline on answer-free train-subsample histories via submit.py,
+  ~250 new LLM inputs × 2 prompts + ReasonEmbed, est. 10 min) → rule 18 for 2a history (ReasonEmbed re-dump from cache
+  with raw scores, then Qwen3-Embedding-4B NF4 over the same top-50 pools, est. ~25–30k new documents ≈ 60–70 min) →
+  B3 cold run on a slice (synthetic test release of iota, quant (Track 1) and drones, politics (Track 2); empty LLM /
+  ReasonEmbed / reranker caches; all variants; est. 30–45 min) → rule 18 for 1a, 2a current, 1b (est. 60–90 min each).
+`queue_1110f.sh` (after e): B4 = rule 13 for 1b (5 HyDE samples at temperature 0.7 for 3,976 step inputs, est.
+  1.5–2 h at 0.5–0.9 inputs/s; then retrieval + hybrid grid ~20 min; ReasonEmbed only if the hybrid stage adopts n > 1).
+
+## 2026-11-10 11:05–11:52 — rule 17 result, 1a: pool 100 adopted
+command: `queue_1110d.sh` → `reason_rerank.py --pool 100 --name 1a_rerun_p100` (19,796 new documents, ~7 docs/s, 46 min).
+result (train sub / dev): pool 50 (interp 0.8) 0.3078 / 0.3667; pool 100 (interp 0.8) 0.3139 / 0.3672.
+  train 100 − 50 +0.0062 [+0.0012, +0.0121] → **adopted**. Dev once: +0.0005 [−0.0023, +0.0031].
+submission: `1a_p100` (= `1a` with ReasonEmbed pool 100, w 0.8) becomes the main 1a run; `1a` (pool 50) a fallback.
+dev check: `submit.py --variants 1a_p100 --split dev` (4.8 min, BM25 indexing 244 s, 0 new ReasonEmbed documents) +
+  `score_submission.py` → official macro **0.3672 = research 0.3672**; format_checker exit 0 for all 13 files.
