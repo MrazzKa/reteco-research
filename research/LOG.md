@@ -1655,3 +1655,14 @@ command: `queue_1110e.sh`: `history.without_answers` applied to the train-subsam
 result (train subsample 330): M0 0.5220 vs H0q+RE 0.5168; M0 − H0q+RE +0.0052 [−0.0111, +0.0220] → **not adopted**
   (lower bound < 0); the answer-free run stays `2a_history_q`. By group: first turns M0 0.559 vs 0.525 (M0 has the LLM),
   recycled-gold turns 0.533 vs 0.537, new-gold 0.332 vs 0.332. Dev (seen earlier, not used): M0 0.4908 vs 0.4802.
+
+## 2026-11-10 12:48–13:49 — rule 18 result, 2a history: second embedder not adopted
+commands: `queue_1110e.sh` → ReasonEmbed score dump re-made from cache with raw scores (8 s); `reason_rerank.py --model
+  qwen3-emb-4b --pool 50 --name 2ah_hybrid_q3e` (26,843 documents + 1,188 queries, NF4, ~7.7 docs/s, 58 min);
+  `ensemble_embed.py --cond 2a_history` (out `ensemble/rule18_2a_history.json`). Self-test before (both inputs =
+  ReasonEmbed): the ensemble reproduces the current system exactly (0.5830 / 0.5475).
+result (train sub / dev): current (ReasonEmbed, interp 0.9) 0.5830 / 0.5475 · Qwen3-Embedding-4B alone (best on train
+  interp 0.5) 0.5335 / 0.4789 (hybrid alone 0.5170 / 0.4601) · ensemble mean-z (best on train interp 0.9) 0.5683 / 0.5242.
+  ensemble − current: train −0.0147 [−0.0313, +0.0014] → **not adopted**; dev −0.0233 [−0.0352, −0.0111].
+reading: the general-purpose Qwen3-Embedding-4B adds little over the hybrid (+0.017 train) and averaging it with
+  ReasonEmbed dilutes the reasoning embedder. Rule 18 for 1a, 2a current, 1b still runs after B3 (queue order).

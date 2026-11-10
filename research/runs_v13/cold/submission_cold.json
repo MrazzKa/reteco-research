@@ -1,0 +1,999 @@
+{
+ "_about": "Frozen submission configuration (LOG rules 6-17). Generated 2026-11-02 from the train-chosen reports; used by scripts/submit.py. Paths are relative to the repository root. Updated 2026-11-10: rule-14 fallback 2a_history_q and the 2a automation (_auto_2a).",
+ "tie_key": "sha1",
+ "seeds": {
+  "llm": 0,
+  "train_subsample": 20260921,
+  "bootstrap": 20260921
+ },
+ "variants": {
+  "1a": {
+   "track": 1,
+   "query": "1a",
+   "run_id": "UA_1a_main",
+   "domains": [
+    "iota",
+    "quant",
+    "law",
+    "workplace",
+    "cardano",
+    "monero",
+    "economics",
+    "bitcoin",
+    "politics",
+    "genealogy",
+    "travel",
+    "hsm",
+    "history"
+   ],
+   "llm": {
+    "name": "qwen3-4b",
+    "checkpoint": "cyankiwi/Qwen3-4B-Instruct-2507-AWQ-4bit",
+    "revision": "b37d1ccb77e27a70fe4222d995fda27940eead5a",
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "quant": "AWQ W4A16 (compressed-tensors)",
+    "engine": "vLLM 0.32.0, enforce_eager",
+    "temperature": 0.0,
+    "max_new_tokens": 256,
+    "seed": 0,
+    "max_input_chars": 3000,
+    "prompts": [
+     "reason",
+     "hyde"
+    ],
+    "prompt_texts": {
+     "reason": "Read the question below. First, reason briefly about what knowledge is needed to answer it. Then describe what a relevant document would look like: its topic, the key concepts, terms and entities it would mention{time}. Keep the whole answer under 150 words.\n\n{body}",
+     "hyde": "Write a short passage (about 100 words) that could appear in a document that helps answer the question below. Write it as factual reference text, not as a reply to the asker{time}.\n\n{body}"
+    },
+    "system": "You help a search engine find documents. Answer in plain English text only.",
+    "time_hint_track1": {
+     "reason": "; if the question refers to a time (years, periods, events), state that time explicitly",
+     "hyde": "; if the question refers to a time (years, periods, events), place the passage in that time"
+    },
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/llm/t1"
+   },
+   "variant": "q+r+h",
+   "bm25": {
+    "impl": "bm25s 0.2 (Lucene variant)",
+    "k1": 0.9,
+    "b": 0.4,
+    "analyzer": "lucene",
+    "depth": 1000,
+    "text": "q \\n r \\n h"
+   },
+   "dense": {
+    "model": "bge-small",
+    "checkpoint": "BAAI/bge-small-en-v1.5",
+    "max_len": 256,
+    "emb": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v12/emb",
+    "maxp": false,
+    "query_vector": "normalised sum of e_query(q), e_query(r), e_doc(h)"
+   },
+   "hybrid": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "minmax",
+    "alpha": 0.6
+   },
+   "reasonembed": {
+    "checkpoint": "hanhainebula/reason-embed-qwen3-4b-0928",
+    "quant": "bitsandbytes NF4, fp16 compute",
+    "pooling": "last token, L2-normalised",
+    "max_len": 512,
+    "doc_max_chars": 4000,
+    "pool": 50,
+    "how": "interp",
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/reason",
+    "instruction": "Given a <domain> question, retrieve documents that help answer the question.",
+    "w": 0.8
+   },
+   "depth": 1000,
+   "source": "rule 6 (q+r+h), rule 8 (ReasonEmbed w 0.8)",
+   "dev_research": 0.3667,
+   "role": "fallback (rule-8 main, ReasonEmbed pool 50)",
+   "train_research": 0.3078
+  },
+  "1b": {
+   "track": 1,
+   "query": "1b_query+step",
+   "run_id": "UA_1b_main",
+   "domains": [
+    "iota",
+    "quant",
+    "law",
+    "workplace",
+    "cardano",
+    "monero",
+    "economics",
+    "bitcoin",
+    "politics",
+    "genealogy",
+    "travel",
+    "hsm",
+    "history"
+   ],
+   "llm": {
+    "name": "qwen3-4b",
+    "checkpoint": "cyankiwi/Qwen3-4B-Instruct-2507-AWQ-4bit",
+    "revision": "b37d1ccb77e27a70fe4222d995fda27940eead5a",
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "quant": "AWQ W4A16 (compressed-tensors)",
+    "engine": "vLLM 0.32.0, enforce_eager",
+    "temperature": 0.0,
+    "max_new_tokens": 256,
+    "seed": 0,
+    "max_input_chars": 3000,
+    "prompts": [
+     "reason",
+     "hyde"
+    ],
+    "prompt_texts": {
+     "reason": "Read the question below. First, reason briefly about what knowledge is needed to answer it. Then describe what a relevant document would look like: its topic, the key concepts, terms and entities it would mention{time}. Keep the whole answer under 150 words.\n\n{body}",
+     "hyde": "Write a short passage (about 100 words) that could appear in a document that helps answer the question below. Write it as factual reference text, not as a reply to the asker{time}.\n\n{body}"
+    },
+    "system": "You help a search engine find documents. Answer in plain English text only.",
+    "time_hint_track1": {
+     "reason": "; if the question refers to a time (years, periods, events), state that time explicitly",
+     "hyde": "; if the question refers to a time (years, periods, events), place the passage in that time"
+    },
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/llm/t1"
+   },
+   "variant": "q+r+h",
+   "bm25": {
+    "impl": "bm25s 0.2 (Lucene variant)",
+    "k1": 0.9,
+    "b": 0.4,
+    "analyzer": "lucene",
+    "depth": 1000,
+    "text": "q \\n r \\n h"
+   },
+   "dense": {
+    "model": "bge-small",
+    "checkpoint": "BAAI/bge-small-en-v1.5",
+    "max_len": 256,
+    "emb": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v12/emb",
+    "maxp": false,
+    "query_vector": "normalised sum of e_query(q), e_query(r), e_doc(h)"
+   },
+   "hybrid": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.7
+   },
+   "reasonembed": {
+    "checkpoint": "hanhainebula/reason-embed-qwen3-4b-0928",
+    "quant": "bitsandbytes NF4, fp16 compute",
+    "pooling": "last token, L2-normalised",
+    "max_len": 512,
+    "doc_max_chars": 4000,
+    "pool": 50,
+    "how": "interp",
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/reason",
+    "instruction": "Given a <domain> question and one research step, retrieve documents that help with that step.",
+    "w": 0.7
+   },
+   "depth": 1000,
+   "source": "rule 6, rule 8 (w 0.7)",
+   "dev_research": 0.4053,
+   "role": "main",
+   "train_research": 0.3754
+  },
+  "2a_maxp": {
+   "track": 2,
+   "query": "2a_current",
+   "run_id": "UA_2a_maxp",
+   "domains": [
+    "drones",
+    "politics",
+    "law",
+    "medicalsciences",
+    "hardware",
+    "economics",
+    "psychology",
+    "biology",
+    "sustainable_living",
+    "robotics",
+    "earth_science"
+   ],
+   "llm": {
+    "name": "qwen3-4b",
+    "checkpoint": "cyankiwi/Qwen3-4B-Instruct-2507-AWQ-4bit",
+    "revision": "b37d1ccb77e27a70fe4222d995fda27940eead5a",
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "quant": "AWQ W4A16 (compressed-tensors)",
+    "engine": "vLLM 0.32.0, enforce_eager",
+    "temperature": 0.0,
+    "max_new_tokens": 256,
+    "seed": 0,
+    "max_input_chars": 3000,
+    "prompts": [
+     "reason",
+     "hyde"
+    ],
+    "prompt_texts": {
+     "reason": "Read the question below. First, reason briefly about what knowledge is needed to answer it. Then describe what a relevant document would look like: its topic, the key concepts, terms and entities it would mention{time}. Keep the whole answer under 150 words.\n\n{body}",
+     "hyde": "Write a short passage (about 100 words) that could appear in a document that helps answer the question below. Write it as factual reference text, not as a reply to the asker{time}.\n\n{body}"
+    },
+    "system": "You help a search engine find documents. Answer in plain English text only.",
+    "time_hint_track1": {
+     "reason": "; if the question refers to a time (years, periods, events), state that time explicitly",
+     "hyde": "; if the question refers to a time (years, periods, events), place the passage in that time"
+    },
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/llm/t2"
+   },
+   "variant": "q+r+h",
+   "bm25": {
+    "impl": "bm25s 0.2 (Lucene variant)",
+    "k1": 0.9,
+    "b": 0.4,
+    "analyzer": "lucene",
+    "depth": 1000,
+    "text": "q \\n r \\n h"
+   },
+   "dense": {
+    "model": "bge-base",
+    "checkpoint": "BAAI/bge-base-en-v1.5",
+    "max_len": 512,
+    "emb": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v12/emb",
+    "maxp": true,
+    "query_vector": "normalised sum of e_query(q), e_query(r), e_doc(h)",
+    "passages": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/emb",
+    "passage_len": 510,
+    "passage_stride": 382,
+    "max_passages": 200
+   },
+   "hybrid": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "reasonembed": {
+    "checkpoint": "hanhainebula/reason-embed-qwen3-4b-0928",
+    "quant": "bitsandbytes NF4, fp16 compute",
+    "pooling": "last token, L2-normalised",
+    "max_len": 512,
+    "doc_max_chars": 4000,
+    "pool": 50,
+    "how": "interp",
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/reason",
+    "instruction": "Given a <domain> question, retrieve documents that help answer the question.",
+    "w": 0.8
+   },
+   "depth": 1000,
+   "source": "rules 6, 7 (MaxP), 8 (w 0.8)",
+   "dev_research": 0.3901,
+   "role": "fallback 2 (current turn + MaxP)",
+   "train_research": 0.4359
+  },
+  "2a_nomaxp": {
+   "track": 2,
+   "query": "2a_current",
+   "run_id": "UA_2a_nomaxp",
+   "domains": [
+    "drones",
+    "politics",
+    "law",
+    "medicalsciences",
+    "hardware",
+    "economics",
+    "psychology",
+    "biology",
+    "sustainable_living",
+    "robotics",
+    "earth_science"
+   ],
+   "llm": {
+    "name": "qwen3-4b",
+    "checkpoint": "cyankiwi/Qwen3-4B-Instruct-2507-AWQ-4bit",
+    "revision": "b37d1ccb77e27a70fe4222d995fda27940eead5a",
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "quant": "AWQ W4A16 (compressed-tensors)",
+    "engine": "vLLM 0.32.0, enforce_eager",
+    "temperature": 0.0,
+    "max_new_tokens": 256,
+    "seed": 0,
+    "max_input_chars": 3000,
+    "prompts": [
+     "reason",
+     "hyde"
+    ],
+    "prompt_texts": {
+     "reason": "Read the question below. First, reason briefly about what knowledge is needed to answer it. Then describe what a relevant document would look like: its topic, the key concepts, terms and entities it would mention{time}. Keep the whole answer under 150 words.\n\n{body}",
+     "hyde": "Write a short passage (about 100 words) that could appear in a document that helps answer the question below. Write it as factual reference text, not as a reply to the asker{time}.\n\n{body}"
+    },
+    "system": "You help a search engine find documents. Answer in plain English text only.",
+    "time_hint_track1": {
+     "reason": "; if the question refers to a time (years, periods, events), state that time explicitly",
+     "hyde": "; if the question refers to a time (years, periods, events), place the passage in that time"
+    },
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/llm/t2"
+   },
+   "variant": "q+r+h",
+   "bm25": {
+    "impl": "bm25s 0.2 (Lucene variant)",
+    "k1": 0.9,
+    "b": 0.4,
+    "analyzer": "lucene",
+    "depth": 1000,
+    "text": "q \\n r \\n h"
+   },
+   "dense": {
+    "model": "bge-base",
+    "checkpoint": "BAAI/bge-base-en-v1.5",
+    "max_len": 512,
+    "emb": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v12/emb",
+    "maxp": false,
+    "query_vector": "normalised sum of e_query(q), e_query(r), e_doc(h)"
+   },
+   "hybrid": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "reasonembed": {
+    "checkpoint": "hanhainebula/reason-embed-qwen3-4b-0928",
+    "quant": "bitsandbytes NF4, fp16 compute",
+    "pooling": "last token, L2-normalised",
+    "max_len": 512,
+    "doc_max_chars": 4000,
+    "pool": 50,
+    "how": "interp",
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/reason",
+    "instruction": "Given a <domain> question, retrieve documents that help answer the question.",
+    "w": 0.8
+   },
+   "depth": 1000,
+   "source": "rule 6 (q+r+h), rule 10 (no MaxP), ReasonEmbed w 0.8 (rule-8 grid on train)",
+   "dev_research": 0.3779,
+   "role": "fallback (current turn, rule 10; ReasonEmbed pool 50)",
+   "train_research": 0.4317
+  },
+  "2a_history": {
+   "track": 2,
+   "query": "2a_hist3qa",
+   "run_id": "UA_2a_history",
+   "domains": [
+    "drones",
+    "politics",
+    "law",
+    "medicalsciences",
+    "hardware",
+    "economics",
+    "psychology",
+    "biology",
+    "sustainable_living",
+    "robotics",
+    "earth_science"
+   ],
+   "llm": {
+    "name": "qwen3-4b",
+    "checkpoint": "cyankiwi/Qwen3-4B-Instruct-2507-AWQ-4bit",
+    "revision": "b37d1ccb77e27a70fe4222d995fda27940eead5a",
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "quant": "AWQ W4A16 (compressed-tensors)",
+    "engine": "vLLM 0.32.0, enforce_eager",
+    "temperature": 0.0,
+    "max_new_tokens": 256,
+    "seed": 0,
+    "max_input_chars": 3000,
+    "prompts": [
+     "reason",
+     "hyde"
+    ],
+    "prompt_texts": {
+     "reason": "Read the question below. First, reason briefly about what knowledge is needed to answer it. Then describe what a relevant document would look like: its topic, the key concepts, terms and entities it would mention{time}. Keep the whole answer under 150 words.\n\n{body}",
+     "hyde": "Write a short passage (about 100 words) that could appear in a document that helps answer the question below. Write it as factual reference text, not as a reply to the asker{time}.\n\n{body}"
+    },
+    "system": "You help a search engine find documents. Answer in plain English text only.",
+    "time_hint_track1": {
+     "reason": "; if the question refers to a time (years, periods, events), state that time explicitly",
+     "hyde": "; if the question refers to a time (years, periods, events), place the passage in that time"
+    },
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/llm/t2"
+   },
+   "variant": "q+r+h",
+   "bm25": {
+    "impl": "bm25s 0.2 (Lucene variant)",
+    "k1": 0.9,
+    "b": 0.4,
+    "analyzer": "lucene",
+    "depth": 1000,
+    "text": "q \\n r \\n h"
+   },
+   "dense": {
+    "model": "bge-base",
+    "checkpoint": "BAAI/bge-base-en-v1.5",
+    "max_len": 512,
+    "emb": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v12/emb",
+    "maxp": false,
+    "query_vector": "normalised sum of e_query(q), e_query(r), e_doc(h)"
+   },
+   "hybrid": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "reasonembed": {
+    "checkpoint": "hanhainebula/reason-embed-qwen3-4b-0928",
+    "quant": "bitsandbytes NF4, fp16 compute",
+    "pooling": "last token, L2-normalised",
+    "max_len": 512,
+    "doc_max_chars": 4000,
+    "pool": 50,
+    "how": "interp",
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/reason",
+    "instruction": "Given a <domain> conversation, retrieve documents that help answer the current question.",
+    "w": 0.9
+   },
+   "depth": 1000,
+   "source": "rule 11 (Hb: LLM input = current question first + last <= 3 earlier Q/A turns from conversation_history; q = history text, current question first), rule 11 ReasonEmbed w 0.9, rule 12 (main 2a run)",
+   "dev_research": 0.5475,
+   "history": {
+    "llm_input": "current question first, then the last <=3 earlier turns (Q and A) of conversation_history",
+    "q_text": "current question + newline + released conversation_history",
+    "reasonembed_query": "same text as the LLM input, whitespace-collapsed"
+   },
+   "role": "fallback (rule-12 main without the rule-16 reranker)",
+   "train_research": 0.583
+  },
+  "1a_noRE": {
+   "track": 1,
+   "query": "1a",
+   "run_id": "UA_1a_noRE",
+   "domains": [
+    "iota",
+    "quant",
+    "law",
+    "workplace",
+    "cardano",
+    "monero",
+    "economics",
+    "bitcoin",
+    "politics",
+    "genealogy",
+    "travel",
+    "hsm",
+    "history"
+   ],
+   "llm": {
+    "name": "qwen3-4b",
+    "checkpoint": "cyankiwi/Qwen3-4B-Instruct-2507-AWQ-4bit",
+    "revision": "b37d1ccb77e27a70fe4222d995fda27940eead5a",
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "quant": "AWQ W4A16 (compressed-tensors)",
+    "engine": "vLLM 0.32.0, enforce_eager",
+    "temperature": 0.0,
+    "max_new_tokens": 256,
+    "seed": 0,
+    "max_input_chars": 3000,
+    "prompts": [
+     "reason",
+     "hyde"
+    ],
+    "prompt_texts": {
+     "reason": "Read the question below. First, reason briefly about what knowledge is needed to answer it. Then describe what a relevant document would look like: its topic, the key concepts, terms and entities it would mention{time}. Keep the whole answer under 150 words.\n\n{body}",
+     "hyde": "Write a short passage (about 100 words) that could appear in a document that helps answer the question below. Write it as factual reference text, not as a reply to the asker{time}.\n\n{body}"
+    },
+    "system": "You help a search engine find documents. Answer in plain English text only.",
+    "time_hint_track1": {
+     "reason": "; if the question refers to a time (years, periods, events), state that time explicitly",
+     "hyde": "; if the question refers to a time (years, periods, events), place the passage in that time"
+    },
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/llm/t1"
+   },
+   "variant": "q+r+h",
+   "bm25": {
+    "impl": "bm25s 0.2 (Lucene variant)",
+    "k1": 0.9,
+    "b": 0.4,
+    "analyzer": "lucene",
+    "depth": 1000,
+    "text": "q \\n r \\n h"
+   },
+   "dense": {
+    "model": "bge-small",
+    "checkpoint": "BAAI/bge-small-en-v1.5",
+    "max_len": 256,
+    "emb": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v12/emb",
+    "maxp": false,
+    "query_vector": "normalised sum of e_query(q), e_query(r), e_doc(h)"
+   },
+   "hybrid": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "minmax",
+    "alpha": 0.6
+   },
+   "reasonembed": {
+    "checkpoint": "hanhainebula/reason-embed-qwen3-4b-0928",
+    "quant": "bitsandbytes NF4, fp16 compute",
+    "pooling": "last token, L2-normalised",
+    "max_len": 512,
+    "doc_max_chars": 4000,
+    "pool": 50,
+    "how": "interp",
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/reason",
+    "instruction": "Given a <domain> question, retrieve documents that help answer the question.",
+    "w": 0.8,
+    "use": false
+   },
+   "depth": 1000,
+   "source": "rule 6 hybrid only",
+   "dev_research": 0.3258,
+   "role": "fallback (no ReasonEmbed)",
+   "train_research": 0.2823
+  },
+  "1b_noRE": {
+   "track": 1,
+   "query": "1b_query+step",
+   "run_id": "UA_1b_noRE",
+   "domains": [
+    "iota",
+    "quant",
+    "law",
+    "workplace",
+    "cardano",
+    "monero",
+    "economics",
+    "bitcoin",
+    "politics",
+    "genealogy",
+    "travel",
+    "hsm",
+    "history"
+   ],
+   "llm": {
+    "name": "qwen3-4b",
+    "checkpoint": "cyankiwi/Qwen3-4B-Instruct-2507-AWQ-4bit",
+    "revision": "b37d1ccb77e27a70fe4222d995fda27940eead5a",
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "quant": "AWQ W4A16 (compressed-tensors)",
+    "engine": "vLLM 0.32.0, enforce_eager",
+    "temperature": 0.0,
+    "max_new_tokens": 256,
+    "seed": 0,
+    "max_input_chars": 3000,
+    "prompts": [
+     "reason",
+     "hyde"
+    ],
+    "prompt_texts": {
+     "reason": "Read the question below. First, reason briefly about what knowledge is needed to answer it. Then describe what a relevant document would look like: its topic, the key concepts, terms and entities it would mention{time}. Keep the whole answer under 150 words.\n\n{body}",
+     "hyde": "Write a short passage (about 100 words) that could appear in a document that helps answer the question below. Write it as factual reference text, not as a reply to the asker{time}.\n\n{body}"
+    },
+    "system": "You help a search engine find documents. Answer in plain English text only.",
+    "time_hint_track1": {
+     "reason": "; if the question refers to a time (years, periods, events), state that time explicitly",
+     "hyde": "; if the question refers to a time (years, periods, events), place the passage in that time"
+    },
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/llm/t1"
+   },
+   "variant": "q+r+h",
+   "bm25": {
+    "impl": "bm25s 0.2 (Lucene variant)",
+    "k1": 0.9,
+    "b": 0.4,
+    "analyzer": "lucene",
+    "depth": 1000,
+    "text": "q \\n r \\n h"
+   },
+   "dense": {
+    "model": "bge-small",
+    "checkpoint": "BAAI/bge-small-en-v1.5",
+    "max_len": 256,
+    "emb": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v12/emb",
+    "maxp": false,
+    "query_vector": "normalised sum of e_query(q), e_query(r), e_doc(h)"
+   },
+   "hybrid": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.7
+   },
+   "reasonembed": {
+    "checkpoint": "hanhainebula/reason-embed-qwen3-4b-0928",
+    "quant": "bitsandbytes NF4, fp16 compute",
+    "pooling": "last token, L2-normalised",
+    "max_len": 512,
+    "doc_max_chars": 4000,
+    "pool": 50,
+    "how": "interp",
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/reason",
+    "instruction": "Given a <domain> question and one research step, retrieve documents that help with that step.",
+    "w": 0.7,
+    "use": false
+   },
+   "depth": 1000,
+   "source": "rule 6 hybrid only",
+   "dev_research": 0.3505,
+   "role": "fallback (no ReasonEmbed)",
+   "train_research": 0.3442
+  },
+  "2a_history_q": {
+   "track": 2,
+   "query": "2a_hist3q_qonly",
+   "run_id": "UA_2a_history_q",
+   "domains": [
+    "drones",
+    "politics",
+    "law",
+    "medicalsciences",
+    "hardware",
+    "economics",
+    "psychology",
+    "biology",
+    "sustainable_living",
+    "robotics",
+    "earth_science"
+   ],
+   "variant": "q",
+   "bm25": {
+    "impl": "bm25s 0.2 (Lucene variant)",
+    "k1": 0.9,
+    "b": 0.4,
+    "analyzer": "lucene",
+    "depth": 1000,
+    "text": "q"
+   },
+   "dense": {
+    "model": "bge-base",
+    "checkpoint": "BAAI/bge-base-en-v1.5",
+    "max_len": 512,
+    "emb": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v12/emb",
+    "maxp": false,
+    "query_vector": "e_query(q)"
+   },
+   "hybrid": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.7
+   },
+   "reasonembed": {
+    "checkpoint": "hanhainebula/reason-embed-qwen3-4b-0928",
+    "quant": "bitsandbytes NF4, fp16 compute",
+    "pooling": "last token, L2-normalised",
+    "max_len": 512,
+    "doc_max_chars": 4000,
+    "pool": 50,
+    "how": "interp",
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/reason",
+    "instruction": "Given a <domain> conversation, retrieve documents that help answer the current question.",
+    "w": 0.9
+   },
+   "depth": 1000,
+   "source": "rule 14 (H0q: answer-free history text, BM25 + bge-base hybrid z-score a 0.7, no LLM) + ReasonEmbed w 0.9 (rule-8 grid on train)",
+   "dev_research": 0.4802,
+   "history": {
+    "llm_input": "none (no LLM)",
+    "q_text": "current question + newline + released conversation_history with every answer removed (history.strip_answers)",
+    "reasonembed_query": "current question first, then the last <=3 earlier questions (no answers), whitespace-collapsed",
+    "answer_free": "asserted per topic in submit.py (history.assert_answer_free)"
+   },
+   "role": "main when the history has no earlier answers (rule 14; chosen by 2a_auto)",
+   "train_research": 0.5168
+  },
+  "2a_history_rr": {
+   "track": 2,
+   "query": "2a_hist3qa",
+   "run_id": "UA_2a_history_rr",
+   "domains": [
+    "drones",
+    "politics",
+    "law",
+    "medicalsciences",
+    "hardware",
+    "economics",
+    "psychology",
+    "biology",
+    "sustainable_living",
+    "robotics",
+    "earth_science"
+   ],
+   "llm": {
+    "name": "qwen3-4b",
+    "checkpoint": "cyankiwi/Qwen3-4B-Instruct-2507-AWQ-4bit",
+    "revision": "b37d1ccb77e27a70fe4222d995fda27940eead5a",
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "quant": "AWQ W4A16 (compressed-tensors)",
+    "engine": "vLLM 0.32.0, enforce_eager",
+    "temperature": 0.0,
+    "max_new_tokens": 256,
+    "seed": 0,
+    "max_input_chars": 3000,
+    "prompts": [
+     "reason",
+     "hyde"
+    ],
+    "prompt_texts": {
+     "reason": "Read the question below. First, reason briefly about what knowledge is needed to answer it. Then describe what a relevant document would look like: its topic, the key concepts, terms and entities it would mention{time}. Keep the whole answer under 150 words.\n\n{body}",
+     "hyde": "Write a short passage (about 100 words) that could appear in a document that helps answer the question below. Write it as factual reference text, not as a reply to the asker{time}.\n\n{body}"
+    },
+    "system": "You help a search engine find documents. Answer in plain English text only.",
+    "time_hint_track1": {
+     "reason": "; if the question refers to a time (years, periods, events), state that time explicitly",
+     "hyde": "; if the question refers to a time (years, periods, events), place the passage in that time"
+    },
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/llm/t2"
+   },
+   "variant": "q+r+h",
+   "bm25": {
+    "impl": "bm25s 0.2 (Lucene variant)",
+    "k1": 0.9,
+    "b": 0.4,
+    "analyzer": "lucene",
+    "depth": 1000,
+    "text": "q \\n r \\n h"
+   },
+   "dense": {
+    "model": "bge-base",
+    "checkpoint": "BAAI/bge-base-en-v1.5",
+    "max_len": 512,
+    "emb": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v12/emb",
+    "maxp": false,
+    "query_vector": "normalised sum of e_query(q), e_query(r), e_doc(h)"
+   },
+   "hybrid": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "reasonembed": {
+    "checkpoint": "hanhainebula/reason-embed-qwen3-4b-0928",
+    "quant": "bitsandbytes NF4, fp16 compute",
+    "pooling": "last token, L2-normalised",
+    "max_len": 512,
+    "doc_max_chars": 4000,
+    "pool": 50,
+    "how": "interp",
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/reason",
+    "instruction": "Given a <domain> conversation, retrieve documents that help answer the current question.",
+    "w": 0.9
+   },
+   "depth": 1000,
+   "source": "rule 11 (Hb: LLM input = current question first + last <= 3 earlier Q/A turns from conversation_history; q = history text, current question first), rule 11 ReasonEmbed w 0.9, rule 12 (main 2a run); rule 16: Qwen3-Reranker-0.6B over the final top 20, (1 - w) z(final) + w z(reranker), w 0.4",
+   "dev_research": 0.5507,
+   "history": {
+    "llm_input": "current question first, then the last <=3 earlier turns (Q and A) of conversation_history",
+    "q_text": "current question + newline + released conversation_history",
+    "reasonembed_query": "same text as the LLM input, whitespace-collapsed"
+   },
+   "role": "main when earlier answers are present (rules 12 + 16; chosen by 2a_auto)",
+   "train_research": 0.5999,
+   "llm_rerank": {
+    "name": "qwen3-reranker-0.6b",
+    "checkpoint": "Qwen/Qwen3-Reranker-0.6B",
+    "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+    "bits": 16,
+    "dtype": "fp16",
+    "prompt": "model card (transformers example): system 'Judge whether the Document meets the requirements based on the Query and the Instruct provided. Note that the answer can only be \"yes\" or \"no\".', user '<Instruct>: {instruction}\\n<Query>: {query}\\n<Document>: {doc}', assistant prefix with an empty think block",
+    "score": "logit(yes) - logit(no) at the last position",
+    "doc_len": 512,
+    "query_len": 1024,
+    "depth": 20,
+    "how": "interp",
+    "w": 0.4,
+    "norm": "z-score over the top 20 of each topic (final score and reranker score)",
+    "instruction_cond": "2a_current",
+    "instruction_qcond": "2a_hist3qa",
+    "instruction": "Given a <domain> conversation, retrieve documents that help answer the current question.",
+    "query": "the ReasonEmbed query (current question first, then <= 3 earlier Q/A turns)",
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/rerank/scores.tsv"
+   }
+  },
+  "1a_p100": {
+   "track": 1,
+   "query": "1a",
+   "run_id": "UA_1a_main_p100",
+   "domains": [
+    "iota",
+    "quant",
+    "law",
+    "workplace",
+    "cardano",
+    "monero",
+    "economics",
+    "bitcoin",
+    "politics",
+    "genealogy",
+    "travel",
+    "hsm",
+    "history"
+   ],
+   "llm": {
+    "name": "qwen3-4b",
+    "checkpoint": "cyankiwi/Qwen3-4B-Instruct-2507-AWQ-4bit",
+    "revision": "b37d1ccb77e27a70fe4222d995fda27940eead5a",
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "quant": "AWQ W4A16 (compressed-tensors)",
+    "engine": "vLLM 0.32.0, enforce_eager",
+    "temperature": 0.0,
+    "max_new_tokens": 256,
+    "seed": 0,
+    "max_input_chars": 3000,
+    "prompts": [
+     "reason",
+     "hyde"
+    ],
+    "prompt_texts": {
+     "reason": "Read the question below. First, reason briefly about what knowledge is needed to answer it. Then describe what a relevant document would look like: its topic, the key concepts, terms and entities it would mention{time}. Keep the whole answer under 150 words.\n\n{body}",
+     "hyde": "Write a short passage (about 100 words) that could appear in a document that helps answer the question below. Write it as factual reference text, not as a reply to the asker{time}.\n\n{body}"
+    },
+    "system": "You help a search engine find documents. Answer in plain English text only.",
+    "time_hint_track1": {
+     "reason": "; if the question refers to a time (years, periods, events), state that time explicitly",
+     "hyde": "; if the question refers to a time (years, periods, events), place the passage in that time"
+    },
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/llm/t1"
+   },
+   "variant": "q+r+h",
+   "bm25": {
+    "impl": "bm25s 0.2 (Lucene variant)",
+    "k1": 0.9,
+    "b": 0.4,
+    "analyzer": "lucene",
+    "depth": 1000,
+    "text": "q \\n r \\n h"
+   },
+   "dense": {
+    "model": "bge-small",
+    "checkpoint": "BAAI/bge-small-en-v1.5",
+    "max_len": 256,
+    "emb": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v12/emb",
+    "maxp": false,
+    "query_vector": "normalised sum of e_query(q), e_query(r), e_doc(h)"
+   },
+   "hybrid": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "minmax",
+    "alpha": 0.6
+   },
+   "reasonembed": {
+    "checkpoint": "hanhainebula/reason-embed-qwen3-4b-0928",
+    "quant": "bitsandbytes NF4, fp16 compute",
+    "pooling": "last token, L2-normalised",
+    "max_len": 512,
+    "doc_max_chars": 4000,
+    "pool": 100,
+    "how": "interp",
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/reason",
+    "instruction": "Given a <domain> question, retrieve documents that help answer the question.",
+    "w": 0.8
+   },
+   "depth": 1000,
+   "source": "rule 6 (q+r+h), rule 8 (ReasonEmbed w 0.8), rule 17 (ReasonEmbed over the top 100; w re-chosen: 0.8)",
+   "dev_research": 0.3672,
+   "role": "main (rule 17)",
+   "train_research": 0.3139
+  },
+  "2a_nomaxp_p100": {
+   "track": 2,
+   "query": "2a_current",
+   "run_id": "UA_2a_nomaxp_p100",
+   "domains": [
+    "drones",
+    "politics",
+    "law",
+    "medicalsciences",
+    "hardware",
+    "economics",
+    "psychology",
+    "biology",
+    "sustainable_living",
+    "robotics",
+    "earth_science"
+   ],
+   "llm": {
+    "name": "qwen3-4b",
+    "checkpoint": "cyankiwi/Qwen3-4B-Instruct-2507-AWQ-4bit",
+    "revision": "b37d1ccb77e27a70fe4222d995fda27940eead5a",
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "quant": "AWQ W4A16 (compressed-tensors)",
+    "engine": "vLLM 0.32.0, enforce_eager",
+    "temperature": 0.0,
+    "max_new_tokens": 256,
+    "seed": 0,
+    "max_input_chars": 3000,
+    "prompts": [
+     "reason",
+     "hyde"
+    ],
+    "prompt_texts": {
+     "reason": "Read the question below. First, reason briefly about what knowledge is needed to answer it. Then describe what a relevant document would look like: its topic, the key concepts, terms and entities it would mention{time}. Keep the whole answer under 150 words.\n\n{body}",
+     "hyde": "Write a short passage (about 100 words) that could appear in a document that helps answer the question below. Write it as factual reference text, not as a reply to the asker{time}.\n\n{body}"
+    },
+    "system": "You help a search engine find documents. Answer in plain English text only.",
+    "time_hint_track1": {
+     "reason": "; if the question refers to a time (years, periods, events), state that time explicitly",
+     "hyde": "; if the question refers to a time (years, periods, events), place the passage in that time"
+    },
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/llm/t2"
+   },
+   "variant": "q+r+h",
+   "bm25": {
+    "impl": "bm25s 0.2 (Lucene variant)",
+    "k1": 0.9,
+    "b": 0.4,
+    "analyzer": "lucene",
+    "depth": 1000,
+    "text": "q \\n r \\n h"
+   },
+   "dense": {
+    "model": "bge-base",
+    "checkpoint": "BAAI/bge-base-en-v1.5",
+    "max_len": 512,
+    "emb": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v12/emb",
+    "maxp": false,
+    "query_vector": "normalised sum of e_query(q), e_query(r), e_doc(h)"
+   },
+   "hybrid": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "reasonembed": {
+    "checkpoint": "hanhainebula/reason-embed-qwen3-4b-0928",
+    "quant": "bitsandbytes NF4, fp16 compute",
+    "pooling": "last token, L2-normalised",
+    "max_len": 512,
+    "doc_max_chars": 4000,
+    "pool": 100,
+    "how": "interp",
+    "cache": "/home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache/reason",
+    "instruction": "Given a <domain> question, retrieve documents that help answer the question.",
+    "w": 0.8
+   },
+   "depth": 1000,
+   "source": "rule 6 (q+r+h), rule 10 (no MaxP), ReasonEmbed w 0.8 (rule-8 grid on train); rule 17 (ReasonEmbed over the top 100, w 0.8)",
+   "dev_research": 0.3801,
+   "role": "fallback (current turn, rules 10 + 17)",
+   "train_research": 0.4389
+  }
+ },
+ "_main_runs": {
+  "1a": "1a_p100",
+  "1b": "1b",
+  "2a": "2a_history_rr"
+ },
+ "_fallback_runs": {
+  "1a": [
+   "1a",
+   "1a_noRE"
+  ],
+  "1b": [
+   "1b_noRE"
+  ],
+  "2a": [
+   "2a_history",
+   "2a_history_q",
+   "2a_nomaxp_p100",
+   "2a_nomaxp",
+   "2a_maxp"
+  ]
+ },
+ "_auto_2a": {
+  "with_answers": "2a_history_rr",
+  "without_answers": "2a_history_q",
+  "run_id": "UA_2a_auto",
+  "rule": "per Track-2 domain file: if any turn with turn_id >= 2 has a non-empty parsed earlier answer in conversation_history -> with_answers, else without_answers (LOG rule 14)"
+ }
+}

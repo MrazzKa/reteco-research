@@ -134,6 +134,31 @@ def week7(root):
                          f"{ci(r['train_minus_prev'])} | {f4(r['dev'])} [{f4(r['dev_ci95'][0])}, {f4(r['dev_ci95'][1])}] | "
                          f"{ci(r['dev_minus_prev'])} | {r.get('delta_vs') or ''} |")
             L += [""]
+    r14b = jload(os.path.join(R, "select", "rule14b_train.json"))
+    if r14b:
+        L += _breakdown(r14b, "Rule 14b (phase B): the main pipeline on answer-free histories vs the rule-14 run, train subsample")
+    ens = sorted(glob.glob(os.path.join(R, "ensemble", "rule18_*.json")))
+    if ens:
+        L += ["## AG. Second reasoning embedder: Qwen3-Embedding-4B, alone and averaged with ReasonEmbed (rule 18, phase B)", "",
+              "Same top-50 pool as the current system; E = mean of z(ReasonEmbed) and z(Qwen3-Embedding) per topic; way "
+              "(top-N or interpolation weight) chosen on the train subsample. ReasonIR-8B was excluded (training positives "
+              "drawn from the BRIGHT datastore; LOG 2026-11-10 09:58).", "",
+              "| condition | current (ReasonEmbed) train / dev | Qwen3-Emb alone: way, train / dev | ensemble: way, train / dev | "
+              "ensemble − current, train | dev | adopted |", "| --- | --- | --- | --- | --- | --- | --- |"]
+        for p_ in ens:
+            x = jload(p_)
+            so, eb = x["second_only_best"], x["ensemble_best"]
+            L.append(f"| {x['cond']} | {f4(x['current']['train'])} / {f4(x['current']['dev'])} | {so['how']}: {f4(so['train'])} / "
+                     f"{f4(so['dev'])} | {eb['how']}: {f4(eb['train'])} / {f4(eb['dev'])} | {ci(eb['train_minus_current'])} | "
+                     f"{ci(eb['dev_minus_current'])} | {x['adopted']} |")
+        L += [""]
+    cold = jload(os.path.join(R, "cold", "cold_report.json"))
+    if cold:
+        L += ["## AH. Cold run on a slice of a synthetic test release (B3, phase B)", "",
+              cold.get("about", ""), "", "| part | topics | wall time | per topic | notes |", "| --- | ---: | ---: | ---: | --- |"]
+        for r in cold["rows"]:
+            L.append(f"| {r['part']} | {r['topics']} | {r['wall_s']:.0f} s | {r['per_topic_s']:.2f} s | {r.get('notes', '')} |")
+        L += ["", cold.get("estimate", ""), ""]
     cp = jload(os.path.join(R, "compute_1110.json"))
     if cp:
         L += ["## AF. Compute: models, revisions, throughput (B5)", "", cp["machine"] + ".", "",

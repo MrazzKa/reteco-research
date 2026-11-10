@@ -18,3 +18,65 @@ data_noans written
    interp=0.8: train 0.5818  dev 0.539
    interp=0.9: train 0.583  dev 0.5475
 === 12:48:30 attempt 1: qwen3-emb-4b --track 2 --conditions 2a_hist3qa__q+r+h --query-cond 2a_hist3qa --name 2ah_hybrid_q3e --hybrid ../research/runs_v13/hist/t2/hybrid.json --bm25 ../research/runs_v13/hist/t2/bm25/runs --dense ../research/runs_v13/hist/t2/dense/runs --save-scores ../research/runs_v13/scores/2ah_hybrid_q3e.json
+  [2a_hist3qa__q+r+h] docs 2000/26843 (340s)
+  [2a_hist3qa__q+r+h] docs 4000/26843 (699s)
+  [2a_hist3qa__q+r+h] docs 6000/26843 (1044s)
+  [2a_hist3qa__q+r+h] docs 8000/26843 (1389s)
+  [2a_hist3qa__q+r+h] docs 10000/26843 (1720s)
+  [2a_hist3qa__q+r+h] docs 12000/26843 (2027s)
+  [2a_hist3qa__q+r+h] docs 14000/26843 (2274s)
+  [2a_hist3qa__q+r+h] docs 16000/26843 (2503s)
+  [2a_hist3qa__q+r+h] docs 18000/26843 (2650s)
+  [2a_hist3qa__q+r+h] docs 20000/26843 (2847s)
+  [2a_hist3qa__q+r+h] docs 22000/26843 (3060s)
+  [2a_hist3qa__q+r+h] docs 24000/26843 (3260s)
+  [2a_hist3qa__q+r+h] docs 26000/26843 (3426s)
+  [2a_hist3qa__q+r+h] docs 26843/26843 (3500s)
+  [2a_hist3qa__q+r+h] 26843 docs + 1188 queries in 3641s
+== t2 2a_hist3qa__q+r+h: none train 0.517 dev 0.4601 | best on train ('interp', 0.5): train 0.5335 dev 0.4789 train boot {'diff': 0.0165, 'ci95': [0.0011, 0.0311], 'p_le_0': 0.0175}
+   none=0: train 0.517  dev 0.4601
+   top=10: train 0.5049  dev 0.4462
+   top=20: train 0.494  dev 0.4433
+   top=50: train 0.4947  dev 0.4351
+   interp=0.1: train 0.5259  dev 0.4635
+   interp=0.2: train 0.5267  dev 0.4702
+   interp=0.3: train 0.5254  dev 0.474
+   interp=0.4: train 0.5294  dev 0.4757
+   interp=0.5: train 0.5335  dev 0.4789
+   interp=0.6: train 0.5312  dev 0.4771
+   interp=0.7: train 0.5259  dev 0.4735
+   interp=0.8: train 0.5225  dev 0.4665
+   interp=0.9: train 0.5115  dev 0.453
+   "ci95": [
+    -0.0352,
+    -0.0111
+   ],
+   "p_le_0": 1.0
+  }
+ },
+ "second_only_best": {
+  "how": "interp=0.5",
+  "train": 0.5335,
+  "dev": 0.4789,
+  "train_minus_current": {
+   "diff": -0.0496,
+   "ci95": [
+    -0.0727,
+    -0.0267
+   ],
+   "p_le_0": 1.0
+  },
+  "dev_minus_current": {
+   "diff": -0.0686,
+   "ci95": [
+    -0.083,
+    -0.0541
+   ],
+   "p_le_0": 1.0
+  }
+ },
+ "adopted": false
+}
+=== 13:49:29 R18_2a_history_DONE
+{"t1_topics": 58, "t1_steps": 142, "t2_turns": 92, "t2_turns_with_answers_after": 68}
+wrote ../research/runs_v13/cold/submission_cold.json; caches under /home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold/cache
