@@ -569,3 +569,226 @@ FlashInfer kernels are disabled: flashinfer-cubin is not installed and nvcc (CUD
 === 17:24:15 R18_1b_DONE
 === 17:24:15 R18_ALL_DONE
 === 17:24:15 gen gpu-util 0.75
+(EngineCore pid=32762) INFO 11-10 17:24:46 [kv_cache_utils.py:2327] GPU KV cache size: 17,168 tokens, Maximum concurrency for 1,536 tokens per request: 11.18x
+[hyde/1b_query+step] 3976 inputs, 3976 unique, 3976 to generate
+  256/3976  chunk 208s  959 tok/s  1.23 q/s
+  512/3976  chunk 213s  966 tok/s  1.22 q/s
+  768/3976  chunk 218s  952 tok/s  1.20 q/s
+  1024/3976  chunk 228s  947 tok/s  1.18 q/s
+  1280/3976  chunk 229s  946 tok/s  1.17 q/s
+  1536/3976  chunk 227s  943 tok/s  1.16 q/s
+  1792/3976  chunk 223s  943 tok/s  1.16 q/s
+  2048/3976  chunk 225s  944 tok/s  1.16 q/s
+  2304/3976  chunk 231s  943 tok/s  1.15 q/s
+  2560/3976  chunk 235s  942 tok/s  1.14 q/s
+  2816/3976  chunk 221s  942 tok/s  1.15 q/s
+  3072/3976  chunk 213s  943 tok/s  1.15 q/s
+  3328/3976  chunk 219s  943 tok/s  1.15 q/s
+  3584/3976  chunk 233s  942 tok/s  1.15 q/s
+  3840/3976  chunk 236s  941 tok/s  1.14 q/s
+  3976/3976  chunk 129s  939 tok/s  1.14 q/s
+=== 18:23:00 GEN_DONE
+=== 18:23:00 /home/timur_rk/semeval-reteco/.venv/bin/python qexp_search.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 1 --cond 1b_query+step --variants q+r+h1s q+r+h3 q+r+h5 --llm ../research/runs_v13/llm/t1 --model bge-small --max-len 256 --emb ../research/runs_v12/emb --out ../research/runs_v13/hyde5/t1
+    model BAAI/bge-small-en-v1.5 rev 5c38ec7c40 dim 384 max_len 256 fp16=True (7s)
+    index: 9,680 docs, 2s (lucene)
+[t1/iota] indexes ready (3s)
+    1b_query+step__q+r+h1s      16 topics (16 unique)    0.1s
+  train q+r+h1s bm25 0.2148  dense 0.3054
+    1b_query+step__q+r+h3       16 topics (16 unique)    0.2s
+  train q+r+h3 bm25 0.1489  dense 0.2856
+    1b_query+step__q+r+h5       16 topics (16 unique)    0.3s
+  train q+r+h5 bm25 0.1229  dense 0.2856
+    1b_query+step__q+r+h1s       8 topics (8 unique)    0.1s
+    1b_query+step__q+r+h3        8 topics (8 unique)    0.1s
+    1b_query+step__q+r+h5        8 topics (8 unique)    0.1s
+    index: 25,040 docs, 4s (lucene)
+[t1/quant] indexes ready (4s)
+    1b_query+step__q+r+h1s      37 topics (37 unique)    0.4s
+  train q+r+h1s bm25 0.0000  dense 0.2261
+    1b_query+step__q+r+h3       37 topics (37 unique)    0.6s
+  train q+r+h3 bm25 0.0171  dense 0.2421
+    1b_query+step__q+r+h5       37 topics (37 unique)    0.9s
+  train q+r+h5 bm25 0.0270  dense 0.2330
+    1b_query+step__q+r+h1s      15 topics (15 unique)    0.2s
+    1b_query+step__q+r+h3       15 topics (15 unique)    0.3s
+    1b_query+step__q+r+h5       15 topics (15 unique)    0.3s
+    index: 36,110 docs, 6s (lucene)
+[t1/law] indexes ready (7s)
+    1b_query+step__q+r+h1s      53 topics (53 unique)    0.5s
+  train q+r+h1s bm25 0.1089  dense 0.3442
+    1b_query+step__q+r+h3       53 topics (53 unique)    0.8s
+  train q+r+h3 bm25 0.1152  dense 0.3367
+    1b_query+step__q+r+h5       53 topics (53 unique)    1.1s
+  train q+r+h5 bm25 0.1191  dense 0.3451
+    1b_query+step__q+r+h1s      23 topics (23 unique)    0.3s
+    1b_query+step__q+r+h3       23 topics (23 unique)    0.4s
+    1b_query+step__q+r+h5       23 topics (23 unique)    0.5s
+    index: 43,584 docs, 5s (lucene)
+[t1/workplace] indexes ready (5s)
+    1b_query+step__q+r+h1s      31 topics (31 unique)    0.4s
+  train q+r+h1s bm25 0.2990  dense 0.3427
+    1b_query+step__q+r+h3       31 topics (31 unique)    0.6s
+  train q+r+h3 bm25 0.2804  dense 0.3346
+    1b_query+step__q+r+h5       31 topics (31 unique)    0.8s
+  train q+r+h5 bm25 0.2719  dense 0.3341
+    1b_query+step__q+r+h1s      20 topics (20 unique)    0.2s
+    1b_query+step__q+r+h3       20 topics (20 unique)    0.3s
+    1b_query+step__q+r+h5       20 topics (20 unique)    0.4s
+    index: 47,509 docs, 7s (lucene)
+[t1/cardano] indexes ready (7s)
+    1b_query+step__q+r+h1s      57 topics (57 unique)    0.5s
+  train q+r+h1s bm25 0.2224  dense 0.2777
+    1b_query+step__q+r+h3       57 topics (57 unique)    0.8s
+  train q+r+h3 bm25 0.2041  dense 0.2844
+    1b_query+step__q+r+h5       57 topics (57 unique)    1.1s
+  train q+r+h5 bm25 0.2019  dense 0.2807
+    1b_query+step__q+r+h1s      33 topics (33 unique)    0.3s
+    1b_query+step__q+r+h3       33 topics (33 unique)    0.5s
+    1b_query+step__q+r+h5       33 topics (33 unique)    0.8s
+    index: 53,955 docs, 9s (lucene)
+[t1/monero] indexes ready (9s)
+    1b_query+step__q+r+h1s      73 topics (73 unique)    0.7s
+  train q+r+h1s bm25 0.0589  dense 0.3109
+    1b_query+step__q+r+h3       73 topics (73 unique)    1.1s
+  train q+r+h3 bm25 0.0423  dense 0.3186
+    1b_query+step__q+r+h5       73 topics (73 unique)    1.5s
+  train q+r+h5 bm25 0.0325  dense 0.3175
+    1b_query+step__q+r+h1s      28 topics (28 unique)    0.3s
+    1b_query+step__q+r+h3       28 topics (28 unique)    0.4s
+    1b_query+step__q+r+h5       28 topics (28 unique)    0.6s
+    index: 74,692 docs, 13s (lucene)
+[t1/economics] indexes ready (13s)
+    1b_query+step__q+r+h1s     130 topics (130 unique)    1.6s
+  train q+r+h1s bm25 0.0756  dense 0.1562
+    1b_query+step__q+r+h3      130 topics (130 unique)    2.5s
+  train q+r+h3 bm25 0.0793  dense 0.1510
+    1b_query+step__q+r+h5      130 topics (130 unique)    3.3s
+  train q+r+h5 bm25 0.0798  dense 0.1514
+    1b_query+step__q+r+h1s      51 topics (51 unique)    0.6s
+    1b_query+step__q+r+h3       51 topics (51 unique)    1.0s
+    1b_query+step__q+r+h5       51 topics (51 unique)    1.3s
+    index: 76,706 docs, 12s (lucene)
+[t1/bitcoin] indexes ready (13s)
+    1b_query+step__q+r+h1s     132 topics (132 unique)    1.6s
+  train q+r+h1s bm25 0.0722  dense 0.1841
+    1b_query+step__q+r+h3      132 topics (132 unique)    2.4s
+  train q+r+h3 bm25 0.0708  dense 0.1852
+    1b_query+step__q+r+h5      132 topics (132 unique)    3.3s
+  train q+r+h5 bm25 0.0659  dense 0.1823
+    1b_query+step__q+r+h1s      56 topics (56 unique)    0.6s
+    1b_query+step__q+r+h3       56 topics (56 unique)    1.0s
+    1b_query+step__q+r+h5       56 topics (56 unique)    1.3s
+    index: 135,207 docs, 24s (lucene)
+[t1/politics] indexes ready (24s)
+    1b_query+step__q+r+h1s     266 topics (266 unique)    4.3s
+  train q+r+h1s bm25 0.3603  dense 0.3550
+    1b_query+step__q+r+h3      266 topics (266 unique)    6.4s
+  train q+r+h3 bm25 0.3849  dense 0.3644
+    1b_query+step__q+r+h5      266 topics (266 unique)    8.6s
+  train q+r+h5 bm25 0.3952  dense 0.3615
+    1b_query+step__q+r+h1s     119 topics (119 unique)    1.9s
+    1b_query+step__q+r+h3      119 topics (119 unique)    2.9s
+    1b_query+step__q+r+h5      119 topics (119 unique)    3.9s
+    index: 136,101 docs, 26s (lucene)
+[t1/genealogy] indexes ready (26s)
+    1b_query+step__q+r+h1s     159 topics (159 unique)    2.5s
+  train q+r+h1s bm25 0.1381  dense 0.3698
+    1b_query+step__q+r+h3      159 topics (159 unique)    3.7s
+  train q+r+h3 bm25 0.1394  dense 0.3649
+    1b_query+step__q+r+h5      159 topics (159 unique)    5.0s
+  train q+r+h5 bm25 0.1379  dense 0.3595
+    1b_query+step__q+r+h1s      68 topics (68 unique)    1.0s
+    1b_query+step__q+r+h3       68 topics (68 unique)    1.5s
+    1b_query+step__q+r+h5       68 topics (68 unique)    2.1s
+    index: 158,771 docs, 23s (lucene)
+[t1/travel] indexes ready (24s)
+    1b_query+step__q+r+h1s     133 topics (133 unique)    2.1s
+  train q+r+h1s bm25 0.0316  dense 0.2728
+    1b_query+step__q+r+h3      133 topics (133 unique)    3.3s
+  train q+r+h3 bm25 0.0256  dense 0.2686
+    1b_query+step__q+r+h5      133 topics (133 unique)    4.3s
+  train q+r+h5 bm25 0.0246  dense 0.2695
+    1b_query+step__q+r+h1s      52 topics (52 unique)    0.8s
+    1b_query+step__q+r+h3       52 topics (52 unique)    1.2s
+    1b_query+step__q+r+h5       52 topics (52 unique)    1.6s
+    index: 169,552 docs, 30s (lucene)
+[t1/hsm] indexes ready (31s)
+    1b_query+step__q+r+h1s     254 topics (254 unique)    4.1s
+  train q+r+h1s bm25 0.3028  dense 0.3150
+    1b_query+step__q+r+h3      254 topics (254 unique)    6.1s
+  train q+r+h3 bm25 0.3240  dense 0.3095
+    1b_query+step__q+r+h5      254 topics (254 unique)    8.2s
+  train q+r+h5 bm25 0.3296  dense 0.3084
+    1b_query+step__q+r+h1s     105 topics (105 unique)    1.5s
+    1b_query+step__q+r+h3      105 topics (105 unique)    2.3s
+    1b_query+step__q+r+h5      105 topics (105 unique)    3.1s
+    index: 200,252 docs, 55s (lucene)
+[t1/history] indexes ready (56s)
+    1b_query+step__q+r+h1s    1421 topics (1421 unique)   26.5s
+  train q+r+h1s bm25 0.0636  dense 0.2632
+    1b_query+step__q+r+h3     1421 topics (1421 unique)   40.1s
+  train q+r+h3 bm25 0.0648  dense 0.2672
+    1b_query+step__q+r+h5     1421 topics (1421 unique)   53.9s
+  train q+r+h5 bm25 0.0668  dense 0.2662
+    1b_query+step__q+r+h1s     636 topics (636 unique)   12.5s
+    1b_query+step__q+r+h3      636 topics (636 unique)   18.5s
+    1b_query+step__q+r+h5      636 topics (636 unique)   24.7s
+missing generations: 0; wrote ../research/runs_v13/hyde5/t1/results.json
+=== exit 0
+=== 18:32:48 /home/timur_rk/semeval-reteco/.venv/bin/python hybrid.py --track 1 --conditions 1b_query+step__q+r+h1s 1b_query+step__q+r+h3 1b_query+step__q+r+h5 --bm25 ../research/runs_v13/hyde5/t1/bm25/runs --dense ../research/runs_v13/hyde5/t1/dense/runs --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out ../research/runs_v13/hyde5/t1/hybrid_1b.json
+
+== track 1 1b_query+step__q+r+h1s (dense: 1b_query+step__q+r+h1s) — train 13 dom, dev 13 dom
+  bm25             train 0.1499  dev 0.1657   kind=bm25
+  dense            train 0.2864  dev 0.3091   kind=dense
+  rerank           train 0.2784  dev 0.3079   kind=rerank
+  linear*          train 0.3245  dev 0.3509   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.7
+  rrf*             train 0.3050  dev 0.3397   kind=rrf|kb=50|kd=50|c=30
+  pool_rerank*     train 0.2864  dev 0.3091   kind=pool_rerank|kb=100|kd=100
+  rrf_c60_100+100  train 0.2978  dev 0.3383   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.1852, 'ci95': [0.1545, 0.2186], 'p_le_0': 0.0}
+  dev rrf* - bm25: {'diff': 0.174, 'ci95': [0.1457, 0.2055], 'p_le_0': 0.0}
+  dev linear* - rerank: {'diff': 0.043, 'ci95': [0.0248, 0.0623], 'p_le_0': 0.0}
+  dev dense - bm25: {'diff': 0.1434, 'ci95': [0.1105, 0.1783], 'p_le_0': 0.0}
+  dev rerank - bm25: {'diff': 0.1422, 'ci95': [0.1105, 0.1761], 'p_le_0': 0.0}
+  dev linear* - dense: {'diff': 0.0418, 'ci95': [0.0291, 0.0548], 'p_le_0': 0.0}
+
+== track 1 1b_query+step__q+r+h3 (dense: 1b_query+step__q+r+h3) — train 13 dom, dev 13 dom
+  bm25             train 0.1459  dev 0.1615   kind=bm25
+  dense            train 0.2856  dev 0.3126   kind=dense
+  rerank           train 0.2920  dev 0.3122   kind=rerank
+  linear*          train 0.3310  dev 0.3572   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.7
+  rrf*             train 0.3077  dev 0.3430   kind=rrf|kb=50|kd=50|c=30
+  pool_rerank*     train 0.2856  dev 0.3126   kind=pool_rerank|kb=100|kd=100
+  rrf_c60_100+100  train 0.3060  dev 0.3400   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.1957, 'ci95': [0.1643, 0.2296], 'p_le_0': 0.0}
+  dev rrf* - bm25: {'diff': 0.1815, 'ci95': [0.1529, 0.2132], 'p_le_0': 0.0}
+  dev linear* - rerank: {'diff': 0.045, 'ci95': [0.0274, 0.064], 'p_le_0': 0.0}
+  dev dense - bm25: {'diff': 0.1511, 'ci95': [0.118, 0.1867], 'p_le_0': 0.0}
+  dev rerank - bm25: {'diff': 0.1507, 'ci95': [0.1185, 0.1856], 'p_le_0': 0.0}
+  dev linear* - dense: {'diff': 0.0446, 'ci95': [0.0301, 0.0594], 'p_le_0': 0.0}
+
+== track 1 1b_query+step__q+r+h5 (dense: 1b_query+step__q+r+h5) — train 13 dom, dev 13 dom
+  bm25             train 0.1442  dev 0.1579   kind=bm25
+  dense            train 0.2842  dev 0.3128   kind=dense
+  rerank           train 0.2847  dev 0.3129   kind=rerank
+  linear*          train 0.3316  dev 0.3573   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.7
+  rrf*             train 0.3083  dev 0.3457   kind=rrf|kb=50|kd=50|c=30
+  pool_rerank*     train 0.2841  dev 0.3128   kind=pool_rerank|kb=100|kd=100
+  rrf_c60_100+100  train 0.3040  dev 0.3476   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.1994, 'ci95': [0.1683, 0.2325], 'p_le_0': 0.0}
+  dev rrf* - bm25: {'diff': 0.1878, 'ci95': [0.1617, 0.2149], 'p_le_0': 0.0}
+  dev linear* - rerank: {'diff': 0.0443, 'ci95': [0.0269, 0.0624], 'p_le_0': 0.0}
+  dev dense - bm25: {'diff': 0.1549, 'ci95': [0.1214, 0.1902], 'p_le_0': 0.0}
+  dev rerank - bm25: {'diff': 0.1551, 'ci95': [0.122, 0.1897], 'p_le_0': 0.0}
+  dev linear* - dense: {'diff': 0.0445, 'ci95': [0.0301, 0.0592], 'p_le_0': 0.0}
+wrote ../research/runs_v13/hyde5/t1/hybrid_1b.json
+=== exit 0
+=== 18:41:00 /home/timur_rk/semeval-reteco/.venv/bin/python select_rule.py --rule 13 --cond 1b_query+step --baseline n1_t0 --cand n1_t0=../research/runs_v13/qexp/t1/hybrid_1b.json:1b_query+step__q+r+h n3=../research/runs_v13/hyde5/t1/hybrid_1b.json:1b_query+step__q+r+h3 n5=../research/runs_v13/hyde5/t1/hybrid_1b.json:1b_query+step__q+r+h5 --out ../research/runs_v13/select/rule13_1b_hybrid.json
+rule 13 1b_query+step:
+  n5         bm25 0.1442/0.1579  dense 0.2842/0.3128  hybrid train 0.3316  dev 0.3573
+  n3         bm25 0.1459/0.1615  dense 0.2856/0.3126  hybrid train 0.3310  dev 0.3572
+  n1_t0      bm25 0.1470/0.1620  dense 0.2779/0.3097  hybrid train 0.3226  dev 0.3505
+  best on train n5; train bootstrap {'diff': 0.009, 'ci95': [0.003, 0.0155], 'p_le_0': 0.0006}; adopted=True -> n5
+  dev chosen - baseline {'diff': 0.0068, 'ci95': [-0.0015, 0.0161], 'p_le_0': 0.0575}
+=== exit 0
+=== 18:41:09 ALLDONE

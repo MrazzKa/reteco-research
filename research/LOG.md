@@ -1749,3 +1749,14 @@ result (train sub / dev): current (ReasonEmbed, interp 0.7) 0.3754 / 0.4053 · Q
 rule 18 summary: the Qwen3-Embedding-4B ensemble is not adopted anywhere (train ensemble − current: 2a history −0.015,
   1a −0.011, 2a current −0.023, 1b −0.005). The general embedder alone is far below ReasonEmbed in every condition.
   GPU time ≈ 3.2 h for 87,184 documents.
+
+## 2026-11-10 17:24–18:41 — B4 / rule 13 for 1b, hybrid stage: 5 HyDE samples adopted at the hybrid stage
+command: `queue_1110h.sh`: `llm_expand.py --track 1 --conditions 1b_query+step --prompts hyde --samples 5 --temperature
+  0.7` (3,976 step inputs, 59 min, 1.15 inputs/s, ~945 tok/s), `qexp_search.py --variants q+r+h1s q+r+h3 q+r+h5`
+  (out `hyde5/t1`), `hybrid.py`, `select_rule.py --rule 13` (out `select/rule13_1b_hybrid.json`).
+result (hybrid, fusion tuned on full train; train / dev): baseline one HyDE at temperature 0 0.3226 / 0.3505 · n = 3
+  0.3310 / 0.3572 · **n = 5 0.3316 / 0.3573**. n5 − baseline train +0.0090 [+0.0030, +0.0155] → adopted at the hybrid
+  stage; dev +0.0068 [−0.0015, +0.0161]. (Opposite of 2a with history, where more samples hurt.)
+next (rule 13 as written): ReasonEmbed over the top 50 of the n = 5 hybrid with its weight re-chosen on the train
+  subsample, then the final comparison against the current 1b final system (ReasonEmbed pool 50, w 0.7) on the same
+  subsample with the same margin. Caveat (B3b): this comparison changes the LLM input; draw-to-draw noise ≈ 0.003.
