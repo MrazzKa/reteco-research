@@ -1,0 +1,12 @@
+=== 14:18:43 /home/timur_rk/semeval-reteco/.venv/bin/python submit.py --config ../research/runs_v13/nondet/submission_freshllm.json --variants 1a_p100 1b --data ../../reteco_data_v11 --split dev --out ../research/runs_v13/nondet/sub
+(MainProcess pid=27044) INFO 11-10 14:18:49 [api_utils.py:286] non-default args: {'max_model_len': 1536, 'gpu_memory_utilization': 0.6, 'max_num_batched_tokens': 2048, 'max_num_seqs': 64, 'disable_log_stats': True, 'revision': 'b37d1ccb77e27a70fe4222d995fda27940eead5a', 'enforce_eager': True, 'model': 'cyankiwi/Qwen3-4B-Instruct-2507-AWQ-4bit'}
+(MainProcess pid=27044) INFO 11-10 14:18:50 [model.py:733] Resolved architecture: Qwen3ForCausalLM
+(MainProcess pid=27044) INFO 11-10 14:18:50 [model.py:2152] Using max model len 1536
+(MainProcess pid=27044) WARNING 11-10 14:18:50 [flashinfer.py:99] FlashInfer kernels are disabled: flashinfer-cubin is not installed and nvcc (CUDA_HOME, CUDA_PATH, PATH or /usr/local/cuda) or ninja (PATH) is missing. Set CUDA_HOME to a CUDA toolkit and put ninja on PATH, or run `vllm download-kernels`.
+(MainProcess pid=27044) INFO 11-10 14:18:50 [scheduler.py:307] Chunked prefill is enabled with max_num_batched_tokens=2048.
+(MainProcess pid=27044) WARNING 11-10 14:18:50 [vllm.py:1703] Enforce eager set, disabling torch.compile, CUDAGraphs, and JIT kernel warmup. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none and --kernel_config.enable_jit_warmup=False
+(MainProcess pid=27044) WARNING 11-10 14:18:50 [vllm.py:1727] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(MainProcess pid=27044) INFO 11-10 14:18:50 [kernel.py:467] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native'], gelu_and_mul_sparse=['triton', 'native'])
+(MainProcess pid=27044) INFO 11-10 14:18:50 [vllm.py:1929] Cudagraph is disabled under eager mode
+(MainProcess pid=27044) INFO 11-10 14:18:50 [compilation.py:317] Enabled custom fusions: norm_quant, act_quant
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 2583.49it/s]

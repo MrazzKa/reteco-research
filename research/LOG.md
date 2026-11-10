@@ -1705,3 +1705,6 @@ design: config copy whose LLM cache is a new empty folder (ReasonEmbed and reran
   per LLM config); report per variant the official macro of the fresh draw vs the cached one, the paired bootstrap
   difference, and the share of identical generations. Purpose: compare the run-to-run noise with the +0.005 margin
   of the rules and with the dev differences reported so far. Runs in `queue_1110f.sh` before B4.
+14:30 queue reordered (before any B3b or further rule-18 result): `queue_1110g.sh` (rule 18 for 1a had just started;
+  no Qwen3-Emb vector saved yet) and the waiting `queue_1110f.sh` stopped by PID; `queue_1110h.sh` = B3b → rule 18 for
+  1a, 2a current, 1b → B4. Reason: B3b bears on how to read every +0.005 margin; rule 18 was clearly negative on 2a.
