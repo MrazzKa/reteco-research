@@ -1,1 +1,18 @@
 === 18:41:27 attempt 1
+  [1b_query+step__q+r+h5] docs 54/54 (42s)
+  [1b_query+step__q+r+h5] 54 docs + 0 queries in 42s
+== t1 1b_query+step__q+r+h5: none train 0.3512 dev 0.3573 | best on train ('interp', 0.7): train 0.3777 dev 0.4084 train boot {'diff': 0.0265, 'ci95': [0.0076, 0.0457], 'p_le_0': 0.0034}
+   none=0: train 0.3512  dev 0.3573
+   top=10: train 0.3468  dev 0.3574
+   top=20: train 0.35  dev 0.3767
+   top=50: train 0.3489  dev 0.3934
+   interp=0.1: train 0.3551  dev 0.3649
+   interp=0.2: train 0.3593  dev 0.3741
+   interp=0.3: train 0.3601  dev 0.3809
+   interp=0.4: train 0.3689  dev 0.3882
+   interp=0.5: train 0.3741  dev 0.3988
+   interp=0.6: train 0.377  dev 0.4033
+   interp=0.7: train 0.3777  dev 0.4084
+   interp=0.8: train 0.3725  dev 0.4115
+   interp=0.9: train 0.3637  dev 0.4031
+=== 18:42:21 ALLDONE

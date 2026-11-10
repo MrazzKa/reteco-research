@@ -1760,3 +1760,12 @@ result (hybrid, fusion tuned on full train; train / dev): baseline one HyDE at t
 next (rule 13 as written): ReasonEmbed over the top 50 of the n = 5 hybrid with its weight re-chosen on the train
   subsample, then the final comparison against the current 1b final system (ReasonEmbed pool 50, w 0.7) on the same
   subsample with the same margin. Caveat (B3b): this comparison changes the LLM input; draw-to-draw noise ≈ 0.003.
+
+## 2026-11-10 18:41–18:43 — B4 / rule 13 for 1b, final stage: not adopted
+command: `queue_1110i.sh` → `reason_rerank.py --pool 50 --conditions 1b_query+step__q+r+h5 --name 1b_h5` (54 new
+  documents), then the final paired comparison on the train subsample (out `select/rule13_1b_final.json`).
+result (train sub / dev): n = 5 hybrid + ReasonEmbed (interp 0.7, re-chosen) 0.3777 / 0.4084 vs current 1b final
+  0.3754 / 0.4053; train +0.0023 [−0.0048, +0.0094] → **not adopted** (the hybrid-stage gain of +0.009 mostly
+  disappears once ReasonEmbed rescoring is on top, as with MaxP in rule 10). Dev +0.0031 [−0.0034, +0.0109].
+next: rule 13 for 1a (the task list puts it last, "only if time is left"): same procedure, queue `queue_1110j.sh`;
+  estimate 1a generation ~45–60 min (1,730 long inputs × 5 samples at ~0.5–1 inputs/s) + retrieval/grid ~20 min.
