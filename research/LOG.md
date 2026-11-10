@@ -1780,3 +1780,18 @@ phase B summary (12:50–19:17): rule 14b not adopted; B3 cold run found and fix
   ≤ 0.003 between draws; rule 18 (Qwen3-Embedding-4B ensemble) not adopted anywhere; rule 13 (several HyDE) adopted at
   the 1b hybrid stage but not after ReasonEmbed, not for 1a; B5 ablation / compute / error examples done. The
   submission configuration is unchanged since the end of phase A (1a_p100, 1b, 2a_auto + fallbacks).
+
+## 2026-11-10 21:45 — C1 (written before running; check, no choice): full cold dress rehearsal of the submission
+why: the phase-B cold run covered only 4 of 22 domains and found a crash that warm caches hid; the exact submission
+  command has never run end to end at full size with empty caches. Not a selection: nothing in configs changes on
+  its outcome unless something breaks.
+what: synthetic test release from all dev topics (`make_test_release.py`, gold fields removed, earlier answers kept),
+  caches redirected to an empty `research/runs_v13/cold_full/cache` (`cold_config.py`), then one `submit.py` call per
+  track with exactly the submission runs: Track 1 `1a_p100 1a 1a_noRE 1b 1b_noRE`; Track 2 `2a_auto` (builds
+  `2a_history_rr` and `2a_history_q`) `2a_history 2a_nomaxp_p100 2a_nomaxp 2a_maxp`. Then `score_submission.py` on
+  every run (official format_checker + scorer, dev qrels) and `cold_report.py` (stage timings, test-size estimate).
+pass criteria: no crash; format_checker exit 0 on every file; `2a_auto` chooses `2a_history_rr` in 11/11 domains;
+  every official macro within ±0.005 of its research dev number (B3b: fresh LLM draws move dev by ≤ 0.003).
+  A larger deviation is investigated, not tuned.
+estimate (scaled from the slice: 519 1a topics, 1,214 1b steps, 858 2a turns): Track 1 ≈ 2.0–2.5 h, Track 2 ≈
+  1.5–2 h, total ≈ 3.5–4.5 h (upper bound: the slice over-counts vLLM start-up and BM25 indexing per topic).

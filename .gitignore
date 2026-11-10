@@ -45,3 +45,7 @@ research/runs_v13/cold/release/
 research/runs_v13/nondet/llm/
 research/runs_v13/nondet/sub/
 research/runs_v13/a2/sub_noans/
+# 2026-11-10 evening: full cold dress rehearsal (reports kept)
+research/runs_v13/cold_full/cache/
+research/runs_v13/cold_full/sub/
+research/runs_v13/cold_full/release/
