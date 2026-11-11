@@ -1806,3 +1806,8 @@ done (empty caches, full synthetic test release from dev): pre-generation of all
   holds within ~10% after scaling 519 → 350 queries.
 resume: `research/runs_v13/logs/queue_1110k_resume.sh` (keeps release and caches; runs 1b 1b_noRE, Track 2, scoring of
   all runs, cold report). Caveat: the Track-1 LLM texts are already cached, so the resumed 1b timing excludes LLM time.
+
+## 2026-11-11 07:32 — C1 resumed
+command: `queue_1110k_resume.sh` (1b 1b_noRE, Track 2 with empty Track-2 caches, scoring of all 12 runs, cold report).
+estimate: 1b ≈ 15–25 min (LLM texts cached), Track 2 ≈ 1.5–2 h (LLM generations + ReasonEmbed + reranker, cold),
+  scoring ≈ 5 min.
