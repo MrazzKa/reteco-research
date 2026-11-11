@@ -28,7 +28,15 @@ def main():
     a = ap.parse_args()
     report = {}
     for v in a.variants:
-        man = json.load(open(os.path.join(a.sub, v, "manifest.json")))
+        mp = os.path.join(a.sub, v, "manifest.json")
+        if not os.path.exists(mp) and os.path.exists(os.path.join(a.sub, v, "decision.json")):
+            # 2a_auto: files copied from the chosen run per domain; take the config of the run chosen most often
+            dec = json.load(open(os.path.join(a.sub, v, "decision.json")))
+            src = max(dec["summary"], key=dec["summary"].get)
+            man = json.load(open(os.path.join(a.sub, src, "manifest.json")))
+            man["domains"] = {d: man["domains"][d] for d in dec["domains"]}
+        else:
+            man = json.load(open(mp))
         cfg = man["config"]
         tr = cfg["track"]
         sub, key = ("track1_tempo", "id") if tr == 1 else ("track2_recor", "doc_id")

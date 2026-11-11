@@ -201,6 +201,43 @@ Synthetic test release (dev topics of iota, quant / drones, politics; gold remov
 
 Scaled to the full test by topics per sub-task (sum over all variants of the sub-task): 1a ≈ 91 min, 1b ≈ 21 min, 2a ≈ 25 min; total ≈ 2.3 h (+ BM25 indexing is per domain, not per topic, so this over-counts it for Track 1).
 
+## AK. Full cold dress rehearsal of the submission (C1, 2026-11-10/11)
+
+All dev topics as a synthetic test release (gold fields removed, earlier answers kept), every cache empty, `submit.py` with exactly the submission runs; official format_checker + scorer on dev qrels. Pass criteria written before the run (LOG 2026-11-10 21:45): no crash, checker exit 0 everywhere, 2a_auto picks the main run in 11/11 domains, every run within ±0.005 of its research dev number. Paused by the user after the 1a runs and resumed (1b then ran with the Track-1 LLM texts already generated).
+
+| run | official (cold) | research (warm) | cold − warm [95% CI] | within ±0.005 | checker / sanity |
+| --- | ---: | ---: | --- | --- | --- |
+| 1a_p100 | 0.3704 | 0.3672 | +0.0032 [-0.0017, +0.0087] | yes | ok / ok |
+| 1a | 0.3659 | 0.3667 | -0.0008 [-0.0053, +0.0034] | yes | ok / ok |
+| 1a_noRE | 0.3407 | 0.3258 | +0.0148 [-0.0001, +0.0297] | **no** | ok / ok |
+| 1b | 0.4084 | 0.4053 | +0.0031 [-0.0019, +0.0087] | yes | ok / ok |
+| 1b_noRE | 0.3549 | 0.3505 | +0.0044 [-0.0008, +0.0102] | yes | ok / ok |
+| 2a_auto | 0.5504 | 0.5507 | -0.0003 [-0.0035, +0.0027] | yes | ok / ok |
+| 2a_history_rr | 0.5504 | 0.5507 | -0.0003 [-0.0035, +0.0027] | yes | ok / ok |
+| 2a_history_q | 0.4800 | 0.4802 | -0.0002 [-0.0010, +0.0007] | yes | ok / ok |
+| 2a_history | 0.5453 | 0.5475 | -0.0022 [-0.0050, +0.0004] | yes | ok / ok |
+| 2a_nomaxp_p100 | 0.3778 | 0.3801 | -0.0022 [-0.0063, +0.0018] | yes | ok / ok |
+| 2a_nomaxp | 0.3761 | 0.3779 | -0.0018 [-0.0059, +0.0022] | yes | ok / ok |
+| 2a_maxp | 0.3886 | 0.3901 | -0.0015 [-0.0048, +0.0017] | yes | ok / ok |
+
+2a_auto: {'2a_history_rr': 11, '2a_history_q': 0}. LLM generations of the cold run: identical to the B3b fresh draw t1_reason 1733/1733, t1_hyde 1733/1733, t2_reason 1716/1716, t2_hyde 1716/1716; identical to the research cache t1_reason 360/1733, t1_hyde 292/1733, t2_reason 361/1716, t2_hyde 401/1716. So vLLM output is reproducible for the same set of inputs in one call; it changes with batch composition. The only run outside the tolerance is the 1a hybrid without ReasonEmbed (+0.015): its only difference from the warm run is the LLM texts, and ReasonEmbed (w 0.8) damps the same change to −0.001 in `1a`. `2a_history_q` uses no LLM; its −0.0002 comes from ReasonEmbed vectors computed in other batches.
+
+| run | topics | wall time | BM25 index | ReasonEmbed (new docs) | reranker (new pairs) |
+| --- | ---: | ---: | ---: | --- | --- |
+| 1a | 519 | 3.7 min | 204 s | 0 s (0) | 0 s (0) |
+| 1a_noRE | 519 | 3.6 min | 202 s | 0 s (0) | 0 s (0) |
+| 1a_p100 | 519 | 104.3 min | 209 s | 6030 s (41431) | 0 s (0) |
+| 1b | 1214 | 5.5 min | 198 s | 104 s (0) | 0 s (0) |
+| 1b_noRE | 1214 | 3.8 min | 197 s | 0 s (0) | 0 s (0) |
+| 2a_history | 858 | 37.1 min | 19 s | 2187 s (16642) | 0 s (0) |
+| 2a_history_q | 858 | 3.6 min | 19 s | 189 s (1604) | 0 s (0) |
+| 2a_history_rr | 858 | 13.9 min | 18 s | 0 s (0) | 798 s (16897) |
+| 2a_maxp | 858 | 1.8 min | 18 s | 80 s (289) | 0 s (0) |
+| 2a_nomaxp | 858 | 0.5 min | 19 s | 0 s (0) | 0 s (0) |
+| 2a_nomaxp_p100 | 858 | 49.1 min | 19 s | 2914 s (27144) | 0 s (0) |
+
+Pre-generation of all LLM texts: Track 1 801 s, Track 2 632 s. Wall time: Track 1 2.24 h, Track 2 1.94 h, total 4.18 h for 519 1a queries, 1,214 1b steps and 858 2a turns. Scaled to the test (350 / 820 / 200; BM25 indexing per domain kept fixed): ≈ 2.1 h (1a 79 min, 1b 8 min, 2a 26 min, plus pre-generation).
+
 ## AI. Run-to-run noise from LLM nondeterminism on dev (B3b, analysis)
 
 vLLM at temperature 0 is not batch-invariant: a fresh generation of the same inputs differs. Dev runs rebuilt with an empty LLM cache (ReasonEmbed and reranker caches shared) against the cached runs.

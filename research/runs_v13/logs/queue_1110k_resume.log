@@ -1,0 +1,101 @@
+[pregenerate] {'pregenerate_total_s': 0.03678703308105469}
+[1b] 1214 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 198.3, 'bm25_search_s': 20.0, 'dense_index_load_s': 3.0, 'dense_search_s': 6.3, 'fusion_s': 0.6, 'reasonembed_s': 103.9, 'reasonembed_new_docs': 0}
+[1b_noRE] 1214 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 197.3, 'bm25_search_s': 19.6, 'dense_index_load_s': 2.7, 'dense_search_s': 6.1, 'fusion_s': 0.7, 'reasonembed_s': 0.0, 'reasonembed_new_docs': 0}
+=== 07:42:26 TRACK1_DONE 574 s
+[2a_auto] drones: 2a_history_rr  ({"turns": 38, "normalized_differs": 0, "turns_ge2": 27, "turns_ge2_with_answer": 27, "qa_pairs": 49, "empty_answers": 0, "summary_questions": 0, "unparsed_lines": 0, "empty_history": 0})
+[2a_auto] politics: 2a_history_rr  ({"turns": 54, "normalized_differs": 0, "turns_ge2": 41, "turns_ge2_with_answer": 41, "qa_pairs": 92, "empty_answers": 0, "summary_questions": 0, "unparsed_lines": 0, "empty_history": 0})
+[2a_auto] law: 2a_history_rr  ({"turns": 66, "normalized_differs": 0, "turns_ge2": 51, "turns_ge2_with_answer": 51, "qa_pairs": 117, "empty_answers": 0, "summary_questions": 8, "unparsed_lines": 0, "empty_history": 0})
+[2a_auto] medicalsciences: 2a_history_rr  ({"turns": 44, "normalized_differs": 0, "turns_ge2": 31, "turns_ge2_with_answer": 31, "qa_pairs": 57, "empty_answers": 0, "summary_questions": 0, "unparsed_lines": 0, "empty_history": 0})
+[2a_auto] hardware: 2a_history_rr  ({"turns": 58, "normalized_differs": 0, "turns_ge2": 44, "turns_ge2_with_answer": 44, "qa_pairs": 94, "empty_answers": 0, "summary_questions": 15, "unparsed_lines": 0, "empty_history": 0})
+[2a_auto] economics: 2a_history_rr  ({"turns": 92, "normalized_differs": 0, "turns_ge2": 70, "turns_ge2_with_answer": 70, "qa_pairs": 158, "empty_answers": 0, "summary_questions": 0, "unparsed_lines": 0, "empty_history": 0})
+[2a_auto] psychology: 2a_history_rr  ({"turns": 99, "normalized_differs": 0, "turns_ge2": 74, "turns_ge2_with_answer": 74, "qa_pairs": 161, "empty_answers": 0, "summary_questions": 0, "unparsed_lines": 0, "empty_history": 0})
+[2a_auto] biology: 2a_history_rr  ({"turns": 115, "normalized_differs": 0, "turns_ge2": 89, "turns_ge2_with_answer": 89, "qa_pairs": 201, "empty_answers": 0, "summary_questions": 39, "unparsed_lines": 0, "empty_history": 0})
+[2a_auto] sustainable_living: 2a_history_rr  ({"turns": 84, "normalized_differs": 0, "turns_ge2": 61, "turns_ge2_with_answer": 61, "qa_pairs": 119, "empty_answers": 0, "summary_questions": 0, "unparsed_lines": 0, "empty_history": 0})
+[2a_auto] robotics: 2a_history_rr  ({"turns": 75, "normalized_differs": 0, "turns_ge2": 55, "turns_ge2_with_answer": 55, "qa_pairs": 109, "empty_answers": 0, "summary_questions": 0, "unparsed_lines": 0, "empty_history": 0})
+[2a_auto] earth_science: 2a_history_rr  ({"turns": 133, "normalized_differs": 0, "turns_ge2": 104, "turns_ge2_with_answer": 104, "qa_pairs": 246, "empty_answers": 0, "summary_questions": 30, "unparsed_lines": 0, "empty_history": 0})
+[reason/bodies] 1716 inputs, 1716 unique, 1716 to generate
+[hyde/bodies] 1716 inputs, 1716 unique, 1716 to generate
+[pregenerate] {'llm_reason_generate_s': 330.8, 'llm_reason_generated': 1716, 'llm_hyde_generate_s': 301.4, 'llm_hyde_generated': 1716, 'pregenerate_total_s': 632.2239389419556}
+[2a_history] 858 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 19.1, 'bm25_search_s': 7.4, 'dense_index_load_s': 1.7, 'dense_search_s': 11.0, 'fusion_s': 0.4, 'reasonembed_s': 2186.8, 'reasonembed_new_docs': 16642}
+[2a_nomaxp_p100] 858 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 18.6, 'bm25_search_s': 4.7, 'dense_index_load_s': 1.6, 'dense_search_s': 6.6, 'fusion_s': 0.4, 'reasonembed_s': 2913.9, 'reasonembed_new_docs': 27144}
+[2a_nomaxp] 858 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 18.6, 'bm25_search_s': 4.8, 'dense_index_load_s': 1.5, 'dense_search_s': 6.4, 'fusion_s': 0.4, 'reasonembed_s': 0.3, 'reasonembed_new_docs': 0}
+[2a_maxp] 858 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 18.2, 'bm25_search_s': 4.8, 'dense_index_load_s': 1.4, 'dense_search_s': 6.2, 'fusion_s': 0.4, 'reasonembed_s': 79.8, 'reasonembed_new_docs': 289}
+[2a_history_rr] 858 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 18.5, 'bm25_search_s': 7.2, 'dense_index_load_s': 1.2, 'dense_search_s': 10.3, 'fusion_s': 0.4, 'reasonembed_s': 0.3, 'reasonembed_new_docs': 0, 'llm_rerank_s': 798.5, 'llm_rerank_new_pairs': 16897}
+[2a_history_q] 858 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 18.6, 'bm25_search_s': 1.6, 'dense_index_load_s': 1.2, 'dense_search_s': 3.7, 'fusion_s': 0.4, 'reasonembed_s': 188.6, 'reasonembed_new_docs': 1604}
+[2a_auto] domains per run: {'2a_history_rr': 11, '2a_history_q': 0}; files in ../research/runs_v13/cold_full/sub/2a_auto
+=== 09:39:21 COLD track1 574 s, track2 7015 s
+1a_noRE    travel               nDCG@10 0.2839  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1a_noRE    hsm                  nDCG@10 0.4576  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1a_noRE    history              nDCG@10 0.2591  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+== 1a_noRE: official macro 0.3407 (research 0.3258)
+1b         iota                 nDCG@10 0.5689  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b         quant                nDCG@10 0.2643  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b         law                  nDCG@10 0.4134  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b         workplace            nDCG@10 0.6235  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b         cardano              nDCG@10 0.3611  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b         monero               nDCG@10 0.2575  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b         economics            nDCG@10 0.3592  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b         bitcoin              nDCG@10 0.2538  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b         politics             nDCG@10 0.4946  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b         genealogy            nDCG@10 0.5388  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b         travel               nDCG@10 0.3544  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b         hsm                  nDCG@10 0.4334  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b         history              nDCG@10 0.3862  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+== 1b: official macro 0.4084 (research 0.4053)
+1b_noRE    iota                 nDCG@10 0.5625  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b_noRE    quant                nDCG@10 0.1713  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b_noRE    law                  nDCG@10 0.3695  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b_noRE    workplace            nDCG@10 0.5227  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b_noRE    cardano              nDCG@10 0.3180  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b_noRE    monero               nDCG@10 0.2196  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b_noRE    economics            nDCG@10 0.2914  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b_noRE    bitcoin              nDCG@10 0.2367  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b_noRE    politics             nDCG@10 0.4698  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b_noRE    genealogy            nDCG@10 0.4177  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b_noRE    travel               nDCG@10 0.3202  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b_noRE    hsm                  nDCG@10 0.4143  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+1b_noRE    history              nDCG@10 0.3006  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+== 1b_noRE: official macro 0.3549 (research 0.3505)
+Traceback (most recent call last):
+  File "/home/timur_rk/semeval-reteco/reteco-research/scripts/score_submission.py", line 89, in <module>
+    main()
+    ~~~~^^
+  File "/home/timur_rk/semeval-reteco/reteco-research/scripts/score_submission.py", line 31, in main
+    man = json.load(open(os.path.join(a.sub, v, "manifest.json")))
+                    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '../research/runs_v13/cold_full/sub/2a_auto/manifest.json'
+{
+ "about": "Synthetic test release (dev topics of iota, quant / drones, politics; gold removed), every cache empty (LLM generations, ReasonEmbed vectors, reranker scores) in research/runs_v13/cold; corpus artefacts (dense corpus index, MaxP passages) prebuilt. Wall time = sum of the stage timings of submit.py; LLM time includes ~2 min of vLLM start-up per prompt and variant that needs generations.",
+ "totals_measured": {
+  "track1_s": 574,
+  "track2_s": 7015
+ },
+ "per_subtask_s": {
+  "1a": 6691.3,
+  "1b": 558.7,
+  "2a": 6365.8
+ },
+ "topics_per_subtask": {
+  "1a": 519,
+  "1b": 1214,
+  "2a": 858
+ },
+ "scaled_full_test_s": {
+  "1a": 4512.437379576108,
+  "1b": 377.3756177924218,
+  "2a": 1483.869463869464
+ },
+ "estimate": "Scaled to the full test by topics per sub-task (sum over all variants of the sub-task): 1a \u2248 75 min, 1b \u2248 6 min, 2a \u2248 25 min; total \u2248 1.8 h (+ BM25 indexing is per domain, not per topic, so this over-counts it for Track 1)."
+}
+1a (iota, quant, law, workplace, cardano, monero, economics, bitcoin, politics, genealogy, travel, hsm, history) 519 220 reasonembed_new_docs 0
+1a_noRE (iota, quant, law, workplace, cardano, monero, economics, bitcoin, politics, genealogy, travel, hsm, history) 519 216 reasonembed_new_docs 0
+1a_p100 (iota, quant, law, workplace, cardano, monero, economics, bitcoin, politics, genealogy, travel, hsm, history) 519 6255 reasonembed_new_docs 41431
+1b (iota, quant, law, workplace, cardano, monero, economics, bitcoin, politics, genealogy, travel, hsm, history) 1214 332 reasonembed_new_docs 0
+1b_noRE (iota, quant, law, workplace, cardano, monero, economics, bitcoin, politics, genealogy, travel, hsm, history) 1214 226 reasonembed_new_docs 0
+2a_history (drones, politics, law, medicalsciences, hardware, economics, psychology, biology, sustainable_living, robotics, earth_science) 858 2226 reasonembed_new_docs 16642
+2a_history_q (drones, politics, law, medicalsciences, hardware, economics, psychology, biology, sustainable_living, robotics, earth_science) 858 214 reasonembed_new_docs 1604
+2a_history_rr (drones, politics, law, medicalsciences, hardware, economics, psychology, biology, sustainable_living, robotics, earth_science) 858 836 reasonembed_new_docs 0, llm_rerank_new_pairs 16897
+2a_maxp (drones, politics, law, medicalsciences, hardware, economics, psychology, biology, sustainable_living, robotics, earth_science) 858 111 reasonembed_new_docs 289
+2a_nomaxp (drones, politics, law, medicalsciences, hardware, economics, psychology, biology, sustainable_living, robotics, earth_science) 858 32 reasonembed_new_docs 0
+2a_nomaxp_p100 (drones, politics, law, medicalsciences, hardware, economics, psychology, biology, sustainable_living, robotics, earth_science) 858 2946 reasonembed_new_docs 27144
+=== 09:40:32 ALLDONE

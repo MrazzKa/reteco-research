@@ -1,0 +1,8 @@
+{"t1_topics": 519, "t1_steps": 1214, "t2_turns": 858, "t2_turns_with_answers_after": 647}
+wrote ../research/runs_v13/cold_full/submission_cold.json; caches under /home/timur_rk/semeval-reteco/reteco-research/research/runs_v13/cold_full/cache
+[reason/bodies] 1733 inputs, 1733 unique, 1733 to generate
+[hyde/bodies] 1733 inputs, 1733 unique, 1733 to generate
+[pregenerate] {'llm_reason_generate_s': 395.8, 'llm_reason_generated': 1733, 'llm_hyde_generate_s': 404.9, 'llm_hyde_generated': 1733, 'pregenerate_total_s': 800.8383433818817}
+[1a_p100] 519 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 209.3, 'bm25_search_s': 8.1, 'dense_index_load_s': 2.9, 'dense_search_s': 4.5, 'fusion_s': 0.3, 'reasonembed_s': 6030.2, 'reasonembed_new_docs': 41431}
+[1a] 519 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 204.2, 'bm25_search_s': 8.0, 'dense_index_load_s': 2.8, 'dense_search_s': 4.1, 'fusion_s': 0.3, 'reasonembed_s': 0.3, 'reasonembed_new_docs': 0}
+[1a_noRE] 519 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 201.7, 'bm25_search_s': 8.1, 'dense_index_load_s': 2.5, 'dense_search_s': 3.7, 'fusion_s': 0.3, 'reasonembed_s': 0.0, 'reasonembed_new_docs': 0}

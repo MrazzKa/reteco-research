@@ -101,7 +101,7 @@ Git-ignored and regenerable: `*.tsv` run files, `*.npy` / `*.ids.json` embedding
 | `passage_index.py` | Passage embeddings (510 tokens, overlap 128) beyond the first window; `MaxPIndex` for search. |
 | `history.py` | Track-2 history: label normalisation, parse, answer detection, `strip_answers`, answer-leak assertion, audit. |
 | `submit.py` · `score_submission.py` · `final_1110.py` | Submission runs from the frozen config (incl. `2a_auto`); official check + score; submission table with dev CIs. |
-| `make_test_release.py` · `cold_config.py` | Synthetic test release from dev (gold removed, optionally answers removed); config copy with empty caches. |
+| `make_test_release.py` · `cold_config.py` · `c1_report.py` | Synthetic test release from dev (gold removed, optionally answers removed); config copy with empty caches; report of the full cold dress rehearsal (C1). |
 | `rule14_choice.py` · `rule15_choice.py` · `rule17_choice.py` | Train-only choices of rules 14 (answer-free 2a), 15 (per-source variant), 17 (pool 50 vs 100). |
 | `gen_answers.py` · `a2_report.py` | A2: earlier answers written by our LLM; synthetic releases; report vs reference answers. |
 | `llm_rerank.py` | Rule 16: Qwen3-Reranker (yes/no logit) over the top N of a final system, grid on train, cached scores. |
@@ -204,10 +204,13 @@ Do not run `submit.py` while another GPU job (vLLM generation) is running: on 20
 the 8 GB GPU and both stalled. Long GPU jobs: Windows takes 1.7–5.3 GB of the 8 GB GPU; ReasonEmbed saves document
 vectors every 2,000 documents and reranker scores are appended per chunk, so an interrupted `submit.py` can simply be
 restarted. `submit.py` runs every missing LLM generation first, before any model is loaded in the process (a vLLM start
-next to a loaded ReasonEmbed fails on 8 GB; found by the cold run, LOG 2026-11-10 13:50). Cold cost of the full test:
-≈ 2.3 h (RESULTS AH). vLLM at temperature 0 is not batch-invariant: a fresh run differs from the cached dev
-generations and moves the dev macro by up to ~0.003 (RESULTS AI); the dev numbers are reproduced exactly only from the
-cached generations.
+next to a loaded ReasonEmbed fails on 8 GB; found by the cold run, LOG 2026-11-10 13:50). Cold cost: the full dress
+rehearsal on all dev topics (empty caches, all 12 submission runs) took 4.2 h and scales to ≈ 2.1 h for the test
+(RESULTS AK); ReasonEmbed over the 1a top 100 is half of it. vLLM at temperature 0 is not batch-invariant: generations
+depend on which inputs share a call. Two cold runs that generate the same inputs in one call give byte-identical
+texts (C1 vs B3b, 6,898/6,898), but they differ from the research cache, which was filled in other batches; this moves
+the dev macro by up to ~0.003 for the final runs and by +0.015 for the 1a hybrid without ReasonEmbed (RESULTS AI, AK).
+The dev numbers are reproduced exactly only from the cached generations.
 
 ## Rules
 

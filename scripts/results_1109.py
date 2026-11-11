@@ -159,6 +159,43 @@ def week7(root):
         for r in cold["rows"]:
             L.append(f"| {r['part']} | {r['topics']} | {r['wall_s']:.0f} s | {r['per_topic_s']:.2f} s | {r.get('notes', '')} |")
         L += ["", cold.get("estimate", ""), ""]
+    c1 = jload(os.path.join(R, "cold_full", "c1_report.json"))
+    if c1:
+        tm = c1["timing"]
+        L += ["## AK. Full cold dress rehearsal of the submission (C1, 2026-11-10/11)", "",
+              "All dev topics as a synthetic test release (gold fields removed, earlier answers kept), every cache empty, "
+              "`submit.py` with exactly the submission runs; official format_checker + scorer on dev qrels. Pass "
+              "criteria written before the run (LOG 2026-11-10 21:45): no crash, checker exit 0 everywhere, 2a_auto picks "
+              "the main run in 11/11 domains, every run within ±0.005 of its research dev number. Paused by the user "
+              "after the 1a runs and resumed (1b then ran with the Track-1 LLM texts already generated).", "",
+              "| run | official (cold) | research (warm) | cold − warm [95% CI] | within ±0.005 | checker / sanity |",
+              "| --- | ---: | ---: | --- | --- | --- |"]
+        for v, x in c1["runs"].items():
+            L.append(f"| {v} | {f4(x['official'])} | {f4(x['research'])} | {ci(x['cold_minus_warm'])} | "
+                     f"{'yes' if x['within_tol'] else '**no**'} | {'ok' if x['checker_ok'] else 'FAIL'} / "
+                     f"{'ok' if x['sanity_ok'] else 'FAIL'} |")
+        g = c1["generations"]
+        L += ["", f"2a_auto: {c1['auto_2a']}. LLM generations of the cold run: identical to the B3b fresh draw "
+              + ", ".join(f"{k} {x['identical_to_b3b_fresh']}/{x['cold']}" for k, x in g.items())
+              + "; identical to the research cache " + ", ".join(f"{k} {x['identical_to_research_cache']}/{x['cold']}"
+                                                              for k, x in g.items())
+              + ". So vLLM output is reproducible for the same set of inputs in one call; it changes with batch "
+              "composition. The only run outside the tolerance is the 1a hybrid without ReasonEmbed (+0.015): its only "
+              "difference from the warm run is the LLM texts, and ReasonEmbed (w 0.8) damps the same change to −0.001 "
+              "in `1a`. `2a_history_q` uses no LLM; its −0.0002 comes from ReasonEmbed vectors computed in other batches.", "",
+              "| run | topics | wall time | BM25 index | ReasonEmbed (new docs) | reranker (new pairs) |",
+              "| --- | ---: | ---: | ---: | --- | --- |"]
+        for r in tm["rows"]:
+            L.append(f"| {r['variant']} | {r['topics']} | {r['wall_s'] / 60:.1f} min | {r['bm25_index_s']:.0f} s | "
+                     f"{r['reasonembed_s']:.0f} s ({r['reasonembed_new_docs']}) | {r['llm_rerank_s']:.0f} s "
+                     f"({r['llm_rerank_new_pairs']}) |")
+        L += ["", f"Pre-generation of all LLM texts: Track 1 {tm['pregenerate_s']['1']:.0f} s, Track 2 "
+              f"{tm['pregenerate_s']['2']:.0f} s. Wall time: Track 1 {tm['wall_s_track']['1'] / 3600:.2f} h, Track 2 "
+              f"{tm['wall_s_track']['2'] / 3600:.2f} h, total {tm['wall_s_total'] / 3600:.2f} h for 519 1a queries, 1,214 "
+              f"1b steps and 858 2a turns. Scaled to the test (350 / 820 / 200; BM25 indexing per domain kept fixed): "
+              f"≈ {tm['test_estimate_s'] / 3600:.1f} h ("
+              + ", ".join(f"{k} {v / 60:.0f} min" for k, v in tm["test_estimate_by_sub_s"].items())
+              + ", plus pre-generation).", ""]
     nd = jload(os.path.join(R, "nondet", "report.json"))
     if nd:
         L += ["## AI. Run-to-run noise from LLM nondeterminism on dev (B3b, analysis)", "",

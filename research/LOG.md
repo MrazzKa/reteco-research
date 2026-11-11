@@ -1811,3 +1811,26 @@ resume: `research/runs_v13/logs/queue_1110k_resume.sh` (keeps release and caches
 command: `queue_1110k_resume.sh` (1b 1b_noRE, Track 2 with empty Track-2 caches, scoring of all 12 runs, cold report).
 estimate: 1b ≈ 15–25 min (LLM texts cached), Track 2 ≈ 1.5–2 h (LLM generations + ReasonEmbed + reranker, cold),
   scoring ≈ 5 min.
+
+## 2026-11-11 07:32–09:40 — C1 result: the full cold dress rehearsal passes, except a +0.015 drift of the 1a fallback without ReasonEmbed
+command: `queue_1110k_resume.sh` (1b 1b_noRE 574 s; Track 2 7,015 s), then `score_submission.py` on all 12 runs (it
+  crashed on `2a_auto`, which has no manifest — fixed: the auto folder is now scored with the manifest of its chosen
+  run; scoring code only), `c1_report.py --pregen-t1 800.8` (out `cold_full/c1_report.json`); RESULTS AK.
+result vs the pass criteria: no crash in either track; format_checker exit 0 and own sanity checks clean on all 12
+  runs × domains; `2a_auto` chose `2a_history_rr` in 11/11 domains; 11 of 12 runs within ±0.005 of the research dev
+  number (1a_p100 +0.0032, 1a −0.0008, 1b +0.0031, 1b_noRE +0.0044, 2a_auto / 2a_history_rr −0.0003, 2a_history_q
+  −0.0002, 2a_history −0.0022, 2a_nomaxp_p100 −0.0023, 2a_nomaxp −0.0018, 2a_maxp −0.0015). **Outside: 1a_noRE
+  0.3407 vs 0.3258, +0.0149 [−0.0001, +0.0297].**
+investigation (as the rule requires; no tuning): every LLM text of the cold run is byte-identical to the B3b fresh
+  draw (6,898 / 6,898; both generated all inputs of a track in one call), and identical to the research cache for
+  only 17–23% (which was filled in other batches). So vLLM at temperature 0 is deterministic for the same input set in
+  one call and changes with batch composition — this corrects the B3b reading ("not reproducible"): the submission
+  run is reproducible on the same release, but its texts differ from the cache our dev numbers came from. The 1a
+  hybrid without ReasonEmbed differs from the warm run only in those texts; the same texts move `1a` (ReasonEmbed
+  w 0.8 on top) by −0.0008, so the drift is LLM-draw noise of the bare hybrid, which ReasonEmbed damps. Consequence:
+  hybrid-stage comparisons on 1a that change the LLM input carry noise up to ~0.015 on dev (rule 13 for 1a was such
+  a comparison; it was not adopted, so nothing changes). No change to the submission (1a_noRE is the last fallback).
+time: Track 1 2.24 h (pre-generation 801 s, ReasonEmbed for 1a top 100 6,030 s = 41,431 new documents), Track 2 1.94 h
+  (pre-generation 632 s, ReasonEmbed 2a_nomaxp_p100 2,914 s, 2a_history 2,187 s, reranker 798 s for 16,897 pairs);
+  total 4.18 h on dev size (519 / 1,214 / 858). Scaled to the test (350 / 820 / 200): ≈ 2.1 h. Estimates vs actual:
+  C1 total 3.5–4.5 h / 4.18 h of compute (plus the pause 23:59–07:32).
