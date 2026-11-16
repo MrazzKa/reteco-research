@@ -1,0 +1,1341 @@
+{
+ "structure": {
+  "train": {
+   "turns": 2113,
+   "first_turns": 496,
+   "sr_present": 2113,
+   "sr_present_first": 496,
+   "sr_type": {
+    "str": 2113
+   },
+   "srm_type": {
+    "dict": 2113
+   },
+   "sr_words_first": {
+    "n": 496,
+    "mean": 29.2,
+    "median": 29.0,
+    "p90": 35,
+    "min": 20,
+    "max": 42
+   },
+   "sr_words_later": {
+    "n": 1617,
+    "mean": 29.8,
+    "median": 30,
+    "p90": 35,
+    "min": 17,
+    "max": 45
+   },
+   "sr_words_all": {
+    "n": 2113,
+    "mean": 29.7,
+    "median": 30,
+    "p90": 35,
+    "min": 17,
+    "max": 45
+   },
+   "srm_keys": {
+    "target_information": 2113,
+    "relevance_signals": 2113,
+    "irrelevance_signals": 2113
+   },
+   "srm_value_types": {
+    "target_information": {
+     "str": 2113
+    },
+    "relevance_signals": {
+     "list": 2113
+    },
+    "irrelevance_signals": {
+     "list": 2113
+    }
+   },
+   "srm_words": {
+    "target_information": {
+     "n": 2113,
+     "mean": 22.8,
+     "median": 23,
+     "p90": 28,
+     "min": 12,
+     "max": 39
+    },
+    "relevance_signals": {
+     "n": 2113,
+     "mean": 10.3,
+     "median": 10,
+     "p90": 14,
+     "min": 2,
+     "max": 21
+    },
+    "irrelevance_signals": {
+     "n": 2113,
+     "mean": 11.0,
+     "median": 11,
+     "p90": 15,
+     "min": 3,
+     "max": 24
+    }
+   },
+   "srm_list_len": {
+    "relevance_signals": {
+     "n": 2113,
+     "mean": 2.6,
+     "median": 3,
+     "p90": 3,
+     "min": 2,
+     "max": 5
+    },
+    "irrelevance_signals": {
+     "n": 2113,
+     "mean": 2.6,
+     "median": 3,
+     "p90": 3,
+     "min": 2,
+     "max": 4
+    }
+   }
+  },
+  "dev": {
+   "turns": 858,
+   "first_turns": 211,
+   "sr_present": 858,
+   "sr_present_first": 211,
+   "sr_type": {
+    "str": 858
+   },
+   "srm_type": {
+    "dict": 858
+   },
+   "sr_words_first": {
+    "n": 211,
+    "mean": 28.9,
+    "median": 29,
+    "p90": 34,
+    "min": 19,
+    "max": 42
+   },
+   "sr_words_later": {
+    "n": 647,
+    "mean": 30.0,
+    "median": 30,
+    "p90": 35,
+    "min": 19,
+    "max": 49
+   },
+   "sr_words_all": {
+    "n": 858,
+    "mean": 29.7,
+    "median": 30.0,
+    "p90": 35,
+    "min": 19,
+    "max": 49
+   },
+   "srm_keys": {
+    "target_information": 858,
+    "relevance_signals": 858,
+    "irrelevance_signals": 858
+   },
+   "srm_value_types": {
+    "target_information": {
+     "str": 858
+    },
+    "relevance_signals": {
+     "list": 858
+    },
+    "irrelevance_signals": {
+     "list": 858
+    }
+   },
+   "srm_words": {
+    "target_information": {
+     "n": 858,
+     "mean": 22.7,
+     "median": 23.0,
+     "p90": 28,
+     "min": 13,
+     "max": 34
+    },
+    "relevance_signals": {
+     "n": 858,
+     "mean": 10.3,
+     "median": 10.0,
+     "p90": 14,
+     "min": 4,
+     "max": 25
+    },
+    "irrelevance_signals": {
+     "n": 858,
+     "mean": 11.0,
+     "median": 11.0,
+     "p90": 15,
+     "min": 4,
+     "max": 23
+    }
+   },
+   "srm_list_len": {
+    "relevance_signals": {
+     "n": 858,
+     "mean": 2.7,
+     "median": 3.0,
+     "p90": 3,
+     "min": 2,
+     "max": 5
+    },
+    "irrelevance_signals": {
+     "n": 858,
+     "mean": 2.6,
+     "median": 3.0,
+     "p90": 3,
+     "min": 2,
+     "max": 4
+    }
+   }
+  }
+ },
+ "ids": {
+  "train": {
+   "turns": 2113,
+   "sr_gold_id": 0,
+   "srm_gold_id": 0,
+   "sr_idlike": 0,
+   "srm_idlike": 1,
+   "bright_turns": 1417,
+   "sr_gold_title": 114,
+   "sr_gold_slug": 229,
+   "srm_gold_title": 162,
+   "srm_gold_slug": 317,
+   "sr_chance_title": 1,
+   "sr_chance_slug": 0,
+   "srm_chance_title": 0,
+   "srm_chance_slug": 0,
+   "answer_gold_title": 116,
+   "answer_chance_title": 0,
+   "query_gold_title": 51,
+   "query_gold_slug": 128,
+   "history_gold_title": 130,
+   "history_gold_slug": 270,
+   "srm_idlike_examples": [
+    [
+     "robotics",
+     "7_turn_4",
+     ".txt"
+    ]
+   ]
+  },
+  "dev": {
+   "turns": 858,
+   "sr_gold_id": 0,
+   "srm_gold_id": 0,
+   "sr_idlike": 0,
+   "srm_idlike": 0,
+   "bright_turns": 598,
+   "sr_gold_title": 55,
+   "sr_gold_slug": 87,
+   "srm_gold_title": 68,
+   "srm_gold_slug": 122,
+   "sr_chance_title": 0,
+   "sr_chance_slug": 0,
+   "srm_chance_title": 0,
+   "srm_chance_slug": 0,
+   "answer_gold_title": 41,
+   "answer_chance_title": 0,
+   "query_gold_title": 17,
+   "query_gold_slug": 47,
+   "history_gold_title": 39,
+   "history_gold_slug": 102,
+   "srm_idlike_examples": null
+  }
+ },
+ "ngram": {
+  "train": {
+   "all": {
+    "8": {
+     "sr": {
+      "gold": {
+       "turns": 330,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "top10_nongold": {
+       "turns": 330,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "random10": {
+       "turns": 330,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "srm": {
+      "gold": {
+       "turns": 330,
+       "mean_share": 0.0003,
+       "share_turns_any": 0.0061
+      },
+      "top10_nongold": {
+       "turns": 330,
+       "mean_share": 0.0006,
+       "share_turns_any": 0.0121
+      },
+      "random10": {
+       "turns": 330,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "answer": {
+      "gold": {
+       "turns": 330,
+       "mean_share": 0.001,
+       "share_turns_any": 0.0303
+      },
+      "top10_nongold": {
+       "turns": 330,
+       "mean_share": 0.0003,
+       "share_turns_any": 0.0091
+      },
+      "random10": {
+       "turns": 330,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "query": {
+      "gold": {
+       "turns": 330,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "top10_nongold": {
+       "turns": 330,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "random10": {
+       "turns": 330,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     }
+    },
+    "5": {
+     "sr": {
+      "gold": {
+       "turns": 330,
+       "mean_share": 0.0012,
+       "share_turns_any": 0.0273
+      },
+      "top10_nongold": {
+       "turns": 330,
+       "mean_share": 0.0025,
+       "share_turns_any": 0.0515
+      },
+      "random10": {
+       "turns": 330,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "srm": {
+      "gold": {
+       "turns": 330,
+       "mean_share": 0.0029,
+       "share_turns_any": 0.0727
+      },
+      "top10_nongold": {
+       "turns": 330,
+       "mean_share": 0.0042,
+       "share_turns_any": 0.097
+      },
+      "random10": {
+       "turns": 330,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "answer": {
+      "gold": {
+       "turns": 330,
+       "mean_share": 0.0088,
+       "share_turns_any": 0.2606
+      },
+      "top10_nongold": {
+       "turns": 330,
+       "mean_share": 0.0054,
+       "share_turns_any": 0.1818
+      },
+      "random10": {
+       "turns": 330,
+       "mean_share": 0.0001,
+       "share_turns_any": 0.0061
+      }
+     },
+     "query": {
+      "gold": {
+       "turns": 330,
+       "mean_share": 0.0016,
+       "share_turns_any": 0.0182
+      },
+      "top10_nongold": {
+       "turns": 330,
+       "mean_share": 0.0016,
+       "share_turns_any": 0.0152
+      },
+      "random10": {
+       "turns": 330,
+       "mean_share": 0.0001,
+       "share_turns_any": 0.003
+      }
+     }
+    }
+   },
+   "bright": {
+    "8": {
+     "sr": {
+      "gold": {
+       "turns": 180,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "top10_nongold": {
+       "turns": 180,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "random10": {
+       "turns": 180,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "srm": {
+      "gold": {
+       "turns": 180,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "top10_nongold": {
+       "turns": 180,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "random10": {
+       "turns": 180,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "answer": {
+      "gold": {
+       "turns": 180,
+       "mean_share": 0.0011,
+       "share_turns_any": 0.0389
+      },
+      "top10_nongold": {
+       "turns": 180,
+       "mean_share": 0.0001,
+       "share_turns_any": 0.0056
+      },
+      "random10": {
+       "turns": 180,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "query": {
+      "gold": {
+       "turns": 180,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "top10_nongold": {
+       "turns": 180,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "random10": {
+       "turns": 180,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     }
+    },
+    "5": {
+     "sr": {
+      "gold": {
+       "turns": 180,
+       "mean_share": 0.001,
+       "share_turns_any": 0.0222
+      },
+      "top10_nongold": {
+       "turns": 180,
+       "mean_share": 0.003,
+       "share_turns_any": 0.0667
+      },
+      "random10": {
+       "turns": 180,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "srm": {
+      "gold": {
+       "turns": 180,
+       "mean_share": 0.0021,
+       "share_turns_any": 0.0722
+      },
+      "top10_nongold": {
+       "turns": 180,
+       "mean_share": 0.0026,
+       "share_turns_any": 0.0778
+      },
+      "random10": {
+       "turns": 180,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "answer": {
+      "gold": {
+       "turns": 180,
+       "mean_share": 0.0086,
+       "share_turns_any": 0.2333
+      },
+      "top10_nongold": {
+       "turns": 180,
+       "mean_share": 0.0022,
+       "share_turns_any": 0.0833
+      },
+      "random10": {
+       "turns": 180,
+       "mean_share": 0.0001,
+       "share_turns_any": 0.0056
+      }
+     },
+     "query": {
+      "gold": {
+       "turns": 180,
+       "mean_share": 0.0013,
+       "share_turns_any": 0.0167
+      },
+      "top10_nongold": {
+       "turns": 180,
+       "mean_share": 0.0009,
+       "share_turns_any": 0.0056
+      },
+      "random10": {
+       "turns": 180,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     }
+    }
+   },
+   "se": {
+    "8": {
+     "sr": {
+      "gold": {
+       "turns": 150,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "top10_nongold": {
+       "turns": 150,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "random10": {
+       "turns": 150,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "srm": {
+      "gold": {
+       "turns": 150,
+       "mean_share": 0.0007,
+       "share_turns_any": 0.0133
+      },
+      "top10_nongold": {
+       "turns": 150,
+       "mean_share": 0.0012,
+       "share_turns_any": 0.0267
+      },
+      "random10": {
+       "turns": 150,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "answer": {
+      "gold": {
+       "turns": 150,
+       "mean_share": 0.0009,
+       "share_turns_any": 0.02
+      },
+      "top10_nongold": {
+       "turns": 150,
+       "mean_share": 0.0005,
+       "share_turns_any": 0.0133
+      },
+      "random10": {
+       "turns": 150,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "query": {
+      "gold": {
+       "turns": 150,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "top10_nongold": {
+       "turns": 150,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "random10": {
+       "turns": 150,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     }
+    },
+    "5": {
+     "sr": {
+      "gold": {
+       "turns": 150,
+       "mean_share": 0.0014,
+       "share_turns_any": 0.0333
+      },
+      "top10_nongold": {
+       "turns": 150,
+       "mean_share": 0.0019,
+       "share_turns_any": 0.0333
+      },
+      "random10": {
+       "turns": 150,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "srm": {
+      "gold": {
+       "turns": 150,
+       "mean_share": 0.004,
+       "share_turns_any": 0.0733
+      },
+      "top10_nongold": {
+       "turns": 150,
+       "mean_share": 0.0062,
+       "share_turns_any": 0.12
+      },
+      "random10": {
+       "turns": 150,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "answer": {
+      "gold": {
+       "turns": 150,
+       "mean_share": 0.0089,
+       "share_turns_any": 0.2933
+      },
+      "top10_nongold": {
+       "turns": 150,
+       "mean_share": 0.0093,
+       "share_turns_any": 0.3
+      },
+      "random10": {
+       "turns": 150,
+       "mean_share": 0.0001,
+       "share_turns_any": 0.0067
+      }
+     },
+     "query": {
+      "gold": {
+       "turns": 150,
+       "mean_share": 0.002,
+       "share_turns_any": 0.02
+      },
+      "top10_nongold": {
+       "turns": 150,
+       "mean_share": 0.0025,
+       "share_turns_any": 0.0267
+      },
+      "random10": {
+       "turns": 150,
+       "mean_share": 0.0003,
+       "share_turns_any": 0.0067
+      }
+     }
+    }
+   }
+  },
+  "dev": {
+   "all": {
+    "8": {
+     "sr": {
+      "gold": {
+       "turns": 858,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "top10_nongold": {
+       "turns": 858,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "random10": {
+       "turns": 858,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "srm": {
+      "gold": {
+       "turns": 858,
+       "mean_share": 0.0002,
+       "share_turns_any": 0.0023
+      },
+      "top10_nongold": {
+       "turns": 858,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "random10": {
+       "turns": 858,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "answer": {
+      "gold": {
+       "turns": 858,
+       "mean_share": 0.001,
+       "share_turns_any": 0.0291
+      },
+      "top10_nongold": {
+       "turns": 858,
+       "mean_share": 0.0004,
+       "share_turns_any": 0.014
+      },
+      "random10": {
+       "turns": 858,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "query": {
+      "gold": {
+       "turns": 858,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "top10_nongold": {
+       "turns": 858,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "random10": {
+       "turns": 858,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     }
+    },
+    "5": {
+     "sr": {
+      "gold": {
+       "turns": 858,
+       "mean_share": 0.0012,
+       "share_turns_any": 0.0268
+      },
+      "top10_nongold": {
+       "turns": 858,
+       "mean_share": 0.0014,
+       "share_turns_any": 0.028
+      },
+      "random10": {
+       "turns": 858,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "srm": {
+      "gold": {
+       "turns": 858,
+       "mean_share": 0.0018,
+       "share_turns_any": 0.0501
+      },
+      "top10_nongold": {
+       "turns": 858,
+       "mean_share": 0.0025,
+       "share_turns_any": 0.0699
+      },
+      "random10": {
+       "turns": 858,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0012
+      }
+     },
+     "answer": {
+      "gold": {
+       "turns": 858,
+       "mean_share": 0.0077,
+       "share_turns_any": 0.2319
+      },
+      "top10_nongold": {
+       "turns": 858,
+       "mean_share": 0.0041,
+       "share_turns_any": 0.148
+      },
+      "random10": {
+       "turns": 858,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0012
+      }
+     },
+     "query": {
+      "gold": {
+       "turns": 858,
+       "mean_share": 0.0003,
+       "share_turns_any": 0.0058
+      },
+      "top10_nongold": {
+       "turns": 858,
+       "mean_share": 0.0013,
+       "share_turns_any": 0.0186
+      },
+      "random10": {
+       "turns": 858,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     }
+    }
+   },
+   "bright": {
+    "8": {
+     "sr": {
+      "gold": {
+       "turns": 598,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "top10_nongold": {
+       "turns": 598,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "random10": {
+       "turns": 598,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "srm": {
+      "gold": {
+       "turns": 598,
+       "mean_share": 0.0002,
+       "share_turns_any": 0.0033
+      },
+      "top10_nongold": {
+       "turns": 598,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "random10": {
+       "turns": 598,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "answer": {
+      "gold": {
+       "turns": 598,
+       "mean_share": 0.0006,
+       "share_turns_any": 0.0184
+      },
+      "top10_nongold": {
+       "turns": 598,
+       "mean_share": 0.0002,
+       "share_turns_any": 0.0084
+      },
+      "random10": {
+       "turns": 598,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "query": {
+      "gold": {
+       "turns": 598,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "top10_nongold": {
+       "turns": 598,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "random10": {
+       "turns": 598,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     }
+    },
+    "5": {
+     "sr": {
+      "gold": {
+       "turns": 598,
+       "mean_share": 0.0009,
+       "share_turns_any": 0.0217
+      },
+      "top10_nongold": {
+       "turns": 598,
+       "mean_share": 0.001,
+       "share_turns_any": 0.0217
+      },
+      "random10": {
+       "turns": 598,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "srm": {
+      "gold": {
+       "turns": 598,
+       "mean_share": 0.0015,
+       "share_turns_any": 0.0435
+      },
+      "top10_nongold": {
+       "turns": 598,
+       "mean_share": 0.0018,
+       "share_turns_any": 0.0518
+      },
+      "random10": {
+       "turns": 598,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "answer": {
+      "gold": {
+       "turns": 598,
+       "mean_share": 0.0069,
+       "share_turns_any": 0.2207
+      },
+      "top10_nongold": {
+       "turns": 598,
+       "mean_share": 0.0025,
+       "share_turns_any": 0.097
+      },
+      "random10": {
+       "turns": 598,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0017
+      }
+     },
+     "query": {
+      "gold": {
+       "turns": 598,
+       "mean_share": 0.0001,
+       "share_turns_any": 0.0017
+      },
+      "top10_nongold": {
+       "turns": 598,
+       "mean_share": 0.0007,
+       "share_turns_any": 0.0084
+      },
+      "random10": {
+       "turns": 598,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     }
+    }
+   },
+   "se": {
+    "8": {
+     "sr": {
+      "gold": {
+       "turns": 260,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "top10_nongold": {
+       "turns": 260,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "random10": {
+       "turns": 260,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "srm": {
+      "gold": {
+       "turns": 260,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "top10_nongold": {
+       "turns": 260,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "random10": {
+       "turns": 260,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "answer": {
+      "gold": {
+       "turns": 260,
+       "mean_share": 0.0018,
+       "share_turns_any": 0.0538
+      },
+      "top10_nongold": {
+       "turns": 260,
+       "mean_share": 0.0008,
+       "share_turns_any": 0.0269
+      },
+      "random10": {
+       "turns": 260,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "query": {
+      "gold": {
+       "turns": 260,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "top10_nongold": {
+       "turns": 260,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      },
+      "random10": {
+       "turns": 260,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     }
+    },
+    "5": {
+     "sr": {
+      "gold": {
+       "turns": 260,
+       "mean_share": 0.0019,
+       "share_turns_any": 0.0385
+      },
+      "top10_nongold": {
+       "turns": 260,
+       "mean_share": 0.0025,
+       "share_turns_any": 0.0423
+      },
+      "random10": {
+       "turns": 260,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "srm": {
+      "gold": {
+       "turns": 260,
+       "mean_share": 0.0024,
+       "share_turns_any": 0.0654
+      },
+      "top10_nongold": {
+       "turns": 260,
+       "mean_share": 0.0043,
+       "share_turns_any": 0.1115
+      },
+      "random10": {
+       "turns": 260,
+       "mean_share": 0.0001,
+       "share_turns_any": 0.0038
+      }
+     },
+     "answer": {
+      "gold": {
+       "turns": 260,
+       "mean_share": 0.0094,
+       "share_turns_any": 0.2577
+      },
+      "top10_nongold": {
+       "turns": 260,
+       "mean_share": 0.008,
+       "share_turns_any": 0.2654
+      },
+      "random10": {
+       "turns": 260,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     },
+     "query": {
+      "gold": {
+       "turns": 260,
+       "mean_share": 0.0009,
+       "share_turns_any": 0.0154
+      },
+      "top10_nongold": {
+       "turns": 260,
+       "mean_share": 0.0029,
+       "share_turns_any": 0.0423
+      },
+      "random10": {
+       "turns": 260,
+       "mean_share": 0.0,
+       "share_turns_any": 0.0
+      }
+     }
+    }
+   }
+  }
+ },
+ "conversation_fields": {
+  "id": {
+   "type": "str",
+   "example": null
+  },
+  "task": {
+   "type": "str",
+   "example": null
+  },
+  "original_query": {
+   "type": "str",
+   "example": null
+  },
+  "original_answer": {
+   "type": "str",
+   "example": null
+  },
+  "metadata": {
+   "type": "dict",
+   "example": null,
+   "keys": [
+    "created_at",
+    "gold_doc_count",
+    "method",
+    "num_turns",
+    "source",
+    "version"
+   ]
+  }
+ },
+ "track1": {
+  "examples_dev.jsonl": {
+   "id": "str",
+   "query": "str",
+   "gold_ids": "list",
+   "gold_answers": "list"
+  },
+  "steps_dev.jsonl": {
+   "id": "str",
+   "query": "str",
+   "steps": "list"
+  },
+  "step_keys": {
+   "step_id": "str",
+   "step": "int",
+   "step_instruction": "str",
+   "gold_ids": "list"
+  },
+  "guidance_dev.jsonl": {
+   "id": "str",
+   "query_guidance": "dict",
+   "gold_passage_annotations": "list"
+  },
+  "query_guidance_keys": [
+   "expected_granularity",
+   "is_temporal_query",
+   "key_time_anchors",
+   "quality_checks",
+   "query_summary",
+   "query_temporal_events",
+   "query_temporal_signals",
+   "retrieval_plan",
+   "retrieval_reasoning",
+   "temporal_intent",
+   "temporal_reasoning_class_primary",
+   "temporal_reasoning_class_secondary"
+  ],
+  "gold_passage_annotation_keys": [
+   "confidence",
+   "doc_id",
+   "passage_temporal_events",
+   "passage_temporal_signals",
+   "tense_guess",
+   "time_mentions",
+   "time_scope_guess"
+  ],
+  "guidance_example": {
+   "query_guidance": {
+    "expected_granularity": "month",
+    "is_temporal_query": true,
+    "key_time_anchors": [
+     "April 28th"
+    ],
+    "quality_checks": [
+     "cross-check dates from multiple sources",
+     "verify information from official IOTA channels",
+     "ensure technical details align with migration documentation"
+    ],
+    "query_summary": "The query seeks information about the future status and utility of the IOTA legacy network after April 28th.",
+    "query_temporal_events": [
+     "Chrysalis Token Migration"
+    ],
+    "query_temporal_signals": [
+     "future plans",
+     "after April 28th",
+     "in the coming months"
+    ],
+    "retrieval_plan": [
+     {
+      "action": "Search for official IOTA publications or blog posts discussing the legacy network's future after April 28th.",
+      "gold_ids": [
+       "iota/c5cc10bf_0004.txt"
+      ],
+      "step": 1
+     },
+     {
+      "action": "Review technical documentation or migration guides for details on the network's ongoing functionality.",
+      "gold_ids": [
+       "iota/c5cc10bf_0004.txt"
+      ],
+      "step": 2
+     },
+     {
+      "action": "Check community forums or developer updates for additional insights on the network's status and plans.",
+      "gold_ids": [],
+      "step": 3
+     }
+    ],
+    "retrieval_reasoning": "Focus on identifying official announcements, technical updates, or plans regarding the IOTA legacy network's status and functionality post-April 28th.",
+    "temporal_intent": "ongoing_status",
+    "temporal_reasoning_class_primary": "event_analysis_and_localization",
+    "temporal_reasoning_class_secondary": [
+     "time_period_contextualization"
+    ]
+   }
+  },
+  "dev_query_guidance_with_gold_id": [
+   484,
+   519
+  ]
+ },
+ "novel_terms": {
+  "train": {
+   "all": {
+    "sr": {
+     "n_novel": 9.5909,
+     "gold": 0.2184,
+     "top10_nongold": 0.3746,
+     "random10": 0.1025,
+     "turns_with_novel": 330
+    },
+    "llm_reason": {
+     "n_novel": 29.0758,
+     "gold": 0.1753,
+     "top10_nongold": 0.372,
+     "random10": 0.1139,
+     "turns_with_novel": 330
+    }
+   },
+   "bright": {
+    "sr": {
+     "n_novel": 9.4889,
+     "gold": 0.2294,
+     "top10_nongold": 0.3383,
+     "random10": 0.0513,
+     "turns_with_novel": 180
+    },
+    "llm_reason": {
+     "n_novel": 29.0778,
+     "gold": 0.1814,
+     "top10_nongold": 0.3304,
+     "random10": 0.0519,
+     "turns_with_novel": 180
+    }
+   },
+   "se": {
+    "sr": {
+     "n_novel": 9.7133,
+     "gold": 0.2053,
+     "top10_nongold": 0.418,
+     "random10": 0.164,
+     "turns_with_novel": 150
+    },
+    "llm_reason": {
+     "n_novel": 29.0733,
+     "gold": 0.168,
+     "top10_nongold": 0.422,
+     "random10": 0.1883,
+     "turns_with_novel": 150
+    }
+   }
+  },
+  "dev": {
+   "all": {
+    "sr": {
+     "n_novel": 9.7611,
+     "gold": 0.2339,
+     "top10_nongold": 0.3794,
+     "random10": 0.0922,
+     "turns_with_novel": 858
+    },
+    "llm_reason": {
+     "n_novel": 29.6037,
+     "gold": 0.1839,
+     "top10_nongold": 0.3654,
+     "random10": 0.0944,
+     "turns_with_novel": 858
+    }
+   },
+   "bright": {
+    "sr": {
+     "n_novel": 9.7023,
+     "gold": 0.247,
+     "top10_nongold": 0.3575,
+     "random10": 0.0502,
+     "turns_with_novel": 598
+    },
+    "llm_reason": {
+     "n_novel": 29.4398,
+     "gold": 0.1914,
+     "top10_nongold": 0.3429,
+     "random10": 0.0534,
+     "turns_with_novel": 598
+    }
+   },
+   "se": {
+    "sr": {
+     "n_novel": 9.8962,
+     "gold": 0.2037,
+     "top10_nongold": 0.4296,
+     "random10": 0.1886,
+     "turns_with_novel": 260
+    },
+    "llm_reason": {
+     "n_novel": 29.9808,
+     "gold": 0.1668,
+     "top10_nongold": 0.4171,
+     "random10": 0.1885,
+     "turns_with_novel": 260
+    }
+   }
+  }
+ }
+}

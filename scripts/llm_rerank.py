@@ -44,7 +44,9 @@ WEIGHTS = [round(0.1 * i, 1) for i in range(1, 10)]
 # condition -> (track, plan condition for query text / gold, ReasonEmbed-style instruction condition, qrels)
 CONDS = {"1a": (1, "1a", "1a", None), "1b": (1, "1b_query+step", "1b_query+step", None),
          "2a_current": (2, "2a_current", "2a_current", None), "2a_history": (2, "2a_current", "2a_current", "2a_hist3qa"),
-         "2a_history_q": (2, "2a_current", "2a_current", "2a_hist3q")}
+         "2a_history_q": (2, "2a_current", "2a_current", "2a_hist3q"),
+         # rule 19: Hb query + "\nReasoning: " + subquestion_reasoning, history cut to the query limit (never SR)
+         "2a_history_sr": (2, "2a_current", "2a_current", "2a_hist3qa")}
 
 
 class Reranker:
@@ -121,7 +123,7 @@ def rerank(lst, how, rs):
     return [d for d, _ in order([(d, (1 - w) * a + w * b) for (d, _), a, b in zip(head, zf, zr)])] + tail
 
 
-def query_texts(data, cond, split, dom):
+def query_texts(data, cond, split, dom, tok=None, query_len=1024):
     track, pc, _, hist = CONDS[cond]
     sub = "track1_tempo" if track == 1 else "track2_recor"
     d = os.path.join(data, sub, dom)
@@ -132,6 +134,10 @@ def query_texts(data, cond, split, dom):
         bench = json.load(open(os.path.join(d, f"benchmark_{split}.json"), encoding="utf-8"))
         bench = [bench] if isinstance(bench, dict) else bench
         qt = {f"{c['id']}_turn_{t['turn_id']}": history_body(t, hist == "2a_hist3qa") for c in bench for t in c["turns"]}
+    if cond.endswith("_sr"):
+        from sr import join_cut, sr_map
+        srs = sr_map(data, dom, split)
+        qt = {q: join_cut(tok, clean(x), clean(srs.get(q, "")), query_len, special=False)[0] for q, x in qt.items()}
     return qt, gold
 
 
@@ -152,6 +158,7 @@ def main():
     ap.add_argument("--limit", type=int, help="speed test: score only the first N uncached pairs, no report")
     ap.add_argument("--margin", type=float, default=0.005)
     ap.add_argument("--save-runs", help="write the chosen reranked top-N + rest as TREC runs here")
+    ap.add_argument("--name", help="report / run name (default: --cond)")
     ap.add_argument("--out", required=True)
     tiebreak.add_arg(ap)
     a = ap.parse_args()
@@ -165,9 +172,11 @@ def main():
     cache = load_cache(cpath)
     # phase 1: pairs
     pairs, per, golds = [], {}, {}
+    rr = Reranker(a.model, a.bits, a.doc_len, a.query_len, load_model=False)
+    name = a.name or a.cond
     for sp in a.splits:
         for dom, tops in pools[sp].items():
-            qt, gold = query_texts(a.data, a.cond, sp, dom)
+            qt, gold = query_texts(a.data, a.cond, sp, dom, rr.tok, a.query_len)
             golds[(sp, dom)] = gold
             ins = instruction(track, CONDS[a.cond][2], dom, CONDS[a.cond][3])
             docs = fetch(a.data, track, dom, {d for q in tops for d, _ in tops[q][:a.depth]})
@@ -175,11 +184,11 @@ def main():
             for q, lst in tops.items():
                 per[(sp, dom)][q] = []
                 for d, _ in lst[:a.depth]:
-                    pairs.append((sp, dom, q, d, ins, clean(qt[q]), clean(docs.get(d, ""))[:6000]))
+                    qx = qt[q] if a.cond.endswith("_sr") else clean(qt[q])
+                    pairs.append((sp, dom, q, d, ins, qx, clean(docs.get(d, ""))[:6000]))
     print(f"[{a.cond}] {len(pairs)} pairs over {sum(len(v) for v in per.values())} topics", flush=True)
     # phase 2: score missing pairs (texts cut to token limits first; the cache key uses the cut texts)
     t0 = time.time()
-    rr = Reranker(a.model, a.bits, a.doc_len, a.query_len, load_model=False)
     keyed, cut_q, cut_d, n_new = [], {}, {}, 0
     for c in range(0, len(pairs), a.chunk):
         part = pairs[c:c + a.chunk]
@@ -241,7 +250,7 @@ def main():
            "dev_bootstrap_best_minus_none": bootstrap(res[best]["dev"], res[none]["dev"]) if "dev" in a.splits else None,
            "dev_per_topic_best": res[best].get("dev"), "dev_per_topic_none": res[none].get("dev"),
            "train_per_topic_best": res[best]["train"], "train_per_topic_none": res[none]["train"]}
-    rpath = os.path.join(a.out, f"rule16_{a.cond}_{a.model}.json")
+    rpath = os.path.join(a.out, f"rule16_{name}_{a.model}.json")
     json.dump(row, open(rpath, "w"), indent=1)
     for h in hows:
         print(f"   {lab(h):<16} " + "  ".join(f"{sp} {mac[h][sp]:.4f}" for sp in a.splits), flush=True)
@@ -251,7 +260,7 @@ def main():
         os.makedirs(a.save_runs, exist_ok=True)
         for sp in a.splits:
             for dom, tops in pools[sp].items():
-                with open(os.path.join(a.save_runs, f"t{track}_{dom}_{sp}_{a.cond}__rr.tsv"), "w") as f:
+                with open(os.path.join(a.save_runs, f"t{track}_{dom}_{sp}_{name}__rr.tsv"), "w") as f:
                     for q in sorted(tops):
                         for r, d in enumerate(rerank([tuple(x) for x in tops[q]], best, rs[(sp, dom, q)]), 1):
                             f.write(f"{q} Q0 {d} {r} {1.0 / r:.6f} rr-{lab(best)}\n")

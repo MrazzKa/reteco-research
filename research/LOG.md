@@ -1834,3 +1834,167 @@ time: Track 1 2.24 h (pre-generation 801 s, ReasonEmbed for 1a top 100 6,030 s =
   (pre-generation 632 s, ReasonEmbed 2a_nomaxp_p100 2,914 s, 2a_history 2,187 s, reranker 798 s for 16,897 pairs);
   total 4.18 h on dev size (519 / 1,214 / 858). Scaled to the test (350 / 820 / 200): ≈ 2.1 h. Estimates vs actual:
   C1 total 3.5–4.5 h / 4.18 h of compute (plus the pause 23:59–07:32).
+
+## 2026-11-16 14:21 — S0: sync; organisers' answers and supervisor decisions since 11.11 (no run)
+repo: origin/main = 322bba8 (clean). RETECO kit: `git fetch` → origin/main still 7ee8acf (28.10), `git ls-remote` HEAD
+  7ee8acf; nothing new in scorer / format_checker / data; website News (docs/index.html of the same commit): last item
+  26.10 (Pyserini). Nothing new on the site.
+organisers (mailing list, recorded here as received by Timur):
+  - 10.11: the Track-2 (2a) test release has exactly the train/dev structure — the earlier answers stay in
+    `conversation_history`; the test turns also carry `subquestion_reasoning` and `subquestion_reasoning_metadata`.
+    So `2a_auto` is expected to pick `2a_history_rr` on test; it stays as insurance.
+  - 13.11: the corpus may be cut, chunked and indexed in any way (MaxP etc.) as long as no external documents are added
+    and the original doc ids are submitted. Our MaxP (`2a_maxp`, passages of 510 tokens, max over passages) is allowed.
+  - 15.11: a retriever trained on synthetic pairs built from the BRIGHT corpus is allowed on Track 2. So ReasonEmbed
+    (ReMixer data synthesised from the BRIGHT corpora, LOG 2026-11-10 09:58) is explicitly allowed. ReasonIR-8B was
+    excluded in rule 18 for its BRIGHT-derived training data — that reason is now void; the remaining reason is memory
+    (8B in NF4 leaves < 1 GB of the 8 GB GPU). No new ReasonIR experiments (supervisor's scope).
+supervisor (Steven, reply of 11.11 to the update of 09.11):
+  1. Pool 100 is dropped: the gain is tiny and the step is slow. Timur drops it for 1a and for the 2a current-turn
+     fallback. **This is a supervisor's cost decision, not a train rule** (rule 17 had adopted pool 100 for 1a and 2a
+     current on train; the decision overrides it on cost grounds).
+  2. `subquestion_reasoning` (SR) to be checked as a separate run (like the answer-free fallback); the main run does
+     not change without his decision.
+  3. Main 2a = history + reranker (`2a_history_rr`); `2a_auto` stays as insurance.
+  4. Fallbacks per sub-task: 1a / 1b without ReasonEmbed; 2a without the reranker and without answers.
+  5. The leak through the file order is reported to the organisers by Timur himself.
+  6. Paper: SemEval system-paper structure, ACL template; System Overview, Experimental Setup, Results first; the text
+     is written outside the repo; from here: tables and numbers.
+estimates for today: S1 ≤ 30 min (CPU, caches); S2 SR recon ~45 min CPU, rule 19 ~3–4 h (GPU: ReasonEmbed query
+  vectors + reranker pairs for the new queries); S3 paper tables ~1.5 h; S4 error types ~1.5 h.
+
+## 2026-11-16 14:22 — S1 (no choice; supervisor decision): submission without pool 100
+change: was (pool 100, rule 17) 1a 0.3672 / 2a current 0.3801 → becomes (pool 50) 1a 0.3667 / 2a current 0.3779 dev
+  (train subsample 0.3139 → 0.3078 / 0.4389 → 0.4317). `configs/submission.json`: main runs `1a` (pool 50), `1b`,
+  `2a_auto` (= `2a_history_rr` / `2a_history_q`); fallbacks `1a_noRE`, `1b_noRE`, `2a_history`, `2a_nomaxp`,
+  `2a_maxp` (+ `2a_history_q` inside `2a_auto`); `1a_p100` and `2a_nomaxp_p100` stay in `variants` as unused (for
+  reproducing the tables) and leave `_main_runs` / `_fallback_runs`.
+check: `submit.py --split dev` (warm caches) for every submission run, `score_submission.py` + `final_1110.py`;
+  pass = every official macro equal to its research number. Estimate 20–30 min (Track-1 BM25 indexing dominates).
+
+## 2026-11-16 14:24 — S2a (written before any SR result; analysis, no choice): reconnaissance of `subquestion_reasoning`
+what (CPU, `scripts/sr_recon.py`, out `runs_v13/sr/recon.json`): for train and dev of all 11 Track-2 domains —
+  type / presence / length in words of `subquestion_reasoning` (SR), first turn vs later turns; the keys, value types
+  and lengths of `subquestion_reasoning_metadata` (SRM); whether SR or SRM contain a gold doc id, any doc-id-like
+  string (`*_ex_<n>_doc_<n>`, `*.txt`), or (BRIGHT ids are `<question slug>/<page title>_<n>.txt`) the gold page title
+  or question slug as a phrase — against the same check with the gold ids of a random other conversation of the domain
+  (chance level). "Written from gold?": share of SR word 8-grams (lower-cased [a-z0-9]+ tokens) that occur verbatim in
+  the turn's gold documents vs in the top-10 non-gold documents of our main run (`2a_history_rr`; dev all turns, train
+  the rule-8 subsample) vs in 10 random documents of the domain (random.Random(20260921)); the same for SRM text, for
+  the turn's reference `answer` and for the current `query` as reference points. Conversation-level fields
+  (`original_query`, `original_answer`, `metadata`) listed as well. Track 1: which fields of examples / steps /
+  guidance files could carry reasoning (report only).
+decision rule (fixed now): if SRM (or SR) contains gold doc ids or other gold identifiers, that field is NOT used —
+  it is gold. SR text may be used (rule 19) only if it contains no id. SRM is not used in any case (supervisor scope:
+  SR text only).
+examples rule (fixed before viewing any example): `research/cases/subquestion_reasoning_dev.md`, 4 dev turns: keys
+  (domain, qid) sorted; rng = random.Random(20260921); 2 = rng.sample(BRIGHT-domain keys, 2), then 2 =
+  rng.sample(StackExchange-domain keys, 2) with the same rng. Shown: current question, SR (first 500 chars), SRM (keys
+  and short values), the first 300 chars of the turn's first gold document. No resampling.
+estimate: 30–45 min.
+
+## 2026-11-16 14:26 — rule 19 (written before any retrieval run that uses SR): `subquestion_reasoning` as a separate run
+scope (supervisor, 11.11): SR is tested as a separate run; the main run (`2a_history_rr`) does not change whatever the
+  outcome — the decision is Steven's. Only the SR text of the current turn is used (never SRM, never other fields).
+base: `2a_history_rr` = Hb hybrid (BM25 on q + r + h, q = current question + released history; dense bge-base L512 =
+  normalised sum of e_query(q), e_query(r), e_doc(h); z-score fusion α 0.6, kb = kd = 100) → ReasonEmbed over the top
+  50 (w 0.9) → Qwen3-Reranker-0.6B over the top 20 (z-interpolation w 0.4). Generations of the LLM unchanged.
+candidates (s = SR text of the current turn):
+  S1  BM25 = q + r + h + s; dense = normalised sum of e_query(q), e_query(r), e_doc(h), e_query(s);
+  S2  BM25 = q + s + h; dense = normalised sum of e_query(q), e_query(s), e_doc(h) (SR replaces the LLM reason r);
+  both: ReasonEmbed query = the Hb query text (current question first + ≤ 3 earlier Q/A turns, whitespace-collapsed)
+  + "\nReasoning: " + s, at most 512 tokens with the instruction — the history is cut, never SR; reranker query = the
+  same construction cut to the reranker's 1,024-token query limit (history cut, never SR); same instructions.
+  S3 (LLM sees SR) only if S1, S2 and the two analyses below finish before 18:30 (then generations for all inputs in
+  one call); otherwise not run (stated as such).
+procedure per candidate: fusion grid of `hybrid.py` on full train (as rule 11); ReasonEmbed way/weight from the
+  rule-8 grid (none / top N / interp 0.1–0.9) on the rule-8 train subsample (≤ 30 per domain, random.Random(20260921));
+  reranker from the rule-16 grid (none / order / z-interp w 0.1–0.9 over the top 10 or 20; depth 20) on the same
+  subsample. The candidate with the better final train-subsample macro = run `2a_history_sr`.
+report (no adoption): `2a_history_sr` − `2a_history_rr` on the train subsample (paired bootstrap, within domain,
+  10,000, seed 20260921) — stating whether the usual margin (≥ +0.005 and lower bound > 0) would be met — and on dev
+  once, with BRIGHT / StackExchange, first turns / recycled gold / new gold and T1…T5+.
+analysis (no choice): (i) SR without history = 2a current B (rule 10) + SR in the S1 form (BM25 q + r + h + s, dense
+  + e_query(s), ReasonEmbed query = current question + "\nReasoning: " + s, its own fusion and weight on train;
+  no reranker); (ii) SR as the only query: BM25 on s, dense e_query(s), ReasonEmbed query = s (question instruction),
+  fusion and weight on train — the "ceiling" of SR alone.
+submission (S2c): variant `2a_history_sr` in submission.json + submit.py; a turn with an empty SR falls back to the
+  `2a_history_rr` ranking (counters in the manifest).
+estimate: code 45 min; GPU: dense search ~10 min per variant set, ReasonEmbed ~1,200 queries + new pool documents per
+  candidate (~10–20 min each), reranker 23,760 pairs per history candidate (~22 min each) → ~2–2.5 h in total.
+
+## 2026-11-16 14:29 — S4 rule (written before viewing any topic): error types of the main runs for the paper
+sample: per sub-task — 1a (main `1a`, pool 50), 1b (`1b`), 2a (main `2a_history_rr`) — the dev topics whose official
+  nDCG@10 under the main run (submit.py dev files) is ≤ 0.1 (0 included); keys (domain, topic id) sorted; 15 drawn
+  with a fresh `random.Random(20260921).sample(keys, 15)` per sub-task. No resampling.
+shown per topic (generated by `scripts/error_types.py`, material in `research/cases/error_material_dev.json`):
+  query / step / current turn (+ history start for 2a), the LLM reason and HyDE texts (start), every gold document's
+  first-stage (hybrid) rank and final rank, the first gold document's start, our top 3 (starts, with "gold of another
+  topic" marks).
+categories (fixed now; one primary label per topic, preliminary, to be confirmed by a human):
+  (a) recall miss — no gold in the first-stage top 100 (= the final top 100; mechanical);
+  (b) gold in the first-stage top 100 but not brought into the top 10 by ReasonEmbed / reranker (mechanical; hybrid
+      vs final rank shown, demotion = final rank worse than hybrid rank);
+  (c) our top 1 looks relevant on reading — possibly incomplete judgments;
+  (d) temporal mismatch (Track 1 only): the top documents are about the right topic but the wrong period;
+  (e) the LLM expansion (reason / HyDE) drifted away from the question;
+  (f) other.
+  Precedence: a reading label (c) > (d) > (e) applies when it is clearly visible; otherwise the mechanical label
+  (a) or (b); (f) when none fits. Labels in `research/cases/error_types_dev.md` are marked "preliminary, to be
+  confirmed by a human"; a count table by sub-task and category goes with them.
+estimate: material 20 min, reading 45 topics ~1 h.
+
+## 2026-11-16 14:24–14:30 — S2a result: `subquestion_reasoning` reconnaissance (analysis, no choice)
+command: `python3 sr_recon.py --data ../../reteco_data_v11 --runs ../research/runs_v13 --out
+  ../research/runs_v13/sr/recon.json --cases ../research/cases/subquestion_reasoning_dev.md` (CPU, ~1.5 min; run three
+  times while adding checks — title/slug in query and history, Track-1 guidance ids, novel terms; the 8-gram and id
+  numbers did not change between runs).
+structure: SR is a string in every turn — train 2,113 / 2,113, dev 858 / 858, including every first turn (496 / 211);
+  ~30 words (dev median 29 first turns / 30 later, range 19–49). SRM is a dict with exactly three keys in every turn:
+  `target_information` (string, median 23 words), `relevance_signals` and `irrelevance_signals` (lists of 2–5 short
+  phrases, ~10–11 words in all). SR reads like a retrieval instruction: "Select / Retrieve documents that … ; avoid
+  those focused on …".
+identifiers: no gold doc id in SR or SRM (train 0 / 2,113, dev 0 / 858); no doc-id-like string (one SRM hit in train
+  is "CMakeLists.txt", not an id). BRIGHT ids carry page titles: the gold page title occurs as a phrase in SR in 55 of
+  598 dev BRIGHT turns (9%), the question slug in 87 (15%) — chance level (titles of another conversation's gold) 0.
+  For reference, the same check on released inputs: current question title 17 / slug 47, released history 39 / 102,
+  reference answer (not an input) title 41. So SR names the gold page topic about as often as the history does.
+"written from gold?": word 8-grams of SR found verbatim in the turn's gold documents: share 0.0000 on train and dev
+  (no turn has any), same for the top-10 non-gold of our main run and for random documents → SR copies no gold text.
+  5-grams: gold 0.0012 vs top-10 non-gold 0.0014 vs random 0.0000 (dev). Novel content words (≥ 4 letters, not in the
+  current question or the released history): SR has 9.8 per dev turn, 23.4% of them occur in the gold documents vs
+  37.9% in the (larger) top-10 non-gold set vs 9.2% in 10 random documents; our own LLM reason text (no documents seen)
+  has 29.6 novel words with 18.4% / 36.5% / 9.4%. SR's new words are somewhat more gold-specific than the LLM's
+  (gold / top-10 ratio 0.62 vs 0.50), and the examples show why: SR names entities that are in the gold or the
+  original post but not in the turn (law: "ROSCA" for an early-termination-fee question; hardware: "Visual Studio").
+reading: SR contains no id and no copied gold text, so by the decision rule its text may be used (rule 19); it is,
+  however, written with knowledge of the target information (an oracle-flavoured query rewrite supplied by the task),
+  which the paper must say. SRM contains no id either but is not used (scope: SR text only).
+other fields seen (not used anywhere, nothing changes): per conversation `original_query`, `original_answer` and
+  `metadata` {created_at, gold_doc_count, method, num_turns, source, version} — `gold_doc_count` is gold-derived
+  (`make_test_release.py` already drops it); whether the test files keep them is not announced.
+Track 1 (report only): examples carry {id, query, gold_ids, gold_answers}; steps {step_id, step, step_instruction,
+  gold_ids} — `step_instruction` is the only reasoning-like field of the test input and is already in 1b. The
+  separate `guidance_*.jsonl` (query_guidance: retrieval_plan, retrieval_reasoning, key_time_anchors, temporal classes
+  …; gold_passage_annotations with doc ids) is gold-bearing: `query_guidance.retrieval_plan` lists gold ids in 484 of
+  519 dev queries. Not usable, and not announced as a test input.
+examples: `research/cases/subquestion_reasoning_dev.md` (earth_science 9_turn_9, biology 33_turn_3, law ex_105196_turn_2,
+  hardware ex_10266_turn_2).
+time: estimate 30–45 min / actual ~6 min of compute + reading.
+
+## 2026-11-16 14:22–14:43 — S1 result: submission without pool 100 passes the dev check
+command: `research/runs_v13/logs/queue_1116a.sh` (`submit.py --split dev` warm caches: Track 1 `1a 1a_noRE 1b 1b_noRE`,
+  Track 2 `2a_auto 2a_history 2a_nomaxp 2a_maxp`; `score_submission.py` → `runs_v13/submit_check_1116.json`;
+  `final_1110.py` → `runs_v13/final_1116.json`).
+result (official macro nDCG@10, dev [95% CI]) — every run equals its research number: main `1a` 0.3667 [0.3292,
+  0.4042], `1b` 0.4053 [0.3700, 0.4408], `2a_history_rr` 0.5507 [0.5274, 0.5741] (`2a_auto` chose it in 11/11
+  domains), `2a_history_q` 0.4802; fallbacks `1a_noRE` 0.3258, `1b_noRE` 0.3505, `2a_history` 0.5475, `2a_nomaxp`
+  0.3779, `2a_maxp` 0.3901. format_checker exit 0 on every file. The run files are byte-identical to the 10.11 dev
+  files (`submit/dev`) for 1a, 1b, 2a_history_rr, 2a_history_q, 1a_noRE, 1b_noRE. (The Track-2 part already ran with
+  the rule-19 changes in submit.py — the non-SR path is unchanged, as the identical files show.)
+test-time estimate without pool 100 (`scripts/paper_tables.py`, keys `compute.no_p100.*`, arithmetic in
+  `research/paper_tables/README.md`): C1 wall times of the non-p100 runs scaled to the test size plus the ReasonEmbed
+  time of the documents these runs would have to encode themselves (C1 ran the p100 runs first, so their cost hid
+  the pool-50 encoding; 1b's documents were encoded before the pause): ≈ **1.6 h** (1a 44 min, 1b 23 min, 2a 19 min,
+  LLM pre-generation 11 min) vs ≈ 2.1 h with pool 100. The earlier "2.1 h" also under-counted 1b.
+time: estimate 20–30 min / actual 21 min.

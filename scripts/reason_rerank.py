@@ -51,10 +51,15 @@ WEIGHTS = [round(0.1 * i, 1) for i in range(1, 10)]
 
 
 HIST_QCONDS = {"2a_hist3q": False, "2a_hist3qa": True}  # query = current question first + earlier turns
+# rule 19: query conditions with the current turn's `subquestion_reasoning` (s): base text + "\nReasoning: " + s,
+# the base cut to the token limit (never s). "sr_only" = s alone. Value: base query condition (None = no base).
+SR_QCONDS = {"2a_hist3qa+sr": "2a_hist3qa", "2a_current+sr": "2a_current", "sr_only": None}
 
 
 def instruction(track, cond, dom, qcond=None):
     name = dom.replace("_", " ")
+    if qcond in SR_QCONDS:
+        qcond = SR_QCONDS[qcond]
     if qcond in HIST_QCONDS:
         return f"Given a {name} conversation, retrieve documents that help answer the current question."
     if cond.startswith("1b"):
@@ -216,16 +221,17 @@ def main():
                 pre = f"t{a.track}_{dom}_{split}"
                 bm = read_run(os.path.join(a.bm25, f"{pre}_{cond}.tsv"))
                 de = read_run(os.path.join(a.dense, f"{pre}_{dcond}.tsv"))
-                pq = "2a_current" if qcond in HIST_QCONDS else qcond
+                base_qc = SR_QCONDS.get(qcond, qcond) if qcond in SR_QCONDS else qcond
+                pq = "2a_current" if (qcond in SR_QCONDS or qcond in HIST_QCONDS) else qcond
                 (_, queries, gold), = [p for p in plan(a.track, os.path.join(a.data, sub, dom), split)
                                        if p[0] == pq]
                 qtext = dict(queries)
-                if qcond in HIST_QCONDS:
+                if base_qc in HIST_QCONDS:
                     from llm_expand import history_body
                     bench = json.load(open(os.path.join(a.data, sub, dom, f"benchmark_{split}.json"),
                                            encoding="utf-8"))
                     bench = [bench] if isinstance(bench, dict) else bench
-                    qtext = {f"{c['id']}_turn_{t['turn_id']}": history_body(t, HIST_QCONDS[qcond])
+                    qtext = {f"{c['id']}_turn_{t['turn_id']}": history_body(t, HIST_QCONDS[base_qc])
                              for c in bench for t in c["turns"]}
                 qids = sorted(q for q in gold if q in qtext)
                 if split == "train" and len(qids) > a.train_per_domain:
@@ -235,7 +241,26 @@ def main():
                     caches[dom] = load_cache(os.path.join(cdir, f"docs_{dom}"))
                 ins = instruction(a.track, cond, dom, qcond)
                 fmt = QFMT.get(a.model, QFMT_DEFAULT)
-                per[split][dom] = (qids, pools, gold, [fmt.format(ins=ins, q=clean(qtext[q])) for q in qids])
+                if qcond in SR_QCONDS:
+                    from sr import join_cut, sr_map
+                    from transformers import AutoTokenizer
+                    if not hasattr(a, "_tok"):
+                        a._tok = AutoTokenizer.from_pretrained(ckpt, revision=REVISIONS.get(a.model))
+                    srs = sr_map(a.data, dom, split)
+                    qts = []
+                    for q in qids:
+                        base = "" if base_qc is None else clean(qtext[q])
+                        s_ = clean(srs.get(q, ""))
+                        if base_qc is None:
+                            txt, cut = s_, False
+                        else:
+                            txt, cut = join_cut(a._tok, base, s_, a.max_len, wrap=lambda x: fmt.format(ins=ins, q=x))
+                        stats["sr_base_cut"] = stats.get("sr_base_cut", 0) + cut
+                        stats["sr_empty"] = stats.get("sr_empty", 0) + (not s_)
+                        qts.append(fmt.format(ins=ins, q=txt))
+                    per[split][dom] = (qids, pools, gold, qts)
+                else:
+                    per[split][dom] = (qids, pools, gold, [fmt.format(ins=ins, q=clean(qtext[q])) for q in qids])
         need = {dom: sorted({d for sp in per for q in per[sp].get(dom, ([],))[0] for d, _ in per[sp][dom][1][q]}
                             - set(caches[dom])) for dom in caches}
         # phase 2: embed in chunks; document vectors are saved after every chunk (resumable)

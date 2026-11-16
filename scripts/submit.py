@@ -18,6 +18,9 @@ Pipeline per topic (all frozen in the config):
   3. Linear fusion of the two lists (normalisation and alpha from the config) over the union of the
      top kb / kd.
   4. ReasonEmbed-4B (NF4) over the top 50: (1 - w) minmax(fused) + w minmax(embedder).
+  (2a_history_sr, LOG rule 19: the current turn's `subquestion_reasoning` s joins the BM25 text and the dense
+  vector as configured, and "\nReasoning: " + s is appended to the ReasonEmbed / reranker queries with the history
+  cut to their token limits; a turn without SR gets the ranking of the `sr.fallback` variant, built alongside.)
   Then: positions 1-50 = step 4, then the rest of the fused pool, then the remaining dense and BM25
   documents, cut at 1000. Ties anywhere: sha1(doc id) (scripts/tiebreak.py). No component reads a doc
   id or a document's position in the corpus file to rank.
@@ -180,17 +183,27 @@ def run_variant(a, name, cfg, enc_cache):
     rc = cfg["reasonembed"]
     hcfg = cfg["hybrid"]
     pending = {}
+    src = cfg.get("sr")  # rule 19
+    srs = {}
     for dom in doms:
         ts = tops[dom]
         qids = [t[0] for t in ts]
         assert len(set(qids)) == len(qids), f"duplicate topic ids in {dom}"
         texts = {t[0]: (t[1], gen["reason"][t[2]], gen["hyde"][t[2]]) for t in ts}
+        if src:  # rule 19: components of the BM25 text / dense vector, e.g. q r h s or q s h
+            from sr import sr_map
+            srs[dom] = sr_map(a.data, dom, a.split)
+            comp = src["components"]
+            texts = {q: dict(zip("qrh", x)) | {"s": srs[dom].get(q, "")} for q, x in texts.items()}
         # 2a. BM25
         t0 = time.time()
         bm, ids = build(os.path.join(a.data, sub, dom, "documents.jsonl"), key, "lucene")
         timing["bm25_index_s"] += time.time() - t0
         t0 = time.time()
-        bq = [(q, texts[q][0] if plain else "\n".join(texts[q])) for q in qids]
+        if src:
+            bq = [(q, "\n".join(texts[q][c] for c in comp)) for q in qids]
+        else:
+            bq = [(q, texts[q][0] if plain else "\n".join(texts[q])) for q in qids]
         bres = search(bm, ids, bq, "lucene", name, k=1000, threads=8)
         bres = {q: [(d, r6(s)) for d, s in v] for q, v in bres.items()}
         timing["bm25_search_s"] += time.time() - t0
@@ -205,10 +218,14 @@ def run_variant(a, name, cfg, enc_cache):
             gi = GpuIndex(domain_dir(rp(dc["emb"]), dc["model"], dc["max_len"], tr, dom))
         timing["dense_index_load_s"] += time.time() - t0
         t0 = time.time()
-        eq = enc.encode_queries([texts[q][0] for q in qids]).astype(np.float32)
-        if plain:
+        if src:  # same order of the summed vectors as qexp_search.py
+            vec = {"q": enc.encode_queries, "r": enc.encode_queries, "s": enc.encode_queries, "h": enc.encode_docs}
+            mat = sum(vec[c]([texts[q][c] for q in qids]).astype(np.float32) for c in comp)
+        elif plain:
+            eq = enc.encode_queries([texts[q][0] for q in qids]).astype(np.float32)
             mat = eq
         else:
+            eq = enc.encode_queries([texts[q][0] for q in qids]).astype(np.float32)
             er = enc.encode_queries([texts[q][1] for q in qids]).astype(np.float32)
             eh = enc.encode_docs([texts[q][2] for q in qids]).astype(np.float32)
             mat = eq + er + eh
@@ -227,6 +244,7 @@ def run_variant(a, name, cfg, enc_cache):
     cdir = rp(os.path.join(rc["cache"], f"t{tr}"))
     os.makedirs(cdir, exist_ok=True)
     emb = None
+    emb_tok = [None]
     qcache_path = os.path.join(cdir, "queries")
     qcache = load_cache(qcache_path)
     n_new_docs = 0
@@ -237,7 +255,16 @@ def run_variant(a, name, cfg, enc_cache):
         need = sorted({d for q in pools for d, _ in pools[q][:rc["pool"]]} - set(cache))
         qc = {"2a_hist3q_qonly": "2a_hist3q"}.get(cfg["query"], cfg["query"])
         ins = instruction(tr, cfg["query"], dom, qc if qc.startswith("2a_hist") else None)
-        qtext = {t[0]: f"Instruct: {ins}\nQuery: {re_clean(t[3])}" for t in ts}
+        if src:
+            from sr import join_cut
+            if emb_tok[0] is None:
+                from transformers import AutoTokenizer
+                emb_tok[0] = AutoTokenizer.from_pretrained(rc["checkpoint"])
+            wrap = lambda x: f"Instruct: {ins}\nQuery: {x}"  # noqa: E731
+            qtext = {t[0]: wrap(join_cut(emb_tok[0], re_clean(t[3]), re_clean(srs[dom].get(t[0], "")), rc["max_len"],
+                                         wrap=wrap)[0]) for t in ts}
+        else:
+            qtext = {t[0]: f"Instruct: {ins}\nQuery: {re_clean(t[3])}" for t in ts}
         qkey = {q: hashlib.sha1(x.encode("utf-8")).hexdigest() for q, x in qtext.items()}
         q_todo = sorted({qkey[q] for q in qkey if qkey[q] not in qcache})
         if need or q_todo:
@@ -282,7 +309,12 @@ def run_variant(a, name, cfg, enc_cache):
             cd = {d: rr.cut(re_clean(docs.get(d, ""))[:6000], lr["doc_len"]) for d in need}
             items = {}
             for q, _, _, qx in ts:
-                cq = rr.cut(re_clean(qx), lr["query_len"])
+                if src:
+                    from sr import join_cut
+                    cq = rr.cut(join_cut(rr.tok, re_clean(qx), re_clean(srs[dom].get(q, "")), lr["query_len"],
+                                         special=False)[0], lr["query_len"])
+                else:
+                    cq = rr.cut(re_clean(qx), lr["query_len"])
                 for d, _ in finals[q][:lr["depth"]]:
                     it = (ins, cq, cd[d])
                     items[(q, d)] = (hashlib.sha1("\n".join(it).encode("utf-8")).hexdigest(), it)
@@ -401,6 +433,42 @@ def history_stats(data, split, dom):
     return dict(c)
 
 
+def sr_fallback(a, name, cfg):
+    """Turns with an empty `subquestion_reasoning` get the ranking of cfg["sr"]["fallback"] (same file layout,
+    this variant's run id); counters per domain go to the manifest."""
+    from sr import sr_map
+    fb = cfg["sr"]["fallback"]
+    mpath = os.path.join(a.out, name, "manifest.json")
+    man = json.load(open(mpath))
+    tot = defaultdict(int)
+    for dom in (a.domains or cfg["domains"]):
+        srs = sr_map(a.data, dom, a.split)
+        empty = {q for q, x in srs.items() if not x.strip()}
+        path, fpath = os.path.join(a.out, name, f"{dom}.txt"), os.path.join(a.out, fb, f"{dom}.txt")
+        if empty:
+            own = [ln for ln in open(path, encoding="utf-8") if ln.split()[0] not in empty]
+            alt = [" ".join(ln.split()[:5] + [cfg["run_id"]]) + "\n" for ln in open(fpath, encoding="utf-8")
+                   if ln.split()[0] in empty]
+            by_q = defaultdict(list)
+            for ln in own + alt:
+                by_q[ln.split()[0]].append(ln)
+            order_q = []
+            for ln in open(path, encoding="utf-8"):  # keep the release order of topics
+                q = ln.split()[0]
+                if not order_q or order_q[-1] != q:
+                    order_q.append(q)
+            with open(path, "w", encoding="utf-8") as f:
+                for q in order_q:
+                    f.writelines(by_q[q])
+        c = {"turns": len(srs), "turns_with_sr": len(srs) - len(empty), "turns_fallback": len(empty), "fallback": fb}
+        man["domains"].setdefault(dom, {})["sr"] = c
+        for k in ("turns", "turns_with_sr", "turns_fallback"):
+            tot[k] += c[k]
+        print(f"[{name}] {dom}: {c}", flush=True)
+    man["sr_summary"] = dict(tot)
+    json.dump(man, open(mpath, "w"), indent=1)
+
+
 def auto_2a(a, conf):
     """Per Track-2 domain: earlier answers present (any turn >= 2 with a non-empty parsed answer) -> the main
     history run, else the rule-14 run without answers. Both variants are always built; the chosen file is
@@ -437,9 +505,16 @@ def main():
         for v in (conf["_auto_2a"]["with_answers"], conf["_auto_2a"]["without_answers"]):
             if v not in variants:
                 variants.append(v)
+    for v in list(variants):  # rule 19: an SR variant needs its fallback variant for turns without SR
+        fb = conf["variants"][v].get("sr", {}).get("fallback")
+        if fb and fb not in variants:
+            variants.append(fb)
     pregenerate(a, conf, variants)
     for v in variants:
         run_variant(a, v, conf["variants"][v], enc_cache)
+    for v in variants:
+        if conf["variants"][v].get("sr"):
+            sr_fallback(a, v, conf["variants"][v])
     if dec is not None:
         adir = os.path.join(a.out, "2a_auto")
         os.makedirs(adir, exist_ok=True)

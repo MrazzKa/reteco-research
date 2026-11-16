@@ -6,6 +6,8 @@ Track 1 `gold_ids`, `gold_answers` (and the step `gold_ids`); Track 2 per turn `
 (the current turn's reference answer), `subquestion_reasoning(_metadata)`, per conversation
 `original_answer` and the gold count in `metadata`. No qrels are written; documents are symlinked.
 With --strip-answers every earlier answer is removed from `conversation_history` (history.strip_answers).
+With --keep-sr the turn field `subquestion_reasoning` (and its metadata) is kept: the organisers announced on 10.11
+that the Track-2 test turns carry both fields (S2c check of `2a_history_sr`).
 
     python3 make_test_release.py --data ../../reteco_data_v11 --out /tmp/rel_with  --tracks 2
     python3 make_test_release.py --data ../../reteco_data_v11 --out /tmp/rel_without --tracks 2 --strip-answers
@@ -36,8 +38,10 @@ def main():
     ap.add_argument("--domains", nargs="+")
     ap.add_argument("--src-split", default="dev")
     ap.add_argument("--strip-answers", action="store_true")
+    ap.add_argument("--keep-sr", action="store_true", help="keep subquestion_reasoning(_metadata) (test has them)")
     a = ap.parse_args()
-    n = {"t1_topics": 0, "t1_steps": 0, "t2_turns": 0, "t2_turns_with_answers_after": 0}
+    n = {"t1_topics": 0, "t1_steps": 0, "t2_turns": 0, "t2_turns_with_answers_after": 0, "t2_turns_with_sr": 0}
+    drop = T2_TURN_DROP - ({"subquestion_reasoning", "subquestion_reasoning_metadata"} if a.keep_sr else set())
     for tr in a.tracks:
         sub = "track1_tempo" if tr == 1 else "track2_recor"
         for dom in [d for d in (T1 if tr == 1 else T2) if not a.domains or d in a.domains]:
@@ -66,7 +70,8 @@ def main():
                     c["metadata"] = {k: v for k, v in (c.get("metadata") or {}).items() if "gold" not in k}
                     turns = []
                     for t in c["turns"]:
-                        t = {k: v for k, v in t.items() if k not in T2_TURN_DROP}
+                        t = {k: v for k, v in t.items() if k not in drop}
+                        n["t2_turns_with_sr"] += bool((t.get("subquestion_reasoning") or "").strip())
                         if a.strip_answers:
                             t = H.without_answers(t)
                         n["t2_turns"] += 1

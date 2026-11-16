@@ -5,20 +5,21 @@ Directed Research (INFO 492, University of Arizona) on **SemEval-2027 Task 1 —
 
 Code, experiment log and generated results only. Notes and meeting briefs are kept outside the repo.
 
-**Where things stand (2026-11-10):** submission systems chosen on train (LOG rules 6–17), dev nDCG@10 [95% CI]:
-Track 1a **0.3672** [0.330, 0.405] (LLM query reasoning → BM25 + dense hybrid → ReasonEmbed over the top 100, rule 17),
-1b **0.4053** [0.370, 0.441] (same with query + step, ReasonEmbed over the top 50). Track 2a has two main runs and `submit.py` picks one per domain file automatically:
+**Where things stand (2026-11-16):** submission systems chosen on train (LOG rules 6–17), dev nDCG@10 [95% CI]:
+Track 1a **0.3667** [0.329, 0.404] (LLM query reasoning → BM25 + dense hybrid → ReasonEmbed over the top 50),
+1b **0.4053** [0.370, 0.441] (same with query + step). Pool 100 (rule 17) was dropped on 11.11 by the supervisor for
+cost (1a 0.3672 → 0.3667, 2a current 0.3801 → 0.3779). Track 2a: `submit.py --variants 2a_auto` picks per domain file:
 - earlier answers present in `conversation_history` → `2a_history_rr` **0.5507** [0.527, 0.574] (history system of
-  rule 12 + Qwen3-Reranker-0.6B over the top 20, rule 16);
+  rule 12 + Qwen3-Reranker-0.6B over the top 20, rule 16). The organisers confirmed on 10.11 that the test histories
+  keep the answers, so this is the expected choice; `2a_auto` stays as insurance;
 - no earlier answers → `2a_history_q` **0.4802** [0.456, 0.504] (rule 14: answer-free history text, BM25 + dense,
   ReasonEmbed; no LLM; no answer text reaches any input — asserted per topic).
-Fallbacks: `2a_history` 0.5475, current turn `2a_nomaxp_p100` 0.3801 / `2a_maxp` 0.3901, `1a` (pool 50) 0.3667,
-`1a_noRE` 0.3258, `1b_noRE` 0.3505.
-Whether test histories contain the earlier answers is not announced (asked on the organisers' list, 09.11). The
-main run's whole advantage over the answer-free run comes from the reference answers: with answers written by our
-own LLM it drops to 0.4823 (RESULTS AA). Not adopted on train: a per-source query variant (rule 15), the reranker on
-1a / 1b / 2a current (rule 16), ReasonEmbed pool 100 on 1b and 2a history (rule 17). Tables: `research/RESULTS.md` (X, Z–AJ = 2026-11-10; T–Y = 2026-11-02; M–S = week 5).
-Every number in this paragraph is reproduced exactly by `scripts/submit.py` from the topic files with the official
+Fallbacks (supervisor, 11.11): 1a / 1b without ReasonEmbed (`1a_noRE` 0.3258, `1b_noRE` 0.3505); 2a without the
+reranker (`2a_history` 0.5475) and without answers (`2a_history_q`); current turn `2a_nomaxp` 0.3779 / `2a_maxp` 0.3901.
+`subquestion_reasoning` (a Track-2 test field, organisers 10.11) is tested as a separate run `2a_history_sr` (rule 19,
+RESULTS AL–AM); the main run does not change without the supervisor's decision. Paper tables: `research/paper_tables/`
+(`scripts/paper_tables.py`). Tables: `research/RESULTS.md` (X, AL–AP = 2026-11-16; Z–AK = 2026-11-10; T–Y = 2026-11-02;
+M–S = week 5). Every main number is reproduced exactly by `scripts/submit.py` from the topic files with the official
 scorer.
 
 2026-11-02: foreign-gold diagnostics (RESULTS T), contamination check with a pre-BRIGHT Llama (W), the history
@@ -154,14 +155,16 @@ python hybrid.py --track 2 --conditions 2a_current__q 2a_current__q+r+h --bm25 $
 The exact commands of every reported run are in `research/LOG.md` and in the queue scripts
 under `research/runs_v12/logs/*.sh` and `research/runs_v13/logs/*.sh`.
 
-## How to make a submission (2026-11-10)
+## How to make a submission (2026-11-16)
 
 Everything that defines a submitted run is frozen in `configs/submission.json` (models and revisions,
 quantisation, prompts, fusion weights, depths, ReasonEmbed weight, reranker, MaxP on/off, tie key, seeds);
 `scripts/submit.py` reads only that file, the release topic files and the corpora (never qrels). One run file per
-(variant, domain), because Track-2 topic ids repeat across domains. Main runs: `1a_p100`, `1b`, and for 2a the
-automatic `2a_auto` (= `2a_history_rr` or `2a_history_q` per domain file); fallbacks: `1a`, `1a_noRE`, `1b_noRE`,
-`2a_history`, `2a_nomaxp_p100`, `2a_maxp` (listed under `_main_runs` / `_fallback_runs` / `_auto_2a`). Official format
+(variant, domain), because Track-2 topic ids repeat across domains. Main runs: `1a`, `1b`, and for 2a the
+automatic `2a_auto` (= `2a_history_rr` or `2a_history_q` per domain file); fallbacks: `1a_noRE`, `1b_noRE`,
+`2a_history`, `2a_history_q`, `2a_nomaxp`, `2a_maxp` (listed under `_main_runs` / `_fallback_runs` / `_auto_2a`); separate
+run `2a_history_sr` (rule 19, `subquestion_reasoning`; a turn without it gets the `2a_history_rr` ranking). `1a_p100` and
+`2a_nomaxp_p100` stay in the config as unused (`_unused_runs`, pool 100 dropped 11.11). Official format
 `qid Q0 docid rank score run_id`, depth 1000.
 
 ```bash
@@ -170,11 +173,12 @@ D=../../reteco_data_v11            # for test: the folder with the test release 
 K=../../RETECO/starter_kit
 # 1. runs (LLM generations cached by sha1(prompt + model + text), generated with vLLM in ../../.venv-llm when missing,
 #    which needs CC=~/semeval-reteco/tools/bin/cc; ReasonEmbed vectors cached per domain; reranker scores cached)
-python submit.py --variants 1a_p100 1b 2a_auto 2a_history 2a_nomaxp_p100 2a_maxp 1a 1a_noRE 1b_noRE \
+python submit.py --variants 1a 1b 1a_noRE 1b_noRE --data $D --split test --out ../research/runs_v13/submit/test
+python submit.py --variants 2a_auto 2a_history 2a_nomaxp 2a_maxp 2a_history_sr \
     --data $D --split test --out ../research/runs_v13/submit/test
 # 2. dev check of the same pipeline (official checker + scorer, compares with the research numbers)
-python submit.py --variants 1a_p100 1b 2a_history_rr 2a_history_q --data $D --split dev --out ../research/runs_v13/submit/dev
-python score_submission.py --sub ../research/runs_v13/submit/dev --variants 1a_p100 1b 2a_history_rr 2a_history_q \
+python submit.py --variants 1a 1b 2a_history_rr 2a_history_q --data $D --split dev --out ../research/runs_v13/submit/dev
+python score_submission.py --sub ../research/runs_v13/submit/dev --variants 1a 1b 2a_history_rr 2a_history_q \
     --data $D --kit $K --out ../research/runs_v13/submit_check.json
 # 3. per file: format check against the corpus (Track 1 doc key "id", Track 2 "doc_id")
 python $K/format_checker.py ../research/runs_v13/submit/test/1a/iota.txt --corpus $D/track1_tempo/iota/documents.jsonl --doc-key id

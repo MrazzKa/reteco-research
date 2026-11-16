@@ -49,3 +49,6 @@ research/runs_v13/a2/sub_noans/
 research/runs_v13/cold_full/cache/
 research/runs_v13/cold_full/sub/
 research/runs_v13/cold_full/release/
+# 2026-11-16: rule 19 (subquestion_reasoning) synthetic releases and submission runs; error-analysis material is kept
+research/runs_v13/sr/rel_*/
+research/runs_v13/sr/sub_*/
