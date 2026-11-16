@@ -2114,3 +2114,12 @@ addendum 16:15 (rule 19, dev turn groups of `sr/breakdown_dev.json`; analysis): 
   RESULTS sections X (2026-11-16), AL (SR reconnaissance), AM (rule 19), AN (M0), AO (error types), AP (paper tables).
   Section X of 10.11 kept below as history. README updated (submission without pool 100, SR run, paper tables).
 time S2 + S3 + S4 + S2c: estimate ~6–8 h / actual 14:24–16:15 (≈ 1.9 h; GPU 14:43–16:09).
+
+## 2026-11-16 16:20 — S5: end of the session
+outside the repo: `~/semeval-reteco/notes/RETECO_report_2026-11-13.{md,txt}` (report in Russian; .txt UTF-8 BOM / CRLF,
+  copy on the desktop), handoff `RETECO_handoff_2026-11-16.zip` on the desktop (git bundle, notes, LLM / reranker
+  caches, session transcript), meeting summary for 16.11 as a Notion page under "RETECO".
+state: main runs 1a / 1b / 2a_auto unchanged in method (pool 50); separate run `2a_history_sr` awaits the supervisor's
+  decision; error labels (S4) await a human check. No experiment is running.
+time: session 14:21–16:20 (estimate 6–10 h; GPU work took 1.4 h, because the reranker pairs overlapped between
+  candidates and every Track-1 / Track-2 cache was warm).
