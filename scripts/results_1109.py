@@ -24,7 +24,7 @@ def week7(root):
          "(train decides on the rule-8 subsample; margin +0.005 and train bootstrap lower bound > 0; dev once).", ""]
     fin = jload(os.path.join(R, "final_1110.json"))
     if fin:
-        L += ["## X. Submission systems (2026-11-10; supersedes the 2026-11-02 table further down)", "",
+        L += ["## X (2026-11-10, superseded by section X of 2026-11-16 above: pool 100 since dropped). Submission systems", "",
               "Dev = official qrels over the `scripts/submit.py` files (identical to the research numbers); 95% interval "
               "= bootstrap of the domain macro (topics resampled within domain, 10,000 draws, seed 20260921). Train = "
               "rule-8 subsample (≤ 30 topics per domain), the number the run was chosen on.", "",

@@ -1,0 +1,339 @@
+{
+ "rule": "LOG 2026-11-16 14:29",
+ "status": "preliminary labels, to be confirmed by a human",
+ "subtasks": {
+  "1a": {
+   "eligible": 151,
+   "topics": 519,
+   "items": [
+    {
+     "domain": "history",
+     "qid": "67963_434",
+     "label": "e",
+     "mechanical_label": "a",
+     "note": "The expansion invents a referent for 'IAA iii' ('International Archives of Asia', a 1985 volume) while the gold is Ibn al-Athir's chronicle, so retrieval chases generic multi-volume series."
+    },
+    {
+     "domain": "bitcoin",
+     "qid": "123461_13",
+     "label": "b",
+     "mechanical_label": "b",
+     "note": "Best gold (HTLC definition) sits at hybrid rank 70, outside the 50-document rerank pool, so it was never reranked; the top-1 on nLockTime is on topic but only covers part of the question."
+    },
+    {
+     "domain": "history",
+     "qid": "56929_710",
+     "label": "c",
+     "mechanical_label": "b",
+     "note": "Top-1 explains why armoured warfare was secondary in the Pacific theatre, close in content to the judged gold passage (hybrid 3, demoted to 11), so it looks like a judgment gap."
+    },
+    {
+     "domain": "economics",
+     "qid": "45680_223",
+     "label": "a",
+     "mechanical_label": "a",
+     "note": "No gold (staggered DiD problems, Simpson's paradox) in the first-stage top 100; top-1 is a generic difference-in-differences text that does not address the reversed subsample result."
+    },
+    {
+     "domain": "bitcoin",
+     "qid": "124603_8",
+     "label": "c",
+     "mechanical_label": "b",
+     "note": "Top-1 (gold for another topic) and top-3 (the Mastering Bitcoin retargeting section itself) explain the 2016-block difficulty formula the question asks about; the gold was demoted from hybrid 6 to 18."
+    },
+    {
+     "domain": "history",
+     "qid": "56068_771",
+     "label": "b",
+     "mechanical_label": "b",
+     "note": "Golds at hybrid 4 and 44 were demoted to 13 and only lifted to 35; top-1 is a general overview of the NDH, while the more direct answer (Nazi stance on the Ustase) is at rank 2."
+    },
+    {
+     "domain": "history",
+     "qid": "79533_1",
+     "label": "b",
+     "mechanical_label": "b",
+     "note": "All 17 golds are about prehistoric stone butchery tools (best at hybrid 68, outside the rerank pool); the expansion assumed a medieval cleaver and the top-3 are weapon texts."
+    },
+    {
+     "domain": "history",
+     "qid": "76410_105",
+     "label": "b",
+     "mechanical_label": "b",
+     "note": "Top-1 discusses economic repercussions of Protestant iconoclasm rather than economic reasons for it; the best gold stayed at 18 -> 19 (never lifted)."
+    },
+    {
+     "domain": "history",
+     "qid": "72564_153",
+     "label": "e",
+     "mechanical_label": "a",
+     "note": "The expansion recasts 'out of sync' as different first days of the week and invents a 1243-1267 England/France discrepancy; top-1 is about which day starts the week."
+    },
+    {
+     "domain": "history",
+     "qid": "72370_163",
+     "label": "b",
+     "mechanical_label": "b",
+     "note": "Best gold (1908 Bosnia annexation) moved only from hybrid 34 to 32; top-1 is about the Franco-Russian alliance and does not address the Austro-Russian Balkan conflict."
+    },
+    {
+     "domain": "economics",
+     "qid": "43853_228",
+     "label": "b",
+     "mechanical_label": "b",
+     "note": "Gold demoted from hybrid 8 to 30; top-1 (gold for another topic) defines base years for price indices but does not explain why round years such as 1990/2010 are chosen."
+    },
+    {
+     "domain": "history",
+     "qid": "76694_86",
+     "label": "c",
+     "mechanical_label": "b",
+     "note": "Top-1 describes how the papacy became a political power after the fall of the western Roman Empire, which directly answers the question; golds at hybrid 9 and 12 were demoted to 40 and 18."
+    },
+    {
+     "domain": "history",
+     "qid": "70583_271",
+     "label": "a",
+     "mechanical_label": "a",
+     "note": "Only gold (Suetonius' access to imperial archives) is at rank 524; the expansion cites the Historia Augusta and contradictory birth dates, but the top-3 (Tacitus, a Nero biography) do not visibly follow that error."
+    },
+    {
+     "domain": "cardano",
+     "qid": "9250_104",
+     "label": "b",
+     "mechanical_label": "b",
+     "note": "Gold (snapshot used two epochs later) was lifted from hybrid 22 to 12 but not into the top 10; top-1 is a general epochs/slots description, not the reason for the delay."
+    },
+    {
+     "domain": "hsm",
+     "qid": "18796_657",
+     "label": "e",
+     "mechanical_label": "b",
+     "note": "The expansion declares the Tulane anecdote fictional ('no real year or event exists'), denying the premise; top-1 is an unrelated 2024 graduate conference."
+    }
+   ]
+  },
+  "1b": {
+   "eligible": 395,
+   "topics": 1214,
+   "items": [
+    {
+     "domain": "history",
+     "qid": "62574_607_step3",
+     "label": "e",
+     "mechanical_label": "a",
+     "note": "The expansion fabricates presumed-dead monarchs (Charles II after Edgehill, Mary I in 1553) while the gold is about Richard I; top-1 follows the Tudor framing (Queen Jane)."
+    },
+    {
+     "domain": "bitcoin",
+     "qid": "123461_13_step2",
+     "label": "c",
+     "mechanical_label": "b",
+     "note": "Top-1 describes Bitcoin's time-lock features (nLockTime) and top-2 explains HTLC hashlocks/timelocks, i.e. the two sides of the comparison the step asks for."
+    },
+    {
+     "domain": "history",
+     "qid": "56978_708_step1",
+     "label": "c",
+     "mechanical_label": "a",
+     "note": "Top-1 argues the USA knew the USSR would detect the H-bomb test by atmospheric sampling, which directly addresses whether Soviets needed to be invited."
+    },
+    {
+     "domain": "cardano",
+     "qid": "840_139_step1",
+     "label": "e",
+     "mechanical_label": "a",
+     "note": "The expansion reads '45 billion coins' as physical coins (U.S. Mint, ECB) instead of Cardano's ADA supply; the gold is the ADA emission schedule."
+    },
+    {
+     "domain": "bitcoin",
+     "qid": "124510_9_step4",
+     "label": "b",
+     "mechanical_label": "b",
+     "note": "Only gold (CSV / BIP68 opcode) sits at hybrid 76, outside the rerank pool; top-1 covers absolute nLocktime, while top-2/3 on BIP-68 look relevant."
+    },
+    {
+     "domain": "quant",
+     "qid": "70819_1086_step2",
+     "label": "a",
+     "mechanical_label": "a",
+     "note": "Only gold (ARIMA) is at rank 940; top-1 appears to be the question post's own GBM recipe and top-2 a survey of simulation approaches, so the miss is mostly about the narrow gold."
+    },
+    {
+     "domain": "genealogy",
+     "qid": "2975_328_step3",
+     "label": "a",
+     "mechanical_label": "a",
+     "note": "Only gold (assisted migrants, Henry Parkes) is at rank 322; top-3 are topically close (indentured pastoral workers, 1844-5 assisted emigration) but not about arranged employment of English migrants."
+    },
+    {
+     "domain": "history",
+     "qid": "70583_271_step1",
+     "label": "c",
+     "mechanical_label": "a",
+     "note": "Top-1 names the principal ancient sources for Nero's reign (Tacitus and two others), which is what the step asks for, although it does not mention his birth."
+    },
+    {
+     "domain": "history",
+     "qid": "69940_313_step3",
+     "label": "c",
+     "mechanical_label": "b",
+     "note": "Top-1 recommends 'Shattered Sword', the standard account of Midway from the Japanese side, which fits the step's request for Japanese perspectives."
+    },
+    {
+     "domain": "history",
+     "qid": "56929_710_step1",
+     "label": "c",
+     "mechanical_label": "a",
+     "note": "Top-1 lists Type 95 Ha-Go engagements at Khalkhin Gol and in Burma, i.e. the key battles the step asks for (the gold is the Khalkhin Gol article at rank 201)."
+    },
+    {
+     "domain": "quant",
+     "qid": "74929_1079_step2",
+     "label": "a",
+     "mechanical_label": "a",
+     "note": "Only gold (CRSP Treasury database) is at rank 359; top-1 is the Fed's fitted TIPS yield curve, a daily dataset but not quotes for individual and matured TIPS."
+    },
+    {
+     "domain": "history",
+     "qid": "68862_380_step3",
+     "label": "b",
+     "mechanical_label": "b",
+     "note": "Gold lifted from hybrid 47 to 15 but not into the top 10; top-1 is book front matter (dedication and contents), not content about the Taffy groups."
+    },
+    {
+     "domain": "history",
+     "qid": "68862_380_step1",
+     "label": "b",
+     "mechanical_label": "b",
+     "note": "Gold demoted from hybrid 7 to 15; top-1 is the same book front matter as in the step-3 topic."
+    },
+    {
+     "domain": "cardano",
+     "qid": "4225_128_step2",
+     "label": "c",
+     "mechanical_label": "b",
+     "note": "Top-1 (gold for another topic) explains that validity intervals are in POSIXTime converted by consensus, which is how a Plutus validator gets the time; the gold was lifted from 31 to 12."
+    },
+    {
+     "domain": "history",
+     "qid": "70284_294_step1",
+     "label": "a",
+     "mechanical_label": "a",
+     "note": "No gold (fall of Constantinople, Titanic) in the first-stage pool; the top-3 are about pandemics, which the step itself suggests, so the expansion is not clearly at fault."
+    }
+   ]
+  },
+  "2a": {
+   "eligible": 136,
+   "topics": 858,
+   "items": [
+    {
+     "domain": "hardware",
+     "qid": "ex_15430_turn_4",
+     "label": "b",
+     "mechanical_label": "b",
+     "note": "Only gold (hybrid CrossFire no longer supported) sits at hybrid 52, outside the rerank pool; top-1 is generic PCIe and driver advice, not about using iGPU outputs alongside a GPU."
+    },
+    {
+     "domain": "biology",
+     "qid": "6_turn_5",
+     "label": "e",
+     "mechanical_label": "b",
+     "note": "The expansion anchors on the earlier turn's antagonistic pleiotropy instead of the maintenance-versus-reproduction trade-off (disposable soma, the gold); the top-3 are all antagonistic pleiotropy passages."
+    },
+    {
+     "domain": "economics",
+     "qid": "47_turn_2",
+     "label": "a",
+     "mechanical_label": "a",
+     "note": "Only gold (a model passage on a productivity gap between firms) is at rank 153; top-1 is the title page of a paper on low interest rates and market power, not about bank lending."
+    },
+    {
+     "domain": "earth_science",
+     "qid": "20_turn_1",
+     "label": "c",
+     "mechanical_label": "a",
+     "note": "Top-1 explains that magma rises at divergent boundaries and solidifies into new oceanic crust, a direct answer, while the only gold is about triple-junction stability."
+    },
+    {
+     "domain": "drones",
+     "qid": "ex_2271_turn_1",
+     "label": "c",
+     "mechanical_label": "b",
+     "note": "Top-1 is a Stack Exchange thread on using different brushless motors with the same ESC and top-3 discusses ESC timing for low-Kv motors; the gold was demoted from 14 to 22."
+    },
+    {
+     "domain": "earth_science",
+     "qid": "9_turn_8",
+     "label": "b",
+     "mechanical_label": "b",
+     "note": "Gold demoted from hybrid 5 to 16; top-1 notes that solstices are season starts in some languages and midpoints in others, but not how the U.S. convention arose."
+    },
+    {
+     "domain": "politics",
+     "qid": "ex_93094_turn_1",
+     "label": "c",
+     "mechanical_label": "b",
+     "note": "Top-1 explains wartime national-security laws that restrict press freedom to protect operations and classified information, which answers the question."
+    },
+    {
+     "domain": "medicalsciences",
+     "qid": "ex_34769_turn_3",
+     "label": "c",
+     "mechanical_label": "b",
+     "note": "Top-1 says sleep loss hampers weight loss and can add pounds, and top-2 covers ghrelin/leptin, both addressing weight regain after dieting."
+    },
+    {
+     "domain": "medicalsciences",
+     "qid": "ex_34029_turn_2",
+     "label": "b",
+     "mechanical_label": "b",
+     "note": "Gold demoted from hybrid 7 to 16; top-1 is about ferrochelatase substrates in mitochondria (the previous turn's topic), not about oral enzyme therapy."
+    },
+    {
+     "domain": "medicalsciences",
+     "qid": "ex_34029_turn_1",
+     "label": "b",
+     "mechanical_label": "b",
+     "note": "Gold demoted from hybrid 28 to 42; top-1 describes the genetics of EPP but not why giving the missing enzyme fails."
+    },
+    {
+     "domain": "earth_science",
+     "qid": "106_turn_3",
+     "label": "b",
+     "mechanical_label": "b",
+     "note": "Gold demoted from hybrid 2 to 20; the top-3 are about Pangaea and the Permian (the previous turn's topic) rather than Cenozoic cooling and desert spread."
+    },
+    {
+     "domain": "politics",
+     "qid": "ex_89563_turn_4",
+     "label": "c",
+     "mechanical_label": "b",
+     "note": "Top-1 states that under the legislation Israel will refuse coordination, UNRWA staff lose immunity and access may be denied, which directly answers the turn."
+    },
+    {
+     "domain": "law",
+     "qid": "ex_106319_turn_4",
+     "label": "e",
+     "mechanical_label": "b",
+     "note": "The expansion stays on airline lease assignment in bankruptcy (the earlier turn) while the turn asks about assigning a right to future payment after full performance, which is the subject of the gold (hybrid 66)."
+    },
+    {
+     "domain": "drones",
+     "qid": "ex_2424_turn_4",
+     "label": "b",
+     "mechanical_label": "b",
+     "note": "Golds (general drone range articles) start at hybrid 70, outside the rerank pool; top-1 is about cellular/satellite links, not humidity or water effects."
+    },
+    {
+     "domain": "psychology",
+     "qid": "36_turn_1",
+     "label": "c",
+     "mechanical_label": "b",
+     "note": "Top-1 summarises the 1990s Xq28 linkage findings and twin heritability estimates, a direct answer; the only gold (hybrid 74) starts with a Science passage on plant-Rhizobia signalling."
+    }
+   ]
+  }
+ }
+}

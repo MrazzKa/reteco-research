@@ -1998,3 +1998,23 @@ test-time estimate without pool 100 (`scripts/paper_tables.py`, keys `compute.no
   the pool-50 encoding; 1b's documents were encoded before the pause): ≈ **1.6 h** (1a 44 min, 1b 23 min, 2a 19 min,
   LLM pre-generation 11 min) vs ≈ 2.1 h with pool 100. The earlier "2.1 h" also under-counted 1b.
 time: estimate 20–30 min / actual 21 min.
+
+## 2026-11-16 14:31–14:43 — S4 result: preliminary error types of the main runs (dev; analysis, no choice)
+command: `python3 error_types.py --sub ../research/runs_v13/submit/dev ...` (material `research/cases/error_material_dev.json`;
+  the 10.11 submit.py dev files — byte-identical to the 16.11 check, see S1); labels by reading under the fixed rule
+  (LOG 14:29) → `research/cases/error_types_dev.md` / `.json`, marked "preliminary, to be confirmed by a human".
+eligible (nDCG@10 ≤ 0.1): 1a 151 / 519, 1b 395 / 1,214, 2a 136 / 858; all 45 sampled topics have nDCG@10 = 0.
+labels (a recall miss / b not lifted / c top 1 looks relevant / d temporal / e LLM drift / f other):
+  1a 2 / 7 / 3 / 0 / 3 / 0 · 1b 4 / 3 / 6 / 0 / 2 / 0 · 2a 1 / 6 / 6 / 0 / 2 / 0 · all 7 / 16 / 15 / 0 / 7 / 0.
+  Mechanical only: 30 (b) vs 15 (a). Of the 16 final (b): 8 demoted by the later stages, 5 with the best gold at
+  hybrid rank 51–100 (outside the rescored pool), 3 lifted but not into the top 10; in 9 of 45 topics a gold was in
+  the hybrid top 10 and was pushed out. (c) 15 of 45 — several single-gold 2a turns whose gold reads off-topic
+  (possible sparse judgments). (e): Track 1 the LLM invents referents or denies the premise; 2a it anchors on the
+  previous turn's concept. No clear temporal mismatch (d) in the 30 Track-1 topics.
+time: estimate ~1.5 h / actual ~15 min (material 2 min, reading + write-up in parallel with the GPU queue).
+
+## 2026-11-16 14:31–14:44 — S3 (first pass): paper tables
+command: `python3 paper_tables.py --root .. --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit` → 
+  `research/paper_tables/t1_submission … t8_sr.tex` + `numbers.json` (467 numbers) + `README.md` (source of each
+  table). Checked against RESULTS: every number taken from a report matches X, AE, Z, AA, AD. Pending inputs (filled on
+  re-run): Table 3 M0 dev breakdown and dev CIs (queue_1116c), Table 8 SR (rule 19, queue_1116b).

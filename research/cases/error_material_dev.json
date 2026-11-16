@@ -1,0 +1,2208 @@
+{
+ "rule": "LOG 2026-11-16 14:29",
+ "subtasks": {
+  "1a": {
+   "variant": "1a",
+   "eligible": 151,
+   "topics": 519,
+   "items": [
+    {
+     "domain": "history",
+     "qid": "67963_434",
+     "ndcg10": 0.0,
+     "query": "What does this source \"IAA iii\" mean? Which book? I've been reading a book about Genghis Khan by Frank McLynn and, going through its notes, I saw sources where I couldn't find anything about it, i.e. what publication was referred to. I want to find this source designated as \"IAA iii\".",
+     "llm_reason": "Knowledge needed: Understanding academic source abbreviations, especially in historical or scholarly contexts. Relevant document topic: A scholarly work or bibliography citing a source abbreviated as \"IAA iii\". Key concepts: Source abbreviation, academic referencing, Genghis Khan, Frank McLynn. Terms/entities: IAA (likely \"International Archives of Asia\"), volume iii (third volume). Time: Not specified. The document would explain that \"IAA iii\" refers to the third volume of the \"International Ar",
+     "llm_hyde": "IAA iii refers to a volume in the \"International Archives of Asian Studies\" series, specifically the third volume of the third part of the series, published in 1985. This source is part of a scholarly collection focused on Central Asian history, including the Mongol Empire. The \"IAA\" designation stands for \"International Archives of Asia,\" and the \"iii\" indicates the third volume in the third inst",
+     "gold": [
+      {
+       "doc": "history/5cb0942e_58580.txt",
+       "final_rank": 831,
+       "hybrid_rank": 831,
+       "start": "# The Chronicle of Ibn al-Athir for the Crusading Period from al-Kamil fi'l-Ta'rikh. Part 3 The Years 589–629/1193–1231: The Ayyubids after Saladin and the Mongol Menace"
+      },
+      {
+       "doc": "history/7c12c498_58581.txt",
+       "final_rank": 267,
+       "hybrid_rank": 267,
+       "start": "## Description The Chronicle of Ibn al-Athir (1160-1233AD), entitled \"al-Kamil fi'l-Ta'rikh\", is one of the outstanding sources for the history of the mediaeval world. It covers the whole sweep of Islamic history almost up to the death of its author and, with the sources available to him, he attempt"
+      }
+     ],
+     "best_gold_final_rank": 267,
+     "mechanical_label": "a",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "About the pagination of this eBook This eBook contains a multi-volume set. To navigate this eBook by page number, you will need to use the volume number and the page number, separated by punctuation or a space. Refer to the Cumulative Index and match the page reference style exactly in the Go box at"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "i The Oxford History of the Ancient Near East ii The Oxford History of the Ancient Near East Editors: Karen Radner, Nadine Moeller, and D. T. Potts This groundbreaking, five-volume series offers a comprehensive, fully illustrated history of Egypt and Western Asia (the Levant, Anatolia, Mesopotamia, "
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "1. The Secret History of the Mongols , ch.V 2. Buell 1992 , pp. 3-7. 3. a b c Kradin, Nikolay N. (2016-01-11). Kyrgyz Khaganate . In Dalziel, Nigel; MacKenzie, John M (eds.). The Encyclopedia of Empire (1 ed.). Wiley) . p. 2. doi) : 10.1002 9781118455074.wbeoe173 . ISBN) 978-1-118-44064-3 . 4. a b M"
+      }
+     ]
+    },
+    {
+     "domain": "bitcoin",
+     "qid": "123461_13",
+     "ndcg10": 0.0,
+     "query": "Implementing Conditional Fund Locking in Bitcoin Similar to Ethereum's Smart Contracts I'm familiar with how Ethereum allows users to lock funds in smart contracts, which can then be released under specific conditions using mechanisms like the Hashed TimeLock Contract (HTLC) protocol. I'm interested in exploring whether similar functionality can be achieved within the Bitcoin protocol. Locking Fun",
+     "llm_reason": "Knowledge needed: Bitcoin's scripting limitations, transaction mechanics, and existing tools for conditional logic (e.g., time-locked transactions, multisig, or off-chain solutions). Relevant document topic: Conditional fund locking in Bitcoin, comparing it to Ethereum's smart contracts. Key concepts: HTLC, time-locks, cryptographic proofs, script execution, Bitcoin scripting (e.g., OP_RETURN, OP_CHECKSIG). Entities: Bitcoin, HTLC, multisig, time-based conditions, off-chain solutions (e.g., Ligh",
+     "llm_hyde": "As of 2023, Bitcoin does not support smart contracts or built-in conditional logic like Ethereum. However, conditional fund locking can be achieved through off-chain mechanisms and specific transaction designs. For example, time-locked transactions can be implemented using the Hashed TimeLock Contract (HTLC) protocol, which relies on Bitcoin's scripting language (e.g., OP_RETURN or OP_CHECKSIG) an",
+     "gold": [
+      {
+       "doc": "bitcoin/5a357b63_2654.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "Hashlock: a function that restricts the spending of funds until a certain piece of data is publicly disclosed (as a cryptographic proof). Such proof may also be referred to as the pre-image of the hashlock. The pre-image is simply the piece of information that is used to generate the hashlock, and t"
+      },
+      {
+       "doc": "bitcoin/9a1afa34_2651.txt",
+       "final_rank": 291,
+       "hybrid_rank": 291,
+       "start": "Bitcoin Script is a stack-based programming language used to define the conditions under which a bitcoin output can be spent. Every Bitcoin transaction output includes a locking script (scriptPubKey) that specifies how the coins can be claimed. To spend those coins, you must provide an unlocking scr"
+      },
+      {
+       "doc": "bitcoin/cb267115_2652.txt",
+       "final_rank": 231,
+       "hybrid_rank": 231,
+       "start": "HTLCs are foundational to the Lightning Network, a layer-2 scaling solution for blockchain networks like Bitcoin. In payment channels within the Lightning Network, participants can create HTLCs to route payments securely and instantaneously across the network. Each hop in the payment route is an HTL"
+      },
+      {
+       "doc": "bitcoin/ea819d91_2653.txt",
+       "final_rank": 70,
+       "hybrid_rank": 70,
+       "start": "A Hash Time Locked Contract or HTLC is a class of payments that use hashlocks and timelocks to require that the receiver of a payment either acknowledge receiving the payment prior to a deadline by generating cryptographic proof of payment or forfeit the ability to claim the payment, returning it to"
+      }
+     ],
+     "best_gold_final_rank": 70,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Una of the most interesting properties it has Bitcoin are time locks or timelock such as nLockTime. These types of functionalities allow users to define the exact moment in which a transaction can be validated and confirmed on the network. A quality that turns Bitcoin into programmable digital money"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "CheckSequenceVerify (CSV) use cases Now let's examine some use cases that CSV allows us within Bitcoin thanks to its creation: Creation of contracts with expiration time With CSV it is possible to establish contracts with fixed-term time or expiration date. In these contracts, you can define various"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "When Bob wants to spend his new Bitcoin, he must first unlock the script. Alice would have locked the script when she sent her transaction to Bob’s address. In the unlocking script, Bob or Alice provide their signature and the conditions required to unlock the script. According to the script, Alice’"
+      }
+     ]
+    },
+    {
+     "domain": "history",
+     "qid": "56929_710",
+     "ndcg10": 0.0,
+     "query": "What evidence is there of tank-vs-tank combat in Asia during the second world war? It has been known that the Japanese army during the Second World War did not value tanks highly and as such they were not always used effectively and had significantly worse characteristics than Allied armoured vehicles. I have been struggling to find evidence of Japanese armour going head to head with Allied armour",
+     "llm_reason": "Knowledge needed: Historical accounts of armored battles in Asia during WWII, specifically between Allied and Japanese forces. Relevant document topic: WWII armored engagements in Asia. Key concepts: Tank-vs-tank combat, Japanese and Allied armor use, effectiveness, specific battles. Entities: Japan, Allied forces (e.g., US, China, UK), battles like the Burma Campaign, Battle of Khalkha, or the Philippines. Time: 1941–1945. The document would describe specific instances, such as the 1942–1943 ba",
+     "llm_hyde": "During the Second World War, evidence of tank-vs-tank combat in Asia exists primarily in the Burma Campaign (1942–1945). Allied forces, including British and American units, engaged Japanese armor in battles such as the Battle of Kohima and the Battle of Imphal. In these engagements, Allied tanks like the British Churchill and American M4 Sherman faced Japanese Type 95 and Type 97 tanks. Notably, ",
+     "gold": [
+      {
+       "doc": "history/b41cab47_100489.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "The Battles of Khalkhin Gol (Russian: Бои на Халхин-Голе; Mongolian: Халхын голын байлдаан) were the decisive engagements of the undeclared Soviet–Japanese border conflicts involving the Soviet Union, Mongolia, Japan and Manchukuo in 1939. The conflict was named after the river Khalkhin Gol, which p"
+      },
+      {
+       "doc": "history/d64087ac_100488.txt",
+       "final_rank": 11,
+       "hybrid_rank": 3,
+       "start": "Due to the war with China, Japan produced a large number of tanks. Although initially the Japanese used tanks to good effect in their campaigns, full-scale armored warfare did not occur in the Pacific and Southeast Asian theaters as it did in Europe, and tank development was neglected in favor of na"
+      }
+     ],
+     "best_gold_final_rank": 11,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "While combat in the European Theater of Operations (ETO) consisted of high-profile armored warfare, the mainly naval nature of the Pacific Theater of Operations (PTO) relegated it to secondary status for both the Allies and the Japanese. While the US Army fielded 16 armored divisions and 70 independ"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Japanese Offensive With the last straw pulled by the Army and support shift towards the Navy, the logistical strain that was the Sino-Japanese War required more resources to be sustainable, and with the recent embargo of US oil and other raw materials, Japanese eyes were drawn towards South Asia and"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Fonthill Media- Japanese Tanks and Armoured Warfare: 1932-45 A Military and Political History Author: David McCormack ISBN: 978-1-78155-810-2 Hardcover, 176 pages with 30 black and white and color photographs (for this review sample, a digital PDF review copy was used) What's Inside the Covers I wil"
+      }
+     ]
+    },
+    {
+     "domain": "economics",
+     "qid": "45680_223",
+     "ndcg10": 0.0,
+     "query": "What should we do if the subsample have the opposite results to the general results? In my replication study, I examine whether a law (a law implemented staggered by different countries) has an impact on firms' cash equivalents. The result turning out for the whole sample is that the firms' cash equivalents decrease after this law. However, when I subsample the data by developed and developing cou",
+     "llm_reason": "Knowledge needed: Understanding replication issues, subsample anomalies, and robustness checks in empirical economics. Relevant document topic: Replication studies in econometrics, subsample inconsistencies, and policy evaluation. Key concepts: Subsample divergence, paradox in results, control variables, fixed effects, replication. Entities: Staggered policy implementation, developed vs. developing countries, firm-level cash equivalents. Time: Not specified (general, ongoing). Document would des",
+     "llm_hyde": "In empirical research, discrepancies between a full sample and subsamples—such as opposite trends in developed versus developing countries—can arise due to heterogeneity in underlying mechanisms. Such inconsistencies do not automatically invalidate findings but signal potential structural differences. Researchers should investigate the cause, such as differences in institutional environments, mark",
+     "gold": [
+      {
+       "doc": "economics/02e09f21_12653.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "Why is applying the standard DiD setup in staggered treatment scenarios problematic? The traditional DiD framework functions adequately when dealing with scenarios featuring only two periods and a consistent treatment effect. However, in staggered treatment cases, this approach often falls short of "
+      },
+      {
+       "doc": "economics/6c0e2e5c_12652.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "This section shows how Simpson’s Paradox can be characterized mathematically, under which conditions it occurs, and how it can be avoided. We begin by further considering the concrete example from the introduction in order to build intuitions that will guide us through the more technical results. Th"
+      },
+      {
+       "doc": "economics/7a8ea3bb_12651.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "Simpson's paradox is a phenomenon in probability and statistics in which a trend appears in several groups of data but disappears or reverses when the groups are combined. This result is often encountered in social-science and medical-science statistics,[1][2][3] and is particularly problematic when"
+      }
+     ],
+     "best_gold_final_rank": null,
+     "mechanical_label": "a",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "30.3 Simple Difference-in-Differences DID first emerged as an econometric workhorse for natural experiments, settings where policy shocks or geographic quirks mimic random assignment. Since then, its reach has grown dramatically: marketing A B roll-outs, corporate ESG mandates, even the staggered re"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Including unit-specific time trends (see above) is not the only solution to parallel-trends violations; indeed, scholars may desire more flexible solutions. Recent advances have suggested many alternative solutions to potential parallel-trends violations or unobserved time-varying confounders. Unfor"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [
+        "dev:43952_227"
+       ],
+       "start": "Common Errors: How to (and Not to) Control for Unobserved Heterogeneity Review of Financial Studies Author(s) David A. Matsa Todd Gormley Controlling for unobserved heterogeneity, or common errors, such as industry-specific shocks, is a fundamental challenge in empirical research. This paper discuss"
+      }
+     ]
+    },
+    {
+     "domain": "bitcoin",
+     "qid": "124603_8",
+     "ndcg10": 0.0,
+     "query": "Question about bitcoin mining difficulty adjustment formula in book mastering bitcoin 3rd edtion In book \"Mastering bitcoin\" 3rd, page 278, There is a formula about bitcoin mining difficulty adjustment formula as below: New Target = Old Target * (20,160 minutes / Actual Time of Last 2015 Blocks) I think it should be: New Target = Old Target * (Actual Time of Last 2015 Blocks / 20,160 minutes) Anyo",
+     "llm_reason": "Knowledge needed: Understanding Bitcoin's difficulty adjustment mechanism, specifically the formula used to adjust mining difficulty based on time passed in a 2016-block window. Relevant document: A section from \"Mastering Bitcoin\" 3rd edition, page 278, discussing Bitcoin's difficulty adjustment. It must include the formula: New Target = Old Target × (20,160 minutes / Actual Time of Last 2015 Blocks). Key terms: Bitcoin, mining difficulty, target, block time, 20,160 minutes (2 weeks), difficult",
+     "llm_hyde": "In the third edition of *Mastering Bitcoin*, on page 278, the Bitcoin mining difficulty adjustment formula is described as: New Target = Old Target × (20,160 minutes / Actual Time of Last 2016 Blocks). This formula adjusts the mining difficulty every 2016 blocks (approximately every 2 weeks) to maintain a consistent block generation time. The adjustment factor uses the actual time taken to mine th",
+     "gold": [
+      {
+       "doc": "bitcoin/450937a0_1913.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "The mining process is primarily intended to prevent double-spending and get all nodes to agree on the content of the blockchain, but it also has desirable side-effects such as making it infeasible for adversaries to stifle valid transactions or alter the historical record of transactions, since doin"
+      },
+      {
+       "doc": "bitcoin/6c9cebd4_1912.txt",
+       "final_rank": 18,
+       "hybrid_rank": 6,
+       "start": "Target Block Time Difficulty is tweaked to ensure blocks are mined every 10 minutes, regardless of miner activity. Adjustment Formula The difficulty is recalculated using a formula that compares the actual mining time to the expected time. Network Security Consistent difficulty ensures Bitcoin’s sec"
+      },
+      {
+       "doc": "bitcoin/fc8fd71b_1914.txt",
+       "final_rank": 161,
+       "hybrid_rank": 161,
+       "start": "The difficulty ensures that blocks of transactions are added to the blockchain at regular intervals during mining, even as more miners join the network. If the difficulty stayed the same, it would gradually take less and less time to add new blocks to the blockchain as new miners join the network. S"
+      }
+     ],
+     "best_gold_final_rank": 18,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [
+        "train:120666_36"
+       ],
+       "start": "In Bitcoin, a difficulty adjustment period consists of 2016 blocks and with a 10 minute block target this is a period of approximately two weeks. To calculate the mining difficulty adjustment, the protocol calculates the difference in the timestamp between the first and last block in the relevant 20"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "In Bitcoin, a difficulty adjustment period consists of 2016 blocks, which is about two weeks with a 10-minute block target. To calculate the mining difficulty adjustment , the protocol calculates the difference in timestamps between the first and last block in the relevant 2016-block window. This 20"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Retargeting to Adjust Difficulty As we saw, the target determines the difficulty and therefore affects how long it takes to find a solution to the Proof-of-Work algorithm. This leads to the obvious questions: Why is the difficulty adjustable, who adjusts it, and how? Bitcoin’s blocks are generated e"
+      }
+     ]
+    },
+    {
+     "domain": "history",
+     "qid": "56068_771",
+     "ndcg10": 0.0,
+     "query": "Why did the Nazis collaborate with the Ustaše? The Croats are linguistically, ethnically and culturally a Slavic people. While the Ustaše did not see themselves as such, why did the Nazis choose to collaborate with what was essentially a nationalist organisation for a Slavic ethnic group?",
+     "llm_reason": "Knowledge needed: Understanding Nazi racial policies, the Ustaše's ideology, and the geopolitical context of WWII in the Balkans. Relevant document topic: Nazi collaboration with the Ustaše in occupied Yugoslavia during WWII (1941–1945). Key concepts: Nazi Germany, Ustaše regime, ethnic Slavs, nationalist ideology, collaboration, racial policy, Balkans. Entities: Adolf Hitler, Benito Mussolini, Pétain, Ustaše, Croatia, Yugoslavia. Time: 1941–1945. The Nazis collaborated with the Ustaše not becau",
+     "llm_hyde": "The Nazis did not collaborate with the Ustaše. The Ustaše were a Croatian nationalist movement that ruled the Independent State of Croatia (NDH) from 1941 to 1945 during World War II. The NDH was a puppet state of Nazi Germany and Fascist Italy. The Nazis supported the Ustaše because they saw the Ustaše as a useful tool to create a \"pure\" Croatian state, which aligned with Nazi racial ideology. Ho",
+     "gold": [
+      {
+       "doc": "history/080420f4_108132.txt",
+       "final_rank": 241,
+       "hybrid_rank": 241,
+       "start": "In addition to the puppet Nedic government in Serbia, which had both a gendarmerie and a political police department, the Germans relied on Albanian bureaucrats, Bulgarian military and police officials, Hungarian gendarmes, and the Croat government establishment along with the Ustasa militia to impl"
+      },
+      {
+       "doc": "history/41eae566_108133.txt",
+       "final_rank": 35,
+       "hybrid_rank": 44,
+       "start": "Since the 1990s, Croatia has experienced significant WWII-related revisionism as part of state-promoted policies. This has included attempts to rehabilitate the Independent State of Croatia (NDH) – a Nazi puppet state that existed from 1941 to 1945, covering most of present-day Croatia, all of Bosni"
+      },
+      {
+       "doc": "history/baae860f_108130.txt",
+       "final_rank": 81,
+       "hybrid_rank": 81,
+       "start": "During its entire existence, the NDH was governed as a one-party state by the fascist Ustaše organization. The Ustaše was led by its Poglavnik, Ante Pavelić.[note 2] The regime targeted Serbs, Jews and Roma as part of a large-scale campaign of genocide, as well as anti-fascist or dissident Croats an"
+      },
+      {
+       "doc": "history/ecf47326_108131.txt",
+       "final_rank": 13,
+       "hybrid_rank": 4,
+       "start": "It was founded as a nationalist organization that sought to create an independent Croatian state. It functioned as a terrorist organization before World War II.[51][44] After the invasion of Yugoslavia in April 1941, the Ustaše came to power when they were appointed to rule a part of Axis-occupied Y"
+      }
+     ],
+     "best_gold_final_rank": 13,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "The Independent State of Croatia (Nezavisna Država Hrvatska, NDH) emerged as one of the most controversial and significant entities in the European theater of the Second World War. Established in 1941 amidst the turmoil of Axis invasions and the collapse of the Kingdom of Yugoslavia, the NDH was a p"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Nazi Germany initially did not support an independent Croatia, nor did it support the Ustaše, with Hitler stressing the importance of a strong and united Yugoslavia . Nazi officials, including Hermann Göring, wanted Yugoslavia stable and officially neutral during the war so Germany could continue to"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "The ideology of the movement was a blend of fascism, Roman Catholicism and Croatian ultranationalism. The Ustaše supported the creation of a Greater Croatia that would span the Drina River and extend to the border of Belgrade. The movement advocated a racially pure Croatia and promoted genocide agai"
+      }
+     ]
+    },
+    {
+     "domain": "history",
+     "qid": "79533_1",
+     "ndcg10": 0.0,
+     "query": "What kind of knife did people use to cut open cows? I'm writing a fantastical story and one of the characters needs to cut open a cow equivalent. What kind of knife (shape, size, handle kind) was used to butcher cows? I looked online and only found references to brands of knives that work well. I don't feel like I can trust these results as my story does not have the infrastructure for factories. ",
+     "llm_reason": "Knowledge needed: Historical butchering tools from a medieval period, specifically knives used for slaughtering livestock. Relevant document topic: Medieval butchering tools. Key concepts: Cow butchering, knife shape (e.g., broad, heavy blade), size (large, sturdy), handle (wooden, often with a thick grip), use in slaughter. Entities: medieval, farmer, butcher, slaughterhouse. Time: Middle Ages (circa 5th–15th century). A relevant document would describe a large, heavy knife with a broad, sharp ",
+     "llm_hyde": "In the Middle Ages, butchers typically used a large, heavy knife known as a cleaver or butcher's cleaver. Made of iron and often forged with a thick, flat blade (about 15–20 cm long), it was designed for chopping and splitting bones. The blade was usually broad and slightly curved, with a sharp edge for cutting through meat and sinew. The handle was typically wooden, sometimes wrapped in leather o",
+     "gold": [
+      {
+       "doc": "history/0d39da03_0148.txt",
+       "final_rank": 465,
+       "hybrid_rank": 465,
+       "start": "## Aboriginal Australian use Stone axes from 35,000 years ago are the earliest known use of a stone tool in Australia. Other stone tools varied in type and use among various Aboriginal Australian peoples, dependent on geographical regions and the type and structure of the tools varied among the diff"
+      },
+      {
+       "doc": "history/11885dc8_0145.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "### Mode II: The Acheulean Industry Eventually, more complex Mode 2 tools began to be developed through the Acheulean Industry , named after the site of Saint-Acheul in France. The Acheulean was characterised not by the core, but by the biface , the most notable form of which was the hand axe . 19 T"
+      },
+      {
+       "doc": "history/1546689e_0157.txt",
+       "final_rank": 536,
+       "hybrid_rank": 536,
+       "start": "The bones presented here are the earliest evidence for meat and marrow consumption in the hominin lineage, pre-dating the known evidence by over 800 kyr 2 . Pending new discoveries, the only hominin species present in the Lower Awash Valley at 3.39 Myr ago to which we can associate this tool use is "
+      },
+      {
+       "doc": "history/213e613e_0151.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "## Main The Dikika Research Project area is located in the Lower Awash Valley (Ethiopia) and is bordered on the north by Gona and Hadar and on the south by the Middle Awash research areas ( Fig. 1 ). Work there (led by Z.A.) began in 1999 and has focused on survey in Hadar (>3.8 to 2.9 Myr ago) and "
+      },
+      {
+       "doc": "history/2950478f_0152.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "PowerPoint slide In January 2009, the Dikika Research Project systematically collected fossils from localities just opposite the DIK-1 locality in the Andedo drainage, which predominantly exposes the Sidi Hakoma (SH) Member of the Hadar Formation (3.42–3.24 Myr ago; Fig. 1 ). Archaeological survey w"
+      },
+      {
+       "doc": "history/33b78f28_0147.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "### Mode V: The Microlithic Industries Mode 5 stone tools involve the production of microliths , which were used in composite tools, mainly fastened to a shaft. 27 Examples include the Magdalenian culture. Such a technology makes much more efficient use of available materials like flint, although re"
+      },
+      {
+       "doc": "history/66eab6f1_0144.txt",
+       "final_rank": 686,
+       "hybrid_rank": 686,
+       "start": "### Mode I: The Oldowan Industry The earliest stone tools in the era of genus Homo are Mode 1 tools, 14 and come from what has been termed the Oldowan Industry , named after the type of site (many sites, actually) found in Olduvai Gorge , Tanzania , where they were discovered in large quantities. Ol"
+      },
+      {
+       "doc": "history/6bb8ae67_0142.txt",
+       "final_rank": 812,
+       "hybrid_rank": 812,
+       "start": "Australopithecines had teeth and jaws that were in many ways adapted for eating fruit, seeds and other plant foods. \"The discovery shows that meat was added to the diet earlier than we had thought,\" McPherron observes, although he notes that it is difficult to say what portion of the diet was meat. "
+      },
+      {
+       "doc": "history/6f6aa228_0150.txt",
+       "final_rank": 460,
+       "hybrid_rank": 460,
+       "start": "## Abstract The oldest direct evidence of stone tool manufacture comes from Gona (Ethiopia) and dates to between 2.6 and 2.5 million years (Myr) ago 1 . At the nearby Bouri site several cut-marked bones also show stone tool use approximately 2.5 Myr ago 2 . Here we report stone-tool-inflicted marks "
+      },
+      {
+       "doc": "history/756e4329_0149.txt",
+       "final_rank": 251,
+       "hybrid_rank": 251,
+       "start": "Across northern Australia, especially in Arnhem Land , the \"Leilira blade\", a rectangular stone flake shaped by striking quartzite or silcrete stone, was used as a spear tip and also as a knife, sometimes 30 cm (12 in) long. Tasmania did not have spears or stone axes, but the peoples there used tool"
+      },
+      {
+       "doc": "history/883ee3b1_0146.txt",
+       "final_rank": 68,
+       "hybrid_rank": 68,
+       "start": "In contrast to an Oldowan tool, which is the result of a fortuitous and probably unplanned operation to obtain one sharp edge on a stone, an Acheulean tool is a planned result of a manufacturing process. The manufacturer begins with a blank, either a larger stone or a slab knocked off a larger rock."
+      },
+      {
+       "doc": "history/b560ba9c_0155.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "a , The exterior surface of DIK-55-3. The bone is oriented such that the proximal end is to the right. Dashed rule, 4 cm. The location of each of the surface marks is shown in close-up in b – i . b , Mark A (high-confidence stone-tool-inflicted mark) under low-power optical magnification shows clear"
+      },
+      {
+       "doc": "history/d1a56691_0143.txt",
+       "final_rank": 299,
+       "hybrid_rank": 299,
+       "start": "Paleolithic Epipalaeolithic Stone tools have been used throughout human history but are most closely associated with prehistoric cultures and in particular those of the Stone Age . Stone tools may be made of either ground stone or knapped stone , the latter fashioned by a craftsman called a flintkna"
+      },
+      {
+       "doc": "history/d8b6aa0d_0153.txt",
+       "final_rank": 543,
+       "hybrid_rank": 543,
+       "start": "DIK-55-2 ( Fig. 2 and Supplementary Information ) is a right rib fragment of a large ungulate, probably size 4 (cow-sized) or larger. Marks A1 and A2 are perpendicular to the cortical surface, V-shaped in cross-section with internal microstriations and diagnosed as high-confidence stone-tool cut mar"
+      },
+      {
+       "doc": "history/dc75f24e_0156.txt",
+       "final_rank": 238,
+       "hybrid_rank": 238,
+       "start": "PowerPoint slide The cut marks demonstrate hominin use of sharp-edged stone to remove flesh from the femur and rib. The location and density of the marks on the femur indicate that flesh was rather widely spread on the surface, although it is possible that there could have been isolated patches of f"
+      },
+      {
+       "doc": "history/eb20dda2_0154.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "PowerPoint slide DIK-55-3 ( Fig. 3 and Supplementary Information ) is a femur shaft fragment of a size 2 (goat-sized) young bovid. The surface is densely marked ( Fig. 3a ). Mark A is perpendicular to the cortical surface and has clear microstriations running out one end ( Fig. 3b, c ), diagnosed as"
+      },
+      {
+       "doc": "history/f1d7ec88_0141.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "## On supporting science journalism If you're enjoying this article, consider supporting our award-winning journalism by subscribing . By purchasing a subscription you are helping to ensure the future of impactful stories about the discoveries and ideas shaping our world today. That hunch helped mot"
+      }
+     ],
+     "best_gold_final_rank": 68,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "For the better understanding of various weapons, parts of dress, and army-implements, we have brought together a great number of such objects on pl. 25. Cutting weapons: cavalry swords; fig. 18a, French heavy cavalry sword, pattern of 1803, with iron scabbard; the blade (fig. 18b) has two grooves, a"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "More Viking men carried axes or spears. Battle axes had long handles, were light, well balanced and deadly. Battle axes had a variety of head shapes with a cutting edge from 3 to 6 inches. Later axe heads were much larger, from 9 to 18 inches long. The long handle allowed the warrior a longer reach "
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "This post once again comes to us from Cameron Laird: The solution to this one is the ever-helpful Ox (OE Oxa), who not only pulled the plough for planting crops but also provided leather for all sorts of useful things in early medieval England. Ælfric (c. 955-1010), an abbot of the monastery at Eyns"
+      }
+     ]
+    },
+    {
+     "domain": "history",
+     "qid": "76410_105",
+     "ndcg10": 0.0,
+     "query": "Was there an economic reason for Protestants' iconoclasm? Europe underwent major economic upheavals during the creation of Protestantism (cf. E. Michael Jones, Barren Metal or Goy Guide to World History ). Is this one reason why Protestants upheld iconoclasm ? Was it a sense of necessity or utilitarianism (that having a minimally decorated church is better than having no church at all) that inspir",
+     "llm_reason": "Knowledge needed: Historical context of Protestant iconoclasm, especially during the 16th century, and links between economic conditions and religious practices. Relevant document topic: Protestant Reformation and religious iconoclasm in 16th-century Europe. Key concepts: Iconoclasm, economic hardship, church funding, simplicity in worship, utilitarianism. Entities: Martin Luther, Calvin, Reformation, 1520s–1550s. Time: 16th century (specifically 1520s–1550s). The document would discuss how econ",
+     "llm_hyde": "During the 16th century, economic factors significantly influenced Protestant iconoclasm. In regions like Germany and the Netherlands, many Protestant reformers, such as Martin Luther and John Calvin, criticized the wealth accumulated by the Catholic Church through the sale of indulgences and ornate church furnishings. Protestant movements emphasized simplicity and reduced materialism. In economic",
+     "gold": [
+      {
+       "doc": "history/a52ddb6a_14427.txt",
+       "final_rank": 284,
+       "hybrid_rank": 284,
+       "start": "In addition, material interests were often behind the veneration of cultic images. Pilgrimages to such supposedly wonder-working images were often associated with indulgences, and so the places where they were kept attracted large numbers of pilgrims. As in modern centres of tourism, the economic be"
+      },
+      {
+       "doc": "history/b9a7ad00_14425.txt",
+       "final_rank": 19,
+       "hybrid_rank": 18,
+       "start": "The research demonstrates that iconoclastic revolutions involved complex discussions between religious convictions and practical concerns such as economic stability, governmental authority, and social order, contesting traditional interpretations that see these events merely as theological conflicts"
+      },
+      {
+       "doc": "history/da1e6a1d_14426.txt",
+       "final_rank": 231,
+       "hybrid_rank": 231,
+       "start": "The basis for the deliberate destruction of pictures and sculptures in Christian churches at the time of the Reformation was the idea that to make and use images for Christian worship was contrary to the word of the Bible; in particular, the second of the Ten Commandments: “Thou shalt not make unto "
+      }
+     ],
+     "best_gold_final_rank": 19,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "The Protestant critique of religious iconography had significant economic repercussions that extended beyond theological debates. The systematic obliteration of religious art disrupted traditional creative patronage systems, endangered the livelihoods of artists and artisans and presented new econom"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Particular iconoclastic events that occurred in European towns throughout the first half of the 16th century illustrate the Reformation’s transformation in perspectives on religious imagery. These occurrences of systematic image destruction provide essential insights into how religious arguments man"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "The Protestant Reformation’s treatment of religious iconography was intricately linked to prevailing social structures, sometimes reflecting and occasionally contesting established class divisions. The conflict regarding religious imagery was not merely theological; it was deeply rooted in social di"
+      }
+     ]
+    },
+    {
+     "domain": "history",
+     "qid": "72564_153",
+     "ndcg10": 0.0,
+     "query": "Has a region/territory/country using the Western 7-day week ever got 'out-of-sync' for the day of the week? In a previous question on History Stack Exchange, it was reported that the cycle of days-of-the-week have continued uninterrupted since at least 60 AD. Do we know of any groups of people who, whilst still using the same seven-day-week significantly got out-of-sync with the 'accepted' day-of-",
+     "llm_reason": "Knowledge needed: Historical use of the seven-day week across cultures, especially in Europe, and whether any region used a different starting day (e.g., Sunday vs. Monday) despite shared religious roots. Relevant document topic: Historical use of days of the week in medieval Europe. Key concept: Out-of-sync day-of-week usage (e.g., England starting on Wednesday, France on Monday). Entities: England, France, Christian/Jewish/Muslim traditions, 13th century. Time: 1243–1267. The document would no",
+     "llm_hyde": "Between 1243 and 1267, England and France used different starting days for the week, with England beginning the week on Wednesday and France on Monday, creating a two-day discrepancy. This occurred due to the independent adoption of the Julian calendar and local customs, particularly in England where the week began on Wednesday, a practice rooted in early Christian and Anglo-Saxon traditions. Fran",
+     "gold": [
+      {
+       "doc": "history/a6185d15_20582.txt",
+       "final_rank": 397,
+       "hybrid_rank": 397,
+       "start": "Didn't it get lost somewhere along the line? This question comes frequently to the per­sonal worker, and although it may present no problem to the majority of us, it might help some if we discussed it again. When God gave man 168 hours a week, and required him to devote 24 of those hours to worship,"
+      }
+     ],
+     "best_gold_final_rank": 397,
+     "mechanical_label": "a",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [
+        "dev:62887_596"
+       ],
+       "start": "Cultures vary in which days of the week are designated the first and the last, though virtually all have Saturday, Sunday or Monday as the first day. The Geneva -based ISO standards organization uses Monday as the first day of the week in its ISO week date system through the international ISO 8601 s"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "The seven-day weekly cycle has remained unbroken in Christendom, and hence in Western history, for almost two millennia, despite changes to the Coptic, Julian, and Gregorian calendars, demonstrated by the date of Easter Sunday having been traced back through numerous computistic tables to an Ethiopi"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Today I found out why we have a seven day week and the origins of each day’s name. Two of the earliest known civilizations to use a seven day week were the Babylonians and the Jews. The Babylonians marked time with lunar months and it is thought by many scholars that this is why they chose a seven d"
+      }
+     ]
+    },
+    {
+     "domain": "history",
+     "qid": "72370_163",
+     "ndcg10": 0.0,
+     "query": "At the beginning of the 20th century, how did Austria-Hungary and Russia's foreign policies conflict in the Balkans? I'm reading The Sleepwalkers: How Europe Went to War in 1914 by Christopher Clark. Either I missed something or it was omitted, but I don't understand how Russia and Austria-Hungary's foreign policies and desires conflicted with respect to the Balkan region. For example, Clark state",
+     "llm_reason": "Knowledge needed: Understanding early 20th-century Balkan geopolitics, the Austro-Hungarian and Russian imperial ambitions, and the role of alliances like the Franco-Russian Alliance. Relevant document topic: Balkan diplomacy pre-1914, focusing on Austria-Hungary and Russia’s competing interests. Key concepts: Balkan influence, Slavic nationalism, Austro-Hungarian control of Bosnia, Russian desire to protect Slavic peoples, the 1890s Franco-Russian Alliance. Entities: Austria-Hungary, Russia, Se",
+     "llm_hyde": "At the beginning of the 20th century, Austria-Hungary and Russia pursued conflicting foreign policies in the Balkans. Austria-Hungary sought to maintain its influence and prevent Slavic nationalism, especially among South Slavs, by supporting ethnic and religious groups within the Balkans. Russia, driven by the 1890s Franco-Russian Alliance and its desire to protect Slavic peoples, especially Serb",
+     "gold": [
+      {
+       "doc": "history/a8b3b1d3_21719.txt",
+       "final_rank": 138,
+       "hybrid_rank": 138,
+       "start": "The July Crisis[b] was a series of interrelated diplomatic and military escalations among the major powers of Europe in mid-1914, which led to the outbreak of World War I. It began on 28 June 1914 when the Bosnian Serb nationalist Gavrilo Princip assassinated Archduke Franz Ferdinand, heir presumpti"
+      },
+      {
+       "doc": "history/d974f229_21720.txt",
+       "final_rank": 32,
+       "hybrid_rank": 34,
+       "start": "In 1908, the Austro-Hungarian Empire formally annexed Bosnia and Herzegovina, a move that significantly escalated tensions in the Balkans and among the Great Powers of Europe. This region had been under Austro-Hungarian administration since 1878, following the Congress of Berlin, although it remaine"
+      }
+     ],
+     "best_gold_final_rank": 32,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "The original Franco-Russian alliance was formed to protect both France and Russia from a German attack. In the event of such an attack, both states would mobilize in tandem, placing Germany under the threat of a two-front war. However, there were limits placed on the alliance so that it was essentia"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "The Austro-Hungarian Empire, headquartered at Vienna, was a largely rural, poor, multicultural state. It was operated by and for the Habsburg family, who demanded loyalty to the throne, but not to the nation [citation needed]. Nationalistic movements were growing rapidly. The most powerful were the "
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "The Balkan Wars were two conflicts that took place in the Balkan Peninsula in southeastern Europe in 1912 and 1913. Four Balkan states defeated the Ottoman Empire in the first war; one of them, Bulgaria, was defeated in the second war. The Ottoman Empire lost nearly all of its territory in Europe. A"
+      }
+     ]
+    },
+    {
+     "domain": "economics",
+     "qid": "43853_228",
+     "ndcg10": 0.0,
+     "query": "What are the justification of using 1990 or 2010 as benchmark in studies? Normally, many international studies and documents using multiple-of-10 years (for example 1990, 2010) as the benchmark year. For example: Dong,2019, p.899 used 1990 as the benchmark to calculate the Export Market Leniency Laws variable as discussed here , or WorldBank converted GDP to $USD 2010 as discussed here . I have so",
+     "llm_reason": "Knowledge needed: Historical data standardization, international development benchmarks, census cycles, and data reliability in global studies. Relevant document topic: Global development reporting and data standardization. Key concepts: Benchmark years (1990, 2010), GDP conversion, census years, data transparency. Entities: World Bank, UN, USA census. Time: 1990, 2010. Justification: These years align with major global censuses and data collection cycles. The World Bank and UN use them for cons",
+     "llm_hyde": "The use of 1990 and 2010 as benchmark years in international studies stems from their alignment with major global data collection cycles. The United Nations established the 1990s as a reference point for the Human Development Report and the World Bank's Global Development Finance, using 1990 as a baseline for poverty and health indicators. Similarly, 2010 was adopted by the UN and World Bank as a ",
+     "gold": [
+      {
+       "doc": "economics/5ae19622_13446.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "The past year has brought a flurry of news stories about the 2020 decennial census that reflect uncertainty about its success. Stories suggest several concerns, including persistent underfunding, the director’s unexpected resignation, challenges implementing technological innovations under budget co"
+      },
+      {
+       "doc": "economics/84ff16e4_13444.txt",
+       "final_rank": 30,
+       "hybrid_rank": 8,
+       "start": "Researchers in NOAA’s Global Monitoring Division calculate the AGGI using air samples collected every week at about 40 remote sites around the world. Technicians use state-of-the-art instruments to measure the abundance of greenhouse gases. From these observations, the researchers generate a smoothe"
+      },
+      {
+       "doc": "economics/b85cef0b_13445.txt",
+       "final_rank": 181,
+       "hybrid_rank": 181,
+       "start": "Before I explain what real GDP is, it is worth noting where you can find the data. Probably the best source is data.worldbank.org. Simply start typing “GDP constant” into the search box and select “GDP (constant 2010 US$)” from the list when it appears (or type “GDP (constant LCU)” for GDP in the lo"
+      }
+     ],
+     "best_gold_final_rank": 30,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [
+        "train:43830_229"
+       ],
+       "start": "A base year refers to the base point in time of a time series. The most frequent use of a base year in economic data is in compiling price indices such as the GDP deflator to convert a current value such as GDP at market prices into GDP at constant prices. The constant price series are always publis"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "The failure to update base years is a serious problem which affects the perceived quality of GDP data. Data on a country's GDP are used continually to monitor domestic growth rates in current terms and in constant prices and to make intercountry comparisons of growth or of GDP per capita levels. GDP"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [
+        "train:43830_229"
+       ],
+       "start": "Data reported in current (or “nominal”) prices for each year are measured in the prices for that particular year. For example, current price estimates shown for 1990 are based on 1990 prices, for 2000 are based on 2000 prices, and so on. The World Development Indicators (WDI) alternatively present t"
+      }
+     ]
+    },
+    {
+     "domain": "history",
+     "qid": "76694_86",
+     "ndcg10": 0.0,
+     "query": "How did the Catholic Church grow in power between Rome and the Middle Ages? I am not a historian, but I love learning history, and have loved it since middle school. One thing that was odd to me even back then, though, is that there seemed to be a \"gap\" in European history. What I mean by this is that we studied quite a lot about Rome, from its early monarchy, to the republic, to the empire and th",
+     "llm_reason": "Knowledge needed: Understanding the transition of political and religious authority in post-Roman Europe, focusing on the Church’s rise from late antiquity to the early Middle Ages (5th–8th centuries AD). Relevant document topic: The Catholic Church’s expansion of influence after the fall of Rome, covering the shift from imperial to ecclesiastical authority. Key concepts: Conversion of Germanic kingdoms, papal authority, missionary work, monasticism, the role of the Church in governance, and the",
+     "llm_hyde": "Between the 5th and 8th centuries AD, as the Western Roman Empire collapsed, the Catholic Church expanded its influence in the absence of centralized political authority. Monasteries became centers of learning and record-keeping, preserving Roman and Christian texts. The Church established a network of bishops and dioceses across Europe, consolidating spiritual and administrative control. In the 6",
+     "gold": [
+      {
+       "doc": "history/57b581cb_12147.txt",
+       "final_rank": 13,
+       "hybrid_rank": 35,
+       "start": "## Belief and Institutions We should start by charting the broad outlines of the place of the medieval church in Western Europe. I should start off by noting that this is a huge topic – as will swiftly become clear, there was almost no part of society in which the Church did not play a significant r"
+      },
+      {
+       "doc": "history/58ee89ce_12150.txt",
+       "final_rank": 40,
+       "hybrid_rank": 9,
+       "start": "Following the 5th century Fall of Rome , Europe entered the Middle Ages, during which period the Catholic Church filled the power vacuum left in the West by the fall of the Western Roman Empire , while the Eastern Roman Empire (or Byzantine Empire) endured in the East for centuries, becoming a Helle"
+      },
+      {
+       "doc": "history/5a468b06_12137.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "Diocletian intervened in the daily life of the empire in a way that emperors before largely had not. When his plan to reform the Roman currency failed, sparking hyper-inflation (whoops!), Diocletian responded with his Edict on Maximum Prices , an effort to fix the prices of many goods empire wide . "
+      },
+      {
+       "doc": "history/66c1de43_12136.txt",
+       "final_rank": 665,
+       "hybrid_rank": 665,
+       "start": "By contrast, the Roman governance system that emerges during the reigns of Diocletian (r. 284-305) and Constantine (r. 306-337) was centralized and direct. The process of centralizing governance 1 had been going on for some time, really since the beginning of the empire, albeit slowly. The Constitut"
+      },
+      {
+       "doc": "history/842ec1f5_12143.txt",
+       "final_rank": 922,
+       "hybrid_rank": 922,
+       "start": "## The East The picture in the East is more complex. We’ve been avoiding the Eastern Roman Empire because our question is about the fall of Rome and Rome didn’t fall there. Like the successor states of the Western Roman Empire, the Eastern Roman Empire was heir to the centralized, bureaucratic, some"
+      },
+      {
+       "doc": "history/8516fdd6_12149.txt",
+       "final_rank": 856,
+       "hybrid_rank": 856,
+       "start": "Western civilization traces its roots back to Europe and the Mediterranean . It began in ancient Greece , transformed in ancient Rome , and evolved into medieval Western Christendom before experiencing such seminal developmental episodes as the development of Scholasticism , the Renaissance , the Re"
+      },
+      {
+       "doc": "history/9cff8929_12135.txt",
+       "final_rank": 310,
+       "hybrid_rank": 310,
+       "start": "## Political Institutions While last week we noted how the collapse of the Roman Empire in the West did not destroy the Roman cultural sphere so much as accelerate its transformation (albeit into a collection of fragmented fusion cultures which were part ‘Roman’ mixed with other things), it did brin"
+      },
+      {
+       "doc": "history/a03e866d_12141.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "While most of the wealth of any of these cities was derived from the rents and taxes extracted from their agricultural hinterlands, these cities also substantially lived off of trade and markets. Because the local city typically housed the local market, they were the obvious point for local products"
+      },
+      {
+       "doc": "history/ad41808c_12148.txt",
+       "final_rank": 18,
+       "hybrid_rank": 12,
+       "start": "That said, the institutional power of the Church (and here we really do mean what would be the Roman Catholic Church) begins to change dramatically in the 11th century, right as we enter the High Middle Ages, and continues for the next several centuries (keeping in mind that Game of Thrones and A So"
+      },
+      {
+       "doc": "history/cb15f608_12144.txt",
+       "final_rank": 115,
+       "hybrid_rank": 115,
+       "start": "Unlike in the West, where the Church and secular rulership had eventually become separate institutions, in the East the emperor and the church – what would become the Eastern Orthodox Church – were closely linked and there was an expectation that the emperor would encourage the ‘right’ sort of Chris"
+      },
+      {
+       "doc": "history/d382054c_12139.txt",
+       "final_rank": 329,
+       "hybrid_rank": 329,
+       "start": "The problem rulers faced was two-fold: first that the Late Roman system, in contrast to its earlier form, demanded a large, literate bureaucracy, but the economic decline of the fifth century (which we’ll get to next time) came with a marked decline in literacy, which in turn meant that the supply o"
+      },
+      {
+       "doc": "history/df053df8_12145.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "Urban culture lasted longer in the East than in the West, though regional patterns vary. In Syria, Egypt and the Levant, Liebescheutz notes that on the whole the classical form of city continues largely unchanged during the fifth century and indeed continues relatively undiminished until the eighth "
+      },
+      {
+       "doc": "history/ea63bc2d_12138.txt",
+       "final_rank": 583,
+       "hybrid_rank": 583,
+       "start": "All of this matters here because it is this kind of government – centralized, bureaucratic, religiously framed and interventionist, which the new rulers of the fifth century break-away kingdoms will attempt to emulate . They will mostly fail, leading to a precipitous decline in state capacity. This "
+      },
+      {
+       "doc": "history/ece3dff5_12146.txt",
+       "final_rank": 483,
+       "hybrid_rank": 483,
+       "start": "Roman governance in the East responded to the challenges of the sixth and seventh century with evolution. Civil and military officials, who had been divided by Diocletian, began to be merged back together by Justinian in an effort to make provinces which were more able to defend themselves; this tre"
+      },
+      {
+       "doc": "history/eda7dde6_12140.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "As mentioned above, the Romans generally wanted these cities to be mostly self-governing. While at conquest, the Romans found themselves managing a bewildering array of different styles of local urban government, over time a mix of Roman administrative preference and cultural diffusion tended to pro"
+      },
+      {
+       "doc": "history/edf41627_12142.txt",
+       "final_rank": 652,
+       "hybrid_rank": 652,
+       "start": "The end result was that in the West, urbanism declined severely between the fourth and sixth centuries . Rome, once a city of a million people, collapsed down to a population of just 80,000. Arles, which had been a thriving Roman city with an amphitheater, an aqueduct, a chariot-racing track, a thea"
+      }
+     ],
+     "best_gold_final_rank": 13,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "With the decline and fall of the Roman Empire in the west, the papacy became a political player, first visible in Pope Leo's diplomatic dealings with Huns and Vandals. The church also entered into a long period of missionary activity and expansion among the various tribes. While Arianists instituted"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "After the Fall of Rome , the papacy served as a source of authority and continuity. In the absence of a magister militum living in Rome, even the control of military matters fell to the pope. Gregory the Great ( c 540-604) administered the church with strict reform. A trained Roman lawyer and admini"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "After the Fall of Rome, the papacy served as a source of authority and continuity. In the absence of a magister militum living in Rome, even the control of military matters fell to the pope. Gregory the Great (c 540 604) administered the church with strict reform. A trained Roman lawyer and administ"
+      }
+     ]
+    },
+    {
+     "domain": "history",
+     "qid": "70583_271",
+     "ndcg10": 0.0,
+     "query": "How do we know when Nero was born? If I go onto Wikipedia , I can see an answer of when he was born. But I can't really follow the sources. How do historians know when Nero was born?",
+     "llm_reason": "To know when Nero was born, historians rely on ancient Roman records, such as inscriptions, official documents, and contemporary accounts. The key concept is the use of historical sources and cross-referencing. A relevant document would be a scholarly article or historical text on Roman emperors, mentioning Nero’s birth date (March 1, 37 AD) and citing primary sources like the *Historia Augusta* or *Suetonius*. It would explain how historians verify dates using multiple, corroborated sources fro",
+     "llm_hyde": "Nero was born on December 15, 37 AD. This date is established through a combination of Roman inscriptions, historical records, and references in early Christian and Roman sources. The most reliable evidence comes from the *Historia Augusta*, which mentions Nero's age during key events, and from the *Annals of the Roman Empire* compiled by later historians. These records are cross-referenced with a",
+     "gold": [
+      {
+       "doc": "history/5f314964_37506.txt",
+       "final_rank": 524,
+       "hybrid_rank": 524,
+       "start": "Suetonius was also a close friend and secretary of Emperor Hadrian, who granted him privileged access to the imperial archives and libraries. Suetonius was particularly interested in the lives and characters of the emperors rather than their political and military achievements. Thus, Suetonius searc"
+      }
+     ],
+     "best_gold_final_rank": 524,
+     "mechanical_label": "a",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "All three principal sources for Emperor Nero's reign, including Tacitus, were senators. However, unlike other historians, Tacitus was more lenient, trying to portray the controversial ruler in more neutral terms. Born around 56 CE, during Nero's reign, Tacitus was only eight during the Great Fire of"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "All three principal sources for Emperor Nero s reign, including Tacitus, were senators. However, unlike other historians, Tacitus was more lenient, trying to portray the controversial ruler in more neutral terms. Born around 56 CE, during Nero s reign, Tacitus was only eight during the Great Fire of"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Nero was born Lucius Domitius Ahenobarbus in 37 CE, but he was renamed Nero Claudius Caesar Augustus when his mother, Agrippina, married Emperor Claudius in 49 CE. Some believe Nero's fate was inevitable. His father, Gnaeus Domitius, who died when Nero was three, was extremely violent in his own rig"
+      }
+     ]
+    },
+    {
+     "domain": "cardano",
+     "qid": "9250_104",
+     "ndcg10": 0.0,
+     "query": "Why does staking happen with a delay? In Cardano, AFAICU, at the beginning of an epoch a snapshot is taken of the end state of previous epoch to see who staked, how much and where. But it seems that that state is not used as for that current epoch but for the next one instead. Is there a particular reason for this? E.g is it because to have time to calculate slot leaders and then let them know tha",
+     "llm_reason": "Knowledge needed: Understanding Cardano’s epoch-based staking, block production, and state transition timing. Relevant document topic: Cardano’s staking mechanism and epoch transitions. Key concepts: Epoch, snapshot, staking delay, slot leaders, state transition, delegation. Entities: Cardano, epoch, staking, pool, snapshot. Time: At the start of an epoch (e.g., 10-minute intervals). The document would explain that staking delays occur because the snapshot from the prior epoch is used to determi",
+     "llm_hyde": "In Cardano, staking delays occur due to epoch-based design and consensus mechanics. At the start of each epoch, a snapshot of the previous epoch's stake distribution is taken to determine validator eligibility and rewards. This snapshot is used to compute rewards for the *next* epoch, not the current one. The delay allows time for slot leaders to be calculated and announced, ensuring network stabi",
+     "gold": [
+      {
+       "doc": "cardano/2b58eb57_0504.txt",
+       "final_rank": 12,
+       "hybrid_rank": 22,
+       "start": "A snapshot Mark at epoch transition from EpochN to EpochN+1 will be used for the slot leader election process during EpochN+2, when it becomes Set. Finally, it is employed for rewards calculation during Epoch N+3 when it becomes Go. On any current epoch, Mark is not actively used, Set is used for th"
+      },
+      {
+       "doc": "cardano/78bd1516_0503.txt",
+       "final_rank": 92,
+       "hybrid_rank": 92,
+       "start": "In Praos, each epoch has an agreed upon nonce which all participants must use as input to their VRF. For each slot, each participant uses their VRF and the nonce to produce a random number. If the number is less than a threshold value proportional to their stake, then they are a leader for that slot"
+      }
+     ],
+     "best_gold_final_rank": 12,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [
+        "dev:7235_117"
+       ],
+       "start": "Time periods in Cardano: Epochs, slots, and nominations The Cardano network has time periods called Epochs that last 432000 slots, and each slot lasts 1 second. That means an epoch lasts 5 days. On average, a pool node is expected to be nominated for block production every 20 seconds, with roughly 2"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [
+        "dev:7539_115"
+       ],
+       "start": "For example, if you delegate ADA coins to a pool, it will only show up after a new snapshot. Epochs are used as a specific accounting period for which rewards are paid. It is necessary to measure the performance of pools in terms of block production in order to reward pool operators and delegators. "
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Chains are divided into blocks of time called epoch’s and individual units of time within an epoch are slots. For each slot, a stake pool is assigned as the slot leader, and is rewarded for adding a block to the chain. For security reasons, there is mechanism in place called ‘settlement delay’ where"
+      }
+     ]
+    },
+    {
+     "domain": "hsm",
+     "qid": "18796_657",
+     "ndcg10": 0.0,
+     "query": "What was this mathematical colloquium event at Tulane and what year did it take place? Steven Krantz in his book Mathematical Apocrypha on page 14 writes: A famous mathematician was once invited to give a colloquium at Tulane University in New Orleans. During the ceremonial dinner, the great man let on that he would like to have a liaison with a lady of the evening. His hosts were nonplussed, as t",
+     "llm_reason": "The question refers to a fictional anecdote from Steven Krantz's book *Mathematical Apocrypha*, not a real historical event. No actual mathematical colloquium at Tulane University is described or documented in the text. The event is a satire, not a factual occurrence. Therefore, no real year or event exists. The answer is that this was not a real mathematical colloquium—only a fictional story. (No real year, no real event.)",
+     "llm_hyde": "There is no historical record of a mathematical colloquium at Tulane University in the context described involving Steven Krantz or the anecdote about a mathematician being taken to a red light district. The story is a fictional anecdote from Krantz's book *Mathematical Apocrypha*, written in 1998, and is presented as satire or humor, not as a factual account of an actual event. Therefore, no spec",
+     "gold": [
+      {
+       "doc": "hsm/b38e9456_0837.txt",
+       "final_rank": 52,
+       "hybrid_rank": 52,
+       "start": "The Tulane Conference Following the panel discussion, Douglas sought funding from the Sloan Foundation for a conference on calculus reform (Douglas, 1985b). The result was the \"Conference/Workshop To Develop Curriculum and Teaching Methods for Calculus at the College Level\" held at Tulane University"
+      }
+     ],
+     "best_gold_final_rank": 52,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Friday, May 24, 2024 The organizing commitee is pleased to invite you to the XXVIth ISM Graduate Student Conference! The colloquium will be held at the Université du Québec à Montréal (UQAM) from Friday May 24 to Sunday May 26, 2024. This annual colloquium brings together the community of graduate s"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "@Book{Lehto:1998:MBH, author = \"Olli Lehto\", title = \"Mathematics Without Borders: a History of the {International Mathematical Union}\", publisher = pub-SV, address = pub-SV:adr, pages = \"xvi + 399\", year = \"1998\", ISBN = \"0-387-98358-9\", ISBN-13 = \"978-0-387-98358-5\", LCCN = \"QA1 .L42 1998\", bibdat"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Description: The aim of this symposium on the history of mathematics is to take the theme of ideas in social context and focus it on how status is acquired in mathematics. We do this by considering aeronautics, an emerging topic in applied mathematics, and on complex function theory, a major, and re"
+      }
+     ]
+    }
+   ]
+  },
+  "1b": {
+   "variant": "1b",
+   "eligible": 395,
+   "topics": 1214,
+   "items": [
+    {
+     "domain": "history",
+     "qid": "62574_607_step3",
+     "ndcg10": 0.0,
+     "query": "Is there any example of a monarch being presumed dead but returning after the heir ascended to the throne? Has there ever been a monarch is incorrectly believed to be dead—perhaps disappeared for many months, incorrectly thought to have fallen in battle, etc—and after some waiting the heir ascends t || STEP: Cross-reference coronation dates and timelines from authoritative historical sources.",
+     "llm_reason": "Time period: 16th–18th century Europe. Topic: Monarchs presumed dead, heir ascending, return of the true monarch. Key concept: Two monarchs simultaneously crowned (e.g., during a succession crisis). Example: The case of King Charles II of England, who was believed dead after the Battle of Edge Hill (1644) and during the English Civil War, but returned after the death of his brother, Charles I, and the ascension of his son. However, no verified case exists where a monarch was *presumed dead*, an ",
+     "llm_hyde": "In 1553, England's Queen Mary I's half-sister, Elizabeth, was believed to have died, and the throne passed to the young Prince Edward, who was crowned King Edward VI in 1553. However, Edward was only six years old, and the crown was actually intended for Mary, who had been declared queen in 1553. Mary had been declared dead after a fall from a horse in 1553, but she was later found alive. The coro",
+     "gold": [
+      {
+       "doc": "history/bd682876_87475.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "Despite it traditionally being the duty of a king to bear children, Richard I never had children. King Richard I did marry Berengaria, the daughter of the king of Navarre on May 12, 1191, but they never had any children. It is speculated that the lack of children between the two was due to the fact "
+      }
+     ],
+     "best_gold_final_rank": null,
+     "mechanical_label": "a",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "B July 22, 2016 at 1:51 pmA great video Claire, exploring this concept. I’m in the camp of Queen Jane. The current monarch chose her as his heir and she was accepted as the rightful monarch so for me she is a Queen. Not being crowned shouldn’t be used as an argument because as you said Edward V was "
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "The timing of the coronation has varied throughout British history. King Edgar's coronation was some 15 years after his accession in 959 and may have been intended to mark the high point of his reign, or that he reached the age of 30, the age at which Jesus Christ was baptised. Harold II was crowned"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "How can we know that legitimacy matters to English monarchs? The general principle of managing shared beliefs is well known. Public events—such as coronations—during which one is exposed to information relevant to the belief-formation process are crucial. The public nature of such events makes one a"
+      }
+     ]
+    },
+    {
+     "domain": "bitcoin",
+     "qid": "123461_13_step2",
+     "ndcg10": 0.0,
+     "query": "Implementing Conditional Fund Locking in Bitcoin Similar to Ethereum's Smart Contracts I'm familiar with how Ethereum allows users to lock funds in smart contracts, which can then be released under specific conditions using mechanisms like the Hashed TimeLock Contract (HTLC) protocol. I'm interested || STEP: Compare Bitcoin's time-locking features with Ethereum's Hashed TimeLock Contract (HTLC) pr",
+     "llm_reason": "Knowledge needed: Bitcoin’s time-locking mechanisms and comparison with Ethereum’s HTLC protocol. Relevant document topic: Bitcoin time-locking features vs. Ethereum HTLC. Key concepts: Time-locked transactions, script-based conditions, OP_RETURN, Pay-to-Script-Hash (P2SH), and Bitcoin’s scripting limitations. Entities: Bitcoin, HTLC, P2SH, time-lock, script, transaction. Time: Present-day (2024). Document would describe Bitcoin’s use of time-locks (e.g., in 2-of-3 multisig or time-locked P2SH s",
+     "llm_hyde": "As of 2023, Bitcoin does not support smart contracts like Ethereum, but it includes time-locking mechanisms through the use of Pay-to-Pubkey-Hash (P2PKH) and Pay-to-Script-Hash (P2SH) transactions. A key feature is the use of time-locked transactions, such as those in the Taproot upgrade (2021), which allows scripts to enforce conditions like time-based unlocking. The Hashed TimeLock Contract (HTL",
+     "gold": [
+      {
+       "doc": "bitcoin/cb267115_2652.txt",
+       "final_rank": 287,
+       "hybrid_rank": 287,
+       "start": "HTLCs are foundational to the Lightning Network, a layer-2 scaling solution for blockchain networks like Bitcoin. In payment channels within the Lightning Network, participants can create HTLCs to route payments securely and instantaneously across the network. Each hop in the payment route is an HTL"
+      },
+      {
+       "doc": "bitcoin/ea819d91_2653.txt",
+       "final_rank": 23,
+       "hybrid_rank": 26,
+       "start": "A Hash Time Locked Contract or HTLC is a class of payments that use hashlocks and timelocks to require that the receiver of a payment either acknowledge receiving the payment prior to a deadline by generating cryptographic proof of payment or forfeit the ability to claim the payment, returning it to"
+      }
+     ],
+     "best_gold_final_rank": 23,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Una of the most interesting properties it has Bitcoin are time locks or timelock such as nLockTime. These types of functionalities allow users to define the exact moment in which a transaction can be validated and confirmed on the network. A quality that turns Bitcoin into programmable digital money"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Hash Timelock Contracts operate based on two fundamental cryptographic principles: hashlocks and timelocks. Together, these mechanisms form a secure and automated way to manage conditional payments. Hashlock: A hashlock ensures that funds can only be unlocked if a party provides a specific cryptogra"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Una of the innovative functions it has Bitcoin known as Timelock. This is a tool that it serves to establish and specify certain conditions under which transactions may be validated. Un time lock o time lock, is a kind of smart contract primitive, which refers to what block height or specific time, "
+      }
+     ]
+    },
+    {
+     "domain": "history",
+     "qid": "56978_708_step1",
+     "ndcg10": 0.0,
+     "query": "Were Soviets invited to the Marshall Islands to observe the first hydrogen bomb detonations? In 1952, did the US invite, or consider inviting, Russian scientist to observe the detonation of the first hydrogen bomb? These were above-ground tests far away from Russian in the Marshall Islands, and thus || STEP: Search declassified US government documents from 1952 related to the hydrogen bomb tests i",
+     "llm_reason": "Knowledge needed: U.S. nuclear policy, Cold War diplomacy, declassified records on 1952 hydrogen bomb tests, and whether the USSR was informed of U.S. developments. Relevant document: A declassified 1952 U.S. government memo or report from the Atomic Energy Commission or Department of Defense. Topic: U.S. hydrogen bomb test in the Marshall Islands (e.g., \"Operation Ivy\"). Key terms: \"hydrogen bomb,\" \"deterrence,\" \"Soviet notification,\" \"nuclear transparency,\" \"1952,\" \"Marshall Islands.\" It would",
+     "llm_hyde": "In 1952, the United States conducted the first above-ground hydrogen bomb test, \"Ivy Mike,\" at the Enewetak Atoll in the Marshall Islands. Declassified U.S. government records indicate that the U.S. did not invite Soviet scientists or officials to observe the test. The U.S. considered the test a strategic advantage and chose to maintain secrecy, particularly due to the weapon's unprecedented yield",
+     "gold": [
+      {
+       "doc": "history/40322bcb_100196.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "The test series was named IVY, and two shots were proposed: Mike and King. Mike would be the first to explore the possibility of a megaton-class thermonuclear device while King would demonstrate the potential yield that could be obtained with a conventional fission design. If King had fired first, i"
+      },
+      {
+       "doc": "history/fe93a6e9_100194.txt",
+       "final_rank": 344,
+       "hybrid_rank": 344,
+       "start": "The first Ivy shot, codenamed Mike, was the first successful full-scale test of a multi-megaton thermonuclear weapon (\"hydrogen bomb\") using the Teller-Ulam design. Unlike later thermonuclear weapons, Mike used deuterium as its fusion fuel, maintained as a liquid by an expensive and cumbersome cryog"
+      }
+     ],
+     "best_gold_final_rank": 344,
+     "mechanical_label": "a",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "The USA could be confident that the USSR would learn about the hydrogen bomb test from atmospheric sampling. It's possible to detect extremely low levels of radioactive isotopes in the atmosphere, some of which are characteristic of nuclear explosions. Doing this sampling has given important clues t"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "The world was never the same after the United States leveled Hiroshima and Nagasaki in August 1945 with atomic bombs. Not only had perhaps 180,000 civilians been killed, the nature of warfare was forever changed. The Soviets accelerated their nuclear research, expedited in no small part by “atom spi"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "On August 30, 1961, the Soviet Union issued a statement that it was abandoning the test moratorium. It, of course, blamed the United States, claiming the Americans were on the threshold of starting up nuclear testing underground, and emphasizing the defensive nature of the Soviet arsenal. The statem"
+      }
+     ]
+    },
+    {
+     "domain": "cardano",
+     "qid": "840_139_step1",
+     "ndcg10": 0.0,
+     "query": "When will all 45 billion coins be in circulation? I cannot find any accurate information with what speed and based on what formula the coins which are not in circulation will be in circulation and when (approximately) all coins will be in circulation. || STEP: Identify official sources or governing bodies responsible for coin circulation schedules.",
+     "llm_reason": "No coins are being tracked for a \"45 billion coin\" universal circulation timeline. Coins are not issued in such a fixed, global quantity with a set date for full circulation. A relevant document would be from a central bank (e.g., the U.S. Mint, European Central Bank) outlining coin production, circulation, and retirement policies. It would mention entities like the U.S. Mint, coin types (e.g., pennies, quarters), production rates, and retirement schedules. The document would not predict a speci",
+     "llm_hyde": "There is no official schedule or formula indicating when all 45 billion coins will enter circulation. Coin issuance and circulation are managed by national central banks and monetary authorities, such as the U.S. Mint, the European Central Bank, or the Bank of England, depending on the jurisdiction. These bodies issue coins based on demand, economic conditions, and currency policies, not on a fixe",
+     "gold": [
+      {
+       "doc": "cardano/6e899ff6_7998.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "Emission schedule: The token release rate is set at 0.22% of the remaining reserve per epoch (approximately every 5 days), ensuring a gradual distribution of ADA until the cap is reached. Distribution: The initial distribution included 31,112,484,646 ADA, allocated among the Cardano Foundation, EMUR"
+      }
+     ],
+     "best_gold_final_rank": null,
+     "mechanical_label": "a",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "When it comes to Bitcoin (BTC), its max supply is 21 million coins and since none of them have been burnt, Bitcoins circulating and total supply are the same. At the time of writing, 18,342,431 BTC are circulating the market. However, since Bitcoin is releasing 6.25 BTC every 10 minutes for every so"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Cardano, being a popular blockchain platform, has a number of coins and tokens in circulation. To explore the current state of these coins and tokens, let's dive deeper into their distribution and characteristics. The following table represents the current status of coins and tokens on the Cardano p"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "| Feature | Max Supply | Total Supply | Circulating Supply | | --- | --- | --- | --- | | Simple Definition | The absolute maximum number of coins that will ever exist. | All coins ever created (minus any burned coins). | The number of coins publicly available and actively traded. | | What It Include"
+      }
+     ]
+    },
+    {
+     "domain": "bitcoin",
+     "qid": "124510_9_step4",
+     "ndcg10": 0.0,
+     "query": "Can I use Relative Locktime (BIP 68) to send funds to myself that can only be spent after a specific time in Bitcoin? Context: I want to send funds to myself in Bitcoin but prevent them from being spent until a specified period has passed, using Relative Locktime (BIP 68). I'm exploring whether this || STEP: Verify the state and restrictions of UTXOs before the locktime expires using blockchain an",
+     "llm_reason": "Yes, Relative Locktime (BIP 68) allows a transaction to be spendable only after a certain number of blocks or time passes. A relevant document would discuss BIP 68, relative locktime, and UTXO behavior. It would state that UTXOs are not immediately spendable—instead, they are locked until the specified block height or time. Before the locktime expires, the UTXO is unspendable, even if the transaction is valid. The document would cite Bitcoin Core, blockchain analysis tools (e.g., Blockchain.com,",
+     "llm_hyde": "Yes, Relative Locktime (BIP 68) allows a transaction to specify that funds can only be spent after a certain number of blocks or time have passed. When a UTXO is created with a relative locktime, it becomes spendable only after the specified block height or time interval. Before the locktime expires, the UTXO is not spendable—no transactions can use it, and it remains in a locked state. Blockchain",
+     "gold": [
+      {
+       "doc": "bitcoin/1af7f39b_15146.txt",
+       "final_rank": 76,
+       "hybrid_rank": 76,
+       "start": "Also part of the BIP68/112/113 soft fork was the CheckSequenceVerify opcode[8], which provides for relative locktime the same feature CLTV provides for absolute locktime. When the CSV opcode is called, it will cause the script to fail unless the nSequence on the transaction indicates an equal or gre"
+      }
+     ],
+     "best_gold_final_rank": 76,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Transaction Locktime (nLocktime) From the beginning, bitcoin has had a transaction-level timelock feature. Transaction locktime is a transaction-level setting (a field in the transaction data structure) that defines the earliest time that a transaction is valid and can be relayed on the network or a"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Since the activation of BIP-68, new consensus rules apply for any transaction containing an input whose nSequence value is less than 231 (bit 1 = 231). The nSequence value is specified in either blocks or seconds, but in a slightly different format than we saw used in nLocktime. A type-flag is used "
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "nSequence as a consensus-enforced relative timelock Since the activation of BIP-68, new consensus rules apply for any transaction containing an input whose nSequence value is less than 231 (bit 1 31 is not set). Programmatically, that means that if the most significant (bit 1 31) is not set, it is a"
+      }
+     ]
+    },
+    {
+     "domain": "quant",
+     "qid": "70819_1086_step2",
+     "ndcg10": 0.0,
+     "query": "What are common ways to realistically simulate the stock market using historical market data? I am currently using the FinRL library to try to automate Trading using Reinforcement Learning. However, I wanted to understand how FinRL simulates the stock market using historical data. I read here that t || STEP: Search for examples of historical data usage in stock market simulations, including method",
+     "llm_reason": "A relevant document would discuss stock market simulation methods using historical data, focusing on time-driven simulation and statistical models. Key concepts: geometric Brownian motion, log returns, empirical mean/standard deviation, time series models (e.g., ARIMA, GARCH), and parameter estimation. It should mention FinRL’s use of time-driven simulation, clarify if it uses geometric Brownian motion or alternative models like GARCH or machine learning-based time series. The document should re",
+     "llm_hyde": "In the early 2010s, researchers widely adopted geometric Brownian motion (GBM) to simulate stock price paths using historical data. GBM models log returns as normally distributed with estimated mean and volatility from historical prices, enabling realistic price trajectory generation. For instance, given historical prices $S_0, \\dots, S_N$, log returns are computed, and parameters $\\hat{\\mu}$ and ",
+     "gold": [
+      {
+       "doc": "quant/6ae3b72c_3831.txt",
+       "final_rank": 940,
+       "hybrid_rank": 940,
+       "start": "ARIMA excels in the stock market by analyzing historical data to predict future stock prices, thereby aiding in short-term investment decisions. It integrates three essential components: Autoregression (AR), Differencing (I), and Moving Average (MA). The AR component models the relationship between "
+      }
+     ],
+     "best_gold_final_rank": 940,
+     "mechanical_label": "a",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Unrelated to FinRL I read here that you could do it with geometric Brownian motion like this: Assume you have historical stock data $S\\_0, \\dots, S\\_N$. Then we can calculate the log returns $$ ⁡r\\_1 = \\log\\left(\\frac{S\\_1}{S\\_0}\\right), \\dots, \\log\\left(\\frac{S\\_N}{S\\_{N-1}}\\right) $$ Then we can e"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "The simulation of financial time series is crucial for designing investment strategies and financial products. Two approaches are commonly used in practice. A naïve approach involves testing strategies or products solely on historical data. However, as noted by (Assefa et al., 2020), this approach s"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "The simulation of financial time series is crucial for designing investment strategies and financial products. Two approaches are commonly used in practice. A naïve approach involves testing strategies or products solely on historical data. However, as noted by (Assefa et al., 2020), this approach s"
+      }
+     ]
+    },
+    {
+     "domain": "genealogy",
+     "qid": "2975_328_step3",
+     "ndcg10": 0.0,
+     "query": "Where do I find information about arranged employment in Australia in the 1850s? Many immigrants from England worked for the Hon. Edward Flood M.P. in the 1850s. They were employed mainly as sheep overseers, station hands, bullock drivers etc. Would this type of employment have been arranged prior t || STEP: Review secondary sources analyzing labor practices and immigrant experiences in 1850s Aust",
+     "llm_reason": "Knowledge needed: Labor practices, immigrant employment patterns, and migration history in 19th-century Australia, specifically the 1850s. Relevant document topic: Immigrant labor in colonial Australia during the 1850s. Key concepts: Arranged employment, sheep farming, station hands, bullock drivers, English immigrants, Edward Flood (MP), Sydney. Entities: Australia, England, 1850s, Edward Flood, colonial labor, immigrant employment. Time: Explicitly the 1850s. The document would analyze whether",
+     "llm_hyde": "In the 1850s, arranged employment in Australia, including roles such as sheep overseers, station hands, and bullock drivers, was typically arranged prior to departure from England. Immigrants, especially from England, often secured work through employment agencies or via letters of introduction sent to Australian stations. These arrangements were facilitated by recruiters and transport companies o",
+     "gold": [
+      {
+       "doc": "genealogy/a11b2153_9801.txt",
+       "final_rank": 322,
+       "hybrid_rank": 322,
+       "start": "In 1839 Henry Parkes and his wife, Clarinda, were two of the thousands of assisted migrants. Parkes would later be Premier of New South Wales and one of the fathers of Federation. In England he had trouble making a living as an ivory turner. Like many migrants, the couple arrived in Australia with a"
+      }
+     ],
+     "best_gold_final_rank": 322,
+     "mechanical_label": "a",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "[*Among Australia's Pioneers Chinese Indentured Pastoral Workers on the Northern Frontier 1848 to c.1880*](http://www.amazon.com/gp/product/1452524807/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1452524807&linkCode=as2&tag=themaritime00-20&linkId=WQ62USYES2IDE3SL)*!Chinese Indentured P"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Work such as hers could not be undone. The Land and Emigration Commissioners renewed in 1844 their sending of selected migrants—agricultural labourers, shepherds and domestic servants—4500 of whom went out under their auspices in 1844-5. Thereupon a committee of the Legislative Council asked in 1845"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "AS there were wicket-keepers before Blackham, so there were labour unions before the gold discoveries. Convict artisans and labourers had, without unions and through sheer scarcity of man-power, even enjoyed an active government's pay and conditions when Macquarie was building to Greenway's plans,* "
+      }
+     ]
+    },
+    {
+     "domain": "history",
+     "qid": "70583_271_step1",
+     "ndcg10": 0.0,
+     "query": "How do we know when Nero was born? If I go onto Wikipedia , I can see an answer of when he was born. But I can't really follow the sources. How do historians know when Nero was born? || STEP: Identify primary sources or ancient texts that reference Nero's birth, such as Roman records or writings by contemporary historians.",
+     "llm_reason": "To know when Nero was born, historians rely on primary sources like Roman records, inscriptions, or writings by contemporary historians (e.g., Suetonius, Tacitus). A relevant document would be a historical text from the 1st century CE, such as Suetonius’s *Life of Nero*, which mentions Nero’s early life and birth. It would include references to his birth year (AD 37) and cite Roman administrative or imperial records. The document would be in Latin, from the Roman Empire era, and reference imperi",
+     "llm_hyde": "Nero was born in 37 AD, a date established through multiple primary sources. The Roman historian Suetonius, in *Life of Nero*, provides a chronological account of Nero’s early life, placing his birth in 37 AD. Additionally, the *Annals* of the Roman historian Tacitus reference events in the early 30s AD that align with Nero’s youth, supporting a birth year consistent with 37 AD. The *Historia Augu",
+     "gold": [
+      {
+       "doc": "history/5f314964_37506.txt",
+       "final_rank": 105,
+       "hybrid_rank": 105,
+       "start": "Suetonius was also a close friend and secretary of Emperor Hadrian, who granted him privileged access to the imperial archives and libraries. Suetonius was particularly interested in the lives and characters of the emperors rather than their political and military achievements. Thus, Suetonius searc"
+      }
+     ],
+     "best_gold_final_rank": 105,
+     "mechanical_label": "a",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "All three principal sources for Emperor Nero s reign, including Tacitus, were senators. However, unlike other historians, Tacitus was more lenient, trying to portray the controversial ruler in more neutral terms. Born around 56 CE, during Nero s reign, Tacitus was only eight during the Great Fire of"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "All three principal sources for Emperor Nero's reign, including Tacitus, were senators. However, unlike other historians, Tacitus was more lenient, trying to portray the controversial ruler in more neutral terms. Born around 56 CE, during Nero's reign, Tacitus was only eight during the Great Fire of"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Nero was born Lucius Domitius Ahenobarbus in 37 CE, but he was renamed Nero Claudius Caesar Augustus when his mother, Agrippina, married Emperor Claudius in 49 CE. Some believe Nero's fate was inevitable. His father, Gnaeus Domitius, who died when Nero was three, was extremely violent in his own rig"
+      }
+     ]
+    },
+    {
+     "domain": "history",
+     "qid": "69940_313_step3",
+     "ndcg10": 0.0,
+     "query": "Is there any evidence that the US strategy at Midway was deliberate? The Battle of Midway was a crushing US victory over the Empire of Japan that, at face value, appears to be due to good SIGINT and a huge amount of luck by the Americans. In particular, the piecemeal way in which the US dispatched n || STEP: Cross-reference Japanese accounts or intelligence to understand their perspective on US ac",
+     "llm_reason": "Knowledge needed: Understanding US strategic intent at Midway, especially regarding air raid tactics, and Japanese operational responses. Relevant document topic: Japanese naval logs or intelligence reports from June 1942, detailing their perception of US air activity around Midway. Key terms: US air raids, carrier operations, Japanese carrier vulnerability, timing of attacks, US tactical intent. Time: June 1942 (Battle of Midway). The document should describe how Japanese commanders perceived U",
+     "llm_hyde": "In early June 1942, Japanese naval commanders reported that US forces launched multiple uncoordinated raids on their carriers, with no clear objective or hit. Japanese intelligence noted the pattern of small, scattered attacks—particularly on June 4–5—described as \"persistent and disruptive.\" These raids, which included torpedo and bomber waves, were observed to keep Japanese carriers under consta",
+     "gold": [
+      {
+       "doc": "history/bab233d3_42340.txt",
+       "final_rank": 87,
+       "hybrid_rank": 87,
+       "start": "The operational effect on the Battle of Midway from their disjointed Marine Corps and Army aircraft, and later those of U.S. carrier torpedo squadrons, however, was significant. Japanese Striking Force commander Vice Admiral Chuichi Nagumo received a message earlier from the commander of the Midway "
+      }
+     ],
+     "best_gold_final_rank": 87,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "So, first off, I would recommend Shattered Sword: The untold Story of the Battle of Midway by John Lundstrom. While it focuses on the misconceptions about the Japanese actions at Midway (perpetuated by English-language single-source reporting of IJN actions long since discounted by Japanese source) "
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Admiral Yamamoto viewed the operation against Midway as the potentially decisive battle of the war, which could lead to the destruction of American strategic power in the Pacific; this, the Japanese felt, would open the door for a negotiated peace settlement with the United States, favorable to Japa"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Having learned important lessons at Coral Sea, the United States Navy was prepared when the Japanese navy under Admiral Isoroku Yamamoto launched an offensive aimed at destroying the American Pacific Fleet at Midway Island. The Japanese hoped to embarrass the Americans after the humiliation of the D"
+      }
+     ]
+    },
+    {
+     "domain": "history",
+     "qid": "56929_710_step1",
+     "ndcg10": 0.0,
+     "query": "What evidence is there of tank-vs-tank combat in Asia during the second world war? It has been known that the Japanese army during the Second World War did not value tanks highly and as such they were not always used effectively and had significantly worse characteristics than Allied armoured vehicl || STEP: Identify key battles in Asia during the Second World War where Japanese and Allied forces ",
+     "llm_reason": "Knowledge needed: Key battles in Asia where Japanese and Allied forces clashed in tank engagements during WWII. Relevant document topic: WWII battles in Asia involving armored units. Key concepts: Tank-vs-tank combat, Allied vs. Japanese armor, armored engagements. Entities: Battle of Khalkhin Gol (not applicable), Battle of Midway, Battle of the Bulge (not relevant), relevant battles: Battle of Burma, Battle of the Philippines, Battle of Singapore, Battle of Malaya, Battle of Java. Time: 1941–1",
+     "llm_hyde": "During the Second World War, significant tank-vs-tank combat occurred in the Asian theater, particularly during the Battle of the Bulge in Europe—this is not relevant to Asia. In Asia, key engagements included the Battle of Khalkha in 1945, where Japanese forces faced Soviet advances in Manchuria. The most notable example is the Battle of Khalkha, where the Soviet Union deployed tanks such as the ",
+     "gold": [
+      {
+       "doc": "history/b41cab47_100489.txt",
+       "final_rank": 201,
+       "hybrid_rank": 201,
+       "start": "The Battles of Khalkhin Gol (Russian: Бои на Халхин-Голе; Mongolian: Халхын голын байлдаан) were the decisive engagements of the undeclared Soviet–Japanese border conflicts involving the Soviet Union, Mongolia, Japan and Manchukuo in 1939. The conflict was named after the river Khalkhin Gol, which p"
+      }
+     ],
+     "best_gold_final_rank": 201,
+     "mechanical_label": "a",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Type 95 Ha-Go tanks served during the Battle of Khalkhin Gol (Nomonhan) against the Soviet Red Army in 1939, against the British Army in Burma and India, and throughout the Pacific Theater during World War II. On 22 December 1941 the Type 95 light tank earned the distinction of being the first tank "
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "While combat in the European Theater of Operations (ETO) consisted of high-profile armored warfare, the mainly naval nature of the Pacific Theater of Operations (PTO) relegated it to secondary status for both the Allies and the Japanese. While the US Army fielded 16 armored divisions and 70 independ"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Type 95 Ha-Go tanks served during the Battle of Khalkhin Gol ( Nomonhan ) against the Soviet Red Army in 1939, 33 against the British Army in Burma and India , 34 and throughout the Pacific Theater during World War II . On 22 December 1941 the Type 95 light tank earned the distinction of being the f"
+      }
+     ]
+    },
+    {
+     "domain": "quant",
+     "qid": "74929_1079_step2",
+     "ndcg10": 0.0,
+     "query": "Daily quotes TIPS (treasury inflation protected securities) data I am looking for historical quotes for US TIPS (treasury inflation protection security). What is a reliable source of data to get this information? Here's what I have tried: I have looked into this question: What data sources are avail || STEP: Search for datasets or reports that include daily quotes for both active and matured TIPS.",
+     "llm_reason": "Knowledge needed: Reliable, daily historical data for US TIPS, including matured securities, from a trusted source. Relevant document topic: US Treasury Inflation-Protected Securities (TIPS) historical data. Key concepts: Daily quotes, US TIPS, maturity history, active and retired securities. Entities: US Treasury, TIPS, Bloomberg, Federal Reserve, Treasury Department. Time: Historical (pre-2000 to present). The document should list a public or academic database with daily TIPS quotes, ideally f",
+     "llm_hyde": "From 2000 to 2023, reliable daily quotes for U.S. Treasury Inflation-Protected Securities (TIPS) have been available through the U.S. Department of the Treasury’s Treasury Direct and the Bureau of Economic Analysis (BEA). The Federal Reserve Bank of St. Louis (FRED) database provides free, publicly accessible daily TIPS data, including yields and inflation-adjusted prices. FRED includes historical",
+     "gold": [
+      {
+       "doc": "quant/3587fb81_2980.txt",
+       "final_rank": 359,
+       "hybrid_rank": 359,
+       "start": "Featuring 1.7 million end-of-day observations on nearly 7,000 Treasury instruments (bills, notes, bonds) Daily data since 1961 and month-end data since 1925 (monthly) Includes many supplemental files, including fixed-term indexes, maturity portfolios, discount bonds, term structure, and CPI file Sup"
+      }
+     ],
+     "best_gold_final_rank": 359,
+     "mechanical_label": "a",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Keywords: Yield curve, treasury market, inflation compensation, risk premia For over ten years, the U.S. Treasury has issued index-linked debt. Federal Reserve Board staff have fitted a yield curve to these indexed securities at the daily frequency from the start of 1999 to the present. This paper d"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "TIPS were first auctioned by the U.S. Treasury in January 1997. As of June 30, 2021, the market value of Treasury Inflation Protected Securities outstanding was approximately 1.6 trillion, representing roughly 7.4 of marketable Treasury debt outstanding. TIPS are issued with maturities of 5, 10, and"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "For over ten years, the U.S. Treasury has issued index-linked debt. Federal Reserve Board staff have fitted a yield curve to these indexed securities at the daily frequency from the start of 1999 to the present. This paper describes the methodology that is used and makes the estimates public. Compar"
+      }
+     ]
+    },
+    {
+     "domain": "history",
+     "qid": "68862_380_step3",
+     "ndcg10": 0.0,
+     "query": "Could the \"Taffy\" Groups have been reinforced by air during the battle of Leyte Gulf? During the Battle for Leyte Gulf , most elements of the American fleet fought two \"side\" groups of the Japanese fleet to the south and north of the main action, which would take place off Samar in the San Bernardin || STEP: Cross-reference historical accounts of Taffy groups' engagement and resource depletion dur",
+     "llm_reason": "Knowledge needed: Logistics of aircraft refueling, range limitations, and historical engagement details of Taffy groups during the Battle of Leyte Gulf (1944–1945). Relevant document topic: The Battle of Leyte Gulf, specifically Taffy One, Two, and Three operations. Key concepts: Escort carriers, aircraft range, refueling, Japanese fleet movements, American air support. Entities: Taffy groups, Halsey’s Third Fleet, Kurita’s fleet, San Bernardino Strait. Time: October 1944–20 October 1944. The do",
+     "llm_hyde": "During the Battle of Leyte Gulf (October 23–26, 1944), Taffy Groups (Taffy 1, 2, and 3) operated at extreme range from the main U.S. fleet, with Taffy 1 and 2 facing the Japanese fleet under Admiral Kurita. The Taffy groups relied on escort carriers and limited air support, with aircraft suffering heavy losses due to distance, poor visibility, and enemy anti-aircraft fire. The U.S. fleet, under Ad",
+     "gold": [
+      {
+       "doc": "history/3f8f6891_51645.txt",
+       "final_rank": 15,
+       "hybrid_rank": 47,
+       "start": "situation looks almost hopeless and the group has requested air and surface aid from Admiral Stump. There is nothing more he can do. All of his available aircraft, 24 Avenger torpedo planes with Wildcat fighter protection, have been launched against the Japanese. The destroyer screen of the beseiged"
+      }
+     ],
+     "best_gold_final_rank": 15,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Author’s Dedication To my mother, Betty Lardas, who went to join my late father on March 28, 2021. Ave atque vale. AIR CAMPAIGN CONTENTS INTRODUCTION CHRONOLOGY ATTACKER’S CAPABILITIES DEFENDER’S CAPABILITIES CAMPAIGN OBJECTIVES THE CAMPAIGN AFTERMATH AND ANALYSIS FURTHER READING INTRODUCTION It had"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "tl;dr Halsey receives news of the danger at 0800. By 0930 Kurita is already withdrawing. At best a one-way strike could be organized to attack Kurita as he withdraws. Communications between 3rd and 7th Fleet are extremely poor, organizing a landing on Taffys carriers is almost impossible. Assuming t"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Taffy 3 consisted of six 18-knot escort carriers, known as baby flattops, accompanied by three destroyers and four destroyer escorts. Since no doctrine existed for such a force fighting a battle fleet, Sprague had to rely on common sense , and it must be said that he did superbly well. First, with a"
+      }
+     ]
+    },
+    {
+     "domain": "history",
+     "qid": "68862_380_step1",
+     "ndcg10": 0.0,
+     "query": "Could the \"Taffy\" Groups have been reinforced by air during the battle of Leyte Gulf? During the Battle for Leyte Gulf , most elements of the American fleet fought two \"side\" groups of the Japanese fleet to the south and north of the main action, which would take place off Samar in the San Bernardin || STEP: Locate primary sources detailing fleet positions and air operations during the Battle of L",
+     "llm_reason": "Knowledge needed: Fleet movements, air range, refueling capabilities, and operational logistics of U.S. and Japanese forces during the Battle of Leyte Gulf (1944). Relevant document: A primary source (e.g., naval log, air operations report) from the U.S. Navy during the Battle of Leyte Gulf (October 1944), detailing fleet positions, escort carrier (Taffy) aircraft deployments, range of operations, fuel consumption, and air refueling procedures. It should mention Halsey’s Third Fleet’s distance f",
+     "llm_hyde": "During the Battle of Leyte Gulf (October 23–26, 1944), U.S. Task Forces Taffy I, II, and III operated in the waters south and north of the main engagement off Samar. Halsey’s Third Fleet, approximately 400 miles away, was too distant for direct air support. Aircraft from Halsey’s fleet could not conduct a round-trip mission to the Taffy groups due to fuel constraints and the vast distance. Escort ",
+     "gold": [
+      {
+       "doc": "history/837586a9_51644.txt",
+       "final_rank": 15,
+       "hybrid_rank": 7,
+       "start": "The Composition of Taffy 3 Taffy 3 was comprised of six escort carriers, three destroyers, and four destroyer escorts, all tasked with providing air support for the amphibious landings at Leyte Gulf, Battle off Samar. Commanded by Rear Admiral Clifton Sprague, Taffy 3 was a critical component of the"
+      }
+     ],
+     "best_gold_final_rank": 15,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Author’s Dedication To my mother, Betty Lardas, who went to join my late father on March 28, 2021. Ave atque vale. AIR CAMPAIGN CONTENTS INTRODUCTION CHRONOLOGY ATTACKER’S CAPABILITIES DEFENDER’S CAPABILITIES CAMPAIGN OBJECTIVES THE CAMPAIGN AFTERMATH AND ANALYSIS FURTHER READING INTRODUCTION It had"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Taffy 3 consisted of six 18-knot escort carriers, known as baby flattops, accompanied by three destroyers and four destroyer escorts. Since no doctrine existed for such a force fighting a battle fleet, Sprague had to rely on common sense , and it must be said that he did superbly well. First, with a"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "By contrast, Admiral Kurita’s more powerful force debouched from San Bernardino Strait at 0035, expecting a fight but finding no ships guarding the strait. The Japanese decoy plan had succeeded. The main Japanese force sailed unchallenged around the island of Samar toward the transports in Leyte Gul"
+      }
+     ]
+    },
+    {
+     "domain": "cardano",
+     "qid": "4225_128_step2",
+     "ndcg10": 0.0,
+     "query": "Is there a way for a validator to get the current time? Is it possible for a validator to get the current time without it being passed in via the redeemer? My validator is heavily dependent on the time being correct so it would probably be a bad design choice to allow the wallet to pass in the time, || STEP: Identify authoritative sources or standards that describe time synchronization and validat",
+     "llm_reason": "Knowledge needed: Time synchronization standards in blockchain systems, especially how validators obtain accurate time without relying on external inputs like redeemers. Relevant document topic: Time synchronization in blockchain validators. Key concepts: Time sources, consensus time, validator clocks, time validation, cryptographic time, network time protocols (e.g., NTP, PT). Entities: Blockchain validators, redeemers, consensus mechanisms. Time reference: Present (current time in blockchain o",
+     "llm_hyde": "In blockchain systems, validators can obtain the current time through consensus mechanisms and trusted time sources. According to the Ethereum 2.0 specification, validators use the chain's block timestamp, derived from the timestamp of the previous block, as an authoritative time reference. This timestamp is embedded in the blockchain and is synchronized across nodes via the consensus algorithm. T",
+     "gold": [
+      {
+       "doc": "cardano/f751c898_1824.txt",
+       "final_rank": 12,
+       "hybrid_rank": 31,
+       "start": "How do Plutus scripts handle time? Plutus scripts get access to the transaction validity range, defined by its creator. When defining the validity range, a creator can decide that a transaction is valid from slot X to slot Y, or leave one or both of the bounds undefined. This imposes constraints int"
+      }
+     ],
+     "best_gold_final_rank": 12,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [
+        "dev:6888_120_step2"
+       ],
+       "start": "The limits of the validity interval are expressed in real time (POSIXTime), rather than slots, and the conversion from slots to real time is done by consensus. Using real time rather than slots is important because slot lengths can change at a hard fork, so assumptions based on counting slots are ge"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [
+        "train:7263_116_step1",
+        "train:7263_116_step3"
+       ],
+       "start": "The limits of the validity interval are expressed in real time (POSIXTime), rather than slots, and the conversion from slots to real time is done by consensus. Using real time rather than slots is important because slot lengths can change at a hard fork, so assumptions based on counting slots are ge"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [
+        "dev:7564_114_step2"
+       ],
+       "start": "The limits of the validity interval are expressed in real time (POSIXTime), rather than slots, and the conversion from slots to real time is done by consensus. Using real time rather than slots is important because slot lengths can change at a hard fork, so assumptions based on counting slots are ge"
+      }
+     ]
+    },
+    {
+     "domain": "history",
+     "qid": "70284_294_step1",
+     "ndcg10": 0.0,
+     "query": "Are there historical examples of civilization reaction to learning about impending doom? By impending doom, I mean events that are deadly, imminent, inexorable and unfightable (i.e. a volcano eruption, a deadly disease, an environmental/astronomical disaster...). They should leave humans with no cho || STEP: Identify historical events that qualify as 'impending doom' (e.g., volcanic eruptions, pan",
+     "llm_reason": "Knowledge needed: Historical events where a civilization received advance warning of an inevitable, deadly disaster (e.g., volcanic eruption, pandemic, asteroid impact). Relevant document topic: Historical pandemic or natural disaster with advance warning. Key concepts: Advance knowledge, inevitable doom, human response. Entities: Black Death (14th century), 1855 cholera outbreak, Mount Vesuvius (79 CE). Time: 14th century (Black Death), 1855 (cholera), 79 CE (Vesuvius). Example: In 1855, London",
+     "llm_hyde": "In 1519, the Spanish conquistadors in the Americas encountered the devastating impact of the smallpox pandemic, which had already spread to the Americas via European contact. Indigenous populations, with no prior immunity, suffered catastrophic mortality. The disease, introduced in the 1520s, was a known threat to Europeans, but its transmission to the Americas was not fully understood. However, b",
+     "gold": [
+      {
+       "doc": "history/1839f767_40203.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "### Legends There are many legends in Greece surrounding the Fall of Constantinople. It was said that the partial lunar eclipse that occurred on 22 May 1453 represented a fulfilment of a prophecy of the city's demise. 144 Four days later, the whole city was blotted out by a thick fog , a condition u"
+      },
+      {
+       "doc": "history/701e1a12_40206.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "RMS Titanic sank on 15 April 1912 in the North Atlantic Ocean . The largest ocean liner in service at the time, Titanic was four days into her maiden voyage from Southampton , England, to New York City , United States, with an estimated 2,224 people on board when she struck an iceberg at 23:40 ( shi"
+      },
+      {
+       "doc": "history/b01a6e58_40199.txt",
+       "final_rank": null,
+       "hybrid_rank": null,
+       "start": "## Background Constantinople had been an imperial capital since its consecration in 330 under Roman emperor Constantine the Great . In the following eleven centuries, the city had been besieged many times but was captured only once before: the Sack of Constantinople during the Fourth Crusade in 1204"
+      }
+     ],
+     "best_gold_final_rank": null,
+     "mechanical_label": "a",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "This is a pretty good place to apply Hanlon's Razor: Never attribute to malice that which is adequately explained by stupidity. While this probably happened some, the overall scale of the disease die-offs associated with the Columbian Exchange strongly argues for the most important cause far and awa"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "My choice of reading over the last few weeks has narrowed to three books in my own library on the subject of the Black Death, the mysterious high mortality disease that arrived in Sicily and the Crimea on the Black sea in 1347 and made an impact on other Mediterranean port cities and from there spre"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Plague outbreaks would continue long after the Black Death pandemic of the 14th century but none would have the same psychological impact resulting in a complete reevaluation of the existing paradigm of received knowledge. Europe - as well as other regions - based its reactions to the Black Death on"
+      }
+     ]
+    }
+   ]
+  },
+  "2a": {
+   "variant": "2a_history_rr",
+   "eligible": 136,
+   "topics": 858,
+   "items": [
+    {
+     "domain": "hardware",
+     "qid": "ex_15430_turn_4",
+     "ndcg10": 0.0,
+     "query": "CURRENT: Can you actually run extra monitors off the 5600G’s graphics once you add a GPU, or does it switch over completely?\n\nHISTORY: Q: In building a PC with a Ryzen 5600G or 5600X, does Crossfire or SLI matter anymore when thinking about future GPU upgrades? A: SLI and Crossfire really don't matter anymore when building a PC with a Ryzen 5600G or 5600X. These CPUs only support one graphics card at a time, so you can't use multip",
+     "llm_reason": "Knowledge needed: Understanding of Ryzen 5600G’s integrated graphics, PCIe support, and how discrete GPU integration works. Relevant document topic: Ryzen 5600G and multi-monitor setup with discrete GPU. Key concepts: Integrated graphics, discrete GPU upgrade, multi-monitor support, PCIe 3.0, dual monitors. Entities: Ryzen 5600G, PCIe 3.0, integrated graphics, discrete GPU, multi-monitor setup. The document would confirm that the 5600G supports running extra monitors via the discrete GPU after i",
+     "llm_hyde": "The AMD Ryzen 5600G features integrated graphics that can be used without a dedicated GPU. When a discrete GPU is added, the system switches entirely to the dedicated graphics card, and the integrated graphics are disabled. The 5600G supports one GPU at a time via PCIe, and does not support multi-GPU configurations like SLI or Crossfire. Once a discrete GPU is installed, the system uses only that ",
+     "gold": [
+      {
+       "doc": "hardwarerecs_ex_15430_doc_1",
+       "final_rank": 52,
+       "hybrid_rank": 52,
+       "start": "Short answer is no. There are things called hybrid crossfire as mentioned by others in above post but AMD have long stop doing it. And even that is very limited since it can only be done with low end discrete gpu only. AMD used to do this sometime ago with some of their now older processors and vide"
+      }
+     ],
+     "best_gold_final_rank": 52,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "However, it's essential to ensure that your motherboard has the necessary PCIe slots and power supply capacity to accommodate the graphics card you plan to use. Additionally, make sure to install the latest drivers for both the processor and the graphics card for optimal compatibility and performanc"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [
+        "dev:ex_15430_turn_1",
+        "dev:ex_15430_turn_3"
+       ],
+       "start": "The Ryzen 5 5600G is compatible with a wide range of graphics cards. It supports PCIe 4.0, which is the latest version of the PCIe interface, offering faster data transfer rates. Popular graphics cards that are compatible with Ryzen 5 5600G include NVIDIA GeForce RTX 30 Series, AMD Radeon RX 6000 Se"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "The Ryzen 5 5600G comes with integrated graphics, but if you want to enhance your gaming or graphics-intensive tasks, you can use a dedicated graphics card. The Ryzen 5 5600G is compatible with most current graphics cards, including those from AMD and NVIDIA. Make sure that your motherboard has a co"
+      }
+     ]
+    },
+    {
+     "domain": "biology",
+     "qid": "6_turn_5",
+     "ndcg10": 0.0,
+     "query": "CURRENT: What happens if a species puts more energy into staying healthy instead of having kids?\n\nHISTORY: Q: In evolution, why doesn’t natural selection care much about traits that show up after we have kids? A: Natural selection mainly acts on traits that affect us before or during our reproductive years because that's when we're passing on our genes. Traits or mutations that show up after we've alread",
+     "llm_reason": "Knowledge needed: Understanding evolutionary biology, particularly antagonistic pleiotropy and natural selection pressures on genes with early benefits and late costs. Relevant document topic: Evolutionary biology of aging and gene function. Key concepts: Antagonistic pleiotropy, natural selection, late-acting harmful genes, reproductive fitness. Entities: Huntington’s disease, aging, natural selection, gene expression over lifespan. The document would explain how genes beneficial for early surv",
+     "llm_hyde": "Species that invest more energy in maintaining health often delay reproduction or reduce fertility. This behavior can be explained by antagonistic pleiotropy, where genes beneficial in early life—such as those supporting growth, immunity, or stress resistance—may have harmful effects later, like increased risk of age-related diseases. Because natural selection favors traits that enhance survival a",
+     "gold": [
+      {
+       "doc": "evolution_not_make_our_life_longer/Disposable_soma_theory_of_aging_0.txt",
+       "final_rank": 100,
+       "hybrid_rank": 100,
+       "start": "The disposable soma theory of aging states that organisms age due to an evolutionary trade-off between growth, reproduction, and DNA repair maintenance. Formulated by Thomas Kirkwood, the disposable soma theory explains that an organism only has a limited amount of resources that it can allocate to "
+      },
+      {
+       "doc": "evolution_not_make_our_life_longer/Disposable_soma_theory_of_aging_2.txt",
+       "final_rank": 228,
+       "hybrid_rank": 228,
+       "start": "Principles[edit] The disposable soma theory of aging posits that there is a trade-off in resource allocation between somatic maintenance and reproductive investment. Too low an investment in self-repair would be evolutionarily unsound, as the organism would likely die before reproductive age. Howeve"
+      },
+      {
+       "doc": "evolution_not_make_our_life_longer/Disposable_soma_theory_of_aging_3.txt",
+       "final_rank": 300,
+       "hybrid_rank": 300,
+       "start": "Mechanisms[edit] The IGF-1 pathway, which represses FOXO, thus preventing gene expression of longevity-inducing proteins Growth and somatic maintenance[edit] Main article: Mechanistic target of rapamycin § Aging Much research has been done on the antagonistic effects of increased growth on lifespan."
+      },
+      {
+       "doc": "evolution_not_make_our_life_longer/Disposable_soma_theory_of_aging_4.txt",
+       "final_rank": 16,
+       "hybrid_rank": 26,
+       "start": "Evidence[edit] Growth and aging[edit] There is a large body of evidence indicating the negative effects of growth on longevity across many species. As a general rule, individuals of a smaller size generally live longer than larger individuals of the same species. Animal models[edit] In dwarf models "
+      },
+      {
+       "doc": "evolution_not_make_our_life_longer/Disposable_soma_theory_of_aging_5.txt",
+       "final_rank": 51,
+       "hybrid_rank": 51,
+       "start": "Criticism[edit] One of the main weaknesses of the disposable soma theory is that it does not postulate any specific cellular mechanisms to which an organism shifts energy to somatic repair over reproduction. Instead, it only offers an evolutionary perspective on why aging may occur due to reproducti"
+      }
+     ],
+     "best_gold_final_rank": 16,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [
+        "dev:6_turn_1",
+        "dev:6_turn_2",
+        "dev:6_turn_4"
+       ],
+       "start": "Adaptivity and senescence[edit] An antagonistically pleiotropic gene can be selected for if it has beneficial effects in early life while having its negative effects in later life because genes tend to have larger impacts on fitness in an organism's prime than in their old age. An example of this is"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [
+        "dev:6_turn_4"
+       ],
+       "start": "The antagonistic pleiotropy hypothesis was first proposed by George C. Williams in 1957 as an evolutionary explanation for senescence. Pleiotropy is the phenomenon where one gene controls more than one phenotypic trait in an organism. A gene is considered to possess antagonistic pleiotropy if it con"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [
+        "dev:6_turn_3",
+        "dev:6_turn_4"
+       ],
+       "start": "Role in disease[edit] The survival of many serious genetic disorders in our long evolutionary history has led researchers to reassess the role of antagonistic pleiotropy in disease. If genetic disorders are defined by the existence of deleterious alleles, then natural selection acting over evolution"
+      }
+     ]
+    },
+    {
+     "domain": "economics",
+     "qid": "47_turn_2",
+     "ndcg10": 0.0,
+     "query": "CURRENT: What happens if banks start earning less from loans—do they just cut back on lending?\n\nHISTORY: Q: In banking, how do low interest rates affect how much banks want to lend? A: From what’s explained, low interest rates are connected to higher profits and markups for firms that have a productivity advantage. In more competitive markets (where firms are closely matched), profits are lower. So, if",
+     "llm_reason": "Knowledge needed: Understanding bank incentives, loan profitability, and how earnings affect lending behavior. Relevant document topic: Bank lending behavior under declining loan profits. Key concepts: Loan profitability, risk assessment, credit demand, interest rate sensitivity. Terms: Loan yields, net interest margin, credit risk, lending volume, capital constraints. Entities: Commercial banks, financial institutions, central banks. Document would explain that if banks earn less from loans, th",
+     "llm_hyde": "If banks earn less from loans, they may reduce lending, but the extent depends on other factors. Lower loan profits can lead to reduced capital availability, prompting banks to cut back on new lending. However, banks also consider risk, regulatory requirements, and deposit costs. Some may shift lending toward lower-risk borrowers or adjust loan terms to maintain balance sheets. In certain cases, b",
+     "gold": [
+      {
+       "doc": "nominal_interest_rate/ECTA17408_9.txt",
+       "final_rank": 153,
+       "hybrid_rank": 153,
+       "start": "yi s.t. p1y1 + p2y2 = 1 and y1/y2 = (p1/p2)−σ \b (5) The solution to this problem can be written in terms of state variable s = |z1 − z2| ∈ Z≥0 that captures the productivity gap between the two firms. When s = 0, two firms are said to be neck-and-neck; when s > 0, one firm is a temporary leader whil"
+      }
+     ],
+     "best_gold_final_rank": 153,
+     "mechanical_label": "a",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Econometrica, Vol. 90, No. 1 (January, 2022), 193–221 LOW INTEREST RATES, MARKET POWER, AND PRODUCTIVITY GROWTH ERNEST LIU Department of Economics, Princeton University ATIF MIAN Department of Economics, Princeton University AMIR SUFI Booth School of Business, University of Chicago This study provid"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "consumers’ assets from government bonds to deposits and an increase in both deposits and government bonds on the commercial banks’ balance sheet. (3) Commercial banks’ purchases of government bonds and their issuance of long-term debt and equity have both been important influences on broad money gro"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Currency Deposits So the buyer’s bank will in practice seek to attract or retain new deposits (and reserves) — in the example shown here, from the seller’s bank — to accompany their new loans. Topical articles Money creation in the modern economy 19 Figure 2 Money creation for an individual bank mak"
+      }
+     ]
+    },
+    {
+     "domain": "earth_science",
+     "qid": "20_turn_1",
+     "ndcg10": 0.0,
+     "query": "CURRENT: In planetary geology, how do divergent boundaries actually create new oceanic plates?\n\nHISTORY: No previous conversation.",
+     "llm_reason": "To answer this, one needs knowledge of plate tectonics, specifically how magma rises at divergent boundaries and solidifies to form new oceanic crust. A relevant document would discuss divergent boundaries (like mid-ocean ridges), the process of mantle upwelling, magma generation, and crustal formation. Key terms: seafloor spreading, mantle convection, basaltic lava, oceanic crust, magma, lithosphere extension. It would mention entities like mid-ocean ridges, Iceland, and the global tectonic sys",
+     "llm_hyde": "At divergent boundaries, tectonic plates move apart, creating a gap where hot mantle material rises to the surface. This upwelling magma, less dense than surrounding rock, erupts through the crust and solidifies to form new oceanic crust. As the plates continue to separate, this process repeats, continuously generating new seafloor. The magma typically forms basaltic rock, creating mid-ocean ridge",
+     "gold": [
+      {
+       "doc": "ocean_continent_divergent_boundary/Triple_junction4.txt",
+       "final_rank": 134,
+       "hybrid_rank": 134,
+       "start": "part4 ------------------- Stability[edit] Triple junctions may be described and their stability assessed without use of the geological details but simply by defining the properties of the ridges, trenches and transform faults involved, making some simplifying assumptions and applying simple velocity"
+      }
+     ],
+     "best_gold_final_rank": 134,
+     "mechanical_label": "a",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "strong>divergent boundary occurs when two tectonic plates move away from each other. Along these boundaries, earthquakes are common and magma (molten rock) rises from the Earth’s mantle to the surface, solidifying to create new oceanic crust. The Mid-Atlantic Ridge is an example of divergent plate b"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "part1 ------------------- A mid-ocean ridge (MOR) is a seafloor mountain system formed by plate tectonics. It typically has a depth of about 2,600 meters (8,500 ft) and rises about 2,000 meters (6,600 ft) above the deepest portion of an ocean basin. This feature is where seafloor spreading takes pla"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "part3 ------------------- Types of plate boundaries Main article: List of tectonic plate interactions Three types of plate boundaries exist, characterized by the way the plates move relative to each other. They are associated with different types of surface phenomena. The different types of plate bo"
+      }
+     ]
+    },
+    {
+     "domain": "drones",
+     "qid": "ex_2271_turn_1",
+     "ndcg10": 0.0,
+     "query": "CURRENT: In drone building, can the same ESC handle both high Kv and low Kv brushless motors without any issues?\n\nHISTORY: No previous conversation.",
+     "llm_reason": "Knowledge needed: Understanding how Electronic Speed Controllers (ESCs) interact with motor Kv ratings, particularly regarding current handling, thermal limits, and motor compatibility. Relevant document topic: Drone electronics and ESC motor compatibility. Key concepts: ESC function, Kv rating, motor power requirements, current draw, thermal management. Terms: ESC, Kv, brushless motor, current limit, heat dissipation. Entities: ESC, brushless motor, high Kv, low Kv. Document would explain that ",
+     "llm_hyde": "In drone building, a single electronic speed controller (ESC) can generally handle both high Kv and low Kv brushless motors, provided the ESC is rated for the motor's voltage and current requirements. Most ESCs are designed to work across a range of Kv values, as long as the motor's electrical specifications (voltage, current, and power) are within the ESC's limits. However, performance may vary—h",
+     "gold": [
+      {
+       "doc": "drones_ex_2271_doc_2",
+       "final_rank": 80,
+       "hybrid_rank": 80,
+       "start": "I recently built a 5-inch quad using: - Diatone Mamba F405 Mk2 F40 Mk2 3-6S 30x30 Stack/Combo (F4 FC / 40A 4in1 ESC) - Motors: iFlight Xing-E PRO 2207 1800Kv Motor with DShot 600 and 4S battery cell. I didn't notice any problems with the build when I did a test flight. I am now trying to build a lar"
+      },
+      {
+       "doc": "drones_ex_2271_doc_4",
+       "final_rank": 22,
+       "hybrid_rank": 14,
+       "start": "To select the appropriate ESC for your FPV drone, ensure you understand the requirements: the ESC should be compatible with your battery's voltage and should handle the current draw of your chosen motor and propeller combo at 100% throttle. Verify that your ESCs support the voltage of your battery. "
+      }
+     ],
+     "best_gold_final_rank": 22,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Will different brushless motor sizes work with the same flight controller and esc - Drones and Model Aircraft Stack Exchange Stack Internal Knowledge at work Bring the best of human thought and AI automation together at your work. Explore Stack Internal Will different brushless motor sizes work with"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Choosing ESCs requires understanding several specifications. Current rating indicates how many amps the ESC can handle continuously. A 30A ESC handles 30 amps continuous current, typically with brief burst capability higher. Undersized ESCs overheat and fail; oversized ESCs waste money and weight. V"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "If they stutter or otherwise don't spin up reliably, you may need to adjust the timing settings in the ESC firmware. This controls when the motor winding are energised as they pass the magnets. Lower Kv motors can need a lower setting. Here's an article on BL Heli settings (the ESC firmware) Share I"
+      }
+     ]
+    },
+    {
+     "domain": "earth_science",
+     "qid": "9_turn_8",
+     "ndcg10": 0.0,
+     "query": "CURRENT: How did it end up that the U.S. started calling the solstice the first day instead of the middle?\n\nHISTORY: Earlier discussion covered: Turn 1: In seasonal calendars, how do earlier summer starts in Celtic and Chinese traditions shape their Midsummer festivals?; Turn 2: Did the Romans see the solstices as the middle of each season, or did they count them as the start?; Turn 3: Is that why meteorologists s",
+     "llm_reason": "Knowledge needed: Understanding historical and cultural views of solstices, seasonal definitions, and how calendars evolved. Relevant document topic: Historical perception of solstices in seasonal cycles. Key concepts: Solstice as peak of summer (not start), traditional European and East Asian calendars, \"Midsummer\" celebrations, solar energy as season marker. Entities: Solstice, summer, Midsummer, seasonal calendars, cultural traditions. The document would explain that historically, solstices m",
+     "llm_hyde": "The U.S. does not traditionally consider the solstice as the \"first day\" of summer; rather, summer begins on the summer solstice, which marks the longest day of the year. Historically, the solstice was viewed as the peak of summer, not the start. In many cultures, including older European and East Asian traditions, the solstice marked the middle of summer—hence the term \"Midsummer.\" Modern U.S. us",
+     "gold": [
+      {
+       "doc": "start_of_a_season/Season3.txt",
+       "final_rank": 16,
+       "hybrid_rank": 5,
+       "start": "part3 ------------------- Four-season reckoning Four Seasons by Alphonse Mucha (1897) Most calendar-based partitions use a four-season model to demarcate the warmest and coldest seasons, which are further separated by two intermediate seasons. Calendar-based reckoning defines the seasons in relative"
+      }
+     ],
+     "best_gold_final_rank": 16,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "used in a wider sense, as the date (day) that such a passage happens. The solstices, together with the equinoxes, are connected with the seasons. In some languages they are considered to start or separate the seasons; in others they are considered to be centre points (in England, in the Northern Hem"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "is still ceremonially observed in Ireland and some East Asian countries. Summer is defined as the quarter of the year with the greatest insolation and winter as the quarter with the least. The solar seasons change at the cross-quarter days, which are about 3–4 weeks earlier than the meteorological s"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "part1 ------------------- A solstice is an event that occurs when the Sun reaches its most northerly or southerly excursion relative to the celestial equator on the celestial sphere. Two solstices occur annually, around June 21 and December 21. In many countries, the seasons of the year are determin"
+      }
+     ]
+    },
+    {
+     "domain": "politics",
+     "qid": "ex_93094_turn_1",
+     "ndcg10": 0.0,
+     "query": "CURRENT: In wartime reporting, why do governments often limit foreign press access, and how much is that about security concerns?\n\nHISTORY: No previous conversation.",
+     "llm_reason": "To answer this, one needs knowledge of media policy, wartime communication strategies, and national security practices. A relevant document would discuss wartime press restrictions, focusing on security concerns like preventing leaks, protecting military operations, and avoiding sensitive information exposure. It would mention key terms like \"media access,\" \"information control,\" \"national security,\" \"military operations,\" and \"foreign journalists.\" The document might reference real-world exampl",
+     "llm_hyde": "Governments often limit foreign press access during wartime to protect national security and prevent sensitive information from being disclosed. Restrictions help prevent adversaries from gaining insights into military strategies, troop movements, or infrastructure. Access controls also reduce the risk of leaks that could compromise operations or diplomatic efforts. While security is a primary con",
+     "gold": [
+      {
+       "doc": "politics_ex_93094_doc_1",
+       "final_rank": 34,
+       "hybrid_rank": 36,
+       "start": "Such observations are, no doubt, historically consistent. During the Civil War, for example, both the Union and the Confederacy controlled and restricted media access to battlefields and troops. The governments on both sides further banned printing stories that could have been damaging to the cause "
+      },
+      {
+       "doc": "politics_ex_93094_doc_2",
+       "final_rank": 29,
+       "hybrid_rank": 31,
+       "start": "The First World War presents an example of governmental censoring on a national scale. The government restricted publishing within the United States in addition to censoring reports from the war. The Espionage Act of 1917 prohibited publishing any information that conceivably could benefit the enemy"
+      },
+      {
+       "doc": "politics_ex_93094_doc_3",
+       "final_rank": 58,
+       "hybrid_rank": 58,
+       "start": "When the United States (under the Reagan administration) invaded Grenada in 1983, the experience of the Vietnam War was still lingering in the US army spheres. As such, the military administration ensured almost total restriction or denial of access of the media to the battlefield. A year before, th"
+      },
+      {
+       "doc": "politics_ex_93094_doc_4",
+       "final_rank": 72,
+       "hybrid_rank": 72,
+       "start": "The First World War was characterized by rigid censorship. British Lord Kitchener hated reporters, and they were banned from the Front at the start of the war. But reporters such as Basil Clarke and Philip Gibbs lived as fugitives near the Front, sending back their reports. The Government eventually"
+      },
+      {
+       "doc": "politics_ex_93094_doc_6",
+       "final_rank": 214,
+       "hybrid_rank": 214,
+       "start": "Embedded journalism is the practice of attaching war correspondents to military units involved in armed conflicts. While the term could be applied to many historical interactions between journalists and military personnel, it first came to be used in the media coverage of the 2003 invasion of Iraq. "
+      }
+     ],
+     "best_gold_final_rank": 29,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Countries may have specific national security laws that allow for censorship and restrictions on press freedom during wartime These laws often aim to prevent the disclosure of classified information, protect military operations, and maintain public order The balance between national security and pre"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "There is an ongoing tension between journalists' desires to report on conflicts and military actions, and military concerns about security. Generally journalists accept the need for some secrecy regarding military maneuvers. However many journalists have observed that \"secrecy and controls on report"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "But, according to Shaw, the Secretary of Defense has said, �these principles may have to be �tweaked� given the unusual nature of this war�. And government officials have persistently claimed this as the reason for imposing media access restrictions during the current war. Even some media analysts h"
+      }
+     ]
+    },
+    {
+     "domain": "medicalsciences",
+     "qid": "ex_34769_turn_3",
+     "ndcg10": 0.0,
+     "query": "CURRENT: I wonder if losing sleep makes it easier to put the weight back on, even after dieting?\n\nHISTORY: Q: In dieting, does not getting enough sleep change whether you lose more fat or more muscle? A: Yes, not getting enough sleep while dieting can really change what kind of weight you lose. When people don’t sleep enough, they tend to lose less fat and more muscle compared to when they get enough res",
+     "llm_reason": "Knowledge needed: Understanding the link between sleep, appetite hormones, metabolism, and weight regain after dieting. Relevant document topic: Sleep and post-diet weight regain. Key concepts: Sleep deprivation, hunger hormones (ghrelin, leptin), appetite regulation, metabolic changes, weight regain. Entities: Sleep, dieting, weight loss, hunger, fat storage, cortisol, metabolism. The document would explain how lack of sleep increases hunger, disrupts hormones, and may promote weight regain aft",
+     "llm_hyde": "Losing sleep can make it harder to maintain weight loss, even after successful dieting. Sleep deprivation increases hunger hormones like ghrelin and decreases satiety hormones like leptin, leading to increased food intake. This heightened appetite, especially for high-calorie foods, can lead to overeating and weight regain. Additionally, poor sleep disrupts metabolic regulation and reduces physica",
+     "gold": [
+      {
+       "doc": "medicalsciences_ex_34769_doc_0",
+       "final_rank": 24,
+       "hybrid_rank": 44,
+       "start": "Results Sleep curtailment decreased the fraction of weight lost as fat by 55% (1.4 vs. 0.6 kg with 8.5 vs. 5.5-h sleep opportunity, P=0.043) and increased the loss of fat-free body mass by 60% (1.5 vs. 2.4 kg, P=0.002). This was accompanied by markers of enhanced neuroendocrine adaptation to caloric"
+      },
+      {
+       "doc": "medicalsciences_ex_34769_doc_1",
+       "final_rank": 17,
+       "hybrid_rank": 21,
+       "start": "This study examined whether experimental sleep restriction, designed to approximate the short sleep times of a growing number of people in modern society, may compromise the effect of reduced-calorie diets on excess adiposity. The fraction of body weight lost as fat during the 8.5-h time-in-bed cond"
+      },
+      {
+       "doc": "medicalsciences_ex_34769_doc_2",
+       "final_rank": 186,
+       "hybrid_rank": 186,
+       "start": "We found that there was a similar amount of weight loss, but the total mass lost was composed of a greater percentage of lean mass and less percentage of fat mass in the CR+SR group compared to the CR group. The amount of fat mass as a percentage of total mass lost was greater than body fat percenta"
+      },
+      {
+       "doc": "medicalsciences_ex_34769_doc_3",
+       "final_rank": 462,
+       "hybrid_rank": 462,
+       "start": "Interestingly, the amount of DXA-assessed fat mass lost as a proportion of total mass lost was greater in the CR than CR+SR group, with median proportions of 83% and 58%, respectively. In contrast, the amount of lean mass lost as a proportion of total mass lost was less in the CR than the CR+SR grou"
+      },
+      {
+       "doc": "medicalsciences_ex_34769_doc_4",
+       "final_rank": 84,
+       "hybrid_rank": 84,
+       "start": "Sleep has also been causatively implicated in the maintenance of muscle mass (Nedeltcheva et al. 2010; Dattilo et al. 2012), with an increased likelihood of both sarcopenia and lower total skeletal muscle mass in those reporting insufficient (i.e. 24 h of extended wakefulness) (Dattilo et al. 2012; "
+      }
+     ],
+     "best_gold_final_rank": 17,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Lack of sleep can have a serious impact on your ability to lose weight. As a matter of fact, you may even pack on a few extra pounds as a direct result. During sleep, the body rests and replenishes itself. By depriving it of this necessary restoration time, you are also more likely to skip a workout"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "One of the most direct links between sleep and weight loss lies in the hormonal shifts that occur when sleep is compromised. Two hormones – ghrelin and leptin – play key roles in regulating hunger and satiety. Ghrelin increases appetite, while leptin signals fullness. Sleep deprivation skews this ba"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Even with calorie control and regular physical activity, sleep debt can create a physiological environment that resists fat loss. One key issue is the body’s preference to break down muscle rather than fat when in a sleep-deprived state, which can lead to loss of lean body mass – something that slow"
+      }
+     ]
+    },
+    {
+     "domain": "medicalsciences",
+     "qid": "ex_34029_turn_2",
+     "ndcg10": 0.0,
+     "query": "CURRENT: Is that why taking enzymes by mouth only works when the enzyme acts outside cells?\n\nHISTORY: Q: In erythropoietic protoporphyria, why is it so hard to treat the disease by just giving the missing ferrochelatase enzyme? A: It's tough to treat erythropoietic protoporphyria just by giving the missing ferrochelatase enzyme because this enzyme works inside the mitochondria, specifically on the i",
+     "llm_reason": "Knowledge needed: Understanding enzyme function, cellular localization, and enzyme delivery limitations. Relevant document topic: Enzyme therapy and cellular delivery. Key concepts: Enzyme activity, intracellular vs. extracellular action, cellular compartments (e.g., mitochondria), enzyme stability, bioavailability. Terms: enzyme replacement therapy, intracellular enzymes, mitochondrial function, enzyme activity outside cells. Entities: ferrochelatase, mitochondria, erythropoietic protoporphyria",
+     "llm_hyde": "Enzymes that function inside cells, such as those in mitochondria, require delivery into the cellular environment to be effective. Oral enzymes often degrade in the digestive tract or are broken down before reaching their site of action. For enzymes that act intracellularly—like ferrochelatase in erythropoietic protoporphyria—oral administration is ineffective because the enzyme cannot survive the",
+     "gold": [
+      {
+       "doc": "medicalsciences_ex_34029_doc_1",
+       "final_rank": 75,
+       "hybrid_rank": 75,
+       "start": "Digestive enzymes are produced and secreted by the gastrointestinal system to degrade fats, proteins, and carbohydrates, to accomplish the digestion and, afterwards, the absorption of nutrients. Their supplementation, when indicated, may provide a reliable help as an adjuvant treatment of several di"
+      },
+      {
+       "doc": "medicalsciences_ex_34029_doc_3",
+       "final_rank": 16,
+       "hybrid_rank": 7,
+       "start": "Among other approaches, enzyme replacement therapy (ERT) has advanced to the clinic and represents a beneficial strategy for 8 out of the 50–60 known LDs. However, despite its value, current ERT suffers from several shortcomings, including various side effects, development of \"resistance\", and subop"
+      }
+     ],
+     "best_gold_final_rank": 16,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Ferrochelatases either utilize protoporphyrin IX or coproporphyrin III as one substrate and ferrous iron as the other substrate ( Figure 1 ). FIGURE 1 FIGURE 1 . Ferrochelatase at the intersection of iron and porphyrin metabolism in mitochondria. Ferrochelatase (colored red) in the mitochondrial mat"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Section 1 reviews the biology of lysosomes as important cellular organelles, offering information about the composition, structural and functional characteristics of this organelle, as well as a classification and depiction of LDs and their pathological effects, advantages and hurdles of translation"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Furthermore, heme B is found in cytochrome b , a key component in Q-cytochrome c oxidoreductase (complex III) in oxidative phosphorylation . [ 4 ] Structure [ edit ] Human ferrochelatase is a homodimer composed of two 359-amino-acid polypeptide chains. It has a total molecular weight of 85.07 kDa. ["
+      }
+     ]
+    },
+    {
+     "domain": "medicalsciences",
+     "qid": "ex_34029_turn_1",
+     "ndcg10": 0.0,
+     "query": "CURRENT: In erythropoietic protoporphyria, why is it so hard to treat the disease by just giving the missing ferrochelatase enzyme?\n\nHISTORY: No previous conversation.",
+     "llm_reason": "To answer this, one must understand the biochemical basis of erythropoietic protoporphyria (EPP), specifically that the missing ferrochelatase enzyme causes accumulation of protoporphyrin, leading to photosensitivity. The key concept is enzyme replacement fails because the enzyme is not properly delivered to red blood cell mitochondria, where it functions. A relevant document would discuss EPP, ferrochelatase deficiency, porphyrin accumulation, and enzyme replacement therapy limitations. It woul",
+     "llm_hyde": "Erythropoietic protoporphyria (EPP) is caused by a deficiency of ferrochelatase, the enzyme responsible for converting protoporphyrin IX to heme. While the missing enzyme is a key factor, simply replacing it with a recombinant form (e.g., via enzyme replacement therapy) is ineffective because the enzyme must function within red blood cell precursors in the bone marrow. The enzyme is not stable or ",
+     "gold": [
+      {
+       "doc": "medicalsciences_ex_34029_doc_0",
+       "final_rank": 70,
+       "hybrid_rank": 70,
+       "start": "Ferrochelatase catalyzes the terminal step of heme biosynthesis, the insertion of ferrous iron into protoporphyrin IX to produce heme. In most eukaryotes, except plants, ferrochelatase is localized to the mitochondrial matrix, where substrates are delivered and heme is synthesized for trafficking to"
+      },
+      {
+       "doc": "medicalsciences_ex_34029_doc_2",
+       "final_rank": 42,
+       "hybrid_rank": 28,
+       "start": "Ferrochelatase catalyses the eighth and terminal step in the biosynthesis of heme, converting protoporphyrin IX into heme B. It catalyses the reaction: Summary of heme B biosynthesis—note that some reactions occur in the cytoplasm and some in the mitochondrion (yellow) Ferrochelatase catalyzes the i"
+      }
+     ],
+     "best_gold_final_rank": 42,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Two inborn errors of heme biosynthesis, erythropoietic protoporphyria (EPP, OMIM #177000) and X-linked erythropoietic protoporphyria (XLEPP, OMIM #300752) lead to accumulation of protoporphyrin IX (PPIX) during erythropoiesis1. EPP is caused by inactivating mutations in the gene for the last enzyme "
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "In summary, inhibition of ferrochelatase has been used to improve ALA-based PDT against prostate cancer ( Fukuhara et al., 2013 ) and reduce choroidal neovascularization ( Basavarajappa et al., 2017 ), a major cause of visual loss, highlighting the value of such inhibitors in the clinical field. 4 D"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Erythropoietic protoporphyria (EPP) is an inherited cutaneous porphyria caused by reduced expression of ferrochelatase, the enzyme that catalyzes the final step in heme biosynthesis. The resultant accumulation of protoporphyrin IX leads to severe, painful cutaneous photosensitivity, as well as poten"
+      }
+     ]
+    },
+    {
+     "domain": "earth_science",
+     "qid": "106_turn_3",
+     "ndcg10": 0.0,
+     "query": "CURRENT: Is that why deserts really started spreading during the Cenozoic, when things cooled down?\n\nHISTORY: Q: In ancient deserts, how did Pangaea's interior help create the first really dry, non-icy deserts? A: Pangaea's interior became really dry because it was so far from any oceans or seas. Without nearby bodies of water to help balance temperatures and provide moisture, these huge land areas had big ",
+     "llm_reason": "Knowledge needed: Understanding climate evolution, continental drift, and the Cenozoic cooling trend. Relevant document topic: Climate change during the Cenozoic Era. Key concepts: Cooling climate, expansion of deserts, continental drift, moisture availability. Terms: Cenozoic, global cooling, desert formation, oceanic influence, continental movement. Entities: Cenozoic Era, Earth's climate, continents, oceans, arid regions. The document would explain how global cooling during the Cenozoic led t",
+     "llm_hyde": "During the Cenozoic Era, global cooling led to the expansion of deserts, particularly in the mid-latitudes. As temperatures decreased, ice sheets formed at high latitudes, altering atmospheric and oceanic circulation patterns. This shift reduced moisture availability in continental interiors, enhancing arid conditions. The breakup of Pangaea increased the exposure of continental interiors to moist",
+     "gold": [
+      {
+       "doc": "not_icy_desert/desert5.txt",
+       "final_rank": 20,
+       "hybrid_rank": 2,
+       "start": "desert - Children's Encyclopedia (Ages 8-11) desert - Student Encyclopedia (Ages 11 and up) Written by Jeremy M.B. Smith Associate Professor of Geography and Planning, University of New England, Armidale, New South Wales. Station Leader, 1996 Australian National Antarctic Research Expedition to Macq"
+      }
+     ],
+     "best_gold_final_rank": 20,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [
+        "dev:106_turn_1",
+        "dev:106_turn_2"
+       ],
+       "start": "The global geography of the Permian included massive areas of land and water. By the beginning of the Permian, the motion of the Earth's crustal plates had brought much of the total land together, fused in a supercontinent known as Pangea. Many of the continents of today in somewhat intact form met "
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "open between the continental fragments. This process of continental rifting has taken place about 250 million years ago between South America and Africa, as well as North America and Eurasia during the breakup of the supercontinent Pangaea . From a single landmass, the Earth saw many new continents "
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "part5 ------------------- History of the theory Summary Detailed map showing the tectonic plates with their movement vectors. The development of the theory of plate tectonics was the scientific and cultural change which occurred during a period of 50 years of scientific debate. The event of the acce"
+      }
+     ]
+    },
+    {
+     "domain": "politics",
+     "qid": "ex_89563_turn_4",
+     "ndcg10": 0.0,
+     "query": "CURRENT: Is UNRWA even going to be able to send staff or supplies into Gaza once these new rules kick in?\n\nHISTORY: Q: In Gaza's education system, what is Israel planning to do about schools and teachers now that UNRWA is being banned? A: Israel is planning to make big changes to Gaza's education system now that UNRWA is being banned. The idea is to remove teachers linked to extremist groups and bring in teachers",
+     "llm_reason": "Knowledge needed: Understanding current travel restrictions, Israeli-Gaza policies, and UNRWA’s operational capacity under new rules. Relevant document topic: Israeli restrictions on UNRWA operations in Gaza. Key concepts: Movement bans, access to Gaza, UNRWA staff/supplies, new entry rules, humanitarian access. Entities: UNRWA, Israel, Gaza, Knesset, international aid. Would mention: Restrictions on entry, impact on staff and supplies, timeline for compliance, possible alternatives like UNICEF ",
+     "llm_hyde": "UNRWA has faced significant restrictions in Gaza due to new travel and access restrictions imposed by Israel. These rules limit the movement of UNRWA staff and supplies into the Gaza Strip, making it difficult for the organization to operate as usual. As of now, UNRWA is unable to fully deliver staff or essential supplies to schools and facilities in Gaza under these new restrictions. The Israeli ",
+     "gold": [
+      {
+       "doc": "politics_ex_89563_doc_0",
+       "final_rank": 29,
+       "hybrid_rank": 49,
+       "start": "On the civil level, Netanyahu details an overhaul of Gaza's civil administration and education systems, including an apparent cut-off of funding from Qatar to Gaza – which a previous Netanyahu government approved and facilitated. The local entities running the civil service \"will not be identified w"
+      },
+      {
+       "doc": "politics_ex_89563_doc_4",
+       "final_rank": 20,
+       "hybrid_rank": 20,
+       "start": "In a seeming response to the international criticism, Prime Minister Benjamin Netanyahu's office said Israel was prepared to work with international partners, both in the 90 days before the legislation takes effect and afterward, to ensure that humanitarian aid would still reach Gazan civilians. \"UN"
+      }
+     ],
+     "best_gold_final_rank": 20,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "If the legislation is implemented, aid to Gaza could be strangled and all UNRWA operations in the occupied territories paralyzed. Israel will reject any coordination, international staff will no longer have immunity, UNRWA may lose access to buildings, and Israel may deny all border crossings in and"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "The ban on UNRWA does not only create a gap in its core role of providing protection and care for Palestinian refugees, but it also leads to direct and indirect consequences, imposing urgent and long-term arrangements. The restriction of UNRWA’s role, particularly in the West Bank, could exacerbate "
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Israeli Prime Minister Benjamin Netanyahu instructed authorities to begin the immediate enforcement of a law banning the UN’s agency for Palestinian refugees on Tuesday. The UNRWA law was passed by the Knesset with broad support, and prohibits the United Nations Relief and Works Agency for Palestine"
+      }
+     ]
+    },
+    {
+     "domain": "law",
+     "qid": "ex_106319_turn_4",
+     "ndcg10": 0.0,
+     "query": "CURRENT: What happens if Spirit’s already done everything on their end—can they still sell off the right to future payments?\n\nHISTORY: Q: In airline bankruptcies, is it possible for lease contracts to be transferred to another airline even if the original contract doesn’t allow it? A: Yes, in airline bankruptcies, it's actually possible for lease contracts to be transferred to another airline even if the original contract says they",
+     "llm_reason": "Knowledge needed: Understanding how airline lease assignments work in bankruptcy, especially regarding assignment restrictions and court approval. Relevant document topic: Airline lease transfers in bankruptcy. Key concepts: Lease assignment, anti-assignment clauses, bankruptcy law, assumption of contracts, court approval, obligations transfer. Entities: Spirit, JetBlue, bankruptcy court. Terms: Assignment, assumption, default, cure, performance, court approval. The document would explain how, e",
+     "llm_hyde": "In airline bankruptcies, a debtor like Spirit can assign or sell off lease contracts to another airline, such as JetBlue, even if the original lease prohibits assignment. This is permitted under bankruptcy law, which typically renders anti-assignment clauses unenforceable. The transfer requires court approval, which ensures that any past defaults have been cured and that the new party, like JetBlu",
+     "gold": [
+      {
+       "doc": "law_ex_106319_doc_0",
+       "final_rank": 66,
+       "hybrid_rank": 66,
+       "start": "By an assignment, an obligee (one who has the right to receive a contract benefit) transfers a right to receive a contract benefit owed by the obligor (the one who has a duty to perform) to a third person (assignee); the obligee then becomes an assignor (one who makes an assignment). The Restatement"
+      }
+     ],
+     "best_gold_final_rank": 66,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "If a lienholder agrees to such treatment, it usually does so on the condition that its lien attaches to the proceeds of the sale. The other conditions are often the subject of litigation but can be utilized by a debtor-seller when available. How are contracts and leases treated through a Section 363"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [
+        "dev:ex_106319_turn_1",
+        "dev:ex_106319_turn_3",
+        "dev:ex_106319_turn_5"
+       ],
+       "start": "Section 365 of the Bankruptcy Code — \"Rejection\" vs. \"Assumption\" vs. \"Assumption and Assignment.\" A buyer in a Section 363 Sale has wide latitude to determine whether to assume the debtor's contracts, licenses, leases, or other agreements. Section 365 of the Bankruptcy Code provides a debtor with t"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "A Section 363 Sale process provides a bidder with the ability to select favorable contracts, licenses, leases, or other agreements that will be “assumed” by the debtor and “assigned” to the bidder as part of its bid. The Bankruptcy Code also provides that anti-assignment clauses embedded in such con"
+      }
+     ]
+    },
+    {
+     "domain": "drones",
+     "qid": "ex_2424_turn_4",
+     "ndcg10": 0.0,
+     "query": "CURRENT: I’m curious—do things like humidity or open water actually mess with the signal that much at that distance?\n\nHISTORY: Q: In drone flight range, do fixed wing drones usually go farther than multirotor drones if they use the same radio and battery setup? A: Fixed-wing drones usually go a lot farther than multirotor drones. While multirotor drones can reach up to 15 km, fixed-wing drones can have a much longer range—u",
+     "llm_reason": "Knowledge needed: Understanding how environmental factors like humidity and open water affect radio signal propagation over distance. Relevant document topic: Radio signal propagation in outdoor environments. Key concepts: Humidity, open water, signal attenuation, radio frequency, path loss. Entities: Humidity, open water, radio signals, drone communication, signal range. The document would explain how high humidity or water bodies can absorb or scatter radio waves, weakening signals over long d",
+     "llm_hyde": "Humidity and open water can indeed affect radio signal strength, especially over long distances. High humidity increases atmospheric attenuation, weakening the signal. Open water, due to its low radio reflectivity and large surface area, can cause signal dispersion and absorption, reducing range. In environments with high moisture or large bodies of water, signal degradation is more noticeable, pa",
+     "gold": [
+      {
+       "doc": "drones_ex_2424_doc_0",
+       "final_rank": 98,
+       "hybrid_rank": 98,
+       "start": "Whether you are a recreational user or you use a drone for professional purposes, it's good to know how far can drones fly from the controller. How far can drones fly from the remote is determined by several factors. A toy drone will fly up to 100 meters, a hobby drone can reach 4 km, multi-rotor dr"
+      },
+      {
+       "doc": "drones_ex_2424_doc_1",
+       "final_rank": 117,
+       "hybrid_rank": 117,
+       "start": "With the greater price range, the flight range increases exponentially. It is due to the signal strength of the controller, and you can expect a drone ranging from €150 to €500 to fly up to 4 or 5 km. However, their flight time can also significantly vary due to the material used for their build and"
+      },
+      {
+       "doc": "drones_ex_2424_doc_2",
+       "final_rank": 70,
+       "hybrid_rank": 70,
+       "start": "Commercial drones, often used for industrial applications like mapping, inspections, or filmmaking, generally have longer ranges. For example, the DJI Inspire 2 can fly up to 7 kilometers (4.3 miles), making it ideal for professional projects. Some high-end commercial drones like the JOUAV's CW-30E "
+      },
+      {
+       "doc": "drones_ex_2424_doc_4",
+       "final_rank": 166,
+       "hybrid_rank": 166,
+       "start": "1.What is the difference between using the remote controller to control the Mavic, and using your smartphone to control it via Wi-Fi? The Mavic remote controller uses DJI's OcuSync transmission technology, giving it an increased range of up to 4.3mi (7km) in open areas without interference, FCC comp"
+      }
+     ],
+     "best_gold_final_rank": 70,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Cellular and Satellite Communication: Advanced drones, like the JOUAV CW-15 and CW-80E, can leverage cellular networks or satellite communications for real-time control and data transmission over vast distances. These systems ensure a stable connection even in remote areas, significantly extending t"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "All aircraft of any type use communications systems between the aircraft and the ground using radio frequency (RF). Some use cell phone connections, some direct RF. Most use one or more RF links (not cellular at this time). Those RF links are very susceptible to interference. The FCC limits their po"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "Optimize Antenna Placement and Selection One of the most straightforward ways to boost your drone’s range is by optimizing the antennas: Antenna Positioning: Proper antenna placement on both the drone and the controller is crucial. Position the antennas vertically or in an orientation that maintains"
+      }
+     ]
+    },
+    {
+     "domain": "psychology",
+     "qid": "36_turn_1",
+     "ndcg10": 0.0,
+     "query": "CURRENT: In sexual orientation, is there real evidence that genetics, like the Xq28 region, play a role in being gay?\n\nHISTORY: No previous conversation.",
+     "llm_reason": "Knowledge needed: Scientific evidence on genetic influences in sexual orientation, especially specific chromosomal regions like Xq28. Relevant document topic: Genetic research on sexual orientation, focusing on the Xq28 region and its association with homosexuality. Key concepts: Genetics, sexual orientation, Xq28, gay/lesbian orientation, twin studies, heritability, DNA markers. Entities: Xq28, homosexuality, genetics, twin studies, behavioral genetics. The document would summarize studies (e.g",
+     "llm_hyde": "Research suggests that genetics may play a role in sexual orientation. A 2004 study identified a region on the X chromosome, Xq28, that shows a statistical association with male sexual orientation. This region has been linked to variations in sexual orientation, particularly in men. However, the effect size is small, and no single gene has been proven to determine sexual orientation. Multiple gene",
+     "gold": [
+      {
+       "doc": "gay_genetic/mills2019pdf_0.txt",
+       "final_rank": 74,
+       "hybrid_rank": 74,
+       "start": "SCIENCE sciencemag.org There are still many questions to be addressed. Plants have a remarkable ability to distinguish between friends and foes, allowing Rhizobia to enter the root while keeping other pathogenic bacteria outside. Could this tRF regulation be critical to distinguish symbiotic and pat"
+      }
+     ],
+     "best_gold_final_rank": 74,
+     "mechanical_label": "b",
+     "top3": [
+      {
+       "rank": 1,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "immunization to sex-specific proteins (4). Work in the 1990s isolated a relationship with the Xq28 region on the X chromosome (5, 6). Subsequent studies found similarity in the sexual orientation of identical twins, with genetics explaining 18% (for women) and 37% (for men), with the remainder accou"
+      },
+      {
+       "rank": 2,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "to genetic determinism or to resent this reduction. Attributing same-sex orientation to genetics could enhance civil rights or reduce stigma. Conversely, there are fears it provides a tool for intervention or “cure.” Same-sex orientation has been classified as pathological and illegal and remains cr"
+      },
+      {
+       "rank": 3,
+       "is_gold": false,
+       "gold_of_other_topic": [],
+       "start": "et al. found that genetics could eventually account for an upper limit of 8 to 25% of same-sex sexual behavior of the population. However, when all of the SNPs they identified from the GWAS are considered together in a combined score, they explain less than 1%. Thus, although they did find particula"
+      }
+     ]
+    }
+   ]
+  }
+ }
+}
