@@ -52,9 +52,13 @@ def main():
     R = a.runs
     ndcg = ndcg_fn(a.kit)
     hyb = json.load(open(os.path.join(R, "sr", "t2", "hybrid.json")))
+    h3 = os.path.join(R, "sr", "t2", "hybrid_s3.json")
+    has_s3 = os.path.exists(os.path.join(R, "rerank", f"rule16_sr_S3_{MODEL}.json"))
+    if has_s3:
+        hyb["conditions"].update(json.load(open(h3))["conditions"])
     rea = json.load(open(os.path.join(R, "reason", "t2_reasonembed-4b.json")))
     rr = {k: json.load(open(os.path.join(R, "rerank", f"rule16_{k}_{MODEL}.json")))
-          for k in ("2a_history", "sr_S1", "sr_S2")}
+          for k in ("2a_history", "sr_S1", "sr_S2") + (("sr_S3",) if has_s3 else ())}
     F, S, RR = f"{R}/foreign/runs", f"{R}/sr/runs", f"{R}/rerank/runs"
     pats = {"2a_history_rr (main)": f"{RR}/{{pre}}_2a_history__rr.tsv",
             "2a_history (no reranker)": f"{F}/{{pre}}_2ah_hybrid__best.tsv",
@@ -62,16 +66,28 @@ def main():
             "S2 final (q+s+h)": f"{RR}/{{pre}}_sr_S2__rr.tsv",
             "S1 before reranker": f"{S}/{{pre}}_sr_S1__best.tsv",
             "S2 before reranker": f"{S}/{{pre}}_sr_S2__best.tsv",
+            **({"S3 final (LLM sees SR)": f"{RR}/{{pre}}_sr_S3__rr.tsv",
+                "S3 before reranker": f"{S}/{{pre}}_sr_S3__best.tsv"} if has_s3 else {}),
             "B current turn": f"{F}/{{pre}}_2a_nomaxp__best.tsv",
             "B + SR (no history)": f"{S}/{{pre}}_sr_cur__best.tsv",
             "SR only": f"{S}/{{pre}}_sr_only__best.tsv",
             "H0q+RE (no answers)": f"{F}/{{pre}}_2ahq_h0q__best.tsv"}
+    # rule 19 clarification (LOG 15:20): a candidate's final system includes its reranker only if rule 16 adopted it
+    for k in ("S1", "S2", "S3"):
+        nm = f"sr_{k}"
+        if nm in rr:
+            lab = next(x for x in pats if x.startswith(f"{k} final"))
+            pats[lab.replace("final", "+ best reranker way")] = pats[lab]
+            if not rr[nm]["adopted"]:
+                pats[lab] = pats[f"{k} before reranker"]
     # train subsample = the topics of the main run's train file (rule-8 subsample)
     sub = {dom: set(read_run(pats["2a_history_rr (main)"].format(pre=f"t2_{dom}_train"))) for dom in T2}
     pt = {sp: {lab: per_topic(a.data, p, sp, ndcg, sub if sp == "train" else None) for lab, p in pats.items()}
           for sp in ("train", "dev")}
     rows = []
     stage = {"S1": "2a_hist3qa__q+r+h+s", "S2": "2a_hist3qa__q+s+h", "B + SR": "2a_current__q+r+h+s", "SR only": "2a_current__s"}
+    if has_s3:
+        stage["S3"] = "2a_hist3qa_sr__q+r+h"
     for lab in pats:
         r = {"system": lab, "train": macro(pt["train"][lab]), "dev": macro(pt["dev"][lab]),
              "train_bright": macro(pt["train"][lab], sorted(BRIGHT_DOMAINS)),
@@ -80,7 +96,10 @@ def main():
              "dev_se": macro(pt["dev"][lab], [d for d in T2 if d not in BRIGHT_DOMAINS])}
         rows.append(r)
     cand = {"S1": "S1 final (q+r+h+s)", "S2": "S2 final (q+s+h)"}
-    chosen = max(cand, key=lambda k: (next(r["train"] for r in rows if r["system"] == cand[k]), k == "S1"))
+    if has_s3:
+        cand["S3"] = "S3 final (LLM sees SR)"
+    # ties: the simpler candidate (S1 < S2 < S3)
+    chosen = max(cand, key=lambda k: (next(r["train"] for r in rows if r["system"] == cand[k]), -["S1", "S2", "S3"].index(k)))
     base = "2a_history_rr (main)"
     ch = cand[chosen]
 
@@ -93,6 +112,9 @@ def main():
     for sp in ("train", "dev"):
         diffs[sp] = {"all": diff(ch, base, sp), "bright": diff(ch, base, sp, BRIGHT_DOMAINS), "se": diff(ch, base, sp, se),
                      "S1_vs_S2": diff(cand["S1"], cand["S2"], sp),
+                     **({"S3_vs_S1": diff(cand["S3"], cand["S1"], sp), "S3_vs_S2": diff(cand["S3"], cand["S2"], sp),
+                         "S3_vs_main": diff(cand["S3"], base, sp)} if has_s3 else {}),
+                     "S1_vs_main": diff(cand["S1"], base, sp), "S2_vs_main": diff(cand["S2"], base, sp),
                      "B+SR_vs_B": diff("B + SR (no history)", "B current turn", sp),
                      "SRonly_vs_B": diff("SR only", "B current turn", sp),
                      "SRonly_vs_main": diff("SR only", base, sp),
@@ -105,7 +127,7 @@ def main():
     for k, cond in stage.items():
         c = hyb["conditions"].get(cond, {})
         lin = c.get("systems", {}).get("linear*", {})
-        name = {"S1": "sr_S1", "S2": "sr_S2", "B + SR": "sr_cur", "SR only": "sr_only"}[k]
+        name = {"S1": "sr_S1", "S2": "sr_S2", "S3": "sr_S3", "B + SR": "sr_cur", "SR only": "sr_only"}[k]
         re_ = rea.get(name, {})
         st = {"hybrid_cfg": lin.get("cfg"), "hybrid_train_full": lin.get("train_macro"), "hybrid_dev": lin.get("dev_macro"),
               "reasonembed_best_on_train": re_.get("best_on_train"),
@@ -130,7 +152,7 @@ def main():
                "--only-run-topics", "--out", tmp] + [x for lab in labs for x in ("--run", f"{lab}={pats[lab]}")]
         subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL)
         bd[sp] = json.load(open(tmp))
-    rep = {"rule": "LOG 2026-11-16 14:26 (rule 19)", "chosen": chosen, "chosen_system": ch, "base": base,
+    rep = {"rule": "LOG 2026-11-16 14:26 (rule 19; S3 details 15:12)", "chosen": chosen, "candidates": list(cand), "chosen_system": ch, "base": base,
            "rows": rows, "diff": {sp: diffs[sp]["all"] for sp in diffs}, "diffs": diffs,
            "margin_would_be_met_on_train": margin_met, "stages": stages, "breakdown": bd,
            "train_topics": sum(len(v) for v in pt["train"][base].values()),

@@ -2018,3 +2018,46 @@ command: `python3 paper_tables.py --root .. --data ../../reteco_data_v11 --kit .
   `research/paper_tables/t1_submission … t8_sr.tex` + `numbers.json` (467 numbers) + `README.md` (source of each
   table). Checked against RESULTS: every number taken from a report matches X, AE, Z, AA, AD. Pending inputs (filled on
   re-run): Table 3 M0 dev breakdown and dev CIs (queue_1116c), Table 8 SR (rule 19, queue_1116b).
+
+## 2026-11-16 15:12 — rule 19, S3 details (written before any S3 generation; S1/S2 will finish well before 18:30)
+LLM input of S3 (`llm_expand.py` condition `2a_hist3qa_sr`): the Hb input with one line after the current question —
+  "What the documents should cover (task annotation): <SR>" — then the earlier Q/A turns; the 3,000-character cut
+  removes history, never SR. Same model, prompts (reason, hyde), temperature 0, seed 0. All 2,971 train + dev inputs
+  are generated in one llm_expand call with one generate() call (`--chunk 100000`), so the S3 texts form one batch.
+  Retrieval: BM25 q + r' + h', dense e_query(q) + e_query(r') + e_doc(h') (q = current question + released history, as
+  in the base); ReasonEmbed and reranker queries = Hb + "\nReasoning: " + SR, as S1/S2; fusion on full train,
+  ReasonEmbed way and reranker way on the train subsample. Then `2a_history_sr` = the best of S1, S2, S3 on the final
+  train-subsample macro. Caveat recorded now: S3 changes the LLM input, so its comparison with S1/S2/base also carries
+  the LLM-draw noise (RESULTS AI/AK: ≤ ~0.003 on the final 2a run).
+
+## 2026-11-16 15:20 — rule 19 clarification (written after S1's reranker grid, before S2's and S3's)
+ambiguity: rule 19 says the reranker way comes "from the rule-16 grid"; rule 16 itself is grid + adoption margin (the
+  best way is used only if it beats "none" by ≥ +0.005 on the train subsample with bootstrap lower bound > 0 — this is
+  how the base `2a_history_rr` got its reranker). The ReasonEmbed stage of rule 8 has the same margin. Reading fixed
+  now: each stage follows its full rule (grid + margin), as for the base. For S1 the reranker grid gave interp@20
+  w 0.5, train +0.0137 [−0.0030, +0.0308] over none → not adopted, so S1's final system is its ReasonEmbed stage.
+  Seen before writing this: S1 reranker train / dev numbers only. The report shows every candidate with and without
+  its best reranker way, so the other reading can be checked; the choice among S1 / S2 / S3 uses this reading.
+
+## 2026-11-16 15:31–15:32 — S3 input: M0 dev breakdown (main pipeline on answer-free histories; analysis)
+command: `queue_1116c.sh`: `make_test_release.py --tracks 2 --strip-answers` (dev → split "test", 0 turns with answers),
+  `submit.py --variants 2a_history` (all LLM texts and ReasonEmbed vectors cached from the 10.11 run; 53 s), then
+  `t2_breakdown.py` (out `runs_v13/a2/m0_dev_breakdown.json`).
+result (dev, macro / first turn / recycled gold 568 / new gold 79): reference answers 0.5475 / 0.5213 / 0.6371 / 0.3759 ·
+  LLM-written answers 0.4823 / 0.5213 / 0.5396 / 0.3663 · **M0 (no answers) 0.4908 / 0.5213 / 0.5429 / 0.4034** ·
+  H0q+RE 0.4802 / 0.4797 / 0.5390 / 0.3766 · B 0.3779. M0 = 0.4908 reproduces the number seen on 10.11. Reference − M0
+  +0.057 [+0.044, +0.069]; LLM-written − M0 −0.009 [−0.020, +0.003] (paper table 3). The whole price of the answers
+  sits on recycled-gold turns (0.637 vs 0.543); on new-gold turns the answers do not help (0.376 vs 0.403).
+
+## 2026-11-16 14:43–15:31 — rule 19, S1 / S2 and the two analyses (S3 running)
+command: `queue_1116b.sh` (qexp_search 186 s; hybrid grids ~8 min; ReasonEmbed S1/S2 860 s incl. 1,188 SR queries,
+  99 new documents; reranker S1 23,760 pairs ~20 min, S2 mostly cached; ReasonEmbed for B+SR / SR only, 5,602 new
+  documents ~9 min). Total 48 min (estimate ~2–2.5 h; the reranker pairs of S2 overlapped S1's).
+result (train subsample / dev): base `2a_history_rr` 0.5999 / 0.5507 · `2a_history` (no reranker) 0.5830 / 0.5475 ·
+  S1 hybrid (full train) 0.5201 / 0.4798 → + ReasonEmbed (interp 0.8) 0.5997 / 0.5609 → reranker interp@20 w 0.5
+  0.6134 / 0.5572, train +0.0137 [−0.0030, +0.0308] over none → not adopted (rule 16 margin) ·
+  S2 hybrid 0.5255 / 0.4892 → + ReasonEmbed (interp 0.9) 0.5990 / 0.5718 → reranker interp@20 w 0.4 0.6117 / 0.5755,
+  +0.0127 [−0.0018, +0.0273] → not adopted. (Base Hb hybrid: 0.5112 / 0.4601.)
+  analyses: B + SR (no history; ReasonEmbed interp 0.9) 0.5123 / 0.4735 vs B 0.4317 / 0.3779; SR only (BM25 + dense +
+  ReasonEmbed on SR alone, interp 0.8) 0.5158 / 0.4825 — as good as the answer-free history run (0.5168 / 0.4802).
+  Full report (with bootstraps and breakdowns) after S3: `sr_report.py` → `runs_v13/sr/report.json`, RESULTS AM.

@@ -1,0 +1,493 @@
+=== 14:43:07 /home/timur_rk/semeval-reteco/.venv/bin/python qexp_search.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 2 --cond 2a_hist3qa --query-cond 2a_history_qfirst --variants q+r+h+s q+s+h --llm ../research/runs_v13/llm/t2 --model bge-base --max-len 512 --emb ../research/runs_v12/emb --out ../research/runs_v13/sr/t2
+    model BAAI/bge-base-en-v1.5 rev a5beb1e3e6 dim 768 max_len 512 fp16=True (6s)
+    index: 16,381 docs, 1s (lucene)
+[t2/drones] indexes ready (1s)
+    2a_hist3qa__q+r+h+s        104 topics (104 unique)    1.0s
+  train q+r+h+s bm25 0.2643  dense 0.4378
+    2a_hist3qa__q+s+h          104 topics (104 unique)    0.7s
+  train q+s+h  bm25 0.2583  dense 0.4468
+    2a_hist3qa__q+r+h+s         38 topics (38 unique)    0.3s
+    2a_hist3qa__q+s+h           38 topics (38 unique)    0.2s
+    index: 16,712 docs, 1s (lucene)
+[t2/politics] indexes ready (1s)
+    2a_hist3qa__q+r+h+s        159 topics (159 unique)    1.6s
+  train q+r+h+s bm25 0.4248  dense 0.4981
+    2a_hist3qa__q+s+h          159 topics (159 unique)    1.3s
+  train q+s+h  bm25 0.4286  dense 0.5094
+    2a_hist3qa__q+r+h+s         54 topics (54 unique)    0.5s
+    2a_hist3qa__q+s+h           54 topics (54 unique)    0.3s
+    index: 20,027 docs, 1s (lucene)
+[t2/law] indexes ready (1s)
+    2a_hist3qa__q+r+h+s        164 topics (164 unique)    1.6s
+  train q+r+h+s bm25 0.3019  dense 0.4564
+    2a_hist3qa__q+s+h          164 topics (164 unique)    1.2s
+  train q+s+h  bm25 0.3033  dense 0.4528
+    2a_hist3qa__q+r+h+s         66 topics (66 unique)    0.6s
+    2a_hist3qa__q+s+h           66 topics (66 unique)    0.5s
+    index: 23,297 docs, 2s (lucene)
+[t2/medicalsciences] indexes ready (2s)
+    2a_hist3qa__q+r+h+s        139 topics (139 unique)    1.3s
+  train q+r+h+s bm25 0.2201  dense 0.4991
+    2a_hist3qa__q+s+h          139 topics (139 unique)    1.0s
+  train q+s+h  bm25 0.2210  dense 0.5000
+    2a_hist3qa__q+r+h+s         44 topics (44 unique)    0.4s
+    2a_hist3qa__q+s+h           44 topics (44 unique)    0.3s
+    index: 26,308 docs, 1s (lucene)
+[t2/hardware] indexes ready (2s)
+    2a_hist3qa__q+r+h+s        130 topics (130 unique)    1.3s
+  train q+r+h+s bm25 0.2472  dense 0.3697
+    2a_hist3qa__q+s+h          130 topics (130 unique)    1.0s
+  train q+s+h  bm25 0.2504  dense 0.3742
+    2a_hist3qa__q+r+h+s         58 topics (58 unique)    0.6s
+    2a_hist3qa__q+s+h           58 topics (58 unique)    0.4s
+    index: 50,220 docs, 2s (lucene)
+[t2/economics] indexes ready (2s)
+    2a_hist3qa__q+r+h+s        196 topics (196 unique)    1.7s
+  train q+r+h+s bm25 0.5042  dense 0.4709
+    2a_hist3qa__q+s+h          196 topics (196 unique)    1.3s
+  train q+s+h  bm25 0.5040  dense 0.4746
+    2a_hist3qa__q+r+h+s         92 topics (92 unique)    1.0s
+    2a_hist3qa__q+s+h           92 topics (92 unique)    0.6s
+    index: 52,835 docs, 2s (lucene)
+[t2/psychology] indexes ready (2s)
+    2a_hist3qa__q+r+h+s        234 topics (234 unique)    2.1s
+  train q+r+h+s bm25 0.6367  dense 0.5739
+    2a_hist3qa__q+s+h          234 topics (234 unique)    1.6s
+  train q+s+h  bm25 0.6100  dense 0.5662
+    2a_hist3qa__q+r+h+s         99 topics (99 unique)    0.9s
+    2a_hist3qa__q+s+h           99 topics (99 unique)    0.6s
+    index: 57,359 docs, 2s (lucene)
+[t2/biology] indexes ready (2s)
+    2a_hist3qa__q+r+h+s        247 topics (247 unique)    2.3s
+  train q+r+h+s bm25 0.7375  dense 0.5270
+    2a_hist3qa__q+s+h          247 topics (247 unique)    1.7s
+  train q+s+h  bm25 0.7344  dense 0.5213
+    2a_hist3qa__q+r+h+s        115 topics (115 unique)    1.1s
+    2a_hist3qa__q+s+h          115 topics (115 unique)    0.8s
+    index: 60,792 docs, 2s (lucene)
+[t2/sustainable_living] indexes ready (2s)
+    2a_hist3qa__q+r+h+s        235 topics (235 unique)    2.2s
+  train q+r+h+s bm25 0.6169  dense 0.5702
+    2a_hist3qa__q+s+h          235 topics (235 unique)    1.6s
+  train q+s+h  bm25 0.6219  dense 0.5629
+    2a_hist3qa__q+r+h+s         84 topics (84 unique)    0.8s
+    2a_hist3qa__q+s+h           84 topics (84 unique)    0.5s
+    index: 61,961 docs, 2s (lucene)
+[t2/robotics] indexes ready (2s)
+    2a_hist3qa__q+r+h+s        184 topics (184 unique)    1.5s
+  train q+r+h+s bm25 0.5086  dense 0.3651
+    2a_hist3qa__q+s+h          184 topics (184 unique)    1.1s
+  train q+s+h  bm25 0.5097  dense 0.3766
+    2a_hist3qa__q+r+h+s         75 topics (75 unique)    0.6s
+    2a_hist3qa__q+s+h           75 topics (75 unique)    0.4s
+    index: 121,249 docs, 4s (lucene)
+[t2/earth_science] indexes ready (4s)
+    2a_hist3qa__q+r+h+s        321 topics (321 unique)    3.1s
+  train q+r+h+s bm25 0.6684  dense 0.4560
+    2a_hist3qa__q+s+h          321 topics (321 unique)    2.4s
+  train q+s+h  bm25 0.6790  dense 0.4602
+    2a_hist3qa__q+r+h+s        133 topics (133 unique)    1.2s
+    2a_hist3qa__q+s+h          133 topics (133 unique)    0.9s
+missing generations: 0; wrote ../research/runs_v13/sr/t2/results.json
+=== 14:44:59 exit 0
+=== 14:44:59 /home/timur_rk/semeval-reteco/.venv/bin/python qexp_search.py --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --track 2 --cond 2a_current --variants q+r+h+s s --llm ../research/runs_v13/llm/t2 --model bge-base --max-len 512 --emb ../research/runs_v12/emb --out ../research/runs_v13/sr/t2
+    model BAAI/bge-base-en-v1.5 rev a5beb1e3e6 dim 768 max_len 512 fp16=True (6s)
+    index: 16,381 docs, 1s (lucene)
+[t2/drones] indexes ready (1s)
+    2a_current__q+r+h+s        104 topics (104 unique)    0.6s
+  train q+r+h+s bm25 0.1702  dense 0.3500
+    2a_current__s              104 topics (104 unique)    0.1s
+  train s      bm25 0.1748  dense 0.2846
+    2a_current__q+r+h+s         38 topics (38 unique)    0.2s
+    2a_current__s               38 topics (38 unique)    0.0s
+    index: 16,712 docs, 1s (lucene)
+[t2/politics] indexes ready (1s)
+    2a_current__q+r+h+s        159 topics (159 unique)    1.0s
+  train q+r+h+s bm25 0.2759  dense 0.3428
+    2a_current__s              159 topics (159 unique)    0.2s
+  train s      bm25 0.2544  dense 0.3409
+    2a_current__q+r+h+s         54 topics (54 unique)    0.3s
+    2a_current__s               54 topics (54 unique)    0.1s
+    index: 20,027 docs, 1s (lucene)
+[t2/law] indexes ready (1s)
+    2a_current__q+r+h+s        164 topics (164 unique)    1.0s
+  train q+r+h+s bm25 0.1599  dense 0.3414
+    2a_current__s              164 topics (164 unique)    0.2s
+  train s      bm25 0.2177  dense 0.2996
+    2a_current__q+r+h+s         66 topics (66 unique)    0.4s
+    2a_current__s               66 topics (66 unique)    0.1s
+    index: 23,297 docs, 2s (lucene)
+[t2/medicalsciences] indexes ready (2s)
+    2a_current__q+r+h+s        139 topics (139 unique)    0.9s
+  train q+r+h+s bm25 0.1466  dense 0.4032
+    2a_current__s              139 topics (139 unique)    0.1s
+  train s      bm25 0.1331  dense 0.3625
+    2a_current__q+r+h+s         44 topics (44 unique)    0.3s
+    2a_current__s               44 topics (44 unique)    0.0s
+    index: 26,308 docs, 1s (lucene)
+[t2/hardware] indexes ready (1s)
+    2a_current__q+r+h+s        130 topics (130 unique)    0.9s
+  train q+r+h+s bm25 0.1488  dense 0.2673
+    2a_current__s              130 topics (130 unique)    0.2s
+  train s      bm25 0.1806  dense 0.2783
+    2a_current__q+r+h+s         58 topics (58 unique)    0.4s
+    2a_current__s               58 topics (58 unique)    0.1s
+    index: 50,220 docs, 2s (lucene)
+[t2/economics] indexes ready (2s)
+    2a_current__q+r+h+s        196 topics (196 unique)    1.2s
+  train q+r+h+s bm25 0.3425  dense 0.3421
+    2a_current__s              196 topics (196 unique)    0.2s
+  train s      bm25 0.3786  dense 0.3541
+    2a_current__q+r+h+s         92 topics (92 unique)    0.5s
+    2a_current__s               92 topics (92 unique)    0.1s
+    index: 52,835 docs, 2s (lucene)
+[t2/psychology] indexes ready (2s)
+    2a_current__q+r+h+s        234 topics (234 unique)    1.4s
+  train q+r+h+s bm25 0.4489  dense 0.3841
+    2a_current__s              234 topics (234 unique)    0.3s
+  train s      bm25 0.5163  dense 0.4577
+    2a_current__q+r+h+s         99 topics (99 unique)    0.6s
+    2a_current__s               99 topics (99 unique)    0.1s
+    index: 57,359 docs, 2s (lucene)
+[t2/biology] indexes ready (2s)
+    2a_current__q+r+h+s        247 topics (247 unique)    1.5s
+  train q+r+h+s bm25 0.6303  dense 0.3960
+    2a_current__s              247 topics (247 unique)    0.3s
+  train s      bm25 0.5954  dense 0.4561
+    2a_current__q+r+h+s        115 topics (115 unique)    0.7s
+    2a_current__s              115 topics (115 unique)    0.2s
+    index: 60,792 docs, 2s (lucene)
+[t2/sustainable_living] indexes ready (2s)
+    2a_current__q+r+h+s        235 topics (235 unique)    1.5s
+  train q+r+h+s bm25 0.4522  dense 0.4238
+    2a_current__s              235 topics (235 unique)    0.3s
+  train s      bm25 0.4199  dense 0.4324
+    2a_current__q+r+h+s         84 topics (84 unique)    0.5s
+    2a_current__s               84 topics (84 unique)    0.1s
+    index: 61,961 docs, 1s (lucene)
+[t2/robotics] indexes ready (2s)
+    2a_current__q+r+h+s        184 topics (184 unique)    1.1s
+  train q+r+h+s bm25 0.2721  dense 0.2340
+    2a_current__s              184 topics (184 unique)    0.3s
+  train s      bm25 0.3264  dense 0.2498
+    2a_current__q+r+h+s         75 topics (75 unique)    0.5s
+    2a_current__s               75 topics (75 unique)    0.1s
+    index: 121,249 docs, 4s (lucene)
+[t2/earth_science] indexes ready (4s)
+    2a_current__q+r+h+s        321 topics (321 unique)    2.0s
+  train q+r+h+s bm25 0.5227  dense 0.3488
+    2a_current__s              321 topics (321 unique)    0.5s
+  train s      bm25 0.5260  dense 0.3834
+    2a_current__q+r+h+s        133 topics (133 unique)    0.8s
+    2a_current__s              133 topics (133 unique)    0.2s
+missing generations: 0; wrote ../research/runs_v13/sr/t2/results.json
+=== 14:46:13 exit 0
+=== 14:46:13 SEARCH_DONE 186 s
+=== 14:46:13 /home/timur_rk/semeval-reteco/.venv/bin/python hybrid.py --track 2 --conditions 2a_hist3qa__q+r+h+s 2a_hist3qa__q+s+h 2a_current__q+r+h+s 2a_current__s --bm25 ../research/runs_v13/sr/t2/bm25/runs --dense ../research/runs_v13/sr/t2/dense/runs --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out ../research/runs_v13/sr/t2/hybrid.json
+
+== track 2 2a_hist3qa__q+r+h+s (dense: 2a_hist3qa__q+r+h+s) — train 11 dom, dev 11 dom
+  bm25             train 0.4664  dev 0.4591   kind=bm25
+  dense            train 0.4749  dev 0.4185   kind=dense
+  rerank           train 0.4837  dev 0.4354   kind=rerank
+  linear*          train 0.5201  dev 0.4798   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.6
+  rrf*             train 0.5059  dev 0.4707   kind=rrf|kb=50|kd=50|c=10
+  pool_rerank*     train 0.4749  dev 0.4185   kind=pool_rerank|kb=100|kd=100
+  rrf_c60_100+100  train 0.4886  dev 0.4553   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.0208, 'ci95': [0.0056, 0.0354], 'p_le_0': 0.0039}
+  dev rrf* - bm25: {'diff': 0.0116, 'ci95': [-0.0023, 0.0258], 'p_le_0': 0.0487}
+  dev linear* - rerank: {'diff': 0.0445, 'ci95': [0.0316, 0.0577], 'p_le_0': 0.0}
+  dev dense - bm25: {'diff': -0.0406, 'ci95': [-0.0636, -0.0186], 'p_le_0': 0.9999}
+  dev rerank - bm25: {'diff': -0.0237, 'ci95': [-0.046, -0.0023], 'p_le_0': 0.985}
+  dev linear* - dense: {'diff': 0.0614, 'ci95': [0.0471, 0.0757], 'p_le_0': 0.0}
+
+== track 2 2a_hist3qa__q+s+h (dense: 2a_hist3qa__q+s+h) — train 11 dom, dev 11 dom
+  bm25             train 0.4655  dev 0.4609   kind=bm25
+  dense            train 0.4768  dev 0.4233   kind=dense
+  rerank           train 0.4872  dev 0.4404   kind=rerank
+  linear*          train 0.5255  dev 0.4892   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.6
+  rrf*             train 0.5124  dev 0.4789   kind=rrf|kb=50|kd=50|c=10
+  pool_rerank*     train 0.4768  dev 0.4233   kind=pool_rerank|kb=100|kd=100
+  rrf_c60_100+100  train 0.4966  dev 0.4624   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.0284, 'ci95': [0.0128, 0.0433], 'p_le_0': 0.0002}
+  dev rrf* - bm25: {'diff': 0.018, 'ci95': [0.0036, 0.0321], 'p_le_0': 0.0089}
+  dev linear* - rerank: {'diff': 0.0488, 'ci95': [0.0349, 0.063], 'p_le_0': 0.0}
+  dev dense - bm25: {'diff': -0.0376, 'ci95': [-0.0616, -0.0142], 'p_le_0': 0.9996}
+  dev rerank - bm25: {'diff': -0.0205, 'ci95': [-0.0441, 0.0019], 'p_le_0': 0.9627}
+  dev linear* - dense: {'diff': 0.0659, 'ci95': [0.0505, 0.0815], 'p_le_0': 0.0}
+
+== track 2 2a_current__q+r+h+s (dense: 2a_current__q+r+h+s) — train 11 dom, dev 11 dom
+  bm25             train 0.3246  dev 0.3162   kind=bm25
+  dense            train 0.3485  dev 0.3109   kind=dense
+  rerank           train 0.3611  dev 0.3234   kind=rerank
+  linear*          train 0.3807  dev 0.3543   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.6
+  rrf*             train 0.3723  dev 0.3492   kind=rrf|kb=50|kd=50|c=10
+  pool_rerank*     train 0.3485  dev 0.3109   kind=pool_rerank|kb=100|kd=100
+  rrf_c60_100+100  train 0.3606  dev 0.3380   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.0381, 'ci95': [0.0229, 0.053], 'p_le_0': 0.0}
+  dev rrf* - bm25: {'diff': 0.033, 'ci95': [0.0197, 0.0458], 'p_le_0': 0.0}
+  dev linear* - rerank: {'diff': 0.0308, 'ci95': [0.0189, 0.0426], 'p_le_0': 0.0}
+  dev dense - bm25: {'diff': -0.0053, 'ci95': [-0.0264, 0.0155], 'p_le_0': 0.6834}
+  dev rerank - bm25: {'diff': 0.0073, 'ci95': [-0.0135, 0.0276], 'p_le_0': 0.2383}
+  dev linear* - dense: {'diff': 0.0434, 'ci95': [0.0305, 0.0562], 'p_le_0': 0.0}
+
+== track 2 2a_current__s (dense: 2a_current__s) — train 11 dom, dev 11 dom
+  bm25             train 0.3385  dev 0.3247   kind=bm25
+  dense            train 0.3545  dev 0.3345   kind=dense
+  rerank           train 0.3769  dev 0.3632   kind=rerank
+  linear*          train 0.4055  dev 0.3972   kind=linear|kb=100|kd=100|norm=zscore|alpha=0.6
+  rrf*             train 0.3980  dev 0.3958   kind=rrf|kb=50|kd=50|c=10
+  pool_rerank*     train 0.3545  dev 0.3345   kind=pool_rerank|kb=100|kd=100
+  rrf_c60_100+100  train 0.3888  dev 0.3872   kind=rrf|kb=100|kd=100|c=60
+  dev linear* - bm25: {'diff': 0.0725, 'ci95': [0.0563, 0.0886], 'p_le_0': 0.0}
+  dev rrf* - bm25: {'diff': 0.0711, 'ci95': [0.0566, 0.086], 'p_le_0': 0.0}
+  dev linear* - rerank: {'diff': 0.034, 'ci95': [0.0211, 0.0469], 'p_le_0': 0.0}
+  dev dense - bm25: {'diff': 0.0098, 'ci95': [-0.0117, 0.0324], 'p_le_0': 0.1915}
+  dev rerank - bm25: {'diff': 0.0385, 'ci95': [0.0178, 0.0593], 'p_le_0': 0.0004}
+  dev linear* - dense: {'diff': 0.0627, 'ci95': [0.0481, 0.0773], 'p_le_0': 0.0}
+wrote ../research/runs_v13/sr/t2/hybrid.json
+=== 14:54:11 exit 0
+=== 14:54:11 HYBRID_DONE 664 s
+=== 14:54:11 /home/timur_rk/semeval-reteco/.venv/bin/python reason_rerank.py --backend bnb --bits 4 --batch 4 --chunk 2000 --pool 50 --track 2 --hybrid ../research/runs_v13/sr/t2/hybrid.json --bm25 ../research/runs_v13/sr/t2/bm25/runs --dense ../research/runs_v13/sr/t2/dense/runs --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out ../research/runs_v13/reason --conditions 2a_hist3qa__q+r+h+s 2a_hist3qa__q+s+h --query-cond 2a_hist3qa+sr 2a_hist3qa+sr --name sr_S1 sr_S2 --save-scores ../research/runs_v13/scores/sr.json --save-runs ../research/runs_v13/sr/runs
+  [2a_hist3qa__q+r+h+s] docs 26/26 (17s)
+  [2a_hist3qa__q+r+h+s] 26 docs + 1188 queries in 165s
+== t2 2a_hist3qa__q+r+h+s: none train 0.5257 dev 0.4798 | best on train ('interp', 0.8): train 0.5997 dev 0.5609 train boot {'diff': 0.074, 'ci95': [0.0497, 0.0988], 'p_le_0': 0.0}
+   none=0: train 0.5257  dev 0.4798
+   top=10: train 0.5522  dev 0.5283
+   top=20: train 0.5769  dev 0.5496
+   top=50: train 0.5867  dev 0.5601
+   interp=0.1: train 0.5337  dev 0.4876
+   interp=0.2: train 0.5434  dev 0.4987
+   interp=0.3: train 0.5515  dev 0.5096
+   interp=0.4: train 0.5627  dev 0.5204
+   interp=0.5: train 0.5783  dev 0.5325
+   interp=0.6: train 0.5895  dev 0.5409
+   interp=0.7: train 0.599  dev 0.5496
+   interp=0.8: train 0.5997  dev 0.5609
+   interp=0.9: train 0.599  dev 0.5653
+  [2a_hist3qa__q+s+h] docs 73/73 (11s)
+  [2a_hist3qa__q+s+h] 73 docs + 0 queries in 11s
+== t2 2a_hist3qa__q+s+h: none train 0.5317 dev 0.4892 | best on train ('interp', 0.9): train 0.599 dev 0.5718 train boot {'diff': 0.0673, 'ci95': [0.0398, 0.0958], 'p_le_0': 0.0}
+   none=0: train 0.5317  dev 0.4892
+   top=10: train 0.5597  dev 0.5294
+   top=20: train 0.581  dev 0.5561
+   top=50: train 0.5857  dev 0.563
+   interp=0.1: train 0.5368  dev 0.4976
+   interp=0.2: train 0.5497  dev 0.5071
+   interp=0.3: train 0.5564  dev 0.5193
+   interp=0.4: train 0.5662  dev 0.5313
+   interp=0.5: train 0.5781  dev 0.5427
+   interp=0.6: train 0.5902  dev 0.552
+   interp=0.7: train 0.5942  dev 0.5607
+   interp=0.8: train 0.5982  dev 0.5705
+   interp=0.9: train 0.599  dev 0.5718
+=== 14:57:27 exit 0
+=== 14:57:27 RE_HIST_DONE 860 s
+=== 14:57:27 /home/timur_rk/semeval-reteco/.venv/bin/python llm_rerank.py --model qwen3-reranker-0.6b --bits 16 --cond 2a_history_sr --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out ../research/runs_v13/rerank --save-runs ../research/runs_v13/rerank/runs --batch 4 --name sr_S1 --scores ../research/runs_v13/scores/sr_sr_S1.json
+[2a_history_sr] 23760 pairs over 1188 topics
+  400/23760 pairs, 400 scored in 21s (18.71 pairs/s), total 23s
+  800/23760 pairs, 400 scored in 24s (16.78 pairs/s), total 47s
+  1200/23760 pairs, 400 scored in 26s (15.33 pairs/s), total 73s
+  1600/23760 pairs, 400 scored in 24s (16.73 pairs/s), total 97s
+  2000/23760 pairs, 400 scored in 24s (16.94 pairs/s), total 121s
+  2400/23760 pairs, 400 scored in 23s (17.29 pairs/s), total 144s
+  2800/23760 pairs, 400 scored in 27s (14.91 pairs/s), total 171s
+  3200/23760 pairs, 397 scored in 25s (15.95 pairs/s), total 196s
+  3600/23760 pairs, 398 scored in 20s (19.68 pairs/s), total 216s
+  4000/23760 pairs, 395 scored in 22s (18.34 pairs/s), total 238s
+  4400/23760 pairs, 387 scored in 21s (18.05 pairs/s), total 260s
+  4800/23760 pairs, 346 scored in 13s (27.11 pairs/s), total 273s
+  5200/23760 pairs, 398 scored in 17s (22.87 pairs/s), total 290s
+  5600/23760 pairs, 387 scored in 17s (23.18 pairs/s), total 307s
+  6000/23760 pairs, 367 scored in 17s (21.27 pairs/s), total 324s
+  6400/23760 pairs, 394 scored in 18s (21.45 pairs/s), total 343s
+  6800/23760 pairs, 397 scored in 20s (20.25 pairs/s), total 363s
+  7200/23760 pairs, 400 scored in 22s (17.84 pairs/s), total 385s
+  7600/23760 pairs, 400 scored in 22s (18.01 pairs/s), total 408s
+  8000/23760 pairs, 400 scored in 23s (17.25 pairs/s), total 431s
+  8400/23760 pairs, 400 scored in 24s (16.72 pairs/s), total 455s
+  8800/23760 pairs, 400 scored in 24s (16.46 pairs/s), total 479s
+  9200/23760 pairs, 400 scored in 24s (16.85 pairs/s), total 503s
+  9600/23760 pairs, 400 scored in 25s (16.23 pairs/s), total 528s
+  10000/23760 pairs, 400 scored in 21s (19.00 pairs/s), total 549s
+  10400/23760 pairs, 400 scored in 24s (16.67 pairs/s), total 573s
+  10800/23760 pairs, 400 scored in 22s (17.88 pairs/s), total 595s
+  11200/23760 pairs, 400 scored in 25s (15.86 pairs/s), total 621s
+  11600/23760 pairs, 400 scored in 22s (17.97 pairs/s), total 643s
+  12000/23760 pairs, 399 scored in 21s (19.24 pairs/s), total 664s
+  12400/23760 pairs, 394 scored in 23s (17.07 pairs/s), total 687s
+  12800/23760 pairs, 399 scored in 24s (16.34 pairs/s), total 712s
+  13200/23760 pairs, 400 scored in 22s (18.21 pairs/s), total 734s
+  13600/23760 pairs, 400 scored in 27s (14.68 pairs/s), total 761s
+  14000/23760 pairs, 400 scored in 20s (20.45 pairs/s), total 781s
+  14400/23760 pairs, 396 scored in 20s (19.75 pairs/s), total 801s
+  14800/23760 pairs, 388 scored in 20s (19.87 pairs/s), total 821s
+  15200/23760 pairs, 399 scored in 25s (16.05 pairs/s), total 846s
+  15600/23760 pairs, 398 scored in 23s (17.43 pairs/s), total 868s
+  16000/23760 pairs, 368 scored in 16s (23.11 pairs/s), total 884s
+  16400/23760 pairs, 381 scored in 14s (26.35 pairs/s), total 899s
+  16800/23760 pairs, 388 scored in 15s (25.14 pairs/s), total 914s
+  17200/23760 pairs, 383 scored in 15s (25.33 pairs/s), total 930s
+  17600/23760 pairs, 389 scored in 15s (25.88 pairs/s), total 945s
+  18000/23760 pairs, 385 scored in 15s (25.00 pairs/s), total 960s
+  18400/23760 pairs, 398 scored in 21s (18.72 pairs/s), total 981s
+  18800/23760 pairs, 398 scored in 17s (22.99 pairs/s), total 999s
+  19200/23760 pairs, 398 scored in 17s (22.94 pairs/s), total 1016s
+  19600/23760 pairs, 393 scored in 15s (25.68 pairs/s), total 1032s
+  20000/23760 pairs, 375 scored in 18s (20.36 pairs/s), total 1050s
+  20400/23760 pairs, 382 scored in 17s (22.91 pairs/s), total 1067s
+  20800/23760 pairs, 394 scored in 19s (20.21 pairs/s), total 1086s
+  21200/23760 pairs, 383 scored in 16s (24.19 pairs/s), total 1102s
+  21600/23760 pairs, 399 scored in 16s (24.19 pairs/s), total 1119s
+  22000/23760 pairs, 400 scored in 18s (21.87 pairs/s), total 1137s
+  22400/23760 pairs, 398 scored in 16s (24.71 pairs/s), total 1153s
+  22800/23760 pairs, 384 scored in 17s (22.01 pairs/s), total 1171s
+  23200/23760 pairs, 388 scored in 19s (20.56 pairs/s), total 1190s
+  23600/23760 pairs, 400 scored in 20s (19.71 pairs/s), total 1210s
+  23760/23760 pairs, 150 scored in 8s (18.14 pairs/s), total 1218s
+   none@20          train 0.5997  dev 0.5609
+   only@10          train 0.5880  dev 0.5197
+   only@20          train 0.5623  dev 0.4888
+   interp@10_w0.1   train 0.6041  dev 0.5673
+   interp@10_w0.2   train 0.6087  dev 0.5671
+   interp@10_w0.3   train 0.6098  dev 0.5651
+   interp@10_w0.4   train 0.6120  dev 0.5611
+   interp@10_w0.5   train 0.6110  dev 0.5561
+   interp@10_w0.6   train 0.6117  dev 0.5486
+   interp@10_w0.7   train 0.6063  dev 0.5442
+   interp@10_w0.8   train 0.6016  dev 0.5387
+   interp@10_w0.9   train 0.5959  dev 0.5264
+   interp@20_w0.1   train 0.6080  dev 0.5681
+   interp@20_w0.2   train 0.6117  dev 0.5689
+   interp@20_w0.3   train 0.6128  dev 0.5672
+   interp@20_w0.4   train 0.6086  dev 0.5656
+   interp@20_w0.5   train 0.6134  dev 0.5572
+   interp@20_w0.6   train 0.6073  dev 0.5486
+   interp@20_w0.7   train 0.6023  dev 0.5402
+   interp@20_w0.8   train 0.5883  dev 0.5232
+   interp@20_w0.9   train 0.5794  dev 0.5069
+== 2a_history_sr: none {'train': 0.5997, 'dev': 0.5609} | best on train interp@20_w0.5 {'train': 0.6134, 'dev': 0.5572} | train boot {'diff': 0.0137, 'ci95': [-0.003, 0.0308], 'p_le_0': 0.0553} | adopted=False | dev boot {'diff': -0.0037, 'ci95': [-0.0148, 0.0076], 'p_le_0': 0.7395}
+=== 15:17:57 exit 0
+=== 15:17:57 RR_S1_DONE 2090 s
+=== 15:17:57 /home/timur_rk/semeval-reteco/.venv/bin/python llm_rerank.py --model qwen3-reranker-0.6b --bits 16 --cond 2a_history_sr --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out ../research/runs_v13/rerank --save-runs ../research/runs_v13/rerank/runs --batch 4 --name sr_S2 --scores ../research/runs_v13/scores/sr_sr_S2.json
+[2a_history_sr] 23760 pairs over 1188 topics
+  400/23760 pairs, 24 scored in 2s (15.28 pairs/s), total 2s
+  800/23760 pairs, 26 scored in 2s (14.87 pairs/s), total 4s
+  1200/23760 pairs, 21 scored in 1s (14.27 pairs/s), total 6s
+  1600/23760 pairs, 34 scored in 2s (17.87 pairs/s), total 8s
+  2000/23760 pairs, 24 scored in 1s (17.29 pairs/s), total 10s
+  2400/23760 pairs, 21 scored in 1s (16.20 pairs/s), total 11s
+  2800/23760 pairs, 42 scored in 3s (14.35 pairs/s), total 14s
+  3200/23760 pairs, 36 scored in 2s (14.84 pairs/s), total 17s
+  3600/23760 pairs, 39 scored in 2s (19.43 pairs/s), total 19s
+  4000/23760 pairs, 44 scored in 2s (21.45 pairs/s), total 21s
+  4400/23760 pairs, 33 scored in 2s (19.71 pairs/s), total 23s
+  4800/23760 pairs, 30 scored in 1s (35.19 pairs/s), total 24s
+  5200/23760 pairs, 32 scored in 1s (22.44 pairs/s), total 25s
+  5600/23760 pairs, 35 scored in 2s (23.17 pairs/s), total 27s
+  6000/23760 pairs, 47 scored in 2s (20.02 pairs/s), total 30s
+  6400/23760 pairs, 29 scored in 1s (23.78 pairs/s), total 31s
+  6800/23760 pairs, 29 scored in 1s (19.54 pairs/s), total 33s
+  7200/23760 pairs, 36 scored in 2s (18.09 pairs/s), total 35s
+  7600/23760 pairs, 23 scored in 2s (15.32 pairs/s), total 36s
+  8000/23760 pairs, 18 scored in 1s (18.52 pairs/s), total 37s
+  8400/23760 pairs, 31 scored in 2s (16.12 pairs/s), total 39s
+  8800/23760 pairs, 32 scored in 2s (16.26 pairs/s), total 41s
+  9200/23760 pairs, 23 scored in 1s (18.45 pairs/s), total 43s
+  9600/23760 pairs, 26 scored in 2s (15.05 pairs/s), total 45s
+  10000/23760 pairs, 26 scored in 1s (18.34 pairs/s), total 46s
+  10400/23760 pairs, 18 scored in 1s (15.96 pairs/s), total 47s
+  10800/23760 pairs, 28 scored in 2s (15.93 pairs/s), total 49s
+  11200/23760 pairs, 25 scored in 2s (15.03 pairs/s), total 51s
+  11600/23760 pairs, 43 scored in 3s (16.46 pairs/s), total 54s
+  12000/23760 pairs, 34 scored in 2s (21.65 pairs/s), total 55s
+  12400/23760 pairs, 31 scored in 2s (15.45 pairs/s), total 57s
+  12800/23760 pairs, 41 scored in 2s (16.67 pairs/s), total 60s
+  13200/23760 pairs, 49 scored in 3s (19.40 pairs/s), total 63s
+  13600/23760 pairs, 25 scored in 2s (13.65 pairs/s), total 65s
+  14000/23760 pairs, 39 scored in 2s (19.44 pairs/s), total 67s
+  14400/23760 pairs, 45 scored in 2s (18.06 pairs/s), total 69s
+  14800/23760 pairs, 37 scored in 2s (22.05 pairs/s), total 71s
+  15200/23760 pairs, 33 scored in 2s (18.03 pairs/s), total 73s
+  15600/23760 pairs, 36 scored in 2s (18.90 pairs/s), total 75s
+  16000/23760 pairs, 39 scored in 1s (26.17 pairs/s), total 76s
+  16400/23760 pairs, 42 scored in 1s (32.04 pairs/s), total 78s
+  16800/23760 pairs, 21 scored in 1s (22.15 pairs/s), total 79s
+  17200/23760 pairs, 18 scored in 1s (27.72 pairs/s), total 79s
+  17600/23760 pairs, 28 scored in 1s (25.73 pairs/s), total 81s
+  18000/23760 pairs, 28 scored in 1s (27.34 pairs/s), total 82s
+  18400/23760 pairs, 44 scored in 3s (17.28 pairs/s), total 84s
+  18800/23760 pairs, 36 scored in 1s (26.66 pairs/s), total 86s
+  19200/23760 pairs, 35 scored in 2s (20.82 pairs/s), total 87s
+  19600/23760 pairs, 32 scored in 1s (23.66 pairs/s), total 89s
+  20000/23760 pairs, 46 scored in 2s (21.09 pairs/s), total 91s
+  20400/23760 pairs, 43 scored in 2s (24.65 pairs/s), total 93s
+  20800/23760 pairs, 36 scored in 2s (21.79 pairs/s), total 95s
+  21200/23760 pairs, 37 scored in 2s (24.20 pairs/s), total 96s
+  21600/23760 pairs, 35 scored in 2s (22.67 pairs/s), total 98s
+  22000/23760 pairs, 26 scored in 1s (22.80 pairs/s), total 99s
+  22400/23760 pairs, 32 scored in 1s (25.44 pairs/s), total 100s
+  22800/23760 pairs, 45 scored in 2s (23.15 pairs/s), total 102s
+  23200/23760 pairs, 39 scored in 2s (17.40 pairs/s), total 105s
+  23600/23760 pairs, 34 scored in 2s (21.84 pairs/s), total 106s
+  23760/23760 pairs, 13 scored in 1s (19.90 pairs/s), total 107s
+   none@20          train 0.5990  dev 0.5718
+   only@10          train 0.5758  dev 0.5256
+   only@20          train 0.5656  dev 0.4944
+   interp@10_w0.1   train 0.6021  dev 0.5729
+   interp@10_w0.2   train 0.6007  dev 0.5738
+   interp@10_w0.3   train 0.6041  dev 0.5712
+   interp@10_w0.4   train 0.6068  dev 0.5690
+   interp@10_w0.5   train 0.6028  dev 0.5658
+   interp@10_w0.6   train 0.6049  dev 0.5569
+   interp@10_w0.7   train 0.5945  dev 0.5505
+   interp@10_w0.8   train 0.5896  dev 0.5463
+   interp@10_w0.9   train 0.5821  dev 0.5315
+   interp@20_w0.1   train 0.6023  dev 0.5740
+   interp@20_w0.2   train 0.6074  dev 0.5742
+   interp@20_w0.3   train 0.6107  dev 0.5768
+   interp@20_w0.4   train 0.6117  dev 0.5755
+   interp@20_w0.5   train 0.6106  dev 0.5685
+   interp@20_w0.6   train 0.6080  dev 0.5598
+   interp@20_w0.7   train 0.5997  dev 0.5463
+   interp@20_w0.8   train 0.5889  dev 0.5293
+   interp@20_w0.9   train 0.5768  dev 0.5123
+== 2a_history_sr: none {'train': 0.599, 'dev': 0.5718} | best on train interp@20_w0.4 {'train': 0.6117, 'dev': 0.5755} | train boot {'diff': 0.0127, 'ci95': [-0.0018, 0.0273], 'p_le_0': 0.0416} | adopted=False | dev boot {'diff': 0.0037, 'ci95': [-0.006, 0.0135], 'p_le_0': 0.2221}
+=== 15:19:55 exit 0
+=== 15:19:55 RR_S2_DONE 2208 s
+=== 15:19:55 /home/timur_rk/semeval-reteco/.venv/bin/python reason_rerank.py --backend bnb --bits 4 --batch 4 --chunk 2000 --pool 50 --track 2 --hybrid ../research/runs_v13/sr/t2/hybrid.json --bm25 ../research/runs_v13/sr/t2/bm25/runs --dense ../research/runs_v13/sr/t2/dense/runs --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out ../research/runs_v13/reason --conditions 2a_current__q+r+h+s 2a_current__s --query-cond 2a_current+sr sr_only --name sr_cur sr_only --save-scores ../research/runs_v13/scores/srx.json --save-runs ../research/runs_v13/sr/runs
+  [2a_current__q+r+h+s] docs 96/96 (25s)
+  [2a_current__q+r+h+s] 96 docs + 1188 queries in 85s
+== t2 2a_current__q+r+h+s: none train 0.3984 dev 0.3543 | best on train ('interp', 0.9): train 0.5123 dev 0.4735 train boot {'diff': 0.1139, 'ci95': [0.0867, 0.1413], 'p_le_0': 0.0}
+   none=0: train 0.3984  dev 0.3543
+   top=10: train 0.4382  dev 0.4053
+   top=20: train 0.4768  dev 0.4386
+   top=50: train 0.5051  dev 0.4687
+   interp=0.1: train 0.4117  dev 0.3638
+   interp=0.2: train 0.4243  dev 0.3779
+   interp=0.3: train 0.4372  dev 0.3928
+   interp=0.4: train 0.4544  dev 0.4082
+   interp=0.5: train 0.468  dev 0.4228
+   interp=0.6: train 0.4853  dev 0.4415
+   interp=0.7: train 0.5004  dev 0.4515
+   interp=0.8: train 0.5088  dev 0.4659
+   interp=0.9: train 0.5123  dev 0.4735
+  [2a_current__s] docs 2000/5602 (254s)
+  [2a_current__s] docs 4000/5602 (421s)
+  [2a_current__s] docs 5602/5602 (538s)
+  [2a_current__s] 5602 docs + 1188 queries in 587s
+== t2 2a_current__s: none train 0.421 dev 0.3972 | best on train ('interp', 0.8): train 0.5158 dev 0.4825 train boot {'diff': 0.0948, 'ci95': [0.0742, 0.1153], 'p_le_0': 0.0}
+   none=0: train 0.421  dev 0.3972
+   top=10: train 0.4562  dev 0.4432
+   top=20: train 0.4824  dev 0.4654
+   top=50: train 0.4936  dev 0.4757
+   interp=0.1: train 0.4343  dev 0.4041
+   interp=0.2: train 0.4439  dev 0.4137
+   interp=0.3: train 0.4566  dev 0.4235
+   interp=0.4: train 0.4773  dev 0.4356
+   interp=0.5: train 0.4909  dev 0.4498
+   interp=0.6: train 0.4975  dev 0.463
+   interp=0.7: train 0.5068  dev 0.4762
+   interp=0.8: train 0.5158  dev 0.4825
+   interp=0.9: train 0.5084  dev 0.4831
+=== 15:31:29 exit 0
+=== 15:31:29 ALLDONE 2902 s

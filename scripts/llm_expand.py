@@ -89,6 +89,18 @@ def history_body(t, answers):
     return body[:MAX_INPUT_CHARS]
 
 
+def history_body_sr(t):
+    """Rule 19, candidate S3: the Hb input with the current turn's `subquestion_reasoning` placed right after the
+    current question (so the character cut removes history, never SR)."""
+    sr = clean(t.get("subquestion_reasoning") or "")
+    hb = history_body(t, answers=True)
+    if not sr:
+        return hb
+    head = f"Current question: {clean(t['query'])}"
+    rest = hb[len(head):]
+    return (head + f"\n\nWhat the documents should cover (task annotation): {sr}" + rest)[:MAX_INPUT_CHARS]
+
+
 def read_jsonl(p):
     with open(p, encoding="utf-8") as f:
         return [json.loads(x) for x in f if x.strip()]
@@ -121,6 +133,8 @@ def inputs(data, track, cond):
                             b = history_body(t, answers=False)
                         elif cond == "2a_hist3qa":
                             b = history_body(t, answers=True)
+                        elif cond == "2a_hist3qa_sr":
+                            b = history_body_sr(t)
                         else:
                             b = f"Question: {clean(t['query'])}"
                         out.append((dom, split, f"{c['id']}_turn_{t['turn_id']}", b))

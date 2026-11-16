@@ -112,7 +112,11 @@ def topics(data, split, cfg, dom):
                 answers = q == "2a_hist3qa"
                 qtext = (t["query"] + "\n" + hist_text(t).strip()).strip()
                 body = history_body(t, answers)
-                out.append((tid, qtext, body, body))
+                if cfg.get("sr", {}).get("llm_input"):  # rule 19 S3: the LLM also sees SR; embedder query stays Hb
+                    from llm_expand import history_body_sr
+                    out.append((tid, qtext, history_body_sr(t), body))
+                else:
+                    out.append((tid, qtext, body, body))
     return out
 
 
