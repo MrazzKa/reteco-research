@@ -53,6 +53,7 @@ def main():
     v["sr"] = {"components": comp, "fallback": "2a_history_rr", "field": "subquestion_reasoning (current turn; text only, "
                "never subquestion_reasoning_metadata)", "rule": "LOG rule 19 (2026-11-16)", "candidate": ch,
                "llm_input": ch == "S3"}
+    v["history"]["reasonembed_query"] = "see reasonembed.query (Hb text + SR)"
     if ch == "S3":
         v["history"]["llm_input"] = ("Hb input + 'What the documents should cover (task annotation): <SR>' after the "
                                      "current question (llm_expand.history_body_sr)")

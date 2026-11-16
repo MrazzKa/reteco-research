@@ -2061,3 +2061,56 @@ result (train subsample / dev): base `2a_history_rr` 0.5999 / 0.5507 · `2a_hist
   analyses: B + SR (no history; ReasonEmbed interp 0.9) 0.5123 / 0.4735 vs B 0.4317 / 0.3779; SR only (BM25 + dense +
   ReasonEmbed on SR alone, interp 0.8) 0.5158 / 0.4825 — as good as the answer-free history run (0.5168 / 0.4802).
   Full report (with bootstraps and breakdowns) after S3: `sr_report.py` → `runs_v13/sr/report.json`, RESULTS AM.
+
+## 2026-11-16 15:32–16:02 — rule 19 result: `2a_history_sr` = S3 (the LLM sees SR); no adoption (separate run)
+command: `queue_1116e.sh`: `llm_expand.py --conditions 2a_hist3qa_sr --chunk 100000` (2,971 inputs, reason 681 s + hyde
+  697 s, one generate() call per prompt), `qexp_search.py` (q+r+h), `hybrid.py` (out `sr/t2/hybrid_s3.json`),
+  `reason_rerank.py --name sr_S3`, `llm_rerank.py --name sr_S3`; then `sr_report.py` (out `runs_v13/sr/report.json`)
+  and `sr_config.py` (writes the `2a_history_sr` block of configs/submission.json from these outputs). 29 min.
+S3 stages (train subsample / dev): hybrid 0.5418 (full train) / 0.4990 → + ReasonEmbed interp 0.8 0.6084 / 0.5700
+  (+0.0544 [+0.0290, +0.0801] over none) → reranker interp@20 w 0.6 0.6194 / 0.5604, +0.0110 [−0.0094, +0.0319] →
+  not adopted.
+choice (final train-subsample macro, rule-16 margin applied per LOG 15:20): S1 0.5997, S2 0.5990, **S3 0.6084** →
+  `2a_history_sr` = S3. (Under the other reading — best reranker way regardless of margin — S3 + reranker 0.6194 would
+  also win; S1 0.6134, S2 0.6117.)
+`2a_history_sr` − `2a_history_rr` (paired bootstrap): train +0.0085 [−0.0146, +0.0315] — the adoption margin would
+  NOT be met; dev (once) **+0.0193 [+0.0048, +0.0335]** (0.5700 vs 0.5507). By source, dev: BRIGHT +0.0440
+  [+0.0262, +0.0616] (0.6724 vs 0.6284), StackExchange −0.0104 [−0.0343, +0.0142] (0.4471 vs 0.4575); train BRIGHT
+  +0.0191 [−0.0140, +0.0530], SE −0.0043. Turn groups / depth: RESULTS AM (`sr/breakdown_{dev,train}.json`).
+other differences (train / dev): S3 − S1 +0.0088 [−0.0032, +0.0214] / +0.0090 [+0.0019, +0.0164]; S1 − S2 +0.0007 /
+  −0.0109; S1 − main −0.0003 / +0.0102; S2 − main −0.0010 / +0.0211 [+0.0077, +0.0347].
+analyses: SR without history (B + SR) − B +0.0806 [+0.0572, +0.1046] / +0.0956 [+0.0805, +0.1112]; SR alone − B
+  +0.0841 / +0.1046; SR alone − main −0.0842 / −0.0682. SR alone (0.4825 dev) is as good as the whole answer-free
+  history run (0.4802) and +0.10 above the current turn.
+reading: on train SR adds nothing measurable on top of the history system (all three candidates within ±0.01 of the
+  main run, intervals across 0); on dev the best candidates gain +0.02, all of it in the BRIGHT domains (+0.04), none
+  on StackExchange. Without history SR is worth +0.08 to +0.10 — it carries much of what the earlier answers carry.
+  Train and dev disagree on the size, the train subsample is small (330 turns), and S3 also changes the LLM draw, so
+  the honest summary is "no train evidence, a dev gain concentrated in BRIGHT". Main run unchanged; `2a_history_sr`
+  is a separate run for the supervisor to decide on.
+
+## 2026-11-16 16:02–16:09 — S2c result: `2a_history_sr` in submission.json and submit.py, checks pass
+config: `sr_config.py` wrote the `2a_history_sr` block (copy of `2a_history_rr` with: `sr` {components q r h,
+  llm_input true (S3), fallback `2a_history_rr`, text only}, fusion z-score α 0.6, ReasonEmbed interp 0.8 with the
+  Hb + SR query, no reranker (not adopted), run id `UA_2a_history_sr`); listed under `_separate_runs` — not in
+  `_main_runs`, not in `_auto_2a`. submit.py: SR in the LLM input (llm_expand.history_body_sr), ReasonEmbed query
+  Hb + "\nReasoning: " + SR (history cut to 512 tokens), and the per-turn fallback (`sr_fallback`: a turn with an
+  empty SR gets the `2a_history_rr` ranking; counters `sr` per domain and `sr_summary` in the manifest).
+  `make_test_release.py --keep-sr` keeps the two SR fields (the test has them, organisers 10.11).
+checks (`queue_1116d.sh`, 6.3 min; out `runs_v13/sr/s2c_check.json`):
+  dev: `submit.py --variants 2a_history_sr --split dev` → official macro **0.5700 = research 0.5700**; checker exit 0.
+  synthetic test release from dev WITH SR: 858 / 858 turns use SR, 0 fall back; 2a_history_sr 0.5700, 2a_auto →
+  2a_history_rr 11/11 (0.5507); format_checker exit 0 on every file.
+  the same release WITHOUT the SR field: 858 / 858 turns fall back; the 2a_history_sr files are identical to
+  2a_history_rr in 11 / 11 domains (0.5507); format_checker exit 0.
+cost on the test (estimate from these runs): the SR run adds ≈ 400 LLM generations (~1.5 min at 4.3 inputs/s), ~200
+  ReasonEmbed queries and a few dozen new documents, BM25/dense ~0.5 min → ≈ +3–5 min to the 1.6 h.
+addendum 16:15 (rule 19, dev turn groups of `sr/breakdown_dev.json`; analysis): the SR run's dev gain sits on first
+  turns (0.5627 vs 0.5090, 211) and new-gold turns (0.4741 vs 0.3326, 79); recycled-gold turns are unchanged (0.6464 vs
+  0.6432, 568) — SR helps where the earlier answers cannot. Paper table 8 (`t8_sr.tex`) regenerated with these columns.
+
+## 2026-11-16 16:15 — S3 (final pass) and RESULTS
+`paper_tables.py` re-run with every input present (552 numbers; all eight tables complete); `make_results.py` →
+  RESULTS sections X (2026-11-16), AL (SR reconnaissance), AM (rule 19), AN (M0), AO (error types), AP (paper tables).
+  Section X of 10.11 kept below as history. README updated (submission without pool 100, SR run, paper tables).
+time S2 + S3 + S4 + S2c: estimate ~6–8 h / actual 14:24–16:15 (≈ 1.9 h; GPU 14:43–16:09).

@@ -967,6 +967,109 @@
    "dev_research": 0.3801,
    "role": "unused since 2026-11-11 (pool 100 dropped by the supervisor for cost; kept to reproduce the tables)",
    "train_research": 0.4389
+  },
+  "2a_history_sr": {
+   "track": 2,
+   "query": "2a_hist3qa",
+   "run_id": "UA_2a_history_sr",
+   "domains": [
+    "drones",
+    "politics",
+    "law",
+    "medicalsciences",
+    "hardware",
+    "economics",
+    "psychology",
+    "biology",
+    "sustainable_living",
+    "robotics",
+    "earth_science"
+   ],
+   "llm": {
+    "name": "qwen3-4b",
+    "checkpoint": "cyankiwi/Qwen3-4B-Instruct-2507-AWQ-4bit",
+    "revision": "b37d1ccb77e27a70fe4222d995fda27940eead5a",
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "quant": "AWQ W4A16 (compressed-tensors)",
+    "engine": "vLLM 0.32.0, enforce_eager",
+    "temperature": 0.0,
+    "max_new_tokens": 256,
+    "seed": 0,
+    "max_input_chars": 3000,
+    "prompts": [
+     "reason",
+     "hyde"
+    ],
+    "prompt_texts": {
+     "reason": "Read the question below. First, reason briefly about what knowledge is needed to answer it. Then describe what a relevant document would look like: its topic, the key concepts, terms and entities it would mention{time}. Keep the whole answer under 150 words.\n\n{body}",
+     "hyde": "Write a short passage (about 100 words) that could appear in a document that helps answer the question below. Write it as factual reference text, not as a reply to the asker{time}.\n\n{body}"
+    },
+    "system": "You help a search engine find documents. Answer in plain English text only.",
+    "time_hint_track1": {
+     "reason": "; if the question refers to a time (years, periods, events), state that time explicitly",
+     "hyde": "; if the question refers to a time (years, periods, events), place the passage in that time"
+    },
+    "cache": "research/runs_v13/llm/t2"
+   },
+   "variant": "q+r+h",
+   "bm25": {
+    "impl": "bm25s 0.2 (Lucene variant)",
+    "k1": 0.9,
+    "b": 0.4,
+    "analyzer": "lucene",
+    "depth": 1000,
+    "text": "q \\n r \\n h"
+   },
+   "dense": {
+    "model": "bge-base",
+    "checkpoint": "BAAI/bge-base-en-v1.5",
+    "max_len": 512,
+    "emb": "research/runs_v12/emb",
+    "maxp": false,
+    "query_vector": "normalised sum of e_query(q), e_query(r), e_doc(h)"
+   },
+   "hybrid": {
+    "kind": "linear",
+    "kb": 100,
+    "kd": 100,
+    "norm": "zscore",
+    "alpha": 0.6
+   },
+   "reasonembed": {
+    "checkpoint": "hanhainebula/reason-embed-qwen3-4b-0928",
+    "quant": "bitsandbytes NF4, fp16 compute",
+    "pooling": "last token, L2-normalised",
+    "max_len": 512,
+    "doc_max_chars": 4000,
+    "pool": 50,
+    "how": "interp",
+    "cache": "research/runs_v13/reason/cache/reasonembed-4b_4bit_L512",
+    "instruction": "Given a <domain> conversation, retrieve documents that help answer the current question.",
+    "w": 0.8,
+    "query": "Hb query (current question first + <= 3 earlier Q/A turns, whitespace-collapsed) + '\\nReasoning: ' + s; history cut so that the instructed query fits max_len (never s)"
+   },
+   "depth": 1000,
+   "source": "rule 19 candidate S3 (BM25 q + r + h; s = subquestion_reasoning), fusion zscore a 0.6 on train, ReasonEmbed interp=0.8, reranker not adopted (rule 16 margin) (train subsample); base = 2a_history_rr",
+   "dev_research": 0.57,
+   "history": {
+    "llm_input": "Hb input + 'What the documents should cover (task annotation): <SR>' after the current question (llm_expand.history_body_sr)",
+    "q_text": "current question + newline + released conversation_history",
+    "reasonembed_query": "see reasonembed.query (Hb text + SR)"
+   },
+   "role": "separate run (rule 19, subquestion_reasoning); not main — the supervisor decides",
+   "train_research": 0.6084,
+   "sr": {
+    "components": [
+     "q",
+     "r",
+     "h"
+    ],
+    "fallback": "2a_history_rr",
+    "field": "subquestion_reasoning (current turn; text only, never subquestion_reasoning_metadata)",
+    "rule": "LOG rule 19 (2026-11-16)",
+    "candidate": "S3",
+    "llm_input": true
+   }
   }
  },
  "_main_runs": {
@@ -1002,5 +1105,11 @@
    "2a_nomaxp_p100"
   ],
   "why": "pool 100 dropped by the supervisor on 2026-11-11 (cost decision, not a train rule)"
+ },
+ "_separate_runs": {
+  "2a": [
+   "2a_history_sr"
+  ],
+  "why": "rule 19: tested as a separate run (supervisor, 11.11)"
  }
 }

@@ -16,8 +16,10 @@ cost (1a 0.3672 → 0.3667, 2a current 0.3801 → 0.3779). Track 2a: `submit.py 
   ReasonEmbed; no LLM; no answer text reaches any input — asserted per topic).
 Fallbacks (supervisor, 11.11): 1a / 1b without ReasonEmbed (`1a_noRE` 0.3258, `1b_noRE` 0.3505); 2a without the
 reranker (`2a_history` 0.5475) and without answers (`2a_history_q`); current turn `2a_nomaxp` 0.3779 / `2a_maxp` 0.3901.
-`subquestion_reasoning` (a Track-2 test field, organisers 10.11) is tested as a separate run `2a_history_sr` (rule 19,
-RESULTS AL–AM); the main run does not change without the supervisor's decision. Paper tables: `research/paper_tables/`
+`subquestion_reasoning` (a Track-2 test field, organisers 10.11; no ids, no copied gold text, but written with
+knowledge of the target) is tested as a separate run `2a_history_sr` (rule 19, RESULTS AL–AM): dev **0.5700**
+[+0.019 over the main run, CI +0.005…+0.034; all of it in the BRIGHT domains], train +0.009 (CI across 0, margin not
+met). The main run does not change without the supervisor's decision. Full test without pool 100 ≈ 1.6 h. Paper tables: `research/paper_tables/`
 (`scripts/paper_tables.py`). Tables: `research/RESULTS.md` (X, AL–AP = 2026-11-16; Z–AK = 2026-11-10; T–Y = 2026-11-02;
 M–S = week 5). Every main number is reproduced exactly by `scripts/submit.py` from the topic files with the official
 scorer.

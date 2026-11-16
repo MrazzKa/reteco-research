@@ -1,0 +1,36 @@
+{
+ "sr": {
+  "sr_summary": {
+   "turns": 858,
+   "turns_with_sr": 858,
+   "turns_fallback": 0
+  },
+  "domains_identical_to_2a_history_rr": [
+   0,
+   11
+  ],
+  "scores": {
+   "2a_history_sr": 0.57,
+   "2a_history_rr": 0.5507,
+   "2a_auto": 0.5507
+  },
+  "format_checker_all_exit0": true
+ },
+ "nosr": {
+  "sr_summary": {
+   "turns": 858,
+   "turns_with_sr": 0,
+   "turns_fallback": 858
+  },
+  "domains_identical_to_2a_history_rr": [
+   11,
+   11
+  ],
+  "scores": {
+   "2a_history_sr": 0.5507,
+   "2a_history_rr": 0.5507,
+   "2a_auto": 0.5507
+  },
+  "format_checker_all_exit0": true
+ }
+}

@@ -147,7 +147,8 @@ def main():
     bd = {}
     for sp in ("dev", "train"):
         tmp = os.path.join(R, "sr", f"breakdown_{sp}.json")
-        labs = [base, ch, "2a_history (no reranker)", "B current turn", "B + SR (no history)", "SR only"]
+        labs = [base, ch] + [cand[k] for k in cand if cand[k] != ch] + ["2a_history (no reranker)", "B current turn",
+                                                                         "B + SR (no history)", "SR only", "H0q+RE (no answers)"]
         cmd = [sys.executable, os.path.join(HERE, "t2_breakdown.py"), "--data", a.data, "--kit", a.kit, "--split", sp,
                "--only-run-topics", "--out", tmp] + [x for lab in labs for x in ("--run", f"{lab}={pats[lab]}")]
         subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL)

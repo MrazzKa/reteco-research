@@ -519,18 +519,43 @@ def t8_sr(R, out):
     sr = jload(os.path.join(R, "sr", "report.json"))
     if not sr:
         return placeholder(out, "t8_sr.tex", "research/runs_v13/sr/report.json not written yet (rule 19)")
+    show = [("2a_history_rr (main)", "Main run (history + ReasonEmbed + reranker)", "main"),
+            ("S1 final (q+r+h+s)", "S1: SR added to BM25 / dense / ReasonEmbed", "s1"),
+            ("S2 final (q+s+h)", "S2: SR replaces the LLM reason", "s2"),
+            ("S3 final (LLM sees SR)", "S3: LLM input + ReasonEmbed query with SR (SR run)", "s3"),
+            ("B current turn", "Current turn only (B)", "b"),
+            ("B + SR (no history)", "B + SR, no history", "b_sr"),
+            ("SR only", "SR alone (BM25 + dense + ReasonEmbed)", "sr_only"),
+            ("H0q+RE (no answers)", "Answer-free history run", "h0q")]
+    byname = {r["system"]: r for r in sr.get("rows", [])}
+    bd = {k: v for k, v in sr.get("breakdown", {}).get("dev", {}).items()}
     rows = []
-    for i, r in enumerate(sr.get("rows", [])):
-        key = f"sr.{r.get('key', i)}"
-        put(key + ".train", r.get("train"))
-        put(key + ".dev", r.get("dev"))
-        rows.append([esc(r["system"]), fv_ci(r.get("train"), r.get("train_ci")), fv_ci(r.get("dev"), r.get("dev_ci"))])
-    for sp, b in (sr.get("diff") or {}).items():
-        b = {"diff": b.get("delta", b.get("diff")), "ci95": b["ci95"]}
-        put_ci(f"sr.diff.{sp}", b)
-        rows.append([f"$\\Delta$ SR run $-$ main ({sp})", fci(b) if sp == "train" else "", fci(b) if sp == "dev" else ""])
-    table(out, "t8_sr.tex", "Using the released \\texttt{subquestion\\_reasoning} text of the current turn (rule 19; a "
-          "separate run, not the main submission).", "tab:sr", "lcc", ["System", "Train", "Dev"], rows)
+    for sysname, label, key in show:
+        r = byname.get(sysname)
+        if not r:
+            continue
+        g = bd.get(sysname, {}).get("groups", {})
+        for k_ in ("train", "dev", "dev_bright", "dev_se"):
+            put(f"sr.{key}.{k_}", r.get(k_))
+        for gk in ("first_turn", "new_gold", "recycled_gold"):
+            if gk in g:
+                put(f"sr.{key}.dev_{gk}", g[gk]["ndcg10"])
+        rows.append([label, fv_ci(r.get("train"), None), fv_ci(r.get("dev"), None), fv_ci(r.get("dev_bright"), None),
+                     fv_ci(r.get("dev_se"), None),
+                     fv_ci(g.get("first_turn", {}).get("ndcg10"), None), fv_ci(g.get("new_gold", {}).get("ndcg10"), None)])
+    d = sr.get("diffs", {})
+    for sp in ("train", "dev"):
+        for part in ("all", "bright", "se"):
+            if part in d.get(sp, {}):
+                put_ci(f"sr.diff.{sp}.{part}", d[sp][part])
+    put("sr.margin_met_on_train", sr.get("margin_would_be_met_on_train"))
+    note = (f"SR run $-$ main: train {fci(d['train']['all'])}, dev {fci(d['dev']['all'])} (BRIGHT "
+            f"{fci(d['dev']['bright'])}, StackExchange {fci(d['dev']['se'])}).") if d else None
+    table(out, "t8_sr.tex", "Using the released \\texttt{subquestion\\_reasoning} (SR) text of the current turn (rule 19; "
+          "a separate run, not the main submission). Train = rule-8 subsample; dev groups are means over turns "
+          "(first turns 211, new-gold turns 79). No candidate used the reranker (rule-16 margin not met).",
+          "tab:sr", "lcccccc", ["System", "Train", "Dev", "Dev BRIGHT", "Dev SE", "Dev first turn", "Dev new gold"],
+          rows, note=note, star=True)
 
 
 def main():
