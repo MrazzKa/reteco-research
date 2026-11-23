@@ -7,7 +7,24 @@ cd ~/semeval-reteco/reteco-research/scripts
 ~/semeval-reteco/.venv/bin/python paper_tables.py --root .. --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit [--digits 3]
 ```
 
-Each `.tex` is a `table`/`table*` with booktabs, caption and label (`\usepackage{booktabs}`). `numbers.json` holds every
+Each `.tex` is a `table`/`table*` with booktabs, caption and label (`\usepackage{booktabs}`). Numbers in the `.tex`
+are rounded half-up (Decimal): 0.5475 → 0.548 (since 2026-11-23; before, binary-float rounding gave 0.547).
+
+**Main text (one column, `table`, `\small`, ≤ 5 columns)** — built from `numbers.json` after the wide tables:
+
+| file | label | content |
+| --- | --- | --- |
+| `c_main.tex` | `tab:main` | task, run, train, dev [CI]: official BM25, main run, backups (1a/1b without ReasonEmbed; 2a without reranker, without answers = `_auto_2a.without_answers`) |
+| `c_ablation.tex` | `tab:ablation` | stages × {1a, 1b, 2a cur., 2a hist.}, dev |
+| `c_answers.tex` | `tab:answers` | reference / LLM-written / none (M0) / current turn; train, dev, recycled, new |
+| `c_sr.tex` | `tab:sr` | main / + SR / SR alone / current turn + SR / current turn; train, dev, dev new |
+| `c_variants.tex` | `tab:variants` | q / q+r / q+h / q+r+h with ReasonEmbed (+ BM25 / hybrid q), dev, 4 conditions |
+| `c_guidance.tex` | `tab:guidance` | main / G1 / G2; 1a and 1b train, dev |
+
+**Appendix (wide, `table*`)**: every `t*.tex` below; labels `tab:app-<name>` (`tab:app-submission`, `tab:app-ablation`,
+`tab:app-answers`, `tab:app-negative`, `tab:app-compute`, `tab:app-domains-t1`, `tab:app-domains-t2`, `tab:app-noise`,
+`tab:app-sr`, `tab:app-variants`, `tab:app-recall`, `tab:app-guidance`, `tab:app-llm-draws`). The labels without
+`app-` before 2026-11-23 (`tab:submission`, …) no longer exist. `numbers.json` holds every
 number the text may cite (4 decimals; `<key>.ci_lo` / `<key>.ci_hi` for 95% intervals). Placeholders (a single
 comment line) are written when an input does not exist yet; the script prints a WARNING/NOTE for each fallback.
 
@@ -21,6 +38,9 @@ comment line) are written when an input does not exist yet; the script prints a 
 | `t6_domains_t1.tex`, `t6_domains_t2.tex` | dev nDCG@10 per domain of the main runs (1a, 1b; 2a with BRIGHT / StackExchange) | X, A | `submit_check_1116.json` (fallback: recomputed with the official nDCG from `submit/dev_1116/` or `submit/dev/` + qrels) |
 | `t7_noise.tex` | cached vs fresh LLM texts (cold dress rehearsal), paired CI; identical generations | AK, AI | `cold_full/c1_report.json`, `nondet/report.json` |
 | `t8_sr.tex` | `subquestion_reasoning` run (rule 19) | new section (S2) | `sr/report.json` (keys `rows` [{system, train, dev, train_ci?, dev_ci?, key?}], `diff` {train/dev: {delta, ci95}}) |
+| `t9_variants.tex`, `t9_recall.tex` | query variants q / q+r / q+h / q+r+h through hybrid + ReasonEmbed (+ BM25 / hybrid q); recall@k of the q+r+h hybrid and ReasonEmbed cost per pool depth | AQ | `n1/report.json` (`scripts/n1_report.py`) |
+| `t10_guidance.tex` | Track-1 query-side guidance, G1 / G2 vs main (rule 20) | AR | `guid/report.json` (`scripts/g_report.py`) |
+| `t11_draws.tex` | spread over 4 LLM draws (research cache + 3 shuffled fresh generations) of the main runs and of the paper's differences | AT | `n4/report.json` (`scripts/n4_report.py`) |
 
 ## Notes on individual tables
 

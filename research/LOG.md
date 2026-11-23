@@ -2373,3 +2373,12 @@ time: estimate ~1 h / actual ~15 min of work + 2 min GPU.
   0.3754 / 0.3442 / 0.5999 / 0.5830 / 0.5169 / 0.5220 / 0.5205 — all equal to the research numbers except the 2a
   history hybrid stage on the subsample, 0.5169 vs 0.5170 (one tie-level topic; the final stages match exactly).
   So r1–r3 are read with this machinery (rule N4).
+
+## 2026-11-23 15:40 — N5: paper tables (CPU)
+`scripts/paper_tables.py`: half-up rounding through Decimal in the `.tex` (0.5475 → 0.548; 9 old tables changed in the
+  third decimal); compact one-column tables for the main text from `numbers.json` — `c_main` (tab:main), `c_ablation`
+  (tab:ablation), `c_answers` (tab:answers), `c_sr` (tab:sr), `c_variants` (tab:variants, N1), `c_guidance`
+  (tab:guidance, rule 20); the wide tables keep their content with labels `tab:app-*`; new appendix tables
+  `t9_variants`, `t9_recall` (N1), `t10_guidance` (rule 20), `t11_draws` (N4, filled when N4 ends); numbers.json keys
+  n1.* / recall.* / cost.* / guid.* / draws.*. README of the folder updated (sources, labels). RESULTS regenerated
+  (`make_results.py` + new `results_1123.py`: sections AQ, AR, AS so far).

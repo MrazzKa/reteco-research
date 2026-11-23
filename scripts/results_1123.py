@@ -144,8 +144,8 @@ def week9(root):
                 L.append(f"| {k} | {f4(t) if t else '–'} | {f4(x['macro'])} | {f4(gr['first_turn']['ndcg10'])} | "
                          f"{f4(gr['recycled_gold']['ndcg10'])} | {f4(gr['new_gold']['ndcg10'])} | {_b(next((v for kk, v in x.items() if kk.startswith('vs_')), None))} |")
             tb = r14b.get("M0 main pipeline, no answers", {}).get("vs_H0q+RE (rule 14)")
-            L += ["", f"Train subsample M0 − H0q+RE: {_b(tb)} (rule 14b); dev: first row of the table's last column "
-                  "is M0 vs itself, the H0q+RE row gives H0q+RE − M0.", ""]
+            L += ["", f"Last column: system − M0 on dev (paired bootstrap within domain). Train subsample M0 − H0q+RE: "
+                  f"{_b(tb)} (rule 14b).", ""]
     n4 = jload(os.path.join(R, "n4", "report.json"))
     if n4:
         L += ["## AT. Several LLM draws (N4, analysis, no choice)", "",
