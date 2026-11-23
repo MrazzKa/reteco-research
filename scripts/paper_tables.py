@@ -715,7 +715,7 @@ def t11_draws(R, out):
     rows.append("MID")
     for s in n4["diffs"]["dev"]:
         d, t = n4["diffs"]["dev"][s], n4["diffs"]["trainsub"].get(s)
-        rows.append([esc(s), f"{f(t['mean'], True)} $\\pm$ {f(t['sd'])}" if t else "--", f(t["range"]) if t else "--",
+        rows.append([esc(s).replace(" - ", " $-$ "), f"{f(t['mean'], True)} $\\pm$ {f(t['sd'])}" if t else "--", f(t["range"]) if t else "--",
                      f"{f(d['mean'], True)} $\\pm$ {f(d['sd'])}", f(d["range"])])
     n = len(n4["realisations"])
     table(out, "t11_draws.tex", f"Spread over {n} LLM draws (the research cache and {n - 1} fresh generations with a "

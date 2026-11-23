@@ -117,6 +117,36 @@ Dev per domain, 1b chosen − main: monero +0.019, workplace +0.012, politics +0
 
 Last column: system − M0 on dev (paired bootstrap within domain). Train subsample M0 − H0q+RE: +0.0052 [-0.0111, +0.0220] (rule 14b).
 
+## AT. Several LLM draws (N4, analysis, no choice)
+
+Realisations [0, 1, 2, 3]: 0 = the research generation cache; 1–3 = fresh generations of every LLM input with the input order shuffled (random.Random(s)), temperature 0, one vLLM call per track. Everything after the LLM is the frozen submission pipeline (`submit.py --stages`). Mean, SD (n − 1) and range of the domain-macro nDCG@10; differences are taken within each draw.
+
+| system | train mean ± SD | train range | dev mean ± SD | dev range | dev per draw |
+| --- | --- | ---: | --- | ---: | --- |
+| 1a | 0.3098 ± 0.0014 | 0.0031 | 0.3655 ± 0.0020 | 0.0042 | 0.3667, 0.3675, 0.3634, 0.3643 |
+| 1a hybrid | 0.2813 ± 0.0010 | 0.0024 | 0.3291 ± 0.0070 | 0.0160 | 0.3258, 0.3392, 0.3280, 0.3232 |
+| 1b | 0.3742 ± 0.0013 | 0.0025 | 0.4054 ± 0.0006 | 0.0012 | 0.4053, 0.4059, 0.4058, 0.4047 |
+| 1b hybrid | 0.3426 ± 0.0017 | 0.0032 | 0.3518 ± 0.0030 | 0.0061 | 0.3505, 0.3563, 0.3502, 0.3501 |
+| 2a_history_rr | 0.6007 ± 0.0016 | 0.0033 | 0.5513 ± 0.0010 | 0.0022 | 0.5507, 0.5526, 0.5504, 0.5515 |
+| 2a_history | 0.5826 ± 0.0010 | 0.0020 | 0.5470 ± 0.0006 | 0.0012 | 0.5475, 0.5476, 0.5466, 0.5464 |
+| 2a history hybrid | 0.5191 ± 0.0018 | 0.0043 | 0.4615 ± 0.0017 | 0.0038 | 0.4601, 0.4608, 0.4639, 0.4610 |
+| M0 | 0.5191 ± 0.0022 | 0.0053 | 0.4904 ± 0.0014 | 0.0033 | 0.4908, 0.4917, 0.4884, 0.4907 |
+| LLM-written answers | 0.5193 ± 0.0014 | 0.0031 | 0.4840 ± 0.0011 | 0.0026 | 0.4823, 0.4842, 0.4850, 0.4844 |
+
+| difference | train mean ± SD | train min…max | dev mean ± SD | dev min…max |
+| --- | --- | --- | --- | --- |
+| reference answers - M0 | +0.0634 ± 0.0016 | +0.0610 … +0.0646 | +0.0566 ± 0.0012 | +0.0557 … +0.0582 |
+| LLM-written answers - M0 | +0.0001 ± 0.0011 | -0.0015 … +0.0008 | -0.0064 ± 0.0022 | -0.0085 … -0.0034 |
+| +ReasonEmbed 1a | +0.0285 ± 0.0023 | +0.0254 … +0.0309 | +0.0364 ± 0.0060 | +0.0283 … +0.0411 |
+| +ReasonEmbed 1b | +0.0316 ± 0.0019 | +0.0294 … +0.0339 | +0.0536 ± 0.0027 | +0.0496 … +0.0556 |
+| +ReasonEmbed 2a history | +0.0635 ± 0.0020 | +0.0619 … +0.0662 | +0.0855 ± 0.0021 | +0.0827 … +0.0874 |
+| +LLM 1a | +0.0311 ± 0.0014 | +0.0291 … +0.0321 | +0.0179 ± 0.0020 | +0.0158 … +0.0200 |
+| +LLM 1b | +0.0250 ± 0.0013 | +0.0237 … +0.0262 | +0.0397 ± 0.0006 | +0.0390 … +0.0402 |
+| +LLM 2a history | +0.0021 ± 0.0010 | +0.0006 … +0.0026 | +0.0093 ± 0.0006 | +0.0087 … +0.0099 |
+| +reranker 2a history | +0.0182 ± 0.0010 | +0.0169 … +0.0191 | +0.0043 ± 0.0009 | +0.0032 … +0.0051 |
+
+r0 reproduces every research number: False. Generations identical to the research cache: s1.t1.reason 506/2459, s1.t1.hyde 441/2459, s1.t2.reason 645/2984, s1.t2.hyde 684/2984, s2.t1.reason 489/2459, s2.t1.hyde 429/2459, s2.t2.reason 699/2984, s2.t2.hyde 668/2984, s3.t1.reason 480/2459, s3.t1.hyde 401/2459, s3.t2.reason 719/2984, s3.t2.hyde 676/2984.
+
 # 2026-11-16: submission without pool 100, subquestion_reasoning (rule 19), paper tables, error types
 
 Supervisor decisions of 11.11 and organisers' answers of 10.11 / 13.11 / 15.11 are recorded in `research/LOG.md` (entry 2026-11-16 14:21). Rule 19 was written before any run that uses `subquestion_reasoning`.
