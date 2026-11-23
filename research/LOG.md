@@ -2289,8 +2289,8 @@ estimate: LLM ~45 min per realisation (≈ 5,400 unique inputs × 2 prompts) →
   realisation (Track-1 BM25 indexes dominate) → ~2 h; in all ≈ 4–4.5 h GPU (queue_1123c, after rule 20 and N3).
 
 ## 2026-11-23 12:55–13:19 — N1 result: query variants through the final system; recall@k; ReasonEmbed cost (analysis, no choice)
-commands: `queue_1123a.sh` (qexp_search history q+r / q+h 1.5 min; hybrid.py `hist/t2/hybrid_n1.json` 4 min — both
-  z-score α 0.7 (q+r) / see report; ReasonEmbed 10 runs 13:01–13:19, new pool documents only for the q pools), then
+commands: `queue_1123a.sh` (qexp_search history q+r / q+h 1.5 min; hybrid.py `hist/t2/hybrid_n1.json` 4 min — q+r z-score α 0.6, train 0.5099 / dev 0.4595;
+  q+h z-score α 0.7, 0.5079 / 0.4588; ReasonEmbed 10 runs 13:01–13:19, new pool documents only for the q pools), then
   `python3 n1_report.py --root .. --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out
   ../research/runs_v13/n1/report.json` (every final macro re-computed from the score dumps and asserted equal to the
   reason_rerank report). Every variant met the rule-8 margin for ReasonEmbed (way interp 0.7–0.9).
