@@ -54,6 +54,9 @@ HIST_QCONDS = {"2a_hist3q": False, "2a_hist3qa": True}  # query = current questi
 # rule 19: query conditions with the current turn's `subquestion_reasoning` (s): base text + "\nReasoning: " + s,
 # the base cut to the token limit (never s). "sr_only" = s alone. Value: base query condition (None = no base).
 SR_QCONDS = {"2a_hist3qa+sr": "2a_hist3qa", "2a_current+sr": "2a_current", "sr_only": None}
+# rule 20 (Track 1): query text + "\nGuidance: " + g (guidance.guidance_text of the query; 1b steps: their query's g),
+# the query text cut first. Value: base query condition.
+GUID_QCONDS = {"1a+g": "1a", "1b_query+step+g": "1b_query+step"}
 
 
 def instruction(track, cond, dom, qcond=None):
@@ -222,7 +225,7 @@ def main():
                 bm = read_run(os.path.join(a.bm25, f"{pre}_{cond}.tsv"))
                 de = read_run(os.path.join(a.dense, f"{pre}_{dcond}.tsv"))
                 base_qc = SR_QCONDS.get(qcond, qcond) if qcond in SR_QCONDS else qcond
-                pq = "2a_current" if (qcond in SR_QCONDS or qcond in HIST_QCONDS) else qcond
+                pq = "2a_current" if (qcond in SR_QCONDS or qcond in HIST_QCONDS) else GUID_QCONDS.get(qcond, qcond)
                 (_, queries, gold), = [p for p in plan(a.track, os.path.join(a.data, sub, dom), split)
                                        if p[0] == pq]
                 qtext = dict(queries)
@@ -257,6 +260,22 @@ def main():
                             txt, cut = join_cut(a._tok, base, s_, a.max_len, wrap=lambda x: fmt.format(ins=ins, q=x))
                         stats["sr_base_cut"] = stats.get("sr_base_cut", 0) + cut
                         stats["sr_empty"] = stats.get("sr_empty", 0) + (not s_)
+                        qts.append(fmt.format(ins=ins, q=txt))
+                    per[split][dom] = (qids, pools, gold, qts)
+                elif qcond in GUID_QCONDS:
+                    from guidance import SEP as GSEP, topic_guidance
+                    from sr import join_cut
+                    from transformers import AutoTokenizer
+                    if not hasattr(a, "_tok"):
+                        a._tok = AutoTokenizer.from_pretrained(ckpt, revision=REVISIONS.get(a.model))
+                    gds = topic_guidance(a.data, dom, split, GUID_QCONDS[qcond])
+                    qts = []
+                    for q in qids:
+                        g_ = clean(gds.get(q, ""))
+                        txt, cut = join_cut(a._tok, clean(qtext[q]), g_, a.max_len,
+                                            wrap=lambda x: fmt.format(ins=ins, q=x), sep=GSEP)
+                        stats["guid_base_cut"] = stats.get("guid_base_cut", 0) + cut
+                        stats["guid_empty"] = stats.get("guid_empty", 0) + (not g_)
                         qts.append(fmt.format(ins=ins, q=txt))
                     per[split][dom] = (qids, pools, gold, qts)
                 else:

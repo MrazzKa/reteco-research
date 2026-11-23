@@ -52,3 +52,9 @@ research/runs_v13/cold_full/release/
 # 2026-11-16: rule 19 (subquestion_reasoning) synthetic releases and submission runs; error-analysis material is kept
 research/runs_v13/sr/rel_*/
 research/runs_v13/sr/sub_*/
+# 2026-11-23: guidance (rule 20) generations, LLM-draw (N4) generations / releases / runs, test-day rehearsal
+research/runs_v13/guid/llm/
+research/runs_v13/n4/llm/
+research/runs_v13/n4/rel/
+research/runs_v13/n4/sub/
+research/runs_v13/testday/

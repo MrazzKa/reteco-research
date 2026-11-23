@@ -113,16 +113,27 @@ def inputs(data, track, cond):
         for dom in (T1 if track == 1 else T2):
             if track == 1:
                 d = os.path.join(data, "track1_tempo", dom)
-                if cond == "1a":
+                gm = {}
+                if cond.endswith("_g"):  # rule 20 G2: the LLM also sees the query-side guidance g
+                    from guidance import guidance_map
+                    gm = guidance_map(data, dom, split)
+                if cond in ("1a", "1a_g"):
                     for r in read_jsonl(os.path.join(d, f"examples_{split}.jsonl")):
-                        out.append((dom, split, r["id"], f"Question: {clean(r['query'])}"))
+                        b = f"Question: {clean(r['query'])}"
+                        if gm:
+                            from guidance import llm_body
+                            b = llm_body(b, gm.get(str(r["id"]), ""), MAX_INPUT_CHARS)
+                        out.append((dom, split, r["id"], b))
                 else:
                     for r in read_jsonl(os.path.join(d, f"steps_{split}.jsonl")):
                         for s in r.get("steps", []):
-                            out.append((dom, split, s["step_id"],
-                                        f"Question: {clean(r['query'])}\n\nCurrent research step "
-                                        f"(the document should serve this step): "
-                                        f"{clean(s.get('step_instruction', ''))}"))
+                            b = (f"Question: {clean(r['query'])}\n\nCurrent research step "
+                                 f"(the document should serve this step): "
+                                 f"{clean(s.get('step_instruction', ''))}")
+                            if gm:
+                                from guidance import llm_body
+                                b = llm_body(b, gm.get(str(r["id"]), ""), MAX_INPUT_CHARS)
+                            out.append((dom, split, s["step_id"], b))
             else:
                 d = os.path.join(data, "track2_recor", dom)
                 bench = json.load(open(os.path.join(d, f"benchmark_{split}.json"), encoding="utf-8"))
@@ -163,6 +174,10 @@ def main():
     ap.add_argument("--splits", nargs="+", default=["train", "dev"])
     ap.add_argument("--samples", type=int, default=1, help="rule 13: n sampled outputs per input (stored as a list)")
     ap.add_argument("--temperature", type=float, default=0.0)
+    ap.add_argument("--merge-conditions", action="store_true",
+                    help="all --conditions in one input list (one generate() call per prompt with --chunk large)")
+    ap.add_argument("--shuffle-seed", type=int, help="N4: shuffle the unique inputs with random.Random(seed) "
+                    "before generating (a different batch composition; the cache key does not change)")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     model, quant = LLMS[a.llm]
@@ -191,15 +206,20 @@ def main():
         if os.path.exists(path):
             with open(path, encoding="utf-8") as f:
                 done = {json.loads(x)["key"] for x in f if x.strip()}
-        for cond in (a.conditions or ["bodies"]):
+        conds = ["|".join(a.conditions)] if (a.merge_conditions and a.conditions) else (a.conditions or ["bodies"])
+        for cond in conds:
             if a.bodies:
                 rows = [(None, None, None, b) for b in json.load(open(a.bodies, encoding="utf-8"))]
             else:
-                rows = [r for r in inputs(a.data, a.track, cond) if r[1] in a.splits]
+                rows = [r for c in cond.split("|") if c for r in inputs(a.data, a.track, c) if r[1] in a.splits] \
+                    if a.merge_conditions else [r for r in inputs(a.data, a.track, cond) if r[1] in a.splits]
             uniq = {}
             for _, _, _, body in rows:
                 uniq.setdefault(key_of(prompt, body, model), body)
             todo = [(k, b) for k, b in uniq.items() if k not in done]
+            if a.shuffle_seed is not None:
+                import random
+                random.Random(a.shuffle_seed).shuffle(todo)
             if a.limit:
                 todo = todo[:a.limit]
             print(f"[{prompt}/{cond}] {len(rows)} inputs, {len(uniq)} unique, {len(todo)} to generate", flush=True)

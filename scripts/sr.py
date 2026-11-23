@@ -23,12 +23,14 @@ def sr_map(data, dom, split):
     return out
 
 
-def join_cut(tok, base, s, limit, wrap=lambda q: q, special=True):
+def join_cut(tok, base, s, limit, wrap=lambda q: q, special=True, sep=SEP):
     """base + SEP + s, with base cut (token-wise, from the end) so that len(tokens(wrap(text))) <= limit.
-    Returns (text, base_was_cut). With an empty s the base alone is returned (still cut to the limit)."""
+    Returns (text, base_was_cut). With an empty s the base alone is returned (still cut to the limit).
+    `sep` = "\nGuidance: " for the Track-1 guidance of rule 20 (guidance.SEP); if s alone does not fit, the base is
+    dropped and the embedder's own truncation cuts the tail of s."""
     def n(t):
         return len(tok(wrap(t), add_special_tokens=special)["input_ids"])
-    tail = (SEP + s) if s else ""
+    tail = (sep + s) if s else ""
     text = base + tail
     if n(text) <= limit:
         return text, False

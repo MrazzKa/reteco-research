@@ -14,6 +14,9 @@ generation, h = the "hyde" generation):
   q+r+h+s  BM25: q, r, h, s concatenated         dense: normalised sum of e(q), e_query(r), e_doc(h), e_query(s)
   q+s+h    BM25: q, s, h concatenated            dense: normalised sum of e(q), e_query(s), e_doc(h)
   s        BM25: s alone                          dense: e_query(s)
+  (rule 20, Track 1 only; g = query-side guidance text, scripts/guidance.py; 1b steps get their query's g)
+  q+r+h+g  BM25: q, r, h, g concatenated         dense: normalised sum of e(q), e_query(r), e_doc(h), e_query(g)
+  g        BM25: g alone                          dense: e_query(g)
 
 Dense query vectors are averaged rather than the texts concatenated because the encoders
 truncate at 256/512 tokens and Track-1 queries alone often fill that window.
@@ -44,8 +47,9 @@ from llm_expand import inputs as llm_inputs, key_of  # noqa: E402
 from passage_index import MaxPIndex, pdir  # noqa: E402
 import tiebreak  # noqa: E402
 
-VARIANTS = ("q", "q+r", "r", "q+h", "h", "q+r+h", "q+r+h+s", "q+s+h", "s")
+VARIANTS = ("q", "q+r", "r", "q+h", "h", "q+r+h", "q+r+h+s", "q+s+h", "s", "q+r+h+g", "g")
 SR_VARIANTS = ("q+r+h+s", "q+s+h", "s")
+GUID_VARIANTS = ("q+r+h+g", "g")  # rule 20, Track 1 only: g = guidance.guidance_text of the query
 SAMPLED = {"q+r+h1s": 1, "q+r+h3": 3, "q+r+h5": 5}  # rule 13: HyDE sampled at temperature 0.7 (first n of 5)
 
 
@@ -128,13 +132,18 @@ def main():
             if any(v in SR_VARIANTS for v in a.variants):
                 from sr import sr_map
                 srm = sr_map(a.data, dom, sp)
+            gdm = {}
+            if any(v in GUID_VARIANTS for v in a.variants):
+                from guidance import topic_guidance
+                gdm = topic_guidance(a.data, dom, sp, a.cond)
             for qid, q in queries:
                 k = body.get((dom, sp, qid))
                 km = {"model": a.llm_model} if a.llm_model else {}
                 r = gen["reason"].get(key_of("reason", k, **km), "") if k else ""
                 h = gen["hyde"].get(key_of("hyde", k, **km), "") if k else ""
                 missing += (not r) + (not h)
-                texts[qid] = (q, r, h, samp.get(key_of("hyde", k, **km), []) if (k and samp) else [], srm.get(qid, ""))
+                texts[qid] = (q, r, h, samp.get(key_of("hyde", k, **km), []) if (k and samp) else [], srm.get(qid, ""),
+                              gdm.get(qid, ""))
             qids = [qid for qid, _ in queries]
             # dense vectors, one encoding per distinct text
             eq = dict(zip(qids, enc.encode_queries([texts[x][0] for x in qids]).astype(np.float32)))
@@ -144,6 +153,9 @@ def main():
             if srm:
                 es = dict(zip(qids, enc.encode_queries([texts[x][4] for x in qids]).astype(np.float32)))
                 parts.update({"q+r+h+s": (eq, er, eh, es), "q+s+h": (eq, es, eh), "s": (es,)})
+            if gdm:
+                eg = dict(zip(qids, enc.encode_queries([texts[x][5] for x in qids]).astype(np.float32)))
+                parts.update({"q+r+h+g": (eq, er, eh, eg), "g": (eg,)})
             for v, n in SAMPLED.items():
                 if v in a.variants:
                     hs = [texts[x][3][:n] for x in qids]
@@ -161,7 +173,7 @@ def main():
                 if v in SAMPLED:
                     bq = [(qid, "\n".join([texts[qid][0], texts[qid][1]] + texts[qid][3][:SAMPLED[v]])) for qid in qids]
                 else:
-                    bq = [(qid, "\n".join(texts[qid][{"q": 0, "r": 1, "h": 2, "s": 4}[c]] for c in v.split("+")))
+                    bq = [(qid, "\n".join(texts[qid][{"q": 0, "r": 1, "h": 2, "s": 4, "g": 5}[c]] for c in v.split("+")))
                           for qid in qids]
                 runs = {"bm25": search(bm, ids, bq, "lucene", name, k=a.k, threads=8)}
                 mat = norm(sum(np.stack([p[qid] for qid in qids]) for p in parts[v]))

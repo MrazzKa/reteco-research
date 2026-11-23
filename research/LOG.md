@@ -2123,3 +2123,128 @@ state: main runs 1a / 1b / 2a_auto unchanged in method (pool 50); separate run `
   decision; error labels (S4) await a human check. No experiment is running.
 time: session 14:21–16:20 (estimate 6–10 h; GPU work took 1.4 h, because the reranker pairs overlapped between
   candidates and every Track-1 / Track-2 cache was warm).
+
+## 2026-11-23 12:55 — N0: sync; organisers' answers of 18.11 / 21.11; Track-1 guidance becomes a test input (no run)
+repo: origin/main = 9a85f6b (clean). RETECO kit: `git fetch` / `git ls-remote` HEAD 7ee8acf (28.10); nothing new in
+  scorer / format_checker / data; website News: last item 26.10. Nothing new on the site.
+organisers (mailing list of 18.11 and 21.11, recorded here as received by Timur):
+  - Track 1: the query-side guidance (`query_guidance` as in guidance_train/dev: `key_time_anchors`, `temporal_intent`,
+    `retrieval_plan`, `retrieval_reasoning`, …) WILL be part of the test input, released together with the questions.
+    Not released: everything tied to gold — `gold_passage_annotations` and the `gold_ids` inside `retrieval_plan`.
+    In train/dev all of it may be used for development.
+  - Track 1: retrievers trained on data built from BRIGHT are allowed (as already for Track 2, 15.11).
+  This changes LOG 2026-11-16 14:24–14:30 ("guidance is gold-bearing, not announced as a test input"): the
+  query-side guidance is now a legitimate test input. Our own rules stay stricter than the organisers': we never read
+  `gold_passage_annotations` (not even on train), and we never use the `gold_ids` of `retrieval_plan` anywhere (not
+  even as a train input); before any use the guidance text is stripped of them and asserted to contain no corpus id.
+supervisor (Steven, 19.11): the SR run is not submitted to the test, its train/dev results go into the paper; no more
+  questions to the organisers, the paper says that no gold-derived field was used; paper 5 pages; "what the reference
+  answers give" is one of the main points. Overleaf comments (19–20.11) that need data: (1) a system without the LLM
+  step, and q+r / q+h on the final system (with ReasonEmbed); (2) why ReasonEmbed rescoring only the top 50 — recall@k
+  of the hybrid and cost; (3) M0 vs H0q+RE confuse the reader.
+plan of this session (estimates): N1 query variants on the final system ~2–3 h (GPU + CPU); N2 Track-1 guidance
+  (recon + rule 20, separate runs) ~3–4 h; N3 `2a_history_noans` (= M0) as a run ~1 h; N4 several LLM draws ~2–3 h
+  GPU; N5 paper tables ~1 h; N6 test readiness ~1 h; N7 end.
+
+## 2026-11-23 12:58 — N1 (written before running; analysis, no choice): query variants through the whole final system
+what: for 1a, 1b, 2a current (B) and 2a history (Hb, main pipeline without the reranker) the final system (hybrid +
+  ReasonEmbed, pool 50) for the query variants q (no LLM; for 2a history q = the history text, i.e. H0), q+r, q+h and
+  q+r+h (= the current system).
+how: fusion per variant = the train-chosen `linear*` of the existing hybrid reports (rule 6: `qexp/t1/hybrid_1a.json`,
+  `hybrid_1b.json`, `qexp/t2/hybrid_2a_current.json`; rule 11: `hist/t2/hybrid.json`, H0 `hist/t2/hybrid_h0.json`);
+  for history q+r and q+h the hybrids are made now with the same `hybrid.py` over new `qexp_search.py` runs
+  (`--cond 2a_hist3qa --query-cond 2a_history_qfirst --variants q+r q+h`, out `runs_v13/hist/t2`, report
+  `hist/t2/hybrid_n1.json`). ReasonEmbed per variant: `reason_rerank.py` (NF4, pool 50, the rule-8 grid none / top N /
+  interp 0.1–0.9 on the rule-8 train subsample ≤ 30 per domain, random.Random(20260921)); the reported final system
+  of a variant = its best way on train (and whether the rule-8 margin over "none" would be met is stated). ReasonEmbed
+  query text is the variant-independent query of the condition (as in every run so far); only the pool changes.
+  Existing entries are reused: 1a/1b/2a-current/history q+r+h (`1a_rerun`, `1b_rerun`, `2a_nomaxp`, `2ah_hybrid`),
+  2a-current q (`2a_cur_q`), history q = H0 (`2ah_h0`). New: `n1_1a_q`, `n1_1a_qr`, `n1_1a_qh`, `n1_1b_q`, `n1_1b_qr`,
+  `n1_1b_qh`, `n1_2a_qr`, `n1_2a_qh`, `n1_2ah_qr`, `n1_2ah_qh` (score dumps `runs_v13/scores/n1_*.json`). No new
+  generations (all in cache); new pool documents are encoded and cached.
+report (`scripts/n1_report.py` → `runs_v13/n1/report.json`, RESULTS AQ): per condition train-subsample / dev / dev
+  95% CI, reference rows "BM25 only (q)" and "hybrid (q)" (same topics), paired Δ to q+r+h on dev (bootstrap within
+  domain, 10,000, seed 20260921). Recall@k of the q+r+h hybrid for k ∈ {10, 20, 50, 100, 200, 1000} on train (full)
+  and dev for the four conditions, and the ReasonEmbed cost: distinct documents to encode per topic at pool 50 / 100 /
+  200 / 1000 (dev, per domain union, as on a test day with a cold cache) and the time at 7–10 docs/s (RESULTS AF), next
+  to RESULTS AD (pool 100 gave nothing on dev).
+queue: `runs_v13/logs/queue_1123a.sh` (GPU jobs one at a time). Estimate: qexp ~10 min, hybrid ~10 min CPU, ReasonEmbed
+  10 runs ~1.5–2.5 h (new pool documents dominate).
+
+## 2026-11-23 12:58 — N2a (written before any guidance text is built or read; analysis, no choice): Track-1 guidance reconnaissance
+seen so far (structure only, while checking the field list of the organisers' mail): `guidance_<split>.jsonl` rows
+  {id, query_guidance, gold_passage_annotations}; query_guidance has 12 keys (expected_granularity, is_temporal_query,
+  key_time_anchors, quality_checks, query_summary, query_temporal_events, query_temporal_signals, retrieval_plan
+  [{step, action, gold_ids}], retrieval_reasoning, temporal_intent, temporal_reasoning_class_primary / _secondary);
+  one row per query (train 1,211, dev 519). Every 1b `step_instruction` is verbatim one of the plan actions (train
+  2,762 / 2,762, dev 1,214 / 1,214); the plan has more actions than 1b has steps (dev 1,608 vs 1,214) — the 1b steps
+  look like the plan actions that have gold. We never use which actions are 1b steps.
+`gold_passage_annotations` is never read (the reading code pops it unread); `gold_ids` of `retrieval_plan` are dropped
+  before any text is built.
+code: `scripts/guidance.py`: `guidance_map(data, dom, split)` → {query id: g}; `guidance_text(qg)` builds g only from
+  `key_time_anchors`, `temporal_intent`, `retrieval_reasoning` and the `action` strings of `retrieval_plan` (in plan
+  order), as "Time anchors: …. Temporal intent: … . Reasoning: … . Plan: 1. … 2. …"; `assert_no_ids(g, ids)` fails if
+  any token of g is a corpus id of the domain (with or without the domain prefix / ".txt"), or g matches
+  `\.txt\b` or a hex-id pattern. Called on every g that is built (recon, rule 20, submit.py).
+recon (`scripts/guidance_recon.py` → `runs_v13/guidance/recon.json`): field presence / lengths (words) per split; g
+  length (words, ReasonEmbed tokens); ids in g after stripping (must be 0); "written from gold?" as for SR (RESULTS AL):
+  share of g word 8-grams (and 5-grams) found verbatim in the query's gold documents (qrels) vs in the top-10 non-gold
+  documents of our main `1a` run (score dump `scores/1a_rerun.json`: dev all, train the rule-8 subsample) vs 10 random
+  documents of the domain (random.Random(20260921)); the same for the query text and our LLM reason text; novel
+  content words (≥ 4 letters, not stop words, not in the query) of g vs of our LLM reason text — share found in gold /
+  top-10 non-gold / random.
+examples rule (fixed now): `research/cases/track1_guidance_dev.md`, 4 dev queries: keys (domain, id) sorted;
+  `random.Random(20260921).sample(keys, 4)`; shown: query (first 400 chars), g, the other query-side fields (short),
+  the first 300 chars of the query's first gold document (qrels order). No resampling.
+estimate: 30–45 min CPU.
+
+## 2026-11-23 12:58 — rule 20 (written before any retrieval run that uses guidance): Track-1 guidance as separate runs
+scope (as rule 19): the main runs `1a` / `1b` do not change whatever the outcome — separate runs `1a_guid` / `1b_guid`,
+  the decision is Steven's. Only g (`guidance_text`, above) is used; every other guidance field, and anything tied to
+  gold, is not.
+base: the current main runs — 1a: BM25 q + r + h, dense bge-small L256 normalised sum e_query(q), e_query(r), e_doc(h),
+  minmax α 0.6 (kb = kd = 100), ReasonEmbed pool 50 interp w 0.8; 1b: same with q = query + step, z-score α 0.7,
+  ReasonEmbed w 0.7. For 1b g is the guidance of the step's query; the step stays as it is.
+candidates:
+  G1 (no LLM change): BM25 = q + r + h + g; dense = normalised sum of e_query(q), e_query(r), e_doc(h), e_query(g);
+     ReasonEmbed query = the condition's query text + "\nGuidance: " + g, ≤ 512 tokens with the instruction — the
+     query text is cut first; g is cut (tail) only if g alone does not fit.
+  G2 (the LLM sees g): LLM input = the current body with "\n\nSearch guidance (task annotation): " + g appended, the
+     question part cut so the whole stays ≤ 3,000 characters (g never cut); new reason + hyde for all train + dev
+     inputs of 1a and 1b in one llm_expand call per prompt (`--chunk 100000`); then retrieval as G1 with the new r', h'.
+procedure per candidate and sub-task: fusion grid of `hybrid.py` on full train; ReasonEmbed way from the rule-8 grid
+  on the rule-8 train subsample, with the rule-8 margin over "none" (reading of LOG 2026-11-16 15:20). The candidate
+  with the better final train-subsample macro = `1a_guid` / `1b_guid`.
+report (no adoption): run − main on the train subsample (paired bootstrap within domain, 10,000, seed 20260921;
+  whether the usual margin ≥ +0.005 with lower bound > 0 would be met) and on dev once; per domain (short); G1 vs G2
+  (guidance without vs with the LLM). Caveat recorded now: G2 changes the LLM input, so its comparison also carries
+  LLM-draw noise (RESULTS AI/AK; N4 measures it).
+a query without guidance at test time (no row or empty g): it gets the main run's ranking (counters in the manifest).
+stop rule: if `assert_no_ids` fails on any train/dev g, nothing is run until the function is fixed (stated in LOG).
+estimate: G1 ~1 h (qexp + hybrid ~20 min, ReasonEmbed 2 runs ~30–40 min), G2 + LLM ~1.5–2 h, submit.py + checks 30 min.
+
+## 2026-11-23 12:58–13:00 — N2a result: Track-1 guidance reconnaissance (analysis, no choice)
+command: `python3 guidance_recon.py --data ../../reteco_data_v11 --runs ../research/runs_v13 --out
+  ../research/runs_v13/guidance/recon.json --cases ../research/cases/track1_guidance_dev.md` (CPU, 41 s).
+structure: one guidance row per query (train 1,211 / dev 519, ids = example ids). Presence (dev): retrieval_reasoning,
+  temporal_intent, query_summary, is_temporal_query 519/519; retrieval_plan 509; quality_checks 509; expected_granularity
+  500; temporal_reasoning_class_primary 501 / secondary 494; query_temporal_signals 490; key_time_anchors 489;
+  query_temporal_events 432 (train shares the same, 95–100% except temporal_events 84%). Lengths (dev median words):
+  plan actions 55 (2–4 actions), retrieval_reasoning 24, query_summary 20, quality_checks 16, key_time_anchors 6.
+  1b: every step_instruction is a plan action (train 2,762 / 2,762, dev 1,214 / 1,214); plan actions of those queries
+  3,757 / 1,608 — so a test 1b step will very likely be one of the plan actions; we do not use the membership.
+g (`guidance_text`): never empty (train 1,211, dev 519); median 92 words (6–172), ReasonEmbed tokens median 138, p90
+  185, max 273 — g always fits the 512-token query with room for the question.
+ids: `assert_no_ids` passed on all 1,730 g; 0 g contain a gold id.
+"written from gold?" (dev, 519 queries; train subsample 350 similar): word 8-grams of g found in the gold documents
+  0.0001 (1 query of 519 has any) vs top-10 non-gold of our main 1a run 0.0001 vs random 0 — g copies no gold text;
+  5-grams 0.0011 vs 0.0020 vs 0.0000. For reference the query itself: 8-grams 0.0063 gold / 0.0254 top-10.
+  Novel content words (not in the query): g 33.0 per query, 14.3% occur in the gold documents vs 31.4% in the (larger)
+  top-10 non-gold set vs 20.5% in 10 random documents; our LLM reason text 30.6 novel words, 24.2% / 48.5% / 24.2%.
+  Gold / top-10 ratio g 0.46 vs LLM 0.50 — g's new words are not more gold-specific than our own LLM's (unlike SR on
+  Track 2, 0.62 vs 0.50).
+reading: g reads like a query rewrite plus a generic search plan ("Locate …, Cross-reference …") with time anchors from
+  the question; it shows no sign of having been written from the gold documents (apart from the plan's gold_ids, which
+  we drop). Rule 20 goes ahead. Examples: `research/cases/track1_guidance_dev.md` (history 70471_283, cardano 6888_120,
+  history 66498_462, genealogy 12774_283).
+time: estimate 30–45 min / actual ~3 min (41 s of compute).
