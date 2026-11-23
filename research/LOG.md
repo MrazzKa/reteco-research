@@ -2412,3 +2412,13 @@ reading: for every final (ReasonEmbed) run the draw-to-draw SD is 0.0006–0.002
   0.000 on train (i.e. "LLM-written answers are worth no more than no answers"), and the reranker's dev gain
   +0.003…+0.005 is noise-sized (its train gain +0.018 is stable).
 time: estimate ~4–4.5 h GPU / actual 4 h 00 min.
+
+## 2026-11-23 19:10–20:06 — rule 20 submission checks: `1a_guid` / `1b_guid` pass
+commands: first block of `queue_1123d.sh` (56 min; Track-1 BM25 indexing dominates: 3 releases × 4 runs).
+dev (`submit.py --variants 1a_guid 1b_guid --split dev`, guidance read from guidance_dev with gold fields dropped,
+  ids asserted absent): official **1a_guid 0.3710 = research 0.3710**, **1b_guid 0.3915 = research 0.3915**;
+  format_checker exit 0 on 26 / 26 files.
+synthetic test from dev WITH `guidance_test.jsonl` (`make_test_release.py --keep-guidance`: only {id, query_guidance}
+  without plan gold_ids): 519 / 519 queries and 1,214 / 1,214 steps use g, 0 fall back; 0.3710 / 0.3915; checker exit 0.
+the same release WITHOUT the guidance file: 519 / 519 and 1,214 / 1,214 fall back; the files are identical to the main
+  `1a` / `1b` files in 13 / 13 domains (0.3667 / 0.4053); checker exit 0. (`guid/submit_check.json`)

@@ -1,0 +1,62 @@
+{
+ "g": {
+  "1a_guid": {
+   "guidance_summary": {
+    "topics": 519,
+    "topics_with_guidance": 519,
+    "topics_fallback": 0
+   },
+   "domains_identical_to_main": [
+    0,
+    13
+   ],
+   "official": 0.371,
+   "main_official": 0.3667,
+   "format_checker_all_exit0": true
+  },
+  "1b_guid": {
+   "guidance_summary": {
+    "topics": 1214,
+    "topics_with_guidance": 1214,
+    "topics_fallback": 0
+   },
+   "domains_identical_to_main": [
+    0,
+    13
+   ],
+   "official": 0.3915,
+   "main_official": 0.4053,
+   "format_checker_all_exit0": true
+  }
+ },
+ "nog": {
+  "1a_guid": {
+   "guidance_summary": {
+    "topics": 519,
+    "topics_with_guidance": 0,
+    "topics_fallback": 519
+   },
+   "domains_identical_to_main": [
+    13,
+    13
+   ],
+   "official": 0.3667,
+   "main_official": 0.3667,
+   "format_checker_all_exit0": true
+  },
+  "1b_guid": {
+   "guidance_summary": {
+    "topics": 1214,
+    "topics_with_guidance": 0,
+    "topics_fallback": 1214
+   },
+   "domains_identical_to_main": [
+    13,
+    13
+   ],
+   "official": 0.4053,
+   "main_official": 0.4053,
+   "format_checker_all_exit0": true
+  }
+ }
+}

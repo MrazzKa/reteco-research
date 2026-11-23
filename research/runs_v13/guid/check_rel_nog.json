@@ -1,0 +1,1002 @@
+{
+ "1a_guid": {
+  "official_macro_ndcg10": 0.3667,
+  "per_domain": {
+   "iota": 0.6198,
+   "quant": 0.0988,
+   "law": 0.3844,
+   "workplace": 0.4661,
+   "cardano": 0.3414,
+   "monero": 0.2636,
+   "economics": 0.3239,
+   "bitcoin": 0.227,
+   "politics": 0.5329,
+   "genealogy": 0.4219,
+   "travel": 0.2984,
+   "hsm": 0.4314,
+   "history": 0.3575
+  },
+  "checks": {
+   "iota": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 3,
+    "topics_released": 3,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "quant": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 10,
+    "topics_released": 10,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "law": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 11,
+    "topics_released": 11,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "workplace": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 11,
+    "topics_released": 11,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "cardano": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 15,
+    "topics_released": 15,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "monero": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 19,
+    "topics_released": 19,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "economics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 25,
+    "topics_released": 25,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "bitcoin": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 30,
+    "topics_released": 30,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "politics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 45,
+    "topics_released": 45,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "genealogy": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 35,
+    "topics_released": 35,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "travel": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 30,
+    "topics_released": 30,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "hsm": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 45,
+    "topics_released": 45,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "history": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 240,
+    "topics_released": 240,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   }
+  },
+  "research_dev": 0.371,
+  "diff_vs_research": -0.0043,
+  "timing_s": {
+   "llm_total_s": 0.1,
+   "bm25_index_s": 215.5,
+   "bm25_search_s": 8.1,
+   "dense_index_load_s": 2.8,
+   "dense_search_s": 4.6,
+   "fusion_s": 0.3,
+   "reasonembed_s": 59.6,
+   "reasonembed_new_docs": 249
+  },
+  "per_topic_s": {
+   "llm_total_s": 0.0,
+   "bm25_index_s": 0.415,
+   "bm25_search_s": 0.016,
+   "dense_index_load_s": 0.005,
+   "dense_search_s": 0.009,
+   "fusion_s": 0.001,
+   "reasonembed_s": 0.115
+  },
+  "n_topics": 519
+ },
+ "1b_guid": {
+  "official_macro_ndcg10": 0.4053,
+  "per_domain": {
+   "iota": 0.5722,
+   "quant": 0.2615,
+   "law": 0.4111,
+   "workplace": 0.5882,
+   "cardano": 0.3468,
+   "monero": 0.256,
+   "economics": 0.352,
+   "bitcoin": 0.2565,
+   "politics": 0.5069,
+   "genealogy": 0.542,
+   "travel": 0.3548,
+   "hsm": 0.4347,
+   "history": 0.3857
+  },
+  "checks": {
+   "iota": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 8,
+    "topics_released": 8,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "quant": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 15,
+    "topics_released": 15,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "law": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 23,
+    "topics_released": 23,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "workplace": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 20,
+    "topics_released": 20,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "cardano": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 33,
+    "topics_released": 33,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "monero": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 28,
+    "topics_released": 28,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "economics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 51,
+    "topics_released": 51,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "bitcoin": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 56,
+    "topics_released": 56,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "politics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 119,
+    "topics_released": 119,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "genealogy": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 68,
+    "topics_released": 68,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "travel": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 52,
+    "topics_released": 52,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "hsm": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 105,
+    "topics_released": 105,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "history": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 636,
+    "topics_released": 636,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   }
+  },
+  "research_dev": 0.3915,
+  "diff_vs_research": 0.0138,
+  "timing_s": {
+   "llm_total_s": 0.1,
+   "bm25_index_s": 215.0,
+   "bm25_search_s": 20.9,
+   "dense_index_load_s": 2.5,
+   "dense_search_s": 6.5,
+   "fusion_s": 0.7,
+   "reasonembed_s": 71.9,
+   "reasonembed_new_docs": 285
+  },
+  "per_topic_s": {
+   "llm_total_s": 0.0,
+   "bm25_index_s": 0.177,
+   "bm25_search_s": 0.017,
+   "dense_index_load_s": 0.002,
+   "dense_search_s": 0.005,
+   "fusion_s": 0.001,
+   "reasonembed_s": 0.059
+  },
+  "n_topics": 1214
+ },
+ "1a": {
+  "official_macro_ndcg10": 0.3667,
+  "per_domain": {
+   "iota": 0.6198,
+   "quant": 0.0988,
+   "law": 0.3844,
+   "workplace": 0.4661,
+   "cardano": 0.3414,
+   "monero": 0.2636,
+   "economics": 0.3239,
+   "bitcoin": 0.227,
+   "politics": 0.5329,
+   "genealogy": 0.4219,
+   "travel": 0.2984,
+   "hsm": 0.4314,
+   "history": 0.3575
+  },
+  "checks": {
+   "iota": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 3,
+    "topics_released": 3,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "quant": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 10,
+    "topics_released": 10,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "law": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 11,
+    "topics_released": 11,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "workplace": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 11,
+    "topics_released": 11,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "cardano": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 15,
+    "topics_released": 15,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "monero": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 19,
+    "topics_released": 19,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "economics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 25,
+    "topics_released": 25,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "bitcoin": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 30,
+    "topics_released": 30,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "politics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 45,
+    "topics_released": 45,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "genealogy": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 35,
+    "topics_released": 35,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "travel": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 30,
+    "topics_released": 30,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "hsm": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 45,
+    "topics_released": 45,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "history": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 240,
+    "topics_released": 240,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   }
+  },
+  "research_dev": 0.3667,
+  "diff_vs_research": 0.0,
+  "timing_s": {
+   "llm_total_s": 0.1,
+   "bm25_index_s": 218.3,
+   "bm25_search_s": 8.2,
+   "dense_index_load_s": 2.5,
+   "dense_search_s": 4.3,
+   "fusion_s": 0.3,
+   "reasonembed_s": 0.5,
+   "reasonembed_new_docs": 0
+  },
+  "per_topic_s": {
+   "llm_total_s": 0.0,
+   "bm25_index_s": 0.421,
+   "bm25_search_s": 0.016,
+   "dense_index_load_s": 0.005,
+   "dense_search_s": 0.008,
+   "fusion_s": 0.001,
+   "reasonembed_s": 0.001
+  },
+  "n_topics": 519
+ },
+ "1b": {
+  "official_macro_ndcg10": 0.4053,
+  "per_domain": {
+   "iota": 0.5722,
+   "quant": 0.2615,
+   "law": 0.4111,
+   "workplace": 0.5882,
+   "cardano": 0.3468,
+   "monero": 0.256,
+   "economics": 0.352,
+   "bitcoin": 0.2565,
+   "politics": 0.5069,
+   "genealogy": 0.542,
+   "travel": 0.3548,
+   "hsm": 0.4347,
+   "history": 0.3857
+  },
+  "checks": {
+   "iota": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 8,
+    "topics_released": 8,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "quant": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 15,
+    "topics_released": 15,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "law": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 23,
+    "topics_released": 23,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "workplace": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 20,
+    "topics_released": 20,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "cardano": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 33,
+    "topics_released": 33,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "monero": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 28,
+    "topics_released": 28,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "economics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 51,
+    "topics_released": 51,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "bitcoin": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 56,
+    "topics_released": 56,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "politics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 119,
+    "topics_released": 119,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "genealogy": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 68,
+    "topics_released": 68,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "travel": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 52,
+    "topics_released": 52,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "hsm": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 105,
+    "topics_released": 105,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "history": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 636,
+    "topics_released": 636,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   }
+  },
+  "research_dev": 0.4053,
+  "diff_vs_research": -0.0,
+  "timing_s": {
+   "llm_total_s": 0.1,
+   "bm25_index_s": 215.8,
+   "bm25_search_s": 20.7,
+   "dense_index_load_s": 2.4,
+   "dense_search_s": 5.9,
+   "fusion_s": 0.7,
+   "reasonembed_s": 0.7,
+   "reasonembed_new_docs": 0
+  },
+  "per_topic_s": {
+   "llm_total_s": 0.0,
+   "bm25_index_s": 0.178,
+   "bm25_search_s": 0.017,
+   "dense_index_load_s": 0.002,
+   "dense_search_s": 0.005,
+   "fusion_s": 0.001,
+   "reasonembed_s": 0.001
+  },
+  "n_topics": 1214
+ }
+}
