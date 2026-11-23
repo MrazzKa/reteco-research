@@ -2438,11 +2438,11 @@ other N6 pieces (committed earlier): `configs/env/requirements_{main,llm}.txt` (
   and a busy GPU), README section "Test day" with the checklist.
 time: estimate ~1 h / actual ~40 min of work + 21 min GPU.
 
-## 2026-11-23 20:45 — N7: end of the session
+## 2026-11-23 20:28 — N7: end of the session
 state: main runs unchanged (1a 0.3667, 1b 0.4053, 2a_auto → 2a_history_rr 0.5507). Separate runs awaiting the
   supervisor: `2a_history_noans` (= M0, candidate replacement for `2a_history_q`), `1a_guid` / `1b_guid` (rule 20; no
   train gain), `2a_history_sr` (rule 19; not submitted per 19.11). No experiment is running; the GPU is free.
 outside the repo: report `~/semeval-reteco/notes/RETECO_report_2026-11-23.{md,txt}` (Russian; .txt UTF-8 BOM / CRLF,
   copy on the desktop) and the handoff zip on the desktop (git bundle, notes, LLM caches incl. guidance and N4 draws,
   reranker cache, session transcript).
-time: session 12:51–20:45 (estimate 8–12 h); GPU ≈ 7.5 h (N1 0.4, rule 20 1.9, N3 + N4 4.0, checks + rehearsal 1.3).
+time: session 12:51–20:30 (estimate 8–12 h); GPU ≈ 7.5 h (N1 0.4, rule 20 1.9, N3 + N4 4.0, checks + rehearsal 1.3).
