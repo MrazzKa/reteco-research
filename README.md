@@ -218,6 +218,43 @@ texts (C1 vs B3b, 6,898/6,898), but they differ from the research cache, which w
 the dev macro by up to ~0.003 for the final runs and by +0.015 for the 1a hybrid without ReasonEmbed (RESULTS AI, AK).
 The dev numbers are reproduced exactly only from the cached generations.
 
+## Test day (2026-11-23)
+
+One command builds, checks and summarises every submitted run (main + backup runs of `configs/submission.json`;
+separate runs such as `2a_history_sr`, `2a_history_noans`, `1a_guid` / `1b_guid` are not included):
+
+```bash
+cd ~/semeval-reteco/reteco-research
+scripts/run_test.sh <test release dir> <out dir>        # split name defaults to "test"
+```
+
+It (1) checks the release layout (every Track-1 / Track-2 domain file), free disk (≥ 20 GB at the output, ≥ 10 GB at
+the repo for caches), the GPU (memory in use, no other job of ours) and both venvs; (2) runs `submit.py` for all
+submitted runs (LLM pre-generation first, then retrieval); (3) runs the official `format_checker.py` on every file
+against the corpus and prints the counters (`scripts/test_summary.py` → `<out>/test_summary.json`): topics per
+domain, missing / extra topics, duplicates, `2a_auto` choices per domain and the history-parser counters, stage
+timings. Exit code 0 = every file passed. Full log: `<out>/run_test.log`. Restartable: if it stops, start it again
+with the same arguments — generations, ReasonEmbed vectors and reranker scores are cached as they are computed.
+
+Checklist:
+1. `git pull`; `nvidia-smi` shows < 3 GB in use (close games / browsers with GPU acceleration); nothing else of ours
+   running (`ps -ef | grep -E "llm_expand|submit.py|reason_rerank"`).
+2. Unpack the test release so that it has the train/dev layout (`track1_tempo/<domain>/examples_test.jsonl`,
+   `steps_test.jsonl`, `documents.jsonl`; `track2_recor/<domain>/benchmark_test.json`, `documents.jsonl`). If the file
+   names differ, symlink them to these names (the split name can also be passed as the third argument).
+3. `scripts/run_test.sh <release> <out>`; expected ≈ 1.6 h on the RTX 4060 laptop with empty caches (RESULTS AK, X).
+4. Read the summary: `2a_auto` should choose `2a_history_rr` in every domain (the organisers said the test histories
+   keep the answers); `unparsed_lines` and `normalized_differs` must be 0 — otherwise the history layout differs from
+   train/dev (see "History parser" below) and the choice must be checked by hand.
+5. Submit the files of `<out>/1a`, `<out>/1b`, `<out>/2a_auto` as the main runs and the backups as listed in
+   `_fallback_runs` (one file per domain, `qid Q0 docid rank score run_id`, depth 1000).
+6. Separate runs only on the supervisor's decision: `submit.py --variants 2a_history_noans 1a_guid 1b_guid ...`
+   (`1a_guid` / `1b_guid` need the Track-1 guidance file of the release; a query without guidance falls back to the
+   main ranking, counted in the manifest).
+
+Rehearsal: on a synthetic test release made from dev (`make_test_release.py --keep-sr --keep-guidance`), warm caches
+— RESULTS AU.
+
 ## Rules
 
 1. Never modify `RETECO/` or the datasets.

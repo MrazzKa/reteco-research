@@ -111,6 +111,7 @@ def main():
                                      "read, ids asserted absent)",
                              "reasonembed_query": "query text + '\\nGuidance: ' + g, query cut first (512 tokens)"}
             if c["llm_sees_g"]:
+                v["llm"]["read_caches"] = [base["llm"]["cache"]]  # topics without guidance: the main generations
                 v["llm"]["cache"] = f"{R}/guid/llm/t1"
                 v["llm"]["input"] = "the main body + '\\n\\nSearch guidance (task annotation): ' + g (question cut, never g)"
             v["variant"] = "q+r+h+g"

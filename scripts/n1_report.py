@@ -86,13 +86,14 @@ def main():
     ap.add_argument("--kit", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--boot", type=int, default=10000)
+    ap.add_argument("--conds", nargs="+", default=list(SPEC))
     a = ap.parse_args()
     tiebreak.set_mode("sha1")
     ndcg = ndcg_fn(a.kit)
     rr = {1: json.load(open(os.path.join(a.root, R, "reason", "t1_reasonembed-4b.json"))),
           2: json.load(open(os.path.join(a.root, R, "reason", "t2_reasonembed-4b.json")))}
     rep = {"variants": {}, "recall": {}, "cost": {}}
-    for cname, (tr, qcond, rows) in SPEC.items():
+    for cname, (tr, qcond, rows) in [(c, SPEC[c]) for c in a.conds]:
         doms = T1 if tr == 1 else T2
         out = {}
         per = {}

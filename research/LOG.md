@@ -2287,3 +2287,36 @@ report (`scripts/n4_report.py` → `runs_v13/n4/report.json`, RESULTS AS): per r
   system of N1, which has no LLM), +reranker (2a). Conclusion against the +0.005 margin.
 estimate: LLM ~45 min per realisation (≈ 5,400 unique inputs × 2 prompts) → ~2.3 h; retrieval ~25–30 min per
   realisation (Track-1 BM25 indexes dominate) → ~2 h; in all ≈ 4–4.5 h GPU (queue_1123c, after rule 20 and N3).
+
+## 2026-11-23 12:55–13:19 — N1 result: query variants through the final system; recall@k; ReasonEmbed cost (analysis, no choice)
+commands: `queue_1123a.sh` (qexp_search history q+r / q+h 1.5 min; hybrid.py `hist/t2/hybrid_n1.json` 4 min — both
+  z-score α 0.7 (q+r) / see report; ReasonEmbed 10 runs 13:01–13:19, new pool documents only for the q pools), then
+  `python3 n1_report.py --root .. --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out
+  ../research/runs_v13/n1/report.json` (every final macro re-computed from the score dumps and asserted equal to the
+  reason_rerank report). Every variant met the rule-8 margin for ReasonEmbed (way interp 0.7–0.9).
+final system (hybrid + ReasonEmbed), train subsample / dev [95% CI]; Δ dev vs q+r+h [95% CI]:
+  1a   BM25 q 0.113 dev · hybrid q 0.283 · q 0.2787 / 0.3476 [0.312, 0.383] Δ −0.019 [−0.045, +0.009] ·
+       q+r 0.3051 / 0.3604 Δ −0.006 [−0.017, +0.004] · q+h 0.3047 / 0.3581 Δ −0.009 [−0.022, +0.004] · q+r+h 0.3078 / 0.3667
+  1b   BM25 q 0.118 · hybrid q 0.287 · q 0.3492 / 0.3657 Δ −0.040 [−0.058, −0.022] · q+r 0.3662 / 0.4021 Δ −0.003 ·
+       q+h 0.3694 / 0.4065 Δ +0.001 [−0.009, +0.012] · q+r+h 0.3754 / 0.4053
+  2a current  BM25 q 0.176 · hybrid q 0.254 · q 0.3967 / 0.3591 Δ −0.019 [−0.030, −0.008] · q+r 0.4326 / 0.3778 Δ −0.000 ·
+       q+h 0.4324 / 0.3764 Δ −0.001 · q+r+h 0.4317 / 0.3779
+  2a history (q = history text H0)  BM25 q 0.404 · hybrid q 0.435 · q 0.5804 / 0.5377 Δ −0.010 [−0.018, −0.002] ·
+       q+r 0.5873 / 0.5353 Δ −0.012 [−0.018, −0.006] · q+h 0.5806 / 0.5360 Δ −0.012 [−0.019, −0.005] · q+r+h 0.5830 / 0.5475
+  train Δ vs q+r+h: q −0.029 / −0.026 / −0.035 / −0.003 (1a / 1b / 2a cur / 2a hist); q+r and q+h within ±0.01.
+reading: (1) a system with no LLM step at all (question → BM25 + dense → ReasonEmbed) is already strong: it keeps
+  most of the final number (1a 0.348 vs 0.367, 1b 0.366 vs 0.405, 2a current 0.359 vs 0.378, 2a history 0.538 vs
+  0.548). ReasonEmbed absorbs a large part of what the LLM gives at the hybrid stage (1a hybrid +0.042 from the LLM,
+  final +0.019). The LLM matters most for 1b (+0.040, the step text alone is a weak query). (2) One LLM text is
+  enough: q+r and q+h are each within ±0.01 of q+r+h on Track 1 and 2a current (all intervals across 0); on 2a
+  history both single texts are −0.012 on dev (train +0.004 / −0.002), so there the pair helps a little on dev only.
+recall@k of the submitted q+r+h hybrid (submission order; dev; train full similar): R@10 / 20 / 50 / 100 / 200 / 1000 =
+  1a 0.40 / 0.52 / 0.65 / 0.72 / 0.76 / 0.90; 1b 0.50 / 0.64 / 0.75 / 0.80 / 0.83 / 0.94; 2a current 0.44 / 0.55 /
+  0.67 / 0.78 / 0.83 / 0.91; 2a history 0.62 / 0.74 / 0.86 / 0.93 / 0.96 / 0.98. Going 50 → 100 adds +0.05 to +0.10
+  recall (dev gold pairs at ranks 51–100: 1a 132, 1b 124, 2a cur 171, 2a hist 118 of 1,783 / 1,850 / 1,665 / 1,665).
+cost (dev, distinct documents per domain = cold cache; at 7 docs/s): pool 50 / 100 / 200 / 1000 —
+  1a 22,720 / 41,599 / 63,177 / 234,804 docs (44 / 80 / 122 / 452 per topic; 54 / 99 / 150 / 559 min);
+  1b 27,416 / 50,415 / 71,334 / 253,907; 2a current 24,271 / 43,220 / 72,619 / 187,903; 2a history 16,721 / 30,624 /
+  53,754 / 148,007 (40 / 73 / 128 / 352 min). Pool 100 roughly doubles the ReasonEmbed time and bought +0.0005
+  (1a) / +0.002 (2a cur) on dev (RESULTS AD); pool 1000 would be 6–10 h per sub-task on this GPU.
+time: estimate ~2–3 h / actual 24 min (caches warm; the q pools needed the only new documents).

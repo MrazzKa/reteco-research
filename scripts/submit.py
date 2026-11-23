@@ -155,7 +155,10 @@ def generations(cfg, bodies, timing):
     cache = rp(lc["cache"])
     gen = {}
     for p in lc["prompts"]:
-        g = load_gen(os.path.join(cache, f"{p}.jsonl"))
+        g = {}
+        for extra in lc.get("read_caches", []):  # read-only caches of the same model (e.g. the main cache for 1a_guid)
+            g.update(load_gen(os.path.join(rp(extra), f"{p}.jsonl")))
+        g.update(load_gen(os.path.join(cache, f"{p}.jsonl")))
         todo = sorted({b for b in bodies if key_of(p, b, model) not in g})
         if todo:
             t0 = time.time()
@@ -169,7 +172,7 @@ def generations(cfg, bodies, timing):
                                 "--max-batched", "2048"], check=True, env=env)
             timing[f"llm_{p}_generate_s"] = round(time.time() - t0, 1)
             timing[f"llm_{p}_generated"] = len(todo)
-            g = load_gen(os.path.join(cache, f"{p}.jsonl"))
+            g.update(load_gen(os.path.join(cache, f"{p}.jsonl")))
         gen[p] = {b: g.get(key_of(p, b, model), "") for b in bodies}
     return gen
 
