@@ -1,0 +1,129 @@
+[pregenerate] {'pregenerate_total_s': 0.1385960578918457}
+[2a_history_noans] 858 topics, timing {'llm_total_s': 0.2, 'bm25_index_s': 20.1, 'bm25_search_s': 5.8, 'dense_index_load_s': 1.7, 'dense_search_s': 7.6, 'fusion_s': 0.4, 'reasonembed_s': 0.7, 'reasonembed_new_docs': 0}
+2a_history_noans robotics             nDCG@10 0.4910  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+2a_history_noans earth_science        nDCG@10 0.6161  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+== 2a_history_noans: official macro 0.4908 (research 0.4908)
+{"t1_topics": 0, "t1_steps": 0, "t2_turns": 858, "t2_turns_with_answers_after": 0, "t2_turns_with_sr": 0}
+[pregenerate] {'pregenerate_total_s': 0.11773800849914551}
+[2a_history_noans] 858 topics, timing {'llm_total_s': 0.2, 'bm25_index_s': 20.1, 'bm25_search_s': 6.0, 'dense_index_load_s': 1.6, 'dense_search_s': 7.5, 'fusion_s': 0.4, 'reasonembed_s': 0.7, 'reasonembed_new_docs': 0}
+2a_history_noans robotics             nDCG@10 0.4910  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+2a_history_noans earth_science        nDCG@10 0.6161  checker exit 0  missing 0 dup 0 unknown 0 depth 1000-1000
+== 2a_history_noans: official macro 0.4908 (research 0.4908)
+M0 (2a_history_noans) {"macro": 0.4908, "groups": {"first_turn": {"n": 211, "ndcg10": 0.5213}, "new_gold": {"n": 79, "ndcg10": 0.4034}, "recycled_gold": {"n": 568, "ndcg10": 0.5429}}, "depth": {"T1": {"n": 211, "ndcg10": 0.5213}, "T2": {"n": 211, "ndcg10": 0.5179}, "T3": {"n": 211, "ndcg10": 0.5212}, "T4": {"n": 121, "ndcg10": 0.5343}, "T5+": {"n": 104, "ndcg10": 0.5417}}, "vs_M0 (2a_history_noans)": null}
+H0q+RE (2a_history_q) {"macro": 0.4802, "groups": {"first_turn": {"n": 211, "ndcg10": 0.4797}, "new_gold": {"n": 79, "ndcg10": 0.3766}, "recycled_gold": {"n": 568, "ndcg10": 0.539}}, "depth": {"T1": {"n": 211, "ndcg10": 0.4797}, "T2": {"n": 211, "ndcg10": 0.5105}, "T3": {"n": 211, "ndcg10": 0.5042}, "T4": {"n": 121, "ndcg10": 0.5448}, "T5+": {"n": 104, "ndcg10": 0.5371}}, "vs_M0 (2a_history_noans)": {"diff": -0.0106, "ci95": [-0.0216, -0.0002], "p_le_0": 0.9771}}
+main, reference answers (2a_history) {"macro": 0.5475, "groups": {"first_turn": {"n": 211, "ndcg10": 0.5213}, "new_gold": {"n": 79, "ndcg10": 0.3759}, "recycled_gold": {"n": 568, "ndcg10": 0.6371}}, "depth": {"T1": {"n": 211, "ndcg10": 0.5213}, "T2": {"n": 211, "ndcg10": 0.5963}, "T3": {"n": 211, "ndcg10": 0.6021}, "T4": {"n": 121, "ndcg10": 0.6417}, "T5+": {"n": 104, "ndcg10": 0.587}}, "vs_M0 (2a_history_noans)": {"diff": 0.0567, "ci95": [0.044, 0.069], "p_le_0": 0.0}}
+{"domains_identical_to_m0_1116": [11, 11]}
+=== 15:11:43 N3_DONE 107 s
+t1 trainsub release: {'1a': 350, '1b': 376}
+=== 15:11:44 N4 s0 retrieval
+[pregenerate] {'pregenerate_total_s': 0.0900883674621582}
+[1a] 519 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 229.8, 'bm25_search_s': 8.9, 'dense_index_load_s': 2.8, 'dense_search_s': 4.5, 'fusion_s': 0.3, 'reasonembed_s': 0.5, 'reasonembed_new_docs': 0}
+[1b] 1214 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 229.9, 'bm25_search_s': 23.3, 'dense_index_load_s': 2.6, 'dense_search_s': 6.6, 'fusion_s': 0.8, 'reasonembed_s': 0.8, 'reasonembed_new_docs': 0}
+[pregenerate] {'pregenerate_total_s': 0.06904268264770508}
+[1a] 350 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 235.8, 'bm25_search_s': 4.8, 'dense_index_load_s': 2.9, 'dense_search_s': 4.2, 'fusion_s': 0.2, 'reasonembed_s': 0.5, 'reasonembed_new_docs': 0}
+[1b] 376 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 233.3, 'bm25_search_s': 5.4, 'dense_index_load_s': 2.6, 'dense_search_s': 4.1, 'fusion_s': 0.2, 'reasonembed_s': 0.4, 'reasonembed_new_docs': 0}
+[pregenerate] {'pregenerate_total_s': 0.140869140625}
+[2a_history_rr] 858 topics, timing {'llm_total_s': 0.2, 'bm25_index_s': 19.0, 'bm25_search_s': 7.8, 'dense_index_load_s': 1.5, 'dense_search_s': 8.9, 'fusion_s': 0.4, 'reasonembed_s': 0.7, 'reasonembed_new_docs': 0, 'llm_rerank_s': 5.7, 'llm_rerank_new_pairs': 0}
+[2a_history_noans] 858 topics, timing {'llm_total_s': 0.2, 'bm25_index_s': 19.5, 'bm25_search_s': 5.8, 'dense_index_load_s': 1.1, 'dense_search_s': 7.1, 'fusion_s': 0.4, 'reasonembed_s': 0.4, 'reasonembed_new_docs': 0}
+[pregenerate] {'pregenerate_total_s': 0.11739468574523926}
+[2a_history_rr] 330 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 18.7, 'bm25_search_s': 3.0, 'dense_index_load_s': 1.3, 'dense_search_s': 4.8, 'fusion_s': 0.2, 'reasonembed_s': 0.3, 'reasonembed_new_docs': 0, 'llm_rerank_s': 4.5, 'llm_rerank_new_pairs': 0}
+[2a_history_noans] 330 topics, timing {'llm_total_s': 0.2, 'bm25_index_s': 19.2, 'bm25_search_s': 2.3, 'dense_index_load_s': 1.2, 'dense_search_s': 3.6, 'fusion_s': 0.2, 'reasonembed_s': 0.3, 'reasonembed_new_docs': 0}
+[pregenerate] {'pregenerate_total_s': 0.12096381187438965}
+[2a_history] 858 topics, timing {'llm_total_s': 0.2, 'bm25_index_s': 19.1, 'bm25_search_s': 8.8, 'dense_index_load_s': 1.2, 'dense_search_s': 9.5, 'fusion_s': 0.4, 'reasonembed_s': 0.5, 'reasonembed_new_docs': 0}
+[pregenerate] {'pregenerate_total_s': 0.11948347091674805}
+[2a_history] 330 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 19.1, 'bm25_search_s': 3.5, 'dense_index_load_s': 1.2, 'dense_search_s': 5.1, 'fusion_s': 0.2, 'reasonembed_s': 0.2, 'reasonembed_new_docs': 0}
+=== 15:33:11 N4_S0_DONE 1395 s
+t1 trainsub release: {'1a': 350, '1b': 376}
+seed 1 track 1: 2459 inputs, 2459 unique
+seed 1 track 2: 3564 inputs, 2984 unique
+=== 15:33:12 N4 s1 LLM t1
+[reason/bodies] 2459 inputs, 2459 unique, 2459 to generate
+  2459/2459  chunk 744s  535 tok/s  3.30 q/s
+[hyde/bodies] 2459 inputs, 2459 unique, 2459 to generate
+  2459/2459  chunk 754s  520 tok/s  3.26 q/s
+=== 15:58:47 N4 s1 LLM t2
+[reason/bodies] 2984 inputs, 2984 unique, 2984 to generate
+  2984/2984  chunk 716s  558 tok/s  4.16 q/s
+[hyde/bodies] 2984 inputs, 2984 unique, 2984 to generate
+  2984/2984  chunk 705s  547 tok/s  4.23 q/s
+=== 16:22:57 N4 s1 retrieval
+[pregenerate] {'pregenerate_total_s': 0.0393521785736084}
+[1a] 519 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 227.0, 'bm25_search_s': 8.4, 'dense_index_load_s': 2.8, 'dense_search_s': 4.6, 'fusion_s': 0.3, 'reasonembed_s': 21.7, 'reasonembed_new_docs': 12}
+[1b] 1214 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 227.4, 'bm25_search_s': 22.7, 'dense_index_load_s': 2.5, 'dense_search_s': 6.2, 'fusion_s': 0.7, 'reasonembed_s': 22.3, 'reasonembed_new_docs': 22}
+[pregenerate] {'pregenerate_total_s': 0.03212141990661621}
+[1a] 350 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 223.3, 'bm25_search_s': 4.6, 'dense_index_load_s': 2.9, 'dense_search_s': 4.8, 'fusion_s': 0.2, 'reasonembed_s': 26.1, 'reasonembed_new_docs': 38}
+[1b] 376 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 234.5, 'bm25_search_s': 5.3, 'dense_index_load_s': 2.6, 'dense_search_s': 3.9, 'fusion_s': 0.2, 'reasonembed_s': 21.4, 'reasonembed_new_docs': 10}
+[pregenerate] {'pregenerate_total_s': 0.05744814872741699}
+[2a_history_rr] 858 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 19.6, 'bm25_search_s': 8.0, 'dense_index_load_s': 1.6, 'dense_search_s': 9.4, 'fusion_s': 0.4, 'reasonembed_s': 0.8, 'reasonembed_new_docs': 0, 'llm_rerank_s': 20.8, 'llm_rerank_new_pairs': 381}
+[2a_history_noans] 858 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 18.8, 'bm25_search_s': 5.6, 'dense_index_load_s': 1.4, 'dense_search_s': 6.8, 'fusion_s': 0.4, 'reasonembed_s': 15.2, 'reasonembed_new_docs': 4}
+[pregenerate] {'pregenerate_total_s': 0.03188610076904297}
+[2a_history_rr] 330 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 19.5, 'bm25_search_s': 3.1, 'dense_index_load_s': 1.3, 'dense_search_s': 5.2, 'fusion_s': 0.2, 'reasonembed_s': 15.3, 'reasonembed_new_docs': 3, 'llm_rerank_s': 15.6, 'llm_rerank_new_pairs': 226}
+[2a_history_noans] 330 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 19.2, 'bm25_search_s': 2.2, 'dense_index_load_s': 1.1, 'dense_search_s': 3.6, 'fusion_s': 0.2, 'reasonembed_s': 14.8, 'reasonembed_new_docs': 8}
+[pregenerate] {'pregenerate_total_s': 0.034568071365356445}
+[2a_history] 858 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 19.5, 'bm25_search_s': 9.0, 'dense_index_load_s': 1.5, 'dense_search_s': 9.5, 'fusion_s': 0.4, 'reasonembed_s': 15.0, 'reasonembed_new_docs': 4}
+[pregenerate] {'pregenerate_total_s': 0.03138995170593262}
+[2a_history] 330 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 19.0, 'bm25_search_s': 3.6, 'dense_index_load_s': 1.4, 'dense_search_s': 5.1, 'fusion_s': 0.2, 'reasonembed_s': 17.4, 'reasonembed_new_docs': 14}
+=== 16:47:26 N4_S1_DONE 5850 s
+t1 trainsub release: {'1a': 350, '1b': 376}
+seed 2 track 1: 2459 inputs, 2459 unique
+seed 2 track 2: 3564 inputs, 2984 unique
+=== 16:47:28 N4 s2 LLM t1
+[reason/bodies] 2459 inputs, 2459 unique, 2459 to generate
+  2459/2459  chunk 723s  551 tok/s  3.40 q/s
+[hyde/bodies] 2459 inputs, 2459 unique, 2459 to generate
+  2459/2459  chunk 734s  534 tok/s  3.35 q/s
+=== 17:12:18 N4 s2 LLM t2
+[reason/bodies] 2984 inputs, 2984 unique, 2984 to generate
+  2984/2984  chunk 708s  564 tok/s  4.21 q/s
+[hyde/bodies] 2984 inputs, 2984 unique, 2984 to generate
+  2984/2984  chunk 695s  555 tok/s  4.29 q/s
+=== 17:36:11 N4 s2 retrieval
+[pregenerate] {'pregenerate_total_s': 0.038895606994628906}
+[1a] 519 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 215.4, 'bm25_search_s': 8.2, 'dense_index_load_s': 2.7, 'dense_search_s': 4.6, 'fusion_s': 0.3, 'reasonembed_s': 19.9, 'reasonembed_new_docs': 9}
+[1b] 1214 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 214.5, 'bm25_search_s': 20.6, 'dense_index_load_s': 2.8, 'dense_search_s': 6.1, 'fusion_s': 0.7, 'reasonembed_s': 19.9, 'reasonembed_new_docs': 19}
+[pregenerate] {'pregenerate_total_s': 0.029512643814086914}
+[1a] 350 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 216.0, 'bm25_search_s': 4.6, 'dense_index_load_s': 2.8, 'dense_search_s': 4.8, 'fusion_s': 0.2, 'reasonembed_s': 22.5, 'reasonembed_new_docs': 14}
+[1b] 376 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 216.1, 'bm25_search_s': 5.1, 'dense_index_load_s': 2.5, 'dense_search_s': 4.4, 'fusion_s': 0.2, 'reasonembed_s': 19.7, 'reasonembed_new_docs': 10}
+[pregenerate] {'pregenerate_total_s': 0.04184436798095703}
+[2a_history_rr] 858 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 18.7, 'bm25_search_s': 7.7, 'dense_index_load_s': 1.7, 'dense_search_s': 9.5, 'fusion_s': 0.4, 'reasonembed_s': 0.7, 'reasonembed_new_docs': 0, 'llm_rerank_s': 14.7, 'llm_rerank_new_pairs': 218}
+[2a_history_noans] 858 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 18.8, 'bm25_search_s': 5.6, 'dense_index_load_s': 1.4, 'dense_search_s': 6.6, 'fusion_s': 0.4, 'reasonembed_s': 15.9, 'reasonembed_new_docs': 4}
+[pregenerate] {'pregenerate_total_s': 0.03258228302001953}
+[2a_history_rr] 330 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 19.0, 'bm25_search_s': 3.0, 'dense_index_load_s': 1.2, 'dense_search_s': 4.9, 'fusion_s': 0.2, 'reasonembed_s': 13.3, 'reasonembed_new_docs': 1, 'llm_rerank_s': 10.6, 'llm_rerank_new_pairs': 113}
+[2a_history_noans] 330 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 18.9, 'bm25_search_s': 2.2, 'dense_index_load_s': 1.0, 'dense_search_s': 3.8, 'fusion_s': 0.2, 'reasonembed_s': 14.6, 'reasonembed_new_docs': 11}
+[pregenerate] {'pregenerate_total_s': 0.03431248664855957}
+[2a_history] 858 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 19.0, 'bm25_search_s': 8.8, 'dense_index_load_s': 1.4, 'dense_search_s': 9.5, 'fusion_s': 0.4, 'reasonembed_s': 0.6, 'reasonembed_new_docs': 0}
+[pregenerate] {'pregenerate_total_s': 0.031438350677490234}
+[2a_history] 330 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 18.7, 'bm25_search_s': 3.5, 'dense_index_load_s': 1.3, 'dense_search_s': 5.1, 'fusion_s': 0.2, 'reasonembed_s': 14.9, 'reasonembed_new_docs': 2}
+=== 17:59:01 N4_S2_DONE 10145 s
+t1 trainsub release: {'1a': 350, '1b': 376}
+seed 3 track 1: 2459 inputs, 2459 unique
+seed 3 track 2: 3564 inputs, 2984 unique
+=== 17:59:04 N4 s3 LLM t1
+[reason/bodies] 2459 inputs, 2459 unique, 2459 to generate
+  2459/2459  chunk 722s  551 tok/s  3.40 q/s
+[hyde/bodies] 2459 inputs, 2459 unique, 2459 to generate
+  2459/2459  chunk 740s  530 tok/s  3.32 q/s
+=== 18:23:56 N4 s3 LLM t2
+[reason/bodies] 2984 inputs, 2984 unique, 2984 to generate
+  2984/2984  chunk 706s  564 tok/s  4.22 q/s
+[hyde/bodies] 2984 inputs, 2984 unique, 2984 to generate
+  2984/2984  chunk 691s  559 tok/s  4.32 q/s
+=== 18:47:45 N4 s3 retrieval
+[pregenerate] {'pregenerate_total_s': 0.03823590278625488}
+[1a] 519 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 216.9, 'bm25_search_s': 8.4, 'dense_index_load_s': 2.8, 'dense_search_s': 4.4, 'fusion_s': 0.3, 'reasonembed_s': 17.7, 'reasonembed_new_docs': 5}
+[1b] 1214 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 214.8, 'bm25_search_s': 20.8, 'dense_index_load_s': 2.6, 'dense_search_s': 6.4, 'fusion_s': 0.7, 'reasonembed_s': 20.1, 'reasonembed_new_docs': 12}
+[pregenerate] {'pregenerate_total_s': 0.029509544372558594}
+[1a] 350 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 213.6, 'bm25_search_s': 4.6, 'dense_index_load_s': 2.8, 'dense_search_s': 4.3, 'fusion_s': 0.2, 'reasonembed_s': 19.5, 'reasonembed_new_docs': 11}
+[1b] 376 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 214.3, 'bm25_search_s': 5.2, 'dense_index_load_s': 2.5, 'dense_search_s': 3.8, 'fusion_s': 0.2, 'reasonembed_s': 14.9, 'reasonembed_new_docs': 5}
+[pregenerate] {'pregenerate_total_s': 0.04136395454406738}
+[2a_history_rr] 858 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 18.9, 'bm25_search_s': 7.9, 'dense_index_load_s': 1.6, 'dense_search_s': 9.1, 'fusion_s': 0.4, 'reasonembed_s': 0.7, 'reasonembed_new_docs': 0, 'llm_rerank_s': 12.0, 'llm_rerank_new_pairs': 125}
+[2a_history_noans] 858 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 18.5, 'bm25_search_s': 5.5, 'dense_index_load_s': 1.4, 'dense_search_s': 6.7, 'fusion_s': 0.4, 'reasonembed_s': 15.9, 'reasonembed_new_docs': 4}
+[pregenerate] {'pregenerate_total_s': 0.03998589515686035}
+[2a_history_rr] 330 topics, timing {'llm_total_s': 0.0, 'bm25_index_s': 18.8, 'bm25_search_s': 3.0, 'dense_index_load_s': 1.5, 'dense_search_s': 5.0, 'fusion_s': 0.2, 'reasonembed_s': 0.3, 'reasonembed_new_docs': 0, 'llm_rerank_s': 9.3, 'llm_rerank_new_pairs': 87}
+[2a_history_noans] 330 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 18.7, 'bm25_search_s': 2.1, 'dense_index_load_s': 1.1, 'dense_search_s': 3.9, 'fusion_s': 0.2, 'reasonembed_s': 15.0, 'reasonembed_new_docs': 3}
+[pregenerate] {'pregenerate_total_s': 0.034451961517333984}
+[2a_history] 858 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 19.1, 'bm25_search_s': 8.6, 'dense_index_load_s': 1.5, 'dense_search_s': 9.5, 'fusion_s': 0.4, 'reasonembed_s': 14.8, 'reasonembed_new_docs': 2}
+[pregenerate] {'pregenerate_total_s': 0.03141522407531738}
+[2a_history] 330 topics, timing {'llm_total_s': 0.1, 'bm25_index_s': 18.9, 'bm25_search_s': 3.5, 'dense_index_load_s': 1.3, 'dense_search_s': 5.1, 'fusion_s': 0.2, 'reasonembed_s': 15.1, 'reasonembed_new_docs': 7}
+=== 19:10:24 N4_S3_DONE 14428 s
+=== 19:10:24 ALLDONE 14428 s

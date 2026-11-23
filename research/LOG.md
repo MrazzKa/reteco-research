@@ -2382,3 +2382,33 @@ time: estimate ~1 h / actual ~15 min of work + 2 min GPU.
   `t9_variants`, `t9_recall` (N1), `t10_guidance` (rule 20), `t11_draws` (N4, filled when N4 ends); numbers.json keys
   n1.* / recall.* / cost.* / guid.* / draws.*. README of the folder updated (sources, labels). RESULTS regenerated
   (`make_results.py` + new `results_1123.py`: sections AQ, AR, AS so far).
+
+## 2026-11-23 15:11–19:10 — N4 result: several LLM draws (analysis, no choice)
+commands: `queue_1123c.sh` (r0 15:11–15:33; r1 15:33–16:47; r2 –17:59; r3 –19:10; per realisation LLM ≈ 50 min —
+  Track 1 2,459 + Track 2 2,984 unique inputs, reason + hyde, one llm_expand call per track with the inputs shuffled
+  by random.Random(s) — and retrieval ≈ 24 min, new ReasonEmbed documents only a few dozen per run); then
+  `python3 n4_report.py --root .. --data ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out
+  ../research/runs_v13/n4/report.json`. Generations identical to the research cache: 16–24% per realisation (e.g. s1
+  Track 1 reason 506 / 2,459, Track 2 reason 645 / 2,984), as on 10.11 (RESULTS AI/AK).
+runs over 4 draws, dev mean ± SD (range) / train subsample mean ± SD (range):
+  1a 0.3655 ± 0.0020 (0.0042) / 0.3098 ± 0.0014 (0.0031) · 1b 0.4054 ± 0.0006 (0.0012) / 0.3742 ± 0.0013 (0.0025) ·
+  2a_history_rr 0.5513 ± 0.0010 (0.0022) / 0.6007 ± 0.0016 (0.0033) · 2a_history 0.5470 ± 0.0006 (0.0012) / 0.5826 ±
+  0.0010 (0.0020) · M0 0.4904 ± 0.0014 (0.0033) / 0.5191 ± 0.0022 (0.0053) · LLM-written answers 0.4840 ± 0.0011
+  (0.0026) / 0.5193 ± 0.0014 (0.0031); stages without ReasonEmbed: 1a hybrid 0.3291 ± 0.0070 (0.0160) / 0.2813 ±
+  0.0010, 1b hybrid 0.3518 ± 0.0030 (0.0061), 2a history hybrid 0.4615 ± 0.0017 (0.0038).
+the paper's differences (within each draw), dev mean ± SD [min … max] / train:
+  reference answers − M0 +0.0566 ± 0.0012 [+0.0557 … +0.0582] / +0.0634 ± 0.0016
+  LLM-written answers − M0 −0.0064 ± 0.0022 [−0.0085 … −0.0034] / +0.0001 ± 0.0011
+  +ReasonEmbed 1a +0.0364 ± 0.0060 [+0.0283 … +0.0411] / +0.0285; 1b +0.0536 ± 0.0027 / +0.0316; 2a history +0.0855 ±
+  0.0021 / +0.0635
+  +LLM (q+r+h final − the no-LLM q final of N1) 1a +0.0179 ± 0.0020 [+0.0158 … +0.0200] / +0.0311; 1b +0.0397 ± 0.0006 /
+  +0.0250; 2a history +0.0093 ± 0.0006 / +0.0021
+  +reranker 2a history +0.0043 ± 0.0009 [+0.0032 … +0.0051] / +0.0182 ± 0.0010
+reading: for every final (ReasonEmbed) run the draw-to-draw SD is 0.0006–0.0022 and the range ≤ 0.005 — below the
+  +0.005 adoption margin; the reported research-cache numbers sit inside the range (1a is at the top: 0.3667 vs mean
+  0.3655). Only the hybrid without ReasonEmbed moves more (1a range 0.016), so stage-level ablations before ReasonEmbed
+  carry ~±0.01 of LLM noise. The paper's main differences are far larger than the noise (reference − M0 +0.057,
+  +ReasonEmbed +0.036…+0.086, +LLM 1b +0.040); the small ones are not: LLM-written − M0 is −0.003…−0.009 on dev and
+  0.000 on train (i.e. "LLM-written answers are worth no more than no answers"), and the reranker's dev gain
+  +0.003…+0.005 is noise-sized (its train gain +0.018 is stable).
+time: estimate ~4–4.5 h GPU / actual 4 h 00 min.

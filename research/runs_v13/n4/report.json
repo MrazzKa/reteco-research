@@ -1,0 +1,652 @@
+{
+ "realisations": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "systems": {
+  "dev": {
+   "1a": {
+    "values": [
+     0.3667,
+     0.3675,
+     0.3634,
+     0.3643
+    ],
+    "mean": 0.3655,
+    "sd": 0.002,
+    "min": 0.3634,
+    "max": 0.3675,
+    "range": 0.0042
+   },
+   "1a hybrid": {
+    "values": [
+     0.3258,
+     0.3392,
+     0.328,
+     0.3232
+    ],
+    "mean": 0.3291,
+    "sd": 0.007,
+    "min": 0.3232,
+    "max": 0.3392,
+    "range": 0.016
+   },
+   "1b": {
+    "values": [
+     0.4053,
+     0.4059,
+     0.4058,
+     0.4047
+    ],
+    "mean": 0.4054,
+    "sd": 0.0006,
+    "min": 0.4047,
+    "max": 0.4059,
+    "range": 0.0012
+   },
+   "1b hybrid": {
+    "values": [
+     0.3505,
+     0.3563,
+     0.3502,
+     0.3501
+    ],
+    "mean": 0.3518,
+    "sd": 0.003,
+    "min": 0.3501,
+    "max": 0.3563,
+    "range": 0.0061
+   },
+   "2a_history_rr": {
+    "values": [
+     0.5507,
+     0.5526,
+     0.5504,
+     0.5515
+    ],
+    "mean": 0.5513,
+    "sd": 0.001,
+    "min": 0.5504,
+    "max": 0.5526,
+    "range": 0.0022
+   },
+   "2a_history": {
+    "values": [
+     0.5475,
+     0.5476,
+     0.5466,
+     0.5464
+    ],
+    "mean": 0.547,
+    "sd": 0.0006,
+    "min": 0.5464,
+    "max": 0.5476,
+    "range": 0.0012
+   },
+   "2a history hybrid": {
+    "values": [
+     0.4601,
+     0.4608,
+     0.4639,
+     0.461
+    ],
+    "mean": 0.4615,
+    "sd": 0.0017,
+    "min": 0.4601,
+    "max": 0.4639,
+    "range": 0.0038
+   },
+   "M0": {
+    "values": [
+     0.4908,
+     0.4917,
+     0.4884,
+     0.4907
+    ],
+    "mean": 0.4904,
+    "sd": 0.0014,
+    "min": 0.4884,
+    "max": 0.4917,
+    "range": 0.0033
+   },
+   "LLM-written answers": {
+    "values": [
+     0.4823,
+     0.4842,
+     0.485,
+     0.4844
+    ],
+    "mean": 0.484,
+    "sd": 0.0011,
+    "min": 0.4823,
+    "max": 0.485,
+    "range": 0.0026
+   },
+   "q:1a": {
+    "value": 0.3476
+   },
+   "q:1b": {
+    "value": 0.3657
+   },
+   "q:2a_history": {
+    "value": 0.5377
+   }
+  },
+  "trainsub": {
+   "1a": {
+    "values": [
+     0.3078,
+     0.3106,
+     0.3108,
+     0.3099
+    ],
+    "mean": 0.3098,
+    "sd": 0.0014,
+    "min": 0.3078,
+    "max": 0.3108,
+    "range": 0.0031
+   },
+   "1a hybrid": {
+    "values": [
+     0.2823,
+     0.2818,
+     0.2799,
+     0.2811
+    ],
+    "mean": 0.2813,
+    "sd": 0.001,
+    "min": 0.2799,
+    "max": 0.2823,
+    "range": 0.0024
+   },
+   "1b": {
+    "values": [
+     0.3754,
+     0.3751,
+     0.3729,
+     0.3732
+    ],
+    "mean": 0.3742,
+    "sd": 0.0013,
+    "min": 0.3729,
+    "max": 0.3754,
+    "range": 0.0025
+   },
+   "1b hybrid": {
+    "values": [
+     0.3442,
+     0.3412,
+     0.341,
+     0.3438
+    ],
+    "mean": 0.3426,
+    "sd": 0.0017,
+    "min": 0.341,
+    "max": 0.3442,
+    "range": 0.0032
+   },
+   "2a_history_rr": {
+    "values": [
+     0.5999,
+     0.5988,
+     0.602,
+     0.6022
+    ],
+    "mean": 0.6007,
+    "sd": 0.0016,
+    "min": 0.5988,
+    "max": 0.6022,
+    "range": 0.0033
+   },
+   "2a_history": {
+    "values": [
+     0.583,
+     0.5811,
+     0.583,
+     0.5831
+    ],
+    "mean": 0.5826,
+    "sd": 0.001,
+    "min": 0.5811,
+    "max": 0.5831,
+    "range": 0.002
+   },
+   "2a history hybrid": {
+    "values": [
+     0.5169,
+     0.519,
+     0.5193,
+     0.5212
+    ],
+    "mean": 0.5191,
+    "sd": 0.0018,
+    "min": 0.5169,
+    "max": 0.5212,
+    "range": 0.0043
+   },
+   "M0": {
+    "values": [
+     0.522,
+     0.5167,
+     0.5184,
+     0.5195
+    ],
+    "mean": 0.5191,
+    "sd": 0.0022,
+    "min": 0.5167,
+    "max": 0.522,
+    "range": 0.0053
+   },
+   "LLM-written answers": {
+    "values": [
+     0.5205,
+     0.5173,
+     0.5192,
+     0.5201
+    ],
+    "mean": 0.5193,
+    "sd": 0.0014,
+    "min": 0.5173,
+    "max": 0.5205,
+    "range": 0.0031
+   },
+   "q:1a": {
+    "value": 0.2787
+   },
+   "q:1b": {
+    "value": 0.3492
+   },
+   "q:2a_history": {
+    "value": 0.5804
+   }
+  }
+ },
+ "diffs": {
+  "dev": {
+   "reference answers - M0": {
+    "values": [
+     0.0567,
+     0.0559,
+     0.0582,
+     0.0557
+    ],
+    "mean": 0.0566,
+    "sd": 0.0012,
+    "min": 0.0557,
+    "max": 0.0582,
+    "range": 0.0026
+   },
+   "LLM-written answers - M0": {
+    "values": [
+     -0.0085,
+     -0.0075,
+     -0.0034,
+     -0.0062
+    ],
+    "mean": -0.0064,
+    "sd": 0.0022,
+    "min": -0.0085,
+    "max": -0.0034,
+    "range": 0.0051
+   },
+   "+ReasonEmbed 1a": {
+    "values": [
+     0.0409,
+     0.0283,
+     0.0354,
+     0.0411
+    ],
+    "mean": 0.0364,
+    "sd": 0.006,
+    "min": 0.0283,
+    "max": 0.0411,
+    "range": 0.0128
+   },
+   "+ReasonEmbed 1b": {
+    "values": [
+     0.0548,
+     0.0496,
+     0.0556,
+     0.0545
+    ],
+    "mean": 0.0536,
+    "sd": 0.0027,
+    "min": 0.0496,
+    "max": 0.0556,
+    "range": 0.006
+   },
+   "+ReasonEmbed 2a history": {
+    "values": [
+     0.0874,
+     0.0868,
+     0.0827,
+     0.0853
+    ],
+    "mean": 0.0855,
+    "sd": 0.0021,
+    "min": 0.0827,
+    "max": 0.0874,
+    "range": 0.0047
+   },
+   "+LLM 1a": {
+    "values": [
+     0.0191,
+     0.02,
+     0.0158,
+     0.0168
+    ],
+    "mean": 0.0179,
+    "sd": 0.002,
+    "min": 0.0158,
+    "max": 0.02,
+    "range": 0.0042
+   },
+   "+LLM 1b": {
+    "values": [
+     0.0396,
+     0.0402,
+     0.0401,
+     0.039
+    ],
+    "mean": 0.0397,
+    "sd": 0.0006,
+    "min": 0.039,
+    "max": 0.0402,
+    "range": 0.0012
+   },
+   "+LLM 2a history": {
+    "values": [
+     0.0098,
+     0.0099,
+     0.0089,
+     0.0087
+    ],
+    "mean": 0.0093,
+    "sd": 0.0006,
+    "min": 0.0087,
+    "max": 0.0099,
+    "range": 0.0012
+   },
+   "+reranker 2a history": {
+    "values": [
+     0.0032,
+     0.005,
+     0.0038,
+     0.0051
+    ],
+    "mean": 0.0043,
+    "sd": 0.0009,
+    "min": 0.0032,
+    "max": 0.0051,
+    "range": 0.0019
+   }
+  },
+  "trainsub": {
+   "reference answers - M0": {
+    "values": [
+     0.061,
+     0.0644,
+     0.0646,
+     0.0636
+    ],
+    "mean": 0.0634,
+    "sd": 0.0016,
+    "min": 0.061,
+    "max": 0.0646,
+    "range": 0.0036
+   },
+   "LLM-written answers - M0": {
+    "values": [
+     -0.0015,
+     0.0007,
+     0.0008,
+     0.0006
+    ],
+    "mean": 0.0001,
+    "sd": 0.0011,
+    "min": -0.0015,
+    "max": 0.0008,
+    "range": 0.0023
+   },
+   "+ReasonEmbed 1a": {
+    "values": [
+     0.0254,
+     0.0288,
+     0.0309,
+     0.0288
+    ],
+    "mean": 0.0285,
+    "sd": 0.0023,
+    "min": 0.0254,
+    "max": 0.0309,
+    "range": 0.0054
+   },
+   "+ReasonEmbed 1b": {
+    "values": [
+     0.0312,
+     0.0339,
+     0.0319,
+     0.0294
+    ],
+    "mean": 0.0316,
+    "sd": 0.0019,
+    "min": 0.0294,
+    "max": 0.0339,
+    "range": 0.0046
+   },
+   "+ReasonEmbed 2a history": {
+    "values": [
+     0.0662,
+     0.0621,
+     0.0637,
+     0.0619
+    ],
+    "mean": 0.0635,
+    "sd": 0.002,
+    "min": 0.0619,
+    "max": 0.0662,
+    "range": 0.0043
+   },
+   "+LLM 1a": {
+    "values": [
+     0.0291,
+     0.0319,
+     0.0321,
+     0.0312
+    ],
+    "mean": 0.0311,
+    "sd": 0.0014,
+    "min": 0.0291,
+    "max": 0.0321,
+    "range": 0.0031
+   },
+   "+LLM 1b": {
+    "values": [
+     0.0262,
+     0.0259,
+     0.0237,
+     0.024
+    ],
+    "mean": 0.025,
+    "sd": 0.0013,
+    "min": 0.0237,
+    "max": 0.0262,
+    "range": 0.0025
+   },
+   "+LLM 2a history": {
+    "values": [
+     0.0026,
+     0.0006,
+     0.0026,
+     0.0026
+    ],
+    "mean": 0.0021,
+    "sd": 0.001,
+    "min": 0.0006,
+    "max": 0.0026,
+    "range": 0.002
+   },
+   "+reranker 2a history": {
+    "values": [
+     0.0169,
+     0.0177,
+     0.0189,
+     0.0191
+    ],
+    "mean": 0.0182,
+    "sd": 0.001,
+    "min": 0.0169,
+    "max": 0.0191,
+    "range": 0.0022
+   }
+  }
+ },
+ "r0_check": {
+  "dev": {
+   "1a": {
+    "n4": 0.3667,
+    "research": 0.3667,
+    "equal": true
+   },
+   "1a hybrid": {
+    "n4": 0.3258,
+    "research": 0.3258,
+    "equal": true
+   },
+   "1b": {
+    "n4": 0.4053,
+    "research": 0.4053,
+    "equal": true
+   },
+   "1b hybrid": {
+    "n4": 0.3505,
+    "research": 0.3505,
+    "equal": true
+   },
+   "2a_history_rr": {
+    "n4": 0.5507,
+    "research": 0.5507,
+    "equal": true
+   },
+   "2a_history": {
+    "n4": 0.5475,
+    "research": 0.5475,
+    "equal": true
+   },
+   "2a history hybrid": {
+    "n4": 0.4601,
+    "research": 0.4601,
+    "equal": true
+   },
+   "M0": {
+    "n4": 0.4908,
+    "research": 0.4908,
+    "equal": true
+   },
+   "LLM-written answers": {
+    "n4": 0.4823,
+    "research": 0.4823,
+    "equal": true
+   }
+  },
+  "trainsub": {
+   "1a": {
+    "n4": 0.3078,
+    "research": 0.3078,
+    "equal": true
+   },
+   "1a hybrid": {
+    "n4": 0.2823,
+    "research": 0.2823,
+    "equal": true
+   },
+   "1b": {
+    "n4": 0.3754,
+    "research": 0.3754,
+    "equal": true
+   },
+   "1b hybrid": {
+    "n4": 0.3442,
+    "research": 0.3442,
+    "equal": true
+   },
+   "2a_history_rr": {
+    "n4": 0.5999,
+    "research": 0.5999,
+    "equal": true
+   },
+   "2a_history": {
+    "n4": 0.583,
+    "research": 0.583,
+    "equal": true
+   },
+   "2a history hybrid": {
+    "n4": 0.5169,
+    "research": 0.517,
+    "equal": false
+   },
+   "M0": {
+    "n4": 0.522,
+    "research": 0.522,
+    "equal": true
+   },
+   "LLM-written answers": {
+    "n4": 0.5205,
+    "research": 0.5205,
+    "equal": true
+   }
+  }
+ },
+ "identical_generations": {
+  "s1.t1.reason": {
+   "n": 2459,
+   "identical_to_research": 506
+  },
+  "s1.t1.hyde": {
+   "n": 2459,
+   "identical_to_research": 441
+  },
+  "s1.t2.reason": {
+   "n": 2984,
+   "identical_to_research": 645
+  },
+  "s1.t2.hyde": {
+   "n": 2984,
+   "identical_to_research": 684
+  },
+  "s2.t1.reason": {
+   "n": 2459,
+   "identical_to_research": 489
+  },
+  "s2.t1.hyde": {
+   "n": 2459,
+   "identical_to_research": 429
+  },
+  "s2.t2.reason": {
+   "n": 2984,
+   "identical_to_research": 699
+  },
+  "s2.t2.hyde": {
+   "n": 2984,
+   "identical_to_research": 668
+  },
+  "s3.t1.reason": {
+   "n": 2459,
+   "identical_to_research": 480
+  },
+  "s3.t1.hyde": {
+   "n": 2459,
+   "identical_to_research": 401
+  },
+  "s3.t2.reason": {
+   "n": 2984,
+   "identical_to_research": 719
+  },
+  "s3.t2.hyde": {
+   "n": 2984,
+   "identical_to_research": 676
+  }
+ }
+}
