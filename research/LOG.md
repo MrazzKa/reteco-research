@@ -2365,3 +2365,11 @@ config: unchanged roles — `2a_history_q` stays the fallback and inside `2a_aut
   `_auto_2a.without_answers` and `_fallback_runs.2a` → `2a_history_noans`; the paper then has one answer-free system
   (the main pipeline with the answers removed), and table `tab:main` follows the config.
 time: estimate ~1 h / actual ~15 min of work + 2 min GPU.
+
+## 2026-11-23 15:11–15:36 — N4 r0 check: the stage-dumping submission pipeline reproduces the research numbers
+`queue_1123c.sh` realisation 0 (research caches; 25 min, Track-1 BM25 indexes dominate) + `n4_report.py --realisations
+  0`: dev 1a 0.3667, 1a hybrid 0.3258, 1b 0.4053, 1b hybrid 0.3505, 2a_history_rr 0.5507, 2a_history (rr `__re`
+  stage) 0.5475, 2a history hybrid 0.4601, M0 0.4908, LLM-written answers 0.4823; train subsample 0.3078 / 0.2823 /
+  0.3754 / 0.3442 / 0.5999 / 0.5830 / 0.5169 / 0.5220 / 0.5205 — all equal to the research numbers except the 2a
+  history hybrid stage on the subsample, 0.5169 vs 0.5170 (one tie-level topic; the final stages match exactly).
+  So r1–r3 are read with this machinery (rule N4).

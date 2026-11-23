@@ -58,3 +58,7 @@ research/runs_v13/n4/llm/
 research/runs_v13/n4/rel/
 research/runs_v13/n4/sub/
 research/runs_v13/testday/
+research/runs_v13/n3/rel_noans/
+research/runs_v13/n3/sub_noans/
+research/runs_v13/guid/rel_*/
+research/runs_v13/guid/sub_*/
