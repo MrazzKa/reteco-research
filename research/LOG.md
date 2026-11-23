@@ -2320,3 +2320,31 @@ cost (dev, distinct documents per domain = cold cache; at 7 docs/s): pool 50 / 1
   53,754 / 148,007 (40 / 73 / 128 / 352 min). Pool 100 roughly doubles the ReasonEmbed time and bought +0.0005
   (1a) / +0.002 (2a cur) on dev (RESULTS AD); pool 1000 would be 6–10 h per sub-task on this GPU.
 time: estimate ~2–3 h / actual 24 min (caches warm; the q pools needed the only new documents).
+
+## 2026-11-23 13:19–15:10 — rule 20 result: Track-1 guidance as separate runs — no gain (1a) / a loss (1b)
+commands: `queue_1123b.sh`: G2 generations `llm_expand.py --conditions 1a_g 1b_query+step_g --merge-conditions --chunk
+  100000` (5,417 unique inputs, reason 13:20–13:50, hyde –14:24; one generate() per prompt), `qexp_search.py` G1 / G2
+  for 1a and 1b (variant q+r+h+g; 0 missing generations), `hybrid.py` (`guid/t1/hybrid_1a.json`, `hybrid_1b.json`),
+  `reason_rerank.py` `g_1a_G1`, `g_1a_G2`, `g_1b_G1`, `g_1b_G2` (query + "\nGuidance: " + g; the query text had to be
+  cut for g to fit in 140 of the 1a and 349 of the 1b ReasonEmbed queries); then `python3 g_report.py --root .. --data
+  ../../reteco_data_v11 --kit ../../RETECO/starter_kit --out ../research/runs_v13/guid/report.json --write-config`.
+hybrid stage (full train / dev): 1a main q+r+h 0.2949 / 0.3258 · G1 0.2856 / 0.3296 (minmax α 0.6) · G2 0.2780 / 0.3312
+  (z-score α 0.6); 1b main 0.3226 / 0.3505 · G1 0.3082 / 0.3445 (z-score α 0.6) · G2 0.3033 / 0.3396 (z-score α 0.7).
+final (ReasonEmbed interp 0.8 for all four; rule-8 margin met), train subsample / dev [95% CI]:
+  1a  main 0.3078 / 0.3667 [0.329, 0.404] · **G1 0.3088 / 0.3710** [0.335, 0.408] · G2 0.3004 / 0.3676
+      G1 − main: train +0.0011 [−0.0075, +0.0099], dev +0.0043 [−0.0090, +0.0177]; G2 − main: −0.0074 / +0.0009
+  1b  main 0.3754 / 0.4053 [0.370, 0.441] · **G1 0.3633 / 0.3915** [0.356, 0.427] · G2 0.3544 / 0.3892
+      G1 − main: train −0.0121 [−0.0246, +0.0001], dev −0.0138 [−0.0267, −0.0007]; G2 − main: −0.0210 / −0.0161
+  G2 − G1 (does the LLM gain from seeing g?): 1a train −0.0084 [−0.0188, +0.0009], dev −0.0034; 1b train −0.0088
+  [−0.0174, −0.0007], dev −0.0023 — no; the LLM's own reading of the question is as good or better.
+choice (rule 20, better final train-subsample macro): 1a → G1, 1b → G1. The usual adoption margin would NOT be met
+  for either (1a +0.001, 1b −0.012 on train). Dev per domain, 1a G1 − main: workplace +0.078, law +0.056, cardano
+  +0.036, … monero −0.057, economics −0.026 (mixed); 1b: 9 of 13 domains negative.
+config: `1a_guid` / `1b_guid` written into configs/submission.json (`_separate_runs`; G1: main LLM texts, BM25 q r h g,
+  dense + e_query(g), fusion and ReasonEmbed as above; a query without guidance → main ranking). Submission checks run
+  in `queue_1123d.sh` after N4.
+reading: the released guidance adds nothing measurable to 1a and hurts 1b. For 1b the query-level g is the same for
+  every step of a query and pulls the step's BM25 text / dense vector / ReasonEmbed query back towards the whole
+  question (hybrid −0.014 on train); for 1a g mostly restates the question and adds a generic plan ("Locate …,
+  Cross-reference …"), which our own LLM reasoning already covers. Neither G1 nor G2 is a candidate for the main runs.
+time: estimate G1 ~1 h + G2 ~1.5–2 h / actual 1 h 51 min (LLM 65 min).

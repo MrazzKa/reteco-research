@@ -1,0 +1,555 @@
+{
+ "rule": "LOG 2026-11-23 12:58 (rule 20)",
+ "subtasks": {
+  "1a": {
+   "main": {
+    "name": "1a_rerun",
+    "train": 0.3078,
+    "dev": 0.3667,
+    "dev_ci": [
+     0.3292,
+     0.4042
+    ]
+   },
+   "G1": {
+    "name": "g_1a_G1",
+    "llm_sees_g": false,
+    "hybrid_cfg": {
+     "kind": "linear",
+     "kb": 100,
+     "kd": 100,
+     "norm": "minmax",
+     "alpha": 0.6
+    },
+    "hybrid_train_full": 0.2856,
+    "hybrid_dev": 0.3296,
+    "reasonembed_best_on_train": "interp=0.8",
+    "reasonembed_train_boot": {
+     "diff": 0.0396,
+     "ci95": [
+      0.0218,
+      0.0578
+     ],
+     "p_le_0": 0.0
+    },
+    "reasonembed_used": "interp=0.8",
+    "train": 0.3088,
+    "dev": 0.371,
+    "dev_ci": [
+     0.3348,
+     0.4075
+    ],
+    "minus_main": {
+     "train": {
+      "diff": 0.0011,
+      "ci95": [
+       -0.0075,
+       0.0099
+      ],
+      "p_le_0": 0.4061
+     },
+     "dev": {
+      "diff": 0.0043,
+      "ci95": [
+       -0.009,
+       0.0177
+      ],
+      "p_le_0": 0.2655
+     }
+    },
+    "dev_per_domain_minus_main": {
+     "iota": -0.009,
+     "quant": 0.0027,
+     "law": 0.0555,
+     "workplace": 0.0781,
+     "cardano": 0.0364,
+     "monero": -0.0565,
+     "economics": -0.0258,
+     "bitcoin": -0.0243,
+     "politics": 0.0176,
+     "genealogy": 0.0061,
+     "travel": 0.0055,
+     "hsm": -0.0191,
+     "history": -0.0109
+    },
+    "row": {
+     "by_how": {
+      "none=0": {
+       "train": 0.2692,
+       "dev": 0.3296
+      },
+      "top=10": {
+       "train": 0.2639,
+       "dev": 0.3308
+      },
+      "top=20": {
+       "train": 0.2803,
+       "dev": 0.3475
+      },
+      "top=50": {
+       "train": 0.2942,
+       "dev": 0.3587
+      },
+      "interp=0.1": {
+       "train": 0.2739,
+       "dev": 0.335
+      },
+      "interp=0.2": {
+       "train": 0.2779,
+       "dev": 0.3438
+      },
+      "interp=0.3": {
+       "train": 0.285,
+       "dev": 0.3516
+      },
+      "interp=0.4": {
+       "train": 0.2919,
+       "dev": 0.3551
+      },
+      "interp=0.5": {
+       "train": 0.2953,
+       "dev": 0.363
+      },
+      "interp=0.6": {
+       "train": 0.3007,
+       "dev": 0.3717
+      },
+      "interp=0.7": {
+       "train": 0.3043,
+       "dev": 0.3733
+      },
+      "interp=0.8": {
+       "train": 0.3088,
+       "dev": 0.371
+      },
+      "interp=0.9": {
+       "train": 0.3019,
+       "dev": 0.3625
+      }
+     },
+     "docs_encoded": 188,
+     "queries_encoded": 869
+    },
+    "guid_base_cut": 140,
+    "guid_empty": 0
+   },
+   "G2": {
+    "name": "g_1a_G2",
+    "llm_sees_g": true,
+    "hybrid_cfg": {
+     "kind": "linear",
+     "kb": 100,
+     "kd": 100,
+     "norm": "zscore",
+     "alpha": 0.6
+    },
+    "hybrid_train_full": 0.278,
+    "hybrid_dev": 0.3312,
+    "reasonembed_best_on_train": "interp=0.8",
+    "reasonembed_train_boot": {
+     "diff": 0.0366,
+     "ci95": [
+      0.0185,
+      0.0552
+     ],
+     "p_le_0": 0.0
+    },
+    "reasonembed_used": "interp=0.8",
+    "train": 0.3004,
+    "dev": 0.3676,
+    "dev_ci": [
+     0.3328,
+     0.4031
+    ],
+    "minus_main": {
+     "train": {
+      "diff": -0.0074,
+      "ci95": [
+       -0.0209,
+       0.0061
+      ],
+      "p_le_0": 0.8551
+     },
+     "dev": {
+      "diff": 0.0009,
+      "ci95": [
+       -0.0153,
+       0.0168
+      ],
+      "p_le_0": 0.4663
+     }
+    },
+    "dev_per_domain_minus_main": {
+     "iota": -0.0116,
+     "quant": 0.0038,
+     "law": 0.0395,
+     "workplace": 0.0568,
+     "cardano": 0.0344,
+     "monero": -0.0378,
+     "economics": -0.045,
+     "bitcoin": -0.0361,
+     "politics": 0.0236,
+     "genealogy": 0.0118,
+     "travel": -0.0154,
+     "hsm": -0.0012,
+     "history": -0.0108
+    },
+    "row": {
+     "by_how": {
+      "none=0": {
+       "train": 0.2638,
+       "dev": 0.3312
+      },
+      "top=10": {
+       "train": 0.2601,
+       "dev": 0.3373
+      },
+      "top=20": {
+       "train": 0.2841,
+       "dev": 0.3563
+      },
+      "top=50": {
+       "train": 0.286,
+       "dev": 0.3605
+      },
+      "interp=0.1": {
+       "train": 0.2686,
+       "dev": 0.3366
+      },
+      "interp=0.2": {
+       "train": 0.2739,
+       "dev": 0.3484
+      },
+      "interp=0.3": {
+       "train": 0.2778,
+       "dev": 0.354
+      },
+      "interp=0.4": {
+       "train": 0.2855,
+       "dev": 0.3599
+      },
+      "interp=0.5": {
+       "train": 0.2916,
+       "dev": 0.3576
+      },
+      "interp=0.6": {
+       "train": 0.2918,
+       "dev": 0.3748
+      },
+      "interp=0.7": {
+       "train": 0.2961,
+       "dev": 0.3762
+      },
+      "interp=0.8": {
+       "train": 0.3004,
+       "dev": 0.3676
+      },
+      "interp=0.9": {
+       "train": 0.2946,
+       "dev": 0.363
+      }
+     },
+     "docs_encoded": 446,
+     "queries_encoded": 0
+    },
+    "guid_base_cut": 140,
+    "guid_empty": 0
+   },
+   "chosen": "G1",
+   "margin_would_be_met_on_train": false,
+   "G2_minus_G1": {
+    "train": {
+     "diff": -0.0084,
+     "ci95": [
+      -0.0188,
+      0.0009
+     ],
+     "p_le_0": 0.9601
+    },
+    "dev": {
+     "diff": -0.0034,
+     "ci95": [
+      -0.0119,
+      0.0048
+     ],
+     "p_le_0": 0.7959
+    }
+   }
+  },
+  "1b": {
+   "main": {
+    "name": "1b_rerun",
+    "train": 0.3754,
+    "dev": 0.4053,
+    "dev_ci": [
+     0.37,
+     0.4408
+    ]
+   },
+   "G1": {
+    "name": "g_1b_G1",
+    "llm_sees_g": false,
+    "hybrid_cfg": {
+     "kind": "linear",
+     "kb": 100,
+     "kd": 100,
+     "norm": "zscore",
+     "alpha": 0.6
+    },
+    "hybrid_train_full": 0.3082,
+    "hybrid_dev": 0.3445,
+    "reasonembed_best_on_train": "interp=0.8",
+    "reasonembed_train_boot": {
+     "diff": 0.0349,
+     "ci95": [
+      0.0154,
+      0.0554
+     ],
+     "p_le_0": 0.0002
+    },
+    "reasonembed_used": "interp=0.8",
+    "train": 0.3633,
+    "dev": 0.3915,
+    "dev_ci": [
+     0.3559,
+     0.4271
+    ],
+    "minus_main": {
+     "train": {
+      "diff": -0.0121,
+      "ci95": [
+       -0.0246,
+       0.0001
+      ],
+      "p_le_0": 0.9744
+     },
+     "dev": {
+      "diff": -0.0138,
+      "ci95": [
+       -0.0267,
+       -0.0007
+      ],
+      "p_le_0": 0.9803
+     }
+    },
+    "dev_per_domain_minus_main": {
+     "iota": -0.0321,
+     "quant": 0.0023,
+     "law": -0.0285,
+     "workplace": 0.0116,
+     "cardano": 0.0072,
+     "monero": 0.0194,
+     "economics": -0.0464,
+     "bitcoin": -0.0395,
+     "politics": 0.0075,
+     "genealogy": -0.0234,
+     "travel": -0.0222,
+     "hsm": -0.0224,
+     "history": -0.0123
+    },
+    "row": {
+     "by_how": {
+      "none=0": {
+       "train": 0.3284,
+       "dev": 0.3445
+      },
+      "top=10": {
+       "train": 0.3297,
+       "dev": 0.3385
+      },
+      "top=20": {
+       "train": 0.3399,
+       "dev": 0.3783
+      },
+      "top=50": {
+       "train": 0.3361,
+       "dev": 0.371
+      },
+      "interp=0.1": {
+       "train": 0.3351,
+       "dev": 0.3539
+      },
+      "interp=0.2": {
+       "train": 0.34,
+       "dev": 0.3637
+      },
+      "interp=0.3": {
+       "train": 0.3421,
+       "dev": 0.3682
+      },
+      "interp=0.4": {
+       "train": 0.3442,
+       "dev": 0.3745
+      },
+      "interp=0.5": {
+       "train": 0.3539,
+       "dev": 0.3829
+      },
+      "interp=0.6": {
+       "train": 0.3588,
+       "dev": 0.3981
+      },
+      "interp=0.7": {
+       "train": 0.3619,
+       "dev": 0.3997
+      },
+      "interp=0.8": {
+       "train": 0.3633,
+       "dev": 0.3915
+      },
+      "interp=0.9": {
+       "train": 0.3548,
+       "dev": 0.3792
+      }
+     },
+     "docs_encoded": 141,
+     "queries_encoded": 1590
+    },
+    "guid_base_cut": 349,
+    "guid_empty": 0
+   },
+   "G2": {
+    "name": "g_1b_G2",
+    "llm_sees_g": true,
+    "hybrid_cfg": {
+     "kind": "linear",
+     "kb": 100,
+     "kd": 100,
+     "norm": "zscore",
+     "alpha": 0.7
+    },
+    "hybrid_train_full": 0.3033,
+    "hybrid_dev": 0.3396,
+    "reasonembed_best_on_train": "interp=0.8",
+    "reasonembed_train_boot": {
+     "diff": 0.0308,
+     "ci95": [
+      0.0106,
+      0.0521
+     ],
+     "p_le_0": 0.0023
+    },
+    "reasonembed_used": "interp=0.8",
+    "train": 0.3544,
+    "dev": 0.3892,
+    "dev_ci": [
+     0.3538,
+     0.4248
+    ],
+    "minus_main": {
+     "train": {
+      "diff": -0.021,
+      "ci95": [
+       -0.0368,
+       -0.0058
+      ],
+      "p_le_0": 0.9955
+     },
+     "dev": {
+      "diff": -0.0161,
+      "ci95": [
+       -0.0286,
+       -0.0041
+      ],
+      "p_le_0": 0.9959
+     }
+    },
+    "dev_per_domain_minus_main": {
+     "iota": -0.0323,
+     "quant": 0.0233,
+     "law": -0.0122,
+     "workplace": -0.0185,
+     "cardano": 0.0231,
+     "monero": 0.0215,
+     "economics": -0.0489,
+     "bitcoin": -0.0482,
+     "politics": -0.0081,
+     "genealogy": -0.0498,
+     "travel": -0.0188,
+     "hsm": -0.0335,
+     "history": -0.0068
+    },
+    "row": {
+     "by_how": {
+      "none=0": {
+       "train": 0.3236,
+       "dev": 0.3396
+      },
+      "top=10": {
+       "train": 0.3219,
+       "dev": 0.3358
+      },
+      "top=20": {
+       "train": 0.3309,
+       "dev": 0.3659
+      },
+      "top=50": {
+       "train": 0.3385,
+       "dev": 0.3621
+      },
+      "interp=0.1": {
+       "train": 0.328,
+       "dev": 0.3473
+      },
+      "interp=0.2": {
+       "train": 0.3309,
+       "dev": 0.3599
+      },
+      "interp=0.3": {
+       "train": 0.3383,
+       "dev": 0.3679
+      },
+      "interp=0.4": {
+       "train": 0.344,
+       "dev": 0.3763
+      },
+      "interp=0.5": {
+       "train": 0.348,
+       "dev": 0.3824
+      },
+      "interp=0.6": {
+       "train": 0.3491,
+       "dev": 0.3904
+      },
+      "interp=0.7": {
+       "train": 0.3524,
+       "dev": 0.394
+      },
+      "interp=0.8": {
+       "train": 0.3544,
+       "dev": 0.3892
+      },
+      "interp=0.9": {
+       "train": 0.3504,
+       "dev": 0.3746
+      }
+     },
+     "docs_encoded": 377,
+     "queries_encoded": 0
+    },
+    "guid_base_cut": 349,
+    "guid_empty": 0
+   },
+   "chosen": "G1",
+   "margin_would_be_met_on_train": false,
+   "G2_minus_G1": {
+    "train": {
+     "diff": -0.0088,
+     "ci95": [
+      -0.0174,
+      -0.0007
+     ],
+     "p_le_0": 0.9831
+    },
+    "dev": {
+     "diff": -0.0023,
+     "ci95": [
+      -0.0152,
+      0.0102
+     ],
+     "p_le_0": 0.6306
+    }
+   }
+  }
+ }
+}
