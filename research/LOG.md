@@ -2422,3 +2422,18 @@ synthetic test from dev WITH `guidance_test.jsonl` (`make_test_release.py --keep
   without plan gold_ids): 519 / 519 queries and 1,214 / 1,214 steps use g, 0 fall back; 0.3710 / 0.3915; checker exit 0.
 the same release WITHOUT the guidance file: 519 / 519 and 1,214 / 1,214 fall back; the files are identical to the main
   `1a` / `1b` files in 13 / 13 domains (0.3667 / 0.4053); checker exit 0. (`guid/submit_check.json`)
+
+## 2026-11-23 20:06–20:27 — N6 result: test-day rehearsal passes
+commands: end of `queue_1123d.sh`: `make_test_release.py --keep-sr --keep-guidance` (dev → split "test", no gold field)
+  → `bash run_test.sh $R/testday/rel $R/testday/out` (checks → `submit.py` for the 9 submitted runs from the config
+  → `test_summary.py`), then `score_submission.py` on the files with the dev qrels (`testday/score_vs_dev.json`).
+result: run_test exit 0, **20 min** with warm caches (submit.py 1,168 s; checks 2 s); 106 files, format_checker exit 0 on
+  every file, no missing / extra topics, no duplicates; `2a_auto` → `2a_history_rr` in 11 / 11 domains, history
+  counters: 858 turns, 647 turns ≥ 2 all with answers, unparsed_lines 0, normalized_differs 0, 92 summary questions.
+  Scored with the dev qrels every file equals its research number (1a 0.3667, 1b 0.4053, 2a_history_rr 0.5507,
+  1a_noRE 0.3258, 1b_noRE 0.3505, 2a_history 0.5475, 2a_history_q 0.4802, 2a_nomaxp 0.3779, 2a_maxp 0.3901).
+  A cold test day adds the LLM generations and ReasonEmbed / reranker encoding: ≈ 1.6 h (RESULTS X, AK).
+other N6 pieces (committed earlier): `configs/env/requirements_{main,llm}.txt` (pip freeze), `configs/env/README.md`
+  (CUDA 13.0 runtime in the torch wheels, driver 621.24, GPU, OS), `CHECK_ONLY=1` mode (tested: it caught a 4 GB /tmp
+  and a busy GPU), README section "Test day" with the checklist.
+time: estimate ~1 h / actual ~40 min of work + 21 min GPU.

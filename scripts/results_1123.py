@@ -180,5 +180,10 @@ def week9(root):
             L.append(f"| `{v}` | {r['files']} | {r['format_checker_fail']} | {r.get('n_topics', '–')} | {tot:.0f} |")
         a2 = ts["variants"].get("2a_auto", {})
         L += ["", f"2a_auto: {a2.get('auto_2a')}; history counters {a2.get('history_counters')}. Problems: "
-              f"{ts['problems'] or 'none'}.", ""]
+              f"{ts['problems'] or 'none'}."]
+        sc = jload(os.path.join(R, "testday", "score_vs_dev.json"))
+        if sc:
+            L += ["", "The rehearsal files scored with the dev qrels (official scorer) vs the research numbers: " +
+                  ", ".join(f"`{v}` {f4(x['official_macro_ndcg10'])} ({f4(x['research_dev'])})" for v, x in sc.items()) + "."]
+        L.append("")
     return L

@@ -1,0 +1,2085 @@
+{
+ "1a": {
+  "official_macro_ndcg10": 0.3667,
+  "per_domain": {
+   "iota": 0.6198,
+   "quant": 0.0988,
+   "law": 0.3844,
+   "workplace": 0.4661,
+   "cardano": 0.3414,
+   "monero": 0.2636,
+   "economics": 0.3239,
+   "bitcoin": 0.227,
+   "politics": 0.5329,
+   "genealogy": 0.4219,
+   "travel": 0.2984,
+   "hsm": 0.4314,
+   "history": 0.3575
+  },
+  "checks": {
+   "iota": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 3,
+    "topics_released": 3,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "quant": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 10,
+    "topics_released": 10,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "law": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 11,
+    "topics_released": 11,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "workplace": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 11,
+    "topics_released": 11,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "cardano": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 15,
+    "topics_released": 15,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "monero": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 19,
+    "topics_released": 19,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "economics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 25,
+    "topics_released": 25,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "bitcoin": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 30,
+    "topics_released": 30,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "politics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 45,
+    "topics_released": 45,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "genealogy": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 35,
+    "topics_released": 35,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "travel": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 30,
+    "topics_released": 30,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "hsm": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 45,
+    "topics_released": 45,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "history": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 240,
+    "topics_released": 240,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   }
+  },
+  "research_dev": 0.3667,
+  "diff_vs_research": 0.0,
+  "timing_s": {
+   "llm_total_s": 0.1,
+   "bm25_index_s": 223.6,
+   "bm25_search_s": 8.3,
+   "dense_index_load_s": 2.8,
+   "dense_search_s": 4.4,
+   "fusion_s": 0.3,
+   "reasonembed_s": 0.6,
+   "reasonembed_new_docs": 0
+  },
+  "per_topic_s": {
+   "llm_total_s": 0.0,
+   "bm25_index_s": 0.431,
+   "bm25_search_s": 0.016,
+   "dense_index_load_s": 0.005,
+   "dense_search_s": 0.008,
+   "fusion_s": 0.001,
+   "reasonembed_s": 0.001
+  },
+  "n_topics": 519
+ },
+ "1b": {
+  "official_macro_ndcg10": 0.4053,
+  "per_domain": {
+   "iota": 0.5722,
+   "quant": 0.2615,
+   "law": 0.4111,
+   "workplace": 0.5882,
+   "cardano": 0.3468,
+   "monero": 0.256,
+   "economics": 0.352,
+   "bitcoin": 0.2565,
+   "politics": 0.5069,
+   "genealogy": 0.542,
+   "travel": 0.3548,
+   "hsm": 0.4347,
+   "history": 0.3857
+  },
+  "checks": {
+   "iota": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 8,
+    "topics_released": 8,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "quant": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 15,
+    "topics_released": 15,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "law": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 23,
+    "topics_released": 23,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "workplace": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 20,
+    "topics_released": 20,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "cardano": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 33,
+    "topics_released": 33,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "monero": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 28,
+    "topics_released": 28,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "economics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 51,
+    "topics_released": 51,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "bitcoin": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 56,
+    "topics_released": 56,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "politics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 119,
+    "topics_released": 119,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "genealogy": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 68,
+    "topics_released": 68,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "travel": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 52,
+    "topics_released": 52,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "hsm": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 105,
+    "topics_released": 105,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "history": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 636,
+    "topics_released": 636,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   }
+  },
+  "research_dev": 0.4053,
+  "diff_vs_research": -0.0,
+  "timing_s": {
+   "llm_total_s": 0.1,
+   "bm25_index_s": 213.3,
+   "bm25_search_s": 20.5,
+   "dense_index_load_s": 2.5,
+   "dense_search_s": 5.8,
+   "fusion_s": 0.7,
+   "reasonembed_s": 0.7,
+   "reasonembed_new_docs": 0
+  },
+  "per_topic_s": {
+   "llm_total_s": 0.0,
+   "bm25_index_s": 0.176,
+   "bm25_search_s": 0.017,
+   "dense_index_load_s": 0.002,
+   "dense_search_s": 0.005,
+   "fusion_s": 0.001,
+   "reasonembed_s": 0.001
+  },
+  "n_topics": 1214
+ },
+ "2a_history_rr": {
+  "official_macro_ndcg10": 0.5507,
+  "per_domain": {
+   "drones": 0.4535,
+   "politics": 0.5135,
+   "law": 0.4918,
+   "medicalsciences": 0.3954,
+   "hardware": 0.4331,
+   "economics": 0.6164,
+   "psychology": 0.6296,
+   "biology": 0.7016,
+   "sustainable_living": 0.5946,
+   "robotics": 0.5852,
+   "earth_science": 0.6427
+  },
+  "checks": {
+   "drones": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 38,
+    "topics_released": 38,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "politics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 54,
+    "topics_released": 54,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "law": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 66,
+    "topics_released": 66,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "medicalsciences": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 44,
+    "topics_released": 44,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "hardware": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 58,
+    "topics_released": 58,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "economics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 92,
+    "topics_released": 92,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "psychology": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 99,
+    "topics_released": 99,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "biology": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 115,
+    "topics_released": 115,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "sustainable_living": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 84,
+    "topics_released": 84,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "robotics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 75,
+    "topics_released": 75,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "earth_science": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 133,
+    "topics_released": 133,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   }
+  },
+  "research_dev": 0.5507,
+  "diff_vs_research": -0.0,
+  "timing_s": {
+   "llm_total_s": 0.2,
+   "bm25_index_s": 18.8,
+   "bm25_search_s": 7.9,
+   "dense_index_load_s": 1.1,
+   "dense_search_s": 9.2,
+   "fusion_s": 0.5,
+   "reasonembed_s": 0.4,
+   "reasonembed_new_docs": 0,
+   "llm_rerank_s": 5.7,
+   "llm_rerank_new_pairs": 0
+  },
+  "per_topic_s": {
+   "llm_total_s": 0.0,
+   "bm25_index_s": 0.022,
+   "bm25_search_s": 0.009,
+   "dense_index_load_s": 0.001,
+   "dense_search_s": 0.011,
+   "fusion_s": 0.001,
+   "reasonembed_s": 0.0,
+   "llm_rerank_s": 0.007
+  },
+  "n_topics": 858
+ },
+ "1a_noRE": {
+  "official_macro_ndcg10": 0.3258,
+  "per_domain": {
+   "iota": 0.5695,
+   "quant": 0.0828,
+   "law": 0.3631,
+   "workplace": 0.4377,
+   "cardano": 0.2735,
+   "monero": 0.1662,
+   "economics": 0.2405,
+   "bitcoin": 0.2111,
+   "politics": 0.5249,
+   "genealogy": 0.3683,
+   "travel": 0.2823,
+   "hsm": 0.456,
+   "history": 0.2601
+  },
+  "checks": {
+   "iota": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 3,
+    "topics_released": 3,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "quant": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 10,
+    "topics_released": 10,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "law": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 11,
+    "topics_released": 11,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "workplace": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 11,
+    "topics_released": 11,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "cardano": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 15,
+    "topics_released": 15,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "monero": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 19,
+    "topics_released": 19,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "economics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 25,
+    "topics_released": 25,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "bitcoin": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 30,
+    "topics_released": 30,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "politics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 45,
+    "topics_released": 45,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "genealogy": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 35,
+    "topics_released": 35,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "travel": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 30,
+    "topics_released": 30,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "hsm": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 45,
+    "topics_released": 45,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "history": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 240,
+    "topics_released": 240,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   }
+  },
+  "research_dev": 0.3258,
+  "diff_vs_research": 0.0,
+  "timing_s": {
+   "llm_total_s": 0.1,
+   "bm25_index_s": 215.5,
+   "bm25_search_s": 8.2,
+   "dense_index_load_s": 2.5,
+   "dense_search_s": 4.3,
+   "fusion_s": 0.3,
+   "reasonembed_s": 0.0,
+   "reasonembed_new_docs": 0
+  },
+  "per_topic_s": {
+   "llm_total_s": 0.0,
+   "bm25_index_s": 0.415,
+   "bm25_search_s": 0.016,
+   "dense_index_load_s": 0.005,
+   "dense_search_s": 0.008,
+   "fusion_s": 0.001,
+   "reasonembed_s": 0.0
+  },
+  "n_topics": 519
+ },
+ "1b_noRE": {
+  "official_macro_ndcg10": 0.3505,
+  "per_domain": {
+   "iota": 0.5625,
+   "quant": 0.1611,
+   "law": 0.3504,
+   "workplace": 0.5051,
+   "cardano": 0.3104,
+   "monero": 0.2132,
+   "economics": 0.2822,
+   "bitcoin": 0.2297,
+   "politics": 0.4697,
+   "genealogy": 0.4287,
+   "travel": 0.3211,
+   "hsm": 0.4172,
+   "history": 0.3053
+  },
+  "checks": {
+   "iota": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 8,
+    "topics_released": 8,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "quant": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 15,
+    "topics_released": 15,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "law": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 23,
+    "topics_released": 23,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "workplace": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 20,
+    "topics_released": 20,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "cardano": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 33,
+    "topics_released": 33,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "monero": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 28,
+    "topics_released": 28,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "economics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 51,
+    "topics_released": 51,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "bitcoin": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 56,
+    "topics_released": 56,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "politics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 119,
+    "topics_released": 119,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "genealogy": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 68,
+    "topics_released": 68,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "travel": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 52,
+    "topics_released": 52,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "hsm": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 105,
+    "topics_released": 105,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "history": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 636,
+    "topics_released": 636,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   }
+  },
+  "research_dev": 0.3505,
+  "diff_vs_research": 0.0,
+  "timing_s": {
+   "llm_total_s": 0.1,
+   "bm25_index_s": 214.5,
+   "bm25_search_s": 20.7,
+   "dense_index_load_s": 2.3,
+   "dense_search_s": 6.0,
+   "fusion_s": 0.7,
+   "reasonembed_s": 0.0,
+   "reasonembed_new_docs": 0
+  },
+  "per_topic_s": {
+   "llm_total_s": 0.0,
+   "bm25_index_s": 0.177,
+   "bm25_search_s": 0.017,
+   "dense_index_load_s": 0.002,
+   "dense_search_s": 0.005,
+   "fusion_s": 0.001,
+   "reasonembed_s": 0.0
+  },
+  "n_topics": 1214
+ },
+ "2a_history": {
+  "official_macro_ndcg10": 0.5475,
+  "per_domain": {
+   "drones": 0.4104,
+   "politics": 0.4996,
+   "law": 0.4861,
+   "medicalsciences": 0.3733,
+   "hardware": 0.4093,
+   "economics": 0.5953,
+   "psychology": 0.6307,
+   "biology": 0.7249,
+   "sustainable_living": 0.6109,
+   "robotics": 0.615,
+   "earth_science": 0.6669
+  },
+  "checks": {
+   "drones": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 38,
+    "topics_released": 38,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "politics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 54,
+    "topics_released": 54,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "law": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 66,
+    "topics_released": 66,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "medicalsciences": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 44,
+    "topics_released": 44,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "hardware": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 58,
+    "topics_released": 58,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "economics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 92,
+    "topics_released": 92,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "psychology": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 99,
+    "topics_released": 99,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "biology": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 115,
+    "topics_released": 115,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "sustainable_living": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 84,
+    "topics_released": 84,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "robotics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 75,
+    "topics_released": 75,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "earth_science": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 133,
+    "topics_released": 133,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   }
+  },
+  "research_dev": 0.5475,
+  "diff_vs_research": -0.0,
+  "timing_s": {
+   "llm_total_s": 0.2,
+   "bm25_index_s": 18.6,
+   "bm25_search_s": 7.8,
+   "dense_index_load_s": 1.5,
+   "dense_search_s": 9.3,
+   "fusion_s": 0.4,
+   "reasonembed_s": 0.6,
+   "reasonembed_new_docs": 0
+  },
+  "per_topic_s": {
+   "llm_total_s": 0.0,
+   "bm25_index_s": 0.022,
+   "bm25_search_s": 0.009,
+   "dense_index_load_s": 0.002,
+   "dense_search_s": 0.011,
+   "fusion_s": 0.001,
+   "reasonembed_s": 0.001
+  },
+  "n_topics": 858
+ },
+ "2a_history_q": {
+  "official_macro_ndcg10": 0.4802,
+  "per_domain": {
+   "drones": 0.3786,
+   "politics": 0.4831,
+   "law": 0.4247,
+   "medicalsciences": 0.3644,
+   "hardware": 0.3533,
+   "economics": 0.511,
+   "psychology": 0.5282,
+   "biology": 0.6021,
+   "sustainable_living": 0.5419,
+   "robotics": 0.4764,
+   "earth_science": 0.6187
+  },
+  "checks": {
+   "drones": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 38,
+    "topics_released": 38,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "politics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 54,
+    "topics_released": 54,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "law": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 66,
+    "topics_released": 66,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "medicalsciences": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 44,
+    "topics_released": 44,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "hardware": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 58,
+    "topics_released": 58,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "economics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 92,
+    "topics_released": 92,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "psychology": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 99,
+    "topics_released": 99,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "biology": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 115,
+    "topics_released": 115,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "sustainable_living": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 84,
+    "topics_released": 84,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "robotics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 75,
+    "topics_released": 75,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "earth_science": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 133,
+    "topics_released": 133,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   }
+  },
+  "research_dev": 0.4802,
+  "diff_vs_research": 0.0,
+  "timing_s": {
+   "llm_total_s": 0.1,
+   "bm25_index_s": 18.7,
+   "bm25_search_s": 1.9,
+   "dense_index_load_s": 1.1,
+   "dense_search_s": 3.8,
+   "fusion_s": 0.5,
+   "reasonembed_s": 0.4,
+   "reasonembed_new_docs": 0
+  },
+  "per_topic_s": {
+   "llm_total_s": 0.0,
+   "bm25_index_s": 0.022,
+   "bm25_search_s": 0.002,
+   "dense_index_load_s": 0.001,
+   "dense_search_s": 0.004,
+   "fusion_s": 0.001,
+   "reasonembed_s": 0.0
+  },
+  "n_topics": 858
+ },
+ "2a_nomaxp": {
+  "official_macro_ndcg10": 0.3779,
+  "per_domain": {
+   "drones": 0.3049,
+   "politics": 0.3298,
+   "law": 0.2938,
+   "medicalsciences": 0.2626,
+   "hardware": 0.2961,
+   "economics": 0.3877,
+   "psychology": 0.4547,
+   "biology": 0.5546,
+   "sustainable_living": 0.4742,
+   "robotics": 0.3049,
+   "earth_science": 0.4935
+  },
+  "checks": {
+   "drones": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 38,
+    "topics_released": 38,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "politics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 54,
+    "topics_released": 54,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "law": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 66,
+    "topics_released": 66,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "medicalsciences": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 44,
+    "topics_released": 44,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "hardware": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 58,
+    "topics_released": 58,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "economics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 92,
+    "topics_released": 92,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "psychology": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 99,
+    "topics_released": 99,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "biology": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 115,
+    "topics_released": 115,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "sustainable_living": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 84,
+    "topics_released": 84,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "robotics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 75,
+    "topics_released": 75,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "earth_science": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 133,
+    "topics_released": 133,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   }
+  },
+  "research_dev": 0.3779,
+  "diff_vs_research": -0.0,
+  "timing_s": {
+   "llm_total_s": 0.2,
+   "bm25_index_s": 18.7,
+   "bm25_search_s": 5.2,
+   "dense_index_load_s": 1.0,
+   "dense_search_s": 6.2,
+   "fusion_s": 0.5,
+   "reasonembed_s": 0.4,
+   "reasonembed_new_docs": 0
+  },
+  "per_topic_s": {
+   "llm_total_s": 0.0,
+   "bm25_index_s": 0.022,
+   "bm25_search_s": 0.006,
+   "dense_index_load_s": 0.001,
+   "dense_search_s": 0.007,
+   "fusion_s": 0.001,
+   "reasonembed_s": 0.0
+  },
+  "n_topics": 858
+ },
+ "2a_maxp": {
+  "official_macro_ndcg10": 0.3901,
+  "per_domain": {
+   "drones": 0.3049,
+   "politics": 0.3293,
+   "law": 0.301,
+   "medicalsciences": 0.2598,
+   "hardware": 0.2848,
+   "economics": 0.4129,
+   "psychology": 0.5042,
+   "biology": 0.5818,
+   "sustainable_living": 0.4889,
+   "robotics": 0.3025,
+   "earth_science": 0.5215
+  },
+  "checks": {
+   "drones": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 38,
+    "topics_released": 38,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "politics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 54,
+    "topics_released": 54,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "law": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 66,
+    "topics_released": 66,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "medicalsciences": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 44,
+    "topics_released": 44,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "hardware": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 58,
+    "topics_released": 58,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "economics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 92,
+    "topics_released": 92,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "psychology": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 99,
+    "topics_released": 99,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "biology": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 115,
+    "topics_released": 115,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "sustainable_living": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 84,
+    "topics_released": 84,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "robotics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 75,
+    "topics_released": 75,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "earth_science": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 133,
+    "topics_released": 133,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   }
+  },
+  "research_dev": 0.3901,
+  "diff_vs_research": 0.0,
+  "timing_s": {
+   "llm_total_s": 0.1,
+   "bm25_index_s": 18.6,
+   "bm25_search_s": 5.1,
+   "dense_index_load_s": 1.2,
+   "dense_search_s": 6.3,
+   "fusion_s": 0.5,
+   "reasonembed_s": 0.4,
+   "reasonembed_new_docs": 0
+  },
+  "per_topic_s": {
+   "llm_total_s": 0.0,
+   "bm25_index_s": 0.022,
+   "bm25_search_s": 0.006,
+   "dense_index_load_s": 0.001,
+   "dense_search_s": 0.007,
+   "fusion_s": 0.001,
+   "reasonembed_s": 0.0
+  },
+  "n_topics": 858
+ }
+}

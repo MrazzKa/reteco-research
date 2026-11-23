@@ -147,6 +147,24 @@ Realisations [0, 1, 2, 3]: 0 = the research generation cache; 1–3 = fresh gene
 
 r0 reproduces every research number: False. Generations identical to the research cache: s1.t1.reason 506/2459, s1.t1.hyde 441/2459, s1.t2.reason 645/2984, s1.t2.hyde 684/2984, s2.t1.reason 489/2459, s2.t1.hyde 429/2459, s2.t2.reason 699/2984, s2.t2.hyde 668/2984, s3.t1.reason 480/2459, s3.t1.hyde 401/2459, s3.t2.reason 719/2984, s3.t2.hyde 676/2984.
 
+## AU. Test readiness: `scripts/run_test.sh` on a synthetic test release from dev (N6)
+
+| run | files | format_checker failures | topics | stage time (s) |
+| --- | ---: | ---: | ---: | ---: |
+| `1a` | 13 | 0 | 519 | 240 |
+| `1b` | 13 | 0 | 1214 | 244 |
+| `2a_auto` | 11 | 0 | – | 0 |
+| `1a_noRE` | 13 | 0 | 519 | 231 |
+| `1b_noRE` | 13 | 0 | 1214 | 244 |
+| `2a_history` | 11 | 0 | 858 | 38 |
+| `2a_history_q` | 11 | 0 | 858 | 26 |
+| `2a_nomaxp` | 11 | 0 | 858 | 32 |
+| `2a_maxp` | 11 | 0 | 858 | 32 |
+
+2a_auto: {'2a_history_rr': 11, '2a_history_q': 0}; history counters {'turns': 858, 'turns_ge2': 647, 'turns_ge2_with_answer': 647, 'unparsed_lines': 0, 'summary_questions': 92, 'empty_answers': 0, 'normalized_differs': 0, 'empty_history': 0}. Problems: none.
+
+The rehearsal files scored with the dev qrels (official scorer) vs the research numbers: `1a` 0.3667 (0.3667), `1b` 0.4053 (0.4053), `2a_history_rr` 0.5507 (0.5507), `1a_noRE` 0.3258 (0.3258), `1b_noRE` 0.3505 (0.3505), `2a_history` 0.5475 (0.5475), `2a_history_q` 0.4802 (0.4802), `2a_nomaxp` 0.3779 (0.3779), `2a_maxp` 0.3901 (0.3901).
+
 # 2026-11-16: submission without pool 100, subquestion_reasoning (rule 19), paper tables, error types
 
 Supervisor decisions of 11.11 and organisers' answers of 10.11 / 13.11 / 15.11 are recorded in `research/LOG.md` (entry 2026-11-16 14:21). Rule 19 was written before any run that uses `subquestion_reasoning`.
