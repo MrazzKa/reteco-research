@@ -1,0 +1,218 @@
+{
+ "2a_history_noans": {
+  "official_macro_ndcg10": 0.4908,
+  "per_domain": {
+   "drones": 0.3664,
+   "politics": 0.4778,
+   "law": 0.4343,
+   "medicalsciences": 0.3478,
+   "hardware": 0.3638,
+   "economics": 0.5355,
+   "psychology": 0.5702,
+   "biology": 0.6598,
+   "sustainable_living": 0.5365,
+   "robotics": 0.491,
+   "earth_science": 0.6161
+  },
+  "checks": {
+   "drones": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 38,
+    "topics_released": 38,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "politics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 54,
+    "topics_released": 54,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "law": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 66,
+    "topics_released": 66,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "medicalsciences": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 44,
+    "topics_released": 44,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "hardware": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 58,
+    "topics_released": 58,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "economics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 92,
+    "topics_released": 92,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "psychology": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 99,
+    "topics_released": 99,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "biology": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 115,
+    "topics_released": 115,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "sustainable_living": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 84,
+    "topics_released": 84,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "robotics": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 75,
+    "topics_released": 75,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   },
+   "earth_science": {
+    "format_checker_exit": 0,
+    "format_checker_tail": [
+     "RESULT: VALID"
+    ],
+    "topics_in_run": 133,
+    "topics_released": 133,
+    "judged_missing": 0,
+    "duplicates": 0,
+    "unknown_docs": 0,
+    "nonincreasing_violations": 0,
+    "depth_min_max": [
+     1000,
+     1000
+    ]
+   }
+  },
+  "research_dev": 0.4908,
+  "diff_vs_research": 0.0,
+  "timing_s": {
+   "llm_total_s": 0.2,
+   "bm25_index_s": 20.1,
+   "bm25_search_s": 6.0,
+   "dense_index_load_s": 1.6,
+   "dense_search_s": 7.5,
+   "fusion_s": 0.4,
+   "reasonembed_s": 0.7,
+   "reasonembed_new_docs": 0
+  },
+  "per_topic_s": {
+   "llm_total_s": 0.0,
+   "bm25_index_s": 0.023,
+   "bm25_search_s": 0.007,
+   "dense_index_load_s": 0.002,
+   "dense_search_s": 0.009,
+   "fusion_s": 0.0,
+   "reasonembed_s": 0.001
+  },
+  "n_topics": 858
+ }
+}

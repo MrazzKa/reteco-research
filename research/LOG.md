@@ -2348,3 +2348,20 @@ reading: the released guidance adds nothing measurable to 1a and hurts 1b. For 1
   question (hybrid −0.014 on train); for 1a g mostly restates the question and adds a generic plan ("Locate …,
   Cross-reference …"), which our own LLM reasoning already covers. Neither G1 nor G2 is a candidate for the main runs.
 time: estimate G1 ~1 h + G2 ~1.5–2 h / actual 1 h 51 min (LLM 65 min).
+
+## 2026-11-23 15:09–15:12 — N3 result: `2a_history_noans` (= M0) passes every check
+commands: first block of `queue_1123c.sh` (107 s; all LLM texts and ReasonEmbed vectors cached from 10.11).
+checks: (1) `submit.py --variants 2a_history_noans --split dev` on the release WITH answers (answers removed inside
+  submit.py, assert passed on all 858 turns) → official macro **0.4908 = research 0.4908**; rankings identical to the
+  16.11 M0 dev files in 11 / 11 domains; format_checker exit 0 on 11 / 11. (2) synthetic test release from dev
+  without answers (`n3/rel_noans`, 0 turns with answers) → 0.4908, format_checker exit 0 on 11 / 11.
+  (3) dev breakdown (`n3/m0_vs_h0q_dev.json`), macro / first turn / recycled gold (568) / new gold (79):
+  M0 0.4908 / 0.5213 / 0.5429 / 0.4034 · H0q+RE 0.4802 / 0.4797 / 0.5390 / 0.3766 · reference answers 0.5475 / 0.5213
+  / 0.6371 / 0.3759. **M0 − H0q+RE dev +0.0106 [+0.0002, +0.0216]**; train subsample +0.0052 [−0.0111, +0.0220]
+  (rule 14b, 0.5220 vs 0.5168) — i.e. M0 is not worse than the submitted answer-free fallback anywhere; the gap is
+  in first turns (0.521 vs 0.480: M0 has the LLM step, H0q+RE has none). Reference − M0 +0.0567 [+0.0440, +0.0690].
+config: unchanged roles — `2a_history_q` stays the fallback and inside `2a_auto`; `2a_history_noans` is listed in
+  `_separate_runs` as the candidate replacement (Steven decides). If M0 replaces H0q+RE, the change is one line:
+  `_auto_2a.without_answers` and `_fallback_runs.2a` → `2a_history_noans`; the paper then has one answer-free system
+  (the main pipeline with the answers removed), and table `tab:main` follows the config.
+time: estimate ~1 h / actual ~15 min of work + 2 min GPU.
