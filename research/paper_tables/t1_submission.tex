@@ -14,14 +14,14 @@ Task & Run & Role & Train & Dev [95\% CI] \\
 1b & BM25 (official starter kit) & baseline & -- & 0.118 \\
 1b & BM25 (ours, Lucene analyser) & baseline & 0.117 & 0.118 [0.091, 0.146] \\
 1b & \texttt{UA\_1b\_main} & main & 0.375 & 0.405 [0.370, 0.441] \\
-1b & \texttt{UA\_1b\_noRE} & backup & 0.344 & 0.350 [0.313, 0.388] \\
+1b & \texttt{UA\_1b\_noRE} & backup & 0.344 & 0.351 [0.313, 0.388] \\
 \midrule
 2a & BM25 (official starter kit) & baseline & -- & 0.183 \\
 2a & BM25 (ours, Lucene analyser), current turn & baseline & 0.177 & 0.176 [0.157, 0.195] \\
 2a & BM25 (official), with history & baseline & -- & 0.438 \\
 2a & BM25 (ours), with history & baseline & 0.403 & 0.404 [0.380, 0.427] \\
 2a & \texttt{UA\_2a\_history\_rr} & main & 0.600 & 0.551 [0.527, 0.574] \\
-2a & \texttt{UA\_2a\_history} & backup & 0.583 & 0.547 [0.524, 0.571] \\
+2a & \texttt{UA\_2a\_history} & backup & 0.583 & 0.548 [0.524, 0.571] \\
 2a & \texttt{UA\_2a\_history\_q} & main if no answers / backup & 0.517 & 0.480 [0.456, 0.504] \\
 2a & \texttt{UA\_2a\_maxp} & backup & 0.436 & 0.390 [0.366, 0.415] \\
 2a & \texttt{UA\_2a\_nomaxp} & backup & 0.432 & 0.378 [0.353, 0.403] \\
@@ -29,5 +29,5 @@ Task & Run & Role & Train & Dev [95\% CI] \\
 \end{tabular}
 \par\smallskip{\footnotesize 2a main = \texttt{UA\_2a\_auto}: 2a\_history\_rr when earlier answers are present, otherwise 2a\_history\_q. Source: final\_1116.json.}
 \caption{Submitted runs and baselines. Train: rule-8 subsample ($\le$30 topics per domain) on which every choice was made; dev: all topics, 95\% bootstrap interval of the domain macro. nDCG@10 (official scorer), macro over domains. Official BM25 train numbers are on the full train split and are not shown.}
-\label{tab:submission}
+\label{tab:app-submission}
 \end{table*}

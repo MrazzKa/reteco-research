@@ -115,9 +115,46 @@ def llm_body(body, g, limit=3000):
     return body[:max(0, limit - len(tail))] + tail
 
 
-def topic_guidance(data, dom, split, cond, ids=None):
-    """{topic id: g} for a Track-1 condition: 1a topics are queries; 1b topics are steps, each with its query's g."""
-    gm = guidance_map(data, dom, split, ids)
+def release_guidance(data, dom, split):
+    """{query id: query_guidance (gold_ids dropped)} from a release: `guidance_<split>.jsonl` if present, else a
+    `query_guidance` field inside the rows of `examples_<split>.jsonl` / `steps_<split>.jsonl` (the test format is
+    announced only as "as in train/dev"). Empty dict if neither exists."""
+    d = os.path.join(data, "track1_tempo", dom)
+    out = read_guidance(os.path.join(d, f"guidance_{split}.jsonl"))
+    if out:
+        return out
+    for name in ("examples", "steps"):
+        path = os.path.join(d, f"{name}_{split}.jsonl")
+        if not os.path.exists(path):
+            continue
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                if not line.strip():
+                    continue
+                r = json.loads(line)
+                r.pop("gold_passage_annotations", None)
+                if isinstance(r.get("query_guidance"), dict) and str(r.get("id")) not in out:
+                    qg = dict(r["query_guidance"])
+                    if isinstance(qg.get("retrieval_plan"), list):
+                        qg["retrieval_plan"] = [{k: v for k, v in st.items() if k != "gold_ids"}
+                                                if isinstance(st, dict) else st for st in qg["retrieval_plan"]]
+                    out[str(r["id"])] = qg
+    return out
+
+
+def topic_guidance(data, dom, split, cond, ids=None, release=False):
+    """{topic id: g} for a Track-1 condition: 1a topics are queries; 1b topics are steps, each with its query's g.
+    release=True: read through `release_guidance` (submission; tolerates a missing file -> no g anywhere)."""
+    if release:
+        if ids is None:
+            ids = corpus_ids(data, dom)
+        gm = {}
+        for q, qg in release_guidance(data, dom, split).items():
+            g = guidance_text(qg)
+            assert_no_ids(g, ids, f"{dom}/{split}/{q}")
+            gm[q] = g
+    else:
+        gm = guidance_map(data, dom, split, ids)
     if not cond.startswith("1b"):
         return gm
     out = {}

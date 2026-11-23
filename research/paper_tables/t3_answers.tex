@@ -6,13 +6,13 @@
 \toprule
 History given to the pipeline & Train & Dev & Dev recycled & Dev new & Dev $-$ M0 [95\% CI] \\
 \midrule
-Reference answers (released history) & 0.583 & 0.547 & 0.637 & 0.376 & +0.057 [+0.044, +0.069] \\
-LLM-written answers & 0.520 & 0.482 & 0.540 & 0.366 & -0.009 [-0.020, +0.003] \\
+Reference answers (released history) & 0.583 & 0.548 & 0.637 & 0.376 & +0.057 [+0.044, +0.069] \\
+LLM-written answers & 0.521 & 0.482 & 0.540 & 0.366 & -0.009 [-0.020, +0.003] \\
 No answers, same pipeline (M0) & 0.522 & 0.491 & 0.543 & 0.403 & -- \\
 No answers, answer-free run (H0q+RE) & 0.517 & 0.480 & 0.539 & 0.377 & -- \\
 Current turn only (B) & 0.432 & 0.378 & 0.381 & 0.358 & -- \\
 \bottomrule
 \end{tabular}
 \caption{What the 2a main pipeline (without reranker) owes to the reference answers in \texttt{conversation\_history}. Same frozen pipeline; only the earlier answers differ (M0: none). Recycled: later turns whose gold overlaps an earlier turn's gold (568 dev turns); new: later turns with only new gold (79). Group columns are means over turns.}
-\label{tab:answers}
+\label{tab:app-answers}
 \end{table*}

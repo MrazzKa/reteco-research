@@ -80,15 +80,25 @@ def topics(data, split, cfg, dom):
     q = cfg["query"]
     if cfg["track"] == 1:
         d = os.path.join(data, "track1_tempo", dom)
+        gcfg = cfg.get("guidance") or {}
+        gq = {}
+        if gcfg.get("llm_input"):  # rule 20 G2: the LLM also sees g (guidance.llm_body: question cut, never g)
+            from guidance import llm_body, topic_guidance
+            gq = topic_guidance(data, dom, split, "1a", release=True)  # {query id: g}, ids asserted
         if q == "1a":
             for r in read_jsonl(os.path.join(d, f"examples_{split}.jsonl")):
-                out.append((r["id"], r["query"], f"Question: {llm_clean(r['query'])}", r["query"]))
+                body = f"Question: {llm_clean(r['query'])}"
+                if gq.get(str(r["id"])):
+                    body = llm_body(body, gq[str(r["id"])], MAX_INPUT_CHARS)
+                out.append((r["id"], r["query"], body, r["query"]))
         else:  # 1b_query+step
             for r in read_jsonl(os.path.join(d, f"steps_{split}.jsonl")):
                 for s in r.get("steps", []):
                     text = f"{r['query']}\n\nStep: {s.get('step_instruction', '')}"
                     body = (f"Question: {llm_clean(r['query'])}\n\nCurrent research step (the document should "
                             f"serve this step): {llm_clean(s.get('step_instruction', ''))}")
+                    if gq.get(str(r["id"])):
+                        body = llm_body(body, gq[str(r["id"])], MAX_INPUT_CHARS)
                     out.append((s["step_id"], text, body, text))
         return out
     d = os.path.join(data, "track2_recor", dom)
@@ -110,8 +120,15 @@ def topics(data, split, cfg, dom):
                 out.append((tid, qtext, body, body))
             else:  # history: q = current question first, then the released history; LLM/embedder see <= 3 turns
                 answers = q == "2a_hist3qa"
+                strip = cfg.get("strip_answers", False)  # N3 (2026-11-23): `2a_history_noans` = M0
+                if strip:
+                    ans, qs = H.answers(t), H.questions(t)
+                    t = H.without_answers(t)
                 qtext = (t["query"] + "\n" + hist_text(t).strip()).strip()
                 body = history_body(t, answers)
+                if strip:
+                    for what, x in (("BM25/dense text", qtext), ("LLM input / ReasonEmbed query", body)):
+                        H.assert_answer_free(x, ans, what, qs)
                 if cfg.get("sr", {}).get("llm_input"):  # rule 19 S3: the LLM also sees SR; embedder query stays Hb
                     from llm_expand import history_body_sr
                     out.append((tid, qtext, history_body_sr(t), body))
@@ -189,6 +206,8 @@ def run_variant(a, name, cfg, enc_cache):
     pending = {}
     src = cfg.get("sr")  # rule 19
     srs = {}
+    gsrc = cfg.get("guidance")  # rule 20 (Track 1): g joins BM25, dense and the ReasonEmbed query
+    gds = {}
     for dom in doms:
         ts = tops[dom]
         qids = [t[0] for t in ts]
@@ -199,12 +218,17 @@ def run_variant(a, name, cfg, enc_cache):
             srs[dom] = sr_map(a.data, dom, a.split)
             comp = src["components"]
             texts = {q: dict(zip("qrh", x)) | {"s": srs[dom].get(q, "")} for q, x in texts.items()}
+        elif gsrc:
+            from guidance import topic_guidance
+            gds[dom] = topic_guidance(a.data, dom, a.split, cfg["query"], release=True)
+            comp = gsrc["components"]
+            texts = {q: dict(zip("qrh", x)) | {"g": gds[dom].get(q, "")} for q, x in texts.items()}
         # 2a. BM25
         t0 = time.time()
         bm, ids = build(os.path.join(a.data, sub, dom, "documents.jsonl"), key, "lucene")
         timing["bm25_index_s"] += time.time() - t0
         t0 = time.time()
-        if src:
+        if src or gsrc:
             bq = [(q, "\n".join(texts[q][c] for c in comp)) for q in qids]
         else:
             bq = [(q, texts[q][0] if plain else "\n".join(texts[q])) for q in qids]
@@ -222,8 +246,9 @@ def run_variant(a, name, cfg, enc_cache):
             gi = GpuIndex(domain_dir(rp(dc["emb"]), dc["model"], dc["max_len"], tr, dom))
         timing["dense_index_load_s"] += time.time() - t0
         t0 = time.time()
-        if src:  # same order of the summed vectors as qexp_search.py
-            vec = {"q": enc.encode_queries, "r": enc.encode_queries, "s": enc.encode_queries, "h": enc.encode_docs}
+        if src or gsrc:  # same order of the summed vectors as qexp_search.py
+            vec = {"q": enc.encode_queries, "r": enc.encode_queries, "s": enc.encode_queries, "g": enc.encode_queries,
+                   "h": enc.encode_docs}
             mat = sum(vec[c]([texts[q][c] for q in qids]).astype(np.float32) for c in comp)
         elif plain:
             eq = enc.encode_queries([texts[q][0] for q in qids]).astype(np.float32)
@@ -267,6 +292,15 @@ def run_variant(a, name, cfg, enc_cache):
             wrap = lambda x: f"Instruct: {ins}\nQuery: {x}"  # noqa: E731
             qtext = {t[0]: wrap(join_cut(emb_tok[0], re_clean(t[3]), re_clean(srs[dom].get(t[0], "")), rc["max_len"],
                                          wrap=wrap)[0]) for t in ts}
+        elif gsrc:
+            from guidance import SEP as GSEP
+            from sr import join_cut
+            if emb_tok[0] is None:
+                from transformers import AutoTokenizer
+                emb_tok[0] = AutoTokenizer.from_pretrained(rc["checkpoint"])
+            wrap = lambda x: f"Instruct: {ins}\nQuery: {x}"  # noqa: E731
+            qtext = {t[0]: wrap(join_cut(emb_tok[0], re_clean(t[3]), re_clean(gds[dom].get(t[0], "")), rc["max_len"],
+                                         wrap=wrap, sep=GSEP)[0]) for t in ts}
         else:
             qtext = {t[0]: f"Instruct: {ins}\nQuery: {re_clean(t[3])}" for t in ts}
         qkey = {q: hashlib.sha1(x.encode("utf-8")).hexdigest() for q, x in qtext.items()}
@@ -336,7 +370,35 @@ def run_variant(a, name, cfg, enc_cache):
                 rerank_head[(dom, q)] = LR.rerank(finals[q], (lr["how"], lr["depth"], lr["w"]), rs)
         timing["llm_rerank_s"] += time.time() - t0
         timing["llm_rerank_new_pairs"] = n_new
-    # 6. write runs
+    # 6. write runs (N4, --stages: also the fused order "__hybrid" and, with a reranker, the ReasonEmbed order "__re"
+    #    without it, as separate research-only directories; the official files are unchanged)
+    if getattr(a, "stages", False):
+        stage_heads = {"hybrid": lambda dom, q, pool: [d for d, _ in pool]}
+        if rerank_head:
+            stage_heads["re"] = lambda dom, q, pool: (rank(pool, how, scores[dom][q]) if how[0] != "none"
+                                                      else [d for d, _ in pool])
+        for st, fn in stage_heads.items():
+            sdir = os.path.join(a.out, f"{name}__{st}")
+            os.makedirs(sdir, exist_ok=True)
+            for dom in doms:
+                ts, pools, bres, dres, corpus_ids = pending[dom]
+                with open(os.path.join(sdir, f"{dom}.txt"), "w", encoding="utf-8") as f:
+                    done_q = set()
+                    for q, _, _, _ in ts:
+                        if q in done_q:
+                            continue
+                        done_q.add(q)
+                        lst, seen = [], set()
+                        for d in (fn(dom, q, pools[q][:rc["pool"]]) + [d for d, _ in pools[q][rc["pool"]:]]
+                                  + [d for d, _ in dres[q]] + [d for d, _ in bres[q]]):
+                            if d in seen or d not in corpus_ids:
+                                continue
+                            seen.add(d)
+                            lst.append(d)
+                            if len(lst) == 1000:
+                                break
+                        for r, d in enumerate(lst, 1):
+                            f.write(f"{q} Q0 {d} {r} {1.0 / r:.6f} {cfg['run_id']}-{st}\n")
     n_topics = 0
     for dom in doms:
         ts, pools, bres, dres, corpus_ids = pending[dom]
@@ -473,6 +535,39 @@ def sr_fallback(a, name, cfg):
     json.dump(man, open(mpath, "w"), indent=1)
 
 
+def guid_fallback(a, name, cfg):
+    """Rule 20: topics (1a queries / 1b steps) whose query has no guidance text get the ranking of
+    cfg["guidance"]["fallback"] (this variant's run id); counters per domain go to the manifest."""
+    from guidance import topic_guidance
+    fb = cfg["guidance"]["fallback"]
+    mpath = os.path.join(a.out, name, "manifest.json")
+    man = json.load(open(mpath))
+    tot = defaultdict(int)
+    for dom in (a.domains or cfg["domains"]):
+        tids = [t[0] for t in topics(a.data, a.split, cfg, dom)]
+        gm = topic_guidance(a.data, dom, a.split, cfg["query"], release=True)
+        empty = {q for q in tids if not gm.get(q, "").strip()}
+        path, fpath = os.path.join(a.out, name, f"{dom}.txt"), os.path.join(a.out, fb, f"{dom}.txt")
+        if empty:
+            own = [ln for ln in open(path, encoding="utf-8") if ln.split()[0] not in empty]
+            alt = [" ".join(ln.split()[:5] + [cfg["run_id"]]) + "\n" for ln in open(fpath, encoding="utf-8")
+                   if ln.split()[0] in empty]
+            by_q = defaultdict(list)
+            for ln in own + alt:
+                by_q[ln.split()[0]].append(ln)
+            with open(path, "w", encoding="utf-8") as f:
+                for q in dict.fromkeys(tids):  # release order of the topics
+                    f.writelines(by_q[q])
+        c = {"topics": len(set(tids)), "topics_with_guidance": len(set(tids)) - len(empty),
+             "topics_fallback": len(empty), "fallback": fb}
+        man["domains"].setdefault(dom, {})["guidance"] = c
+        for k in ("topics", "topics_with_guidance", "topics_fallback"):
+            tot[k] += c[k]
+        print(f"[{name}] {dom}: {c}", flush=True)
+    man["guidance_summary"] = dict(tot)
+    json.dump(man, open(mpath, "w"), indent=1)
+
+
 def auto_2a(a, conf):
     """Per Track-2 domain: earlier answers present (any turn >= 2 with a non-empty parsed answer) -> the main
     history run, else the rule-14 run without answers. Both variants are always built; the chosen file is
@@ -496,6 +591,8 @@ def main():
     ap.add_argument("--data", required=True)
     ap.add_argument("--split", required=True, help="release split name: dev (check) or test")
     ap.add_argument("--domains", nargs="+")
+    ap.add_argument("--stages", action="store_true", help="research only (N4): also write the fused order and the "
+                    "ReasonEmbed order without the reranker as <variant>__hybrid / <variant>__re")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     conf = json.load(open(a.config))
@@ -509,8 +606,8 @@ def main():
         for v in (conf["_auto_2a"]["with_answers"], conf["_auto_2a"]["without_answers"]):
             if v not in variants:
                 variants.append(v)
-    for v in list(variants):  # rule 19: an SR variant needs its fallback variant for turns without SR
-        fb = conf["variants"][v].get("sr", {}).get("fallback")
+    for v in list(variants):  # rules 19 / 20: an SR / guidance variant needs its fallback variant
+        fb = (conf["variants"][v].get("sr") or conf["variants"][v].get("guidance") or {}).get("fallback")
         if fb and fb not in variants:
             variants.append(fb)
     pregenerate(a, conf, variants)
@@ -519,6 +616,8 @@ def main():
     for v in variants:
         if conf["variants"][v].get("sr"):
             sr_fallback(a, v, conf["variants"][v])
+        if conf["variants"][v].get("guidance"):
+            guid_fallback(a, v, conf["variants"][v])
     if dec is not None:
         adir = os.path.join(a.out, "2a_auto")
         os.makedirs(adir, exist_ok=True)

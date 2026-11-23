@@ -6,6 +6,7 @@ Track 1 `gold_ids`, `gold_answers` (and the step `gold_ids`); Track 2 per turn `
 (the current turn's reference answer), `subquestion_reasoning(_metadata)`, per conversation
 `original_answer` and the gold count in `metadata`. No qrels are written; documents are symlinked.
 With --strip-answers every earlier answer is removed from `conversation_history` (history.strip_answers).
+With --keep-guidance (Track 1) guidance_test.jsonl carries the query-side guidance without any gold field (rule 20).
 With --keep-sr the turn field `subquestion_reasoning` (and its metadata) is kept: the organisers announced on 10.11
 that the Track-2 test turns carry both fields (S2c check of `2a_history_sr`).
 
@@ -39,6 +40,9 @@ def main():
     ap.add_argument("--src-split", default="dev")
     ap.add_argument("--strip-answers", action="store_true")
     ap.add_argument("--keep-sr", action="store_true", help="keep subquestion_reasoning(_metadata) (test has them)")
+    ap.add_argument("--keep-guidance", action="store_true",
+                    help="Track 1: write guidance_test.jsonl with the query-side guidance only (organisers 18.11 / "
+                         "21.11: no gold_passage_annotations, no gold_ids in retrieval_plan)")
     a = ap.parse_args()
     n = {"t1_topics": 0, "t1_steps": 0, "t2_turns": 0, "t2_turns_with_answers_after": 0, "t2_turns_with_sr": 0}
     drop = T2_TURN_DROP - ({"subquestion_reasoning", "subquestion_reasoning_metadata"} if a.keep_sr else set())
@@ -48,6 +52,13 @@ def main():
             sd, od = os.path.join(a.data, sub, dom), os.path.join(a.out, sub, dom)
             os.makedirs(od, exist_ok=True)
             link(os.path.join(sd, "documents.jsonl"), os.path.join(od, "documents.jsonl"))
+            if tr == 1 and a.keep_guidance:
+                from guidance import read_guidance  # pops gold_passage_annotations unread, drops the plan gold_ids
+                rows = read_guidance(os.path.join(sd, f"guidance_{a.src_split}.jsonl"))
+                with open(os.path.join(od, "guidance_test.jsonl"), "w", encoding="utf-8") as f:
+                    for qid, qg in rows.items():
+                        f.write(json.dumps({"id": qid, "query_guidance": qg}, ensure_ascii=False) + "\n")
+                n["t1_guidance_rows"] = n.get("t1_guidance_rows", 0) + len(rows)
             if tr == 1:
                 for name in ("examples", "steps"):
                     rows = [json.loads(x) for x in open(os.path.join(sd, f"{name}_{a.src_split}.jsonl"), encoding="utf-8")

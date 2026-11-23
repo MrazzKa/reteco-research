@@ -16,6 +16,7 @@ import argparse
 import json
 import os
 import sys
+from decimal import ROUND_HALF_UP, Decimal
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from bm25s_run import ndcg_fn  # noqa: E402
@@ -47,9 +48,14 @@ def put_ci(key, b):
 
 
 def f(v, sign=False):
+    """Round half-up (Decimal), not banker's / binary-float rounding: 0.5475 -> 0.548."""
     if v is None or v != v:
         return "--"
-    return f"{v:+.{D}f}" if sign else f"{v:.{D}f}"
+    x = Decimal(repr(float(v))).quantize(Decimal(1).scaleb(-D), rounding=ROUND_HALF_UP)
+    if x == 0:
+        x = abs(x)
+    s_ = f"{x:.{D}f}"
+    return ("+" + s_ if x >= 0 else s_) if sign else s_
 
 
 def fci(b, sign=True):
@@ -186,7 +192,7 @@ def t1_submission(a, R, out):
     table(out, "t1_submission.tex", "Submitted runs and baselines. Train: rule-8 subsample ($\\le$30 topics per domain) "
           "on which every choice was made; dev: all topics, 95\\% bootstrap interval of the domain macro. "
           "nDCG@10 (official scorer), macro over domains. Official BM25 train numbers are on the full train split and "
-          "are not shown.", "tab:submission", "llllc", ["Task", "Run", "Role", "Train", "Dev [95\\% CI]"], rows,
+          "are not shown.", "tab:app-submission", "llllc", ["Task", "Run", "Role", "Train", "Dev [95\\% CI]"], rows,
           note=f"2a main = \\texttt{{UA\\_2a\\_auto}}: {esc(auto['with_answers'])} when earlier answers are present, "
                f"otherwise {esc(auto['without_answers'])}. Source: {esc(src)}.", star=True)
     return src
@@ -217,7 +223,7 @@ def t2_ablation(R, out):
         rows.append("MID")
     table(out, "t2_ablation.tex", "Ablation by stage on the same topics (ReasonEmbed over the hybrid top 50). "
           "$\\Delta$: paired bootstrap difference to the previous stage (topics resampled within domain, 10,000 draws).",
-          "tab:ablation", "lcccc", ["Stage", "Train", "$\\Delta$ train [95\\% CI]", "Dev [95\\% CI]", "$\\Delta$ dev [95\\% CI]"],
+          "tab:app-ablation", "lcccc", ["Stage", "Train", "$\\Delta$ train [95\\% CI]", "Dev [95\\% CI]", "$\\Delta$ dev [95\\% CI]"],
           rows[:-1], star=True)
 
 
@@ -270,7 +276,7 @@ def t3_answers(a, R, out, ndcg):
           "\\texttt{conversation\\_history}. Same frozen pipeline; only the earlier answers differ (M0: none). "
           f"Recycled: later turns whose gold overlaps an earlier turn's gold ({nrec} dev turns); new: later turns with "
           f"only new gold ({nnew}). Group columns are means over turns.",
-          "tab:answers", "lccccc", ["History given to the pipeline", "Train", "Dev", "Dev recycled", "Dev new",
+          "tab:app-answers", "lccccc", ["History given to the pipeline", "Train", "Dev", "Dev recycled", "Dev new",
                                     "Dev $-$ M0 [95\\% CI]"], rows, star=True)
 
 
@@ -358,7 +364,7 @@ def t4_negative(R, out):
     table(out, "t4_negative.tex", "Components tested and not used in the submission (train decides: $\\ge$+0.005 macro "
           "and bootstrap lower bound $>$0 on the rule-8 subsample; dev measured once). $\\Delta$ = candidate $-$ "
           "system without it; ``--'': no bootstrap interval was computed (the candidate was not the train winner, or "
-          "the comparison was made on the full train split).", "tab:negative", "llccl",
+          "the comparison was made on the full train split).", "tab:app-negative", "llccl",
           ["Component", "Setting", "$\\Delta$ train [95\\% CI]", "$\\Delta$ dev [95\\% CI]", "Decision"], rows, star=True)
 
 
@@ -434,7 +440,7 @@ def t5_compute(a, R, out):
             f"({tm['wall_s_total'] / 3600:.1f}\\,h with pool 100; reranker {rr['checkpoint'].split('/')[-1]} "
             f"over the top {rr['depth']}).")
     table(out, "t5_compute.tex", "Models, revisions, precision and measured throughput (one RTX 4060 Laptop GPU, 8\\,GB).",
-          "tab:compute", "lp{3.2cm}lp{2.6cm}p{4.2cm}", ["Stage", "Model", "Revision", "Precision", "Throughput"], rows,
+          "tab:app-compute", "lp{3.2cm}lp{2.6cm}p{4.2cm}", ["Stage", "Model", "Revision", "Precision", "Throughput"], rows,
           note=note, star=True)
     return {"rate1": rate1, "rate2": rate2, "extra_docs": extra_docs, "extra_s": extra_s, "per_sub": per_sub,
             "fixed": fixed, "est": est, "pre_test": pre_test, "total": total}
@@ -465,7 +471,7 @@ def t6_domains(a, R, out, ndcg):
     for d in T1:
         rows.append([esc(d), f(per["1a"][d]), f(per["1b"][d])])
     rows += ["MID", ["macro", f(sum(per["1a"].values()) / 13), f(sum(per["1b"].values()) / 13)]]
-    table(out, "t6_domains_t1.tex", "Dev nDCG@10 of the Track-1 main runs per domain.", "tab:domains-t1", "lcc",
+    table(out, "t6_domains_t1.tex", "Dev nDCG@10 of the Track-1 main runs per domain.", "tab:app-domains-t1", "lcc",
           ["Domain", "1a", "1b"], rows)
     rows = []
     for grp, lab in ((True, "BRIGHT"), (False, "StackExchange")):
@@ -477,7 +483,7 @@ def t6_domains(a, R, out, ndcg):
         rows += [[f"\\textit{{mean {lab}}}", "", f(m)], "MID"]
     rows += [["macro", "", f(sum(per["2a"].values()) / 11)]]
     table(out, "t6_domains_t2.tex", "Dev nDCG@10 of the 2a main run (\\texttt{UA\\_2a\\_history\\_rr}) per domain.",
-          "tab:domains-t2", "llc", ["Domain", "Source", "2a"], rows)
+          "tab:app-domains-t2", "llc", ["Domain", "Source", "2a"], rows)
 
 
 # ---------------------------------------------------------------- table 7: LLM nondeterminism
@@ -511,7 +517,7 @@ def t7_noise(R, out):
             "deterministic for a fixed batch of inputs and changes with batch composition.")
     table(out, "t7_noise.tex", "Run-to-run variation from LLM generation: dev nDCG@10 of each submitted run with the "
           "cached LLM texts (reported numbers) and rebuilt from empty caches (cold dress rehearsal); paired bootstrap.",
-          "tab:noise", "lccc", ["Run", "Cached", "Fresh", "Fresh $-$ cached [95\\% CI]"], rows, note=note)
+          "tab:app-noise", "lccc", ["Run", "Cached", "Fresh", "Fresh $-$ cached [95\\% CI]"], rows, note=note)
 
 
 # ---------------------------------------------------------------- table 8: subquestion_reasoning
@@ -554,8 +560,226 @@ def t8_sr(R, out):
     table(out, "t8_sr.tex", "Using the released \\texttt{subquestion\\_reasoning} (SR) text of the current turn (rule 19; "
           "a separate run, not the main submission). Train = rule-8 subsample; dev groups are means over turns "
           "(first turns 211, new-gold turns 79). No candidate used the reranker (rule-16 margin not met).",
-          "tab:sr", "lcccccc", ["System", "Train", "Dev", "Dev BRIGHT", "Dev SE", "Dev first turn", "Dev new gold"],
+          "tab:app-sr", "lcccccc", ["System", "Train", "Dev", "Dev BRIGHT", "Dev SE", "Dev first turn", "Dev new gold"],
           rows, note=note, star=True)
+
+# ---------------------------------------------------------------- N1: query variants through the final system
+CONDS = (("1a", "1a"), ("1b", "1b"), ("2a_current", "2a cur."), ("2a_history", "2a hist."))
+VARS = (("q", "q (no LLM)"), ("q+r", "q+r"), ("q+h", "q+h"), ("q+r+h", "q+r+h (submitted)"))
+
+
+def t9_variants(R, out):
+    n1 = jload(os.path.join(R, "n1", "report.json"))
+    if not n1:
+        placeholder(out, "c_variants.tex", "runs_v13/n1/report.json missing (N1)")
+        placeholder(out, "t9_variants.tex", "runs_v13/n1/report.json missing (N1)")
+        placeholder(out, "t9_recall.tex", "runs_v13/n1/report.json missing (N1)")
+        return
+    V = n1["variants"]
+    for c, _ in CONDS:
+        for k in ("_bm25_q", "_hybrid_q"):
+            x = V[c][k]
+            kk = f"n1.{c}.{k.strip('_')}"
+            put(kk + ".train", x["train"])
+            put(kk + ".dev", x["dev"])
+            put(kk + ".dev.ci_lo", x["dev_ci"][0])
+            put(kk + ".dev.ci_hi", x["dev_ci"][1])
+            put_ci(kk + ".dev_minus_qrh", x["delta_vs_qrh"]["dev"])
+        for v, _ in VARS:
+            x = V[c][v]
+            kk = f"n1.{c}.{v}"
+            put(kk + ".train", x["train"])
+            put(kk + ".dev", x["dev"])
+            put(kk + ".dev.ci_lo", x["dev_ci"][0])
+            put(kk + ".dev.ci_hi", x["dev_ci"][1])
+            put(kk + ".reasonembed_way", x["reasonembed_way"])
+            if "delta_vs_qrh" in x:
+                put_ci(kk + ".dev_minus_qrh", x["delta_vs_qrh"]["dev"])
+                put_ci(kk + ".train_minus_qrh", x["delta_vs_qrh"]["train"])
+    rows = [["BM25 (q)"] + [f(V[c]["_bm25_q"]["dev"]) for c, _ in CONDS],
+            ["Hybrid (q)"] + [f(V[c]["_hybrid_q"]["dev"]) for c, _ in CONDS], "MID"]
+    rows += [["+ RE, " + esc(lab)] + [f(V[c][v]["dev"]) for c, _ in CONDS] for v, lab in VARS]
+    table(out, "c_variants.tex", "Query variants through the final system (hybrid + ReasonEmbed, pool 50), dev "
+          "nDCG@10. q: the question (2a hist.: the history text) with no LLM; r: LLM reasoning; h: HyDE passage. "
+          "Fusion and ReasonEmbed weight chosen on train for each variant.", "tab:variants", "lcccc",
+          ["Query", "1a", "1b", "2a cur.", "2a hist."], rows)
+    rows = []
+    for c, lab in CONDS:
+        rows.append([r"\multicolumn{5}{l}{\textit{" + esc(lab) + "}}"])
+        for k, nm in (("_bm25_q", "BM25 (q)"), ("_hybrid_q", "Hybrid (q)")):
+            x = V[c][k]
+            rows.append([nm, f(x["train"]), fv_ci(x["dev"], x["dev_ci"]), fci(x["delta_vs_qrh"]["dev"]), "--"])
+        for v, nm in VARS:
+            x = V[c][v]
+            rows.append(["+ ReasonEmbed, " + esc(nm), f(x["train"]), fv_ci(x["dev"], x["dev_ci"]),
+                         fci(x["delta_vs_qrh"]["dev"]) if "delta_vs_qrh" in x else "--",
+                         esc(x["reasonembed_way"].replace("=", " "))])
+        rows.append("MID")
+    table(out, "t9_variants.tex", "Query variants through the final system. Train: rule-8 subsample; dev: all topics, "
+          "95\\% bootstrap interval; $\\Delta$: paired difference to q+r+h (the submitted variant) on dev.",
+          "tab:app-variants", "lcccc", ["System", "Train", "Dev [95\\% CI]", "$\\Delta$ dev vs q+r+h [95\\% CI]",
+                                        "ReasonEmbed"], rows[:-1], star=True)
+    ks = ("10", "20", "50", "100", "200", "1000")
+    rows = []
+    for c, lab in CONDS:
+        rc = n1["recall"][c]
+        for sp in ("train", "dev"):
+            for k in ks:
+                put(f"recall.{c}.{sp}.{k}", rc[sp]["macro_recall"][k])
+            rows.append([esc(lab), sp] + [f(rc[sp]["macro_recall"][k]) for k in ks])
+        co = n1["cost"][c]
+        for pk, x in co.items():
+            if pk.startswith("pool"):
+                put(f"cost.{c}.{pk}.docs_per_topic", x["docs_per_topic"])
+                put(f"cost.{c}.{pk}.distinct_docs_dev", x["distinct_docs"])
+                put(f"cost.{c}.{pk}.minutes_at_7", x["minutes_at_7_per_s"])
+        put(f"cost.{c}.topics_dev", co["topics_dev"])
+    rows.append("MID")
+    rows.append([r"\multicolumn{8}{l}{\textit{ReasonEmbed documents per dev topic (distinct per domain) at pool "
+                 r"50 / 100 / 200 / 1000}}"])
+    for c, lab in CONDS:
+        co = n1["cost"][c]
+        rows.append([esc(lab), "docs/topic"] + ["", ""] + [f"{co[f'pool{p}']['docs_per_topic']:.0f}" for p in (50, 100, 200, 1000)])
+    table(out, "t9_recall.tex", "Recall@k of the submitted q+r+h hybrid (fused pool, then dense, then BM25; train: full "
+          "split) and the ReasonEmbed cost of deeper pools (dev, distinct documents per domain divided by topics; at "
+          "7--10 documents/s on the 8\\,GB GPU).", "tab:app-recall", "llcccccc",
+          ["Task", "Split"] + [f"R@{k}" for k in ks], rows, star=True)
+
+
+# ---------------------------------------------------------------- N2: Track-1 guidance (rule 20)
+def t10_guidance(R, out):
+    g = jload(os.path.join(R, "guid", "report.json"))
+    if not g:
+        placeholder(out, "c_guidance.tex", "runs_v13/guid/report.json missing (rule 20)")
+        placeholder(out, "t10_guidance.tex", "runs_v13/guid/report.json missing (rule 20)")
+        return
+    S = g["subtasks"]
+    for sub, x in S.items():
+        for k in ("main", "G1", "G2"):
+            put(f"guid.{sub}.{k}.train", x[k]["train"])
+            put(f"guid.{sub}.{k}.dev", x[k]["dev"])
+            put(f"guid.{sub}.{k}.dev.ci_lo", x[k]["dev_ci"][0])
+            put(f"guid.{sub}.{k}.dev.ci_hi", x[k]["dev_ci"][1])
+            if k != "main":
+                put_ci(f"guid.{sub}.{k}.train_minus_main", x[k]["minus_main"]["train"])
+                put_ci(f"guid.{sub}.{k}.dev_minus_main", x[k]["minus_main"]["dev"])
+        put(f"guid.{sub}.chosen", x["chosen"])
+        put(f"guid.{sub}.margin_met_on_train", x["margin_would_be_met_on_train"])
+        put_ci(f"guid.{sub}.G2_minus_G1.dev", x["G2_minus_G1"]["dev"])
+    lab = {"main": "Main (no guidance)", "G1": "+ guidance, LLM unchanged (G1)", "G2": "+ guidance, LLM sees it (G2)"}
+    rows = [[lab[k] + (r"$^{*}$" if k == S["1a"]["chosen"] else ""), f(S["1a"][k]["train"]), f(S["1a"][k]["dev"]),
+             f(S["1b"][k]["train"]), f(S["1b"][k]["dev"])] for k in ("main", "G1", "G2")]
+    table(out, "c_guidance.tex", "Track-1 query-side guidance (released with the test questions; no gold field "
+          "used), nDCG@10. Train: rule-8 subsample. $^{*}$ chosen on train (separate run).", "tab:guidance", "lcccc",
+          ["System", "1a train", "1a dev", "1b train", "1b dev"], rows)
+    rows = []
+    for sub, x in S.items():
+        rows.append([r"\multicolumn{5}{l}{\textit{" + sub + "}}"])
+        for k in ("main", "G1", "G2"):
+            y = x[k]
+            rows.append([lab[k], f(y["train"]), fv_ci(y["dev"], y["dev_ci"]),
+                         fci(y["minus_main"]["train"]) if k != "main" else "--",
+                         fci(y["minus_main"]["dev"]) if k != "main" else "--"])
+        rows.append("MID")
+    table(out, "t10_guidance.tex", "Track-1 guidance as separate runs (rule 20). $\\Delta$: paired bootstrap difference "
+          "to the main run (topics resampled within domain).", "tab:app-guidance", "lcccc",
+          ["System", "Train", "Dev [95\\% CI]", "$\\Delta$ train [95\\% CI]", "$\\Delta$ dev [95\\% CI]"], rows[:-1],
+          star=True)
+
+
+# ---------------------------------------------------------------- N4: several LLM draws
+def t11_draws(R, out):
+    n4 = jload(os.path.join(R, "n4", "report.json"))
+    if not n4:
+        return placeholder(out, "t11_draws.tex", "runs_v13/n4/report.json missing (N4)")
+    rows = []
+    for sp, nm in (("dev", "dev"), ("trainsub", "train")):
+        for s, x in n4["systems"].get(sp, {}).items():
+            if "mean" not in x:
+                continue
+            put(f"draws.{sp}.{s}.mean", x["mean"])
+            put(f"draws.{sp}.{s}.sd", x["sd"])
+            put(f"draws.{sp}.{s}.range", x["range"])
+        for s, x in n4["diffs"].get(sp, {}).items():
+            put(f"draws.{sp}.diff.{s}.mean", x["mean"])
+            put(f"draws.{sp}.diff.{s}.sd", x["sd"])
+            put(f"draws.{sp}.diff.{s}.min", x["min"])
+            put(f"draws.{sp}.diff.{s}.max", x["max"])
+    show = [("1a", "1a"), ("1b", "1b"), ("2a_history_rr", "2a main"), ("2a_history", "2a, no reranker"),
+            ("M0", "2a, no answers (M0)"), ("LLM-written answers", "2a, LLM-written answers")]
+    for s, lab in show:
+        d, t = n4["systems"]["dev"].get(s), n4["systems"]["trainsub"].get(s)
+        if d and t:
+            rows.append([esc(lab), f"{f(t['mean'])} $\\pm$ {f(t['sd'])}", f(t["range"]),
+                         f"{f(d['mean'])} $\\pm$ {f(d['sd'])}", f(d["range"])])
+    rows.append("MID")
+    for s in n4["diffs"]["dev"]:
+        d, t = n4["diffs"]["dev"][s], n4["diffs"]["trainsub"].get(s)
+        rows.append([esc(s), f"{f(t['mean'], True)} $\\pm$ {f(t['sd'])}" if t else "--", f(t["range"]) if t else "--",
+                     f"{f(d['mean'], True)} $\\pm$ {f(d['sd'])}", f(d["range"])])
+    n = len(n4["realisations"])
+    table(out, "t11_draws.tex", f"Spread over {n} LLM draws (the research cache and {n - 1} fresh generations with a "
+          "shuffled batch composition, temperature 0): mean $\\pm$ SD and range (max $-$ min) of nDCG@10; "
+          "differences are taken within each draw.", "tab:app-llm-draws", "lcccc",
+          ["System / difference", "Train", "Range", "Dev", "Range"], rows, star=True)
+
+
+# ---------------------------------------------------------------- compact one-column tables for the main text
+def nv(key):
+    return N.get(key)
+
+
+def nci(key):
+    lo, hi = N.get(key + ".ci_lo"), N.get(key + ".ci_hi")
+    return [lo, hi] if lo is not None and hi is not None else None
+
+
+def c_main(a, out):
+    conf = jload(os.path.join(a.root, "configs", "submission.json"))
+    auto = conf["_auto_2a"]
+    spec = [("1a", "bm25_official.1a.dev", [("Main", "1a"), ("No ReasonEmbed", "1a_noRE")]),
+            ("1b", "bm25_official.1b.dev", [("Main", "1b"), ("No ReasonEmbed", "1b_noRE")]),
+            ("2a", "bm25_official.2a_history.dev", [("Main", auto["with_answers"]), ("No reranker", "2a_history"),
+                                                    ("No answers", auto["without_answers"])])]
+    rows = []
+    for sub, bkey, runs in spec:
+        rows.append([sub, "BM25 (official)" + (", history" if sub == "2a" else ""), "--", f(nv(bkey))])
+        for lab, v in runs:
+            rows.append(["", lab, f(nv(f"sub.{v}.train")), fv_ci(nv(f"sub.{v}.dev"), nci(f"sub.{v}.dev"))])
+        rows.append("MID")
+    table(out, "c_main.tex", "Main and backup runs, nDCG@10. Train: rule-8 subsample; dev: all topics, 95\\% "
+          "bootstrap interval. 2a main: history + ReasonEmbed + reranker.", "tab:main", "llcc",
+          ["", "Run", "Train", "Dev [95\\% CI]"], rows[:-1])
+
+
+def c_ablation(out):
+    stages = [("bm25", "BM25"), ("dense", "+ dense (hybrid)"), ("llm", "+ LLM (q+r+h)"),
+              ("reasonembed", "+ ReasonEmbed"), ("reranker", "+ reranker")]
+    conds = ("1a", "1b", "2a_current", "2a_history")
+    rows = [[lab] + [f(nv(f"abl.{c}.{k}.dev")) for c in conds] for k, lab in stages]
+    table(out, "c_ablation.tex", "Dev nDCG@10 by stage (each row adds one stage; 2a history: q = history text, LLM "
+          "sees the earlier Q/A). Reranker adopted only for 2a history.", "tab:ablation", "lcccc",
+          ["Stage", "1a", "1b", "2a cur.", "2a hist."], rows)
+
+
+def c_answers(out):
+    spec = [("ref", "Reference"), ("gen", "LLM-written"), ("m0", "None (M0)"), ("cur", "Current turn only")]
+    rows = [[lab, f(nv(f"ans.{k}.train")), f(nv(f"ans.{k}.dev")), f(nv(f"ans.{k}.dev_recycled")),
+             f(nv(f"ans.{k}.dev_new"))] for k, lab in spec]
+    table(out, "c_answers.tex", "Earlier answers given to the 2a pipeline (no reranker), nDCG@10. Recycled / new: "
+          "later dev turns whose gold does / does not overlap an earlier turn's gold.", "tab:answers", "lcccc",
+          ["Answers", "Train", "Dev", "Recycled", "New"], rows)
+
+
+def c_sr(out):
+    spec = [("main", "Main"), ("s3", "Main + SR"), ("sr_only", "SR alone"), ("b_sr", "Current turn + SR"),
+            ("b", "Current turn")]
+    rows = [[lab, f(nv(f"sr.{k}.train")), f(nv(f"sr.{k}.dev")), f(nv(f"sr.{k}.dev_new_gold"))] for k, lab in spec
+            if nv(f"sr.{k}.dev") is not None]
+    table(out, "c_sr.tex", "The released \\texttt{subquestion\\_reasoning} (SR) of the current turn, 2a, nDCG@10 "
+          "(separate run, not submitted). Dev new: later turns with only new gold.", "tab:sr", "lccc",
+          ["System", "Train", "Dev", "Dev new"], rows)
+
 
 
 def main():
@@ -579,10 +803,18 @@ def main():
     t6_domains(a, R, out, ndcg)
     t7_noise(R, out)
     t8_sr(R, out)
+    c_main(a, out)
+    c_ablation(out)
+    c_answers(out)
+    c_sr(out)
+    t9_variants(R, out)
+    t10_guidance(R, out)
+    t11_draws(R, out)
     N["_about"] = ("Generated by scripts/paper_tables.py from the run files and reports under research/runs_v13; "
                    f"table 1 source: {src1}. Keys: sub.* submitted runs, bm25_* baselines, abl.* ablation, ans.* "
                    "reference answers, neg.* negative results (difference, .ci_lo/.ci_hi), compute.*, domain.*, "
-                   "noise.*, sr.*. Values rounded to 4 decimals.")
+                   "noise.*, sr.*, n1.* / recall.* / cost.* (query variants, recall@k, ReasonEmbed cost; N1), guid.* (rule 20), "
+                   "draws.* (several LLM draws; N4). Values rounded to 4 decimals.")
     if comp:
         N["_compute_arithmetic"] = {k: (round(v, 2) if isinstance(v, float) else
                                         ({kk: round(vv, 1) for kk, vv in v.items()} if isinstance(v, dict) else v))

@@ -11,12 +11,12 @@ S1: SR added to BM25 / dense / ReasonEmbed & 0.600 & 0.561 & 0.661 & 0.441 & 0.5
 S2: SR replaces the LLM reason & 0.599 & 0.572 & 0.671 & 0.453 & 0.563 & 0.441 \\
 S3: LLM input + ReasonEmbed query with SR (SR run) & 0.608 & 0.570 & 0.672 & 0.447 & 0.563 & 0.474 \\
 Current turn only (B) & 0.432 & 0.378 & 0.445 & 0.297 & 0.502 & 0.358 \\
-B + SR, no history & 0.512 & 0.473 & 0.559 & 0.371 & 0.562 & 0.436 \\
-SR alone (BM25 + dense + ReasonEmbed) & 0.516 & 0.482 & 0.579 & 0.367 & 0.526 & 0.484 \\
+B + SR, no history & 0.512 & 0.474 & 0.559 & 0.371 & 0.562 & 0.436 \\
+SR alone (BM25 + dense + ReasonEmbed) & 0.516 & 0.483 & 0.579 & 0.367 & 0.526 & 0.484 \\
 Answer-free history run & 0.517 & 0.480 & 0.546 & 0.401 & 0.480 & 0.377 \\
 \bottomrule
 \end{tabular}
 \par\smallskip{\footnotesize SR run $-$ main: train +0.009 [-0.015, +0.032], dev +0.019 [+0.005, +0.034] (BRIGHT +0.044 [+0.026, +0.062], StackExchange -0.010 [-0.034, +0.014]).}
 \caption{Using the released \texttt{subquestion\_reasoning} (SR) text of the current turn (rule 19; a separate run, not the main submission). Train = rule-8 subsample; dev groups are means over turns (first turns 211, new-gold turns 79). No candidate used the reranker (rule-16 margin not met).}
-\label{tab:sr}
+\label{tab:app-sr}
 \end{table*}

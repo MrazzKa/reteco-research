@@ -7,17 +7,17 @@
 Run & Cached & Fresh & Fresh $-$ cached [95\% CI] \\
 \midrule
 \texttt{1a} & 0.367 & 0.366 & -0.001 [-0.005, +0.003] \\
-\texttt{1a\_noRE} & 0.326 & 0.341 & +0.015 [-0.000, +0.030] \\
+\texttt{1a\_noRE} & 0.326 & 0.341 & +0.015 [+0.000, +0.030] \\
 \texttt{1b} & 0.405 & 0.408 & +0.003 [-0.002, +0.009] \\
-\texttt{1b\_noRE} & 0.350 & 0.355 & +0.004 [-0.001, +0.010] \\
-\texttt{2a\_history\_rr} & 0.551 & 0.550 & -0.000 [-0.004, +0.003] \\
-\texttt{2a\_history\_q} & 0.480 & 0.480 & -0.000 [-0.001, +0.001] \\
-\texttt{2a\_history} & 0.547 & 0.545 & -0.002 [-0.005, +0.000] \\
+\texttt{1b\_noRE} & 0.351 & 0.355 & +0.004 [-0.001, +0.010] \\
+\texttt{2a\_history\_rr} & 0.551 & 0.550 & +0.000 [-0.004, +0.003] \\
+\texttt{2a\_history\_q} & 0.480 & 0.480 & +0.000 [-0.001, +0.001] \\
+\texttt{2a\_history} & 0.548 & 0.545 & -0.002 [-0.005, +0.000] \\
 \texttt{2a\_nomaxp} & 0.378 & 0.376 & -0.002 [-0.006, +0.002] \\
 \texttt{2a\_maxp} & 0.390 & 0.389 & -0.002 [-0.005, +0.002] \\
 \bottomrule
 \end{tabular}
 \par\smallskip{\footnotesize LLM texts of the fresh run identical to the cached ones: 1,414 of 6,898 (20\%); identical to a second fresh run over the same input set: 6,898 of 6,898. vLLM at temperature 0 is deterministic for a fixed batch of inputs and changes with batch composition.}
 \caption{Run-to-run variation from LLM generation: dev nDCG@10 of each submitted run with the cached LLM texts (reported numbers) and rebuilt from empty caches (cold dress rehearsal); paired bootstrap.}
-\label{tab:noise}
+\label{tab:app-noise}
 \end{table}

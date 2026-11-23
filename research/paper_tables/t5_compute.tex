@@ -15,5 +15,5 @@ LLM reranker (rule 16; 2a history only) & Qwen/Qwen3-Reranker-0.6B & \texttt{e61
 \end{tabular}
 \par\smallskip{\footnotesize Machine: NVIDIA GeForce RTX 4060 Laptop GPU, 8 GB (Windows itself holds 0.9-5.3 GB of it); 20 logical CPUs; 12 GB RAM visible to WSL2; torch 2.14.1+cu130, transformers 5.19.0, bitsandbytes 0.50.2, vLLM 0.32.0 (separate venv). Full test without pool 100 (350 1a queries, 820 1b steps, 200 2a turns; all caches empty, all submitted runs): $\approx$1.6\,h (1a 44\,min, 1b 23\,min, 2a 19\,min, LLM pre-generation 11\,min), scaled from the cold dress rehearsal on dev (4.2\,h with pool 100; reranker Qwen3-Reranker-0.6B over the top 20).}
 \caption{Models, revisions, precision and measured throughput (one RTX 4060 Laptop GPU, 8\,GB).}
-\label{tab:compute}
+\label{tab:app-compute}
 \end{table*}

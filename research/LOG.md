@@ -2248,3 +2248,42 @@ reading: g reads like a query rewrite plus a generic search plan ("Locate …, C
   we drop). Rule 20 goes ahead. Examples: `research/cases/track1_guidance_dev.md` (history 70471_283, cardano 6888_120,
   history 66498_462, genealogy 12774_283).
 time: estimate 30–45 min / actual ~3 min (41 s of compute).
+
+## 2026-11-23 13:06 — N3 (supervisor's question; no choice): one answer-free system for the paper — `2a_history_noans` = M0 as a run
+why: the paper has two answer-free systems — M0 (the main pipeline Hb on histories without answers: train sub 0.5220,
+  dev 0.4908) and H0q+RE (the submitted fallback `2a_history_q`: 0.5168 / 0.4802) — and they confuse the reader.
+code: submit.py — a history variant with `"strip_answers": true` builds every text from `history.without_answers(t)`
+  and asserts each BM25/dense text and LLM input / ReasonEmbed query answer-free (`history.assert_answer_free`, as
+  rule 14). configs/submission.json — variant `2a_history_noans` (copy of `2a_history`: LLM + hybrid + ReasonEmbed w
+  0.9, no reranker; run id `UA_2a_history_noans`), listed in `_separate_runs` as "candidate replacement for
+  2a_history_q, for a single description in the paper". Which run is the answer-free fallback stays as it is
+  (`2a_history_q`, also inside `2a_auto`) — that is Steven's decision at today's meeting.
+checks (queue_1123c, after rule 20): (1) `submit.py --variants 2a_history_noans --split dev` → official macro must equal
+  research 0.4908 and the ranking must equal the M0 dev files of 16.11 (`a2/sub_m0dev/2a_history`); (2) synthetic test
+  release from dev without answers (`make_test_release.py --strip-answers`) → format_checker exit 0 on every file;
+  (3) dev bootstrap M0 − H0q+RE (`t2_breakdown.py`, paired within domain) next to the train one of rule 14b
+  (`select/rule14b_train.json`: +0.0052 [−0.0111, +0.0220]); train / dev turn groups from RESULTS AN / rule 14b.
+
+## 2026-11-23 13:06 — N4 (written before any new generation; analysis, no choice): several LLM draws
+question: how much do the main numbers and the paper's differences move between LLM draws (the limitation "one LLM
+  realisation")? Temperature 0 is deterministic for one input set in one call, but outputs change with the batch
+  composition (RESULTS AI/AK).
+realisations: r0 = the research generation cache; r1, r2, r3 = fresh generations of every LLM input below, one
+  llm_expand call per track (Track 1: 1a + 1b; Track 2: Hb + M0 + A2 inputs) with the unique inputs shuffled by
+  random.Random(s), s = 1, 2, 3; same model / prompts / temperature 0 / vLLM settings as submit.py (gpu 0.6, 64 seqs,
+  2,048 batched tokens); caches `runs_v13/n4/llm/s<s>/t<track>` (`scripts/n4_prepare.py`: 2,459 Track-1 and 2,984
+  Track-2 unique inputs per realisation).
+runs per realisation (`submit.py --config runs_v13/n4/configs/s<s>.json --stages`, i.e. the frozen submission
+  pipeline; ReasonEmbed and reranker from their caches, new pool documents / pairs computed and cached): 1a, 1b (dev;
+  rule-8 train subsample through `runs_v13/n4/rel/t1`), `2a_history_rr` (+ its `__re` stage = `2a_history`, + the
+  `__hybrid` stage), `2a_history_noans` (M0) — dev and the subsample (`a2/data_ref`), and `2a_history` on the A2
+  LLM-written answers (`a2/data_gen`, the same written answers in every realisation; only the query-side generations
+  are redrawn). r0 must reproduce the research numbers (dev 1a 0.3667, 1b 0.4053, 2a_history_rr 0.5507, 2a_history
+  0.5475, M0 0.4908, A2 0.4823; subsample 0.3078 / 0.3754 / 0.5999 / 0.5830 / 0.5220 / 0.5205) — otherwise the
+  machinery is fixed before r1–r3 are read.
+report (`scripts/n4_report.py` → `runs_v13/n4/report.json`, RESULTS AS): per run mean, SD and range of the domain-macro
+  nDCG@10 over the 4 realisations (dev, train subsample); the same for the paper's differences: reference answers −
+  M0, LLM-written − M0, +ReasonEmbed (final − hybrid stage; 1a, 1b, 2a history), +LLM (q+r+h final − the q final
+  system of N1, which has no LLM), +reranker (2a). Conclusion against the +0.005 margin.
+estimate: LLM ~45 min per realisation (≈ 5,400 unique inputs × 2 prompts) → ~2.3 h; retrieval ~25–30 min per
+  realisation (Track-1 BM25 indexes dominate) → ~2 h; in all ≈ 4–4.5 h GPU (queue_1123c, after rule 20 and N3).
