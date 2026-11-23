@@ -53,6 +53,7 @@ $PY -c "import torch, bm25s, transformers, bitsandbytes; assert torch.cuda.is_av
 $LPY -c "import vllm" 2> /dev/null || { echo "LLM venv broken"; fail=1; }
 [ $fail -eq 0 ] || { echo "=== checks FAILED — nothing run"; exit 1; }
 echo "=== checks passed ($(( $(date +%s) - T0 )) s)"
+[ "${CHECK_ONLY:-0}" = "1" ] && exit 0  # CHECK_ONLY=1 scripts/run_test.sh ... : checks only
 
 # ---- 2. all submitted runs (LLM texts first, then retrieval; restartable)
 cd "$HERE"
