@@ -5,6 +5,17 @@ Directed Research (INFO 492, University of Arizona) on **SemEval-2027 Task 1 —
 
 Code, experiment log and generated results only. Notes and meeting briefs are kept outside the repo.
 
+**2026-11-23 (RESULTS AQ–AU, LOG 2026-11-23):** main runs unchanged. (1) Query variants through the whole final
+system (N1): with no LLM at all (question → BM25 + dense → ReasonEmbed) dev is 1a 0.348, 1b 0.366, 2a current 0.359,
+2a history 0.538 (vs 0.367 / 0.405 / 0.378 / 0.548 with q+r+h); one LLM text (q+r or q+h) is within ±0.01 of q+r+h.
+Recall of the q+r+h hybrid at 50 → 100 rises by +0.05…+0.10, but pool 100 doubles the ReasonEmbed time (RESULTS AQ).
+(2) Track-1 query-side guidance is a test input since the organisers' mail of 18.11 / 21.11; used without any gold field
+(rule 20) it adds nothing to 1a (+0.001 train, +0.004 dev) and hurts 1b (−0.012 / −0.014); separate runs `1a_guid` /
+`1b_guid` (AR). (3) `2a_history_noans` = M0 (main pipeline, answers removed): dev 0.4908, +0.011 over the submitted
+answer-free fallback `2a_history_q`; candidate replacement, the supervisor decides (AS). (4) Four LLM draws: the final
+runs move by SD ≤ 0.002 (range ≤ 0.005), below the +0.005 margin (AT). (5) Test day: `scripts/run_test.sh` (AU, section
+"Test day" below); environment frozen in `configs/env/`.
+
 **Where things stand (2026-11-16):** submission systems chosen on train (LOG rules 6–17), dev nDCG@10 [95% CI]:
 Track 1a **0.3667** [0.329, 0.404] (LLM query reasoning → BM25 + dense hybrid → ReasonEmbed over the top 50),
 1b **0.4053** [0.370, 0.441] (same with query + step). Pool 100 (rule 17) was dropped on 11.11 by the supervisor for
